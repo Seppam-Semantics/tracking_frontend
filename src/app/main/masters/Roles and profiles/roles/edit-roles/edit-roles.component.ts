@@ -27,6 +27,7 @@ export class EditRolesComponent implements OnInit {
               private fb: FormBuilder )
   {
     this.editprofileform = this.fb.group({
+      'id': sessionStorage.getItem('roleid'),
       'name': new FormControl(''),
       'profiles': []
     });
