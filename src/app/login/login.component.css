@@ -1,0 +1,104 @@
+
+#overalllogin{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 70%;
+    background-color: whitesmoke;
+    height: 100vh;
+  }
+
+  #loginpage{
+    flex-direction: column;
+    margin-top: 5%;
+    justify-content: center;
+    align-items: center;
+    background-color:#A8DF8E;
+    width: 300px;
+    height: 60%;
+    border: 1px solid white;
+    border-radius: 20px;
+  }
+
+
+  #container{
+    display: flex;
+    margin-top: 15%;
+}
+
+#outborder-for-login{
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  width: 400px;
+  border: 1px solid white;
+  margin-left: 0%;
+  margin-top:-40%;
+  background-color: white;
+  border-radius: 20px;
+}
+
+#username{
+    margin-top: 8%;
+    margin-left: 13%;
+    width: 75%;
+}
+#password{
+    margin-left: 13%;
+    margin-top: 10%;
+    width: 75%;
+}
+#Login{
+    margin-top: 15%;
+    width: 75%;
+    margin-left: 13%;
+}
+#RegisterEmail{
+    width: 75%;
+    margin-left: 13%;
+    margin-top: 2%;
+}
+#RegisterPhonenumber{
+    width: 75%;
+    margin-left: 13%;
+    margin-top: 2%;
+}
+#RegisterPassword{
+    width: 75%;
+    margin-left: 13%;
+    margin-top: 2%;
+}
+#Retype{
+    width: 75%;
+    margin-left: 13%;
+    margin-top: 2%;
+}
+#Register{
+    margin-left: 13%;
+    margin-top: 8%;
+    width: 75%;
+}
+img{
+  margin-top: -17%;
+    margin-left: 36%;
+    height: 25%;
+    width: 30%;
+}
+#loginform{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10%;
+
+}
+.logindetails{
+    width: 80%;
+}
+#Logintab{
+    font-weight: 900;
+    font-size: x-large;
+    font-family: none;
+    margin-left: 16%;
+}

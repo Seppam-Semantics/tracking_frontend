@@ -1,0 +1,18 @@
+tr.mat-header-row{
+    width: 100%;
+}
+
+table {
+    width: 135%;
+}
+.table-container{
+    max-width: 100%;
+    overflow-x: auto;
+    
+}
+th{
+    border: 1px solid black;
+}
+td{
+    border: 1px solid black;
+}

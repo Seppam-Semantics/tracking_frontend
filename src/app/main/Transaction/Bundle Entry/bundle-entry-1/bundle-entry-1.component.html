@@ -1,0 +1,270 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row style="display: flex; justify-content: center;">
+      <span>Bundle Input Entry</span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  
+  
+  <cdk-accordion class="example-accordion">
+    <cdk-accordion-item #accordionItem="cdkAccordionItem" class="example-accordion-item" role="button" tabindex="0">
+  
+      <div class="example-accordion-item-header" (click)="accordionItem.toggle()" style="display: flex; flex-wrap: wrap;">
+  
+        <mat-form-field appearance="outline">
+          <mat-label>Work Order</mat-label>
+          <mat-select>
+            <mat-option value="option1">Option 1</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>Buyer</mat-label>
+          <mat-select>
+            <mat-option value="option1">Option 1</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>Order</mat-label>
+          <mat-select>
+            <mat-option value="option1">Option 1</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>Style</mat-label>
+          <mat-select>
+            <mat-option value="option1">Option 1</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>color</mat-label>
+          <mat-select>
+            <mat-option value="option1">Option 1</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>Size</mat-label>
+          <mat-select>
+            <mat-option value="option1">Option 1</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+      </div>
+    </cdk-accordion-item>
+  </cdk-accordion>
+  
+  
+  
+  <cdk-accordion class="example-accordion">
+    <cdk-accordion-item #accordionItem5="cdkAccordionItem" class="example-accordion-item" role="button" tabindex="0">
+  
+      <div class="example-accordion-item-header" (click)="accordionItem5.toggle()"
+        style="display: flex; justify-content: center; " (click)="show = !show">
+        <div><b style="font-size: 110%;">{{ show ? '&minus;': '&plus;' }} </b></div>
+      </div>
+  
+      <div class="cdk-accordion-item-body" [style.display]="accordionItem5.expanded ? '' : 'none'">
+  
+        <div class="example-accordion-item-header" (click)="accordionItem.toggle()"
+          style="display: flex; flex-wrap: wrap;">
+  
+          <mat-form-field appearance="outline">
+            <mat-label>Fab Type</mat-label>
+            <mat-select>
+              <mat-option value="option1">Option 1</mat-option>
+            </mat-select>
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline">
+            <mat-label>Yarn Type</mat-label>
+            <mat-select>
+              <mat-option value="option1">Option 1</mat-option>
+            </mat-select>
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline">
+            <mat-label>Yarn Cunt</mat-label>
+            <mat-select>
+              <mat-option value="option1">Option 1</mat-option>
+            </mat-select>
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline">
+            <mat-label>Knit SL</mat-label>
+            <mat-select>
+              <mat-option value="option1">Option 1</mat-option>
+            </mat-select>
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline">
+            <mat-label>Fab Dia</mat-label>
+            <mat-select>
+              <mat-option value="option1">Option 1</mat-option>
+            </mat-select>
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline">
+            <mat-label>GSM</mat-label>
+            <mat-select>
+              <mat-option value="option1">Option 1</mat-option>
+            </mat-select>
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline">
+            <mat-label>Knit Fty</mat-label>
+            <mat-select>
+              <mat-option value="option1">Option 1</mat-option>
+            </mat-select>
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline">
+            <mat-label>Dye Fty</mat-label>
+            <mat-select>
+              <mat-option value="option1">Option 1</mat-option>
+            </mat-select>
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline">
+            <mat-label>Spin Fty</mat-label>
+            <mat-select>
+              <mat-option value="option1">Option 1</mat-option>
+            </mat-select>
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline">
+            <mat-label>Yarn Lot</mat-label>
+            <mat-select>
+              <mat-option value="option1">Option 1</mat-option>
+            </mat-select>
+          </mat-form-field>
+  
+        </div>
+  
+      </div>
+  
+    </cdk-accordion-item>
+  
+  
+  </cdk-accordion>
+  
+  <div [formGroup]="form">
+    <div class="demo-button-container">
+      <button mat-raised-button  class="demo-button" (click)="add()" style="background-color: blue;"><b>Add</b></button>
+    </div>
+    <div class="table-container">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+  
+      <ng-container matColumnDef="Batchno">
+        <th mat-header-cell *matHeaderCellDef style="padding: 0%;"></th>
+        <td mat-cell *matCellDef="let element" style="padding: 0%;">
+          <div formArrayName="items">
+            <div class="entrydata" *ngFor="let item of items.controls; let i = index" [formGroupName]="i">
+              
+              <mat-form-field appearance="outline" class="full-width" style="width: 100px;">
+                <mat-label>Batchno</mat-label>
+                <input matInput required formControlName="Batchno" textOnly>
+                <mat-error>                 </mat-error>
+            </mat-form-field>
+  
+            </div>
+          </div>
+        </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="Bunno">
+        <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Cum.</th>
+        <td mat-cell *matCellDef="let element" style="padding: 0%;">
+          <div formArrayName="items">
+            <div *ngFor="let item of items.controls; let i = index" [formGroupName]="i" class="entrydata">
+  <div style="display: flex;">
+          <mat-form-field appearance="outline" class="full-width" style="width: 100px;">
+            <mat-label>Bun no</mat-label>
+            <input matInput required formControlName="Bunno" textOnly>
+            <mat-error>
+              
+            </mat-error>
+        </mat-form-field>
+      </div>
+          </div>
+          </div>
+        </td>
+      </ng-container>
+  
+  
+      <ng-container matColumnDef="Range">
+        <th mat-header-cell *matHeaderCellDef style="padding: 0%;"></th>
+        <td mat-cell *matCellDef="let element" style="padding: 0%;">
+          <div formArrayName="items">
+            <div *ngFor="let item of items.controls; let i = index" [formGroupName]="i" class="entrydata">
+  <div style="display: flex;">
+          <mat-form-field appearance="outline" class="full-width" style="width: 100px;">
+            <mat-label>Range</mat-label>
+            <input matInput required formControlName="Range" textOnly>
+            <mat-error>
+              
+            </mat-error>
+        </mat-form-field>
+      </div>
+          </div>
+          </div>
+        </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="ActualCut">
+        <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Cum. Pcs</th>
+        <td mat-cell *matCellDef="let element" style="padding: 0%;">
+          <div formArrayName="items">
+            <div *ngFor="let item of items.controls; let i = index" [formGroupName]="i" class="entrydata">
+  <div style="display: flex;">
+          <mat-form-field appearance="outline" class="full-width" style="width: 100px;">
+            <mat-label>Actual Cut</mat-label>
+            <input matInput required formControlName="ActualCut" textOnly>
+            <mat-error>
+              
+            </mat-error>
+        </mat-form-field>
+      </div>
+          </div>
+          </div>
+        </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="ActualInput">
+        <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Cum. Pcs</th>
+        <td mat-cell *matCellDef="let element" style="padding: 0%;">
+          <div formArrayName="items">
+            <div *ngFor="let item of items.controls; let i = index" [formGroupName]="i" class="entrydata">
+  <div style="display: flex;">
+          <mat-form-field appearance="outline" class="full-width" style="width: 100px;">
+            <mat-label>Actual Input</mat-label>
+            <input matInput required formControlName="ActualInput" textOnly>
+            <mat-error>
+              
+            </mat-error>
+        </mat-form-field>
+        <button type="button" class="btn btn-danger"
+        style="height: 50px; margin-left: 5px;" (click)="delete(i)">&#10008;</button>
+      </div>
+          </div>
+          </div>
+        </td>
+      </ng-container>
+  
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    </div>
+  
+    <div style="display: flex; justify-content: center;">
+      <button mat-raised-button color="primary" style="margin-top: 3%;">Edit</button>
+  
+      <button mat-raised-button color="primary" type="submit" (click)="submit()" style="margin-left: 5%; margin-top: 3%;">Save</button>
+    </div>
+  
+  </div>

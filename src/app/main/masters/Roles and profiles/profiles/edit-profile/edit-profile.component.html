@@ -1,0 +1,516 @@
+<form [formGroup]="profileform" (ngSubmit)="profileadd()">
+    <div class="header-grid">
+      <div>
+        <button mat-icon-button [routerLink]="'/main/RolesProfileRoot'">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <span class="create-profile">Profile Name  <mat-icon>double_arrow</mat-icon>
+        </span>
+        <mat-form-field appearance="outline">
+          <input matInput id="name" name="name" required="" formControlName="profileName" formControlName="profileName" >
+          <mat-error>please enter profile name</mat-error>
+        </mat-form-field>
+    
+      </div>
+    </div>
+    <!------------------------------------------------------------------------------------------------------------->
+    <div class="grid">
+      <div style="font-weight:bold">select All</div>
+      <div style="font-weight:bold">Create</div>
+      <div style="font-weight:bold">Read</div>
+      <div style="font-weight:bold">Update</div>
+      <div style="font-weight:bold">Delete</div>
+    </div>
+    
+    <div class="module-container">
+    
+      <cdk-accordion class="cdk-accordion">
+    
+    
+        <!--------------------------------------------------------Masters----------------------------------------------------->
+    
+        <cdk-accordion-item #accordionItem1="cdkAccordionItem" class="cdk-accordion-item" tabindex="0">
+          <ng-container>
+            <div>
+            <div>
+              <div class="screen-grid">
+                <div (click)="accordionItem1.toggle()" ><b>Masters</b> <b> &#x21e8;</b> </div>
+                <div>
+                  <input type="checkbox" id="Masters" name="Masters" class="Masters" >
+                </div>
+                <div>
+                  <input type="checkbox" id="Masters" name="Masters" class="Masters">
+                </div>
+                <div>
+                  <input type="checkbox" id="Masters" name="Masters" class="Masters">
+                </div>
+                <div>
+                  <input type="checkbox" id="Masters" name="Masters" class="Masters">
+                </div>
+                <div style="margin-top: -20px; margin-left: 86%;">
+                  <input type="checkbox" id="Masters" name="Masters" class="Masters">
+                </div>
+              </div>
+            </div>
+            <!--------------------------------------------------------Masters ====subheading=====----------------------------------------------------->
+    
+            <!--------------------------------------------------------- Masters === Organization---------------------------------------------------->
+            <div class="cdk-accordion-item-body" [style.display]="accordionItem1.expanded ? '' : 'none'">
+              <div class="screen-grid" [formGroup]="organization">
+                <div> &#x21e8; Organization</div>
+                <div>
+                  <input type="checkbox" name="checkbox" formControlName="creation">
+                </div>
+                <div>
+                  <input type="checkbox" name="checkbox" formControlName="selection">
+                </div>
+                <div>
+                  <input type="checkbox" name="checkbox" formControlName="updation">
+                </div>
+                <div>
+                  <input type="checkbox" name="checkbox" formControlName="deletion">
+                </div>
+              </div>
+            </div>
+            <!----------------------------------------------Masters === Profile---------------------------------------------------->
+            <div class="cdk-accordion-item-body" [style.display]="accordionItem1.expanded ? '' : 'none'">
+              <div class="screen-grid" [formGroup]="profile">
+                <div> &#x21e8; Profile</div>
+                <div>
+                  <input type="checkbox" name="checkbox" formControlName="creation">
+                </div>
+                <div>
+                  <input type="checkbox" name="checkbox" formControlName="selection">
+                </div>
+                <div>
+                  <input type="checkbox" name="checkbox" formControlName="updation">
+                </div>
+                <div>
+                  <input type="checkbox" name="checkbox" formControlName="deletion">
+                </div>
+              </div>
+            </div>
+            <!----------------------------------------------Masters === Roles---------------------------------------------------->
+            <div class="cdk-accordion-item-body" [style.display]="accordionItem1.expanded ? '' : 'none'">
+              <div class="screen-grid" [formGroup]="role">
+                <div> &#x21e8; Roles</div>
+                <div>
+                  <input type="checkbox" name="checkbox" formControlName="creation">
+                </div>
+                <div>
+                  <input type="checkbox" name="checkbox" formControlName="selection">
+                </div>
+                <div>
+                  <input type="checkbox" name="checkbox" formControlName="updation">
+                </div>
+                <div>
+                  <input type="checkbox" name="checkbox" formControlName="deletion">
+                </div>
+              </div>
+            </div>
+            <!----------------------------------------------Masters === Employees---------------------------------------------------->
+            <div class="cdk-accordion-item-body" [style.display]="accordionItem1.expanded ? '' : 'none'">
+              <div class="screen-grid" [formGroup]="employee">
+                <div> &#x21e8; Employees</div>
+                <div>
+                  <input type="checkbox" name="checkbox" formControlName="creation" >
+                </div>
+                <div>
+                  <input type="checkbox" name="checkbox" formControlName="selection">
+                </div>
+                <div>
+                  <input type="checkbox" name="checkbox" formControlName="updation">
+                </div>
+                <div>
+                  <input type="checkbox" name="checkbox" formControlName="deletion">
+                </div>
+              </div>
+            </div>
+            </div>
+          </ng-container>
+        </cdk-accordion-item>
+        
+        <!----------------------------------------------Masters ENDS---------------------------------------------------->
+    
+        <!----------------------------------------------Work orders---------------------------------------------------->
+        <cdk-accordion-item #accordionItem2="cdkAccordionItem" class="cdk-accordion-item" tabindex="0">
+          <ng-container>
+            <div >
+              <div class="screen-grid" [formGroup]="workorder">
+                <div (click)="accordionItem2.toggle()"><b>Work Orders</b></div>
+                <div>
+                  <input type="checkbox" id="Masters" name="Masters" class="Masters" formControlName="creation">
+                </div>
+                <div>
+                  <input type="checkbox" id="Masters" name="Masters" class="Masters" formControlName="selection">
+                </div>
+                <div>
+                  <input type="checkbox" id="Masters" name="Masters" class="Masters" formControlName="updation">
+                </div>
+                <div>
+                  <input type="checkbox" id="Masters" name="Masters" class="Masters" formControlName="deletion">
+                </div>
+                <div style="margin-top: -20px; margin-left: 86%;">
+                  <input type="checkbox" id="Masters" name="Masters" class="Masters">
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </cdk-accordion-item>
+    <!----------------------------------------------Work orders ENDS---------------------------------------------------->
+    
+    <!----------------------------------------------Fabric Rolls---------------------------------------------------->
+    <cdk-accordion-item #accordionItem2="cdkAccordionItem" class="cdk-accordion-item" tabindex="0">
+      <ng-container>
+        <div>
+          <div class="screen-grid" [formGroup]="fabricrolls">
+            <div (click)="accordionItem2.toggle()"><b>Fabric Rolls</b></div>
+            <div>
+              <input type="checkbox" id="fabricrolls" name="fabricrolls" class="fabricrolls" formControlName="creation">
+            </div>
+            <div>
+              <input type="checkbox" id="fabricrolls" name="fabricrolls" class="fabricrolls" formControlName="selection">
+            </div>
+            <div>
+              <input type="checkbox" id="fabricrolls" name="fabricrolls" class="fabricrolls" formControlName="updation">
+            </div>
+            <div>
+              <input type="checkbox" id="fabricrolls" name="fabricrolls" class="fabricrolls" formControlName="deletion">
+            </div>
+            <div style="margin-top: -20px; margin-left: 86%;">
+              <input type="checkbox" id="fabricrolls" name="fabricrolls" class="fabricrolls">
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </cdk-accordion-item>
+    
+    <!----------------------------------------------fabric rolls ENDS---------------------------------------------------->
+    <!----------------------------------------------garmentsbundles---------------------------------------------------->
+    <cdk-accordion-item #accordionItem3="cdkAccordionItem" class="cdk-accordion-item" tabindex="0">
+      <ng-container>
+        <div>
+          <div class="screen-grid" [formGroup]="garmentsbundles">
+            <div (click)="accordionItem3.toggle()"><b>Garments Bundles</b></div>
+            <div>
+              <input type="checkbox" id="garmentsbundles" name="garmentsbundles" class="garmentsbundles" formControlName="creation">
+            </div>
+            <div>
+              <input type="checkbox" id="garmentsbundles" name="garmentsbundles" class="garmentsbundles" formControlName="selection">
+            </div>
+            <div>
+              <input type="checkbox" id="garmentsbundles" name="garmentsbundles" class="garmentsbundles" formControlName="updation">
+            </div>
+            <div>
+              <input type="checkbox" id="garmentsbundles" name="garmentsbundles" class="garmentsbundles" formControlName="deletion">
+            </div>
+            <div style="margin-top: -20px; margin-left: 86%;">
+              <input type="checkbox" id="garmentsbundles" name="garmentsbundles" class="garmentsbundles">
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </cdk-accordion-item>
+    <!----------------------------------------------Garmentsbundles ENDS---------------------------------------------------->
+    <!----------------------------------------------Roll Entry---------------------------------------------------->
+    <cdk-accordion-item #accordionItem4="cdkAccordionItem" class="cdk-accordion-item" tabindex="0">
+      <ng-container>
+        <div>
+          <div class="screen-grid">
+            <div (click)="accordionItem4.toggle()"><b>Roll Entry</b> <b> &#x21e8;</b> </div>
+            <div>
+              <input type="checkbox" id="rollentry" name="rollentry" class="rollentry">
+            </div>
+            <div>
+              <input type="checkbox" id="rollentry" name="rollentry" class="rollentry">
+            </div>
+            <div>
+              <input type="checkbox" id="rollentry" name="rollentry" class="rollentry">
+            </div>
+            <div>
+              <input type="checkbox" id="rollentry" name="rollentry" class="rollentry">
+            </div>
+            <div style="margin-top: -20px; margin-left: 86%;">
+              <input type="checkbox" id="rollentry" name="rollentry" class="rollentry">
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    
+    <!----------------------------------------------Roll Entry 1---------------------------------------------------->  
+    <div class="cdk-accordion-item-body" [style.display]="accordionItem4.expanded ? '' : 'none'">
+      <div class="screen-grid" [formGroup]="rollentry1">
+        <div> &#x21e8; Roll Entry 1</div>
+        <div>
+          <input type="checkbox" name="checkbox" formControlName="creation">
+        </div>
+        <div>
+          <input type="checkbox" name="checkbox" formControlName="selection">
+        </div>
+        <div>
+          <input type="checkbox" name="checkbox" formControlName="updation">
+        </div>
+        <div>
+          <input type="checkbox" name="checkbox" formControlName="deletion">
+        </div>
+      </div>
+    </div>
+    <!----------------------------------------------Roll Entry 2---------------------------------------------------->
+    <div class="cdk-accordion-item-body" [style.display]="accordionItem4.expanded ? '' : 'none'">
+      <div class="screen-grid" [formGroup]="rollentry2">
+        <div> &#x21e8; Roll Entry 2</div>
+        <div>
+          <input type="checkbox" name="checkbox" formControlName="creation">
+        </div>
+        <div>
+          <input type="checkbox" name="checkbox" formControlName="selection">
+        </div>
+        <div>
+          <input type="checkbox" name="checkbox" formControlName="updation">
+        </div>
+        <div>
+          <input type="checkbox" name="checkbox" formControlName="deletion">
+        </div>
+      </div>
+    </div>
+    
+    <!----------------------------------------------Roll Entry 3---------------------------------------------------->
+    <div class="cdk-accordion-item-body" [style.display]="accordionItem4.expanded ? '' : 'none'">
+      <div class="screen-grid" [formGroup]="rollentry3">
+        <div> &#x21e8; Roll Entry 3</div>
+        <div>
+          <input type="checkbox" name="checkbox" formControlName="creation">
+        </div>
+        <div>
+          <input type="checkbox" name="checkbox" formControlName="selection">
+        </div>
+        <div>
+          <input type="checkbox" name="checkbox" formControlName="updation">
+        </div>
+        <div>
+          <input type="checkbox" name="checkbox" formControlName="deletion">
+        </div>
+      </div>
+    </div>
+    
+    <!----------------------------------------------Roll Entry 4---------------------------------------------------->
+    <div class="cdk-accordion-item-body" [style.display]="accordionItem4.expanded ? '' : 'none'">
+      <div class="screen-grid" [formGroup]="rollentry4">
+        <div> &#x21e8; Roll Entry 4</div>
+        <div>
+          <input type="checkbox" name="checkbox" formControlName="creation">
+        </div>
+        <div>
+          <input type="checkbox" name="checkbox" formControlName="selection">
+        </div>
+        <div>
+          <input type="checkbox" name="checkbox" formControlName="updation">
+        </div>
+        <div>
+          <input type="checkbox" name="checkbox" formControlName="deletion">
+        </div>
+      </div>
+    </div>
+    
+    <!----------------------------------------------Roll Entry 5---------------------------------------------------->
+    <div class="cdk-accordion-item-body" [style.display]="accordionItem4.expanded ? '' : 'none'">
+      <div class="screen-grid" [formGroup]="rollentry5">
+        <div> &#x21e8; Roll Entry 5</div>
+        <div>
+          <input type="checkbox" name="checkbox" formControlName="creation">
+        </div>
+        <div>
+          <input type="checkbox" name="checkbox" formControlName="selection">
+        </div>
+        <div>
+          <input type="checkbox" name="checkbox" formControlName="updation">
+        </div>
+        <div>
+          <input type="checkbox" name="checkbox" formControlName="deletion">
+        </div>
+      </div>
+    </div>
+    
+    <!----------------------------------------------Roll Entry 6---------------------------------------------------->
+    <div class="cdk-accordion-item-body" [style.display]="accordionItem4.expanded ? '' : 'none'">
+      <div class="screen-grid" [formGroup]="rollentry6">
+        <div> &#x21e8; Roll Entry 6</div>
+        <div>
+          <input type="checkbox" name="checkbox" formControlName="creation">
+        </div>
+        <div>
+          <input type="checkbox" name="checkbox" formControlName="selection">
+        </div>
+        <div>
+          <input type="checkbox" name="checkbox" formControlName="updation">
+        </div>
+        <div>
+          <input type="checkbox" name="checkbox" formControlName="deletion">
+        </div>
+      </div>
+    </div>
+    
+    <!----------------------------------------------Roll Entry 7---------------------------------------------------->
+    <div class="cdk-accordion-item-body" [style.display]="accordionItem4.expanded ? '' : 'none'">
+      <div class="screen-grid" [formGroup]="rollentry7">
+        <div> &#x21e8; Roll Entry 7</div>
+        <div>
+          <input type="checkbox" name="checkbox" formControlName="creation">
+        </div>
+        <div>
+          <input type="checkbox" name="checkbox" formControlName="selection">
+        </div>
+        <div>
+          <input type="checkbox" name="checkbox" formControlName="updation">
+        </div>
+        <div>
+          <input type="checkbox" name="checkbox" formControlName="deletion">
+        </div>
+      </div>
+    </div>
+    </cdk-accordion-item>
+      <!----------------------------------------------====[Roll Entry ENDS]====---------------------------------------------------->
+    <!----------------------------------------------Bundles Entry---------------------------------------------------->
+    <cdk-accordion-item #accordionItem5="cdkAccordionItem" class="cdk-accordion-item" tabindex="0">
+      <ng-container>
+        <div>
+          <div class="screen-grid">
+            <div (click)="accordionItem5.toggle()"><b>Bundles Entry</b> <b> &#x21e8;</b> </div>
+            <div>
+              <input type="checkbox" id="bundlesentry" name="bundlesentry" class="bundlesentry">
+            </div>
+            <div>
+              <input type="checkbox" id="bundlesentry" name="bundlesentry" class="bundlesentry">
+            </div>
+            <div>
+              <input type="checkbox" id="bundlesentry" name="bundlesentry" class="bundlesentry">
+            </div>
+            <div>
+              <input type="checkbox" id="bundlesentry" name="bundlesentry" class="bundlesentry">
+            </div>
+            <div style="margin-top: -20px; margin-left: 86%;">
+              <input type="checkbox" id="bundlesentry" name="bundlesentry" class="bundlesentry">
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    <!----------------------------------------------Bundles Entry 1---------------------------------------------------->
+    <div class="cdk-accordion-item-body" [style.display]="accordionItem5.expanded ? '' : 'none'">
+      <div class="screen-grid" [formGroup]="bundlesentry1">
+        <div> &#x21e8; Bundles Entry 1</div>
+        <div>
+          <input type="checkbox" name="checkbox" formControlName="creation">
+        </div>
+        <div>
+          <input type="checkbox" name="checkbox" formControlName="selection">
+        </div>
+        <div>
+          <input type="checkbox" name="checkbox" formControlName="updation">
+        </div>
+        <div>
+          <input type="checkbox" name="checkbox" formControlName="deletion">
+        </div>
+      </div>
+    </div>
+    <!----------------------------------------------Bundles Entry 2---------------------------------------------------->
+    <div class="cdk-accordion-item-body" [style.display]="accordionItem5.expanded ? '' : 'none'">
+      <div class="screen-grid" [formGroup] = "bundlesentry2">
+        <div> &#x21e8; Bundles Entry 2</div>
+        <div>
+          <input type="checkbox" name="checkbox" formControlName="creation">
+        </div>
+        <div>
+          <input type="checkbox" name="checkbox" formControlName="selection">
+        </div>
+        <div>
+          <input type="checkbox" name="checkbox" formControlName="updation">
+        </div>
+        <div>
+          <input type="checkbox" name="checkbox" formControlName="deletion">
+        </div>
+      </div>
+    </div>
+    
+    <!----------------------------------------------Bundles Entry 3---------------------------------------------------->
+    <div class="cdk-accordion-item-body" [style.display]="accordionItem5.expanded ? '' : 'none'">
+      <div class="screen-grid" [formGroup] = "bundlesentry3">
+        <div> &#x21e8; Bundles Entry 3</div>
+        <div>
+          <input type="checkbox" name="checkbox" formControlName="creation">
+        </div>
+        <div>
+          <input type="checkbox" name="checkbox" formControlName="selection">
+        </div>
+        <div>
+          <input type="checkbox" name="checkbox" formControlName="updation">
+        </div>
+        <div>
+          <input type="checkbox" name="checkbox" formControlName="deletion">
+        </div>
+      </div>
+    </div>
+    </cdk-accordion-item>
+    <!----------------------------------------------[ Bundles Entry ENDS ]---------------------------------------------------->
+    
+    <!----------------------------------------------Report---------------------------------------------------->
+    <cdk-accordion-item #accordionItem7="cdkAccordionItem" class="cdk-accordion-item" tabindex="0">
+      <ng-container>
+        <div>
+          <div class="screen-grid" [formGroup]="reports">
+            <div (click)="accordionItem7.toggle()"><b>Reports</b></div>
+            <div>
+              <input type="checkbox" id="Reports" name="Reports" class="Reports" formControlName="creation">
+            </div>
+            <div>
+              <input type="checkbox" id="Reports" name="Reports" class="Reports" formControlName="selection">
+            </div>
+            <div>
+              <input type="checkbox" id="Reports" name="Reports" class="Reports" formControlName="updation">
+            </div>
+            <div>
+              <input type="checkbox" id="Reports" name="Reports" class="Reports" formControlName="deletion">
+            </div>
+            <div style="margin-top: -20px; margin-left: 86%;">
+              <input type="checkbox" id="Reports" name="Reports" class="Reports">
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </cdk-accordion-item>
+    <!----------------------------------------------[ Report ENDS ]---------------------------------------------------->
+    <!----------------------------------------------Dashboards---------------------------------------------------->
+    <cdk-accordion-item #accordionItem8="cdkAccordionItem" class="cdk-accordion-item" tabindex="0">
+      <ng-container>
+        <div>
+          <div class="screen-grid" [formGroup]="dashboards">
+            <div (click)="accordionItem8.toggle()"><b>Dashboards</b></div>
+            <div>
+              <input type="checkbox" id="dashboards" name="dashboards" class="dashboards" formControlName="creation">
+            </div>
+            <div>
+              <input type="checkbox" id="dashboards" name="dashboards" class="dashboards" formControlName="selection">
+            </div>
+            <div>
+              <input type="checkbox" id="dashboards" name="dashboards" class="dashboards" formControlName="updation">
+            </div>
+            <div>
+              <input type="checkbox" id="dashboards" name="dashboards" class="dashboards" formControlName="deletion">
+            </div>
+            <div style="margin-top: -20px; margin-left: 86%;">
+              <input type="checkbox" id="dashboards" name="dashboards" class="dashboards">
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </cdk-accordion-item>
+    
+    
+    <!----------------------------------------------[ Dashboards ENDS ]---------------------------------------------------->
+    
+    
+    </cdk-accordion>
+      <div class="float-rt">
+        <button mat-flat-button color='primary' >Update</button>
+      </div>
+      </div>
+    </form>

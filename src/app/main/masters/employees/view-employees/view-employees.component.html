@@ -1,0 +1,91 @@
+<div>
+    <mat-toolbar style="height: fit-content; padding: 10px;">
+      <div class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+        (keyup)="applyFilter($event)" #input>
+      </div>
+      <span class="flex-spacer"></span>
+      <button mat-button color='primary' style="margin-right: 12px;" (click)="addemployees()" >New</button>
+    </mat-toolbar>
+    
+    <div >
+    
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+            <ng-container matColumnDef="code">
+              <th mat-header-cell *matHeaderCellDef> Emp Id </th>
+              <td mat-cell *matCellDef="let element"> {{element.employeeCode}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef> Email </th>
+                <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="department">
+                <th mat-header-cell *matHeaderCellDef> Phone </th>
+                <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="designation">
+                <th mat-header-cell *matHeaderCellDef> Address </th>
+                <td mat-cell *matCellDef="let element"> {{element.address}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef> Action </th>
+                <td mat-cell *matCellDef="let element"> 
+                    <span>
+                        <button 
+                        mat-icon-button 
+                        matTooltipClass="example-tooltip-red" 
+                        matTooltipPosition='right'
+                        matTooltip='Edit'
+                        style="font-size: medium;"
+                        (click)="editemployees(element.id)">
+                        <i class="bi bi-pencil-fill"></i>
+                    </button>
+                </span>
+
+                <span>
+                    <button 
+                    mat-icon-button 
+                    matTooltipClass="example-tooltip-red" 
+                    matTooltipPosition='right'
+                    matTooltip='Delete'
+                    style="font-size: medium;"
+                    (click)="deleteItem(element.id)">
+                    <i class="bi bi-trash-fill"></i>
+                </button>
+                  </span>
+
+                  <span>
+                    <button 
+                    mat-icon-button 
+                    matTooltipClass="example-tooltip-red" 
+                    matTooltipPosition='right' 
+                    matTooltip='View More'
+                    style="font-size: medium;"
+                    (click)="viewmore(element.id)">
+                    <mat-icon>remove_red_eye</mat-icon>
+                </button>
+                  </span>
+                </td>
+              </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+
+
+    </div>
+  </div> 
+  
+    
+    
+  

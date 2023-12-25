@@ -1,0 +1,93 @@
+<form [formGroup]="addemployees" (ngSubmit)="postemployee()" >
+    <mat-dialog-content>
+        <div>
+    <!------------------------------------------------------------------------------------------------->
+    <div style="display: flex; justify-content: center;">
+    <mat-card-title ><b>Basic Info</b></mat-card-title>        
+    </div>
+    <div class="box1 pd-8" >
+                
+                <div class="row">
+                    <div class="col">
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Employee Code</mat-label>
+                            <input matInput type="text" formControlName="employeeCode">
+                            <mat-error>
+                                Please enter valid employee code
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col">
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Name</mat-label>
+                            <input matInput required  textOnly formControlName="name">
+                            <mat-error>
+                                Please enter your name
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    
+                </div>
+      
+                <div class="row">
+                    <div class="col">
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Email</mat-label>
+                            <input matInput required type="email" formControlName="email">
+                            <mat-error>
+                                Invalid email
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col">
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Phone</mat-label>
+                            <input matInput type="phone" formControlName="phone">
+                            <mat-error>
+                                Please enter valid phone number
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row">
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Address</mat-label>
+                            <textarea matInput style="min-height: 70px; max-height: 100px;"
+                            formControlName="address"></textarea>
+                            <mat-error>
+                                Please Enter Permenent Address
+                            </mat-error>
+                        </mat-form-field>
+                </div>
+                    <div class="row">
+                        <div class="col">
+                        <mat-form-field  class="full-width" appearance="outline">
+                            <mat-label>Role</mat-label>
+                            <mat-select formControlName="role">
+                                <mat-option *ngFor="let roles of rolesnames" [value]="roles.id">{{roles.name}}</mat-option>
+                              </mat-select> 
+                            <mat-error>
+                                This Filed can't be Empty!
+                            </mat-error>
+                        </mat-form-field>
+                        </div>
+                        <div class="col">
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Defalut Password</mat-label>
+                            <input type="text" matInput formControlName="password">
+                        </mat-form-field>
+                        </div>
+                    </div>
+            </div><br>
+            </div>
+    
+    <!------------------------------------------------------------------------------------------------->
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <div>
+            <button mat-flat-button color='primary' type="submit" class="float-rt">Save</button>
+            <button mat-button mat-dialog-close class="float-rt">Close</button>
+        </div>
+    </mat-dialog-actions>
+    </form>

@@ -1,0 +1,40 @@
+
+<div>
+    <mat-toolbar style="height: fit-content; padding: 10px;">
+      <div class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+      #input  (keyup)="applyFilter($event)">
+      </div>
+
+      <span class="flex-spacer"></span>
+      <button mat-button color="primary" (click)="addprofile()">Add Profile</button>
+    </mat-toolbar>
+</div>
+
+<div>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="profile">
+    <th mat-header-cell *matHeaderCellDef> ProfileName </th>
+    <td mat-cell *matCellDef="let element"> {{element.profileName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef> Action </th>
+    <td mat-cell *matCellDef="let element">
+
+      <button mat-icon-button matTooltipClass="example-tooltip-red" matTooltipPosition='right'matTooltip='Edit' (click)="updateprofile(element.id)">
+        <i class="bi bi-pencil-fill" style="font-size: medium;"></i>
+      </button>
+    
+    <button mat-icon-button matTooltipClass="example-tooltip-red" matTooltipPosition='right' matTooltip='Delete'(click)="deleteItem('0ms', '0ms',element.id)" >
+      <i class="bi bi-trash-fill" style="font-size: medium;"></i>
+    </button>
+
+</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+</div>

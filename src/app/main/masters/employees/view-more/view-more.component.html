@@ -1,0 +1,45 @@
+<mat-tab-group>
+    <mat-tab label=" Basic Info"><br>
+
+        <div class="container">
+            <br>
+            <div class="row">
+                <div class="col-6">
+                    <strong class="semi-bold-text">Name :   {{details.name}}</strong>
+                </div>
+            </div><br>
+        
+            <div class="row">
+                <div class="col-6">
+                    <strong class="semi-bold-text"> Employee Id :  {{details.employeeCode}} </strong> 
+                </div>
+            </div><br>
+        
+            <div class="row">
+                <div class="col-6">
+                    <strong class="semi-bold-text">Phone :  {{details.phone}}</strong> 
+                </div>
+                <div class="col-6">
+                    <strong class="semi-bold-text">Email :  {{details.email}}</strong>
+                </div>
+            </div><br>
+        </div><br>
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    <strong class="semi-bold-text">Address :  {{details.address}}</strong> 
+                </div>
+            </div><br>
+
+            <div class="row">
+                <div class="col-6">
+                    <strong class="semi-bold-text">Role : {{details.roleId}}</strong> 
+                </div>
+            </div>
+        </div>
+        <br><br><br>
+        <button class="float-rt" color="primary" mat-raised-button [mat-dialog-close]="true"
+        style="margin-left: 45%;">Close</button>
+    </mat-tab>
+</mat-tab-group>
