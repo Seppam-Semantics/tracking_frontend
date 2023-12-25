@@ -1,14 +1,7 @@
 table {
     width: 150%;
-    border: 1px solid black;
 }
 .table-container{
-    overflow-x: auto;
     max-width: 100%;
-}
-th{
-    border:1px solid black;
-}
-td{
-    border:1px solid black;
-}
+    overflow-x: auto;
+  }

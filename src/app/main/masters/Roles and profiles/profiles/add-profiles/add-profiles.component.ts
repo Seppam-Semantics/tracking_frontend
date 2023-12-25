@@ -313,11 +313,15 @@ dashboards = new FormGroup({
     this.local.profileadd(this.profileform.value, storedtoken).subscribe((res)=>{
       alert(res.message);
     })
-    this.profileform.reset();
   }
   else(
     alert('profile name is empty')
   )
   }
+
+
+
+
+
 
 }

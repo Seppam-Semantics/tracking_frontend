@@ -27,7 +27,6 @@ export class EditRolesComponent implements OnInit {
               private fb: FormBuilder )
   {
     this.editprofileform = this.fb.group({
-      'id': sessionStorage.getItem('roleid'),
       'name': new FormControl(''),
       'profiles': []
     });
@@ -78,18 +77,12 @@ export class EditRolesComponent implements OnInit {
   }
 
 
-  editroles(){
-    const accept = "Do you want to Update the roles.....?";
-    if (confirm(accept) == true) {
-      const proftoken = 'Bearer '+ sessionStorage.getItem('token')
-      this.local.rolesadd(this.editprofileform.value, proftoken).subscribe((res)=>{
-        console.log(res);
-      })
-      window.location.reload();
-    } else {
-      alert("Cancelled");
-    }
-
+  editroles(){    
+    console.log(this.editprofileform.value);
+    const proftoken = 'Bearer '+ sessionStorage.getItem('token')
+    this.local.rolesadd(this.editprofileform.value, proftoken).subscribe((res)=>{
+      console.log(res);
+    })
   }
 }
 

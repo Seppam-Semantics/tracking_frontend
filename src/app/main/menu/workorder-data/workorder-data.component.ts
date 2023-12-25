@@ -1,8 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { SpeedDialItemModel } from '@syncfusion/ej2-angular-buttons';
-import { ApiService } from 'src/app/api.service';
 import * as xls from 'xlsx'
 
 @Component({
@@ -10,83 +8,43 @@ import * as xls from 'xlsx'
   templateUrl: './workorder-data.component.html',
   styleUrls: ['./workorder-data.component.css']
 })
-export class WorkorderDataComponent implements OnInit{
+export class WorkorderDataComponent {
 
-  displayedColumns: string[] = ['WOno', 'WOLineno',"buyer", "orderNo", "style", "color", "size", "fabType", "fabDia", "fabGsm", "yarnType", "yarnCount", "knitSL", "spinFty", "knitFty", "dyeinFty", "yarnLot", "noRolls", 'PrintStatus'
+  displayedColumns : string[] = [  'WOno', 'WOLineno', 'Order', 'Style', 'Color', 'Size', 'FabType',
+    'FabDia','FabGSM','Yarntype','YarnCount','KnitSL','SpinFty','KnitFty','DyeingFty','YarnLot','NoofRolls','PrintStatus' 
   ];
 
-  constructor(private api:ApiService){}
-
-  ngOnInit(): void {
-    
-  }
-
-  workorder = new FormGroup({
-    WOno: new FormControl(''),
-    WOLineno: new FormControl(''),
-    Order: new FormControl(''),
-    Style: new FormControl(''),
-    Color: new FormControl(''),
-    Size: new FormControl(''),
-    FabType: new FormControl(''),
-    FabDia: new FormControl(''),
-    FabGSM: new FormControl(''),
-    Yarntype: new FormControl(''),
-    YarnCount: new FormControl(''),
-    KnitSL: new FormControl(''),
-    SpinFty: new FormControl(''),
-    KnitFty: new FormControl(''),
-    DyeingFty: new FormControl(''),
-    YarnLot: new FormControl(''),
-    NoofRolls: new FormControl(''),
-    PrintStatus: new FormControl(''),
-  })
-
-
-  dataSource: MatTableDataSource<PeriodicElement> = new MatTableDataSource<PeriodicElement>([])
+  dataSource: MatTableDataSource<PeriodicElement>=new MatTableDataSource<PeriodicElement>([])
   users: any;
-  file: any;
 
+  readexcelfile(e:any){
 
-  workordersubmit() {
-    const storedtoken = 'Bearer ' + sessionStorage.getItem('token')
-    this.api.postworkorder(this.dataSource, storedtoken).subscribe((res)=>{
-      console.log(res)
-    })
-    console.log(this.dataSource)
-  }
-
-  
-  readfile(e: any) {
-    this.file = e.target.files[0]
-  }
-
-
-  readexcelfile() {
-
+    const file= e.target.files[0]
     let fr = new FileReader();
 
-    fr.readAsArrayBuffer(this.file);
+    fr.readAsArrayBuffer(file);
 
-    fr.onload = () => {
-
+    fr.onload= ()=>{
+      
       let data = fr.result;
-      let workbook = xls.read(data, { type: 'array' });
+          let workbook = xls.read(data,{type:'array'});
 
-      const sheetname = workbook.SheetNames[0];
+            const sheetname = workbook.SheetNames[0];
 
-      const sheet1 = workbook.Sheets[sheetname]
+            const sheet1 = workbook.Sheets[sheetname]
 
-      this.users = xls.utils.sheet_to_json(sheet1, { raw: true });
+            this.users=xls.utils.sheet_to_json(sheet1,{raw:true});
+          
 
+            this.users.forEach((user: any) => {
+              this.dataSource=this.users
+              console.log(this.dataSource)
+              
+            });
+          };
 
-      this.users.forEach((user: any) => {
-        this.dataSource = this.users
-      });
-    };
-
+        }
   }
-}
 
 
 
@@ -94,21 +52,44 @@ export interface PeriodicElement {
 
   WOno: any;
   WOLineno: any;
-  buyer:any
-  Order: any;
-  Style: any;
-  Color: any;
-  Size: any;
-  FabType: any;
-  FabDia: any;
-  FabGSM: any;
-  Yarntype: any;
-  yarnCount: any;
-  KnitSL: any;
-  SpinFty: any;
-  KnitFty: any;
-  DyeingFty: any;
-  YarnLot: any;
-  NoofRolls: any;
-  PrintStatus: any;
+  Order:  any;
+  Style : any;
+  Color :any;
+  Size:any;
+  FabType:any;
+  FabDia:any;
+  FabGSM:any;
+  Yarntype:any;
+  YarnCount:any;
+  KnitSL:any;
+  SpinFty:any;
+  KnitFty:any;
+  DyeingFty:any;
+  YarnLot:any;
+  NoofRolls:any;
+  PrintStatus:any;
 }
+
+// const ELEMENT_DATA: PeriodicElement[] = [
+//   {
+//     WOno: 1,
+//     WOLineno: 1,
+//     Order: 'xxx',
+//     Style: 'zzz',
+//     Color: 'ccc',
+//     Size: 12,
+//     FabType: 'vvv',
+//     FabDia: 'bbb',
+//     FabGSM: 'nnnn',
+//     Yarntype: 'mmmm',
+//     YarnCount: 'lll',
+//     KnitSL: 'kkk',
+//     SpinFty: 'jjj',
+//     KnitFty: 'hhh',
+//     DyeingFty: 'ggg',
+//     YarnLot: 'fff',
+//     NoofRolls: 'ddd',
+//     PrintStatus: 'sss',
+//   }
+
+// ];

@@ -34,10 +34,6 @@ getSingleRoles(id:any, profiletoken:any):Observable<any>{
   return this.http.get(`${this.apiUrl}/roleapi/roles/${id}`,  { headers })
 }
 
-postworkorder(data:any, profiletoken:any):Observable<any>{
-  const headers = new HttpHeaders().set('x-access-token', profiletoken);
-  return this.http.post(`${this.apiUrl}/workorderapi/workorder`, data, { headers })
-}
 
 
 }

@@ -47,7 +47,6 @@ export class AddEmployeesComponent implements OnInit {
     this.local.addemployee(this.addemployees.value, storedtoken).subscribe((res)=>{
       console.log(res);
     })
-    this.addemployees.reset();
   }
   else{
     alert('please fill out all details');

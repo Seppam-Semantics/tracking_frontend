@@ -15,18 +15,8 @@ export class EditEmployeesComponent implements OnInit {
   rolesnames:any;
   employee:any;
 
-addemployees : FormGroup;
+
   constructor(private fb:FormBuilder, private api:ApiService, private local:LocalService){ 
-    this.addemployees = this.fb.group({
-      id: sessionStorage.getItem('empid'),
-      employeeCode:new FormControl(),
-      name : new FormControl(''), 
-      email : new FormControl(''),
-      phone : new FormControl(),
-      password : new FormControl(''),
-      role : new FormControl(''),
-      address : new FormControl(''),
-    })
    }
   ngOnInit(): void {
     this.getrolesnames();
@@ -37,7 +27,15 @@ addemployees : FormGroup;
   console.log(this.addemployees.value)
    }
 
-
+   addemployees = new FormGroup({
+    employeeCode:new FormControl(),
+    name : new FormControl(''),
+    email : new FormControl(''),
+    phone : new FormControl(),
+    password : new FormControl(''),
+    role : new FormControl(''),
+    address : new FormControl(''),
+  })
 
   getrolesnames(){
     const storedtoken = 'Bearer ' + sessionStorage.getItem('token')
@@ -68,17 +66,15 @@ addemployees : FormGroup;
   }
 
   postemployee(){
-
-    const accept = "Do you want to Update the Employee Details.....?";
-    if (confirm(accept) == true) {
-      const storedtoken = 'Bearer ' + sessionStorage.getItem('token')
+    if(this.addemployees.valid){
+    const storedtoken = 'Bearer ' + sessionStorage.getItem('token')
     this.local.addemployee(this.addemployees.value, storedtoken).subscribe((res)=>{
       console.log(res);
     })
-      window.location.reload();
-    } else {  
-      alert("Cancelled");
-    }
+  }
+  else{
+    alert('please fill out all details');
+  }
   }
 
 

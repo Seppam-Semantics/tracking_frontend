@@ -13,10 +13,10 @@ export class EditProfileComponent implements OnInit {
   singleprofile:any;
   
   organization = new FormGroup ({
-    "creation": new FormControl(false),
-    "selection": new FormControl(false),
-    "updation": new FormControl(false),
-    "deletion": new FormControl(false)
+    'creation' : new FormControl(false),
+    'selection' : new FormControl(false),
+    'updation': new FormControl(false),
+    'deletion' : new FormControl(false)
 })
 
 profile = new FormGroup ({
@@ -133,13 +133,12 @@ dashboards = new FormGroup({
   constructor(private fb:FormBuilder, private api:ApiService, private local:LocalService){
 
     this.profileform = this.fb.group({
-      'id':sessionStorage.getItem('profileid'),
       'profileName': new FormControl('', Validators.required),
       'masters': this.fb.group ({
-        'organization': this.organization,
-        'profile': this.profile,
-        'role': this.role,
-        'employee': this.employee
+        'organization': this.organization.value,
+        'profile': this.profile.value,
+        'role': this.role.value,
+        'employee': this.employee.value
       }),
       'workOrders':this.fb.group({
         'workOrders':this.workorder
@@ -309,7 +308,6 @@ dashboards = new FormGroup({
     this.local.profileadd(this.profileform.value, storedtoken).subscribe((res)=>{
       alert(res.message);
     })
-    console.log(this.profileform.value);
   }
   else(
     alert('profile name is empty')
