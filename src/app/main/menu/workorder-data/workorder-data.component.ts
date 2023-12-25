@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { SpeedDialItemModel } from '@syncfusion/ej2-angular-buttons';
+import { ApiService } from 'src/app/api.service';
 import * as xls from 'xlsx'
 
 @Component({
@@ -10,6 +11,12 @@ import * as xls from 'xlsx'
   styleUrls: ['./workorder-data.component.css']
 })
 export class WorkorderDataComponent {
+
+
+
+constructor(private api:ApiService){
+
+}
 
   displayedColumns: string[] = ['WOno', 'WOLineno','buyer', 'orderNo', 'style', 'color', 'size', 'fabType',
     'fabDia', 'fabGsm', 'yarnType', 'yarnCount', 'knitSL', 'spinFty', 'knitFty', 'dyeingFty', 'yarnLot', 'noRolls', 'PrintStatus'
@@ -36,9 +43,7 @@ export class WorkorderDataComponent {
     NoofRolls: new FormControl(''),
     PrintStatus: new FormControl(''),
   })
-  workordersubmit() {
-    console.log(this.dataSource)
-  }
+
 
   dataSource: MatTableDataSource<PeriodicElement> = new MatTableDataSource<PeriodicElement>([])
   users: any;
@@ -47,7 +52,14 @@ export class WorkorderDataComponent {
   readfile(e: any) {
     this.file = e.target.files[0]
   }
-
+  workordersubmit() {
+    const proftoken = 'Bearer '+ sessionStorage.getItem('token')
+    this.api.postworkorder(this.dataSource, proftoken).subscribe((res)=>{
+      console.log(res)
+    })
+    window.location.reload();
+    console.log(this.dataSource)
+  }
 
   readexcelfile() {
 
@@ -98,28 +110,3 @@ export interface PeriodicElement {
   NoofRolls: any;
   PrintStatus: any;
 }
-
-
-// const ELEMENT_DATA: PeriodicElement[] = [
-//   {
-//     WOno: 1,
-//     WOLineno: 1,
-//     Order: 'xxx',
-//     Style: 'zzz',
-//     Color: 'ccc',
-//     Size: 12,
-//     FabType: 'vvv',
-//     FabDia: 'bbb',
-//     FabGSM: 'nnnn',
-//     Yarntype: 'mmmm',
-//     YarnCount: 'lll',
-//     KnitSL: 'kkk',
-//     SpinFty: 'jjj',
-//     KnitFty: 'hhh',
-//     DyeingFty: 'ggg',
-//     YarnLot: 'fff',
-//     NoofRolls: 'ddd',
-//     PrintStatus: 'sss',
-//   }
-
-// ];
