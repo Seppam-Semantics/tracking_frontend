@@ -46,7 +46,7 @@
             <span>Menu</span>
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <mat-nav-list>
+        <mat-nav-list *ngIf="workorderpermission">
           <a mat-list-item (click)="workorder()" [routerLink]="'WorkorderData'">
             <div class="text">
               Work Order

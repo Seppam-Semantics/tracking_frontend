@@ -1,6 +1,8 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
+import { EditEmployeesComponent } from '../masters/employees/edit-employees/edit-employees.component';
+import { MainRoutingModule } from '../main-routing.module';
 
 @Component({
   selector: 'app-main',
@@ -9,14 +11,22 @@ import { ApiService } from 'src/app/api.service';
 })
 export class MainComponent implements OnInit {
   
-  constructor(private api:ApiService, private router:Router){}
+
+  constructor(private api:ApiService, private router:Router , private route : MainRoutingModule){
+    
+  }
+
 
   ngOnInit(): void {
 
+
   }
+
+  workorderpermission=    this.route.workorderpermission
 
   workorderdata: boolean = false;
 
+  
   workorder() {
     this.workorderdata = true;
   }
@@ -25,4 +35,5 @@ export class MainComponent implements OnInit {
     this.router.navigate(['login']);
     window.sessionStorage.clear();
   }
+
 }
