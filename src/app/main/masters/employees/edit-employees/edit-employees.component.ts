@@ -14,9 +14,20 @@ export class EditEmployeesComponent implements OnInit {
   edit!: boolean;
   rolesnames:any;
   employee:any;
-
+  addemployees:FormGroup;
 
   constructor(private fb:FormBuilder, private api:ApiService, private local:LocalService){ 
+    this.addemployees = this.fb.group({
+      'id':sessionStorage.getItem('empid'),
+      employeeCode:new FormControl(),
+      name : new FormControl(''),
+      email : new FormControl(''),
+      phone : new FormControl(),
+      password : new FormControl(''),
+      role : new FormControl(''),
+      address : new FormControl(''),
+    })
+
    }
   ngOnInit(): void {
     this.getrolesnames();
@@ -27,15 +38,6 @@ export class EditEmployeesComponent implements OnInit {
   console.log(this.addemployees.value)
    }
 
-   addemployees = new FormGroup({
-    employeeCode:new FormControl(),
-    name : new FormControl(''),
-    email : new FormControl(''),
-    phone : new FormControl(),
-    password : new FormControl(''),
-    role : new FormControl(''),
-    address : new FormControl(''),
-  })
 
   getrolesnames(){
     const storedtoken = 'Bearer ' + sessionStorage.getItem('token')
