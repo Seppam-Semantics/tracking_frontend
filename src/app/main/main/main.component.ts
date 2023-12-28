@@ -22,8 +22,6 @@ export class MainComponent implements OnInit {
 
   }
 
-  workorderpermission=    this.route.workorderpermission
-
   workorderdata: boolean = false;
 
   

@@ -59,6 +59,6 @@ const routes: Routes = [
 })
 export class MainRoutingModule { 
 
-  workorderpermission : boolean= false;
+  
 
 }
