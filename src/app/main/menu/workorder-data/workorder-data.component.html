@@ -1,8 +1,15 @@
-<div class="container m-5">
-  <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
-    <input type="file" class="form-control w-50 mat-elevation-z8" (change)="readfile($event)" style="width: 20px; display:flex; align-items: center;">
-    <a href="../assets/Workorder.xlsx" class="btn btn-primary">Template</a>
+<mat-toolbar color="primary">
+  <mat-toolbar-row style="display: flex; justify-content: center;">
+    <span>WorkOrder Data</span>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+
+<div class="container m-5" style="width: 70%;">
+  <div style="display: flex; justify-content: start; align-items: center; gap: 10px;">
+    <input type="file" class="form-control w-50 mat-elevation-z8" (change)="readfile($event)" style="display:flex; align-items: start;">
     <button class="btn btn-primary" (click)="readexcelfile()"> Load </button>
+    <a href="../assets/Workorder.xlsx" class="btn btn-primary">Template</a>
   </div>
   
   </div>

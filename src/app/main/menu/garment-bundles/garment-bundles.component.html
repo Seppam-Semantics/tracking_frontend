@@ -2,6 +2,11 @@
   <input type="file" class="form-control w-50" (change)="readexcelfile($event)">
 </div> -->
 
+<mat-toolbar color="primary">
+  <mat-toolbar-row style="display: flex; justify-content: center;">
+    <span>Garment Bundles Data</span>
+  </mat-toolbar-row>
+</mat-toolbar>
 
 <div class="table-container">
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" >

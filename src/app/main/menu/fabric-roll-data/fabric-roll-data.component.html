@@ -2,6 +2,36 @@
   <input type="file" class="form-control w-50" (change)="readexcelfile($event)">
 </div> -->
 
+<mat-toolbar color="primary">
+  <mat-toolbar-row style="display: flex; justify-content: center;">
+    <span>Fabric Roll Data</span>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+
+<div style="margin-top: 10px; display: flex; justify-content: center; margin-left: 10px; gap: 10px;">
+  
+  <mat-form-field appearance="outline">
+  <mat-label>Work Order No </mat-label>
+  <mat-select>
+    <mat-option value="Work Order No">
+   -----Work Order No----
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field appearance="outline">
+  <mat-label>Wo Line No </mat-label>
+  <mat-select>
+    <mat-option value="Wo Line No">
+   -----Wo Line No----
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<button class="btn btn-primary" style="height: 10%; margin-top: 1%;" >Load</button>
+
+</div>
 <div class="table-container">
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="border: 1px solid black;">
   
