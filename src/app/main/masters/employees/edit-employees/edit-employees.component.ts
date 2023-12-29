@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/api.service';
 import { LocalService } from 'src/app/main/main/local.service';
 
@@ -20,12 +20,12 @@ export class EditEmployeesComponent implements OnInit {
     this.addemployees = this.fb.group({
       'id':sessionStorage.getItem('empid'),
       employeeCode:new FormControl(),
-      name : new FormControl(''),
-      email : new FormControl(''),
-      phone : new FormControl(),
-      password : new FormControl(''),
-      role : new FormControl(''),
-      address : new FormControl(''),
+      name : new FormControl('', Validators.required),
+      email : new FormControl('', Validators.required),
+      phone : new FormControl(Validators.required),
+      password : new FormControl('', Validators.required),
+      role : new FormControl('', Validators.required),
+      address : new FormControl('', Validators.required),
     })
 
    }

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ApiService } from 'src/app/api.service';
 import * as xls from 'xlsx'
 
 @Component({
@@ -6,45 +7,45 @@ import * as xls from 'xlsx'
   templateUrl: './fabric-roll-data.component.html',
   styleUrls: ['./fabric-roll-data.component.css']
 })
-export class FabricRollDataComponent {
+export class FabricRollDataComponent implements OnInit {
 
-  displayedColumns: string[] = ['WONo','WOLineno','RollNo','FabBarcode','FabBatchno','FirstrollWeightKGS','FirstrollWeightDATE',
-    'GriegeFabKGS','GriegeFabDATE','DyeBatchingKGS','DyeBatchingDATE',
-    'DyeFinishKGS','DyeFinishDATE','DeliverytoGarmenthKGS','DeliverytoGarmenthDATE','PlanCutPanelsKGS',
-    'PlanCutPanelsDATE','ActualCutPanelsKGS','ActualCutPanelsDATE','PcsperBundle','PlannedBundles','ActualBundles','PrintStatus'
+
+  constructor(private api:ApiService){}
+  ngOnInit(): void {
+    const proftoken = 'Bearer '+ sessionStorage.getItem('token')
+    this.api.getfabricdetails(proftoken).subscribe((res)=>{ 
+      console.log(res);
+    })
+  }
+
+  displayedColumns: string[] = ['WONo', 'WOLineno', 'RollNo', 'FabBarcode', 'FabBatchno', 'FirstrollWeightKGS', 'FirstrollWeightDATE',
+    'GriegeFabKGS', 'GriegeFabDATE', 'DyeBatchingKGS', 'DyeBatchingDATE',
+    'DyeFinishKGS', 'DyeFinishDATE', 'DeliverytoGarmenthKGS', 'DeliverytoGarmenthDATE', 'PlanCutPanelsKGS',
+    'PlanCutPanelsDATE', 'ActualCutPanelsKGS', 'ActualCutPanelsDATE', 'PcsperBundle', 'PlannedBundles', 'ActualBundles', 'PrintStatus'
   ];
-  dataSource = ELEMENT_DATA;
 
+  dataSource = ELEMENT_DATA;
   users: any;
 
-  readexcelfile(e:any){
+  readexcelfile(e: any) {
 
-    const file= e.target.files[0]
+    const file = e.target.files[0]
     let fr = new FileReader();
 
     fr.readAsArrayBuffer(file);
 
-    fr.onload= ()=>{
-      
+    fr.onload = () => {
       let data = fr.result;
-          let workbook = xls.read(data,{type:'array'});
-
-            const sheetname = workbook.SheetNames[0];
-
-            const sheet1 = workbook.Sheets[sheetname]
-
-            this.users=xls.utils.sheet_to_json(sheet1,{raw:true});
-          
-
-            this.users.forEach((user: any) => {
-              this.dataSource=this.users
-              console.log(this.dataSource)
-              
-            });
-          };
-
-        }
-
+      let workbook = xls.read(data, { type: 'array' });
+      const sheetname = workbook.SheetNames[0];
+      const sheet1 = workbook.Sheets[sheetname]
+      this.users = xls.utils.sheet_to_json(sheet1, { raw: true });
+      this.users.forEach((user: any) => {
+        this.dataSource = this.users
+        console.log(this.dataSource)
+      });
+    };
+  }
 }
 
 
