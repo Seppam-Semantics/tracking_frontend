@@ -1,4 +1,4 @@
-<form [formGroup]="fabricroll6" (ngSubmit)="fabricroll6submit()">
+
     <mat-toolbar color="primary">
         <mat-toolbar-row style="display: flex; justify-content: center;">
           <span>Transfer from Warehouse to Cutting - Plan Cut</span>
@@ -12,50 +12,41 @@
       
             <mat-form-field appearance="outline">
               <mat-label>Work Order</mat-label>
-              <mat-select formControlName="WorkOrder">
-                <mat-option value="option1">Option 1</mat-option>
-                <mat-option value="option2">Option 2</mat-option>
+              <mat-select  [(ngModel)]="workorderId" (selectionChange)="onSelectionChange()">
+                <mat-option value="{{order.id}}" *ngFor="let order of this.WoNumber">{{order.code}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline">
+              <mat-label>Work Order Line No</mat-label>
+              <mat-select [(ngModel)]="entry" (selectionChange)="onSelectionChange()">
+                <mat-option value="1"> 1 </mat-option>
               </mat-select>
             </mat-form-field>
       
             <mat-form-field appearance="outline">
               <mat-label>Buyer</mat-label>
-              <mat-select formControlName="Buyer">
-                <mat-option value="option1">Option 1</mat-option>
-                <mat-option value="option2">Option 2</mat-option>
-              </mat-select>
+              <input matInput value="{{fabdetails?.buyer}}">
             </mat-form-field>
       
             <mat-form-field appearance="outline">
               <mat-label>Order</mat-label>
-              <mat-select formControlName="Order">
-                <mat-option value="option1">Option 1</mat-option>
-                <mat-option value="option2">Option 2</mat-option>
-              </mat-select>
+              <input matInput value="{{fabdetails?.orderNo}}">
             </mat-form-field>
       
             <mat-form-field appearance="outline">
               <mat-label>Style</mat-label>
-              <mat-select formControlName="Style">
-                <mat-option value="option1">Option 1</mat-option>
-                <mat-option value="option2">Option 2</mat-option>
-              </mat-select>
+              <input matInput value="{{fabdetails?.style}}">
             </mat-form-field>
       
             <mat-form-field appearance="outline">
               <mat-label>color</mat-label>
-              <mat-select formControlName="color">
-                <mat-option value="option1">Option 1</mat-option>
-                <mat-option value="option2">Option 2</mat-option>
-              </mat-select>
+              <input matInput value="{{fabdetails?.color}}">
             </mat-form-field>
       
             <mat-form-field appearance="outline">
               <mat-label>Size</mat-label>
-              <mat-select formControlName="Size">
-                <mat-option value="option1">Option 1</mat-option>
-                <mat-option value="option2">Option 2</mat-option>
-              </mat-select>
+              <input matInput value="{{fabdetails?.size}}">
             </mat-form-field>
       
           </div>
@@ -79,82 +70,71 @@
       
               <mat-form-field appearance="outline">
                 <mat-label>Fab Type</mat-label>
-                <mat-select formControlName="FabType">
-                  <mat-option value="option1">Option 1</mat-option>
-                  <mat-option value="option1">Option 2</mat-option>
+                <mat-select>
+                  <mat-option value="{{fabdetails?.fabType}}">{{fabdetails?.fabType}}</mat-option>
                 </mat-select>
               </mat-form-field>
       
               <mat-form-field appearance="outline">
                 <mat-label>Yarn Type</mat-label>
-                <mat-select formControlName="YarnType">
-                  <mat-option value="option1">Option 1</mat-option>
-                  <mat-option value="option1">Option 2</mat-option>
+                <mat-select>
+                  <mat-option value="{{fabdetails?.yarnType}}">{{fabdetails?.yarnType}}</mat-option>
                 </mat-select>
               </mat-form-field>
       
               <mat-form-field appearance="outline">
                 <mat-label>Yarn Cunt</mat-label>
-                <mat-select formControlName="YarnCunt">
-                  <mat-option value="option1">Option 1</mat-option>
-                  <mat-option value="option1">Option 2</mat-option>
+                <mat-select>
+                  <mat-option value="{{fabdetails?.yarnCount}}">{{fabdetails?.yarnCount}}</mat-option>
                 </mat-select>
               </mat-form-field>
       
               <mat-form-field appearance="outline">
                 <mat-label>Knit SL</mat-label>
-                <mat-select formControlName="KnitSL">
-                  <mat-option value="option1">Option 1</mat-option>
-                  <mat-option value="option1">Option 2</mat-option>
-                
+                <mat-select>
+                  <mat-option value="{{fabdetails?.knitSL}}">{{fabdetails?.knitSL}}</mat-option>
                 </mat-select>
               </mat-form-field>
       
               <mat-form-field appearance="outline">
                 <mat-label>Fab Dia</mat-label>
-                <mat-select formControlName="FabDia">
-                  <mat-option value="option1">Option 1</mat-option>
-                  <mat-option value="option1">Option 2</mat-option>
+                <mat-select>
+                  <mat-option value="{{fabdetails?.fabDia}}">{{fabdetails?.fabDia}}</mat-option>
                 </mat-select>
               </mat-form-field>
       
               <mat-form-field appearance="outline">
                 <mat-label>GSM</mat-label>
-                <mat-select formControlName="GSM">
-                  <mat-option value="option1">Option 1</mat-option>
-                  <mat-option value="option1">Option 2</mat-option>
+                <mat-select>
+                  <mat-option value="{{fabdetails?.fabGsm}}">{{fabdetails?.fabGsm}}</mat-option>
                 </mat-select>
               </mat-form-field>
       
               <mat-form-field appearance="outline">
                 <mat-label>Knit Fty</mat-label>
-                <mat-select formControlName="KnitFty">
-                  <mat-option value="option1">Option 1</mat-option>
-                  <mat-option value="option1">Option 2</mat-option>
+                <mat-select>
+                  <mat-option value="{{fabdetails?.knitFty}}">{{fabdetails?.knitFty}}</mat-option>
                 </mat-select>
               </mat-form-field>
       
               <mat-form-field appearance="outline">
                 <mat-label>Dye Fty</mat-label>
-                <mat-select formControlName="DyeFty">
-                  <mat-option value="option1">Option 1</mat-option>
-                  <mat-option value="option1">Option 2</mat-option>
+                <mat-select>
+                  <mat-option value="{{fabdetails?.dyeinFty}}">{{fabdetails?.dyeinFty}}</mat-option>
                 </mat-select>
               </mat-form-field>
       
               <mat-form-field appearance="outline">
                 <mat-label>Spin Fty</mat-label>
-                <mat-select formControlName="SpinFty">
-                  <mat-option value="option1">Option 1</mat-option>
-                  <mat-option value="option1">Option 2</mat-option>
+                <mat-select>
+                  <mat-option value="{{fabdetails?.spinFty}}">{{fabdetails?.spinFty}}</mat-option>
                 </mat-select>
               </mat-form-field>
       
               <mat-form-field appearance="outline">
                 <mat-label>Yarn Lot</mat-label>
-                <mat-select formControlName="YarnLot">
-                  <mat-option value="option1">Option 1</mat-option>
-                  <mat-option value="option1">Option 2</mat-option>
+                <mat-select>
+                  <mat-option value="{{fabdetails?.yarnLot}}">{{fabdetails?.yarnLot}}</mat-option>
                 </mat-select>
               </mat-form-field>
       
@@ -177,12 +157,12 @@
             <ng-container matColumnDef="Batchno">
               <th mat-header-cell *matHeaderCellDef ></th>
               <td mat-cell *matCellDef="let element">
-                <div formArrayName="items">
+                <div formArrayName="entrys">
                   <div class="entrydata" *ngFor="let item of items.controls; let i = index" [formGroupName]="i">
       
                     <mat-form-field appearance="outline" class="full-width" style="width: 100px;">
                       <mat-label>Batch no</mat-label>
-                      <input matInput required formControlName="Batchno" textOnly>
+                      <input matInput required  textOnly>
                       <mat-error> </mat-error>
                     </mat-form-field>
       
@@ -192,14 +172,14 @@
             </ng-container>
       
             <ng-container matColumnDef="rollno">
-              <th mat-header-cell *matHeaderCellDef > Cum. </th>
+              <th mat-header-cell *matHeaderCellDef > Roll No. </th>
               <td mat-cell *matCellDef="let element" >
-                <div formArrayName="items">
+                <div formArrayName="entrys">
                   <div *ngFor="let item of items.controls; let i = index" [formGroupName]="i" class="entrydata">
       
                     <mat-form-field appearance="outline" class="full-width" style="width: 100px;">
                       <mat-label>Roll no</mat-label>
-                      <input matInput required formControlName="rollno" textOnly>
+                      <input matInput required formControlName="rollNo" textOnly>
                       <mat-error> </mat-error>
                     </mat-form-field>
                   </div>
@@ -213,12 +193,12 @@
       
               <th mat-header-cell *matHeaderCellDef >Cum.Wt</th>
               <td mat-cell *matCellDef="let element" >
-                <div formArrayName="items">
+                <div formArrayName="entrys">
                   <div *ngFor="let item of items.controls; let i = index" [formGroupName]="i" class="entrydata">
                     <div style="display: flex;">
                       <mat-form-field appearance="outline" class="full-width" style="width: 100px;">
                         <mat-label>Greige Wt</mat-label>
-                        <input matInput required formControlName="delWt" textOnly>
+                        <input matInput required  textOnly>
                         <mat-error></mat-error>
                       </mat-form-field>
                     </div>
@@ -233,12 +213,12 @@
       
               <th mat-header-cell *matHeaderCellDef>Cum.Wt</th>
               <td mat-cell *matCellDef="let element" >
-                <div formArrayName="items">
+                <div formArrayName="entrys">
                   <div *ngFor="let item of items.controls; let i = index" [formGroupName]="i" class="entrydata">
                     <div style="display: flex;">
                       <mat-form-field appearance="outline" class="full-width" style="width: 100px;">
                         <mat-label>PlanPcs</mat-label>
-                        <input matInput required formControlName="PlanPcs" textOnly>
+                        <input matInput required formControlName="entry_6" textOnly>
                         <mat-error></mat-error>
                       </mat-form-field>
                       <button type="button" class="btn btn-danger" style="height: 50px;"
@@ -260,6 +240,4 @@
             style="margin-left: 5%; margin-top: 3%;">Save</button>
         </div>
       
-      </div>
-      </form>
-      
+      </div> 
