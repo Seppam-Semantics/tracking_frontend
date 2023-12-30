@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/api.service';
 import * as xls from 'xlsx'
 
@@ -9,12 +10,20 @@ import * as xls from 'xlsx'
 })
 export class FabricRollDataComponent implements OnInit {
 
+  fabricdetails:any
+  ordernumber:any
+
+  fabricfrom =  new FormGroup({
+  'WOno': new FormControl(Validators.required),
+  'WOLineno': new FormControl('1')
+})
 
   constructor(private api:ApiService){}
+
   ngOnInit(): void {
     const proftoken = 'Bearer '+ sessionStorage.getItem('token')
-    this.api.getfabricdetails(proftoken).subscribe((res)=>{ 
-      console.log(res);
+    this.api.getworkorderdetails(proftoken).subscribe((res)=>{
+      this.ordernumber = res.workorders
     })
   }
 
@@ -42,10 +51,21 @@ export class FabricRollDataComponent implements OnInit {
       this.users = xls.utils.sheet_to_json(sheet1, { raw: true });
       this.users.forEach((user: any) => {
         this.dataSource = this.users
-        console.log(this.dataSource)
       });
     };
   }
+
+  loaddetails(){
+    const proftoken = 'Bearer '+ sessionStorage.getItem('token')
+    const id = this.fabricfrom.get('WOno')?.value;
+    const entry = this.fabricfrom.get('WOLineno')?.value;
+    this.api.getfabricdetails(id, entry, proftoken).subscribe((res)=>{ 
+      this.fabricdetails = res.fabricRolls
+      this.dataSource = this.fabricdetails
+    })
+  }
+
+
 }
 
 

@@ -9,35 +9,35 @@
 </mat-toolbar>
 
 
-<div style="margin-top: 10px; display: flex; justify-content: center; margin-left: 10px; gap: 10px;">
-  
+<div style="margin-top: 10px; display: flex; justify-content: center; margin-left: 10px;"  >
+  <form [formGroup]="fabricfrom" (ngSubmit)="loaddetails()" style="display: flex; justify-content: space-evenly;width:80%; align-items:center">
   <mat-form-field appearance="outline">
   <mat-label>Work Order No </mat-label>
-  <mat-select>
-    <mat-option value="Work Order No">
-   -----Work Order No----
+  <mat-select formControlName="WOno">
+    <mat-option value="{{order.id}}" *ngFor="let order of this.ordernumber">
+      {{order.code}}
     </mat-option>
   </mat-select>
 </mat-form-field>
 
-<mat-form-field appearance="outline">
+<mat-form-field appearance="outline" style="display: none;">
   <mat-label>Wo Line No </mat-label>
-  <mat-select>
-    <mat-option value="Wo Line No">
+  <mat-select formControlName="WOLineno">
+    <mat-option value="1">
    -----Wo Line No----
     </mat-option>
   </mat-select>
 </mat-form-field>
-
-<button class="btn btn-primary" style="height: 10%; margin-top: 1%;" >Load</button>
-
+<button class="btn btn-primary" >Load</button>
+</form>
 </div>
+
 <div class="table-container">
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="border: 1px solid black;">
   
     <ng-container matColumnDef="WONo">
       <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> WONo </th>
-      <td mat-cell *matCellDef="let element"> {{element.WONo}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.workorderId}} </td>
     </ng-container>
   
     <ng-container matColumnDef="WOLineno">
@@ -47,12 +47,12 @@
   
     <ng-container matColumnDef="RollNo">
       <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Roll No </th>
-      <td mat-cell *matCellDef="let element"> {{element.RollNo }} </td>
+      <td mat-cell *matCellDef="let element"> {{element.rollNo }} </td>
     </ng-container>
   
     <ng-container matColumnDef="FabBarcode">
       <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Fab Bar code </th>
-      <td mat-cell *matCellDef="let element"> {{element.FabBarcode }} </td>
+      <td mat-cell *matCellDef="let element"> {{element.fabBarcode }} </td>
     </ng-container>
   
     <ng-container matColumnDef="FabBatchno">
@@ -62,78 +62,78 @@
     <!----------------------------------------FirstrollWeight------------------------------------------------------>
     <ng-container matColumnDef="FirstrollWeightKGS">
       <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon; border: 1px solid black;"> Kgs </th>
-      <td mat-cell *matCellDef="let element">   {{element.FirstrollWeightKGS}} </td>
+      <td mat-cell *matCellDef="let element">   {{element.entry_1}} </td>
     </ng-container>
   
     <ng-container matColumnDef="FirstrollWeightDATE">
       <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon; border: 1px solid black"> Date </th>
-      <td mat-cell *matCellDef="let element"> {{element.FirstrollWeightDATE}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.entry_1At}} </td>
     </ng-container>
     <!---------------------------------------------------------------------------------------------->
     <!----------------------------------------GriegeFab------------------------------------------------------>
     <ng-container matColumnDef="GriegeFabKGS">
       <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Kgs </th>
-      <td mat-cell *matCellDef="let element"> {{element.GriegeFabKGS}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.entry_2}} </td>
     </ng-container>
   
     <ng-container matColumnDef="GriegeFabDATE">
       <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Date </th>
-      <td mat-cell *matCellDef="let element"> {{element.GriegeFabDATE}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.entry_2At}} </td>
     </ng-container>
     <!---------------------------------------------------------------------------------------------->
     <!----------------------------------------------DyeBatching------------------------------------------------>
     <ng-container matColumnDef="DyeBatchingKGS">
       <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Kgs </th>
-      <td mat-cell *matCellDef="let element"> {{element.DyeBatchingKGS}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.entry_3}} </td>
     </ng-container>
   
     <ng-container matColumnDef="DyeBatchingDATE">
       <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Date </th>
-      <td mat-cell *matCellDef="let element"> {{element.DyeBatchingDATE}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.entry_3At}} </td>
     </ng-container>
     <!---------------------------------------------------------------------------------------------->
     <!---------------------------------------------DyeFinish------------------------------------------------->
     <ng-container matColumnDef="DyeFinishKGS">
       <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Kgs </th>
-      <td mat-cell *matCellDef="let element"> {{element.DyeFinishKGS}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.entry_4}} </td>
     </ng-container>
   
     <ng-container matColumnDef="DyeFinishDATE">
       <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Date </th>
-      <td mat-cell *matCellDef="let element"> {{element.DyeFinishDATE}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.entry_4At}} </td>
     </ng-container>
     <!---------------------------------------------------------------------------------------------->
     <!---------------------------------------------DeliverytoGarmenth------------------------------------------------->
     <ng-container matColumnDef="DeliverytoGarmenthKGS">
       <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Kgs </th>
-      <td mat-cell *matCellDef="let element"> {{element.DeliverytoGarmenthKGS}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.entry_5}} </td>
     </ng-container>
   
     <ng-container matColumnDef="DeliverytoGarmenthDATE">
       <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Date </th>
-      <td mat-cell *matCellDef="let element"> {{element.DeliverytoGarmenthDATE}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.entry_5At}} </td>
     </ng-container>
     <!---------------------------------------------------------------------------------------------->
     <!---------------------------------------------PlanCutPanels------------------------------------------------->
     <ng-container matColumnDef="PlanCutPanelsKGS">
       <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Kgs </th>
-      <td mat-cell *matCellDef="let element"> {{element.PlanCutPanelsKGS}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.entry_6}} </td>
     </ng-container>
   
     <ng-container matColumnDef="PlanCutPanelsDATE">
       <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Date </th>
-      <td mat-cell *matCellDef="let element"> {{element.PlanCutPanelsDATE}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.entry_6At}} </td>
     </ng-container>
     <!---------------------------------------------------------------------------------------------->
     <!---------------------------------------------ActualCutPanels------------------------------------------------->
     <ng-container matColumnDef="ActualCutPanelsKGS">
       <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Kgs </th>
-      <td mat-cell *matCellDef="let element"> {{element.ActualCutPanelsKGS}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.entry_7}} </td>
     </ng-container>
   
     <ng-container matColumnDef="ActualCutPanelsDATE">
       <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Date </th>
-      <td mat-cell *matCellDef="let element"> {{element.ActualCutPanelsDATE}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.entry_7At}} </td>
     </ng-container>
     <!---------------------------------------------------------------------------------------------->
     <ng-container matColumnDef="PcsperBundle">

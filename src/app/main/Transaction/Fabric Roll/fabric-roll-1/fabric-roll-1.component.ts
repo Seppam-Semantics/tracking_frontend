@@ -1,28 +1,64 @@
-import { Component } from '@angular/core';
-import { FormArray, FormBuilder } from '@angular/forms';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Component, OnInit,ChangeDetectorRef, AfterContentChecked } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ApiService } from 'src/app/api.service';
 
 @Component({
   selector: 'app-fabric-roll-1',
   templateUrl: './fabric-roll-1.component.html',
   styleUrls: ['./fabric-roll-1.component.css']
 })
-export class FabricRoll1Component {
+export class FabricRoll1Component implements OnInit {
 
-
-
-  show=false;
-  
+  show=false;  
   displayedColumns: string[] = ['Cum', 'CumWt'];
   dataSource = [...ELEMENT_DATA];
+  workorderId:any;
+  entry: any;
+  WoNumber:any;
+  fabdetails:any;
+  rollnnumber:any;
+  entry1form!:FormGroup;
+  constructor(private fb: FormBuilder, private api: ApiService, private http: HttpClient,
+    private cdref: ChangeDetectorRef) {
 
-  constructor(private fb:FormBuilder){}
+  }
+
+  ngOnInit(): void {
+    const proftoken = 'Bearer '+ sessionStorage.getItem('token')
+    this.api.getworkorderdetails(proftoken).subscribe((res)=>{
+      this.WoNumber = res.workorders
+    })
+  }
+
+  ngAfterContentChecked() {
+    this.cdref.detectChanges();
+  }
+
+
+  onSelectionChange() {
+      if (this.workorderId && this.entry) {
+        this.loadworkorderdetails(this.workorderId, this.entry);
+      }
+  }
+  loadworkorderdetails(WOno: any, WOLineno: any):void{
+    const proftoken = 'Bearer '+ sessionStorage.getItem('token')  
+    const headers = new HttpHeaders().set('x-access-token', proftoken);
+    this.http.get<any>(`http://localhost:2000/fabricrollapi/fabric-entrys?id=${WOno}&entry=${WOLineno}`, { headers }).subscribe((res)=>{
+      this.fabdetails = res.workorder
+      console.log(this.fabdetails)
+      this.rollnnumber = res.fabricRolls
+    })
+  }
+
+
 
 form = this.fb.group({
-  items:this.fb.array([]),
+  entrys:this.fb.array([]),
 });
 
 get items(){
-  return this.form.get('items') as FormArray
+  return this.form.get('entrys') as FormArray
 }
 
 delete(index: number) {
@@ -32,13 +68,23 @@ delete(index: number) {
 add(){
   this.items.push(
     this.fb.group({
-      cum:[''],
-      cumWt:['']
+      rollNo:[''],
+      entry_1:['']
     })
   )
 }
+
 submit(){
-  console.log(this.form.value)
+  this.entry1form = this.fb.group({
+    "workorderId": this.workorderId,
+    "entry": this.entry,
+    "entrys":this.form.get('entrys') as FormArray
+  })
+  console.log(this.entry1form.value)
+  const proftoken = 'Bearer '+ sessionStorage.getItem('token')
+  this.api.postfabricdetails(this.entry1form.value, proftoken ).subscribe((res)=>{
+    console.log(res);
+  })
 }
 
 }

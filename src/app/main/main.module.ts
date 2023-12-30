@@ -24,7 +24,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
-
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 import { RolesProfileRootComponent } from './masters/Roles and profiles/roles/roles-profile-root/roles-profile-root.component';
 import { RolesComponent } from './masters/Roles and profiles/roles/roles.component';
@@ -79,6 +79,7 @@ import { FabricRoll7Component } from './Transaction/Fabric Roll/fabric-roll-7/fa
     FabricRoll5Component,
     FabricRoll6Component,
     FabricRoll7Component,
+    
         
   ],
   imports: [
@@ -104,7 +105,8 @@ import { FabricRoll7Component } from './Transaction/Fabric Roll/fabric-roll-7/fa
     MatNativeDateModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatAutocompleteModule
 
   ]
 })
