@@ -124,6 +124,7 @@ onSelectionChange() {
         this.getsize(this.buyerName, this.ordernumbers, this.styleslist, this.colorslist)
       }
       if(this.buyerName && this.ordernumbers && this.styleslist && this.colorslist && this.sizeslist){
+        this.resetform();
         this.loadworkorder(this.buyerName, this.ordernumbers, this.styleslist, this.colorslist, this.sizeslist)
         this.workorderhide = false;
       }
@@ -134,7 +135,8 @@ onSelectionChange() {
     const headers = new HttpHeaders().set('x-access-token', proftoken);
     this.http.get<any>(`${this.api.apiUrl}/fabricrollapi/fabric-entrys?id=${WOno}&entry=1`, { headers }).subscribe((res)=>{
       this.fabdetails = res.workorder
-      this.rollnnumber = res.fabricRolls
+      this.rollnnumber = res.fabricRolls;
+      console.log(this.rollnnumber)
       this.numbers = []
         for(let noOfRolls of this.rollnnumber){
         this.numbers.push(noOfRolls.rollNo)
@@ -158,8 +160,12 @@ loadworkorder(buyer:any, order:any, style:any, color:any, size:any){
     this.http.get<any>(`${this.api.apiUrl}/fabricrollapi/fabric-entrys?id=&entry=1&buyer=${buyer}&orderNo=${order}&style=${style}&color=${color}&size=${size}`, { headers }).subscribe((res)=>{
       this.fabdetails = res.workorder
       this.rollnnumber = res.fabricRolls
+      console.log(this.rollnnumber)
+      this.workorderId = this.rollnnumber[0].workorderId;
+      this.numbers = []
         for(let noOfRolls of this.rollnnumber){
         this.numbers.push(noOfRolls.rollNo)
+        this.fabcode.push(noOfRolls.fabBarcode)
         }
         this.numbers.forEach((value)=>{
           this.add(value);

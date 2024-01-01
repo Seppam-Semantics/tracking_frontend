@@ -58,3 +58,8 @@
   th{
     text-align: center;
   }
+
+  .mat-mdc-tab-body-content {
+    height: 100%;
+    overflow: hidden;
+}
