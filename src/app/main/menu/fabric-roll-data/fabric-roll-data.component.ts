@@ -15,7 +15,7 @@ export class FabricRollDataComponent implements OnInit {
 
   fabricfrom =  new FormGroup({
   'WOno': new FormControl(Validators.required),
-  'WOLineno': new FormControl('1')
+  'WOLineno': new FormControl('0')
 })
 
   constructor(private api:ApiService){}

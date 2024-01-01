@@ -54,6 +54,10 @@ postfabricdetails(data:any, profiletoken:any):Observable<any>{
   return this.http.post(`${this.apiUrl}/fabricrollapi/fabric-entrys`, data, { headers })
 }
 
+getbuyers(profiletoken:any):Observable<any>{
+  const headers = new HttpHeaders().set('x-access-token', profiletoken);
+  return this.http.get(`${this.apiUrl}/filtersapi/buyers`, { headers })
+}
 
 }
  

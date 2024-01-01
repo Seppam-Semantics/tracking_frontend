@@ -55,10 +55,10 @@ export class WorkorderDataComponent {
   }
   workordersubmit() {
     const proftoken = 'Bearer ' + sessionStorage.getItem('token')
-    // this.api.postworkorder(this.dataSource, proftoken).subscribe((res)=>{
-    //   console.log(res)
-    // })
-    // window.location.reload();
+    this.api.postworkorder(this.dataSource, proftoken).subscribe((res)=>{
+      console.log(res)
+    })
+    window.location.reload();
     console.log(this.dataSource)
 
   }
