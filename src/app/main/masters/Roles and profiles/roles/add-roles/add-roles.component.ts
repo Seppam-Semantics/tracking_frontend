@@ -30,10 +30,10 @@ this.profilenames = this.api.profilenames
  
 
   addroles(){    
-    console.log(this.addrolesform.value);
+
     const proftoken = 'Bearer '+ sessionStorage.getItem('token')
     this.local.rolesadd(this.addrolesform.value, proftoken).subscribe((res)=>{
-      console.log(res);
+      alert(res.message)
     })
     this.addrolesform.reset();
   }

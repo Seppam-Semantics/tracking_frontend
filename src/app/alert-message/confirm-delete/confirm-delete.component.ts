@@ -15,9 +15,8 @@ deleteprofile(){
   const proftoken = 'Bearer '+ sessionStorage.getItem('token');
   const id = sessionStorage.getItem('deleteid');
   this.api.delete(id,proftoken).subscribe((res)=>{
-    console.log(res);
+    alert(res.message);
   })
-  console.log(proftoken);
   window.location.reload();
 }
 }

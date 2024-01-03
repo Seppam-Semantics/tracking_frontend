@@ -37,7 +37,6 @@ export class AddEmployeesComponent implements OnInit {
     const storedtoken = 'Bearer ' + sessionStorage.getItem('token')
   this.api.getroles(storedtoken).subscribe((res)=>{
     this.rolesnames = res.roles
-    console.log(this.rolesnames);
   })
   }
 
@@ -45,7 +44,7 @@ export class AddEmployeesComponent implements OnInit {
     if(this.addemployees.valid){
     const storedtoken = 'Bearer ' + sessionStorage.getItem('token')
     this.local.addemployee(this.addemployees.value, storedtoken).subscribe((res)=>{
-      console.log(res);
+      alert(res.message)
     })
   }
   else{

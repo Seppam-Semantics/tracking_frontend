@@ -43,7 +43,7 @@ add(){
   )
 }
 submit(){
-  console.log(this.form.value)
+  // console.log(this.form.value)
 }
 
 }

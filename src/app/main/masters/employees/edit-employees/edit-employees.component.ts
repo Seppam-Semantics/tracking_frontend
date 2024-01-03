@@ -35,7 +35,7 @@ export class EditEmployeesComponent implements OnInit {
   }
 
    addemployeesSUBMIT(){
-  console.log(this.addemployees.value)
+  // console.log(this.addemployees.value)
    }
 
 
@@ -43,17 +43,14 @@ export class EditEmployeesComponent implements OnInit {
     const storedtoken = 'Bearer ' + sessionStorage.getItem('token')
   this.api.getroles(storedtoken).subscribe((res)=>{
     this.rolesnames = res.roles
-    console.log(this.rolesnames);
   })
   }
 
   patch(){
     const storedtoken = 'Bearer ' + sessionStorage.getItem('token')
-    console.log(storedtoken);
     const empid = sessionStorage.getItem('empid');
     this.local.getsingleemployee(empid,storedtoken).subscribe((res)=>{
       this.employee = res
-      console.log(this.employee);
       this.addemployees.patchValue({
         employeeCode : res.employee.employeeCode,
         name : res.employee.name,
@@ -71,7 +68,7 @@ export class EditEmployeesComponent implements OnInit {
     if(this.addemployees.valid){
     const storedtoken = 'Bearer ' + sessionStorage.getItem('token')
     this.local.addemployee(this.addemployees.value, storedtoken).subscribe((res)=>{
-      console.log(res);
+      alert(res.message)
     })
   }
   else{

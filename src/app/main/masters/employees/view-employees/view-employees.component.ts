@@ -63,7 +63,6 @@ export class ViewEmployeesComponent implements OnInit {
 getemployee(){
   const proftoken = 'Bearer '+ sessionStorage.getItem('token');
   this.local.getemployee(proftoken).subscribe((res)=>{
-    console.log(res);
     this.dataSource = res.employees
   })
 }

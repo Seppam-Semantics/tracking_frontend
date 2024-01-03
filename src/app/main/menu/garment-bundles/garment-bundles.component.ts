@@ -36,7 +36,6 @@ readexcelfile(e:any){
 
           this.users.forEach((user: any) => {
             this.dataSource=this.users
-            console.log(this.dataSource)
             
           });
         };

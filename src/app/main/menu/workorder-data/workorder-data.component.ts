@@ -19,14 +19,12 @@ export class WorkorderDataComponent {
 
   }
 
-  displayedColumns: string[] = ['WOno', 'WOLineno', 'buyer', 'orderNo', 'style', 'color', 'size', 'fabType',
+  displayedColumns: string[] = ['Sl.no', 'buyer', 'orderNo', 'style', 'color', 'size', 'fabType',
     'fabDia', 'fabGsm', 'yarnType', 'yarnCount', 'knitSL', 'spinFty', 'knitFty', 'dyeingFty', 'yarnLot', 'noRolls', 'PrintStatus'
   ];
 
 
   workorder = new FormGroup({
-    WOno: new FormControl(''),
-    WOLineno: new FormControl(''),
     Order: new FormControl(''),
     Style: new FormControl(''),
     Color: new FormControl(''),
@@ -54,12 +52,10 @@ export class WorkorderDataComponent {
     this.file = e.target.files[0]
   }
   workordersubmit() {
-    const proftoken = 'Bearer ' + sessionStorage.getItem('token')
-    this.api.postworkorder(this.dataSource, proftoken).subscribe((res)=>{
-      console.log(res)
+    this.api.postworkorder(this.dataSource).subscribe((res)=>{
+      alert(res.message)
     })
     window.location.reload();
-    console.log(this.dataSource)
 
   }
 
@@ -123,8 +119,6 @@ export class WorkorderDataComponent {
 
     this.users.forEach((order:any) => {
       order.WOno = workOrderNumberToIndex[order.orderNo.toUpperCase()].toString().padStart(3, '0');
-
-      console.log(order.WOno);
     });
   }
 

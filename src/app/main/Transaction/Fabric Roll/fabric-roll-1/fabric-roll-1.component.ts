@@ -55,47 +55,45 @@ export class FabricRoll1Component implements OnInit {
   }
 
   ngOnInit(): void {
-    const proftoken = 'Bearer '+ sessionStorage.getItem('token')
-    this.api.getworkorderdetails(proftoken).subscribe((res)=>{
-      this.WoNumber = res.workorders
-    })
-    this.api.getbuyers(proftoken).subscribe((res)=>{
-      this.buyers = res.buyers;
-    })
+    this.getbuyers();
+    this.getworkorderdetails()
   }
 
   ngAfterContentChecked() {
     this.cdref.detectChanges();
   }
 
-  getorders(buyer:any){
-    const proftoken = 'Bearer '+ sessionStorage.getItem('token')
-    const headers = new HttpHeaders().set('x-access-token', proftoken);
-    this.http.get<any>(`${this.api.apiUrl}/filtersapi/buyers-orders?buyer=${buyer}`, { headers }).subscribe((res)=>{
+  public getworkorderdetails() {
+    this.api.getworkorderdetails().subscribe((res) => {
+      this.WoNumber = res.workorders
+    })
+  }
+
+  public getbuyers() {
+    this.api.getbuyers().subscribe((res) => {
+      this.buyers = res.buyers;
+    })
+  }
+  getorders(buyer: any) {
+    this.api.getorders(buyer).subscribe((res) => {
       this.order = res.orders
     })
   }
 
-  getstyle(buyer:any, order:any){
-    const proftoken = 'Bearer '+ sessionStorage.getItem('token')
-    const headers = new HttpHeaders().set('x-access-token', proftoken);
-    this.http.get<any>(`${this.api.apiUrl}/filtersapi/orders-styles?buyer=${buyer}&orderNo=${order}`, { headers }).subscribe((res)=>{
+  getstyle(buyer: any, order: any) {
+    this.api.getstyle(buyer, order).subscribe((res) => {
       this.stylelist = res.styles;
     })
   }
 
-  getcolor(buyer:any, order:any, style:any){
-    const proftoken = 'Bearer '+ sessionStorage.getItem('token')
-    const headers = new HttpHeaders().set('x-access-token', proftoken);
-    this.http.get<any>(`${this.api.apiUrl}/filtersapi/styles-colors?buyer=${buyer}&orderNo=${order}&style=${style}`, { headers }).subscribe((res)=>{
+  getcolor(buyer: any, order: any, style: any) {
+    this.api.getcolor(buyer, order, style).subscribe((res) => {
       this.colorlist = res.colors;
     })
   }
 
-  getsize(buyer:any, order:any, style:any, color:any){
-    const proftoken = 'Bearer '+ sessionStorage.getItem('token')
-    const headers = new HttpHeaders().set('x-access-token', proftoken);
-    this.http.get<any>(`${this.api.apiUrl}/filtersapi/colors-sizes?buyer=${buyer}&orderNo=${order}&style=${style}&color=${color}`, { headers }).subscribe((res)=>{
+  getsize(buyer: any, order: any, style: any, color: any) {
+    this.api.getsize(buyer, order, style, color).subscribe((res) => {
       this.sizelist = res.sizes;
     })
   }
@@ -136,7 +134,6 @@ onSelectionChange() {
     this.http.get<any>(`${this.api.apiUrl}/fabricrollapi/fabric-entrys?id=${WOno}&entry=1`, { headers }).subscribe((res)=>{
       this.fabdetails = res.workorder
       this.rollnnumber = res.fabricRolls;
-      console.log(this.rollnnumber)
       this.numbers = []
         for(let noOfRolls of this.rollnnumber){
         this.numbers.push(noOfRolls.rollNo)
@@ -160,7 +157,6 @@ loadworkorder(buyer:any, order:any, style:any, color:any, size:any){
     this.http.get<any>(`${this.api.apiUrl}/fabricrollapi/fabric-entrys?id=&entry=1&buyer=${buyer}&orderNo=${order}&style=${style}&color=${color}&size=${size}`, { headers }).subscribe((res)=>{
       this.fabdetails = res.workorder
       this.rollnnumber = res.fabricRolls
-      console.log(this.rollnnumber)
       this.workorderId = this.rollnnumber[0].workorderId;
       this.numbers = []
         for(let noOfRolls of this.rollnnumber){
@@ -242,10 +238,9 @@ submit(){
     "entry": "1",
     "entrys":this.form.get('entrys') as FormArray
   })
-  console.log(this.entry1form.value)
   const proftoken = 'Bearer '+ sessionStorage.getItem('token')
   this.api.postfabricdetails(this.entry1form.value, proftoken ).subscribe((res)=>{
-    console.log(res);
+    alert(res.message)
   })
 }
 
@@ -283,9 +278,8 @@ submit2(){
 
   const proftoken = 'Bearer '+ sessionStorage.getItem('token')
   this.api.postfabricdetails(this.entry1form.value, proftoken ).subscribe((res)=>{
-    console.log(res);
+    alert(res.message)
   })
-  console.log(this.entry1form.value)
 }
 
 //=======================================================================================
@@ -321,9 +315,8 @@ submit3(){
   })
   const proftoken = 'Bearer '+ sessionStorage.getItem('token')
   this.api.postfabricdetails(this.entry1form.value, proftoken ).subscribe((res)=>{
-    console.log(res);
+    alert(res.message)
   })
-  console.log(this.entry1form.value)
 }
 
 
@@ -360,9 +353,8 @@ submit4(){
   })
   const proftoken = 'Bearer '+ sessionStorage.getItem('token')
   this.api.postfabricdetails(this.entry1form.value, proftoken ).subscribe((res)=>{
-    console.log(res);
+    alert(res.message)
   })
-  console.log(this.entry1form.value)
 }
 
 
@@ -400,9 +392,8 @@ submit5(){
   })
   const proftoken = 'Bearer '+ sessionStorage.getItem('token')
   this.api.postfabricdetails(this.entry1form.value, proftoken ).subscribe((res)=>{
-    console.log(res);
+    alert(res.message)
   })
-  console.log(this.entry1form.value)
 }
 
 //=======================================================================================
@@ -438,9 +429,8 @@ submit6(){
   })
   const proftoken = 'Bearer '+ sessionStorage.getItem('token')
   this.api.postfabricdetails(this.entry1form.value, proftoken ).subscribe((res)=>{
-    console.log(res);
+    alert(res.message)
   })
-  console.log(this.entry1form.value)
 }
 
 //=======================================================================================
@@ -476,9 +466,8 @@ submit7(){
   })
   const proftoken = 'Bearer '+ sessionStorage.getItem('token')
   this.api.postfabricdetails(this.entry1form.value, proftoken ).subscribe((res)=>{
-    console.log(res);
+    alert(res.message)
   })
-  console.log(this.entry1form.value)
 }
 
 //=======================================================================================

@@ -21,13 +21,16 @@ export class FabricRollDataComponent implements OnInit {
   constructor(private api:ApiService){}
 
   ngOnInit(): void {
-    const proftoken = 'Bearer '+ sessionStorage.getItem('token')
-    this.api.getworkorderdetails(proftoken).subscribe((res)=>{
+this.getworkorderdetails()
+  }
+
+  public getworkorderdetails() {
+    this.api.getworkorderdetails().subscribe((res) => {
       this.ordernumber = res.workorders
     })
   }
 
-  displayedColumns: string[] = ['WONo', 'WOLineno', 'RollNo', 'FabBarcode', 'FabBatchno', 'FirstrollWeightKGS', 'FirstrollWeightDATE',
+  displayedColumns: string[] = ['WONo', 'RollNo', 'FabBarcode', 'FabBatchno', 'FirstrollWeightKGS', 'FirstrollWeightDATE',
     'GriegeFabKGS', 'GriegeFabDATE', 'DyeBatchingKGS', 'DyeBatchingDATE',
     'DyeFinishKGS', 'DyeFinishDATE', 'DeliverytoGarmenthKGS', 'DeliverytoGarmenthDATE', 'PlanCutPanelsKGS',
     'PlanCutPanelsDATE', 'ActualCutPanelsKGS', 'ActualCutPanelsDATE', 'PcsperBundle', 'PlannedBundles', 'ActualBundles', 'PrintStatus'
@@ -49,17 +52,16 @@ export class FabricRollDataComponent implements OnInit {
       const sheetname = workbook.SheetNames[0];
       const sheet1 = workbook.Sheets[sheetname]
       this.users = xls.utils.sheet_to_json(sheet1, { raw: true });
-      this.users.forEach((user: any) => {
-        this.dataSource = this.users
+      this.users.forEach((user:any) => {
+        this.dataSource = user
       });
     };
   }
 
   loaddetails(){
-    const proftoken = 'Bearer '+ sessionStorage.getItem('token')
     const id = this.fabricfrom.get('WOno')?.value;
     const entry = this.fabricfrom.get('WOLineno')?.value;
-    this.api.getfabricdetails(id, entry, proftoken).subscribe((res)=>{ 
+    this.api.getfabricdetails(id, entry).subscribe((res)=>{ 
       this.fabricdetails = res.fabricRolls
       this.dataSource = this.fabricdetails
     })
@@ -73,7 +75,6 @@ export class FabricRollDataComponent implements OnInit {
 export interface PeriodicElement {
 
   WONo: number;
-  WOLineno: number;
   RollNo: number;
   FabBarcode: number;
   FabBatchno: number;
@@ -106,42 +107,4 @@ export interface PeriodicElement {
 
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-
-  {
-
-    WONo: 1,
-    WOLineno: 1,
-    RollNo: 2,
-    FabBarcode: 3,
-    FabBatchno: 4,
-
-    FirstrollWeightKGS: 5,
-    FirstrollWeightDATE: '28/01/2000',
-
-    GriegeFabKGS: '5',
-    GriegeFabDATE: '22/02/2000',
-
-    DyeBatchingKGS: '7',
-    DyeBatchingDATE: '28/01/2000',
-
-    DyeFinishKGS: '23',
-    DyeFinishDATE: '28/01/2000',
-
-    DeliverytoGarmenthKGS: '45',
-    DeliverytoGarmenthDATE: '28/01/2000',
-
-    PlanCutPanelsKGS: '23',
-    PlanCutPanelsDATE: '28/01/2000',
-
-    ActualCutPanelsKGS: '34',
-    ActualCutPanelsDATE: '28/01/2000',
-
-
-    PcsperBundle: 'rrr',
-    PlannedBundles: 'ttt',
-    ActualBundles: 'yyy',
-    PrintStatus: 'uuu',
-  }
-
-];
+const ELEMENT_DATA: PeriodicElement[] = [];

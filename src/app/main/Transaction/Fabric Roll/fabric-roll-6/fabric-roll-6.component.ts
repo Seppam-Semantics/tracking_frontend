@@ -26,7 +26,7 @@ export class FabricRoll6Component {
 
   ngOnInit(): void {
     const proftoken = 'Bearer ' + sessionStorage.getItem('token')
-    this.api.getworkorderdetails(proftoken).subscribe((res) => {
+    this.api.getworkorderdetails().subscribe((res) => {
       this.WoNumber = res.workorders
     })
   }
@@ -42,7 +42,6 @@ export class FabricRoll6Component {
     const headers = new HttpHeaders().set('x-access-token', proftoken);
     this.http.get<any>(`http://localhost:2000/fabricrollapi/fabric-entrys?id=${WOno}&entry=${WOLineno}`, { headers }).subscribe((res) => {
       this.fabdetails = res.workorder
-      console.log(this.fabdetails)
       this.rollnnumber = res.fabricRolls
     })
   }
@@ -82,10 +81,9 @@ export class FabricRoll6Component {
       "entry": this.entry,
       "entrys":this.form.get('entrys') as FormArray
     })
-    console.log(this.entry1form.value)
     const proftoken = 'Bearer '+ sessionStorage.getItem('token')
     this.api.postfabricdetails(this.entry1form.value, proftoken ).subscribe((res)=>{
-      console.log(res);
+      alert(res.message)
     })
   }
 

@@ -16,7 +16,7 @@
   <mat-label>Work Order No </mat-label>
   <mat-select formControlName="WOno">
     <mat-option value="{{order.id}}" *ngFor="let order of this.ordernumber">
-      {{order.code}}
+      {{order.workorderCode}}
     </mat-option>
   </mat-select>
 </mat-form-field>
@@ -31,11 +31,6 @@
     <ng-container matColumnDef="WONo">
       <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> WONo </th>
       <td mat-cell *matCellDef="let element"> {{element.workorderId}} </td>
-    </ng-container>
-  
-    <ng-container matColumnDef="WOLineno">
-      <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> WO Line no </th>
-      <td mat-cell *matCellDef="let element"> {{element.WOLineno }} </td>
     </ng-container>
   
     <ng-container matColumnDef="RollNo">

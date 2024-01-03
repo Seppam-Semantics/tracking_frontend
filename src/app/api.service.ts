@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,55 +10,86 @@ export class ApiService {
 
 constructor(private http: HttpClient) { }
 
-apiUrl = "http://localhost:2000";
+  apiUrl = "http://localhost:2000";
 
-token:any;
-profilenames:any;
-rolenames:any;
+  token: any;
+  profilenames: any;
+  rolenames: any;
 
-login(data:any):Observable<any>{
-return this.http.post(`${this.apiUrl}/auth/authentication`,data)
-}
 
-delete(id:any, profiletoken:any):Observable<any>{
-  const headers = new HttpHeaders().set('x-access-token', profiletoken);
-  return this.http.delete(`${this.apiUrl}/profileapi/profile/${id}`,  { headers })
-}
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
+      'Content-Type': 'application/json',
+    }),
+  }
 
-getroles(profiletoken:any):Observable<any>{
-  const headers = new HttpHeaders().set('x-access-token', profiletoken);
-  return this.http.get(`${this.apiUrl}/roleapi/roles`, { headers } )
-}
+  public getHeaders() {
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'x-access-token': 'Bearer ' + sessionStorage.getItem('token'),
+        'Content-Type': 'application/json',
+      }),
+    }
+    return httpOptions;
+  }
 
-getSingleRoles(id:any, profiletoken:any):Observable<any>{
-  const headers = new HttpHeaders().set('x-access-token', profiletoken);
-  return this.http.get(`${this.apiUrl}/roleapi/roles/${id}`,  { headers })
-}
+  public getUrl(): String {
+    let url: String = environment.URL;
+    return url;
+  }
 
-getworkorderdetails(profiletoken:any):Observable<any>{
-  const headers = new HttpHeaders().set('x-access-token', profiletoken);
-  return this.http.get(`${this.apiUrl}/workorderapi/workorder`, { headers})
-}
+  login(data: any): Observable<any> {
+    return this.http.post(this.getUrl() + `/auth/authentication`, data)
+  }
 
-postworkorder(data:any, profiletoken:any):Observable<any>{
-  const headers = new HttpHeaders().set('x-access-token', profiletoken);
-  return this.http.post(`${this.apiUrl}/workorderapi/workorder`, data, { headers })
-}
+  delete(id: any, profiletoken: any): Observable<any> {
+    return this.http.delete(this.getUrl() + `/profileapi/profile/${id}`, this.getHeaders())
+  }
 
-getfabricdetails(id:any, entry:any, profiletoken:any):Observable<any>{
-  const headers = new HttpHeaders().set('x-access-token', profiletoken);
-  return this.http.get(`${this.apiUrl}/fabricrollapi/fabric-entrys/${id}/${entry}`, { headers });
-}
+  getroles(profiletoken: any): Observable<any> {
+    return this.http.get(this.getUrl() + `/roleapi/roles`, this.getHeaders())
+  }
 
-postfabricdetails(data:any, profiletoken:any):Observable<any>{
-  const headers = new HttpHeaders().set('x-access-token', profiletoken);
-  return this.http.post(`${this.apiUrl}/fabricrollapi/fabric-entrys`, data, { headers })
-}
+  getSingleRoles(id: any, profiletoken: any): Observable<any> {
+    return this.http.get(this.getUrl() + `/roleapi/roles/${id}`, this.getHeaders())
+  }
 
-getbuyers(profiletoken:any):Observable<any>{
-  const headers = new HttpHeaders().set('x-access-token', profiletoken);
-  return this.http.get(`${this.apiUrl}/filtersapi/buyers`, { headers })
-}
+  getworkorderdetails(): Observable<any> {
+    return this.http.get(this.getUrl() + `/filtersapi/workorders`, this.getHeaders())
+  }
+
+  postworkorder(data: any): Observable<any> {
+    return this.http.post(this.getUrl() + `/workorderapi/workorder`, data, this.getHeaders())
+  }
+
+  getfabricdetails(id: any, entry: any): Observable<any> {
+    return this.http.get(this.getUrl() + `/fabricrollapi/fabric-entrys?id=${id}&entry=${entry}&buyer=&orderNo=&style=&color=&size=`, this.getHeaders());
+  }
+
+  postfabricdetails(data: any, profiletoken: any): Observable<any> {
+    return this.http.post(this.getUrl() + `/fabricrollapi/fabric-entrys`, data, this.getHeaders())
+  }
+
+  getbuyers(): Observable<any> {
+    return this.http.get(this.getUrl() + `/filtersapi/buyers`, this.getHeaders())
+  }
+
+  getorders(buyer: any): Observable<any> {
+    return this.http.get(this.getUrl() + `/filtersapi/buyers-orders?buyer=${buyer}`, this.getHeaders())
+  }
+
+  getstyle(buyer: any, order: any): Observable<any> {
+    return this.http.get(this.getUrl() + `/filtersapi/orders-styles?buyer=${buyer}&orderNo=${order}`, this.getHeaders())
+  }
+
+  getcolor(buyer: any, order: any, style: any): Observable<any> {
+    return this.http.get(this.getUrl() + `/filtersapi/styles-colors?buyer=${buyer}&orderNo=${order}&style=${style}`, this.getHeaders())
+  }
+
+  getsize(buyer: any, order: any, style: any, color: any): Observable<any> {
+    return this.http.get(this.getUrl() + `/filtersapi/colors-sizes?buyer=${buyer}&orderNo=${order}&style=${style}&color=${color}`, this.getHeaders())
+  }
 
 }
  

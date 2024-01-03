@@ -37,7 +37,6 @@ export class EditRolesComponent implements OnInit {
     this.profilenames = this.api.profilenames;
     this.rolespatch();
     const proftoken = 'Bearer '+ sessionStorage.getItem('token');
-    console.log(proftoken);
   }
  
   getProfile(profile: any) {
@@ -59,7 +58,6 @@ export class EditRolesComponent implements OnInit {
     const proftoken = 'Bearer '+ sessionStorage.getItem('token');
     
     this.api.getSingleRoles(id,proftoken).subscribe((res)=>{
-      console.log(res);
       this.singleRoles = res.role.profiles;
       this.profiles = res.role.profiles.profiles;
       
@@ -79,10 +77,9 @@ export class EditRolesComponent implements OnInit {
 
 
   editroles(){    
-    console.log(this.editprofileform.value);
     const proftoken = 'Bearer '+ sessionStorage.getItem('token')
     this.local.rolesadd(this.editprofileform.value, proftoken).subscribe((res)=>{
-      console.log(res);
+      alert(res.message)
     })
   }
 }

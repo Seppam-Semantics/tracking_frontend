@@ -19,11 +19,9 @@
       <div class="table-container">
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   
-          <ng-container matColumnDef="WOno">
+          <ng-container matColumnDef="Sl.no">
             <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> WO no </th>
-            <div formControlName="WOno">
             <td mat-cell *matCellDef="let element"> {{element.WOno}} </td>
-          </div>
           </ng-container>
   
           <ng-container matColumnDef="WOLineno" >

@@ -20,7 +20,6 @@ export class ViewMoreComponent implements OnInit {
     const proftoken = 'Bearer '+ sessionStorage.getItem('token');
     this.local.getsingleemployee(id, proftoken).subscribe((res)=>{
       this.details = res.employee
-      console.log(res.employee);
     })
   }
 

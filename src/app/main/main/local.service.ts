@@ -10,7 +10,7 @@ export class LocalService {
 
   profilename:any;
 
-  constructor(private http:HttpClient, private api:ApiService) { }
+  constructor(private http:HttpClient) { }
 
   apiUrl = "http://localhost:2000";
 
