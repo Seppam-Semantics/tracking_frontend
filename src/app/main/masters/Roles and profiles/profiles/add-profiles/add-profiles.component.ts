@@ -10,10 +10,15 @@ import { flush } from '@angular/core/testing';
   styleUrls: ['./add-profiles.component.css']
 })
 export class AddProfilesComponent implements OnInit {
+  wo:boolean=false;
   update = this.local.update
   profileform :  FormGroup;
   singleprofile:any;
   select:boolean=true;
+
+  WorkOrder(){
+    this.wo=!this.wo
+  }
 
   organization = new FormGroup ({
     'creation' : new FormControl(false),

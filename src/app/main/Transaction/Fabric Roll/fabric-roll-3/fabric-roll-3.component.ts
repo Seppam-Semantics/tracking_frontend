@@ -82,7 +82,7 @@ export class FabricRoll3Component {
     })
 
     const proftoken = 'Bearer '+ sessionStorage.getItem('token')
-    this.api.postfabricdetails(this.entry1form.value, proftoken ).subscribe((res)=>{
+    this.api.postfabricdetails(this.entry1form.value).subscribe((res)=>{
       alert(res.message)
     })
   }

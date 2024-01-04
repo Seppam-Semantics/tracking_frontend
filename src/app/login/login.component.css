@@ -30,7 +30,7 @@
 #outborder-for-login{
   display: flex;
   flex-direction: column;
-  height: 500px;
+  height: 450px;
   width: 400px;
   border: 1px solid white;
   margin-left: 0%;

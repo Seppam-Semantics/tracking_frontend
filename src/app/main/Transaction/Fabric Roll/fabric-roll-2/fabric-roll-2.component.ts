@@ -77,8 +77,7 @@ loadworkorderdetails(WOno: any, WOLineno: any):void{
       "entry": this.entry,
       "entrys":this.form.get('entrys') as FormArray
     })
-    const proftoken = 'Bearer '+ sessionStorage.getItem('token')
-    this.api.postfabricdetails(this.entry1form.value, proftoken ).subscribe((res)=>{
+    this.api.postfabricdetails(this.entry1form.value).subscribe((res)=>{
       alert(res.message)
     })
   }

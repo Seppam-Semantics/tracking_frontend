@@ -35,7 +35,7 @@ export class AddEmployeesComponent implements OnInit {
 
   getrolesnames(){
     const storedtoken = 'Bearer ' + sessionStorage.getItem('token')
-  this.api.getroles(storedtoken).subscribe((res)=>{
+  this.api.getroles().subscribe((res)=>{
     this.rolesnames = res.roles
   })
   }

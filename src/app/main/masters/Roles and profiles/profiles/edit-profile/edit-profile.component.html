@@ -33,22 +33,22 @@
           <ng-container>
             <div>
             <div>
-              <div class="screen-grid">
+              <div class="screen-grid" [formGroup]="selectall">
                 <div (click)="accordionItem1.toggle()" ><b>Masters</b> <b> &#x21e8;</b> </div>
                 <div>
-                  <input type="checkbox" id="Masters" name="Masters" class="Masters" >
+                  <input type="checkbox" id="Masters" name="Masters" class="Masters" (change)="mastercreate()" formControlName="masterscreate">
                 </div>
                 <div>
-                  <input type="checkbox" id="Masters" name="Masters" class="Masters">
+                  <input type="checkbox" id="Masters" name="Masters" class="Masters" (change)="masterread()" formControlName="mastersread">
                 </div>
                 <div>
-                  <input type="checkbox" id="Masters" name="Masters" class="Masters">
+                  <input type="checkbox" id="Masters" name="Masters" class="Masters" (change)="masterupdate()" formControlName="mastersupdate">
                 </div>
                 <div>
-                  <input type="checkbox" id="Masters" name="Masters" class="Masters">
+                  <input type="checkbox" id="Masters" name="Masters" class="Masters" (change)="masterdelete()" formControlName="mastersdelete">
                 </div>
                 <div style="margin-top: -20px; margin-left: 86%;">
-                  <input type="checkbox" id="Masters" name="Masters" class="Masters">
+                  <input type="checkbox" id="Masters" name="Masters" class="Masters" formControlName="mastersall" (change)="masterselectall()">
                 </div>
               </div>
             </div>
@@ -135,7 +135,7 @@
         <!----------------------------------------------Work orders---------------------------------------------------->
         <cdk-accordion-item #accordionItem2="cdkAccordionItem" class="cdk-accordion-item" tabindex="0">
           <ng-container>
-            <div >
+            <div>
               <div class="screen-grid" [formGroup]="workorder">
                 <div (click)="accordionItem2.toggle()"><b>Work Orders</b></div>
                 <div>
@@ -143,16 +143,16 @@
                   >
                 </div>
                 <div>
-                  <input type="checkbox" id="Masters" name="Masters" class="Masters" formControlName="selection">
+                  <input type="checkbox" id="Masters" name="Masters" class="Masters" formControlName="selection" >
                 </div>
                 <div>
-                  <input type="checkbox" id="Masters" name="Masters" class="Masters" formControlName="updation">
+                  <input type="checkbox" id="Masters" name="Masters" class="Masters" formControlName="updation" >
                 </div>
                 <div>
-                  <input type="checkbox" id="Masters" name="Masters" class="Masters" formControlName="deletion">
+                  <input type="checkbox" id="Masters" name="Masters" class="Masters" formControlName="deletion" >
                 </div>
-                <div style="margin-top: -20px; margin-left: 86%;">
-                  <input type="checkbox" id="Masters" name="Masters" class="Masters">
+                <div style="margin-top: -20px; margin-left: 86%;" [formGroup]="selectall">
+                  <input type="checkbox" id="Masters" name="Masters" class="Masters" formControlName="workorderall" (change)="WorkOrderselectall()">
                 </div>
               </div>
             </div>
@@ -178,8 +178,8 @@
             <div>
               <input type="checkbox" id="fabricrolls" name="fabricrolls" class="fabricrolls" formControlName="deletion">
             </div>
-            <div style="margin-top: -20px; margin-left: 86%;">
-              <input type="checkbox" id="fabricrolls" name="fabricrolls" class="fabricrolls">
+            <div style="margin-top: -20px; margin-left: 86%;" [formGroup]="selectall">
+              <input type="checkbox" id="fabricrolls" name="fabricrolls" class="fabricrolls" (click)="FabricRolls()" (change)="Fabricrollsall()"formControlName="Fabricrollsall" >
             </div>
           </div>
         </div>
@@ -205,8 +205,8 @@
             <div>
               <input type="checkbox" id="garmentsbundles" name="garmentsbundles" class="garmentsbundles" formControlName="deletion">
             </div>
-            <div style="margin-top: -20px; margin-left: 86%;">
-              <input type="checkbox" id="garmentsbundles" name="garmentsbundles" class="garmentsbundles">
+            <div style="margin-top: -20px; margin-left: 86%;" [formGroup]="selectall">
+              <input type="checkbox" id="garmentsbundles" name="garmentsbundles" class="garmentsbundles" (click)="GarmentsBundles()" (change)="GarmentsBbundlesall()" formControlName="Garmentsbundlesselectall">
             </div>
           </div>
         </div>
@@ -232,7 +232,7 @@
               <input type="checkbox" id="rollentry" name="rollentry" class="rollentry">
             </div>
             <div style="margin-top: -20px; margin-left: 86%;">
-              <input type="checkbox" id="rollentry" name="rollentry" class="rollentry">
+              <input type="checkbox" id="rollentry" name="rollentry" class="rollentry" (click)="RollEntry()">
             </div>
           </div>
         </div>
@@ -378,19 +378,19 @@
           <div class="screen-grid">
             <div (click)="accordionItem5.toggle()"><b>Bundles Entry</b> <b> &#x21e8;</b> </div>
             <div>
-              <input type="checkbox" id="bundlesentry" name="bundlesentry" class="bundlesentry">
+              <input type="checkbox" id="bundlesentry" name="bundlesentry" class="bundlesentry" (click)="BundlesEntry1()">
             </div>
             <div>
-              <input type="checkbox" id="bundlesentry" name="bundlesentry" class="bundlesentry">
+              <input type="checkbox" id="bundlesentry" name="bundlesentry" class="bundlesentry" (click)="BundlesEntry2()">
             </div>
             <div>
-              <input type="checkbox" id="bundlesentry" name="bundlesentry" class="bundlesentry">
+              <input type="checkbox" id="bundlesentry" name="bundlesentry" class="bundlesentry" (click)="BundlesEntry3()">
             </div>
             <div>
-              <input type="checkbox" id="bundlesentry" name="bundlesentry" class="bundlesentry">
+              <input type="checkbox" id="bundlesentry" name="bundlesentry" class="bundlesentry" (click)="BundlesEntry4()">
             </div>
             <div style="margin-top: -20px; margin-left: 86%;">
-              <input type="checkbox" id="bundlesentry" name="bundlesentry" class="bundlesentry">
+              <input type="checkbox" id="bundlesentry" name="bundlesentry" class="bundlesentry" (click)="BundlesEntry()">
             </div>
           </div>
         </div>
@@ -471,8 +471,8 @@
             <div>
               <input type="checkbox" id="Reports" name="Reports" class="Reports" formControlName="deletion">
             </div>
-            <div style="margin-top: -20px; margin-left: 86%;">
-              <input type="checkbox" id="Reports" name="Reports" class="Reports">
+            <div style="margin-top: -20px; margin-left: 86%;" [formGroup]="selectall">
+              <input type="checkbox" id="Reports" name="Reports" class="Reports" formControlName="Reportselectall" (click)="Reports()" (change)="Reportall()">
             </div>
           </div>
         </div>
@@ -497,8 +497,8 @@
             <div>
               <input type="checkbox" id="dashboards" name="dashboards" class="dashboards" formControlName="deletion">
             </div>
-            <div style="margin-top: -20px; margin-left: 86%;">
-              <input type="checkbox" id="dashboards" name="dashboards" class="dashboards">
+            <div style="margin-top: -20px; margin-left: 86%;" [formGroup]="selectall">
+              <input type="checkbox" id="dashboards" name="dashboards" class="dashboards" (click)="Dashboards()" formControlName="Dashboardsselectall" (change)="Dashboardsall()">
             </div>
           </div>
         </div>

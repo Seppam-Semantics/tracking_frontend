@@ -48,6 +48,12 @@ export class FabricRoll1Component implements OnInit {
   sizeslist:any;
   workorderhide:boolean = true;
   fabcode:any[] =[];
+  entry1:any[] = [];
+  entry2:any[] = [];
+  entry3:any[] = [];
+  entry4:any[] = [];
+  entry5:any[] = [];
+  entry6:any[] = [];
 
   constructor(private fb: FormBuilder, private api: ApiService, private http: HttpClient,
     private cdref: ChangeDetectorRef) {
@@ -134,10 +140,17 @@ onSelectionChange() {
     this.http.get<any>(`${this.api.apiUrl}/fabricrollapi/fabric-entrys?id=${WOno}&entry=1`, { headers }).subscribe((res)=>{
       this.fabdetails = res.workorder
       this.rollnnumber = res.fabricRolls;
+      console.log(this.rollnnumber);
       this.numbers = []
         for(let noOfRolls of this.rollnnumber){
         this.numbers.push(noOfRolls.rollNo)
         this.fabcode.push(noOfRolls.fabBarcode)
+        this.entry1.push(noOfRolls.entry_1)
+        this.entry2.push(noOfRolls.entry_2)
+        this.entry3.push(noOfRolls.entry_3)
+        this.entry4.push(noOfRolls.entry_4)
+        this.entry5.push(noOfRolls.entry_5)
+        this.entry6.push(noOfRolls.entry_6)
         }
         this.numbers.forEach((value)=>{
           this.add(value);
@@ -158,10 +171,17 @@ loadworkorder(buyer:any, order:any, style:any, color:any, size:any){
       this.fabdetails = res.workorder
       this.rollnnumber = res.fabricRolls
       this.workorderId = this.rollnnumber[0].workorderId;
+      console.log(this.rollnnumber);
       this.numbers = []
         for(let noOfRolls of this.rollnnumber){
         this.numbers.push(noOfRolls.rollNo)
         this.fabcode.push(noOfRolls.fabBarcode)
+        this.entry1.push(noOfRolls.entry_1)
+        this.entry2.push(noOfRolls.entry_2)
+        this.entry3.push(noOfRolls.entry_3)
+        this.entry4.push(noOfRolls.entry_4)
+        this.entry5.push(noOfRolls.entry_5)
+        this.entry6.push(noOfRolls.entry_6)
         }
         this.numbers.forEach((value)=>{
           this.add(value);
@@ -223,6 +243,7 @@ delete(index: number) {
 add(defaultRollNo?:any){
   const defaultRollIndex = this.items.length % this.fabcode.length;
   const fabcodenumber = this.fabcode[defaultRollIndex];
+
   this.items.push(
     this.fb.group({
       rollNo:[defaultRollNo || ''],
@@ -238,8 +259,7 @@ submit(){
     "entry": "1",
     "entrys":this.form.get('entrys') as FormArray
   })
-  const proftoken = 'Bearer '+ sessionStorage.getItem('token')
-  this.api.postfabricdetails(this.entry1form.value, proftoken ).subscribe((res)=>{
+  this.api.postfabricdetails(this.entry1form.value).subscribe((res)=>{
     alert(res.message)
   })
 }
@@ -261,9 +281,15 @@ delete2(index: number) {
   add2(defaultValues?: any) {
     const defaultRollIndex = this.items.length % this.fabcode.length;
     const fabcodenumber = this.fabcode[defaultRollIndex];
+
+    const length1 = this.items.length % this.entry1.length;
+    const entry01 = this.entry1[length1];
+
+
     const formGrouptwo = this.fb.group({
       rollNo: [defaultValues || ''],
       fabBarcode:[fabcodenumber || ''],
+      entry001:[entry01 || ''],
       entry_2: [defaultValues?.entry_2 || '']
     });
 
@@ -275,9 +301,7 @@ submit2(){
     "entry": "1",
     "entrys":this.form2.get('entrystwo') as FormArray
   })
-
-  const proftoken = 'Bearer '+ sessionStorage.getItem('token')
-  this.api.postfabricdetails(this.entry1form.value, proftoken ).subscribe((res)=>{
+  this.api.postfabricdetails(this.entry1form.value).subscribe((res)=>{
     alert(res.message)
   })
 }
@@ -299,9 +323,18 @@ delete3(index: number) {
   add3(defaultValues?: any) {
     const defaultRollIndex = this.items.length % this.fabcode.length;
     const fabcodenumber = this.fabcode[defaultRollIndex];
+
+    const length1 = this.items.length % this.entry1.length;
+    const entry01 = this.entry1[length1];
+
+    const length2 = this.items.length % this.entry2.length;
+    const entry02 = this.entry2[length2];
+    
     const formGroupthree = this.fb.group({
       rollNo: [defaultValues || ''],
       fabBarcode:[fabcodenumber || ''],
+      entry001:[entry01 || ''],
+      entry002:[entry02 || ''],
       entry_3: [defaultValues?.entry_2 || '']
     });
 
@@ -313,8 +346,7 @@ submit3(){
     "entry": "1",
     "entrys":this.form3.get('entrysthree') as FormArray
   })
-  const proftoken = 'Bearer '+ sessionStorage.getItem('token')
-  this.api.postfabricdetails(this.entry1form.value, proftoken ).subscribe((res)=>{
+  this.api.postfabricdetails(this.entry1form.value).subscribe((res)=>{
     alert(res.message)
   })
 }
@@ -337,9 +369,22 @@ delete4(index: number) {
   add4(defaultValues?: any) {
     const defaultRollIndex = this.items.length % this.fabcode.length;
     const fabcodenumber = this.fabcode[defaultRollIndex];
+
+    const length1 = this.items.length % this.entry1.length;
+    const entry01 = this.entry1[length1];
+
+    const length2 = this.items.length % this.entry2.length;
+    const entry02 = this.entry2[length2];
+
+    const length3 = this.items.length % this.entry3.length;
+    const entry03 = this.entry3[length3];
+
     const formGroupthree = this.fb.group({
       rollNo: [defaultValues || ''],
       fabBarcode:[fabcodenumber || ''],
+      entry001:[entry01 || ''],
+      entry002:[entry02 || ''],
+      entry003:[entry03 || ''],
       entry_4: [defaultValues?.entry_4 || '']
     });
 
@@ -351,8 +396,7 @@ submit4(){
     "entry": "1",
     "entrys":this.form4.get('entrysfour') as FormArray
   })
-  const proftoken = 'Bearer '+ sessionStorage.getItem('token')
-  this.api.postfabricdetails(this.entry1form.value, proftoken ).subscribe((res)=>{
+  this.api.postfabricdetails(this.entry1form.value).subscribe((res)=>{
     alert(res.message)
   })
 }
@@ -376,9 +420,18 @@ delete5(index: number) {
   add5(defaultValues?: any) {
     const defaultRollIndex = this.items.length % this.fabcode.length;
     const fabcodenumber = this.fabcode[defaultRollIndex];
+
+    const length2 = this.items.length % this.entry2.length;
+    const entry02 = this.entry2[length2];
+
+    const length4 = this.items.length % this.entry4.length;
+    const entry04 = this.entry4[length4];
+
     const formGroupfour = this.fb.group({
       rollNo: [defaultValues || ''],
       fabBarcode:[fabcodenumber || ''],
+      entry002:[entry02 || ''],
+      entry004:[entry04 || ''],
       entry_5: [defaultValues?.entry_4 || '']
     });
 
@@ -391,7 +444,7 @@ submit5(){
     "entrys":this.form5.get('entrysfive') as FormArray
   })
   const proftoken = 'Bearer '+ sessionStorage.getItem('token')
-  this.api.postfabricdetails(this.entry1form.value, proftoken ).subscribe((res)=>{
+  this.api.postfabricdetails(this.entry1form.value ).subscribe((res)=>{
     alert(res.message)
   })
 }
@@ -413,9 +466,14 @@ delete6(index: number) {
   add6(defaultValues?: any) {
     const defaultRollIndex = this.items.length % this.fabcode.length;
     const fabcodenumber = this.fabcode[defaultRollIndex];
+
+    const length2 = this.items.length % this.entry2.length;
+    const entry02 = this.entry2[length2];
+
     const formGroupfour = this.fb.group({
       rollNo: [defaultValues || ''],
       fabBarcode:[fabcodenumber || ''],
+      entry002:[entry02 || ''],
       entry_6: [defaultValues?.entry_4 || '']
     });
 
@@ -427,8 +485,7 @@ submit6(){
     "entry": "1",
     "entrys":this.form6.get('entryssix') as FormArray
   })
-  const proftoken = 'Bearer '+ sessionStorage.getItem('token')
-  this.api.postfabricdetails(this.entry1form.value, proftoken ).subscribe((res)=>{
+  this.api.postfabricdetails(this.entry1form.value).subscribe((res)=>{
     alert(res.message)
   })
 }
@@ -450,9 +507,18 @@ delete7(index: number) {
   add7(defaultValues?: any) {
     const defaultRollIndex = this.items.length % this.fabcode.length;
     const fabcodenumber = this.fabcode[defaultRollIndex];
+
+    const length2 = this.items.length % this.entry2.length;
+    const entry02 = this.entry2[length2];
+
+    const length6 = this.items.length % this.entry6.length;
+    const entry06 = this.entry6[length6];
+
     const formGroupfour = this.fb.group({
       rollNo: [defaultValues || ''],
       fabBarcode:[fabcodenumber || ''],
+      entry002:[entry02 || ''],
+      entry006:[entry06 || ''],
       entry_7: [defaultValues?.entry_7 || '']
     });
 
@@ -464,8 +530,7 @@ submit7(){
     "entry": "1",
     "entrys":this.form7.get('entrysseven') as FormArray
   })
-  const proftoken = 'Bearer '+ sessionStorage.getItem('token')
-  this.api.postfabricdetails(this.entry1form.value, proftoken ).subscribe((res)=>{
+  this.api.postfabricdetails(this.entry1form.value).subscribe((res)=>{
     alert(res.message)
   })
 }

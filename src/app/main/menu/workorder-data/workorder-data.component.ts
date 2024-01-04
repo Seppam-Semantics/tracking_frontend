@@ -74,8 +74,8 @@ export class WorkorderDataComponent {
       this.users = xls.utils.sheet_to_json(sheet1, { raw: true });
 
       this.users.sort((a: any, b: any) => {
-        const orderNumberA = a.orderNo.toUpperCase();
-        const orderNumberB = b.orderNo.toUpperCase();
+        const orderNumberA = a.orderNo;
+        const orderNumberB = b.orderNo;
 
         if (orderNumberA < orderNumberB) {
           return -1;
@@ -97,10 +97,10 @@ export class WorkorderDataComponent {
 
   assignUniqueIDs(): void {
 
-    const uniqueOrderNumbers = [...new Set(this.users.map((order: any) => order.orderNo.toUpperCase()))];
+    const uniqueOrderNumbers = [...new Set(this.users.map((order: any) => order.orderNo))];
 
     uniqueOrderNumbers.forEach(orderNumber => {
-    const ordersWithSameNumber = this.users.filter((wr: { orderNo: any; }) => wr.orderNo.toUpperCase() == orderNumber);
+    const ordersWithSameNumber = this.users.filter((wr: { orderNo: any; }) => wr.orderNo == orderNumber);
     ordersWithSameNumber.forEach((wo: any, index: any) => {
         wo.WOLineno = `${index + 1}`;
       });

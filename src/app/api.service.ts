@@ -43,15 +43,15 @@ constructor(private http: HttpClient) { }
     return this.http.post(this.getUrl() + `/auth/authentication`, data)
   }
 
-  delete(id: any, profiletoken: any): Observable<any> {
+  delete(id: any): Observable<any> {
     return this.http.delete(this.getUrl() + `/profileapi/profile/${id}`, this.getHeaders())
   }
 
-  getroles(profiletoken: any): Observable<any> {
+  getroles(): Observable<any> {
     return this.http.get(this.getUrl() + `/roleapi/roles`, this.getHeaders())
   }
 
-  getSingleRoles(id: any, profiletoken: any): Observable<any> {
+  getSingleRoles(id: any): Observable<any> {
     return this.http.get(this.getUrl() + `/roleapi/roles/${id}`, this.getHeaders())
   }
 
@@ -67,7 +67,7 @@ constructor(private http: HttpClient) { }
     return this.http.get(this.getUrl() + `/fabricrollapi/fabric-entrys?id=${id}&entry=${entry}&buyer=&orderNo=&style=&color=&size=`, this.getHeaders());
   }
 
-  postfabricdetails(data: any, profiletoken: any): Observable<any> {
+  postfabricdetails(data: any): Observable<any> {
     return this.http.post(this.getUrl() + `/fabricrollapi/fabric-entrys`, data, this.getHeaders())
   }
 

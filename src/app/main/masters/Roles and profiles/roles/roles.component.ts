@@ -61,7 +61,7 @@ edit(id:any){
 
  getroles(){
   const storedtoken = 'Bearer ' + sessionStorage.getItem('token')
-  this.api.getroles(storedtoken).subscribe((res)=>{
+  this.api.getroles().subscribe((res)=>{
     this.rolesdata = res.roles
     this.dataSource = this.rolesdata;
   })

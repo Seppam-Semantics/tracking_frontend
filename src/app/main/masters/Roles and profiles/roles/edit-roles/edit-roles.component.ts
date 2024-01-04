@@ -57,7 +57,7 @@ export class EditRolesComponent implements OnInit {
     const id = sessionStorage.getItem('roleid');
     const proftoken = 'Bearer '+ sessionStorage.getItem('token');
     
-    this.api.getSingleRoles(id,proftoken).subscribe((res)=>{
+    this.api.getSingleRoles(id).subscribe((res)=>{
       this.singleRoles = res.role.profiles;
       this.profiles = res.role.profiles.profiles;
       

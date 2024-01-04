@@ -142,19 +142,19 @@
           <div class="screen-grid" [formGroup]="workorder">
             <div (click)="accordionItem2.toggle()"><b>Work Orders</b></div>
             <div>
-              <input type="checkbox" id="Masters" name="Masters" class="Masters" formControlName="creation">
+              <input type="checkbox" id="Masters" name="Masters" class="Masters" formControlName="creation" [checked]="wo">
             </div>
             <div>
-              <input type="checkbox" id="Masters" name="Masters" class="Masters" formControlName="selection">
+              <input type="checkbox" id="Masters" name="Masters" class="Masters" formControlName="selection" [checked]="wo">
             </div>
             <div>
-              <input type="checkbox" id="Masters" name="Masters" class="Masters" formControlName="updation">
+              <input type="checkbox" id="Masters" name="Masters" class="Masters" formControlName="updation" [checked]="wo">
             </div>
             <div>
-              <input type="checkbox" id="Masters" name="Masters" class="Masters" formControlName="deletion">
+              <input type="checkbox" id="Masters" name="Masters" class="Masters" formControlName="deletion" [checked]="wo">
             </div>
             <div style="margin-top: -20px; margin-left: 86%;">
-              <input type="checkbox" id="Masters" name="Masters" class="Masters">
+              <input type="checkbox" id="Masters" name="Masters" class="Masters" (click)="WorkOrder()">
             </div>
           </div>
         </div>

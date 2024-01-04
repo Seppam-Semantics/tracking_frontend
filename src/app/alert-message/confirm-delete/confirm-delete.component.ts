@@ -12,9 +12,8 @@ export class ConfirmDeleteComponent {
 constructor(private api:ApiService){}
 
 deleteprofile(){
-  const proftoken = 'Bearer '+ sessionStorage.getItem('token');
   const id = sessionStorage.getItem('deleteid');
-  this.api.delete(id,proftoken).subscribe((res)=>{
+  this.api.delete(id).subscribe((res)=>{
     alert(res.message);
   })
   window.location.reload();
