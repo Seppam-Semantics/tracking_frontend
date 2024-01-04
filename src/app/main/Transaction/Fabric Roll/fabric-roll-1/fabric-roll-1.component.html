@@ -130,11 +130,11 @@
   <mat-tab-group>
     <mat-tab label="First Roll Weight" style="overflow: hidden;">
       <div [formGroup]="form" style="overflow: hidden;">
-        <div class="demo-button-container">
-          <button mat-raised-button class="demo-button" (click)="add()"
-            style="background-color: blue;"><b>Add</b></button>
-        </div>
 
+        <div style="display: flex; justify-content: center;">
+          <button mat-raised-button color="primary" type="submit" (click)="submit()"
+            style="margin-top: 3%;">Save</button>
+        </div>
         <div class="table-container">
           <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
 
@@ -173,8 +173,8 @@
                         <mat-error>
                         </mat-error>
                       </mat-form-field>
-                      <button type="button" class="btn btn-danger" style="height: 50px; margin-left: 8px;"
-                        (click)="delete(i)">&#10008;</button>
+                      <button type="button" class="btn btn-danger" style="height: 50px; margin-left: 8px; display: none;"
+                        (click)="delete(i)" >&#10008;</button>
                     </div>
                   </div>
                 </div>
@@ -186,11 +186,9 @@
           </table>
         </div>
 
-        <div style="display: flex; justify-content: center;">
-          <button mat-raised-button color="primary" style="margin-top: 3%;">Edit</button>
-
-          <button mat-raised-button color="primary" type="submit" (click)="submit()"
-            style="margin-left: 5%; margin-top: 3%;">Save</button>
+        <div class="demo-button-container" style="display: flex; justify-content: center;">
+          <button mat-raised-button color="primary" (click)="add()"
+          ><b>Add</b></button>
         </div>
       </div>
     </mat-tab>
@@ -201,13 +199,20 @@
     <mat-tab label="Greige Fab Del Entry">
 
       <div [formGroup]="form2" style="display: flex; flex-direction: column;">
-        <div class="demo-button-container">
-          <button mat-raised-button class="demo-button" (click)="add2()"
-            style="background-color: blue;"><b>Add</b></button>
+
+
+        <div style="display: flex; justify-content: center;">
+          <button mat-raised-button color="primary" type="submit" (click)="submit2()"
+            style="margin-top: 3%;">Save</button>
         </div>
+
+
         <div class="table-container">
           <table mat-table [dataSource]="dataSource2" class="mat-elevation-z8 demo-table">
-
+            <div style="display: flex; justify-content: center;">
+              <button mat-raised-button color="primary" type="submit" (click)="submit2()"
+                style="margin-left: 5%; margin-top: 3%;">Save</button>
+            </div>
             <ng-container matColumnDef="Cum" sticky>
               <th mat-header-cell *matHeaderCellDef>Roll no</th>
               <td mat-cell *matCellDef="let element">
@@ -254,7 +259,7 @@
 
                         </mat-error>
                       </mat-form-field>
-                      <button type="button" class="btn btn-danger" style="height: 50px; margin-left: 8px;"
+                      <button type="button" class="btn btn-danger" style="height: 50px; margin-left: 8px; display: none;"
                         (click)="delete2(a)">&#10008;</button>
                     </div>
                   </div>
@@ -266,10 +271,8 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
           </table>
         </div>
-        <div style="display: flex; justify-content: center;">
-          <button mat-raised-button color="primary" style="margin-top: 3%;">Edit</button>
-          <button mat-raised-button color="primary" type="submit" (click)="submit2()"
-            style="margin-left: 5%; margin-top: 3%;">Save</button>
+        <div class="demo-button-container" style="display: flex; justify-content: center;">
+          <button mat-raised-button color="primary" (click)="add2()"><b>Add</b></button>
         </div>
       </div>
     </mat-tab>
@@ -279,9 +282,9 @@
     <mat-tab label="Dye Batch Entry">
 
       <div [formGroup]="form3" style="display: flex; flex-direction: column;">
-        <div class="demo-button-container">
-          <button mat-raised-button class="demo-button" (click)="add3()"
-            style="background-color: blue;"><b>Add</b></button>
+        <div style="display: flex; justify-content: center;">
+          <button mat-raised-button color="primary" type="submit" (click)="submit3()"
+            style=" margin-top: 3%;">Save</button>
         </div>
         <div class="table-container">
           <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
@@ -370,7 +373,7 @@
                         <input matInput required formControlName="entry_3" textOnly>
                         <mat-error></mat-error>
                       </mat-form-field>
-                      <button type="button" class="btn btn-danger" style="height: 50px; margin-left: 8px;"
+                      <button type="button" class="btn btn-danger" style="height: 50px; margin-left: 8px; display: none;"
                         (click)="delete3(b)"> &#10008; </button>
                     </div>
                   </div>
@@ -382,11 +385,9 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns3;"></tr>
           </table>
         </div>
-        <div style="display: flex; justify-content: center;">
-          <button mat-raised-button color="primary" style="margin-top: 3%;">Edit</button>
 
-          <button mat-raised-button color="primary" type="submit" (click)="submit3()"
-            style="margin-left: 5%; margin-top: 3%;">Save</button>
+        <div class="demo-button-container" style="display: flex; justify-content: center;">
+          <button mat-raised-button color="primary" (click)="add3()"><b>Add</b></button>
         </div>
       </div>
     </mat-tab>
@@ -396,10 +397,12 @@
     <mat-tab label="Dye Finish Entry">
 
       <div [formGroup]="form4" style="overflow: hidden;">
-        <div class="demo-button-container">
-          <button mat-raised-button class="demo-button" (click)="add4()"
-            style="background-color: blue;"><b>Add</b></button>
+        
+        <div style="display: flex; justify-content: center;">
+          <button mat-raised-button color="primary" type="submit" (click)="submit4()"
+            style="margin-top: 3%;">Save</button>
         </div>
+        
         <div class="table-container">
           <table mat-table [dataSource]="dataSource4" class="mat-elevation-z8 demo-table">
 
@@ -506,7 +509,7 @@
                         <input matInput required formControlName="entry_4" textOnly>
                         <mat-error></mat-error>
                       </mat-form-field>
-                      <button type="button" class="btn btn-danger" style="height: 50px;" (click)="delete4(c)"> &#10005;
+                      <button type="button" class="btn btn-danger" style="height: 50px; display: none;" (click)="delete4(c)"> &#10005;
                       </button>
                     </div>
                   </div>
@@ -518,11 +521,9 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns4;"></tr>
           </table>
         </div>
-        <div style="display: flex; justify-content: center;">
-          <button mat-raised-button color="primary" style="margin-top: 3%;">Edit</button>
 
-          <button mat-raised-button color="primary" type="submit" (click)="submit4()"
-            style="margin-left: 5%; margin-top: 3%;">Save</button>
+        <div class="demo-button-container" style="display: flex; justify-content: center;">
+          <button mat-raised-button color="primary" (click)="add4()"><b>Add</b></button>
         </div>
 
       </div>
@@ -532,10 +533,12 @@
 
     <mat-tab label="Dyed Fab Del Entry">
       <div [formGroup]="form5" style="overflow: hidden;">
-        <div class="demo-button-container">
-          <button mat-raised-button class="demo-button" (click)="add5()"
-            style="background-color: blue;"><b>Add</b></button>
+        
+        <div style="display: flex; justify-content: center;">
+          <button mat-raised-button color="primary" type="submit" (click)="submit5()"
+            style="margin-top: 3%;">Save</button>
         </div>
+
         <div class="table-container">
           <table mat-table [dataSource]="dataSource5" class="mat-elevation-z8 demo-table">
             <ng-container matColumnDef="Batchno">
@@ -633,7 +636,7 @@
                         <textarea matInput required formControlName="entry_5" textOnly
                           style="height: 50px; position: fixed;"></textarea>
                       </mat-form-field>
-                      <button type="button" class="btn btn-danger" style="height: 50px;" (click)="delete5(d)"> &#10005;
+                      <button type="button" class="btn btn-danger" style="height: 50px; display: none;" (click)="delete5(d)"> &#10005;
                       </button>
                     </div>
                   </div>
@@ -645,11 +648,10 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns5;"></tr>
           </table>
         </div>
-        <div style="display: flex; justify-content: center;">
-          <button mat-raised-button color="primary" style="margin-top: 3%;">Edit</button>
-          <button mat-raised-button color="primary" type="submit" (click)="submit5()"
-            style="margin-left: 5%; margin-top: 3%;">Save</button>
+        <div class="demo-button-container" style="display: flex; justify-content: center;">
+          <button mat-raised-button color="primary" (click)="add5()"><b>Add</b></button>
         </div>
+
       </div>
     </mat-tab>
 
@@ -657,10 +659,12 @@
 
     <mat-tab label="Transfer from warehouse to Cut">
       <div [formGroup]="form6" style="overflow: hidden;">
-        <div class="demo-button-container">
-          <button mat-raised-button class="demo-button" (click)="add6()"
-            style="background-color: blue;"><b>Add</b></button>
+
+        <div style="display: flex; justify-content: center;">
+          <button mat-raised-button color="primary" type="submit" (click)="submit6()"
+            style=" margin-top: 3%;">Save</button>
         </div>
+
         <div class="table-container">
           <table mat-table [dataSource]="dataSource6" class="mat-elevation-z8 demo-table">
             <ng-container matColumnDef="Batchno">
@@ -726,7 +730,7 @@
                         <input matInput required formControlName="entry_6" textOnly>
                         <mat-error></mat-error>
                       </mat-form-field>
-                      <button type="button" class="btn btn-danger" style="height: 50px;" (click)="delete6(f)"> &#10005;
+                      <button type="button" class="btn btn-danger" style="height: 50px; display: none;" (click)="delete6(f)"> &#10005;
                       </button>
                     </div>
                   </div>
@@ -738,25 +742,22 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns6;"></tr>
           </table>
         </div>
-        <div style="display: flex; justify-content: center;">
-          <button mat-raised-button color="primary" style="margin-top: 3%;">Edit</button>
-
-          <button mat-raised-button color="primary" type="submit" (click)="submit6()"
-            style="margin-left: 5%; margin-top: 3%;">Save</button>
+        <div class="demo-button-container" style="display: flex; justify-content: center;">
+          <button mat-raised-button color="primary" (click)="add6()"><b>Add</b></button>
         </div>
-
       </div>
-
     </mat-tab>
 
     <!--======================== Fab Entry 7 ===========================================================================-->
 
     <mat-tab label="Actual Cut panels Entry">
       <div [formGroup]="form7" style="overflow: hidden;">
-        <div class="demo-button-container">
-          <button mat-raised-button class="demo-button" (click)="add7()"
-            style="background-color: blue;"><b>Add</b></button>
+        
+        <div style="display: flex; justify-content: center;">
+          <button mat-raised-button color="primary" type="submit" (click)="submit7()"
+            style="margin-top: 3%;">Save</button>
         </div>
+
         <div class="table-container">
           <table mat-table [dataSource]="dataSource7" class="mat-elevation-z8 demo-table">
 
@@ -855,7 +856,7 @@
                         <input matInput required formControlName="entry_7" textOnly>
                         <mat-error></mat-error>
                       </mat-form-field>
-                      <button type="button" class="btn btn-danger" style="height: 50px;" (click)="delete(g)"> &#10005;
+                      <button type="button" class="btn btn-danger" style="height: 50px; display: none;" (click)="delete(g)"> &#10005;
                       </button>
                     </div>
                   </div>
@@ -867,10 +868,8 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns7;"></tr>
           </table>
         </div>
-        <div style="display: flex; justify-content: center;">
-          <button mat-raised-button color="primary" style="margin-top: 3%;">Edit</button>
-          <button mat-raised-button color="primary" type="submit" (click)="submit7()"
-            style="margin-left: 5%; margin-top: 3%;">Save</button>
+        <div class="demo-button-container" style="display: flex; justify-content: center;">
+          <button mat-raised-button color="primary" (click)="add7()"><b>Add</b></button>
         </div>
       </div>
     </mat-tab>
