@@ -137,13 +137,13 @@ export interface PeriodicElement {
   FabType: any;
   FabDia: any;
   FabGSM: any;
-  Yarntype: any;
-  YarnCount: any;
+  GreigeKg: any;
+  FinishKg: any;
   KnitSL: any;
   SpinFty: any;
   KnitFty: any;
   DyeingFty: any;
-  YarnLot: any;
+  YarnQty: any;
   NoofRolls: any;
   PrintStatus: any;
 }

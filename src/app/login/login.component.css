@@ -102,6 +102,4 @@ img{
     font-family: none;
     margin-left: 16%;
 }
-::ng-deep .mat-mdc-tab.mdc-tab--active .mdc-tab__text-label{
- font-size:x-large;   
-}
+    
