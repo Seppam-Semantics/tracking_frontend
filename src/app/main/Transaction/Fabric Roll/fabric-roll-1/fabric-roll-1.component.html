@@ -1,9 +1,9 @@
 <cdk-accordion class="example-accordion">
   <cdk-accordion-item #accordionItem="cdkAccordionItem" class="example-accordion-item" role="button" tabindex="0">
 
-    <div class="example-accordion-item-header" (click)="accordionItem.toggle()" style="display: flex; flex-wrap: wrap;">
+    <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
 
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline"  style="width: 105px;">
         <mat-label>Buyer</mat-label>
         <mat-select [(ngModel)]="buyerName" (selectionChange)="onSelectionChange()">
           <mat-option value=""> </mat-option>
@@ -11,7 +11,7 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" style="width: 105px;">
         <mat-label>Order</mat-label>
         <mat-select [(ngModel)]="ordernumbers" (selectionChange)="onSelectionChange()">
           <mat-option value=""> </mat-option>
@@ -19,7 +19,7 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" style="width: 105px;">
         <mat-label>Style</mat-label>
         <mat-select [(ngModel)]="styleslist" (selectionChange)="onSelectionChange()">
           <mat-option value=""> </mat-option>
@@ -27,7 +27,7 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" style="width: 105px;">
         <mat-label>color</mat-label>
         <mat-select [(ngModel)]="colorslist" (selectionChange)="onSelectionChange()">
           <mat-option value=""> </mat-option>
@@ -35,7 +35,7 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" style="width: 105px;">
         <mat-label>Size</mat-label>
         <mat-select [(ngModel)]="sizeslist" (selectionChange)="onSelectionChange()">
           <mat-option value=""> </mat-option>
@@ -43,7 +43,7 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" *ngIf="workorderhide">
+      <mat-form-field appearance="outline" *ngIf="workorderhide" style="width: 105px;">
         <mat-label>Work Order</mat-label>
         <mat-select [(ngModel)]="workorderId" (selectionChange)="onSelectionChange()" (click)="resetform()">
           <mat-option value=""> </mat-option>
@@ -66,54 +66,53 @@
       <div><b style="font-size: 110%;">{{ show ? '&minus;': '&plus;' }} </b></div>
     </div>
     <div class="cdk-accordion-item-body" [style.display]="accordionItem5.expanded ? '' : 'none'">
-      <div class="example-accordion-item-header" (click)="accordionItem.toggle()"
-        style="display: flex; flex-wrap: wrap;">
-        <mat-form-field appearance="outline">
+      <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
+        <mat-form-field appearance="outline" style="width: 105px;">
           <mat-label>Fab Type</mat-label>
           <input matInput value="{{fabdetails?.fabType}}" readonly>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" style="width: 105px;">
           <mat-label>Yarn Type</mat-label>
           <input matInput value="{{fabdetails?.yarnType}}" readonly>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" style="width: 105px;">
           <mat-label>Yarn Cunt</mat-label>
           <input matInput value="{{fabdetails?.yarnCount}}" readonly>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" style="width: 105px;">
           <mat-label>Knit SL</mat-label>
           <input matInput value="{{fabdetails?.knitSL}}" readonly>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" style="width: 105px;"> 
           <mat-label>Fab Dia</mat-label>
           <input matInput value="{{fabdetails?.fabDia}}" readonly>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" style="width: 105px;">
           <mat-label>GSM</mat-label>
           <input matInput value="{{fabdetails?.fabGsm}}" readonly>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" style="width: 105px;">
           <mat-label>Knit Fty</mat-label>
           <input matInput readonly value="{{fabdetails?.knitFty}}">
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" style="width: 105px;">
           <mat-label>Dye Fty</mat-label>
           <input matInput readonly value="{{fabdetails?.dyeinFty}}">
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" style="width: 105px;">
           <mat-label>Spin Fty</mat-label>
           <input matInput readonly value="{{fabdetails?.spinFty}}">
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" style="width: 105px;">
           <mat-label>Yarn Lot</mat-label>
           <input matInput readonly value="{{fabdetails?.yarnLot}}">
         </mat-form-field>
@@ -148,7 +147,7 @@
                       <input type="text" matInput readonly formControlName="fabBarcode">
                     </mat-form-field>
                     <mat-form-field appearance="outline" class="full-width" style="width: 100px;">
-                      <mat-label>Roll no</mat-label>
+                      <!-- <mat-label>Roll no</mat-label> -->
                       <input type="text" matInput required formControlName="rollNo" [matAutocomplete]="auto">
                       <mat-autocomplete #auto="matAutocomplete">
                         <mat-option *ngFor="let roll of this.rollnnumber"
@@ -162,13 +161,13 @@
             </ng-container>
 
             <ng-container matColumnDef="CumWt">
-              <th mat-header-cell *matHeaderCellDef>Cum.Wt</th>
+              <th mat-header-cell *matHeaderCellDef>Roll.Wt</th>
               <td mat-cell *matCellDef="let element">
                 <div formArrayName="entrys">
                   <div *ngFor="let item of items.controls; let i = index" [formGroupName]="i" class="entrydata">
                     <div style="display: flex;">
                       <mat-form-field appearance="outline" class="full-width" style="width: 100px;">
-                        <mat-label>cumWt</mat-label>
+                        <!-- <mat-label>cumWt</mat-label> -->
                         <input matInput required formControlName="entry_1">
                         <mat-error>
                         </mat-error>
@@ -185,6 +184,7 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
         </div>
+        <br>
 
         <div class="demo-button-container" style="display: flex; justify-content: center;">
           <button mat-raised-button color="primary" (click)="add()"
@@ -219,7 +219,7 @@
                 <div formArrayName="entrystwo">
                   <div class="entrydata" *ngFor="let item of items2.controls; let a = index" [formGroupName]="a">
                     <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                      <mat-label>Roll No</mat-label>
+                      <!-- <mat-label>Roll No</mat-label> -->
                       <input matInput required formControlName="rollNo" textOnly>
                       <mat-error></mat-error>
                     </mat-form-field>
@@ -232,12 +232,12 @@
             </ng-container>
 
             <ng-container matColumnDef="CumWt1">
-              <th mat-header-cell *matHeaderCellDef>Cum.Wt</th>
+              <th mat-header-cell *matHeaderCellDef>Roll.Wt</th>
               <td mat-cell *matCellDef="let element">
                 <div formArrayName="entrystwo">
                   <div *ngFor="let item of items2.controls; let a = index" [formGroupName]="a" class="entrydata">
                     <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                      <mat-label>cumWt</mat-label>
+                      <!-- <mat-label>cumWt</mat-label> -->
                       <input formControlName="entry001" matInput required readonly>
                       <mat-error></mat-error>
                     </mat-form-field>
@@ -247,13 +247,13 @@
             </ng-container>
 
             <ng-container matColumnDef="CumWt2">
-              <th mat-header-cell *matHeaderCellDef>Cum.Wt</th>
+              <th mat-header-cell *matHeaderCellDef>Greige.Wt</th>
               <td mat-cell *matCellDef="let element">
                 <div formArrayName="entrystwo">
                   <div *ngFor="let item of items2.controls; let a = index" [formGroupName]="a" class="entrydata">
                     <div style="display: flex; justify-content: center;">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                        <mat-label>GreigeWt</mat-label>
+                        <!-- <mat-label>GreigeWt</mat-label> -->
                         <input matInput required formControlName="entry_2" textOnly>
                         <mat-error>
 
@@ -271,6 +271,7 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
           </table>
         </div>
+        <br>
         <div class="demo-button-container" style="display: flex; justify-content: center;">
           <button mat-raised-button color="primary" (click)="add2()"><b>Add</b></button>
         </div>
@@ -290,13 +291,13 @@
           <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
 
             <ng-container matColumnDef="Batchno">
-              <th mat-header-cell *matHeaderCellDef style="padding: 0%;"></th>
+              <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Batch no</th>
               <td mat-cell *matCellDef="let element" style="padding: 0%;">
                 <div formArrayName="entrysthree">
                   <div class="entrydata" *ngFor="let item of items3.controls; let i = index" [formGroupName]="i">
 
                     <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                      <mat-label>Batch no</mat-label>
+                      <!-- <mat-label>Batch no</mat-label> -->
                       <input matInput required textOnly>
                       <mat-error> </mat-error>
                     </mat-form-field>
@@ -313,7 +314,7 @@
                   <div *ngFor="let item of items3.controls; let i = index" [formGroupName]="i" class="entrydata">
 
                     <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                      <mat-label>Roll no </mat-label>
+                      <!-- <mat-label>Roll no </mat-label> -->
                       <input matInput required formControlName="rollNo" textOnly>
                       <mat-error> </mat-error>
                     </mat-form-field>
@@ -327,13 +328,13 @@
 
             <ng-container matColumnDef="rollWt">
 
-              <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Cum.Wt</th>
+              <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Roll.Wt</th>
               <td mat-cell *matCellDef="let element" style="padding: 0%;">
                 <div formArrayName="entrysthree">
                   <div *ngFor="let item of items3.controls; let i = index" [formGroupName]="i" class="entrydata">
                     <div style="display: flex;">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                        <mat-label>Roll Wt</mat-label>
+                        <!-- <mat-label>Roll Wt</mat-label> -->
                         <input formControlName="entry001" matInput required readonly>
                         <mat-error></mat-error>
                       </mat-form-field>
@@ -345,13 +346,13 @@
 
             <ng-container matColumnDef="greigeWt">
 
-              <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Cum.Wt</th>
+              <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Greige.Wt</th>
               <td mat-cell *matCellDef="let element" style="padding: 0%;">
                 <div formArrayName="entrysthree">
                   <div *ngFor="let item of items3.controls; let i = index" [formGroupName]="i" class="entrydata">
                     <div style="display: flex;">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                        <mat-label>Greige Wt</mat-label>
+                        <!-- <mat-label>Greige Wt</mat-label> -->
                         <input formControlName="entry002" matInput required readonly>
                         <mat-error></mat-error>
                       </mat-form-field>
@@ -363,13 +364,13 @@
 
             <ng-container matColumnDef="dyeWt">
 
-              <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Cum.Wt</th>
+              <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Dye.Wt</th>
               <td mat-cell *matCellDef="let element" style="padding: 0%;">
                 <div formArrayName="entrysthree">
                   <div *ngFor="let item of items3.controls; let b = index" [formGroupName]="b" class="entrydata">
                     <div style="display: flex;">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                        <mat-label>Dye Wt</mat-label>
+                        <!-- <mat-label>Dye Wt</mat-label> -->
                         <input matInput required formControlName="entry_3" textOnly>
                         <mat-error></mat-error>
                       </mat-form-field>
@@ -385,7 +386,7 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns3;"></tr>
           </table>
         </div>
-
+<br>
         <div class="demo-button-container" style="display: flex; justify-content: center;">
           <button mat-raised-button color="primary" (click)="add3()"><b>Add</b></button>
         </div>
@@ -407,13 +408,13 @@
           <table mat-table [dataSource]="dataSource4" class="mat-elevation-z8 demo-table">
 
             <ng-container matColumnDef="Batchno">
-              <th mat-header-cell *matHeaderCellDef style="padding: 0%;"></th>
+              <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Batchno</th>
               <td mat-cell *matCellDef="let element" style="padding: 0%;">
                 <div formArrayName="entrysfour">
                   <div class="entrydata" *ngFor="let item of items4.controls; let c = index" [formGroupName]="c">
 
                     <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                      <mat-label>Batch no</mat-label>
+                      <!-- <mat-label>Batch no</mat-label> -->
                       <input matInput required readonly>
                       <mat-error> </mat-error>
                     </mat-form-field>
@@ -430,7 +431,7 @@
                   <div *ngFor="let item of items4.controls; let c = index" [formGroupName]="c" class="entrydata">
 
                     <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                      <mat-label>Roll no </mat-label>
+                      <!-- <mat-label>Roll no </mat-label> -->
                       <input matInput required formControlName="rollNo" textOnly>
                       <mat-error> </mat-error>
                     </mat-form-field>
@@ -445,13 +446,13 @@
 
             <ng-container matColumnDef="rollWt">
 
-              <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Cum.Wt</th>
+              <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Roll Wt</th>
               <td mat-cell *matCellDef="let element" style="padding: 0%;">
                 <div formArrayName="entrysfour">
                   <div *ngFor="let item of items4.controls; let c = index" [formGroupName]="c" class="entrydata">
                     <div style="display: flex;">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                        <mat-label>Roll Wt</mat-label>
+                        <!-- <mat-label>Roll Wt</mat-label> -->
                         <input formControlName="entry001" matInput required readonly>
                         <mat-error></mat-error>
                       </mat-form-field>
@@ -463,13 +464,13 @@
 
             <ng-container matColumnDef="greigeWt">
 
-              <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Cum.Wt</th>
+              <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Greige.Wt</th>
               <td mat-cell *matCellDef="let element" style="padding: 0%;">
                 <div formArrayName="entrysfour">
                   <div *ngFor="let item of items4.controls; let c = index" [formGroupName]="c" class="entrydata">
                     <div style="display: flex;">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                        <mat-label>Greige Wt</mat-label>
+                        <!-- <mat-label>Greige Wt</mat-label> -->
                         <input formControlName="entry002" matInput required readonly>
                         <mat-error></mat-error>
                       </mat-form-field>
@@ -481,13 +482,13 @@
 
             <ng-container matColumnDef="dyeWt">
 
-              <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Cum.Wt</th>
+              <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Dye.Wt</th>
               <td mat-cell *matCellDef="let element" style="padding: 0%;">
                 <div formArrayName="entrysfour">
                   <div *ngFor="let item of items4.controls; let c = index" [formGroupName]="c" class="entrydata">
                     <div style="display: flex;">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                        <mat-label>Dye Wt</mat-label>
+                        <!-- <mat-label>Dye Wt</mat-label> -->
                         <input formControlName="entry003" matInput required readonly>
                         <mat-error></mat-error>
                       </mat-form-field>
@@ -499,13 +500,13 @@
 
             <ng-container matColumnDef="finWt">
 
-              <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Cum.Wt</th>
+              <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Fin.Wt</th>
               <td mat-cell *matCellDef="let element" style="padding: 0%;">
                 <div formArrayName="entrysfour">
                   <div *ngFor="let item of items4.controls; let c = index" [formGroupName]="c" class="entrydata">
                     <div style="display: flex;">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                        <mat-label>Fin Wt</mat-label>
+                        <!-- <mat-label>Fin Wt</mat-label> -->
                         <input matInput required formControlName="entry_4" textOnly>
                         <mat-error></mat-error>
                       </mat-form-field>
@@ -521,6 +522,7 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns4;"></tr>
           </table>
         </div>
+        <br>
 
         <div class="demo-button-container" style="display: flex; justify-content: center;">
           <button mat-raised-button color="primary" (click)="add4()"><b>Add</b></button>
@@ -542,12 +544,12 @@
         <div class="table-container">
           <table mat-table [dataSource]="dataSource5" class="mat-elevation-z8 demo-table">
             <ng-container matColumnDef="Batchno">
-              <th mat-header-cell *matHeaderCellDef style="padding: 0%;"></th>
+              <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Batchno</th>
               <td mat-cell *matCellDef="let element" style="padding: 0%;">
                 <div formArrayName="entrysfive">
                   <div class="entrydata" *ngFor="let item of items5.controls; let d = index" [formGroupName]="d">
                     <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                      <mat-label>Batch no</mat-label>
+                      <!-- <mat-label>Batch no</mat-label> -->
                       <input matInput required readonly>
                       <mat-error> </mat-error>
                     </mat-form-field>
@@ -562,7 +564,7 @@
                 <div formArrayName="entrysfive">
                   <div *ngFor="let item of items5.controls; let d = index" [formGroupName]="d" class="entrydata">
                     <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                      <mat-label>Roll no</mat-label>
+                      <!-- <mat-label>Roll no</mat-label> -->
                       <input matInput required formControlName="rollNo" textOnly>
                       <mat-error> </mat-error>
                     </mat-form-field>
@@ -575,13 +577,13 @@
             </ng-container>
 
             <ng-container matColumnDef="greigeWt">
-              <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Cum.Wt</th>
+              <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Greige.Wt</th>
               <td mat-cell *matCellDef="let element" style="padding: 0%;">
                 <div formArrayName="entrysfive">
                   <div *ngFor="let item of items5.controls; let d = index" [formGroupName]="d" class="entrydata">
                     <div style="display: flex;">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                        <mat-label>Greige Wt</mat-label>
+                        <!-- <mat-label>Greige Wt</mat-label> -->
                         <input formControlName = "entry002" matInput required readonly>
                         <mat-error></mat-error>
                       </mat-form-field>
@@ -592,13 +594,13 @@
             </ng-container>
 
             <ng-container matColumnDef="delWt">
-              <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Cum.Wt</th>
+              <th mat-header-cell *matHeaderCellDef style="padding: 0%;">del.Wt</th>
               <td mat-cell *matCellDef="let element" style="padding: 0%;">
                 <div formArrayName="entrysfive">
                   <div *ngFor="let item of items5.controls; let d = index" [formGroupName]="d" class="entrydata">
                     <div style="display: flex;">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                        <mat-label>del Wt</mat-label>
+                        <!-- <mat-label>del Wt</mat-label> -->
                         <input formControlName = "entry004" matInput required readonly>
                         <mat-error></mat-error>
                       </mat-form-field>
@@ -609,13 +611,13 @@
             </ng-container>
 
             <ng-container matColumnDef="difference">
-              <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Cum.Wt</th>
+              <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Difference</th>
               <td mat-cell *matCellDef="let element" style="padding: 0%;">
                 <div formArrayName="entrysfive">
                   <div *ngFor="let item of items5.controls; let d = index" [formGroupName]="d" class="entrydata">
                     <div style="display: flex;">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                        <mat-label>Difference</mat-label>
+                        <!-- <mat-label>Difference</mat-label> -->
                         <input matInput required textOnly>
                         <mat-error></mat-error>
                       </mat-form-field>
@@ -626,13 +628,13 @@
             </ng-container>
 
             <ng-container matColumnDef="reason">
-              <th mat-header-cell *matHeaderCellDef style="padding: 0%;"></th>
+              <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Reason</th>
               <td mat-cell *matCellDef="let element" style="padding: 0%;">
                 <div formArrayName="entrysfive">
                   <div *ngFor="let item of items5.controls; let d = index" [formGroupName]="d" class="entrydata">
                     <div style="display: flex;">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                        <mat-label>Reason</mat-label>
+                        <!-- <mat-label>Reason</mat-label> -->
                         <textarea matInput required formControlName="entry_5" textOnly
                           style="height: 50px; position: fixed;"></textarea>
                       </mat-form-field>
@@ -648,6 +650,7 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns5;"></tr>
           </table>
         </div>
+        <br>
         <div class="demo-button-container" style="display: flex; justify-content: center;">
           <button mat-raised-button color="primary" (click)="add5()"><b>Add</b></button>
         </div>
@@ -668,12 +671,12 @@
         <div class="table-container">
           <table mat-table [dataSource]="dataSource6" class="mat-elevation-z8 demo-table">
             <ng-container matColumnDef="Batchno">
-              <th mat-header-cell *matHeaderCellDef></th>
+              <th mat-header-cell *matHeaderCellDef>Batch no</th>
               <td mat-cell *matCellDef="let element">
                 <div formArrayName="entryssix">
                   <div class="entrydata" *ngFor="let item of items6.controls; let f = index" [formGroupName]="f">
                     <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                      <mat-label>Batch no</mat-label>
+                      <!-- <mat-label>Batch no</mat-label> -->
                       <input matInput required textOnly>
                       <mat-error> </mat-error>
                     </mat-form-field>
@@ -689,7 +692,7 @@
                   <div *ngFor="let item of items6.controls; let f = index" [formGroupName]="f" class="entrydata">
 
                     <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                      <mat-label>Roll no</mat-label>
+                      <!-- <mat-label>Roll no</mat-label> -->
                       <input matInput required formControlName="rollNo" textOnly>
                       <mat-error> </mat-error>
                     </mat-form-field>
@@ -703,13 +706,13 @@
             </ng-container>
 
             <ng-container matColumnDef="delWt">
-              <th mat-header-cell *matHeaderCellDef>Cum.Wt</th>
+              <th mat-header-cell *matHeaderCellDef>Greige.Wt</th>
               <td mat-cell *matCellDef="let element">
                 <div formArrayName="entryssix">
                   <div *ngFor="let item of items6.controls; let f = index" [formGroupName]="f" class="entrydata">
                     <div style="display: flex;">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                        <mat-label>Greige Wt</mat-label>
+                        <!-- <mat-label>Greige Wt</mat-label> -->
                         <input formControlName = "entry002" matInput required readonly>
                         <mat-error></mat-error>
                       </mat-form-field>
@@ -720,13 +723,13 @@
             </ng-container>
 
             <ng-container matColumnDef="PlanPcs">
-              <th mat-header-cell *matHeaderCellDef>Cum.Wt</th>
+              <th mat-header-cell *matHeaderCellDef>planPcs</th>
               <td mat-cell *matCellDef="let element">
                 <div formArrayName="entryssix">
                   <div *ngFor="let item of items6.controls; let f = index" [formGroupName]="f" class="entrydata">
                     <div style="display: flex;">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                        <mat-label>PlanPcs</mat-label>
+                        <!-- <mat-label>PlanPcs</mat-label> -->
                         <input matInput required formControlName="entry_6" textOnly>
                         <mat-error></mat-error>
                       </mat-form-field>
@@ -742,6 +745,7 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns6;"></tr>
           </table>
         </div>
+        <br>
         <div class="demo-button-container" style="display: flex; justify-content: center;">
           <button mat-raised-button color="primary" (click)="add6()"><b>Add</b></button>
         </div>
@@ -762,12 +766,12 @@
           <table mat-table [dataSource]="dataSource7" class="mat-elevation-z8 demo-table">
 
             <ng-container matColumnDef="Batchno">
-              <th mat-header-cell *matHeaderCellDef></th>
+              <th mat-header-cell *matHeaderCellDef>Batch no</th>
               <td mat-cell *matCellDef="let element">
                 <div formArrayName="entrysseven">
                   <div class="entrydata" *ngFor="let item of items7.controls; let g = index" [formGroupName]="g">
                     <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                      <mat-label>Batch no</mat-label>
+                      <!-- <mat-label>Batch no</mat-label> -->
                       <input matInput required textOnly>
                       <mat-error> </mat-error>
                     </mat-form-field>
@@ -782,7 +786,7 @@
                 <div formArrayName="entrysseven">
                   <div *ngFor="let item of items7.controls; let g = index" [formGroupName]="g" class="entrydata">
                     <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                      <mat-label>Roll no</mat-label>
+                      <!-- <mat-label>Roll no</mat-label> -->
                       <input matInput required formControlName="rollNo" textOnly>
                       <mat-error> </mat-error>
                     </mat-form-field>
@@ -795,13 +799,13 @@
             </ng-container>
 
             <ng-container matColumnDef="delWt">
-              <th mat-header-cell *matHeaderCellDef>Cum.Wt</th>
+              <th mat-header-cell *matHeaderCellDef>Greige Wt</th>
               <td mat-cell *matCellDef="let element">
                 <div formArrayName="entrysseven">
                   <div *ngFor="let item of items7.controls; let g = index" [formGroupName]="g" class="entrydata">
                     <div>
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                        <mat-label>Greige Wt</mat-label>
+                        <!-- <mat-label>Greige Wt</mat-label> -->
                         <input formControlName = "entry002" matInput required readonly>
                         <mat-error></mat-error>
                       </mat-form-field>
@@ -812,13 +816,13 @@
             </ng-container>
 
             <ng-container matColumnDef="PlanPcs">
-              <th mat-header-cell *matHeaderCellDef>Cum.Pcs</th>
+              <th mat-header-cell *matHeaderCellDef>PlanPcs</th>
               <td mat-cell *matCellDef="let element">
                 <div formArrayName="entrysseven">
                   <div *ngFor="let item of items7.controls; let g = index" [formGroupName]="g" class="entrydata">
                     <div>
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                        <mat-label>PlanPcs</mat-label>
+                        <!-- <mat-label>PlanPcs</mat-label> -->
                         <input formControlName = "entry006" matInput required readonly>
                         <mat-error></mat-error>
                       </mat-form-field>
@@ -829,13 +833,13 @@
             </ng-container>
 
             <ng-container matColumnDef="actualcut">
-              <th mat-header-cell *matHeaderCellDef>Cum.Pcs</th>
+              <th mat-header-cell *matHeaderCellDef>Actual cut</th>
               <td mat-cell *matCellDef="let element">
                 <div formArrayName="entrysseven">
                   <div *ngFor="let item of items7.controls; let g = index" [formGroupName]="g" class="entrydata">
                     <div>
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                        <mat-label>Actual Cut</mat-label>
+                        <!-- <mat-label>Actual Cut</mat-label> -->
                         <input matInput required textOnly>
                         <mat-error></mat-error>
                       </mat-form-field>
@@ -846,13 +850,13 @@
             </ng-container>
 
             <ng-container matColumnDef="rejcause">
-              <th mat-header-cell *matHeaderCellDef></th>
+              <th mat-header-cell *matHeaderCellDef>RejCause</th>
               <td mat-cell *matCellDef="let element">
                 <div formArrayName="entrysseven">
                   <div *ngFor="let item of items7.controls; let g = index" [formGroupName]="g" class="entrydata">
                     <div style="display:flex ;">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                        <mat-label>Rej Cause</mat-label>
+                        <!-- <mat-label>Rej Cause</mat-label> -->
                         <input matInput required formControlName="entry_7" textOnly>
                         <mat-error></mat-error>
                       </mat-form-field>
@@ -868,6 +872,7 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns7;"></tr>
           </table>
         </div>
+        <br>
         <div class="demo-button-container" style="display: flex; justify-content: center;">
           <button mat-raised-button color="primary" (click)="add7()"><b>Add</b></button>
         </div>

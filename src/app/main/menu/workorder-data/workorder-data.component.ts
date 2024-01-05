@@ -20,7 +20,7 @@ export class WorkorderDataComponent {
   }
 
   displayedColumns: string[] = ['Sl.no', 'buyer', 'orderNo', 'style', 'color', 'size', 'fabType',
-    'fabDia', 'fabGsm', 'yarnType', 'yarnCount', 'knitSL', 'spinFty', 'knitFty', 'dyeingFty', 'yarnLot', 'noRolls', 'PrintStatus'
+    'fabDia', 'fabGsm', 'greigeKg', 'finishKg', 'knitSL', 'spinFty', 'knitFty', 'dyeingFty', 'yarnQty', 'noRolls', 'PrintStatus'
   ];
 
 

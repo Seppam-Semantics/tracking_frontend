@@ -511,8 +511,8 @@ export class EditProfileComponent implements OnInit {
     'workorderall' : new FormControl(),
     'Reportselectall':new FormControl(),
     'Dashboardsselectall' : new FormControl(),
-    Garmentsbundlesselectall:new FormControl(),
-    Fabricrollsall:new FormControl(),
+    'Garmentsbundlesselectall':new FormControl(),
+    'Fabricrollsall':new FormControl(),
   })
 
   organization = new FormGroup({

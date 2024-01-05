@@ -16,9 +16,506 @@ export class AddProfilesComponent implements OnInit {
   singleprofile:any;
   select:boolean=true;
 
-  WorkOrder(){
-    this.wo=!this.wo
+  masterselectall() {
+    if (this.selectall.get('mastersall')?.value) {
+      this.Masters();
+    } else {
+      this.MastersF()
+    }
   }
+
+  mastercreate() {
+    if (this.selectall.get('masterscreate')?.value) {
+      this.MastersOrganization();
+    } else {
+      this.MastersOrganizationF()
+    }
+  }
+
+  masterread() {
+    if (this.selectall.get('mastersread')?.value) {
+      this.MastersProfile();
+    } else {
+      this.MastersProfileF()
+    }
+  }
+
+  masterupdate() {
+    if (this.selectall.get('mastersupdate')?.value) {
+      this.MastersRole();
+    } else {
+      this.MastersRoleF()
+    }
+  }
+
+  masterdelete() {
+    if (this.selectall.get('mastersdelete')?.value) {
+      this.MastersEmployee();
+    } else {
+      this.MastersEmployeeF();
+    }
+  }
+
+  WorkOrderselectall() {
+    if (this.selectall.get('workorderall')?.value) {
+      this.WorkOrder()
+    } else {
+      this.WorkOrderF()
+    }
+  }
+
+  Reportall(){
+    if(this.selectall.get('Reportselectall')?.value){
+      this.Reports()
+    }else{
+      this.ReportsF()
+    }
+  }
+
+  Dashboardsall(){
+    if(this.selectall.get('Dashboardsselectall')?.value){ this.Dashboards()}else{this.DashboardsF()}
+  }
+
+  Fabricrollsall(){
+    if(this.selectall.get('Fabricrollsall')?.value){
+      this.FabricRolls()
+    }else{
+      this.FabricRollsF()
+    }
+  }
+
+  GarmentsBbundlesall(){
+    if(this.selectall.get('Garmentsbundlesselectall')?.value){
+      this.GarmentsBundles()
+    }else{
+      this.GarmentsBundlesF()
+    }
+  }
+
+  MastersF() {
+    this.organization.get('creation')?.setValue(false)
+    this.organization.get('selection')?.setValue(false)
+    this.organization.get('updation')?.setValue(false)
+    this.organization.get('deletion')?.setValue(false)
+
+    this.profile.get('creation')?.setValue(false)
+    this.profile.get('selection')?.setValue(false)
+    this.profile.get('updation')?.setValue(false)
+    this.profile.get('deletion')?.setValue(false)
+
+    this.role.get('creation')?.setValue(false)
+    this.role.get('selection')?.setValue(false)
+    this.role.get('updation')?.setValue(false)
+    this.role.get('deletion')?.setValue(false)
+
+    this.employee.get('creation')?.setValue(false)
+    this.employee.get('selection')?.setValue(false)
+    this.employee.get('updation')?.setValue(false)
+    this.employee.get('deletion')?.setValue(false)
+  }
+
+  MastersOrganizationF() {
+    this.organization.get('creation')?.setValue(false)
+    this.profile.get('creation')?.setValue(false)
+    this.role.get('creation')?.setValue(false)
+    this.employee.get('creation')?.setValue(false)
+  }
+
+  MastersProfileF() {
+    this.organization.get('selection')?.setValue(false)
+    this.profile.get('selection')?.setValue(false)
+    this.role.get('selection')?.setValue(false)
+    this.employee.get('selection')?.setValue(false)
+  }
+
+  MastersRoleF() {
+    this.organization.get('updation')?.setValue(false)
+    this.profile.get('updation')?.setValue(false)
+    this.role.get('updation')?.setValue(false)
+    this.employee.get('updation')?.setValue(false)
+  }
+
+  MastersEmployeeF() {
+    this.organization.get('deletion')?.setValue(false)
+    this.profile.get('deletion')?.setValue(false)
+    this.role.get('deletion')?.setValue(false)
+    this.employee.get('deletion')?.setValue(false)
+  }
+  WorkOrderF() {
+    this.workorder.get('creation')?.setValue(false);
+    this.workorder.get('selection')?.setValue(false);
+    this.workorder.get('updation')?.setValue(false);
+    this.workorder.get('deletion')?.setValue(false);
+  }
+
+  FabricRollsF() {
+    this.fabricrolls.get('creation')?.setValue(false);
+    this.fabricrolls.get('selection')?.setValue(false);
+    this.fabricrolls.get('updation')?.setValue(false);
+    this.fabricrolls.get('deletion')?.setValue(false);
+  }
+
+  GarmentsBundlesF() {
+    this.garmentsbundles.get('creation')?.setValue(false);
+    this.garmentsbundles.get('selection')?.setValue(false);
+    this.garmentsbundles.get('updation')?.setValue(false);
+    this.garmentsbundles.get('deletion')?.setValue(false);
+  }
+
+  RollEntryF() {
+    this.rollentry1.get('creation')?.setValue(false)
+    this.rollentry1.get('selection')?.setValue(false)
+    this.rollentry1.get('updation')?.setValue(false)
+    this.rollentry1.get('deletion')?.setValue(false)
+
+    this.rollentry2.get('creation')?.setValue(false)
+    this.rollentry2.get('selection')?.setValue(false)
+    this.rollentry2.get('updation')?.setValue(false)
+    this.rollentry2.get('deletion')?.setValue(false)
+
+    this.rollentry3.get('creation')?.setValue(false)
+    this.rollentry3.get('selection')?.setValue(false)
+    this.rollentry3.get('updation')?.setValue(false)
+    this.rollentry3.get('deletion')?.setValue(false)
+
+    this.rollentry4.get('creation')?.setValue(false)
+    this.rollentry4.get('selection')?.setValue(false)
+    this.rollentry4.get('updation')?.setValue(false)
+    this.rollentry4.get('deletion')?.setValue(false)
+
+    this.rollentry5.get('creation')?.setValue(false)
+    this.rollentry5.get('selection')?.setValue(false)
+    this.rollentry5.get('updation')?.setValue(false)
+    this.rollentry5.get('deletion')?.setValue(false)
+
+    this.rollentry6.get('creation')?.setValue(false)
+    this.rollentry6.get('selection')?.setValue(false)
+    this.rollentry6.get('updation')?.setValue(false)
+    this.rollentry6.get('deletion')?.setValue(false)
+
+    this.rollentry7.get('creation')?.setValue(false)
+    this.rollentry7.get('selection')?.setValue(false)
+    this.rollentry7.get('updation')?.setValue(false)
+    this.rollentry7.get('deletion')?.setValue(false)
+  }
+
+  RollEntryCreationF() {
+    this.rollentry1.get('creation')?.setValue(false)
+    this.rollentry2.get('creation')?.setValue(false)
+    this.rollentry3.get('creation')?.setValue(false)
+    this.rollentry4.get('creation')?.setValue(false)
+    this.rollentry5.get('creation')?.setValue(false)
+    this.rollentry6.get('creation')?.setValue(false)
+    this.rollentry7.get('creation')?.setValue(false)
+  }
+
+  RollEntrySelectionF() {
+    this.rollentry1.get('selection')?.setValue(false)
+    this.rollentry2.get('selection')?.setValue(false)
+    this.rollentry3.get('selection')?.setValue(false)
+    this.rollentry4.get('selection')?.setValue(false)
+    this.rollentry5.get('selection')?.setValue(false)
+    this.rollentry6.get('selection')?.setValue(false)
+    this.rollentry7.get('selection')?.setValue(false)
+  }
+
+  RollEntryUpdationF() {
+    this.rollentry1.get('updation')?.setValue(false)
+    this.rollentry2.get('updation')?.setValue(false)
+    this.rollentry3.get('updation')?.setValue(false)
+    this.rollentry4.get('updation')?.setValue(false)
+    this.rollentry5.get('updation')?.setValue(false)
+    this.rollentry6.get('updation')?.setValue(false)
+    this.rollentry7.get('updation')?.setValue(false)
+  }
+
+  RollEntryDeletionF() {
+    this.rollentry1.get('deletion')?.setValue(false)
+    this.rollentry2.get('deletion')?.setValue(false)
+    this.rollentry3.get('deletion')?.setValue(false)
+    this.rollentry4.get('deletion')?.setValue(false)
+    this.rollentry5.get('deletion')?.setValue(false)
+    this.rollentry6.get('deletion')?.setValue(false)
+    this.rollentry7.get('deletion')?.setValue(false)
+  }
+
+  BundlesEntryF() {
+    this.bundlesentry1.get('creation')?.setValue(false)
+    this.bundlesentry1.get('selection')?.setValue(false)
+    this.bundlesentry1.get('updation')?.setValue(false)
+    this.bundlesentry1.get('deletion')?.setValue(false)
+
+    this.bundlesentry2.get('creation')?.setValue(false)
+    this.bundlesentry2.get('selection')?.setValue(false)
+    this.bundlesentry2.get('updation')?.setValue(false)
+    this.bundlesentry2.get('deletion')?.setValue(false)
+
+    this.bundlesentry3.get('creation')?.setValue(false)
+    this.bundlesentry3.get('selection')?.setValue(false)
+    this.bundlesentry3.get('updation')?.setValue(false)
+    this.bundlesentry3.get('deletion')?.setValue(false)
+  }
+
+  BundlesEntry1F() {
+    this.bundlesentry1.get('creation')?.setValue(false)
+    this.bundlesentry2.get('creation')?.setValue(false)
+    this.bundlesentry3.get('creation')?.setValue(false)
+  }
+
+  BundlesEntry2F() {
+
+    this.bundlesentry1.get('selection')?.setValue(false)
+    this.bundlesentry2.get('selection')?.setValue(false)
+    this.bundlesentry3.get('selection')?.setValue(false)
+  }
+
+  BundlesEntry3F() {
+    this.bundlesentry1.get('updation')?.setValue(false);
+    this.bundlesentry2.get('updation')?.setValue(false);
+    this.bundlesentry3.get('updation')?.setValue(false);
+  }
+
+  BundlesEntry4F() {
+    this.bundlesentry3.get('deletion')?.setValue(false)
+    this.bundlesentry3.get('deletion')?.setValue(false)
+    this.bundlesentry3.get('deletion')?.setValue(false)
+  }
+
+  ReportsF() {
+    this.reports.get('creation')?.setValue(false)
+    this.reports.get('selection')?.setValue(false)
+    this.reports.get('updation')?.setValue(false)
+    this.reports.get('deletion')?.setValue(false)
+  }
+
+  DashboardsF() {
+    this.dashboards.get('creation')?.setValue(false)
+    this.dashboards.get('selection')?.setValue(false)
+    this.dashboards.get('updation')?.setValue(false)
+    this.dashboards.get('deletion')?.setValue(false)
+  }
+
+
+
+
+  Masters() {
+    this.organization.get('creation')?.setValue(true)
+    this.organization.get('selection')?.setValue(true)
+    this.organization.get('updation')?.setValue(true)
+    this.organization.get('deletion')?.setValue(true)
+
+    this.profile.get('creation')?.setValue(true)
+    this.profile.get('selection')?.setValue(true)
+    this.profile.get('updation')?.setValue(true)
+    this.profile.get('deletion')?.setValue(true)
+
+    this.role.get('creation')?.setValue(true)
+    this.role.get('selection')?.setValue(true)
+    this.role.get('updation')?.setValue(true)
+    this.role.get('deletion')?.setValue(true)
+
+    this.employee.get('creation')?.setValue(true)
+    this.employee.get('selection')?.setValue(true)
+    this.employee.get('updation')?.setValue(true)
+    this.employee.get('deletion')?.setValue(true)
+  }
+
+  MastersOrganization() {
+    this.organization.get('creation')?.setValue(true)
+    this.profile.get('creation')?.setValue(true)
+    this.role.get('creation')?.setValue(true)
+    this.employee.get('creation')?.setValue(true)
+  }
+
+  MastersProfile() {
+    this.organization.get('selection')?.setValue(true)
+    this.profile.get('selection')?.setValue(true)
+    this.role.get('selection')?.setValue(true)
+    this.employee.get('selection')?.setValue(true)
+  }
+
+  MastersRole() {
+    this.organization.get('updation')?.setValue(true)
+    this.profile.get('updation')?.setValue(true)
+    this.role.get('updation')?.setValue(true)
+    this.employee.get('updation')?.setValue(true)
+  }
+
+  MastersEmployee() {
+    this.organization.get('deletion')?.setValue(true)
+    this.profile.get('deletion')?.setValue(true)
+    this.role.get('deletion')?.setValue(true)
+    this.employee.get('deletion')?.setValue(true)
+  }
+  WorkOrder() {
+    this.workorder.get('creation')?.setValue(true);
+    this.workorder.get('selection')?.setValue(true);
+    this.workorder.get('updation')?.setValue(true);
+    this.workorder.get('deletion')?.setValue(true);
+  }
+
+  FabricRolls() {
+    this.fabricrolls.get('creation')?.setValue(true);
+    this.fabricrolls.get('selection')?.setValue(true);
+    this.fabricrolls.get('updation')?.setValue(true);
+    this.fabricrolls.get('deletion')?.setValue(true);
+  }
+
+  GarmentsBundles() {
+    this.garmentsbundles.get('creation')?.setValue(true);
+    this.garmentsbundles.get('selection')?.setValue(true);
+    this.garmentsbundles.get('updation')?.setValue(true);
+    this.garmentsbundles.get('deletion')?.setValue(true);
+  }
+
+  RollEntry() {
+    this.rollentry1.get('creation')?.setValue(true)
+    this.rollentry1.get('selection')?.setValue(true)
+    this.rollentry1.get('updation')?.setValue(true)
+    this.rollentry1.get('deletion')?.setValue(true)
+
+    this.rollentry2.get('creation')?.setValue(true)
+    this.rollentry2.get('selection')?.setValue(true)
+    this.rollentry2.get('updation')?.setValue(true)
+    this.rollentry2.get('deletion')?.setValue(true)
+
+    this.rollentry3.get('creation')?.setValue(true)
+    this.rollentry3.get('selection')?.setValue(true)
+    this.rollentry3.get('updation')?.setValue(true)
+    this.rollentry3.get('deletion')?.setValue(true)
+
+    this.rollentry4.get('creation')?.setValue(true)
+    this.rollentry4.get('selection')?.setValue(true)
+    this.rollentry4.get('updation')?.setValue(true)
+    this.rollentry4.get('deletion')?.setValue(true)
+
+    this.rollentry5.get('creation')?.setValue(true)
+    this.rollentry5.get('selection')?.setValue(true)
+    this.rollentry5.get('updation')?.setValue(true)
+    this.rollentry5.get('deletion')?.setValue(true)
+
+    this.rollentry6.get('creation')?.setValue(true)
+    this.rollentry6.get('selection')?.setValue(true)
+    this.rollentry6.get('updation')?.setValue(true)
+    this.rollentry6.get('deletion')?.setValue(true)
+
+    this.rollentry7.get('creation')?.setValue(true)
+    this.rollentry7.get('selection')?.setValue(true)
+    this.rollentry7.get('updation')?.setValue(true)
+    this.rollentry7.get('deletion')?.setValue(true)
+  }
+
+  RollEntryCreation() {
+    this.rollentry1.get('creation')?.setValue(true)
+    this.rollentry2.get('creation')?.setValue(true)
+    this.rollentry3.get('creation')?.setValue(true)
+    this.rollentry4.get('creation')?.setValue(true)
+    this.rollentry5.get('creation')?.setValue(true)
+    this.rollentry6.get('creation')?.setValue(true)
+    this.rollentry7.get('creation')?.setValue(true)
+  }
+
+  RollEntrySelection() {
+    this.rollentry1.get('selection')?.setValue(true)
+    this.rollentry2.get('selection')?.setValue(true)
+    this.rollentry3.get('selection')?.setValue(true)
+    this.rollentry4.get('selection')?.setValue(true)
+    this.rollentry5.get('selection')?.setValue(true)
+    this.rollentry6.get('selection')?.setValue(true)
+    this.rollentry7.get('selection')?.setValue(true)
+  }
+
+  RollEntryUpdation() {
+    this.rollentry1.get('updation')?.setValue(true)
+    this.rollentry2.get('updation')?.setValue(true)
+    this.rollentry3.get('updation')?.setValue(true)
+    this.rollentry4.get('updation')?.setValue(true)
+    this.rollentry5.get('updation')?.setValue(true)
+    this.rollentry6.get('updation')?.setValue(true)
+    this.rollentry7.get('updation')?.setValue(true)
+  }
+
+  RollEntryDeletion() {
+    this.rollentry1.get('deletion')?.setValue(true)
+    this.rollentry2.get('deletion')?.setValue(true)
+    this.rollentry3.get('deletion')?.setValue(true)
+    this.rollentry4.get('deletion')?.setValue(true)
+    this.rollentry5.get('deletion')?.setValue(true)
+    this.rollentry6.get('deletion')?.setValue(true)
+    this.rollentry7.get('deletion')?.setValue(true)
+  }
+
+  BundlesEntry() {
+    this.bundlesentry1.get('creation')?.setValue(true)
+    this.bundlesentry1.get('selection')?.setValue(true)
+    this.bundlesentry1.get('updation')?.setValue(true)
+    this.bundlesentry1.get('deletion')?.setValue(true)
+
+    this.bundlesentry2.get('creation')?.setValue(true)
+    this.bundlesentry2.get('selection')?.setValue(true)
+    this.bundlesentry2.get('updation')?.setValue(true)
+    this.bundlesentry2.get('deletion')?.setValue(true)
+
+    this.bundlesentry3.get('creation')?.setValue(true)
+    this.bundlesentry3.get('selection')?.setValue(true)
+    this.bundlesentry3.get('updation')?.setValue(true)
+    this.bundlesentry3.get('deletion')?.setValue(true)
+  }
+
+  BundlesEntry1() {
+    this.bundlesentry1.get('creation')?.setValue(true)
+    this.bundlesentry2.get('creation')?.setValue(true)
+    this.bundlesentry3.get('creation')?.setValue(true)
+  }
+
+  BundlesEntry2() {
+
+    this.bundlesentry1.get('selection')?.setValue(true)
+    this.bundlesentry2.get('selection')?.setValue(true)
+    this.bundlesentry3.get('selection')?.setValue(true)
+  }
+
+  BundlesEntry3() {
+    this.bundlesentry1.get('updation')?.setValue(true);
+    this.bundlesentry2.get('updation')?.setValue(true);
+    this.bundlesentry3.get('updation')?.setValue(true);
+  }
+
+  BundlesEntry4() {
+    this.bundlesentry3.get('deletion')?.setValue(true)
+    this.bundlesentry3.get('deletion')?.setValue(true)
+    this.bundlesentry3.get('deletion')?.setValue(true)
+  }
+
+  Reports() {
+    this.reports.get('creation')?.setValue(true)
+    this.reports.get('selection')?.setValue(true)
+    this.reports.get('updation')?.setValue(true)
+    this.reports.get('deletion')?.setValue(true)
+  }
+
+  Dashboards() {
+    this.dashboards.get('creation')?.setValue(true)
+    this.dashboards.get('selection')?.setValue(true)
+    this.dashboards.get('updation')?.setValue(true)
+    this.dashboards.get('deletion')?.setValue(true)
+  }
+
+  selectall = new FormGroup({
+    'mastersall': new FormControl(),
+    'masterscreate': new FormControl(),
+    'mastersread': new FormControl(),
+    'mastersupdate': new FormControl(),
+    'mastersdelete': new FormControl(),
+    'workorderall' : new FormControl(),
+    'Reportselectall':new FormControl(),
+    'Dashboardsselectall' : new FormControl(),
+    'Garmentsbundlesselectall':new FormControl(),
+    'Fabricrollsall':new FormControl(),
+  })
+
+
+
 
   organization = new FormGroup ({
     'creation' : new FormControl(false),
