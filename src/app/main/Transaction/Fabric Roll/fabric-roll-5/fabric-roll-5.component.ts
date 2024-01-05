@@ -39,7 +39,7 @@ export class FabricRoll5Component {
   loadworkorderdetails(WOno: any, WOLineno: any): void {
     const proftoken = 'Bearer ' + sessionStorage.getItem('token')
     const headers = new HttpHeaders().set('x-access-token', proftoken);
-    this.http.get<any>(`http://localhost:2000/fabricrollapi/fabric-entrys?id=${WOno}&entry=${WOLineno}`, { headers }).subscribe((res) => {
+    this.http.get<any>(`${this.api.apiUrl}/fabricrollapi/fabric-entrys?id=${WOno}&entry=${WOLineno}`, { headers }).subscribe((res) => {
       this.fabdetails = res.workorder
       this.rollnnumber = res.fabricRolls
     })

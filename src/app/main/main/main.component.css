@@ -9,15 +9,13 @@ mat-sidenav-container{
     height: 86vh;
     border: none;
     background-color: white;
+}
+mat-sidenav{
+    width: 280px;
+    overflow: scroll;
+    border-right: #662d91 4px solid;
 
-    mat-sidenav{
-        width: 280px;
-        overflow: scroll;
-        border-right: #662d91 4px solid;
-    
-        background-color: white;
-
-    }
+    background-color: white;
 }
 .mat-list-item{
     height: 40px;
