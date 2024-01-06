@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/api.service';
 import * as xls from 'xlsx'
@@ -23,13 +24,19 @@ export class FabricRollDataComponent implements OnInit {
   sizelist:any;
   sizeslist:any;
   workorderhide:boolean = true;
+  workorderId:any;
+  WoNumber:any;
+  fabdetails:any;
+  rollnnumber:any;
 
   fabricfrom =  new FormGroup({
   'WOno': new FormControl(Validators.required),
   'WOLineno': new FormControl('0')
 })
 
-  constructor(private api:ApiService){}
+  constructor(private api: ApiService, 
+              private http: HttpClient,
+              private cdref: ChangeDetectorRef){}
 
   ngOnInit(): void {
 this.getbuyers();
@@ -117,7 +124,6 @@ this.getworkorderdetails()
   
 onSelectionChange() {
       if (this.workorderId) {
-        this.resetform();
         this.loadworkorderdetails(this.workorderId);
       }
       if(this.buyerName){
@@ -137,7 +143,6 @@ onSelectionChange() {
         this.getsize(this.buyerName, this.ordernumbers, this.styleslist, this.colorslist)
       }
       if(this.buyerName && this.ordernumbers && this.styleslist && this.colorslist && this.sizeslist){
-        this.resetform();
         this.loadworkorder(this.buyerName, this.ordernumbers, this.styleslist, this.colorslist, this.sizeslist)
         this.workorderhide = false;
       }
