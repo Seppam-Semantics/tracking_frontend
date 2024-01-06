@@ -10,11 +10,11 @@ import { MainRoutingModule } from './main/main-routing.module';
 const routes: Routes = [
   {path:"" ,component:WelcomeComponent},
   {path:"login", component:LoginComponent},
-  {path:"main" , component:MainComponent,canActivate:[AuthGuard]},
+  {path:"main" , component:MainComponent},
   {
     path:'main',
     component:MainComponent,
-    loadChildren:() =>import('./main/main.module').then(x=>x.MainModule),canActivate:[AuthGuard]
+    loadChildren:() =>import('./main/main.module').then(x=>x.MainModule)
   },
 
 ];
