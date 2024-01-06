@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
-import { SpeedDialItemModel } from '@syncfusion/ej2-angular-buttons';
 import { ApiService } from 'src/app/api.service';
 import * as xls from 'xlsx'
 
@@ -108,7 +107,7 @@ export class WorkorderDataComponent {
   }
   
   uniqueid(){
-    const uniqueWorkOrderNumbers = Array.from(new Set(this.users.map((order:any) => order.orderNo.toUpperCase())));
+    const uniqueWorkOrderNumbers = Array.from(new Set(this.users.map((order:any) => order.orderNo)));
 
     uniqueWorkOrderNumbers.sort();
 
@@ -118,7 +117,7 @@ export class WorkorderDataComponent {
     });
 
     this.users.forEach((order:any) => {
-      order.WOno = workOrderNumberToIndex[order.orderNo.toUpperCase()].toString().padStart(3, '0');
+      order.WOno = workOrderNumberToIndex[order.orderNo].toString().padStart(3, '0');
     });
   }
 

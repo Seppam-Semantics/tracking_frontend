@@ -43,13 +43,6 @@ import { BundleEntry1Component } from './Transaction/Bundle Entry/bundle-entry-1
 import { BundleEntry2Component } from './Transaction/Bundle Entry/bundle-entry-2/bundle-entry-2.component';
 import { BundleEntry3Component } from './Transaction/Bundle Entry/bundle-entry-3/bundle-entry-3.component';
 import { FabricRoll1Component } from './Transaction/Fabric Roll/fabric-roll-1/fabric-roll-1.component';
-import { FabricRoll2Component } from './Transaction/Fabric Roll/fabric-roll-2/fabric-roll-2.component';
-import { FabricRoll3Component } from './Transaction/Fabric Roll/fabric-roll-3/fabric-roll-3.component';
-import { FabricRoll4Component } from './Transaction/Fabric Roll/fabric-roll-4/fabric-roll-4.component';
-import { FabricRoll5Component } from './Transaction/Fabric Roll/fabric-roll-5/fabric-roll-5.component';
-import { FabricRoll6Component } from './Transaction/Fabric Roll/fabric-roll-6/fabric-roll-6.component';
-import { FabricRoll7Component } from './Transaction/Fabric Roll/fabric-roll-7/fabric-roll-7.component';
-
 
 @NgModule({
   declarations: [
@@ -73,12 +66,7 @@ import { FabricRoll7Component } from './Transaction/Fabric Roll/fabric-roll-7/fa
     BundleEntry2Component,
     BundleEntry3Component,
     FabricRoll1Component,
-    FabricRoll2Component,
-    FabricRoll3Component,
-    FabricRoll4Component,
-    FabricRoll5Component,
-    FabricRoll6Component,
-    FabricRoll7Component,
+
     
         
   ],

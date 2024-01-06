@@ -11,7 +11,18 @@ import * as xls from 'xlsx'
 export class FabricRollDataComponent implements OnInit {
 
   fabricdetails:any
-  ordernumber:any
+  ordernumber:any;
+  buyers:any;
+  buyerName:any;
+  order:any;
+  ordernumbers:any;
+  stylelist:any;
+  styleslist:any;
+  colorlist:any;
+  colorslist:any;
+  sizelist:any;
+  sizeslist:any;
+  workorderhide:boolean = true;
 
   fabricfrom =  new FormGroup({
   'WOno': new FormControl(Validators.required),
@@ -21,14 +32,10 @@ export class FabricRollDataComponent implements OnInit {
   constructor(private api:ApiService){}
 
   ngOnInit(): void {
+this.getbuyers();
 this.getworkorderdetails()
   }
 
-  public getworkorderdetails() {
-    this.api.getworkorderdetails().subscribe((res) => {
-      this.ordernumber = res.workorders
-    })
-  }
 
   displayedColumns: string[] = ['WONo', 'RollNo', 'FabBarcode', 'FabBatchno', 'FirstrollWeightKGS', 'FirstrollWeightDATE',
     'GriegeFabKGS', 'GriegeFabDATE', 'DyeBatchingKGS', 'DyeBatchingDATE',
@@ -67,7 +74,94 @@ this.getworkorderdetails()
     })
   }
 
+  ngAfterContentChecked() {
+    this.cdref.detectChanges();
+  }
 
+  public getworkorderdetails() {
+    this.api.getworkorderdetails().subscribe((res) => {
+      this.ordernumber = res.workorders
+    })
+  }
+
+  public getbuyers() {
+    this.api.getbuyers().subscribe((res) => {
+      this.buyers = res.buyers;
+    })
+  }
+  getorders(buyer: any) {
+    this.api.getorders(buyer).subscribe((res) => {
+      this.order = res.orders
+    })
+  }
+
+  getstyle(buyer: any, order: any) {
+    this.api.getstyle(buyer, order).subscribe((res) => {
+      this.stylelist = res.styles;
+    })
+  }
+
+  getcolor(buyer: any, order: any, style: any) {
+    this.api.getcolor(buyer, order, style).subscribe((res) => {
+      this.colorlist = res.colors;
+    })
+  }
+
+  getsize(buyer: any, order: any, style: any, color: any) {
+    this.api.getsize(buyer, order, style, color).subscribe((res) => {
+      this.sizelist = res.sizes;
+    })
+  }
+
+
+  
+onSelectionChange() {
+      if (this.workorderId) {
+        this.resetform();
+        this.loadworkorderdetails(this.workorderId);
+      }
+      if(this.buyerName){
+       
+        this.getorders(this.buyerName)
+      }
+      if(this.buyerName && this.ordernumbers){
+       
+        this.getstyle(this.buyerName, this.ordernumbers)
+      }
+      if(this.buyerName && this.ordernumbers && this.styleslist){
+       
+        this.getcolor(this.buyerName, this.ordernumbers, this.styleslist)
+      }
+      if(this.buyerName && this.ordernumbers && this.styleslist && this.colorslist){
+       
+        this.getsize(this.buyerName, this.ordernumbers, this.styleslist, this.colorslist)
+      }
+      if(this.buyerName && this.ordernumbers && this.styleslist && this.colorslist && this.sizeslist){
+        this.resetform();
+        this.loadworkorder(this.buyerName, this.ordernumbers, this.styleslist, this.colorslist, this.sizeslist)
+        this.workorderhide = false;
+      }
+  }
+
+  loadworkorderdetails(WOno: any){
+    const proftoken = 'Bearer '+ sessionStorage.getItem('token')  
+    const headers = new HttpHeaders().set('x-access-token', proftoken);
+    this.http.get<any>(`${this.api.apiUrl}/fabricrollapi/fabric-entrys?id=${WOno}&entry=1`, { headers }).subscribe((res)=>{
+      this.fabdetails = res.workorder
+      this.rollnnumber = res.fabricRolls;
+      console.log(this.rollnnumber);
+    })
+  }
+
+loadworkorder(buyer:any, order:any, style:any, color:any, size:any){
+  const proftoken = 'Bearer '+ sessionStorage.getItem('token')  
+    const headers = new HttpHeaders().set('x-access-token', proftoken);
+    this.http.get<any>(`${this.api.apiUrl}/fabricrollapi/fabric-entrys?id=&entry=1&buyer=${buyer}&orderNo=${order}&style=${style}&color=${color}&size=${size}`, { headers }).subscribe((res)=>{
+      this.fabdetails = res.workorder
+      this.rollnnumber = res.fabricRolls
+      this.workorderId = this.rollnnumber[0].workorderId;
+    })
+}
 }
 
 
