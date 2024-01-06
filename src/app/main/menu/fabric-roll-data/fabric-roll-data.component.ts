@@ -73,8 +73,8 @@ this.getworkorderdetails()
   }
 
   loaddetails(){
-    const id = this.fabricfrom.get('WOno')?.value;
-    const entry = this.fabricfrom.get('WOLineno')?.value;
+    const id = this.workorderId
+    const entry = 1
     this.api.getfabricdetails(id, entry).subscribe((res)=>{ 
       this.fabricdetails = res.fabricRolls
       this.dataSource = this.fabricdetails
@@ -165,6 +165,7 @@ loadworkorder(buyer:any, order:any, style:any, color:any, size:any){
       this.fabdetails = res.workorder
       this.rollnnumber = res.fabricRolls
       this.workorderId = this.rollnnumber[0].workorderId;
+      console.log(this.fabdetails)
     })
 }
 }

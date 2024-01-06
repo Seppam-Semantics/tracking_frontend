@@ -47,7 +47,7 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
         <mat-nav-list>
-          <a mat-list-item (click)="workorder()" [routerLink]="'WorkorderData'">
+          <a mat-list-item (click)="workorder()" [routerLink]="'WorkorderData'" (click)="snav.toggle()">
             <div class="text">
               Work Order
             </div>
@@ -55,7 +55,7 @@
         </mat-nav-list>
 
         <mat-nav-list>
-          <a mat-list-item [routerLink]="'FabricRollData'">
+          <a mat-list-item [routerLink]="'FabricRollData'" (click)="snav.toggle()">
             <div class="text">
               Fabric Rolls
             </div>
@@ -63,7 +63,7 @@
         </mat-nav-list>
 
         <mat-nav-list>
-          <a mat-list-item [routerLink]="'GarmentBundles'">
+          <a mat-list-item [routerLink]="'GarmentBundles'" (click)="snav.toggle()">
             <div class="text">
               Garment bundles
             </div>
@@ -81,7 +81,7 @@
 
         <mat-nav-list>
 
-          <a mat-list-item [routerLink]="'fabricroll1'">
+          <a mat-list-item [routerLink]="'fabricroll1'" (click)="snav.toggle()">
             <div class="text">
               Fabric Roll Entry
             </div>

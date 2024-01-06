@@ -1,5 +1,16 @@
 <cdk-accordion class="example-accordion">
-  <cdk-accordion-item #accordionItem="cdkAccordionItem" class="example-accordion-item" role="button" tabindex="0">
+  <cdk-accordion-item #accordionItem="cdkAccordionItem" class="example-accordion-item" role="button" tabindex="0" style="display: flex; flex-direction: column;">
+
+    <div style="display: flex; justify-content: center; margin-left: 2%;">
+    <mat-form-field appearance="outline" *ngIf="workorderhide" style="width: 250px;">
+      <mat-label>Work Order</mat-label>
+      <mat-select [(ngModel)]="workorderId" (selectionChange)="onSelectionChange()" (click)="resetform()">
+        <mat-option value=""> </mat-option>
+        <mat-option value="{{order.id}}" *ngFor="let order of this.WoNumber">{{order.workorderCode}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    </div>
+
 
     <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
 
@@ -42,15 +53,6 @@
           <mat-option *ngFor="let size of this.sizelist" value="{{size.size}}">{{size.size}}</mat-option>
         </mat-select>
       </mat-form-field>
-
-      <mat-form-field appearance="outline" *ngIf="workorderhide" style="width: 105px;">
-        <mat-label>Work Order</mat-label>
-        <mat-select [(ngModel)]="workorderId" (selectionChange)="onSelectionChange()" (click)="resetform()">
-          <mat-option value=""> </mat-option>
-          <mat-option value="{{order.id}}" *ngFor="let order of this.WoNumber">{{order.workorderCode}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-
     </div>
   </cdk-accordion-item>
 </cdk-accordion>
@@ -59,7 +61,7 @@
 
 
 <cdk-accordion class="example-accordion">
-  <cdk-accordion-item #accordionItem5="cdkAccordionItem" class="example-accordion-item" role="button" tabindex="0" style="border: unset;">
+  <cdk-accordion-item #accordionItem5="cdkAccordionItem" class="example-accordion-item" role="button" tabindex="0">
 
     <div class="example-accordion-item-header" (click)="accordionItem5.toggle()"
       style="display: flex; justify-content: center; " (click)="show = !show">
