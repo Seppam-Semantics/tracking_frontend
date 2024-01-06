@@ -10,17 +10,17 @@
 <cdk-accordion class="example-accordion">
   <cdk-accordion-item #accordionItem="cdkAccordionItem" class="example-accordion-item" role="button" tabindex="0" style="display: flex; flex-direction: column; justify-content: center;">
 
-<div style="display: flex; justify-content: center;">
+<div style="display: flex; justify-content: center;margin-bottom: 1%;">
   <mat-form-field appearance="outline" *ngIf="workorderhide" style="width: 300px;;">
     <mat-label>Work Order</mat-label>
     <mat-select [(ngModel)]="workorderId" (selectionChange)="onSelectionChange()">
       <mat-option value=""> </mat-option>
-      <mat-option value="{{order.id}}" *ngFor="let order of this.WoNumber">{{order.workorderCode}}</mat-option>
+      <mat-option value="{{order.id}}" *ngFor="let order of this.ordernumber">{{order.workorderCode}}</mat-option>
     </mat-select>
   </mat-form-field>
 </div>
 
-    <div class="example-accordion-item-header" (click)="accordionItem.toggle()" style="display: flex; justify-content: center; gap: 0.5%;">
+    <div class="example-accordion-item-header" (click)="accordionItem.toggle()" style="display: flex; justify-content: center; gap: 0.5%; margin-bottom: 1%;">
 
       <mat-form-field appearance="outline"  style="width: 105px;">
         <mat-label>Buyer</mat-label>
