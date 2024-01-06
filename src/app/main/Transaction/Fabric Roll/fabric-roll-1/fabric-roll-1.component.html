@@ -62,6 +62,7 @@
 
 <cdk-accordion class="example-accordion">
   <cdk-accordion-item #accordionItem5="cdkAccordionItem" class="example-accordion-item" role="button" tabindex="0">
+  <cdk-accordion-item #accordionItem5="cdkAccordionItem" class="example-accordion-item" role="button" tabindex="0">
 
     <div class="example-accordion-item-header" (click)="accordionItem5.toggle()"
       style="display: flex; justify-content: center; " (click)="show = !show">
@@ -141,7 +142,7 @@
 
             <ng-container matColumnDef="Cum" sticky>
               <th mat-header-cell *matHeaderCellDef>Roll no</th>
-              <td mat-cell *matCellDef="let element">
+              <td mat-cell *matCellDef="let element" style="display: flex; justify-content: center;">
                 <div formArrayName="entrys">
                   <div class="entrydata" *ngFor="let item of items.controls; let i = index" [formGroupName]="i"
                     style="display: flex;">
@@ -165,7 +166,7 @@
             <ng-container matColumnDef="CumWt">
               <th mat-header-cell *matHeaderCellDef>Roll.Wt</th>
               <td mat-cell *matCellDef="let element">
-                <div formArrayName="entrys">
+                <div formArrayName="entrys" style="display: flex; justify-content: center;">
                   <div *ngFor="let item of items.controls; let i = index" [formGroupName]="i" class="entrydata">
                     <div style="display: flex;">
                       <mat-form-field appearance="outline" class="full-width" style="width: 100px;">
@@ -332,7 +333,7 @@
 
               <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Roll.Wt</th>
               <td mat-cell *matCellDef="let element" style="padding: 0%;">
-                <div formArrayName="entrysthree">
+                <div formArrayName="entrysthree" style="display: flex; justify-content: center;">
                   <div *ngFor="let item of items3.controls; let i = index" [formGroupName]="i" class="entrydata">
                     <div style="display: flex;">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
@@ -350,7 +351,7 @@
 
               <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Greige.Wt</th>
               <td mat-cell *matCellDef="let element" style="padding: 0%;">
-                <div formArrayName="entrysthree">
+                <div formArrayName="entrysthree" style="display: flex; justify-content: center;">
                   <div *ngFor="let item of items3.controls; let i = index" [formGroupName]="i" class="entrydata">
                     <div style="display: flex;">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
@@ -368,7 +369,7 @@
 
               <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Dye.Wt</th>
               <td mat-cell *matCellDef="let element" style="padding: 0%;">
-                <div formArrayName="entrysthree">
+                <div formArrayName="entrysthree" style="display: flex; justify-content: center;">
                   <div *ngFor="let item of items3.controls; let b = index" [formGroupName]="b" class="entrydata">
                     <div style="display: flex;">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
@@ -450,7 +451,7 @@
 
               <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Roll Wt</th>
               <td mat-cell *matCellDef="let element" style="padding: 0%;">
-                <div formArrayName="entrysfour">
+                <div formArrayName="entrysfour" style="display: flex; justify-content: center;">
                   <div *ngFor="let item of items4.controls; let c = index" [formGroupName]="c" class="entrydata">
                     <div style="display: flex;">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
@@ -468,7 +469,7 @@
 
               <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Greige.Wt</th>
               <td mat-cell *matCellDef="let element" style="padding: 0%;">
-                <div formArrayName="entrysfour">
+                <div formArrayName="entrysfour" style="display: flex; justify-content: center;">
                   <div *ngFor="let item of items4.controls; let c = index" [formGroupName]="c" class="entrydata">
                     <div style="display: flex;">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
@@ -486,7 +487,7 @@
 
               <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Dye.Wt</th>
               <td mat-cell *matCellDef="let element" style="padding: 0%;">
-                <div formArrayName="entrysfour">
+                <div formArrayName="entrysfour" style="display: flex; justify-content: center;">
                   <div *ngFor="let item of items4.controls; let c = index" [formGroupName]="c" class="entrydata">
                     <div style="display: flex;">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
@@ -504,7 +505,7 @@
 
               <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Fin.Wt</th>
               <td mat-cell *matCellDef="let element" style="padding: 0%;">
-                <div formArrayName="entrysfour">
+                <div formArrayName="entrysfour" style="display: flex; justify-content: center;">
                   <div *ngFor="let item of items4.controls; let c = index" [formGroupName]="c" class="entrydata">
                     <div style="display: flex;">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
@@ -581,7 +582,7 @@
             <ng-container matColumnDef="greigeWt">
               <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Greige.Wt</th>
               <td mat-cell *matCellDef="let element" style="padding: 0%;">
-                <div formArrayName="entrysfive">
+                <div formArrayName="entrysfive" style="display: flex; justify-content: center;">
                   <div *ngFor="let item of items5.controls; let d = index" [formGroupName]="d" class="entrydata">
                     <div style="display: flex;">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
@@ -598,7 +599,7 @@
             <ng-container matColumnDef="delWt">
               <th mat-header-cell *matHeaderCellDef style="padding: 0%;">del.Wt</th>
               <td mat-cell *matCellDef="let element" style="padding: 0%;">
-                <div formArrayName="entrysfive">
+                <div formArrayName="entrysfive" style="display: flex; justify-content: center;">
                   <div *ngFor="let item of items5.controls; let d = index" [formGroupName]="d" class="entrydata">
                     <div style="display: flex;">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
@@ -615,7 +616,7 @@
             <ng-container matColumnDef="difference">
               <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Difference</th>
               <td mat-cell *matCellDef="let element" style="padding: 0%;">
-                <div formArrayName="entrysfive">
+                <div formArrayName="entrysfive" style="display: flex; justify-content: center;">
                   <div *ngFor="let item of items5.controls; let d = index" [formGroupName]="d" class="entrydata">
                     <div style="display: flex;">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
@@ -632,7 +633,7 @@
             <ng-container matColumnDef="reason">
               <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Reason</th>
               <td mat-cell *matCellDef="let element" style="padding: 0%;">
-                <div formArrayName="entrysfive">
+                <div formArrayName="entrysfive" style="display: flex; justify-content: center;">
                   <div *ngFor="let item of items5.controls; let d = index" [formGroupName]="d" class="entrydata">
                     <div style="display: flex;">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
@@ -709,7 +710,7 @@
 
             <ng-container matColumnDef="delWt">
               <th mat-header-cell *matHeaderCellDef>Greige.Wt</th>
-              <td mat-cell *matCellDef="let element">
+              <td mat-cell *matCellDef="let element" style="display: flex; justify-content: center;">
                 <div formArrayName="entryssix">
                   <div *ngFor="let item of items6.controls; let f = index" [formGroupName]="f" class="entrydata">
                     <div style="display: flex;">
@@ -727,7 +728,7 @@
             <ng-container matColumnDef="PlanPcs">
               <th mat-header-cell *matHeaderCellDef>planPcs</th>
               <td mat-cell *matCellDef="let element">
-                <div formArrayName="entryssix">
+                <div formArrayName="entryssix" style="display: flex; justify-content: center;">
                   <div *ngFor="let item of items6.controls; let f = index" [formGroupName]="f" class="entrydata">
                     <div style="display: flex;">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
