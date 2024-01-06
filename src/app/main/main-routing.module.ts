@@ -26,29 +26,29 @@ import { AuthGuard } from '../auth.guard';
 const routes: Routes = [
   {path:'', component: AppComponent},
   
-  { path: 'FabricRollData', component: FabricRollDataComponent,canActivate:[AuthGuard] },
-  { path: 'WorkorderData', component: WorkorderDataComponent,canActivate:[AuthGuard] },
-  { path: 'GarmentBundles' , component: GarmentBundlesComponent ,canActivate:[AuthGuard]},
+  { path: 'FabricRollData', component: FabricRollDataComponent},
+  { path: 'WorkorderData', component: WorkorderDataComponent },
+  { path: 'GarmentBundles' , component: GarmentBundlesComponent },
 
-  { path: 'RolesProfileRoot', component:RolesProfileRootComponent ,canActivate:[AuthGuard]},
-  { path:'welcome' , component:WelcomeComponent ,canActivate:[AuthGuard]},
+  { path: 'RolesProfileRoot', component:RolesProfileRootComponent },
+  { path:'welcome' , component:WelcomeComponent},
   
-  { path: 'profile' , component: ProfilesComponent ,canActivate:[AuthGuard]},
-  { path: 'addprofile' , component:AddProfilesComponent ,canActivate:[AuthGuard]},
-  { path: 'updateprofile' , component:EditProfileComponent,canActivate:[AuthGuard]},
-  {path: 'viewemployees', component:ViewEmployeesComponent,canActivate:[AuthGuard]},
+  { path: 'profile' , component: ProfilesComponent },
+  { path: 'addprofile' , component:AddProfilesComponent},
+  { path: 'updateprofile' , component:EditProfileComponent},
+  {path: 'viewemployees', component:ViewEmployeesComponent},
 
-  {path:'fabricroll1',component:FabricRoll1Component,canActivate:[AuthGuard]},
-  {path:'fabricroll2',component:FabricRoll2Component ,canActivate:[AuthGuard]},
-  {path:'fabricroll3',component:FabricRoll3Component,canActivate:[AuthGuard]},
-  {path:'fabricroll4',component:FabricRoll4Component,canActivate:[AuthGuard]},
-  {path:'fabricroll5',component:FabricRoll5Component,canActivate:[AuthGuard]},
-  {path:'fabricroll6',component:FabricRoll6Component,canActivate:[AuthGuard]},
-  {path:'fabricroll7',component:FabricRoll7Component,canActivate:[AuthGuard]},
+  {path:'fabricroll1',component:FabricRoll1Component},
+  {path:'fabricroll2',component:FabricRoll2Component},
+  {path:'fabricroll3',component:FabricRoll3Component},
+  {path:'fabricroll4',component:FabricRoll4Component},
+  {path:'fabricroll5',component:FabricRoll5Component},
+  {path:'fabricroll6',component:FabricRoll6Component},
+  {path:'fabricroll7',component:FabricRoll7Component},
 
-  {path:'bundleentry1',component:BundleEntry1Component,canActivate:[AuthGuard]},
-  {path:'bundleentry2',component:BundleEntry2Component,canActivate:[AuthGuard]},
-  {path:'bundleentry3',component:BundleEntry3Component,canActivate:[AuthGuard]},
+  {path:'bundleentry1',component:BundleEntry1Component},
+  {path:'bundleentry2',component:BundleEntry2Component},
+  {path:'bundleentry3',component:BundleEntry3Component},
 ];
 
 @NgModule({
