@@ -52,10 +52,15 @@ export class WorkorderDataComponent {
   }
   workordersubmit() {
     this.api.postworkorder(this.dataSource).subscribe((res)=>{
-      alert(res.message)
+      if(res.success){
+        alert("Your work order details have been saved....!!!!")
+        window.location.reload(); 
+      }
+      else{
+        alert("Error while saving...!!!")
+      }
     })
-    window.location.reload();
-
+       
   }
 
   readexcelfile() {

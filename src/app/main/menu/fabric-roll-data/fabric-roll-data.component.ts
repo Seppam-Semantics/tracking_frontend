@@ -39,8 +39,8 @@ export class FabricRollDataComponent implements OnInit {
               private cdref: ChangeDetectorRef){}
 
   ngOnInit(): void {
-this.getbuyers();
-this.getworkorderdetails()
+        this.getbuyers();
+        this.getworkorderdetails()
   }
 
 
@@ -94,6 +94,7 @@ this.getworkorderdetails()
   public getbuyers() {
     this.api.getbuyers().subscribe((res) => {
       this.buyers = res.buyers;
+      console.log(res)
     })
   }
   getorders(buyer: any) {
