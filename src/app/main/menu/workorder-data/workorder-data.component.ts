@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from 'src/app/api.service';
 import * as xls from 'xlsx'
+import { LoginComponent } from 'src/app/login/login.component';
 
 @Component({
   selector: 'app-workorder-data',
@@ -11,10 +12,11 @@ import * as xls from 'xlsx'
 })
 export class WorkorderDataComponent {
 
+  loadingspinner:boolean=false;
   orderNo: any;
   id?: string;
 
-  constructor(private api: ApiService) {
+  constructor(private api: ApiService ) {
 
   }
 
@@ -51,6 +53,7 @@ export class WorkorderDataComponent {
     this.file = e.target.files[0]
   }
   workordersubmit() {
+    this.loadingspinner=true
     this.api.postworkorder(this.dataSource).subscribe((res)=>{
       if(res.success){
         alert("Your work order details have been saved....!!!!")
