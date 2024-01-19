@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from 'src/app/api.service';
 import * as xls from 'xlsx'
 import { LoginComponent } from 'src/app/login/login.component';
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-workorder-data',
@@ -16,7 +17,7 @@ export class WorkorderDataComponent {
   orderNo: any;
   id?: string;
 
-  constructor(private api: ApiService ) {
+  constructor(private api: ApiService ,  private spinner: NgxSpinnerService) {
 
   }
 
@@ -49,11 +50,20 @@ export class WorkorderDataComponent {
   users: any;
   file: any;
 
+  // Use in app
+  @NgModule({
+    imports: [
+      NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
+    ]
+  })
+
+
   readfile(e: any) {
     this.file = e.target.files[0]
   }
   workordersubmit() {
-    this.loadingspinner=true
+    // this.loadingspinner=true
+    this.spinner.show();
     this.api.postworkorder(this.dataSource).subscribe((res)=>{
       if(res.success){
         alert("Your work order details have been saved....!!!!")
@@ -153,4 +163,7 @@ export interface PeriodicElement {
   YarnQty: any;
   NoofRolls: any;
   PrintStatus: any;
+}
+interface NgxSpinnerConfig {
+  type?: string;
 }

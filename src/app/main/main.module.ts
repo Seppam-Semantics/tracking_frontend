@@ -25,6 +25,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 import { RolesProfileRootComponent } from './masters/Roles and profiles/roles/roles-profile-root/roles-profile-root.component';
 import { RolesComponent } from './masters/Roles and profiles/roles/roles.component';
@@ -67,6 +68,7 @@ import { FabricRoll1Component } from './Transaction/Fabric Roll/fabric-roll-1/fa
     BundleEntry3Component,
     FabricRoll1Component,
 
+
     
         
   ],
@@ -94,7 +96,8 @@ import { FabricRoll1Component } from './Transaction/Fabric Roll/fabric-roll-1/fa
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    NgxSpinnerModule,
 
   ]
 })

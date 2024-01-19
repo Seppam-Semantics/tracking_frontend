@@ -11,18 +11,18 @@
   <cdk-accordion-item #accordionItem="cdkAccordionItem" class="example-accordion-item" role="button" tabindex="0" style="display: flex; flex-direction: column; justify-content: center;">
 
 <div style="display: flex; justify-content: center;margin-bottom: 1%;">
-  <mat-form-field appearance="outline" *ngIf="workorderhide" style="width: 300px;;">
+  <!-- <mat-form-field appearance="outline" *ngIf="workorderhide" style="width: 300px;;">
     <mat-label>Work Order</mat-label>
     <mat-select [(ngModel)]="workorderId" (selectionChange)="onSelectionChange()">
       <mat-option value=""> </mat-option>
       <mat-option value="{{order.id}}" *ngFor="let order of this.ordernumber">{{order.workorderCode}}</mat-option>
     </mat-select>
-  </mat-form-field>
+  </mat-form-field> -->
 </div>
 
     <div class="example-accordion-item-header" (click)="accordionItem.toggle()" style="display: flex; justify-content: center; gap: 0.5%; margin-bottom: 1%;">
 
-      <mat-form-field appearance="outline"  style="width: 105px;">
+      <mat-form-field appearance="outline"  style="width: 105px;" (click)="fabricrolltableclick()">
         <mat-label>Buyer</mat-label>
         <mat-select [(ngModel)]="buyerName" (selectionChange)="onSelectionChange()">
           <mat-option value=""> </mat-option>
@@ -30,7 +30,7 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" style="width: 105px;">
+      <mat-form-field appearance="outline" style="width: 105px;" (click)="workordertableclick()">
         <mat-label>Order</mat-label>
         <mat-select [(ngModel)]="ordernumbers" (selectionChange)="onSelectionChange()">
           <mat-option value=""> </mat-option>
@@ -38,7 +38,7 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" style="width: 105px;">
+      <mat-form-field appearance="outline" style="width: 105px;" (click)="workordertableclick()">
         <mat-label>Style</mat-label>
         <mat-select [(ngModel)]="styleslist" (selectionChange)="onSelectionChange()">
           <mat-option value=""> </mat-option>
@@ -46,7 +46,7 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" style="width: 105px;">
+      <mat-form-field appearance="outline" style="width: 105px;" (click)="workordertableclick()">
         <mat-label>color</mat-label>
         <mat-select [(ngModel)]="colorslist" (selectionChange)="onSelectionChange()">
           <mat-option value=""> </mat-option>
@@ -54,7 +54,7 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" style="width: 105px;">
+      <mat-form-field appearance="outline" style="width: 105px;" (click)="workordertableclick()">
         <mat-label>Size</mat-label>
         <mat-select [(ngModel)]="sizeslist" (selectionChange)="onSelectionChange()">
           <mat-option value=""> </mat-option>
@@ -68,7 +68,10 @@
 </cdk-accordion>
 <div style="display: flex; flex-direction: column;">
 
-<div class="table-container">
+
+  <!----------------------------------Fabric Roll Table-------------------------------------------------->
+<div *ngIf="fabricrolltable">
+  <div class="table-container">
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="border: 1px solid black;">
   
     <ng-container matColumnDef="WONo">
@@ -273,4 +276,131 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
   </div>
+</div>
+  <!----------------------------------Fabric Roll Table [---[Ends]---]-------------------------------------------------->
+<!----------------------------------WorkOrder Table-------------------------------------------------->
+<div *ngIf="workordertable">
+<div class="table-container">
+  <table mat-table [dataSource]="dataSource2" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="Sl.no">
+      <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> WO no </th>
+      <td mat-cell *matCellDef="let element"> {{element.WOno}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="WOLineno" >
+      <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> WO Line no</th>
+      <td mat-cell *matCellDef="let element"> {{element.WOLineno}} </td>
+
+    </ng-container>
+
+    <ng-container matColumnDef="buyer">
+      <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;">Buyer</th>
+      <td mat-cell *matCellDef="let element"> {{element.buyer}} </td>
+      <td mat-cell *matCellDef="let element"> 3 </td>
+    </ng-container>
+
+    <ng-container matColumnDef="orderNo">
+      <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Order </th>
+      <td mat-cell *matCellDef="let element"> {{element.orderNo }} </td>
+      <td mat-cell *matCellDef="let element"> 4 </td>
+    </ng-container>
+
+    <ng-container matColumnDef="style">
+      <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Style </th>
+      <td mat-cell *matCellDef="let element"> {{element.style }} </td>
+      <td mat-cell *matCellDef="let element"> 5 </td>
+    </ng-container>
+
+    <ng-container matColumnDef="color">
+      <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Color </th>
+      <td mat-cell *matCellDef="let element"> {{element.color }} </td>
+      <td mat-cell *matCellDef="let element"> 6 </td>
+    </ng-container>
+
+    <ng-container matColumnDef="size">
+      <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Size </th>
+      <td mat-cell *matCellDef="let element"> {{element.size }} </td>
+      <td mat-cell *matCellDef="let element"> 7 </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fabType">
+      <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Fab Type </th>
+      <td mat-cell *matCellDef="let element"> {{element.fabType }} </td>
+      <td mat-cell *matCellDef="let element"> 45 </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fabDia">
+      <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Fab Dia </th>
+      <td mat-cell *matCellDef="let element"> {{element.fabDia }} </td>
+      <td mat-cell *matCellDef="let element"> 9 </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fabGsm">
+      <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Fab GSM </th>
+      <td mat-cell *matCellDef="let element"> {{element.fabGsm }} </td>
+      <td mat-cell *matCellDef="let element"> 0 </td>
+    </ng-container>
+
+    <ng-container matColumnDef="greigeKg">
+      <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> GreigeKgs </th>
+      <td mat-cell *matCellDef="let element"> {{element.greigeKg }} </td>
+      <td mat-cell *matCellDef="let element">100 </td>
+    </ng-container>
+    <!-- Yarn Quantity -->
+    <ng-container matColumnDef="finishKg">
+      <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Finish Kgs </th>
+      <td mat-cell *matCellDef="let element"> {{element.finishedKg }} </td>
+      <td mat-cell *matCellDef="let element">100 </td>
+    </ng-container>
+
+    <ng-container matColumnDef="knitSL">
+      <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Knit SL </th>
+      <td mat-cell *matCellDef="let element"> {{element.knitSL }} </td>
+      <td mat-cell *matCellDef="let element">100 </td>
+    </ng-container>
+
+    <ng-container matColumnDef="spinFty">
+      <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Spin Fty </th>
+      <td mat-cell *matCellDef="let element"> {{element.spinFty }} </td>
+      <td mat-cell *matCellDef="let element">100 </td>
+    </ng-container>
+
+    <ng-container matColumnDef="knitFty">
+      <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Knit Fty </th>
+      <td mat-cell *matCellDef="let element"> {{element.knitFty }} </td>
+      <td mat-cell *matCellDef="let element">100 </td>
+    </ng-container>
+
+    <ng-container matColumnDef="dyeingFty">
+      <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Dyeing Fty </th>
+      <td mat-cell *matCellDef="let element"> {{element.dyeingFty }} </td>
+      <td mat-cell *matCellDef="let element">100 </td>
+    </ng-container>
+
+    <ng-container matColumnDef="yarnQty">
+      <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> yarnQty </th>
+      <td mat-cell *matCellDef="let element"> {{element.yarnQty }} </td>
+      <td mat-cell *matCellDef="let element">100 </td>
+    </ng-container>
+
+    <ng-container matColumnDef="noRolls">
+      <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> No of Rolls </th>
+      <td mat-cell *matCellDef="let element"> {{element.noRolls }} </td>
+      <td mat-cell *matCellDef="let element">100 </td>
+    </ng-container>
+
+    <ng-container matColumnDef="PrintStatus">
+      <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Print Status </th>
+      <td mat-cell *matCellDef="let element"> {{element.PrintStatus }} </td>
+      <td mat-cell *matCellDef="let element">100 </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns2; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+</div>
+  <!----------------------------------WorkOrder Table [---[Ends]---]-------------------------------------------------->
+
 </div>

@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { flush } from '@angular/core/testing';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/api.service';
 import * as xls from 'xlsx'
@@ -34,6 +35,20 @@ export class FabricRollDataComponent implements OnInit {
   'WOLineno': new FormControl('0')
 })
 
+fabricrolltable:boolean=true;
+workordertable:boolean=false;
+
+fabricrolltableclick(){
+  this.fabricrolltable =false;
+  this.workordertable=true;
+}
+
+workordertableclick(){
+  this.fabricrolltable =true;
+  this.workordertable=false;
+}
+
+
   constructor(private api: ApiService, 
               private http: HttpClient,
               private cdref: ChangeDetectorRef){}
@@ -50,7 +65,12 @@ export class FabricRollDataComponent implements OnInit {
     'PlanCutPanelsDATE', 'ActualCutPanelsKGS', 'ActualCutPanelsDATE', 'PcsperBundle', 'PlannedBundles', 'ActualBundles', 'PrintStatus'
   ];
 
+  displayedColumns2: string[] = ['Sl.no', 'buyer', 'orderNo', 'style', 'color', 'size', 'fabType',
+    'fabDia', 'fabGsm', 'greigeKg', 'finishKg', 'knitSL', 'spinFty', 'knitFty', 'dyeingFty', 'yarnQty', 'noRolls', 'PrintStatus'
+  ];
+ 
   dataSource = ELEMENT_DATA;
+  dataSource2=ELEMENT_DATA;
   users: any;
 
   readexcelfile(e: any) {
