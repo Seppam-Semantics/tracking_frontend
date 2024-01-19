@@ -1,7 +1,7 @@
 <cdk-accordion class="example-accordion">
   <cdk-accordion-item #accordionItem="cdkAccordionItem" class="example-accordion-item" role="button" tabindex="0" style="display: flex; flex-direction: column;">
 
-    <div style="display: flex; justify-content: center; margin-left: 2%; margin-top: 1%;">
+    <!-- <div style="display: flex; justify-content: center; margin-left: 2%; margin-top: 1%;">
     <mat-form-field appearance="outline" *ngIf="workorderhide" style="width: 250px;">
       <mat-label>Work Order</mat-label>
       <mat-select [(ngModel)]="workorderId" (selectionChange)="onSelectionChange()" (click)="resetform()">
@@ -9,7 +9,7 @@
         <mat-option value="{{order.id}}" *ngFor="let order of this.WoNumber">{{order.workorderCode}}</mat-option>
       </mat-select>
     </mat-form-field>
-    </div>
+    </div> -->
 
 
     <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
@@ -129,7 +129,7 @@
 
   <!--================================== Fab Entry 1 ==============================================================================-->
 
-  <mat-tab-group>
+  <mat-tab-group (selectedTabChange)="changetab($event)">
     <mat-tab label="First Roll Weight" style="overflow: hidden;">
       <div [formGroup]="form" style="overflow: hidden;">
 
@@ -757,9 +757,8 @@
 
     <!--======================== Fab Entry 7 ===========================================================================-->
 
-    <mat-tab label="Actual Cut panels Entry">
+    <mat-tab label="Actual Cut panels Entry" >
       <div [formGroup]="form7" style="overflow: hidden;">
-        
         <div style="display: flex; justify-content: center;">
           <button mat-raised-button color="primary" type="submit" (click)="submit7()"
             style="margin-top: 3%;">Save</button>

@@ -10,7 +10,7 @@ export class ApiService {
 
 constructor(private http: HttpClient) { }
 
-  apiUrl = "http://3.110.34.8:2000";
+  apiUrl = "https://tracker.seppam.com";
 
   token: any;
   profilenames: any;
