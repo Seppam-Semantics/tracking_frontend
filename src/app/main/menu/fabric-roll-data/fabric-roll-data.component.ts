@@ -114,7 +114,6 @@ workordertableclick(){
   public getbuyers() {
     this.api.getbuyers().subscribe((res) => {
       this.buyers = res.buyers;
-      console.log(res)
     })
   }
   getorders(buyer: any) {
@@ -175,7 +174,6 @@ onSelectionChange() {
     this.http.get<any>(`${this.api.apiUrl}/fabricrollapi/fabric-entrys?id=${WOno}&entry=1`, { headers }).subscribe((res)=>{
       this.fabdetails = res.workorder
       this.rollnnumber = res.fabricRolls;
-      console.log(this.rollnnumber);
     })
   }
 

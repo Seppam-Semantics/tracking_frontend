@@ -107,10 +107,10 @@ export class FabricRoll1Component implements OnInit {
 
   
 onSelectionChange() {
-      if (this.workorderId) {
-        this.resetform();
-        this.loadworkorderdetails(this.workorderId);
-      }
+      // if (this.workorderId) {
+      //   this.resetform();
+      //   this.loadworkorderdetails(this.workorderId);
+      // }
       if(this.buyerName){
        
         this.getorders(this.buyerName)
@@ -134,34 +134,124 @@ onSelectionChange() {
       }
   }
 
-  loadworkorderdetails(WOno: any){
-    const proftoken = 'Bearer '+ sessionStorage.getItem('token')  
-    const headers = new HttpHeaders().set('x-access-token', proftoken);
-    this.http.get<any>(`${this.api.apiUrl}/fabricrollapi/fabric-entrys?id=${WOno}&entry=1`, { headers }).subscribe((res)=>{
-      this.fabdetails = res.workorder
-      this.rollnnumber = res.fabricRolls;
-      console.log(this.rollnnumber);
+
+
+
+  // loadworkorderdetails(WOno: any){
+  //   const proftoken = 'Bearer '+ sessionStorage.getItem('token')  
+  //   const headers = new HttpHeaders().set('x-access-token', proftoken);
+  //   this.http.get<any>(`${this.api.apiUrl}/fabricrollapi/fabric-entrys?id=${WOno}&entry=1`, { headers }).subscribe((res)=>{
+  //     this.fabdetails = res.workorder
+  //     this.rollnnumber = res.fabricRolls;
+  //     console.log(this.rollnnumber);
+  //     this.numbers = []
+  //       for(let noOfRolls of this.rollnnumber){
+  //       this.numbers.push(noOfRolls.rollNo)
+  //       this.fabcode.push(noOfRolls.fabBarcode)
+  //       this.entry1.push(noOfRolls.entry_1)
+  //       this.entry2.push(noOfRolls.entry_2)
+  //       this.entry3.push(noOfRolls.entry_3)
+  //       this.entry4.push(noOfRolls.entry_4)
+  //       this.entry5.push(noOfRolls.entry_5)
+  //       this.entry6.push(noOfRolls.entry_6)
+  //       }
+  //       this.numbers.forEach((value)=>{
+  //         this.add(value);
+  //         this.add2(value);
+  //         this.add3(value);
+  //         this.add4(value);
+  //         this.add5(value);
+  //         this.add6(value);
+  //         this.add7(value);
+  //       })
+  //   })
+  // }
+
+  fabrollweight(){
       this.numbers = []
-        for(let noOfRolls of this.rollnnumber){
-        this.numbers.push(noOfRolls.rollNo)
-        this.fabcode.push(noOfRolls.fabBarcode)
-        this.entry1.push(noOfRolls.entry_1)
-        this.entry2.push(noOfRolls.entry_2)
-        this.entry3.push(noOfRolls.entry_3)
-        this.entry4.push(noOfRolls.entry_4)
-        this.entry5.push(noOfRolls.entry_5)
-        this.entry6.push(noOfRolls.entry_6)
-        }
-        this.numbers.forEach((value)=>{
-          this.add(value);
-          this.add2(value);
-          this.add3(value);
-          this.add4(value);
-          this.add5(value);
-          this.add6(value);
-          this.add7(value);
-        })
-    })
+      for(let noOfRolls of this.rollnnumber){
+      this.numbers.push(noOfRolls.rollNo)
+      this.fabcode.push(noOfRolls.fabBarcode)
+      }
+      this.numbers.forEach((value)=>{
+        this.add(value);
+      })
+  }
+
+  greigefabDElEntry(){ 
+    this.numbers = [];
+      for(let noOfRolls of this.rollnnumber){
+      this.numbers.push(noOfRolls.rollNo)
+      this.fabcode.push(noOfRolls.fabBarcode)
+      this.entry1.push(noOfRolls.entry_1)
+      }
+      this.numbers.forEach((value)=>{
+        this.add2(value);
+      })
+  }
+
+  dyeBatchEntry(){
+      this.numbers = []
+      for(let noOfRolls of this.rollnnumber){
+      this.numbers.push(noOfRolls.rollNo)
+      this.fabcode.push(noOfRolls.fabBarcode)
+      this.entry1.push(noOfRolls.entry_1)
+      this.entry2.push(noOfRolls.entry_2)
+      }
+      this.numbers.forEach((value)=>{
+        this.add3(value);
+      })
+  }
+
+  dyeFinishEntry(){
+      this.numbers = []
+      for(let noOfRolls of this.rollnnumber){
+      this.numbers.push(noOfRolls.rollNo)
+      this.fabcode.push(noOfRolls.fabBarcode)
+      this.entry1.push(noOfRolls.entry_1)
+      this.entry2.push(noOfRolls.entry_2)
+      this.entry3.push(noOfRolls.entry_3)
+      }
+      this.numbers.forEach((value)=>{
+        this.add4(value);
+      })
+  }
+
+  dyedFabDelEntry(){
+      this.numbers = []
+      for(let noOfRolls of this.rollnnumber){
+      this.numbers.push(noOfRolls.rollNo)
+      this.fabcode.push(noOfRolls.fabBarcode)
+      this.entry2.push(noOfRolls.entry_2)
+      this.entry4.push(noOfRolls.entry_4)
+      }
+      this.numbers.forEach((value)=>{
+        this.add5(value);
+      })
+  }
+
+  warehouseToCut(){
+      this.numbers = []
+      for(let noOfRolls of this.rollnnumber){
+      this.numbers.push(noOfRolls.rollNo)
+      this.fabcode.push(noOfRolls.fabBarcode)
+      this.entry2.push(noOfRolls.entry_2)
+      }
+      this.numbers.forEach((value)=>{
+        this.add6(value);
+      })
+  }
+
+  actualCutPanelEntry(){
+      for(let noOfRolls of this.rollnnumber){
+      this.numbers.push(noOfRolls.rollNo)
+      this.fabcode.push(noOfRolls.fabBarcode)
+      this.entry2.push(noOfRolls.entry_2)
+      this.entry6.push(noOfRolls.entry_6)
+      }
+      this.numbers.forEach((value)=>{
+        this.add7(value);
+      })
   }
 
 loadworkorder(buyer:any, order:any, style:any, color:any, size:any){
@@ -171,29 +261,59 @@ loadworkorder(buyer:any, order:any, style:any, color:any, size:any){
       this.fabdetails = res.workorder
       this.rollnnumber = res.fabricRolls
       this.workorderId = this.rollnnumber[0].workorderId;
-      console.log(this.rollnnumber);
       this.numbers = []
         for(let noOfRolls of this.rollnnumber){
         this.numbers.push(noOfRolls.rollNo)
         this.fabcode.push(noOfRolls.fabBarcode)
-        this.entry1.push(noOfRolls.entry_1)
-        this.entry2.push(noOfRolls.entry_2)
-        this.entry3.push(noOfRolls.entry_3)
-        this.entry4.push(noOfRolls.entry_4)
-        this.entry5.push(noOfRolls.entry_5)
-        this.entry6.push(noOfRolls.entry_6)
         }
         this.numbers.forEach((value)=>{
           this.add(value);
-          this.add2(value);
-          this.add3(value);
-          this.add4(value);
-          this.add5(value);
-          this.add6(value);
-          this.add7(value);
         })
     })
 }
+
+
+  changetab(event: any) {
+    if (event.tab.textLabel == 'First Roll Weight') {
+      this.resetform();
+      setTimeout(() => {
+        this.fabrollweight();
+      }, 1000)
+    }
+
+    if (event.tab.textLabel == 'Greige Fab Del Entry') {
+      this.resetform();
+      setTimeout(() => {
+        this.greigefabDElEntry();
+      }, 1000)
+    }
+    if (event.tab.textLabel == 'Dye Batch Entry') {
+      setTimeout(() => {
+        this.dyeBatchEntry();
+      }, 1000)
+    }
+    if (event.tab.textLabel == 'Dye Finish Entry') {
+      setTimeout(() => {
+        this.dyeFinishEntry();
+      }, 1000)
+    }
+    if (event.tab.textLabel == 'Dyed Fab Del Entry') {
+      setTimeout(() => {
+        this.dyedFabDelEntry();
+      }, 1000)
+    }
+    if (event.tab.textLabel == 'Transfer from warehouse to Cut') {
+      setTimeout(() => {
+        this.warehouseToCut();
+      }, 1000)
+    }
+    if (event.tab.textLabel == 'Actual Cut panels Entry') {
+      setTimeout(() => {
+        this.actualCutPanelEntry();
+      }, 1000);
+    }
+  }
+
 
 
   resetform(){

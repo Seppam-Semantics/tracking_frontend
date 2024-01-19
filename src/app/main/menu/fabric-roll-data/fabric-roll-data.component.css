@@ -12,3 +12,7 @@ th{
 td{
     border:1px solid black;
 }
+mat-option{
+    font-size:smaller;
+  }
+  
