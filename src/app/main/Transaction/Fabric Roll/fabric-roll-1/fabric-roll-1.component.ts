@@ -168,18 +168,35 @@ onSelectionChange() {
   // }
 
   fabrollweight(){
+    this.resetform();
+    const proftoken = 'Bearer '+ sessionStorage.getItem('token')  
+    const headers = new HttpHeaders().set('x-access-token', proftoken);
+    this.http.get<any>(`${this.api.apiUrl}/fabricrollapi/fabric-entrys?id=&entry=1&buyer=${this.buyerName}&orderNo=${this.ordernumbers}&style=${this.styleslist}&color=${this.colorslist}&size=${this.sizeslist}`, { headers }).subscribe((res)=>{
+      this.fabdetails = res.workorder
+      this.rollnnumber = res.fabricRolls
+      this.workorderId = this.rollnnumber[0].workorderId;
       this.numbers = []
       for(let noOfRolls of this.rollnnumber){
       this.numbers.push(noOfRolls.rollNo)
       this.fabcode.push(noOfRolls.fabBarcode)
+      this.entry1.push(noOfRolls.entry_1)
       }
       this.numbers.forEach((value)=>{
         this.add(value);
       })
+    })
   }
 
-  greigefabDElEntry(){ 
-    this.numbers = [];
+  greigefabDElEntry(){
+    this.resetform();
+    this.entry1 = [];
+    const proftoken = 'Bearer '+ sessionStorage.getItem('token')  
+    const headers = new HttpHeaders().set('x-access-token', proftoken);
+    this.http.get<any>(`${this.api.apiUrl}/fabricrollapi/fabric-entrys?id=&entry=1&buyer=${this.buyerName}&orderNo=${this.ordernumbers}&style=${this.styleslist}&color=${this.colorslist}&size=${this.sizeslist}`, { headers }).subscribe((res)=>{
+      this.fabdetails = res.workorder
+      this.rollnnumber = res.fabricRolls
+      this.workorderId = this.rollnnumber[0].workorderId;
+      this.numbers = []
       for(let noOfRolls of this.rollnnumber){
       this.numbers.push(noOfRolls.rollNo)
       this.fabcode.push(noOfRolls.fabBarcode)
@@ -188,9 +205,17 @@ onSelectionChange() {
       this.numbers.forEach((value)=>{
         this.add2(value);
       })
+    })
   }
 
   dyeBatchEntry(){
+    this.resetform();
+    const proftoken = 'Bearer '+ sessionStorage.getItem('token')  
+    const headers = new HttpHeaders().set('x-access-token', proftoken);
+    this.http.get<any>(`${this.api.apiUrl}/fabricrollapi/fabric-entrys?id=&entry=1&buyer=${this.buyerName}&orderNo=${this.ordernumbers}&style=${this.styleslist}&color=${this.colorslist}&size=${this.sizeslist}`, { headers }).subscribe((res)=>{
+      this.fabdetails = res.workorder
+      this.rollnnumber = res.fabricRolls
+      this.workorderId = this.rollnnumber[0].workorderId;
       this.numbers = []
       for(let noOfRolls of this.rollnnumber){
       this.numbers.push(noOfRolls.rollNo)
@@ -201,9 +226,17 @@ onSelectionChange() {
       this.numbers.forEach((value)=>{
         this.add3(value);
       })
+    })
   }
 
   dyeFinishEntry(){
+    this.resetform();
+    const proftoken = 'Bearer '+ sessionStorage.getItem('token')  
+    const headers = new HttpHeaders().set('x-access-token', proftoken);
+    this.http.get<any>(`${this.api.apiUrl}/fabricrollapi/fabric-entrys?id=&entry=1&buyer=${this.buyerName}&orderNo=${this.ordernumbers}&style=${this.styleslist}&color=${this.colorslist}&size=${this.sizeslist}`, { headers }).subscribe((res)=>{
+      this.fabdetails = res.workorder
+      this.rollnnumber = res.fabricRolls
+      this.workorderId = this.rollnnumber[0].workorderId;
       this.numbers = []
       for(let noOfRolls of this.rollnnumber){
       this.numbers.push(noOfRolls.rollNo)
@@ -215,9 +248,17 @@ onSelectionChange() {
       this.numbers.forEach((value)=>{
         this.add4(value);
       })
+    })
   }
 
   dyedFabDelEntry(){
+    this.resetform();
+    const proftoken = 'Bearer '+ sessionStorage.getItem('token')  
+    const headers = new HttpHeaders().set('x-access-token', proftoken);
+    this.http.get<any>(`${this.api.apiUrl}/fabricrollapi/fabric-entrys?id=&entry=1&buyer=${this.buyerName}&orderNo=${this.ordernumbers}&style=${this.styleslist}&color=${this.colorslist}&size=${this.sizeslist}`, { headers }).subscribe((res)=>{
+      this.fabdetails = res.workorder
+      this.rollnnumber = res.fabricRolls
+      this.workorderId = this.rollnnumber[0].workorderId;
       this.numbers = []
       for(let noOfRolls of this.rollnnumber){
       this.numbers.push(noOfRolls.rollNo)
@@ -228,9 +269,17 @@ onSelectionChange() {
       this.numbers.forEach((value)=>{
         this.add5(value);
       })
+    })
   }
 
   warehouseToCut(){
+    this.resetform();
+    const proftoken = 'Bearer '+ sessionStorage.getItem('token')  
+    const headers = new HttpHeaders().set('x-access-token', proftoken);
+    this.http.get<any>(`${this.api.apiUrl}/fabricrollapi/fabric-entrys?id=&entry=1&buyer=${this.buyerName}&orderNo=${this.ordernumbers}&style=${this.styleslist}&color=${this.colorslist}&size=${this.sizeslist}`, { headers }).subscribe((res)=>{
+      this.fabdetails = res.workorder
+      this.rollnnumber = res.fabricRolls
+      this.workorderId = this.rollnnumber[0].workorderId;
       this.numbers = []
       for(let noOfRolls of this.rollnnumber){
       this.numbers.push(noOfRolls.rollNo)
@@ -240,9 +289,18 @@ onSelectionChange() {
       this.numbers.forEach((value)=>{
         this.add6(value);
       })
+    })
   }
 
   actualCutPanelEntry(){
+    this.resetform();
+    const proftoken = 'Bearer '+ sessionStorage.getItem('token')  
+    const headers = new HttpHeaders().set('x-access-token', proftoken);
+    this.http.get<any>(`${this.api.apiUrl}/fabricrollapi/fabric-entrys?id=&entry=1&buyer=${this.buyerName}&orderNo=${this.ordernumbers}&style=${this.styleslist}&color=${this.colorslist}&size=${this.sizeslist}`, { headers }).subscribe((res)=>{
+      this.fabdetails = res.workorder
+      this.rollnnumber = res.fabricRolls
+      this.workorderId = this.rollnnumber[0].workorderId;
+      this.numbers = []
       for(let noOfRolls of this.rollnnumber){
       this.numbers.push(noOfRolls.rollNo)
       this.fabcode.push(noOfRolls.fabBarcode)
@@ -252,6 +310,7 @@ onSelectionChange() {
       this.numbers.forEach((value)=>{
         this.add7(value);
       })
+    })
   }
 
 loadworkorder(buyer:any, order:any, style:any, color:any, size:any){
@@ -265,6 +324,7 @@ loadworkorder(buyer:any, order:any, style:any, color:any, size:any){
         for(let noOfRolls of this.rollnnumber){
         this.numbers.push(noOfRolls.rollNo)
         this.fabcode.push(noOfRolls.fabBarcode)
+        this.entry1.push(noOfRolls.entry_1)
         }
         this.numbers.forEach((value)=>{
           this.add(value);
@@ -364,11 +424,14 @@ add(defaultRollNo?:any){
   const defaultRollIndex = this.items.length % this.fabcode.length;
   const fabcodenumber = this.fabcode[defaultRollIndex];
 
+  const length1 = this.items.length % this.entry1.length;
+    const entry01 = this.entry1[length1];
+
   this.items.push(
     this.fb.group({
       rollNo:[defaultRollNo || ''],
       fabBarcode:[fabcodenumber || ''],
-      entry_1:['']
+      entry_1:[entry01 || '']
     })
   )
 }
@@ -399,12 +462,11 @@ delete2(index: number) {
 }
 
   add2(defaultValues?: any) {
-    const defaultRollIndex = this.items.length % this.fabcode.length;
+    const defaultRollIndex = this.items2.length % this.fabcode.length;
     const fabcodenumber = this.fabcode[defaultRollIndex];
-
-    const length1 = this.items.length % this.entry1.length;
+    
+    const length1 = this.items2.length % this.entry1.length;
     const entry01 = this.entry1[length1];
-
 
     const formGrouptwo = this.fb.group({
       rollNo: [defaultValues || ''],
@@ -441,13 +503,13 @@ delete3(index: number) {
   }
 
   add3(defaultValues?: any) {
-    const defaultRollIndex = this.items.length % this.fabcode.length;
+    const defaultRollIndex = this.items3.length % this.fabcode.length;
     const fabcodenumber = this.fabcode[defaultRollIndex];
 
-    const length1 = this.items.length % this.entry1.length;
+    const length1 = this.items3.length % this.entry1.length;
     const entry01 = this.entry1[length1];
 
-    const length2 = this.items.length % this.entry2.length;
+    const length2 = this.items3.length % this.entry2.length;
     const entry02 = this.entry2[length2];
     
     const formGroupthree = this.fb.group({
@@ -457,8 +519,9 @@ delete3(index: number) {
       entry002:[entry02 || ''],
       entry_3: [defaultValues?.entry_2 || '']
     });
-
     this.items3.push(formGroupthree);
+
+
   }
 submit3(){
   this.entry1form = this.fb.group({
@@ -487,16 +550,16 @@ delete4(index: number) {
   }
 
   add4(defaultValues?: any) {
-    const defaultRollIndex = this.items.length % this.fabcode.length;
+    const defaultRollIndex = this.items4.length % this.fabcode.length;
     const fabcodenumber = this.fabcode[defaultRollIndex];
 
-    const length1 = this.items.length % this.entry1.length;
+    const length1 = this.items4.length % this.entry1.length;
     const entry01 = this.entry1[length1];
 
-    const length2 = this.items.length % this.entry2.length;
+    const length2 = this.items4.length % this.entry2.length;
     const entry02 = this.entry2[length2];
 
-    const length3 = this.items.length % this.entry3.length;
+    const length3 = this.items4.length % this.entry3.length;
     const entry03 = this.entry3[length3];
 
     const formGroupthree = this.fb.group({
@@ -538,13 +601,13 @@ delete5(index: number) {
   }
 
   add5(defaultValues?: any) {
-    const defaultRollIndex = this.items.length % this.fabcode.length;
+    const defaultRollIndex = this.items5.length % this.fabcode.length;
     const fabcodenumber = this.fabcode[defaultRollIndex];
 
-    const length2 = this.items.length % this.entry2.length;
+    const length2 = this.items5.length % this.entry2.length;
     const entry02 = this.entry2[length2];
 
-    const length4 = this.items.length % this.entry4.length;
+    const length4 = this.items5.length % this.entry4.length;
     const entry04 = this.entry4[length4];
 
     const formGroupfour = this.fb.group({
@@ -584,10 +647,10 @@ delete6(index: number) {
   }
 
   add6(defaultValues?: any) {
-    const defaultRollIndex = this.items.length % this.fabcode.length;
+    const defaultRollIndex = this.items6.length % this.fabcode.length;
     const fabcodenumber = this.fabcode[defaultRollIndex];
 
-    const length2 = this.items.length % this.entry2.length;
+    const length2 = this.items6.length % this.entry2.length;
     const entry02 = this.entry2[length2];
 
     const formGroupfour = this.fb.group({
@@ -625,13 +688,13 @@ delete7(index: number) {
   }
 
   add7(defaultValues?: any) {
-    const defaultRollIndex = this.items.length % this.fabcode.length;
+    const defaultRollIndex = this.items7.length % this.fabcode.length;
     const fabcodenumber = this.fabcode[defaultRollIndex];
 
-    const length2 = this.items.length % this.entry2.length;
+    const length2 = this.items7.length % this.entry2.length;
     const entry02 = this.entry2[length2];
 
-    const length6 = this.items.length % this.entry6.length;
+    const length6 = this.items7.length % this.entry6.length;
     const entry06 = this.entry6[length6];
 
     const formGroupfour = this.fb.group({

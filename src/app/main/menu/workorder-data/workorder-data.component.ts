@@ -3,8 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from 'src/app/api.service';
 import * as xls from 'xlsx'
-import { LoginComponent } from 'src/app/login/login.component';
-import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-workorder-data',
@@ -50,19 +49,11 @@ export class WorkorderDataComponent {
   users: any;
   file: any;
 
-  // Use in app
-  @NgModule({
-    imports: [
-      NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
-    ]
-  })
-
 
   readfile(e: any) {
     this.file = e.target.files[0]
   }
   workordersubmit() {
-    // this.loadingspinner=true
     this.spinner.show();
     this.api.postworkorder(this.dataSource).subscribe((res)=>{
       if(res.success){
@@ -113,9 +104,7 @@ export class WorkorderDataComponent {
 
 
   assignUniqueIDs(): void {
-
     const uniqueOrderNumbers = [...new Set(this.users.map((order: any) => order.orderNo))];
-
     uniqueOrderNumbers.forEach(orderNumber => {
     const ordersWithSameNumber = this.users.filter((wr: { orderNo: any; }) => wr.orderNo == orderNumber);
     ordersWithSameNumber.forEach((wo: any, index: any) => {
@@ -126,9 +115,7 @@ export class WorkorderDataComponent {
   
   uniqueid(){
     const uniqueWorkOrderNumbers = Array.from(new Set(this.users.map((order:any) => order.orderNo)));
-
     uniqueWorkOrderNumbers.sort();
-
     const workOrderNumberToIndex: { [key: string]: number } = {};
     uniqueWorkOrderNumbers.forEach((workOrderNumber:any, index:any) => {
       workOrderNumberToIndex[workOrderNumber] = index + 1;
@@ -138,7 +125,6 @@ export class WorkorderDataComponent {
       order.WOno = workOrderNumberToIndex[order.orderNo].toString().padStart(3, '0');
     });
   }
-
 }
 
 

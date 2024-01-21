@@ -25,7 +25,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import { NgxSpinnerModule } from "ngx-spinner";
+
 
 import { RolesProfileRootComponent } from './masters/Roles and profiles/roles/roles-profile-root/roles-profile-root.component';
 import { RolesComponent } from './masters/Roles and profiles/roles/roles.component';
@@ -44,6 +44,7 @@ import { BundleEntry1Component } from './Transaction/Bundle Entry/bundle-entry-1
 import { BundleEntry2Component } from './Transaction/Bundle Entry/bundle-entry-2/bundle-entry-2.component';
 import { BundleEntry3Component } from './Transaction/Bundle Entry/bundle-entry-3/bundle-entry-3.component';
 import { FabricRoll1Component } from './Transaction/Fabric Roll/fabric-roll-1/fabric-roll-1.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -97,8 +98,7 @@ import { FabricRoll1Component } from './Transaction/Fabric Roll/fabric-roll-1/fa
     FormsModule,
     HttpClientModule,
     MatAutocompleteModule,
-    NgxSpinnerModule,
-
+    NgxSpinnerModule.forRoot({type: 'ball-scale-multiple'})
   ]
 })
 export class MainModule { }

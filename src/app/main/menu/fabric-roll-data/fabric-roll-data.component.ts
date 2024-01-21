@@ -1,7 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { flush } from '@angular/core/testing';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/api.service';
 import * as xls from 'xlsx'
 
@@ -30,11 +28,6 @@ export class FabricRollDataComponent implements OnInit {
   fabdetails:any;
   rollnnumber:any;
 
-  fabricfrom =  new FormGroup({
-  'WOno': new FormControl(Validators.required),
-  'WOLineno': new FormControl('0')
-})
-
 fabricrolltable:boolean=true;
 workordertable:boolean=false;
 
@@ -59,7 +52,7 @@ workordertableclick(){
   }
 
 
-  displayedColumns: string[] = ['WONo', 'RollNo', 'FabBarcode', 'FabBatchno', 'FirstrollWeightKGS', 'FirstrollWeightDATE',
+  displayedColumns: string[] = ['RollNo', 'FabBarcode', 'FabBatchno', 'FirstrollWeightKGS', 'FirstrollWeightDATE',
     'GriegeFabKGS', 'GriegeFabDATE', 'DyeBatchingKGS', 'DyeBatchingDATE',
     'DyeFinishKGS', 'DyeFinishDATE', 'DeliverytoGarmenthKGS', 'DeliverytoGarmenthDATE', 'PlanCutPanelsKGS',
     'PlanCutPanelsDATE', 'ActualCutPanelsKGS', 'ActualCutPanelsDATE', 'PcsperBundle', 'PlannedBundles', 'ActualBundles', 'PrintStatus'
@@ -143,11 +136,10 @@ workordertableclick(){
 
   
 onSelectionChange() {
-      if (this.workorderId) {
-        this.loadworkorderdetails(this.workorderId);
-      }
+      // if (this.workorderId) {
+      //   this.loadworkorderdetails(this.workorderId);
+      // }
       if(this.buyerName){
-       
         this.getorders(this.buyerName)
       }
       if(this.buyerName && this.ordernumbers){
@@ -168,14 +160,14 @@ onSelectionChange() {
       }
   }
 
-  loadworkorderdetails(WOno: any){
-    const proftoken = 'Bearer '+ sessionStorage.getItem('token')  
-    const headers = new HttpHeaders().set('x-access-token', proftoken);
-    this.http.get<any>(`${this.api.apiUrl}/fabricrollapi/fabric-entrys?id=${WOno}&entry=1`, { headers }).subscribe((res)=>{
-      this.fabdetails = res.workorder
-      this.rollnnumber = res.fabricRolls;
-    })
-  }
+  // loadworkorderdetails(WOno: any){
+  //   const proftoken = 'Bearer '+ sessionStorage.getItem('token')  
+  //   const headers = new HttpHeaders().set('x-access-token', proftoken);
+  //   this.http.get<any>(`${this.api.apiUrl}/fabricrollapi/fabric-entrys?id=${WOno}&entry=1`, { headers }).subscribe((res)=>{
+  //     this.fabdetails = res.workorder
+  //     this.rollnnumber = res.fabricRolls;
+  //   })
+  // }
 
 loadworkorder(buyer:any, order:any, style:any, color:any, size:any){
   const proftoken = 'Bearer '+ sessionStorage.getItem('token')  
@@ -193,7 +185,6 @@ loadworkorder(buyer:any, order:any, style:any, color:any, size:any){
 
 export interface PeriodicElement {
 
-  WONo: number;
   RollNo: number;
   FabBarcode: number;
   FabBatchno: number;

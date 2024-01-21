@@ -1,6 +1,3 @@
-<!-- <div class="container m-5">
-  <input type="file" class="form-control w-50" (change)="readexcelfile($event)">
-</div> -->
 
 <mat-toolbar color="primary">
   <mat-toolbar-row style="display: flex; justify-content: center;">
@@ -10,19 +7,9 @@
 <cdk-accordion class="example-accordion">
   <cdk-accordion-item #accordionItem="cdkAccordionItem" class="example-accordion-item" role="button" tabindex="0" style="display: flex; flex-direction: column; justify-content: center;">
 
-<div style="display: flex; justify-content: center;margin-bottom: 1%;">
-  <!-- <mat-form-field appearance="outline" *ngIf="workorderhide" style="width: 300px;;">
-    <mat-label>Work Order</mat-label>
-    <mat-select [(ngModel)]="workorderId" (selectionChange)="onSelectionChange()">
-      <mat-option value=""> </mat-option>
-      <mat-option value="{{order.id}}" *ngFor="let order of this.ordernumber">{{order.workorderCode}}</mat-option>
-    </mat-select>
-  </mat-form-field> -->
-</div>
-
     <div class="example-accordion-item-header" (click)="accordionItem.toggle()" style="display: flex; justify-content: center; gap: 0.5%; margin-bottom: 1%;">
 
-      <mat-form-field appearance="outline"  style="width: 105px;" (click)="fabricrolltableclick()">
+      <mat-form-field appearance="outline"  style="width: 105px;"   >
         <mat-label>Buyer</mat-label>
         <mat-select [(ngModel)]="buyerName" (selectionChange)="onSelectionChange()">
           <mat-option value=""> </mat-option>
@@ -271,7 +258,7 @@
   
   
   
-    <tr mat-header-row *matHeaderRowDef="['1','2','3','5','6','7','8','9','10','11','12','13']"></tr>
+    <tr mat-header-row *matHeaderRowDef="['3','5','6','7','8','9','10','11','12','13']"></tr>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
@@ -397,7 +384,7 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns2; sticky: true"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
   </table>
 </div>
 </div>
