@@ -54,6 +54,14 @@ export class FabricRoll1Component implements OnInit {
   entry4:any[] = [];
   entry5:any[] = [];
   entry6:any[] = [];
+  entry7:any[] = [];
+  loading1: boolean = false;
+  loading2: boolean = false;
+  loading3: boolean = false;
+  loading4: boolean = false;
+  loading5: boolean = false;
+  loading6: boolean = false;
+  loading7: boolean = false;
 
   constructor(private fb: FormBuilder, private api: ApiService, private http: HttpClient,
     private cdref: ChangeDetectorRef) {
@@ -134,39 +142,6 @@ onSelectionChange() {
       }
   }
 
-
-
-
-  // loadworkorderdetails(WOno: any){
-  //   const proftoken = 'Bearer '+ sessionStorage.getItem('token')  
-  //   const headers = new HttpHeaders().set('x-access-token', proftoken);
-  //   this.http.get<any>(`${this.api.apiUrl}/fabricrollapi/fabric-entrys?id=${WOno}&entry=1`, { headers }).subscribe((res)=>{
-  //     this.fabdetails = res.workorder
-  //     this.rollnnumber = res.fabricRolls;
-  //     console.log(this.rollnnumber);
-  //     this.numbers = []
-  //       for(let noOfRolls of this.rollnnumber){
-  //       this.numbers.push(noOfRolls.rollNo)
-  //       this.fabcode.push(noOfRolls.fabBarcode)
-  //       this.entry1.push(noOfRolls.entry_1)
-  //       this.entry2.push(noOfRolls.entry_2)
-  //       this.entry3.push(noOfRolls.entry_3)
-  //       this.entry4.push(noOfRolls.entry_4)
-  //       this.entry5.push(noOfRolls.entry_5)
-  //       this.entry6.push(noOfRolls.entry_6)
-  //       }
-  //       this.numbers.forEach((value)=>{
-  //         this.add(value);
-  //         this.add2(value);
-  //         this.add3(value);
-  //         this.add4(value);
-  //         this.add5(value);
-  //         this.add6(value);
-  //         this.add7(value);
-  //       })
-  //   })
-  // }
-
   fabrollweight(){
     this.resetform();
     const proftoken = 'Bearer '+ sessionStorage.getItem('token')  
@@ -189,18 +164,20 @@ onSelectionChange() {
 
   greigefabDElEntry(){
     this.resetform();
-    this.entry1 = [];
     const proftoken = 'Bearer '+ sessionStorage.getItem('token')  
     const headers = new HttpHeaders().set('x-access-token', proftoken);
     this.http.get<any>(`${this.api.apiUrl}/fabricrollapi/fabric-entrys?id=&entry=1&buyer=${this.buyerName}&orderNo=${this.ordernumbers}&style=${this.styleslist}&color=${this.colorslist}&size=${this.sizeslist}`, { headers }).subscribe((res)=>{
       this.fabdetails = res.workorder
       this.rollnnumber = res.fabricRolls
       this.workorderId = this.rollnnumber[0].workorderId;
-      this.numbers = []
+      this.numbers = [];
+      this.fabcode = [];
+      this.entry1 = [];
       for(let noOfRolls of this.rollnnumber){
       this.numbers.push(noOfRolls.rollNo)
       this.fabcode.push(noOfRolls.fabBarcode)
       this.entry1.push(noOfRolls.entry_1)
+      this.entry2.push(noOfRolls.entry_2)
       }
       this.numbers.forEach((value)=>{
         this.add2(value);
@@ -222,6 +199,7 @@ onSelectionChange() {
       this.fabcode.push(noOfRolls.fabBarcode)
       this.entry1.push(noOfRolls.entry_1)
       this.entry2.push(noOfRolls.entry_2)
+      this.entry3.push(noOfRolls.entry_3)
       }
       this.numbers.forEach((value)=>{
         this.add3(value);
@@ -244,6 +222,7 @@ onSelectionChange() {
       this.entry1.push(noOfRolls.entry_1)
       this.entry2.push(noOfRolls.entry_2)
       this.entry3.push(noOfRolls.entry_3)
+      this.entry4.push(noOfRolls.entry_4)
       }
       this.numbers.forEach((value)=>{
         this.add4(value);
@@ -265,6 +244,7 @@ onSelectionChange() {
       this.fabcode.push(noOfRolls.fabBarcode)
       this.entry2.push(noOfRolls.entry_2)
       this.entry4.push(noOfRolls.entry_4)
+      this.entry5.push(noOfRolls.entry_5)
       }
       this.numbers.forEach((value)=>{
         this.add5(value);
@@ -285,6 +265,7 @@ onSelectionChange() {
       this.numbers.push(noOfRolls.rollNo)
       this.fabcode.push(noOfRolls.fabBarcode)
       this.entry2.push(noOfRolls.entry_2)
+      this.entry6.push(noOfRolls.entry_6)
       }
       this.numbers.forEach((value)=>{
         this.add6(value);
@@ -306,6 +287,7 @@ onSelectionChange() {
       this.fabcode.push(noOfRolls.fabBarcode)
       this.entry2.push(noOfRolls.entry_2)
       this.entry6.push(noOfRolls.entry_6)
+      this.entry7.push(noOfRolls.entry_7)
       }
       this.numbers.forEach((value)=>{
         this.add7(value);
@@ -425,7 +407,7 @@ add(defaultRollNo?:any){
   const fabcodenumber = this.fabcode[defaultRollIndex];
 
   const length1 = this.items.length % this.entry1.length;
-    const entry01 = this.entry1[length1];
+  const entry01 = this.entry1[length1];
 
   this.items.push(
     this.fb.group({
@@ -437,13 +419,15 @@ add(defaultRollNo?:any){
 }
 
 submit(){
+  this.loading1 = true;
   this.entry1form = this.fb.group({
     "workorderId": this.workorderId,
     "entry": "1",
     "entrys":this.form.get('entrys') as FormArray
   })
   this.api.postfabricdetails(this.entry1form.value).subscribe((res)=>{
-    alert(res.message)
+    alert(res.message);
+    this.loading1 = false;
   })
 }
 
@@ -468,16 +452,20 @@ delete2(index: number) {
     const length1 = this.items2.length % this.entry1.length;
     const entry01 = this.entry1[length1];
 
+    const length2 = this.items2.length % this.entry2.length;
+    const entry02 = this.entry2[length2];
+
     const formGrouptwo = this.fb.group({
       rollNo: [defaultValues || ''],
       fabBarcode:[fabcodenumber || ''],
       entry001:[entry01 || ''],
-      entry_2: [defaultValues?.entry_2 || '']
+      entry_2: [entry02 || '']
     });
 
     this.items2.push(formGrouptwo);
   }
 submit2(){
+  this.loading2 = true;
   this.entry1form = this.fb.group({
     "workorderId": this.workorderId,
     "entry": "1",
@@ -485,6 +473,7 @@ submit2(){
   })
   this.api.postfabricdetails(this.entry1form.value).subscribe((res)=>{
     alert(res.message)
+    this.loading2 = false;
   })
 }
 
@@ -511,19 +500,23 @@ delete3(index: number) {
 
     const length2 = this.items3.length % this.entry2.length;
     const entry02 = this.entry2[length2];
+
+    const length3 = this.items3.length % this.entry3.length;
+    const entry03 = this.entry3[length3];
     
     const formGroupthree = this.fb.group({
       rollNo: [defaultValues || ''],
       fabBarcode:[fabcodenumber || ''],
       entry001:[entry01 || ''],
       entry002:[entry02 || ''],
-      entry_3: [defaultValues?.entry_2 || '']
+      entry_3: [entry03 || '']
     });
     this.items3.push(formGroupthree);
 
 
   }
 submit3(){
+  this.loading3 = true;
   this.entry1form = this.fb.group({
     "workorderId": this.workorderId,
     "entry": "1",
@@ -531,6 +524,7 @@ submit3(){
   })
   this.api.postfabricdetails(this.entry1form.value).subscribe((res)=>{
     alert(res.message)
+    this.loading3 = false;
   })
 }
 
@@ -562,18 +556,22 @@ delete4(index: number) {
     const length3 = this.items4.length % this.entry3.length;
     const entry03 = this.entry3[length3];
 
+    const length4 = this.items4.length % this.entry4.length;
+    const entry04 = this.entry4[length4];
+
     const formGroupthree = this.fb.group({
       rollNo: [defaultValues || ''],
       fabBarcode:[fabcodenumber || ''],
       entry001:[entry01 || ''],
       entry002:[entry02 || ''],
       entry003:[entry03 || ''],
-      entry_4: [defaultValues?.entry_4 || '']
+      entry_4: [entry04 || '']
     });
 
     this.items4.push(formGroupthree);
   }
 submit4(){
+  this.loading4 = true;
   this.entry1form = this.fb.group({
     "workorderId": this.workorderId,
     "entry": "1",
@@ -581,6 +579,7 @@ submit4(){
   })
   this.api.postfabricdetails(this.entry1form.value).subscribe((res)=>{
     alert(res.message)
+    this.loading4 = false;
   })
 }
 
@@ -610,17 +609,21 @@ delete5(index: number) {
     const length4 = this.items5.length % this.entry4.length;
     const entry04 = this.entry4[length4];
 
+    const length5 = this.items5.length % this.entry5.length;
+    const entry05 = this.entry5[length5];
+
     const formGroupfour = this.fb.group({
       rollNo: [defaultValues || ''],
       fabBarcode:[fabcodenumber || ''],
       entry002:[entry02 || ''],
       entry004:[entry04 || ''],
-      entry_5: [defaultValues?.entry_4 || '']
+      entry_5: [entry05 || '']
     });
 
     this.items5.push(formGroupfour);
   }
 submit5(){
+  this.loading5 = true;
   this.entry1form = this.fb.group({
     "workorderId": this.workorderId,
     "entry": "1",
@@ -629,6 +632,7 @@ submit5(){
   const proftoken = 'Bearer '+ sessionStorage.getItem('token')
   this.api.postfabricdetails(this.entry1form.value ).subscribe((res)=>{
     alert(res.message)
+    this.loading5 = false;
   })
 }
 
@@ -653,16 +657,20 @@ delete6(index: number) {
     const length2 = this.items6.length % this.entry2.length;
     const entry02 = this.entry2[length2];
 
+    const length6 = this.items6.length % this.entry6.length;
+    const entry06 = this.entry6[length6];
+
     const formGroupfour = this.fb.group({
       rollNo: [defaultValues || ''],
       fabBarcode:[fabcodenumber || ''],
       entry002:[entry02 || ''],
-      entry_6: [defaultValues?.entry_4 || '']
+      entry_6: [entry06 || '']
     });
 
     this.items6.push(formGroupfour);
   }
 submit6(){
+  this.loading6 = true;
   this.entry1form = this.fb.group({
     "workorderId": this.workorderId,
     "entry": "1",
@@ -670,6 +678,7 @@ submit6(){
   })
   this.api.postfabricdetails(this.entry1form.value).subscribe((res)=>{
     alert(res.message)
+    this.loading6 = false;
   })
 }
 
@@ -697,17 +706,21 @@ delete7(index: number) {
     const length6 = this.items7.length % this.entry6.length;
     const entry06 = this.entry6[length6];
 
+    const length7 = this.items7.length % this.entry7.length;
+    const entry07 = this.entry6[length7];
+
     const formGroupfour = this.fb.group({
       rollNo: [defaultValues || ''],
       fabBarcode:[fabcodenumber || ''],
       entry002:[entry02 || ''],
       entry006:[entry06 || ''],
-      entry_7: [defaultValues?.entry_7 || '']
+      entry_7: [entry07 || '']
     });
 
     this.items7.push(formGroupfour);
   }
 submit7(){
+  this.loading7 = true;
   this.entry1form = this.fb.group({
     "workorderId": this.workorderId,
     "entry": "1",
@@ -715,6 +728,7 @@ submit7(){
   })
   this.api.postfabricdetails(this.entry1form.value).subscribe((res)=>{
     alert(res.message)
+    this.loading7 = false;
   })
 }
 

@@ -132,10 +132,17 @@
     <mat-tab label="First Roll Weight" style="overflow: hidden;">
       <div [formGroup]="form" style="overflow: hidden;">
 
-        <div style="display: flex; justify-content: center;">
+        <div style="display: flex; justify-content: center;" *ngIf="!loading1">
           <button mat-raised-button color="primary" (click)="submit()"
             style="margin-top: 3%;">Save</button>
         </div>
+        <div style="display: flex; justify-content: center;" *ngIf="loading1">
+          <button mat-raised-button color="primary"
+            style="margin-top: 3%;"><div class="loader"></div></button>
+        </div>
+
+        
+
         <div class="table-container">
           <table mat-table [dataSource]="dataSource" class="demo-table">
 
@@ -203,11 +210,14 @@
       <div [formGroup]="form2" style="display: flex; flex-direction: column;">
 
 
-        <div style="display: flex; justify-content: center;">
+        <div style="display: flex; justify-content: center;" *ngIf="!loading2">
           <button mat-raised-button color="primary" (click)="submit2()"
             style="margin-top: 3%;">Save</button>
         </div>
-
+        <div style="display: flex; justify-content: center;" *ngIf="loading2">
+          <button mat-raised-button color="primary"
+            style="margin-top: 3%;"><div class="loader"></div></button>
+        </div>
 
         <div class="table-container">
           <table mat-table [dataSource]="dataSource2" class=" demo-table">
@@ -286,9 +296,13 @@
 
       <div [formGroup]="form3" style="display: flex; flex-direction: column;">
 
-        <div style="display: flex; justify-content: center;">
+        <div style="display: flex; justify-content: center;" *ngIf="!loading3">
           <button mat-raised-button color="primary" (click)="submit3()"
             style="margin-top: 3%;">Save</button>
+        </div>
+        <div style="display: flex; justify-content: center;" *ngIf="loading3">
+          <button mat-raised-button color="primary"
+            style="margin-top: 3%;"><div class="loader"></div></button>
         </div>
 
         <div class="table-container">
@@ -403,9 +417,13 @@
 
       <div [formGroup]="form4" style="overflow: hidden;">
         
-        <div style="display: flex; justify-content: center;">
+        <div style="display: flex; justify-content: center;" *ngIf="!loading4">
           <button mat-raised-button color="primary" (click)="submit4()"
             style="margin-top: 3%;">Save</button>
+        </div>
+        <div style="display: flex; justify-content: center;" *ngIf="loading4">
+          <button mat-raised-button color="primary"
+            style="margin-top: 3%;"><div class="loader"></div></button>
         </div>
         
         <div class="table-container">
@@ -540,9 +558,13 @@
     <mat-tab label="Dyed Fab Del Entry">
       <div [formGroup]="form5" style="overflow: hidden;">
         
-        <div style="display: flex; justify-content: center;">
+        <div style="display: flex; justify-content: center;" *ngIf="!loading5">
           <button mat-raised-button color="primary"  (click)="submit5()"
             style="margin-top: 3%;">Save</button>
+        </div>
+        <div style="display: flex; justify-content: center;" *ngIf="loading5">
+          <button mat-raised-button color="primary"
+            style="margin-top: 3%;"><div class="loader"></div></button>
         </div>
 
         <div class="table-container">
@@ -667,9 +689,13 @@
     <mat-tab label="Transfer from warehouse to Cut">
       <div [formGroup]="form6" style="overflow: hidden;">
 
-        <div style="display: flex; justify-content: center;">
+        <div style="display: flex; justify-content: center;" *ngIf="!loading6">
           <button mat-raised-button color="primary"  (click)="submit6()"
             style=" margin-top: 3%;">Save</button>
+        </div>
+        <div style="display: flex; justify-content: center;" *ngIf="loading6">
+          <button mat-raised-button color="primary"
+            style="margin-top: 3%;"><div class="loader"></div></button>
         </div>
 
         <div class="table-container">
@@ -760,9 +786,13 @@
 
     <mat-tab label="Actual Cut panels Entry" >
       <div [formGroup]="form7" style="overflow: hidden;">
-        <div style="display: flex; justify-content: center;">
+        <div style="display: flex; justify-content: center;" *ngIf="!loading7">
           <button mat-raised-button color="primary"  (click)="submit7()"
             style="margin-top: 3%;">Save</button>
+        </div>
+        <div style="display: flex; justify-content: center;" *ngIf="loading7">
+          <button mat-raised-button color="primary"
+            style="margin-top: 3%;"><div class="loader"></div></button>
         </div>
 
         <div class="table-container">
