@@ -57,7 +57,7 @@ constructor(private http: HttpClient) { }
   }
 
   getworkorderdetails(): Observable<any> {
-    return this.http.get(this.getUrl() + `/filtersapi/workorders`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/workorderapi/workorders-filter`, this.getHeaders())
   }
 
   postworkorder(data: any): Observable<any> {

@@ -46,6 +46,7 @@ import { BundleEntry3Component } from './Transaction/Bundle Entry/bundle-entry-3
 import { FabricRoll1Component } from './Transaction/Fabric Roll/fabric-roll-1/fabric-roll-1.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
+
 @NgModule({
   declarations: [
     MainComponent,
@@ -68,10 +69,6 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     BundleEntry2Component,
     BundleEntry3Component,
     FabricRoll1Component,
-
-
-    
-        
   ],
   imports: [
     CommonModule,
