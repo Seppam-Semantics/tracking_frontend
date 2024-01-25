@@ -92,5 +92,10 @@ constructor(private http: HttpClient) { }
     return this.http.get(this.getUrl() + `/filtersapi/colors-sizes?buyer=${buyer}&orderNo=${order}&style=${style}&color=${color}`, this.getHeaders())
   }
 
+  getwodetails(buyer: any, orderNo: any, style: any, color: any):Observable<any>{
+    return this.http.get(this.getUrl() + `/workorderapi/workorders-filter?buyer=${buyer}&&orderNo=${orderNo}&&style=${style}&&color=${color}`, this.getHeaders())
+  }
+
+
 }
  

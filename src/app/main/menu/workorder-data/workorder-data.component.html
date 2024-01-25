@@ -21,24 +21,15 @@
       <button class="btn btn-primary">Save</button>
     </div>
   
-    <ngx-spinner
-  bdColor="rgba(0, 0, 0, 0.54)"
-  template="<img src='https://i.stack.imgur.com/hzk6C.gif'>"
->
-</ngx-spinner>
+    <ngx-spinner>Loading...!</ngx-spinner>
+    
     
       <div class="table-container">
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   
           <ng-container matColumnDef="Sl.no">
             <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> WO no </th>
-            <td mat-cell *matCellDef="let element"> {{element.WOno}} </td>
-          </ng-container>
-  
-          <ng-container matColumnDef="WOLineno" >
-            <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> WO Line no</th>
-            <td mat-cell *matCellDef="let element"> {{element.WOLineno}} </td>
-  
+            <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
           </ng-container>
   
           <ng-container matColumnDef="buyer">

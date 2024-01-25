@@ -25,6 +25,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 import { RolesProfileRootComponent } from './masters/Roles and profiles/roles/roles-profile-root/roles-profile-root.component';
@@ -95,7 +96,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     FormsModule,
     HttpClientModule,
     MatAutocompleteModule,
-    NgxSpinnerModule.forRoot({type: 'ball-scale-multiple'})
+    NgxSpinnerModule.forRoot({type: 'ball-scale-multiple'}),
+    MatProgressSpinnerModule
   ]
 })
 export class MainModule { }
