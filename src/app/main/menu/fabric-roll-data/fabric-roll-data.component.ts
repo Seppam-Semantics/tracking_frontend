@@ -4,6 +4,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/api.service';
 import * as xls from 'xlsx'
 
+
 @Component({
   selector: 'app-fabric-roll-data',
   templateUrl: './fabric-roll-data.component.html',
@@ -68,7 +69,7 @@ export class FabricRollDataComponent implements OnInit {
   ];
   dataSource = ELEMENT_DATA;
 
-  displayedColumns2: string[] = ['Wo.no', 'buyer', 'orderNo', 'style', 'color', 'size', 'fabType',
+  displayedColumns2: string[] = ['Slno', 'buyer', 'orderNo', 'style', 'color', 'size', 'fabType',
     'fabDia', 'fabGsm', 'greigeKg', 'finishKg', 'knitSL', 'spinFty', 'knitFty', 'dyeingFty', 'yarnQty', 'noRolls', 'PrintStatus'
   ];
   dataSource2 = ELEMENT_DATA2;
@@ -136,11 +137,6 @@ export class FabricRollDataComponent implements OnInit {
     this.api.getsize(buyer, orderNo, style, color).subscribe((res) => {
       this.sizelist = res.sizes;
     })
-    const proftoken = 'Bearer ' + sessionStorage.getItem('token')
-    const headers = new HttpHeaders().set('x-access-token', proftoken);
-    this.http.get<any>(`${this.api.apiUrl}/workorderapi/workorders-filter?buyer=${buyer}&&orderNo=${orderNo}&&style=${style}&&color=${color}`, { headers }).subscribe((res) => {
-      this.dataSource2 = res.workorders
-    })
   }
 
 
@@ -157,6 +153,7 @@ export class FabricRollDataComponent implements OnInit {
     }
     if (this.buyerName && this.ordernumbers && this.styleslist && this.colorslist) {
       this.getsize(this.buyerName, this.ordernumbers, this.styleslist, this.colorslist)
+      this.api.getwodetails(this.buyerName, this.ordernumbers, this.styleslist, this.colorslist)
     }
     if (this.buyerName && this.ordernumbers && this.styleslist && this.colorslist && this.sizeslist) {
       this.loadworkorder(this.buyerName, this.ordernumbers, this.styleslist, this.colorslist, this.sizeslist)
@@ -174,7 +171,7 @@ export class FabricRollDataComponent implements OnInit {
 }
 
 export interface PeriodicElement2 {
-  Slno: any;
+  Slno: number;
   buyer: any;
   orderNo: any;
   style: any;

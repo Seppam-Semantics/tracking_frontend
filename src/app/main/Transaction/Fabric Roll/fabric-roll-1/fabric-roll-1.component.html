@@ -1,22 +1,9 @@
 <cdk-accordion class="example-accordion">
   <cdk-accordion-item #accordionItem="cdkAccordionItem" class="example-accordion-item" role="button" tabindex="0" style="display: flex; flex-direction: column;">
-
-    <!-- <div style="display: flex; justify-content: center; margin-left: 2%; margin-top: 1%;">
-    <mat-form-field appearance="outline" *ngIf="workorderhide" style="width: 250px;">
-      <mat-label>Work Order</mat-label>
-      <mat-select [(ngModel)]="workorderId" (selectionChange)="onSelectionChange()" (click)="resetform()">
-        <mat-option value=""> </mat-option>
-        <mat-option value="{{order.id}}" *ngFor="let order of this.WoNumber">{{order.workorderCode}}</mat-option>
-      </mat-select>
-    </mat-form-field>
-    </div> -->
-
-
     <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
-
       <mat-form-field appearance="outline"  style="width: 105px;">
         <mat-label>Buyer</mat-label>
-        <mat-select [(ngModel)]="buyerName" (selectionChange)="onSelectionChange()">
+        <mat-select [(ngModel)]="buyerName" (selectionChange)="onSelectionChange()" (click)="resetform()">
           <mat-option value=""> </mat-option>
           <mat-option *ngFor="let buyer of this.buyers" value="{{buyer.buyer}}">{{buyer.buyer}}</mat-option>
         </mat-select>
@@ -24,7 +11,7 @@
 
       <mat-form-field appearance="outline" style="width: 105px;">
         <mat-label>Order</mat-label>
-        <mat-select [(ngModel)]="ordernumbers" (selectionChange)="onSelectionChange()">
+        <mat-select [(ngModel)]="ordernumbers" (selectionChange)="onSelectionChange()" (click)="resetform()">
           <mat-option value=""> </mat-option>
           <mat-option *ngFor="let order of this.order" value="{{order.orderNO}}">{{order.orderNO}}</mat-option>
         </mat-select>
@@ -32,7 +19,7 @@
 
       <mat-form-field appearance="outline" style="width: 105px;">
         <mat-label>Style</mat-label>
-        <mat-select [(ngModel)]="styleslist" (selectionChange)="onSelectionChange()">
+        <mat-select [(ngModel)]="styleslist" (selectionChange)="onSelectionChange()" (click)="resetform()">
           <mat-option value=""> </mat-option>
           <mat-option *ngFor="let style of this.stylelist" value="{{style.style}}">{{style.style}}</mat-option>
         </mat-select>
@@ -40,7 +27,7 @@
 
       <mat-form-field appearance="outline" style="width: 105px;">
         <mat-label>color</mat-label>
-        <mat-select [(ngModel)]="colorslist" (selectionChange)="onSelectionChange()">
+        <mat-select [(ngModel)]="colorslist" (selectionChange)="onSelectionChange()" (click)="resetform()">
           <mat-option value=""> </mat-option>
           <mat-option *ngFor="let color of this.colorlist" value="{{color.color}}">{{color.color}}</mat-option>
         </mat-select>
@@ -48,7 +35,7 @@
 
       <mat-form-field appearance="outline" style="width: 105px;">
         <mat-label>Size</mat-label>
-        <mat-select [(ngModel)]="sizeslist" (selectionChange)="onSelectionChange()">
+        <mat-select [(ngModel)]="sizeslist" (selectionChange)="onSelectionChange()" (click)="resetform()">
           <mat-option value=""> </mat-option>
           <mat-option *ngFor="let size of this.sizelist" value="{{size.size}}">{{size.size}}</mat-option>
         </mat-select>
