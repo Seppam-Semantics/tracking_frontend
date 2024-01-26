@@ -181,11 +181,6 @@
           </table>
         </div>
         <br>
-
-        <!-- <div class="demo-button-container" style="display: flex; justify-content: center;">
-          <button mat-raised-button color="primary" (click)="add()"
-          ><b>Add</b></button>
-        </div> -->
       </div>
     </mat-tab>
 
@@ -208,10 +203,6 @@
 
         <div class="table-container">
           <table mat-table [dataSource]="dataSource2" class=" demo-table">
-            <div style="display: flex; justify-content: center;">
-              <button mat-raised-button color="primary" (click)="submit2()"
-                style="margin-left: 5%; margin-top: 3%;">Save</button>
-            </div>
             <ng-container matColumnDef="Cum" sticky>
               <th mat-header-cell *matHeaderCellDef>Roll no</th>
               <td mat-cell *matCellDef="let element">
@@ -219,7 +210,7 @@
                   <div class="entrydata" *ngFor="let item of items2.controls; let a = index" [formGroupName]="a">
                     <mat-form-field appearance="outline" style="width:70px" class="full-width">
                       <!-- <mat-label>Roll No</mat-label> -->
-                      <input matInput required formControlName="rollNo" textOnly>
+                      <input matInput required formControlName="rollNo" readonly>
                       <mat-error></mat-error>
                     </mat-form-field>
                     <mat-form-field style="display: none;">
@@ -237,7 +228,7 @@
                   <div *ngFor="let item of items2.controls; let a = index" [formGroupName]="a" class="entrydata">
                     <mat-form-field appearance="outline" style="width:70px" class="full-width">
                       <!-- <mat-label>cumWt</mat-label> -->
-                      <input formControlName="entry001" matInput required readonly>
+                      <input formControlName="entry_1" matInput required readonly>
                       <mat-error></mat-error>
                     </mat-form-field>
                   </div>
@@ -253,7 +244,7 @@
                     <div style="display: flex; justify-content: center;">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
                         <!-- <mat-label>GreigeWt</mat-label> -->
-                        <input matInput required formControlName="entry_2" textOnly>
+                        <input matInput required formControlName="entry_2">
                         <mat-error>
 
                         </mat-error>
@@ -269,10 +260,6 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns2 sticky: true"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
           </table>
-        </div>
-        <br>
-        <div class="demo-button-container" style="display: flex; justify-content: center;">
-          <button mat-raised-button color="primary" (click)="add2()"><b>Add</b></button>
         </div>
       </div>
     </mat-tab>
@@ -320,7 +307,7 @@
 
                     <mat-form-field appearance="outline" style="width:70px" class="full-width">
                       <!-- <mat-label>Roll no </mat-label> -->
-                      <input matInput required formControlName="rollNo" textOnly>
+                      <input matInput required formControlName="rollNo">
                       <mat-error> </mat-error>
                     </mat-form-field>
                     <mat-form-field style="display: none;">
@@ -340,7 +327,7 @@
                     <div style="display: flex; justify-content: center;">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
                         <!-- <mat-label>Roll Wt</mat-label> -->
-                        <input formControlName="entry001" matInput required readonly>
+                        <input formControlName="entry_1" matInput required readonly>
                         <mat-error></mat-error>
                       </mat-form-field>
                     </div>
@@ -358,7 +345,7 @@
                     <div style="display: flex; justify-content: center;">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
                         <!-- <mat-label>Greige Wt</mat-label> -->
-                        <input formControlName="entry002" matInput required readonly>
+                        <input formControlName="entry_2" matInput required readonly>
                         <mat-error></mat-error>
                       </mat-form-field>
                     </div>
@@ -462,7 +449,7 @@
                     <div style="display: flex; justify-content: center;">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
                         <!-- <mat-label>Roll Wt</mat-label> -->
-                        <input formControlName="entry001" matInput required readonly>
+                        <input formControlName="entry_1" matInput required readonly>
                         <mat-error></mat-error>
                       </mat-form-field>
                     </div>
@@ -480,7 +467,7 @@
                     <div style="display: flex; justify-content: center">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
                         <!-- <mat-label>Greige Wt</mat-label> -->
-                        <input formControlName="entry002" matInput required readonly>
+                        <input formControlName="entry_2" matInput required readonly>
                         <mat-error></mat-error>
                       </mat-form-field>
                     </div>
@@ -498,7 +485,7 @@
                     <div style="display: flex; justify-content: center">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
                         <!-- <mat-label>Dye Wt</mat-label> -->
-                        <input formControlName="entry003" matInput required readonly>
+                        <input formControlName="entry_3" matInput required readonly>
                         <mat-error></mat-error>
                       </mat-form-field>
                     </div>
@@ -597,7 +584,7 @@
                     <div style="display: flex; justify-content: center">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
                         <!-- <mat-label>Greige Wt</mat-label> -->
-                        <input formControlName = "entry002" matInput required readonly>
+                        <input formControlName = "entry_2" matInput required readonly>
                         <mat-error></mat-error>
                       </mat-form-field>
                     </div>
@@ -614,7 +601,7 @@
                     <div style="display: flex; justify-content: center">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
                         <!-- <mat-label>del Wt</mat-label> -->
-                        <input formControlName = "entry004" matInput required readonly>
+                        <input formControlName = "entry_4" matInput required readonly>
                         <mat-error></mat-error>
                       </mat-form-field>
                     </div>
@@ -730,7 +717,7 @@
                     <div style="display: flex; justify-content: center">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
                         <!-- <mat-label>Greige Wt</mat-label> -->
-                        <input formControlName = "entry002" matInput required readonly>
+                        <input formControlName = "entry_2" matInput required readonly>
                         <mat-error></mat-error>
                       </mat-form-field>
                     </div>
@@ -826,7 +813,7 @@
                     <div>
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
                         <!-- <mat-label>Greige Wt</mat-label> -->
-                        <input formControlName = "entry002" matInput required readonly>
+                        <input formControlName = "entry_2" matInput required readonly>
                         <mat-error></mat-error>
                       </mat-form-field>
                     </div>
@@ -843,7 +830,7 @@
                     <div>
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
                         <!-- <mat-label>PlanPcs</mat-label> -->
-                        <input formControlName = "entry006" matInput required readonly>
+                        <input formControlName = "entry_6" matInput required readonly>
                         <mat-error></mat-error>
                       </mat-form-field>
                     </div>

@@ -337,14 +337,14 @@ loadworkorder(buyer:any, order:any, style:any, color:any, size:any){
 
   changetab(event: any) {
     if (event.tab.textLabel == 'First Roll Weight') {
-      this.resetform();
+ 
       setTimeout(() => {
         this.fabrollweight();
       }, 1000)
     }
 
     if (event.tab.textLabel == 'Greige Fab Del Entry') {
-      this.resetform();
+
       setTimeout(() => {
         this.greigefabDElEntry();
       }, 1000)
@@ -445,6 +445,7 @@ submit(){
     "entry": "1",
     "entrys":this.form.get('entrys') as FormArray
   })
+  console.log(this.entry1form.value)
   this.api.postfabricdetails(this.entry1form.value).subscribe((res)=>{
     alert(res.message);
     this.loading1 = false;
@@ -475,14 +476,13 @@ delete2(index: number) {
     const length2 = this.items2.length % this.entry2.length;
     const entry02 = this.entry2[length2];
 
-    const formGrouptwo = this.fb.group({
+
+    this.items2.push(this.fb.group({
       rollNo: [defaultValues || ''],
       fabBarcode:[fabcodenumber || ''],
-      entry001:[entry01 || ''],
-      entry_2: [entry02 || '']
-    });
-
-    this.items2.push(formGrouptwo);
+      entry_1:[entry01 || ''],
+      entry_2:[entry02 || '']
+    }));
   }
 submit2(){
   this.loading2 = true;
@@ -491,6 +491,7 @@ submit2(){
     "entry": "1",
     "entrys":this.form2.get('entrystwo') as FormArray
   })
+  console.log(this.entry1form.value);
   this.api.postfabricdetails(this.entry1form.value).subscribe((res)=>{
     alert(res.message)
     this.loading2 = false;
@@ -527,8 +528,8 @@ delete3(index: number) {
     const formGroupthree = this.fb.group({
       rollNo: [defaultValues || ''],
       fabBarcode:[fabcodenumber || ''],
-      entry001:[entry01 || ''],
-      entry002:[entry02 || ''],
+      entry_1:[entry01 || ''],
+      entry_2:[entry02 || ''],
       entry_3: [entry03 || '']
     });
     this.items3.push(formGroupthree);
@@ -582,9 +583,9 @@ delete4(index: number) {
     const formGroupthree = this.fb.group({
       rollNo: [defaultValues || ''],
       fabBarcode:[fabcodenumber || ''],
-      entry001:[entry01 || ''],
-      entry002:[entry02 || ''],
-      entry003:[entry03 || ''],
+      entry_1:[entry01 || ''],
+      entry_2:[entry02 || ''],
+      entry_3:[entry03 || ''],
       entry_4: [entry04 || '']
     });
 
@@ -635,8 +636,8 @@ delete5(index: number) {
     const formGroupfour = this.fb.group({
       rollNo: [defaultValues || ''],
       fabBarcode:[fabcodenumber || ''],
-      entry002:[entry02 || ''],
-      entry004:[entry04 || ''],
+      entry_2:[entry02 || ''],
+      entry_4:[entry04 || ''],
       entry_5: [entry05 || '']
     });
 
@@ -683,7 +684,7 @@ delete6(index: number) {
     const formGroupfour = this.fb.group({
       rollNo: [defaultValues || ''],
       fabBarcode:[fabcodenumber || ''],
-      entry002:[entry02 || ''],
+      entry_2:[entry02 || ''],
       entry_6: [entry06 || '']
     });
 
@@ -732,8 +733,8 @@ delete7(index: number) {
     const formGroupfour = this.fb.group({
       rollNo: [defaultValues || ''],
       fabBarcode:[fabcodenumber || ''],
-      entry002:[entry02 || ''],
-      entry006:[entry06 || ''],
+      entry_2:[entry02 || ''],
+      entry_6:[entry06 || ''],
       entry_7: [entry07 || '']
     });
 
