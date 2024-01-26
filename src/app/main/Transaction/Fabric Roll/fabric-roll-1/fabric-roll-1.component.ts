@@ -488,7 +488,7 @@ submit2(){
   this.loading2 = true;
   this.entry1form = this.fb.group({
     "workorderId": this.workorderId,
-    "entry": "1",
+    "entry": "2",
     "entrys":this.form2.get('entrystwo') as FormArray
   })
   console.log(this.entry1form.value);
@@ -540,7 +540,7 @@ submit3(){
   this.loading3 = true;
   this.entry1form = this.fb.group({
     "workorderId": this.workorderId,
-    "entry": "1",
+    "entry": "3",
     "entrys":this.form3.get('entrysthree') as FormArray
   })
   this.api.postfabricdetails(this.entry1form.value).subscribe((res)=>{
@@ -595,7 +595,7 @@ submit4(){
   this.loading4 = true;
   this.entry1form = this.fb.group({
     "workorderId": this.workorderId,
-    "entry": "1",
+    "entry": "4",
     "entrys":this.form4.get('entrysfour') as FormArray
   })
   this.api.postfabricdetails(this.entry1form.value).subscribe((res)=>{
@@ -647,7 +647,7 @@ submit5(){
   this.loading5 = true;
   this.entry1form = this.fb.group({
     "workorderId": this.workorderId,
-    "entry": "1",
+    "entry": "5",
     "entrys":this.form5.get('entrysfive') as FormArray
   })
   const proftoken = 'Bearer '+ sessionStorage.getItem('token')
@@ -694,7 +694,7 @@ submit6(){
   this.loading6 = true;
   this.entry1form = this.fb.group({
     "workorderId": this.workorderId,
-    "entry": "1",
+    "entry": "6",
     "entrys":this.form6.get('entryssix') as FormArray
   })
   this.api.postfabricdetails(this.entry1form.value).subscribe((res)=>{
@@ -744,7 +744,7 @@ submit7(){
   this.loading7 = true;
   this.entry1form = this.fb.group({
     "workorderId": this.workorderId,
-    "entry": "1",
+    "entry": "7",
     "entrys":this.form7.get('entrysseven') as FormArray
   })
   this.api.postfabricdetails(this.entry1form.value).subscribe((res)=>{
