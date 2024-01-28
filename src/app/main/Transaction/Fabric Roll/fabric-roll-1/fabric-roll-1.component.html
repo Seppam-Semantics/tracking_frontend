@@ -784,7 +784,7 @@
                     <div>
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
                         <!-- <mat-label>Actual Cut</mat-label> -->
-                        <input matInput required textOnly>
+                        <input matInput required textOnly formControlName="entry_7" >
                         <mat-error></mat-error>
                       </mat-form-field>
                     </div>
@@ -801,7 +801,7 @@
                     <div style="display:flex ;">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
                         <!-- <mat-label>Rej Cause</mat-label> -->
-                        <input matInput required formControlName="entry_7" textOnly>
+                        <input matInput required textOnly>
                         <mat-error></mat-error>
                       </mat-form-field>
                       <button type="button" class="btn btn-danger" style="height: 50px; display: none;" (click)="delete(g)"> &#10005;
