@@ -11,7 +11,7 @@ import { MainRoutingModule } from '../main-routing.module';
 })
 export class MainComponent implements OnInit {
   
-
+logo:boolean = true
   constructor(private api:ApiService, private router:Router , private route : MainRoutingModule){
     
   }
@@ -22,11 +22,9 @@ export class MainComponent implements OnInit {
 
   }
 
-  workorderdata: boolean = false;
-
   
   workorder() {
-    this.workorderdata = true;
+    this.logo = false;
   }
 
   logout(){

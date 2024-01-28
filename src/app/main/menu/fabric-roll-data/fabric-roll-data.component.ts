@@ -18,7 +18,8 @@ import * as xls from 'xlsx'
   ],
 })
 export class FabricRollDataComponent implements OnInit {
-  expandedElement: PeriodicElement2 | null | undefined;
+  dataSource:any[]=[]
+  data:any[]=[];
   fabricdetails: any
   ordernumber: any;
   buyers: any;
@@ -37,20 +38,7 @@ export class FabricRollDataComponent implements OnInit {
   fabdetails: any;
   rollnnumber: any;
   wodetails: any;
-
-  fabricrolltable: boolean = true;
-  workordertable: boolean = false;
-
-  fabricrolltableclick() {
-    this.fabricrolltable = false;
-    this.workordertable = true;
-  }
-
-  workordertableclick() {
-    this.fabricrolltable = true;
-    this.workordertable = false;
-  }
-
+  fabid:any;
 
   constructor(private api: ApiService,
     private http: HttpClient,
@@ -61,36 +49,31 @@ export class FabricRollDataComponent implements OnInit {
   }
 
 
-  //<!--------------------------------------------------------------------------------------------------->
-  displayedColumns: string[] = ['RollNo', 'FabBarcode', 'FabBatchno', 'FirstrollWeightKGS', 'FirstrollWeightDATE',
-    'GriegeFabKGS', 'GriegeFabDATE', 'DyeBatchingKGS', 'DyeBatchingDATE',
-    'DyeFinishKGS', 'DyeFinishDATE', 'DeliverytoGarmenthKGS', 'DeliverytoGarmenthDATE', 'PlanCutPanelsKGS',
-    'PlanCutPanelsDATE', 'ActualCutPanelsKGS', 'ActualCutPanelsDATE', 'PcsperBundle', 'PlannedBundles', 'ActualBundles', 'PrintStatus'
-  ];
-  dataSource = ELEMENT_DATA;
+check(id:any){
 
-  displayedColumns2: string[] = ['Slno', 'buyer', 'orderNo', 'style', 'color', 'size', 'fabType',
-    'fabDia', 'fabGsm', 'greigeKg', 'finishKg', 'knitSL', 'spinFty', 'knitFty', 'dyeingFty', 'yarnQty', 'noRolls', 'PrintStatus'
-  ];
-  dataSource2 = ELEMENT_DATA2;
+  const entry = 1
+    this.api.getfabricdetails(id, entry).subscribe((res) => {
+      this.dataSource = res.fabricRolls
+       console.log(this.dataSource)
+    })
 
 
-  //<!--------------------------------------------------------------------------------------------------->  
+} 
 
   loaddetails(id: any, element: any) {
     const entry = 1
     this.api.getfabricdetails(id, entry).subscribe((res) => {
       this.dataSource = res.fabricRolls
     })
-    setTimeout(() => {
-      this.expandedElement = this.expandedElement === element ? null : element
-    }, 3000)
+    // setTimeout(() => {
+    //   this.expandedElement = this.expandedElement === element ? null : element
+    // }, 3000)
 
   }
 
-  ngAfterContentChecked() {
-    this.cdref.detectChanges();
-  }
+  // ngAfterContentChecked() {
+  //   this.cdref.detectChanges();
+  // }
 
 
   public getbuyers() {
@@ -107,7 +90,7 @@ export class FabricRollDataComponent implements OnInit {
     const proftoken = 'Bearer ' + sessionStorage.getItem('token')
     const headers = new HttpHeaders().set('x-access-token', proftoken);
     this.http.get<any>(`${this.api.apiUrl}/workorderapi/workorders-filter?buyer=${buyer}`, { headers }).subscribe((res) => {
-      this.dataSource2 = res.workorders
+      this.data = res.workorders
     })
   }
 
@@ -118,7 +101,7 @@ export class FabricRollDataComponent implements OnInit {
     const proftoken = 'Bearer ' + sessionStorage.getItem('token')
     const headers = new HttpHeaders().set('x-access-token', proftoken);
     this.http.get<any>(`${this.api.apiUrl}/workorderapi/workorders-filter?buyer=${buyer}&orderNo=${orderNo}`, { headers }).subscribe((res) => {
-      this.dataSource2 = res.workorders
+      this.data = res.workorders
     })
   }
 
@@ -129,7 +112,7 @@ export class FabricRollDataComponent implements OnInit {
     const proftoken = 'Bearer ' + sessionStorage.getItem('token')
     const headers = new HttpHeaders().set('x-access-token', proftoken);
     this.http.get<any>(`${this.api.apiUrl}/workorderapi/workorders-filter?buyer=${buyer}&&orderNo=${orderNo}&&style=${style}`, { headers }).subscribe((res) => {
-      this.dataSource2 = res.workorders
+      this.data = res.workorders
     })
   }
 
@@ -165,67 +148,10 @@ export class FabricRollDataComponent implements OnInit {
     const proftoken = 'Bearer ' + sessionStorage.getItem('token')
     const headers = new HttpHeaders().set('x-access-token', proftoken);
     this.http.get<any>(`${this.api.apiUrl}/workorderapi/workorders-filter?buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&size=${size}`, { headers }).subscribe((res) => {
-      this.dataSource2 = res.workorders
+      this.data = res.workorders
     })
   }
 }
 
-export interface PeriodicElement2 {
-  Slno: number;
-  buyer: any;
-  orderNo: any;
-  style: any;
-  color: any;
-  size: any;
-  fabType: any;
-  fabDia: any;
-  fabGSM: any;
-  greigeKg: any;
-  finishKg: any;
-  knitSL: any;
-  spinFty: any;
-  knitFty: any;
-  dyeingFty: any;
-  yarnQty: any;
-  noRolls: any;
-  PrintStatus: any;
-}
-
-
-export interface PeriodicElement {
-
-  RollNo: number;
-  FabBarcode: number;
-  FabBatchno: number;
-
-  FirstrollWeightKGS: number;
-  FirstrollWeightDATE: string;
-
-  GriegeFabKGS: string;
-  GriegeFabDATE: string;
-
-  DyeBatchingKGS: string;
-  DyeBatchingDATE: string;
-
-  DyeFinishKGS: string;
-  DyeFinishDATE: string;
-
-  DeliverytoGarmenthKGS: string;
-  DeliverytoGarmenthDATE: string;
-
-  PlanCutPanelsKGS: string;
-  PlanCutPanelsDATE: string;
-
-  ActualCutPanelsKGS: string;
-  ActualCutPanelsDATE: string;
-
-  PcsperBundle: string;
-  PlannedBundles: string;
-  ActualBundles: string;
-  PrintStatus: string;
-
-}
-const ELEMENT_DATA2: PeriodicElement2[] = [];
-const ELEMENT_DATA: PeriodicElement[] = [];
 
 

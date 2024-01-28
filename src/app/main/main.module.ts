@@ -48,6 +48,7 @@ import { FabricRoll1Component } from './Transaction/Fabric Roll/fabric-roll-1/fa
 import { NgxSpinnerModule } from 'ngx-spinner';
 
 
+
 @NgModule({
   declarations: [
     MainComponent,

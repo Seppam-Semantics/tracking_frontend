@@ -1,15 +1,16 @@
-
 <mat-toolbar color="primary">
   <mat-toolbar-row style="display: flex; justify-content: center;">
     <span>Fabric Roll Data</span>
   </mat-toolbar-row>
 </mat-toolbar>
 <cdk-accordion class="example-accordion">
-  <cdk-accordion-item #accordionItem="cdkAccordionItem" class="example-accordion-item" role="button" tabindex="0" style="display: flex; flex-direction: column; justify-content: center;">
+  <cdk-accordion-item #accordionItem="cdkAccordionItem" class="example-accordion-item" role="button" tabindex="0"
+    style="display: flex; flex-direction: column; justify-content: center;">
 
-    <div class="example-accordion-item-header" (click)="accordionItem.toggle()" style="display: flex; justify-content: center; gap: 0.5%; margin-bottom: 1%;">
+    <div class="example-accordion-item-header" (click)="accordionItem.toggle()"
+      style="display: flex; justify-content: center; gap: 0.5%; margin-top: 2%;">
 
-      <mat-form-field appearance="outline"  style="width: 105px;" (click)="fabricrolltableclick()">
+      <mat-form-field appearance="outline" style="width: 105px;">
         <mat-label>Buyer</mat-label>
         <mat-select [(ngModel)]="buyerName" (selectionChange)="onSelectionChange()">
           <mat-option value=""> </mat-option>
@@ -25,7 +26,7 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" style="width: 105px;" (click)="workordertableclick()">
+      <mat-form-field appearance="outline" style="width: 105px;" >
         <mat-label>Style</mat-label>
         <mat-select [(ngModel)]="styleslist" (selectionChange)="onSelectionChange()">
           <mat-option value=""> </mat-option>
@@ -33,7 +34,7 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" style="width: 105px;" (click)="workordertableclick()">
+      <mat-form-field appearance="outline" style="width: 105px;" >
         <mat-label>color</mat-label>
         <mat-select [(ngModel)]="colorslist" (selectionChange)="onSelectionChange()">
           <mat-option value=""> </mat-option>
@@ -41,7 +42,7 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" style="width: 105px;" (click)="workordertableclick()">
+      <mat-form-field appearance="outline" style="width: 105px;" >
         <mat-label>Size</mat-label>
         <mat-select [(ngModel)]="sizeslist" (selectionChange)="onSelectionChange()">
           <mat-option value=""> </mat-option>
@@ -53,323 +54,149 @@
 </cdk-accordion>
 
 <!---===========================================================================================================-->
-<div class="table-container" style="overflow: scroll; height: 100%;">
-  <table mat-table [dataSource]="dataSource2" class="mat-elevation-z8" multiTemplateDataRows>
+<div class="fixTableHead">
+<table>
+  <thead>
+  <tr>
+    <th>Sl.No</th>
+    <th>Buyer</th>
+    <th>Order No</th>
+    <th>Style</th>
+    <th>Color</th>
+    <th>size</th>
+    <th>fabType</th>
+    <th>fabDia</th>
+    <th>fabGsm</th>
+    <th>finishedKg</th>
+    <th>knitSL</th>
+    <th>spinFty</th>
+    <th>knitFty</th>
+    <th>dyeingFty </th>
+    <th>yarnQty</th>
+    <th>noRolls</th>
+    <th>PrintStatus</th>
 
-    <ng-container matColumnDef="Slno">
-      <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;">  </th>
-
-      <td mat-cell *matCellDef="let element; let i = index;">{{i+1}} </td>
-
-    </ng-container>
-
-    <ng-container matColumnDef="buyer">
-      <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;">Buyer</th>
-      <td mat-cell *matCellDef="let element"> {{element.buyer}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="orderNo">
-      <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Order </th>
-      <td mat-cell *matCellDef="let element"> {{element.orderNo }} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="style">
-      <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Style </th>
-      <td mat-cell *matCellDef="let element"> {{element.style }} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="color">
-      <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Color </th>
-      <td mat-cell *matCellDef="let element"> {{element.color }} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="size">
-      <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Size </th>
-      <td mat-cell *matCellDef="let element"> {{element.size }} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="fabType">
-      <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Fab Type </th>
-      <td mat-cell *matCellDef="let element"> {{element.fabType }} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="fabDia">
-      <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Fab Dia </th>
-      <td mat-cell *matCellDef="let element"> {{element.fabDia }} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="fabGsm">
-      <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Fab GSM </th>
-      <td mat-cell *matCellDef="let element"> {{element.fabGsm }} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="greigeKg">
-      <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> GreigeKgs </th>
-      <td mat-cell *matCellDef="let element"> {{element.greigeKg }} </td>
-    </ng-container>
-    <!-- Yarn Quantity -->
-    <ng-container matColumnDef="finishKg">
-      <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Finish Kgs </th>
-      <td mat-cell *matCellDef="let element"> {{element.finishedKg }} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="knitSL">
-      <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Knit SL </th>
-      <td mat-cell *matCellDef="let element"> {{element.knitSL }} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="spinFty">
-      <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Spin Fty </th>
-      <td mat-cell *matCellDef="let element"> {{element.spinFty }} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="knitFty">
-      <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Knit Fty </th>
-      <td mat-cell *matCellDef="let element"> {{element.knitFty }} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="dyeingFty">
-      <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Dyeing Fty </th>
-      <td mat-cell *matCellDef="let element"> {{element.dyeingFty }} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="yarnQty">
-      <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> yarnQty </th>
-      <td mat-cell *matCellDef="let element"> {{element.yarnQty }} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="noRolls">
-      <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> No of Rolls </th>
-      <td mat-cell *matCellDef="let element"> {{element.noRolls }} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="PrintStatus">
-      <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Print Status </th>
-      <td mat-cell *matCellDef="let element"> {{element.PrintStatus }} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="expandedDetail">
-      <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns2.length">
-        <div
-          class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-          <div>
-            <div>
-              <div class="table-container" style="overflow: scroll; height: 400px;">
-              <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="border: 1px solid black;">
-              
-                <ng-container matColumnDef="WONo">
-                  <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> WONo </th>
-                  <td mat-cell *matCellDef="let element"> {{element.workorderId}} </td>
-                </ng-container>
-              
-                <ng-container matColumnDef="RollNo">
-                  <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Roll No </th>
-                  <td mat-cell *matCellDef="let element; let i=index"> {{i*2}} </td>
-                </ng-container>
-              
-                <ng-container matColumnDef="FabBarcode">
-                  <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Fab Bar code </th>
-                  <td mat-cell *matCellDef="let element"> {{element.fabBarcode }} </td>
-                </ng-container>
-              
-                <ng-container matColumnDef="FabBatchno">
-                  <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Fab Batch no </th>
-                  <td mat-cell *matCellDef="let element"> {{element.FabBatchno }} </td>
-                </ng-container>
-                <!----------------------------------------FirstrollWeight------------------------------------------------------>
-                <ng-container matColumnDef="FirstrollWeightKGS">
-                  <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon; border: 1px solid black;"> Kgs </th>
-                  <td mat-cell *matCellDef="let element">   {{element.entry_1}} </td>
-                </ng-container>
-              
-                <ng-container matColumnDef="FirstrollWeightDATE">
-                  <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon; border: 1px solid black"> Date </th>
-                  <td mat-cell *matCellDef="let element"> {{element.entry_1At}} </td>
-                </ng-container>
-                <!---------------------------------------------------------------------------------------------->
-                <!----------------------------------------GriegeFab------------------------------------------------------>
-                <ng-container matColumnDef="GriegeFabKGS">
-                  <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Kgs </th>
-                  <td mat-cell *matCellDef="let element"> {{element.entry_2}} </td>
-                </ng-container>
-              
-                <ng-container matColumnDef="GriegeFabDATE">
-                  <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Date </th>
-                  <td mat-cell *matCellDef="let element"> {{element.entry_2At}} </td>
-                </ng-container>
-                <!---------------------------------------------------------------------------------------------->
-                <!----------------------------------------------DyeBatching------------------------------------------------>
-                <ng-container matColumnDef="DyeBatchingKGS">
-                  <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Kgs </th>
-                  <td mat-cell *matCellDef="let element"> {{element.entry_3}} </td>
-                </ng-container>
-              
-                <ng-container matColumnDef="DyeBatchingDATE">
-                  <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Date </th>
-                  <td mat-cell *matCellDef="let element"> {{element.entry_3At}} </td>
-                </ng-container>
-                <!---------------------------------------------------------------------------------------------->
-                <!---------------------------------------------DyeFinish------------------------------------------------->
-                <ng-container matColumnDef="DyeFinishKGS">
-                  <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Kgs </th>
-                  <td mat-cell *matCellDef="let element"> {{element.entry_4}} </td>
-                </ng-container>
-              
-                <ng-container matColumnDef="DyeFinishDATE">
-                  <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Date </th>
-                  <td mat-cell *matCellDef="let element"> {{element.entry_4At}} </td>
-                </ng-container>
-                <!---------------------------------------------------------------------------------------------->
-                <!---------------------------------------------DeliverytoGarmenth------------------------------------------------->
-                <ng-container matColumnDef="DeliverytoGarmenthKGS">
-                  <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Kgs </th>
-                  <td mat-cell *matCellDef="let element"> {{element.entry_5}} </td>
-                </ng-container>
-              
-                <ng-container matColumnDef="DeliverytoGarmenthDATE">
-                  <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Date </th>
-                  <td mat-cell *matCellDef="let element"> {{element.entry_5At}} </td>
-                </ng-container>
-                <!---------------------------------------------------------------------------------------------->
-                <!---------------------------------------------PlanCutPanels------------------------------------------------->
-                <ng-container matColumnDef="PlanCutPanelsKGS">
-                  <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Kgs </th>
-                  <td mat-cell *matCellDef="let element"> {{element.entry_6}} </td>
-                </ng-container>
-              
-                <ng-container matColumnDef="PlanCutPanelsDATE">
-                  <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Date </th>
-                  <td mat-cell *matCellDef="let element"> {{element.entry_6At}} </td>
-                </ng-container>
-                <!---------------------------------------------------------------------------------------------->
-                <!---------------------------------------------ActualCutPanels------------------------------------------------->
-                <ng-container matColumnDef="ActualCutPanelsKGS">
-                  <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Kgs </th>
-                  <td mat-cell *matCellDef="let element"> {{element.entry_7}} </td>
-                </ng-container>
-              
-                <ng-container matColumnDef="ActualCutPanelsDATE">
-                  <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Date </th>
-                  <td mat-cell *matCellDef="let element"> {{element.entry_7At}} </td>
-                </ng-container>
-                <!---------------------------------------------------------------------------------------------->
-                <ng-container matColumnDef="PcsperBundle">
-                  <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Pcsper Bundle </th>
-                  <td mat-cell *matCellDef="let element"> {{element.PcsperBundle }} </td>
-                </ng-container>
-              
-                <ng-container matColumnDef="PlannedBundles">
-                  <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Planned Bundles </th>
-                  <td mat-cell *matCellDef="let element"> {{element.PlannedBundles }} </td>
-                </ng-container>
-              
-                <ng-container matColumnDef="ActualBundles">
-                  <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Actual Bundles </th>
-                  <td mat-cell *matCellDef="let element"> {{element.ActualBundles }} </td>
-                </ng-container>
-              
-                <ng-container matColumnDef="PrintStatus">
-                  <th mat-header-cell *matHeaderCellDef style="background-color: darksalmon;"> Print Status </th>
-                  <td mat-cell *matCellDef="let element"> {{element.PrintStatus }} </td>
-                </ng-container>
-              
-                <ng-container matColumnDef="1">
-                  <th mat-header-cell *matHeaderCellDef [attr.colspan]="0" style="border: 1px solid white; 
-                  border-bottom: 1px solid black; border-top: 1px solid black"> </th>
-                </ng-container>
-              
-                <ng-container matColumnDef="2">
-                  <th mat-header-cell *matHeaderCellDef [attr.colspan]="1" 
-                  style="border: 1px solid white; border-bottom: 1px solid black; border-top: 1px solid black"> </th>
-                </ng-container>
-              
-                <ng-container matColumnDef="3">
-                  <th mat-header-cell *matHeaderCellDef [attr.colspan]="1" 
-                  style="border: 1px solid white; border-bottom: 1px solid black; border-top: 1px solid black"> </th>
-                </ng-container>
-              
-                <ng-container matColumnDef="4">
-                  <th mat-header-cell *matHeaderCellDef [attr.colspan]="1" 
-                  style="border: 1px solid white; border-bottom: 1px solid black; border-top: 1px solid black"> </th>
-                </ng-container>
-              
-                <ng-container matColumnDef="5">
-                  <th mat-header-cell *matHeaderCellDef [attr.colspan]="1" 
-                  style="border: 1px solid white; border-bottom: 1px solid black; border-top: 1px solid black"> </th>
-                </ng-container>
-              
-                <ng-container matColumnDef="6">
-                  <th mat-header-cell *matHeaderCellDef [attr.colspan]="1" 
-                  style="border-bottom: 1px solid black; border-top: 1px solid black"> </th>
-                </ng-container>
-              
-                <ng-container matColumnDef="7">
-                  <th mat-header-cell *matHeaderCellDef [style.text-align]="'center'" [attr.colspan]="2"
-                  style="border: 1px solid black;">
-                    First roll Weight
-                  </th>
-                </ng-container>
-              
-                <ng-container matColumnDef="8">
-                  <th mat-header-cell *matHeaderCellDef [style.text-align]="'center'" [attr.colspan]="2"
-                  style="border: 1px solid black;">
-                    Griege Fab
-                  </th>
-                </ng-container>
-              
-                <ng-container matColumnDef="9">
-                  <th mat-header-cell *matHeaderCellDef [style.text-align]="'center'" [attr.colspan]="2"
-                  style="border: 1px solid black;">
-                    Dye Batching
-                  </th>
-                </ng-container>
-              
-                <ng-container matColumnDef="10">
-                  <th mat-header-cell *matHeaderCellDef [style.text-align]="'center'" [attr.colspan]="2"
-                  style="border: 1px solid black;">
-                    Dye Finish
-                  </th>
-                </ng-container>
-              
-                <ng-container matColumnDef="11">
-                  <th mat-header-cell *matHeaderCellDef [style.text-align]="'center'" [attr.colspan]="2"
-                  style="border: 1px solid black;">
-                    Delivery to Garment
-                  </th>
-                </ng-container>
-              
-                <ng-container matColumnDef="12">
-                  <th mat-header-cell *matHeaderCellDef [style.text-align]="'center'" [attr.colspan]="2"
-                  style="border: 1px solid black;">
-                    Plan Cut Panels
-                  </th>
-                </ng-container>
-              
-                <ng-container matColumnDef="13">
-                  <th mat-header-cell *matHeaderCellDef [style.text-align]="'center'" [attr.colspan]="2"
-                    style="border: 1px solid black;">
-                    Actual Cut Panels
-                  </th>
-                </ng-container>
-              
-              
-              
-                <tr mat-header-row *matHeaderRowDef="['3','5','6','7','8','9','10','11','12','13']"></tr>
-                <tr mat-header-row *matHeaderRowDef="displayedColumns ; sticky: true"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-              </table>
-              </div>
-            </div>
-          </div>
-        </div>
-      </td>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="displayedColumns2; sticky: true"></tr>
-  <tr mat-row *matRowDef="let element; columns: displayedColumns2;" class="example-element-row"
-    (click)="loaddetails(element.id, element)"></tr>
-  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
-  </table>
+  </tr>
+</thead>
+<tbody>
+  <tr *ngFor="let work of this.data; let i=index" data-toggle="modal" data-target="#myModal" (click)="check(work.id)">
+    <td>{{i+1}}</td>
+    <td>{{work.buyer}}</td>
+    <td>{{work.orderNo}}</td>
+    <td>{{work.style}}</td>
+    <td>{{work.color}}</td>
+    <td>{{work.size}}</td>
+    <td>{{work.fabType}}</td>
+    <td>{{work.fabDia}}</td>
+    <td>{{work.fabGsm}}</td>
+    <td>{{work.finishedKg}}</td>
+    <td>{{work.knitSL}}</td>
+    <td>{{work.spinFty}}</td>
+    <td>{{work.knitFty}}</td>
+    <td>{{work.dyeinFty}}</td>
+    <td>{{work.yarnQty}}</td>
+    <td>{{work.noRolls}}</td>
+    <td>{{work.isPrint}}</td>
+  </tr>
+  <tbody>
+</table>
 </div>
-
 <!---===========================================================================================================-->
 
+<!---===========================================================================================================-->
+<div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen" role="document">
+     <div class="modal-content">
+        <div class="modal-body">
+          <div style="overflow-x: auto; height: 100%;">
+            <table>
+              <thead>
+                <tr>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th colspan="2">FirstrollWeight</th>
+                  <th colspan="2">GriegeFab</th>
+                  <th colspan="2">DyeBatching</th>
+                  <th colspan="2">DyeFinish</th>
+                  <th colspan="2">DeliverytoGarmenth</th>
+                  <th colspan="2">PlanCutPanels</th>
+                  <th colspan="2">ActualCutPanels</th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                </tr>
+          
+                <tr>
+                  <th>WONo</th>
+                  <th>RollNo</th>
+                  <th>FabBarcode</th>
+                  <th>FabBatchNo</th>
+          
+                  <th>KGS</th>
+                  <th>Date</th>
+          
+                  <th>KGS</th>
+                  <th>Date</th>
+          
+                  <th>KGS</th>
+                  <th>Date</th>
+          
+                  <th>KGS</th>
+                  <th>Date</th>
+          
+                  <th>KGS</th>
+                  <th>Date</th>
+          
+                  <th>Pcs</th>
+                  <th>Date</th>
+          
+                  <th>Pcs</th>
+                  <th>Date</th>
+          
+                  <th>PcsperBundle</th>
+                  <th>PlannedBundles</th>
+                  <th>ActualBundles </th>
+                  <th>PrintStatus</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let fab of this.dataSource">
+                  <td>{{fab.workorderId}}</td>
+                  <td>{{fab.rollNo}}</td>
+                  <td>{{fab.fabBarcode}}</td>
+                  <td>{{fab.entry_1}}</td>
+                  <td>{{fab.entry_1At}}</td>
+                  <td>{{fab.entry_2}}</td>
+                  <td>{{fab.entry_2At}}</td>
+                  <td>{{fab.entry_3}}</td>
+                  <td>{{fab.entry_3At}}</td>
+                  <td>{{fab.entry_4}}</td>
+                  <td>{{fab.entry_4At}}</td>
+                  <td>{{fab.entry_5}}</td>
+                  <td>{{fab.entry_5At}}</td>
+                  <td>{{fab.entry_6}}</td>
+                  <td>{{fab.entry_6At}}</td>
+                  <td>{{fab.entry_7}}</td>
+                  <td>{{fab.entry_7At}}</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                </tr>
+                
+              <tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="modal-footer" style="display: flex; justify-content: center;">
+           <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+     </div>
+  </div>
+</div>
+<!---===========================================================================================================-->
