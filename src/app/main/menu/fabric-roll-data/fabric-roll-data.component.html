@@ -109,7 +109,7 @@
      <div class="modal-content">
         <div class="modal-body">
           <div style="overflow-x: auto; height: 100%;">
-            <table>
+            <table id="table-data">
               <thead>
                 <tr>
                   <th></th>
@@ -130,6 +130,7 @@
                 </tr>
           
                 <tr>
+                  <td><b>Sl.No</b></td>
                   <th>WONo</th>
                   <th>RollNo</th>
                   <th>FabBarcode</th>
@@ -163,10 +164,12 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let fab of this.dataSource">
+                <tr *ngFor="let fab of this.dataSource; let i = index">
+                  <td>{{i+1}}</td>
                   <td>{{fab.workorderId}}</td>
                   <td>{{fab.rollNo}}</td>
                   <td>{{fab.fabBarcode}}</td>
+                  <td>{{fab.batchNo}}</td>
                   <td>{{fab.entry_1}}</td>
                   <td>{{fab.entry_1At}}</td>
                   <td>{{fab.entry_2}}</td>
@@ -185,7 +188,6 @@
                   <td>-</td>
                   <td>-</td>
                   <td>-</td>
-                  <td>-</td>
                 </tr>
                 
               <tbody>
@@ -193,9 +195,13 @@
           </div>
         </div>
 
-        <div class="modal-footer" style="display: flex; justify-content: center;">
-           <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        </div>
+        <div class="modal-footer" style="display: flex;">
+    
+           <button type="button" class="btn btn-danger" data-dismiss="modal" style="margin-right: 40%;">Close</button>
+           <button class="btn btn-primary" (click)="exportexcel()" style="display: flex; justify-content: lefts;">
+            Download File
+           </button>
+          </div>
      </div>
   </div>
 </div>

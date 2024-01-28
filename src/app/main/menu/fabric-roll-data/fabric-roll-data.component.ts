@@ -2,7 +2,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/api.service';
-import * as xls from 'xlsx'
+import * as XLSX from 'xlsx'
 
 
 @Component({
@@ -48,6 +48,20 @@ export class FabricRollDataComponent implements OnInit {
     this.getbuyers();
   }
 
+  fileName="Fabricrolldata.xlsx"
+
+  exportexcel() {
+    /* Passing table id */
+    let data = document.getElementById("table-data");
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(data);
+
+    /* Generate workbook and append the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    /* Save to file */
+    XLSX.writeFile(wb, this.fileName);
+}
 
 check(id:any){
 
