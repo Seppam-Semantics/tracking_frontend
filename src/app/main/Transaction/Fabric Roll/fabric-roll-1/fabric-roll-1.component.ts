@@ -244,6 +244,7 @@ loadworkorder(buyer:any, order:any, style:any, color:any, size:any){
     this.http.get<any>(`${this.api.apiUrl}/fabricrollapi/fabric-entrys?id=&entry=1&buyer=${buyer}&orderNo=${order}&style=${style}&color=${color}&size=${size}`, { headers }).subscribe((res)=>{
       this.fabdetails = res.workorder
       this.rollnnumber = res.fabricRolls
+      this.workorderId = this.rollnnumber[0].workorderId;
         for(let noOfRolls of this.rollnnumber){
         this.add(noOfRolls)
         }
@@ -414,6 +415,7 @@ delete3(index: number) {
 
   add3(defaultValues?: any) {    
     this.items3.push(this.fb.group({
+      batchNo:[defaultValues.batchNo || ''],
       rollNo: [defaultValues.rollNo || ''],
       fabBarcode:[defaultValues.fabBarcode || ''],
       entry_2:[defaultValues.entry_2 || ''],
@@ -451,6 +453,7 @@ delete4(index: number) {
 
   add4(defaultValues?: any) {
     this.items4.push(this.fb.group({
+      batchNo:[defaultValues.batchNo || ''],
       rollNo: [defaultValues.rollNo || ''],
       fabBarcode:[defaultValues.fabBarcode || ''],
       entry_3:[defaultValues.entry_3 || ''],
@@ -489,11 +492,13 @@ delete5(index: number) {
 
   add5(defaultValues?: any) {
     this.items5.push(this.fb.group({
+      batchNo:[defaultValues.batchNo || ''],
       rollNo: [defaultValues.rollNo || ''],
       fabBarcode:[defaultValues.fabBarcode || ''],
       entry_2:[defaultValues.entry_2 || ''],
       entry_4:[defaultValues.entry_4 || ''],
-      entry_5: [defaultValues.entry_2 - defaultValues.entry_4 || '']
+      entry_5: [defaultValues.entry_2 - defaultValues.entry_4 || ''],
+      reason:[defaultValues.reason || '']
     }));
   }
 
@@ -527,6 +532,7 @@ delete6(index: number) {
 
   add6(defaultValues?: any) {
     this.items6.push(this.fb.group({
+      batchNo:[defaultValues.batchNo || ''],
       rollNo: [defaultValues.rollNo || ''],
       fabBarcode:[defaultValues.fabBarcode || ''],
       entry_4:[defaultValues.entry_4 || ''],
@@ -563,6 +569,7 @@ delete7(index: number) {
 
   add7(defaultValues?: any) {
     this.items7.push(this.fb.group({
+      batchNo:[defaultValues.batchNo || ''],
       rollNo: [defaultValues.rollNo || ''],
       fabBarcode:[defaultValues.fabBarcode || ''],
       entry_2:[defaultValues.entry_2 || ''],

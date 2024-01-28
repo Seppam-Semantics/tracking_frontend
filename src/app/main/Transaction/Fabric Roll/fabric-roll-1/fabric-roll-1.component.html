@@ -294,7 +294,7 @@
                   <div class="entrydata" *ngFor="let item of items3.controls; let i = index" [formGroupName]="i">
 
                     <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                      <input matInput required textOnly>
+                      <input matInput required  formControlName="batchNo">
                       <mat-error> </mat-error>
                     </mat-form-field>
 
@@ -390,7 +390,7 @@
 
                     <mat-form-field appearance="outline" style="width:70px" class="full-width">
                       <!-- <mat-label>Batch no</mat-label> -->
-                      <input matInput required readonly>
+                      <input matInput required readonly formControlName="batchNo">
                       <mat-error> </mat-error>
                     </mat-form-field>
 
@@ -493,7 +493,7 @@
                   <div class="entrydata" *ngFor="let item of items5.controls; let d = index" [formGroupName]="d">
                     <mat-form-field appearance="outline" style="width:70px" class="full-width">
                       <!-- <mat-label>Batch no</mat-label> -->
-                      <input matInput required readonly>
+                      <input matInput required readonly formControlName="batchNo">
                       <mat-error> </mat-error>
                     </mat-form-field>
                   </div>
@@ -574,7 +574,10 @@
                   <div *ngFor="let item of items5.controls; let d = index" [formGroupName]="d" class="entrydata">
                     <div style="display: flex; justify-content: center">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                        <input matInput required >
+                        <mat-select formControlName="reason">
+                          <mat-option value="yes">YES</mat-option>   
+                          <mat-option value="No">NO</mat-option>   
+                        </mat-select>
                       </mat-form-field>
                       <button type="button" class="btn btn-danger" style="height: 50px; display: none;" (click)="delete5(d)"> &#10005;
                       </button>
@@ -619,7 +622,7 @@
                   <div class="entrydata" *ngFor="let item of items6.controls; let f = index" [formGroupName]="f">
                     <mat-form-field appearance="outline" style="width:70px" class="full-width">
                       <!-- <mat-label>Batch no</mat-label> -->
-                      <input matInput required textOnly>
+                      <input matInput required readonly formControlName="batchNo">
                       <mat-error> </mat-error>
                     </mat-form-field>
                   </div>
@@ -713,7 +716,7 @@
                   <div class="entrydata" *ngFor="let item of items7.controls; let g = index" [formGroupName]="g">
                     <mat-form-field appearance="outline" style="width:70px" class="full-width">
                       <!-- <mat-label>Batch no</mat-label> -->
-                      <input matInput required textOnly>
+                      <input matInput required readonly formControlName="batchNo">
                       <mat-error> </mat-error>
                     </mat-form-field>
                   </div>
