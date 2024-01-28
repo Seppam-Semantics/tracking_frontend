@@ -145,17 +145,9 @@ onSelectionChange() {
       this.fabdetails = res.workorder
       this.rollnnumber = res.fabricRolls
       this.workorderId = this.rollnnumber[0].workorderId;
-      this.numbers = []
-      this.fabcode = []
-      this.entry1 = []
       for(let noOfRolls of this.rollnnumber){
-      this.numbers.push(noOfRolls.rollNo)
-      this.fabcode.push(noOfRolls.fabBarcode)
-      this.entry1.push(noOfRolls.entry_1)
+      this.add(noOfRolls);
       }
-      this.numbers.forEach((value)=>{
-        this.add(value);
-      })
     })
   }
 
