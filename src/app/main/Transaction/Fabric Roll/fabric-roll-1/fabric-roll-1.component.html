@@ -1,7 +1,8 @@
 <cdk-accordion class="example-accordion">
-  <cdk-accordion-item #accordionItem="cdkAccordionItem" class="example-accordion-item" role="button" tabindex="0" style="display: flex; flex-direction: column;">
+  <cdk-accordion-item #accordionItem="cdkAccordionItem" class="example-accordion-item" role="button" tabindex="0"
+    style="display: flex; flex-direction: column;">
     <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
-      <mat-form-field appearance="outline"  style="width: 105px;">
+      <mat-form-field appearance="outline" style="width: 105px;">
         <mat-label>Buyer</mat-label>
         <mat-select [(ngModel)]="buyerName" (selectionChange)="onSelectionChange()" (click)="resetform()">
           <mat-option value=""> </mat-option>
@@ -11,7 +12,7 @@
 
       <mat-form-field appearance="outline" style="width: 105px;">
         <mat-label>Order</mat-label>
-        <mat-select [(ngModel)]="ordernumbers" (selectionChange)="onSelectionChange()" (click)="resetform()">
+        <mat-select  [(ngModel)]="ordernumbers" (selectionChange)="onSelectionChange()" (click)="resetform()">
           <mat-option value=""> </mat-option>
           <mat-option *ngFor="let order of this.order" value="{{order.orderNO}}">{{order.orderNO}}</mat-option>
         </mat-select>
@@ -49,731 +50,787 @@
 
 <cdk-accordion class="example-accordion">
   <cdk-accordion-item #accordionItem5="cdkAccordionItem" class="example-accordion-item" role="button" tabindex="0">
-  <cdk-accordion-item #accordionItem5="cdkAccordionItem" class="example-accordion-item" role="button" tabindex="0">
+    <cdk-accordion-item #accordionItem5="cdkAccordionItem" class="example-accordion-item" role="button" tabindex="0">
 
-    <div class="example-accordion-item-header" (click)="accordionItem5.toggle()"
-      style="display: flex; justify-content: center; " (click)="show = !show">
-      <div><b style="font-size: 110%;">{{ show ? '&minus;': '&plus;' }} </b></div>
-    </div>
-    <div class="cdk-accordion-item-body" [style.display]="accordionItem5.expanded ? '' : 'none'">
-      <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
-        <mat-form-field appearance="outline" style="width: 105px;">
-          <mat-label>Fab Type</mat-label>
-          <input matInput value="{{fabdetails?.fabType}}" readonly>
-        </mat-form-field>
+      <div class="example-accordion-item-header" (click)="accordionItem5.toggle()"
+        style="display: flex; justify-content: center; " (click)="show = !show">
+        <div><b style="font-size: 110%;">{{ show ? '&minus;': '&plus;' }} </b></div>
+      </div>
+      <div class="cdk-accordion-item-body" [style.display]="accordionItem5.expanded ? '' : 'none'">
+        <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
+          <mat-form-field appearance="outline" style="width: 105px;">
+            <mat-label>Fab Type</mat-label>
+            <input matInput value="{{fabdetails?.fabType}}" readonly>
+          </mat-form-field>
 
-        <mat-form-field appearance="outline" style="width: 105px;">
-          <mat-label>Yarn Type</mat-label>
-          <input matInput value="{{fabdetails?.yarnType}}" readonly>
-        </mat-form-field>
+          <mat-form-field appearance="outline" style="width: 105px;">
+            <mat-label>Yarn Type</mat-label>
+            <input matInput value="{{fabdetails?.yarnType}}" readonly>
+          </mat-form-field>
 
-        <mat-form-field appearance="outline" style="width: 105px;">
-          <mat-label>Yarn Cunt</mat-label>
-          <input matInput value="{{fabdetails?.yarnCount}}" readonly>
-        </mat-form-field>
+          <mat-form-field appearance="outline" style="width: 105px;">
+            <mat-label>Yarn Cunt</mat-label>
+            <input matInput value="{{fabdetails?.yarnCount}}" readonly>
+          </mat-form-field>
 
-        <mat-form-field appearance="outline" style="width: 105px;">
-          <mat-label>Knit SL</mat-label>
-          <input matInput value="{{fabdetails?.knitSL}}" readonly>
-        </mat-form-field>
+          <mat-form-field appearance="outline" style="width: 105px;">
+            <mat-label>Knit SL</mat-label>
+            <input matInput value="{{fabdetails?.knitSL}}" readonly>
+          </mat-form-field>
 
-        <mat-form-field appearance="outline" style="width: 105px;"> 
-          <mat-label>Fab Dia</mat-label>
-          <input matInput value="{{fabdetails?.fabDia}}" readonly>
-        </mat-form-field>
+          <mat-form-field appearance="outline" style="width: 105px;">
+            <mat-label>Fab Dia</mat-label>
+            <input matInput value="{{fabdetails?.fabDia}}" readonly>
+          </mat-form-field>
 
-        <mat-form-field appearance="outline" style="width: 105px;">
-          <mat-label>GSM</mat-label>
-          <input matInput value="{{fabdetails?.fabGsm}}" readonly>
-        </mat-form-field>
+          <mat-form-field appearance="outline" style="width: 105px;">
+            <mat-label>GSM</mat-label>
+            <input matInput value="{{fabdetails?.fabGsm}}" readonly>
+          </mat-form-field>
 
-        <mat-form-field appearance="outline" style="width: 105px;">
-          <mat-label>Knit Fty</mat-label>
-          <input matInput readonly value="{{fabdetails?.knitFty}}">
-        </mat-form-field>
+          <mat-form-field appearance="outline" style="width: 105px;">
+            <mat-label>Knit Fty</mat-label>
+            <input matInput readonly value="{{fabdetails?.knitFty}}">
+          </mat-form-field>
 
-        <mat-form-field appearance="outline" style="width: 105px;">
-          <mat-label>Dye Fty</mat-label>
-          <input matInput readonly value="{{fabdetails?.dyeinFty}}">
-        </mat-form-field>
+          <mat-form-field appearance="outline" style="width: 105px;">
+            <mat-label>Dye Fty</mat-label>
+            <input matInput readonly value="{{fabdetails?.dyeinFty}}">
+          </mat-form-field>
 
-        <mat-form-field appearance="outline" style="width: 105px;">
-          <mat-label>Spin Fty</mat-label>
-          <input matInput readonly value="{{fabdetails?.spinFty}}">
-        </mat-form-field>
+          <mat-form-field appearance="outline" style="width: 105px;">
+            <mat-label>Spin Fty</mat-label>
+            <input matInput readonly value="{{fabdetails?.spinFty}}">
+          </mat-form-field>
 
-        <mat-form-field appearance="outline" style="width: 105px;">
-          <mat-label>Yarn Lot</mat-label>
-          <input matInput readonly value="{{fabdetails?.yarnLot}}">
-        </mat-form-field>
+          <mat-form-field appearance="outline" style="width: 105px;">
+            <mat-label>Yarn Lot</mat-label>
+            <input matInput readonly value="{{fabdetails?.yarnLot}}">
+          </mat-form-field>
+
+        </div>
 
       </div>
 
-    </div>
+    </cdk-accordion-item>
 
-  </cdk-accordion-item>
+    <!--================================== Fab Entry 1 ==============================================================================-->
 
-  <!--================================== Fab Entry 1 ==============================================================================-->
+    <mat-tab-group (selectedTabChange)="changetab($event)">
+      <mat-tab label="First Roll Weight" style="overflow: hidden;">
+        <div [formGroup]="form" style="overflow: hidden;">
 
-  <mat-tab-group (selectedTabChange)="changetab($event)">
-    <mat-tab label="First Roll Weight" style="overflow: hidden;">
-      <div [formGroup]="form" style="overflow: hidden;">
+          <div style="display: flex; justify-content: center;" *ngIf="!loading1">
+            <button mat-raised-button color="primary" (click)="submit()" style="margin-top: 3%;">Save</button>
+          </div>
+          <div style="display: flex; justify-content: center;" *ngIf="loading1">
+            <button mat-raised-button color="primary" style="margin-top: 3%;">
+              <div class="loader"></div>
+            </button>
+          </div>
 
-        <div style="display: flex; justify-content: center;" *ngIf="!loading1">
-          <button mat-raised-button color="primary" (click)="submit()"
-            style="margin-top: 3%;">Save</button>
-        </div>
-        <div style="display: flex; justify-content: center;" *ngIf="loading1">
-          <button mat-raised-button color="primary"
-            style="margin-top: 3%;"><div class="loader"></div></button>
-        </div>
 
-        
 
-        <div class="table-container">
-          <table mat-table [dataSource]="dataSource" class="demo-table">
+          <div class="table-container">
+            <table mat-table [dataSource]="dataSource" class="demo-table">
 
-            <ng-container matColumnDef="Cum" sticky>
-              <th mat-header-cell *matHeaderCellDef>Roll no</th>
-              <td mat-cell *matCellDef="let element">
-                <div formArrayName="entrys">
-                  <div class="entrydata" *ngFor="let item of items.controls; let i = index" [formGroupName]="i"
-                    style="display: flex; justify-content: center;">
-                    <mat-form-field style="width: 100px;">
-                      <input type="text" matInput readonly formControlName="fabBarcode">
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" class="full-width" style="width: 100px;">
-                      <input type="text" matInput required formControlName="rollNo" [matAutocomplete]="auto">
-                      <mat-autocomplete #auto="matAutocomplete">
-                        <mat-option *ngFor="let roll of this.rollnnumber"
-                          value="{{roll.rollNo}}">{{roll.rollNo}}</mat-option>
-                      </mat-autocomplete>
-                    </mat-form-field>
-
-                  </div>
-                </div>
-              </td>
-            </ng-container>
-
-            <ng-container matColumnDef="CumWt">
-              <th mat-header-cell *matHeaderCellDef>Roll.Wt</th>
-              <td mat-cell *matCellDef="let element">
-                <div formArrayName="entrys">
-                  <div *ngFor="let item of items.controls; let i = index" [formGroupName]="i" class="entrydata">
-                    <div style="display: flex; justify-content: center;">
+              <ng-container matColumnDef="Cum" sticky>
+                <th mat-header-cell *matHeaderCellDef>Roll no <br></th>
+                <td mat-cell *matCellDef="let element">
+                  <div formArrayName="entrys">
+                    <div class="entrydata" *ngFor="let item of items.controls; let i = index" [formGroupName]="i"
+                      style="display: flex; justify-content: center;">
+                      <mat-form-field style="width: 100px;">
+                        <input type="text" matInput readonly style="direction: rtl;" formControlName="fabBarcode">
+                      </mat-form-field>
                       <mat-form-field appearance="outline" class="full-width" style="width: 100px;">
-                        <input matInput required formControlName="entry_1">
-                        <mat-error>
-                        </mat-error>
+                        <input type="text" matInput required formControlName="rollNo" [matAutocomplete]="auto">
+                        <mat-autocomplete #auto="matAutocomplete">
+                          <mat-option *ngFor="let roll of this.rollnnumber"
+                            value="{{roll.rollNo}}">{{roll.rollNo}}</mat-option>
+                        </mat-autocomplete>
                       </mat-form-field>
-                      <button type="button" class="btn btn-danger" style="height: 50px; margin-left: 8px; display: none;"
-                        (click)="delete(i)" >&#10008;</button>
+
                     </div>
                   </div>
-                </div>
-              </td>
-            </ng-container>
+                </td>
+              </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" ></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
-        </div>
-        <br>
-      </div>
-    </mat-tab>
-
-
-    <!--=================================== Fab Entry 2 =================================================================================-->
-
-    <mat-tab label="Greige Fab Del Entry">
-
-      <div [formGroup]="form2" style="display: flex; flex-direction: column;">
-
-
-        <div style="display: flex; justify-content: center;" *ngIf="!loading2">
-          <button mat-raised-button color="primary" (click)="submit2()"
-            style="margin-top: 3%;">Save</button>
-        </div>
-        <div style="display: flex; justify-content: center;" *ngIf="loading2">
-          <button mat-raised-button color="primary"
-            style="margin-top: 3%;"><div class="loader"></div></button>
-        </div>
-
-        <div class="table-container">
-          <table mat-table [dataSource]="dataSource2" class=" demo-table">
-            <ng-container matColumnDef="Cum" sticky>
-              <th mat-header-cell *matHeaderCellDef>Roll no</th>
-              <td mat-cell *matCellDef="let element">
-                <div formArrayName="entrystwo">
-                  <div class="entrydata" *ngFor="let item of items2.controls; let a = index" [formGroupName]="a">
-                    <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                      <input matInput required formControlName="rollNo" readonly>
-                      <mat-error></mat-error>
-                    </mat-form-field>
-                    <mat-form-field style="display: none;">
-                      <input type="text" matInput required formControlName="fabBarcode">
-                    </mat-form-field>
-                  </div>
-                </div>
-              </td>
-            </ng-container>
-
-            <ng-container matColumnDef="CumWt1">
-              <th mat-header-cell *matHeaderCellDef>Roll.Wt</th>
-              <td mat-cell *matCellDef="let element">
-                <div formArrayName="entrystwo">
-                  <div *ngFor="let item of items2.controls; let a = index" [formGroupName]="a" class="entrydata">
-                    <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                      <input formControlName="entry_1" matInput required readonly>
-                      <mat-error></mat-error>
-                    </mat-form-field>
-                  </div>
-                </div>
-              </td>
-            </ng-container>
-
-            <ng-container matColumnDef="CumWt2">
-              <th mat-header-cell *matHeaderCellDef>Greige.Wt</th>
-              <td mat-cell *matCellDef="let element">
-                <div formArrayName="entrystwo">
-                  <div *ngFor="let item of items2.controls; let a = index" [formGroupName]="a" class="entrydata">
-                    <div style="display: flex; justify-content: center;">
-                      <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                        <input matInput required formControlName="entry_2">
-                        <mat-error>
-
-                        </mat-error>
-                      </mat-form-field>
-                      <button type="button" class="btn btn-danger" style="height: 50px; margin-left: 8px; display: none;"
-                        (click)="delete2(a)">&#10008;</button>
+              <ng-container matColumnDef="CumWt">
+                <th mat-header-cell *matHeaderCellDef>
+                  <input matInput style="width:50%; text-align: center;" [value] = "this.entry1total" readonly><br>
+                  Roll.Wt
+                  </th>
+                
+                <td mat-cell *matCellDef="let element">
+                  <div formArrayName="entrys">
+                    <div *ngFor="let item of items.controls; let i = index" [formGroupName]="i" class="entrydata">
+                      <div style="display: flex; justify-content: center;">
+                        <mat-form-field appearance="outline" class="full-width" style="width: 100px;">
+                          <input matInput required formControlName="entry_1">
+                          <mat-error>
+                          </mat-error>
+                        </mat-form-field>
+                        <button type="button" class="btn btn-danger"
+                          style="height: 50px; margin-left: 8px; display: none;" (click)="delete(i)">&#10008;</button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </td>
-            </ng-container>
+                </td>
+              </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumns2 sticky: true"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
-          </table>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          </div>
+          <br>
         </div>
-      </div>
-    </mat-tab>
+      </mat-tab>
 
-    <!--========================= Fab Entry 3 =======================================================================-->
 
-    <mat-tab label="Dye Batch Entry">
+      <!--=================================== Fab Entry 2 =================================================================================-->
 
-      <div [formGroup]="form3" style="display: flex; flex-direction: column;">
+      <mat-tab label="Greige Fab Del Entry">
 
-        <div style="display: flex; justify-content: center;" *ngIf="!loading3">
-          <button mat-raised-button color="primary" (click)="submit3()"
-            style="margin-top: 3%;">Save</button>
-        </div>
-        <div style="display: flex; justify-content: center;" *ngIf="loading3">
-          <button mat-raised-button color="primary"
-            style="margin-top: 3%;"><div class="loader"></div></button>
-        </div>
+        <div [formGroup]="form2" style="display: flex; flex-direction: column;">
 
-        <div class="table-container">
-          <table mat-table [dataSource]="dataSource" class=" demo-table">
 
-            <ng-container matColumnDef="Batchno">
-              <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Batch no</th>
-              <td mat-cell *matCellDef="let element" style="padding: 0%;">
-                <div formArrayName="entrysthree">
-                  <div class="entrydata" *ngFor="let item of items3.controls; let i = index" [formGroupName]="i">
+          <div style="display: flex; justify-content: center;" *ngIf="!loading2">
+            <button mat-raised-button color="primary" (click)="submit2()" style="margin-top: 3%;">Save</button>
+          </div>
+          <div style="display: flex; justify-content: center;" *ngIf="loading2">
+            <button mat-raised-button color="primary" style="margin-top: 3%;">
+              <div class="loader"></div>
+            </button>
+          </div>
 
-                    <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                      <input matInput required  formControlName="batchNo">
-                      <mat-error> </mat-error>
-                    </mat-form-field>
-
-                  </div>
-                </div>
-              </td>
-            </ng-container>
-
-            <ng-container matColumnDef="Cum" sticky>
-              <th mat-header-cell *matHeaderCellDef style="padding: 0%;"> Roll no </th>
-              <td mat-cell *matCellDef="let element" style="padding: 0%;">
-                <div formArrayName="entrysthree">
-                  <div *ngFor="let item of items3.controls; let i = index" [formGroupName]="i" class="entrydata">
-
-                    <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                      <input matInput required formControlName="rollNo">
-                      <mat-error> </mat-error>
-                    </mat-form-field>
-                    <mat-form-field style="display: none;">
-                      <input type="text" matInput required formControlName="fabBarcode">
-                    </mat-form-field>
-                  </div>
-                </div>
-              </td>
-            </ng-container>
-
-            <ng-container matColumnDef="greigeWt">
-
-              <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Greige.Wt</th>
-              <td mat-cell *matCellDef="let element" style="padding: 0%;">
-                <div formArrayName="entrysthree">
-                  <div *ngFor="let item of items3.controls; let i = index" [formGroupName]="i" class="entrydata">
-                    <div style="display: flex; justify-content: center;">
+          <div class="table-container">
+            <table mat-table [dataSource]="dataSource2" class=" demo-table">
+              <ng-container matColumnDef="Cum" sticky>
+                <th mat-header-cell *matHeaderCellDef>Roll no</th>
+                <td mat-cell *matCellDef="let element">
+                  <div formArrayName="entrystwo">
+                    <div class="entrydata" *ngFor="let item of items2.controls; let a = index" [formGroupName]="a">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                        <input formControlName="entry_2" matInput required readonly>
+                        <input matInput required formControlName="rollNo" readonly>
+                        <mat-error></mat-error>
+                      </mat-form-field>
+                      <mat-form-field style="display: none;">
+                        <input type="text" matInput required formControlName="fabBarcode">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="CumWt1">
+                <th mat-header-cell *matHeaderCellDef>
+                  <input matInput style="width:50%; text-align: center;" [value] = "this.entry1total" readonly><br>
+                  Roll.Wt
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  <div formArrayName="entrystwo">
+                    <div *ngFor="let item of items2.controls; let a = index" [formGroupName]="a" class="entrydata">
+                      <mat-form-field appearance="outline" style="width:70px" class="full-width">
+                        <input formControlName="entry_1" matInput required readonly>
                         <mat-error></mat-error>
                       </mat-form-field>
                     </div>
                   </div>
-                </div>
-              </td>
-            </ng-container>
+                </td>
+              </ng-container>
 
-            <ng-container matColumnDef="dyeWt">
+              <ng-container matColumnDef="CumWt2">
+                <th mat-header-cell *matHeaderCellDef> 
+                  <input matInput style="width:50%; text-align: center;" [value] = "this.entry2total" readonly ><br> 
+                  Greige.Wt
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  <div formArrayName="entrystwo">
+                    <div *ngFor="let item of items2.controls; let a = index" [formGroupName]="a" class="entrydata">
+                      <div style="display: flex; justify-content: center;">
+                        <mat-form-field appearance="outline" style="width:70px" class="full-width">
+                          <input matInput required formControlName="entry_2">
+                          <mat-error>
 
-              <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Dye.Wt</th>
-              <td mat-cell *matCellDef="let element" style="padding: 0%;">
-                <div formArrayName="entrysthree">
-                  <div *ngFor="let item of items3.controls; let b = index" [formGroupName]="b" class="entrydata">
-                    <div style="display: flex; justify-content: center;">
-                      <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                        <input matInput required formControlName="entry_3" textOnly>
-                        <mat-error></mat-error>
-                      </mat-form-field>
-                      <button type="button" class="btn btn-danger" style="height: 50px; margin-left: 8px; display: none;"
-                        (click)="delete3(b)"> &#10008; </button>
+                          </mat-error>
+                        </mat-form-field>
+                        <button type="button" class="btn btn-danger"
+                          style="height: 50px; margin-left: 8px; display: none;" (click)="delete2(a)">&#10008;</button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </td>
-            </ng-container>
+                </td>
+              </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumns3 sticky: true"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns3;"></tr>
-          </table>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns2 sticky: true"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+            </table>
+          </div>
         </div>
-      </div>
-    </mat-tab>
+      </mat-tab>
 
-    <!--========================= Fab Entry 4 =================================================================================-->
+      <!--========================= Fab Entry 3 =======================================================================-->
 
-    <mat-tab label="Dye Finish Entry">
+      <mat-tab label="Dye Batch Entry">
 
-      <div [formGroup]="form4" style="overflow: hidden;">
-        
-        <div style="display: flex; justify-content: center;" *ngIf="!loading4">
-          <button mat-raised-button color="primary" (click)="submit4()"
-            style="margin-top: 3%;">Save</button>
-        </div>
-        <div style="display: flex; justify-content: center;" *ngIf="loading4">
-          <button mat-raised-button color="primary"
-            style="margin-top: 3%;"><div class="loader"></div></button>
-        </div>
-        
-        <div class="table-container">
-          <table mat-table [dataSource]="dataSource4" class=" demo-table">
+        <div [formGroup]="form3" style="display: flex; flex-direction: column;">
+          <div style="display: flex; gap: 20%">
+            <div style="display: flex;flex-direction: column; width: 50%;">
+              <input type="text" class="form-control" style="direction: rtl; text-align: center; width: 50%;" placeholder="Batchno" [formControl]="batchGenerate">
+              <button class="btn btn-primary" style="width: 50%;" (click)="dyeBatchEntry()">Generate</button>
+            </div>
+            <div style="display: flex; justify-content: center;" *ngIf="!loading3">
+              <button mat-raised-button color="primary" (click)="submit3()" style="margin-top: 3%;">Save</button>
+            </div>
+            <div style="display: flex; justify-content: center;" *ngIf="loading3">
+              <button mat-raised-button color="primary" style="margin-top: 3%;">
+                <div class="loader"></div>
+              </button>
+            </div>
+          </div>
 
-            <ng-container matColumnDef="Batchno">
-              <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Batchno</th>
-              <td mat-cell *matCellDef="let element" style="padding: 0%;">
-                <div formArrayName="entrysfour">
-                  <div class="entrydata" *ngFor="let item of items4.controls; let c = index" [formGroupName]="c">
+          <div class="table-container">
+            <table mat-table [dataSource]="dataSource" class=" demo-table">
 
-                    <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                      <input matInput required readonly formControlName="batchNo">
-                      <mat-error> </mat-error>
-                    </mat-form-field>
+              <ng-container matColumnDef="Batchno">
+                <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Batch no</th>
+                <td mat-cell *matCellDef="let element" style="padding: 0%;">
+                  <div formArrayName="entrysthree">
+                    <div class="entrydata" *ngFor="let item of items3.controls; let i = index" [formGroupName]="i">
 
-                  </div>
-                </div>
-              </td>
-            </ng-container>
-
-            <ng-container matColumnDef="Cum" sticky>
-              <th mat-header-cell *matHeaderCellDef style="padding: 0%;"> Roll no </th>
-              <td mat-cell *matCellDef="let element" style="padding: 0%;">
-                <div formArrayName="entrysfour">
-                  <div *ngFor="let item of items4.controls; let c = index" [formGroupName]="c" class="entrydata">
-
-                    <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                      <input matInput required formControlName="rollNo" textOnly>
-                      <mat-error> </mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field style="display: none;">
-                      <input type="text" matInput required formControlName="fabBarcode">
-                    </mat-form-field>
-                  </div>
-                </div>
-              </td>
-            </ng-container>
-
-            <ng-container matColumnDef="dyeWt">
-
-              <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Dye.Wt</th>
-              <td mat-cell *matCellDef="let element" style="padding: 0%;">
-                <div formArrayName="entrysfour">
-                  <div *ngFor="let item of items4.controls; let c = index" [formGroupName]="c" class="entrydata">
-                    <div style="display: flex; justify-content: center">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                        <input formControlName="entry_3" matInput required readonly>
-                        <mat-error></mat-error>
+                        <input matInput required style="direction: rtl;" formControlName="batchNo">
+                        <mat-error> </mat-error>
+                      </mat-form-field>
+
+                    </div>
+                  </div>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="Cum" sticky>
+                <th mat-header-cell *matHeaderCellDef style="padding: 0%;"> Roll no </th>
+                <td mat-cell *matCellDef="let element" style="padding: 0%;">
+                  <div formArrayName="entrysthree">
+                    <div *ngFor="let item of items3.controls; let i = index" [formGroupName]="i" class="entrydata">
+
+                      <mat-form-field appearance="outline" style="width:70px" class="full-width">
+                        <input matInput required formControlName="rollNo">
+                        <mat-error> </mat-error>
+                      </mat-form-field>
+                      <mat-form-field style="display: none;">
+                        <input type="text" matInput required formControlName="fabBarcode">
                       </mat-form-field>
                     </div>
                   </div>
-                </div>
-              </td>
-            </ng-container>
+                </td>
+              </ng-container>
 
-            <ng-container matColumnDef="finWt">
+              <ng-container matColumnDef="greigeWt">
 
-              <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Fin.Wt</th>
-              <td mat-cell *matCellDef="let element" style="padding: 0%;">
-                <div formArrayName="entrysfour">
-                  <div *ngFor="let item of items4.controls; let c = index" [formGroupName]="c" class="entrydata">
-                    <div style="display: flex; justify-content: center">
-                      <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                        <input matInput required formControlName="entry_4" textOnly>
-                        <mat-error></mat-error>
-                      </mat-form-field>
-                      <button type="button" class="btn btn-danger" style="height: 50px; display: none;" (click)="delete4(c)"> &#10005;
-                      </button>
+                <th mat-header-cell *matHeaderCellDef style="padding: 0%;">
+                  <input matInput style="width:50%; text-align: center;" [value] = "this.entry2total" readonly><br>
+                  Greige.Wt
+                </th>
+                <td mat-cell *matCellDef="let element" style="padding: 0%;">
+                  <div formArrayName="entrysthree">
+                    <div *ngFor="let item of items3.controls; let i = index" [formGroupName]="i" class="entrydata">
+                      <div style="display: flex; justify-content: center;">
+                        <mat-form-field appearance="outline" style="width:70px" class="full-width">
+                          <input formControlName="entry_2" matInput required readonly>
+                          <mat-error></mat-error>
+                        </mat-form-field>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </td>
-            </ng-container>
+                </td>
+              </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumns4 sticky: true"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns4;"></tr>
-          </table>
-        </div>
-      </div>
-    </mat-tab>
+              <ng-container matColumnDef="dyeWt">
 
-    <!--======================= Fab Entry 5 ==========================================================================-->
-
-    <mat-tab label="Dyed Fab Del Entry">
-      <div [formGroup]="form5" style="overflow: hidden;">
-        
-        <div style="display: flex; justify-content: center;" *ngIf="!loading5">
-          <button mat-raised-button color="primary"  (click)="submit5()"
-            style="margin-top: 3%;">Save</button>
-        </div>
-        <div style="display: flex; justify-content: center;" *ngIf="loading5">
-          <button mat-raised-button color="primary"
-            style="margin-top: 3%;"><div class="loader"></div></button>
-        </div>
-
-        <div class="table-container">
-          <table mat-table [dataSource]="dataSource5" class="demo-table">
-            <ng-container matColumnDef="Batchno">
-              <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Batchno</th>
-              <td mat-cell *matCellDef="let element" style="padding: 0%;">
-                <div formArrayName="entrysfive">
-                  <div class="entrydata" *ngFor="let item of items5.controls; let d = index" [formGroupName]="d">
-                    <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                      <input matInput required readonly formControlName="batchNo">
-                      <mat-error> </mat-error>
-                    </mat-form-field>
-                  </div>
-                </div>
-              </td>
-            </ng-container>
-
-            <ng-container matColumnDef="rollno" sticky>
-              <th mat-header-cell *matHeaderCellDef style="padding: 0%;"> Roll No </th>
-              <td mat-cell *matCellDef="let element" style="padding: 0%;">
-                <div formArrayName="entrysfive">
-                  <div *ngFor="let item of items5.controls; let d = index" [formGroupName]="d" class="entrydata">
-                    <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                      <input matInput required formControlName="rollNo" textOnly>
-                      <mat-error> </mat-error>
-                    </mat-form-field>
-                    <mat-form-field style="display: none;">
-                      <input type="text" matInput required formControlName="fabBarcode">
-                    </mat-form-field>
-                  </div>
-                </div>
-              </td>
-            </ng-container>
-
-            <ng-container matColumnDef="greigeWt">
-              <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Greige.Wt</th>
-              <td mat-cell *matCellDef="let element" style="padding: 0%;">
-                <div formArrayName="entrysfive">
-                  <div *ngFor="let item of items5.controls; let d = index" [formGroupName]="d" class="entrydata">
-                    <div style="display: flex; justify-content: center">
-                      <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                        <input formControlName = "entry_2" matInput required readonly>
-                        <mat-error></mat-error>
-                      </mat-form-field>
+                <th mat-header-cell *matHeaderCellDef style="padding: 0%;">
+                  <input matInput style="width:50%; text-align: center;" [value] = "this.entry3total" readonly><br>
+                  Dye.Wt
+                </th>
+                <td mat-cell *matCellDef="let element" style="padding: 0%;">
+                  <div formArrayName="entrysthree">
+                    <div *ngFor="let item of items3.controls; let b = index" [formGroupName]="b" class="entrydata">
+                      <div style="display: flex; justify-content: center;">
+                        <mat-form-field appearance="outline" style="width:70px" class="full-width">
+                          <input matInput required formControlName="entry_3" textOnly>
+                          <mat-error></mat-error>
+                        </mat-form-field>
+                        <button type="button" class="btn btn-danger"
+                          style="height: 50px; margin-left: 8px; display: none;" (click)="delete3(b)"> &#10008;
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </td>
-            </ng-container>
+                </td>
+              </ng-container>
 
-            <ng-container matColumnDef="delWt">
-              <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Finish Wt</th>
-              <td mat-cell *matCellDef="let element" style="padding: 0%;">
-                <div formArrayName="entrysfive">
-                  <div *ngFor="let item of items5.controls; let d = index" [formGroupName]="d" class="entrydata">
-                    <div style="display: flex; justify-content: center">
+              <tr mat-header-row *matHeaderRowDef="displayedColumns3 sticky: true"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns3;"></tr>
+            </table>
+          </div>
+        </div>
+      </mat-tab>
+
+      <!--========================= Fab Entry 4 =================================================================================-->
+
+      <mat-tab label="Dye Finish Entry">
+
+        <div [formGroup]="form4" style="overflow: hidden;">
+
+          <div style="display: flex; justify-content: center;" *ngIf="!loading4">
+            <button mat-raised-button color="primary" (click)="submit4()" style="margin-top: 3%;">Save</button>
+          </div>
+          <div style="display: flex; justify-content: center;" *ngIf="loading4">
+            <button mat-raised-button color="primary" style="margin-top: 3%;">
+              <div class="loader"></div>
+            </button>
+          </div>
+
+          <div class="table-container">
+            <table mat-table [dataSource]="dataSource4" class=" demo-table">
+
+              <ng-container matColumnDef="Batchno">
+                <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Batchno</th>
+                <td mat-cell *matCellDef="let element" style="padding: 0%;">
+                  <div formArrayName="entrysfour">
+                    <div class="entrydata" *ngFor="let item of items4.controls; let c = index" [formGroupName]="c">
+
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                        <input formControlName = "entry_4" matInput required readonly>
-                        <mat-error></mat-error>
+                        <input matInput required readonly formControlName="batchNo">
+                        <mat-error> </mat-error>
+                      </mat-form-field>
+
+                    </div>
+                  </div>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="Cum" sticky>
+                <th mat-header-cell *matHeaderCellDef style="padding: 0%;"> Roll no </th>
+                <td mat-cell *matCellDef="let element" style="padding: 0%;">
+                  <div formArrayName="entrysfour">
+                    <div *ngFor="let item of items4.controls; let c = index" [formGroupName]="c" class="entrydata">
+
+                      <mat-form-field appearance="outline" style="width:70px" class="full-width">
+                        <input matInput required formControlName="rollNo" textOnly>
+                        <mat-error> </mat-error>
+                      </mat-form-field>
+
+                      <mat-form-field style="display: none;">
+                        <input type="text" matInput required formControlName="fabBarcode">
                       </mat-form-field>
                     </div>
                   </div>
-                </div>
-              </td>
-            </ng-container>
+                </td>
+              </ng-container>
 
-            <ng-container matColumnDef="difference">
-              <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Difference</th>
-              <td mat-cell *matCellDef="let element" style="padding: 0%;">
-                <div formArrayName="entrysfive">
-                  <div *ngFor="let item of items5.controls; let d = index" [formGroupName]="d" class="entrydata">
-                    <div style="display: flex; justify-content: center">
+              <ng-container matColumnDef="dyeWt">
+
+                <th mat-header-cell *matHeaderCellDef style="padding: 0%;">
+                  <input matInput style="width:50%; text-align: center;" [value] = "this.entry3total" readonly><br>
+                  Dye.Wt
+                </th>
+                <td mat-cell *matCellDef="let element" style="padding: 0%;">
+                  <div formArrayName="entrysfour">
+                    <div *ngFor="let item of items4.controls; let c = index" [formGroupName]="c" class="entrydata">
+                      <div style="display: flex; justify-content: center">
+                        <mat-form-field appearance="outline" style="width:70px" class="full-width">
+                          <input formControlName="entry_3" matInput required readonly>
+                          <mat-error></mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="finWt">
+
+                <th mat-header-cell *matHeaderCellDef style="padding: 0%;">
+                  <input matInput style="width:50%; text-align: center;" [value] = "this.entry4total" readonly><br>
+                  Fin.Wt
+                </th>
+                <td mat-cell *matCellDef="let element" style="padding: 0%;">
+                  <div formArrayName="entrysfour">
+                    <div *ngFor="let item of items4.controls; let c = index" [formGroupName]="c" class="entrydata">
+                      <div style="display: flex; justify-content: center">
+                        <mat-form-field appearance="outline" style="width:70px" class="full-width">
+                          <input matInput required formControlName="entry_4" textOnly>
+                          <mat-error></mat-error>
+                        </mat-form-field>
+                        <button type="button" class="btn btn-danger" style="height: 50px; display: none;"
+                          (click)="delete4(c)"> &#10005;
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns4 sticky: true"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns4;"></tr>
+            </table>
+          </div>
+        </div>
+      </mat-tab>
+
+      <!--======================= Fab Entry 5 ==========================================================================-->
+
+      <mat-tab label="Dyed Fab Del Entry">
+        <div [formGroup]="form5" style="overflow: hidden;">
+
+          <div style="display: flex; justify-content: center;" *ngIf="!loading5">
+            <button mat-raised-button color="primary" (click)="submit5()" style="margin-top: 3%;">Save</button>
+          </div>
+          <div style="display: flex; justify-content: center;" *ngIf="loading5">
+            <button mat-raised-button color="primary" style="margin-top: 3%;">
+              <div class="loader"></div>
+            </button>
+          </div>
+
+          <div class="table-container">
+            <table mat-table [dataSource]="dataSource5" class="demo-table">
+              <ng-container matColumnDef="Batchno">
+                <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Batch No</th>
+                <td mat-cell *matCellDef="let element" style="padding: 0%;">
+                  <div formArrayName="entrysfive">
+                    <div class="entrydata" *ngFor="let item of items5.controls; let d = index" [formGroupName]="d">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                        <input matInput formControlName="entry_5" required readonly>
-                        <mat-error></mat-error>
+                        <input matInput required readonly formControlName="batchNo">
+                        <mat-error> </mat-error>
                       </mat-form-field>
                     </div>
                   </div>
-                </div>
-              </td>
-            </ng-container>
+                </td>
+              </ng-container>
 
-            <ng-container matColumnDef="reason">
-              <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Delivered</th>
-              <td mat-cell *matCellDef="let element" style="padding: 0%;">
-                <div formArrayName="entrysfive">
-                  <div *ngFor="let item of items5.controls; let d = index" [formGroupName]="d" class="entrydata">
-                    <div>
-                      <input type="checkbox" formControlName="reason" [checked]="item.get('reason')?.value"
-                        [value]="item.get('reason')?.value ? 'yes' : 'no'" style="border: 1px solid black; height: 51.2px;">
-                    </div>
-                  </div>
-                </div>
-              </td>
-            </ng-container>
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns5 sticky: true"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns5;"></tr>
-          </table>
-        </div>
-      </div>
-    </mat-tab>
-
-    <!--============================== Fab Entry 6=============================================================================-->
-
-    <mat-tab label="Transfer from warehouse to Cut">
-      <div [formGroup]="form6" style="overflow: hidden;">
-
-        <div style="display: flex; justify-content: center;" *ngIf="!loading6">
-          <button mat-raised-button color="primary"  (click)="submit6()"
-            style=" margin-top: 3%;">Save</button>
-        </div>
-        <div style="display: flex; justify-content: center;" *ngIf="loading6">
-          <button mat-raised-button color="primary"
-            style="margin-top: 3%;"><div class="loader"></div></button>
-        </div>
-
-        <div class="table-container">
-          <table mat-table [dataSource]="dataSource6" class="demo-table">
-            <ng-container matColumnDef="Batchno">
-              <th mat-header-cell *matHeaderCellDef>Batch no</th>
-              <td mat-cell *matCellDef="let element">
-                <div formArrayName="entryssix">
-                  <div class="entrydata" *ngFor="let item of items6.controls; let f = index" [formGroupName]="f">
-                    <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                      <input matInput required readonly formControlName="batchNo">
-                      <mat-error> </mat-error>
-                    </mat-form-field>
-                  </div>
-                </div>
-              </td>
-            </ng-container>
-
-            <ng-container matColumnDef="rollno" sticky>
-              <th mat-header-cell *matHeaderCellDef> Roll No. </th>
-              <td mat-cell *matCellDef="let element">
-                <div formArrayName="entryssix">
-                  <div *ngFor="let item of items6.controls; let f = index" [formGroupName]="f" class="entrydata">
-
-                    <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                      <input matInput required formControlName="rollNo" textOnly>
-                      <mat-error> </mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field style="display: none;">
-                      <input type="text" matInput required formControlName="fabBarcode">
-                    </mat-form-field>
-                  </div>
-                </div>
-              </td>
-            </ng-container>
-
-            <ng-container matColumnDef="delWt">
-              <th mat-header-cell *matHeaderCellDef>Dye Finish Wt</th>
-              <td mat-cell *matCellDef="let element" >
-                <div formArrayName="entryssix">
-                  <div *ngFor="let item of items6.controls; let f = index" [formGroupName]="f" class="entrydata">
-                    <div style="display: flex; justify-content: center">
+              <ng-container matColumnDef="rollno" sticky>
+                <th mat-header-cell *matHeaderCellDef style="padding: 0%;"> Roll No </th>
+                <td mat-cell *matCellDef="let element" style="padding: 0%;">
+                  <div formArrayName="entrysfive">
+                    <div *ngFor="let item of items5.controls; let d = index" [formGroupName]="d" class="entrydata">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                        <input formControlName = "entry_4" matInput required readonly>
-                        <mat-error></mat-error>
+                        <input matInput required formControlName="rollNo" textOnly>
+                        <mat-error> </mat-error>
+                      </mat-form-field>
+                      <mat-form-field style="display: none;">
+                        <input type="text" matInput required formControlName="fabBarcode">
                       </mat-form-field>
                     </div>
                   </div>
-                </div>
-              </td>
-            </ng-container>
+                </td>
+              </ng-container>
 
-            <ng-container matColumnDef="PlanPcs">
-              <th mat-header-cell *matHeaderCellDef>planPcs</th>
-              <td mat-cell *matCellDef="let element">
-                <div formArrayName="entryssix" >
-                  <div *ngFor="let item of items6.controls; let f = index" [formGroupName]="f" class="entrydata">
-                    <div style="display: flex; justify-content: center">
-                      <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                        <input matInput required formControlName="entry_6" textOnly>
-                        <mat-error></mat-error>
-                      </mat-form-field>
-                      <button type="button" class="btn btn-danger" style="height: 50px; display: none;" (click)="delete6(f)"> &#10005;
-                      </button>
+              <ng-container matColumnDef="greigeWt">
+                <th mat-header-cell *matHeaderCellDef style="padding: 0%;">
+                  <input matInput style="width:50%; text-align: center;" [value] = "this.entry2total" readonly><br>
+                  Greige.Wt
+                </th>
+                <td mat-cell *matCellDef="let element" style="padding: 0%;">
+                  <div formArrayName="entrysfive">
+                    <div *ngFor="let item of items5.controls; let d = index" [formGroupName]="d" class="entrydata">
+                      <div style="display: flex; justify-content: center">
+                        <mat-form-field appearance="outline" style="width:70px" class="full-width">
+                          <input formControlName="entry_2" matInput required readonly>
+                          <mat-error></mat-error>
+                        </mat-form-field>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </td>
-            </ng-container>
+                </td>
+              </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumns6 sticky: true"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns6;"></tr>
-          </table>
+              <ng-container matColumnDef="delWt">
+                <th mat-header-cell *matHeaderCellDef style="padding: 0%;">
+                  <input matInput style="width:50%; text-align: center;" [value] = "this.entry4total" readonly><br>
+                  Finish Wt
+                </th>
+                <td mat-cell *matCellDef="let element" style="padding: 0%;">
+                  <div formArrayName="entrysfive">
+                    <div *ngFor="let item of items5.controls; let d = index" [formGroupName]="d" class="entrydata">
+                      <div style="display: flex; justify-content: center">
+                        <mat-form-field appearance="outline" style="width:70px" class="full-width">
+                          <input formControlName="entry_4" matInput required readonly>
+                          <mat-error></mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="difference">
+                <th mat-header-cell *matHeaderCellDef style="padding: 0%;">Difference</th>
+                <td mat-cell *matCellDef="let element" style="padding: 0%;">
+                  <div formArrayName="entrysfive">
+                    <div *ngFor="let item of items5.controls; let d = index" [formGroupName]="d" class="entrydata">
+                      <div style="display: flex; justify-content: center">
+                        <mat-form-field appearance="outline" style="width:70px" class="full-width">
+                          <input matInput formControlName="entry_5" required readonly>
+                          <mat-error></mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="reason">
+                <th mat-header-cell *matHeaderCellDef style="padding: 0%;">
+                  <input matInput style="width:50%; text-align: center;" [value]="this.entry5total" readonly><br>
+                  Delivered
+                </th>
+                <td mat-cell *matCellDef="let element" style="padding: 0%;">
+                  <div formArrayName="entrysfive">
+                    <div *ngFor="let item of items5.controls; let d = index" [formGroupName]="d" class="entrydata">
+                      <div>
+                        <input type="checkbox" formControlName="reason" [checked]="item.get('reason')?.value"
+                          [value]="item.get('reason')?.value ? 'yes' : 'no'"
+                          style="border: 1px solid black; height: 51.2px;">
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns5 sticky: true"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns5;"></tr>
+            </table>
+          </div>
+          <br>
         </div>
-      </div>
-    </mat-tab>
+      </mat-tab>
 
-    <!--======================== Fab Entry 7 ===========================================================================-->
+      <!--============================== Fab Entry 6=============================================================================-->
 
-    <mat-tab label="Actual Cut panels Entry" >
-      <div [formGroup]="form7" style="overflow: hidden;">
-        <div style="display: flex; justify-content: center;" *ngIf="!loading7">
-          <button mat-raised-button color="primary"  (click)="submit7()"
-            style="margin-top: 3%;">Save</button>
+      <mat-tab label="Transfer from warehouse to Cut">
+        <div [formGroup]="form6" style="overflow: hidden;">
+
+          <div style="display: flex; justify-content: center;" *ngIf="!loading6">
+            <button mat-raised-button color="primary" (click)="submit6()" style=" margin-top: 3%;">Save</button>
+          </div>
+          <div style="display: flex; justify-content: center;" *ngIf="loading6">
+            <button mat-raised-button color="primary" style="margin-top: 3%;">
+              <div class="loader"></div>
+            </button>
+          </div>
+
+          <div class="table-container">
+            <table mat-table [dataSource]="dataSource6" class="demo-table">
+              <ng-container matColumnDef="Batchno">
+                <th mat-header-cell *matHeaderCellDef>Batch no</th>
+                <td mat-cell *matCellDef="let element">
+                  <div formArrayName="entryssix">
+                    <div class="entrydata" *ngFor="let item of items6.controls; let f = index" [formGroupName]="f">
+                      <mat-form-field appearance="outline" style="width:70px" class="full-width">
+                        <input matInput required readonly formControlName="batchNo">
+                        <mat-error> </mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="rollno" sticky>
+                <th mat-header-cell *matHeaderCellDef> Roll No. </th>
+                <td mat-cell *matCellDef="let element">
+                  <div formArrayName="entryssix">
+                    <div *ngFor="let item of items6.controls; let f = index" [formGroupName]="f" class="entrydata">
+
+                      <mat-form-field appearance="outline" style="width:70px" class="full-width">
+                        <input matInput required formControlName="rollNo" textOnly>
+                        <mat-error> </mat-error>
+                      </mat-form-field>
+
+                      <mat-form-field style="display: none;">
+                        <input type="text" matInput required formControlName="fabBarcode">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="delWt">
+                <th mat-header-cell *matHeaderCellDef>
+                  <input matInput style="width:50%; text-align: center;" [value] = "this.entry5total" readonly><br>
+                  Dye Finish Wt
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  <div formArrayName="entryssix">
+                    <div *ngFor="let item of items6.controls; let f = index" [formGroupName]="f" class="entrydata">
+                      <div style="display: flex; justify-content: center">
+                        <mat-form-field appearance="outline" style="width:70px" class="full-width">
+                          <input formControlName="entry_4" matInput required readonly>
+                          <mat-error></mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="PlanPcs">
+                <th mat-header-cell *matHeaderCellDef>
+                  <input matInput style="width:50%; text-align: center;" [value] = "this.entry6total" readonly><br>
+                  planPcs
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  <div formArrayName="entryssix">
+                    <div *ngFor="let item of items6.controls; let f = index" [formGroupName]="f" class="entrydata">
+                      <div style="display: flex; justify-content: center">
+                        <mat-form-field appearance="outline" style="width:70px" class="full-width">
+                          <input matInput required formControlName="entry_6" textOnly>
+                          <mat-error></mat-error>
+                        </mat-form-field>
+                        <button type="button" class="btn btn-danger" style="height: 50px; display: none;"
+                          (click)="delete6(f)"> &#10005;
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns6 sticky: true"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns6;"></tr>
+            </table>
+          </div>
         </div>
-        <div style="display: flex; justify-content: center;" *ngIf="loading7">
-          <button mat-raised-button color="primary"
-            style="margin-top: 3%;"><div class="loader"></div></button>
+      </mat-tab>
+
+      <!--======================== Fab Entry 7 ===========================================================================-->
+
+      <mat-tab label="Actual Cut panels Entry">
+        <div [formGroup]="form7" style="overflow: hidden;">
+          <div style="display: flex; justify-content: center;" *ngIf="!loading7">
+            <button mat-raised-button color="primary" (click)="submit7()" style="margin-top: 3%;">Save</button>
+          </div>
+          <div style="display: flex; justify-content: center;" *ngIf="loading7">
+            <button mat-raised-button color="primary" style="margin-top: 3%;">
+              <div class="loader"></div>
+            </button>
+          </div>
+
+          <div class="table-container">
+            <table mat-table [dataSource]="dataSource7" class="demo-table">
+
+              <ng-container matColumnDef="Batchno">
+                <th mat-header-cell *matHeaderCellDef>Batch no</th>
+                <td mat-cell *matCellDef="let element">
+                  <div formArrayName="entrysseven">
+                    <div class="entrydata" *ngFor="let item of items7.controls; let g = index" [formGroupName]="g">
+                      <mat-form-field appearance="outline" style="width:70px" class="full-width">
+                        <input matInput required readonly formControlName="batchNo">
+                        <mat-error> </mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="rollno" sticky>
+                <th mat-header-cell *matHeaderCellDef> Roll No. </th>
+                <td mat-cell *matCellDef="let element">
+                  <div formArrayName="entrysseven">
+                    <div *ngFor="let item of items7.controls; let g = index" [formGroupName]="g" class="entrydata">
+                      <mat-form-field appearance="outline" style="width:70px" class="full-width">
+                        <input matInput required formControlName="rollNo" textOnly>
+                        <mat-error> </mat-error>
+                      </mat-form-field>
+                      <mat-form-field style="display: none;">
+                        <input type="text" matInput required formControlName="fabBarcode">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="delWt">
+                <th mat-header-cell *matHeaderCellDef>
+                  <input matInput style="width:50%; text-align: center;" [value] = "this.entry5total" readonly><br>
+                  Greige Wt
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  <div formArrayName="entrysseven">
+                    <div *ngFor="let item of items7.controls; let g = index" [formGroupName]="g" class="entrydata">
+                      <div>
+                        <mat-form-field appearance="outline" style="width:70px" class="full-width">
+                          <input formControlName="entry_2" matInput required readonly>
+                          <mat-error></mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="PlanPcs">
+                <th mat-header-cell *matHeaderCellDef>
+                  <input matInput style="width:50%; text-align: center;" [value] = "this.entry6total" readonly><br>
+                  PlanPcs
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  <div formArrayName="entrysseven">
+                    <div *ngFor="let item of items7.controls; let g = index" [formGroupName]="g" class="entrydata">
+                      <div>
+                        <mat-form-field appearance="outline" style="width:70px" class="full-width">
+                          <input formControlName="entry_6" matInput required readonly>
+                          <mat-error></mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="actualcut">
+                <th mat-header-cell *matHeaderCellDef>
+                  <input matInput style="width:50%; text-align: center;" [value] = "this.entry7total" readonly><br>
+                  Actual cut
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  <div formArrayName="entrysseven">
+                    <div *ngFor="let item of items7.controls; let g = index" [formGroupName]="g" class="entrydata">
+                      <div>
+                        <mat-form-field appearance="outline" style="width:70px" class="full-width">
+                          <input matInput required textOnly formControlName="entry_7">
+                          <mat-error></mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="rejcause">
+                <th mat-header-cell *matHeaderCellDef>RejCause</th>
+                <td mat-cell *matCellDef="let element">
+                  <div formArrayName="entrysseven">
+                    <div *ngFor="let item of items7.controls; let g = index" [formGroupName]="g" class="entrydata">
+                      <div style="display:flex ;">
+                        <mat-form-field appearance="outline" style="width:70px" class="full-width">
+                          <input matInput required textOnly>
+                          <mat-error></mat-error>
+                        </mat-form-field>
+                        <button type="button" class="btn btn-danger" style="height: 50px; display: none;"
+                          (click)="delete(g)"> &#10005;
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns7 sticky: true"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns7;"></tr>
+            </table>
+          </div>
         </div>
-
-        <div class="table-container">
-          <table mat-table [dataSource]="dataSource7" class="demo-table">
-
-            <ng-container matColumnDef="Batchno">
-              <th mat-header-cell *matHeaderCellDef>Batch no</th>
-              <td mat-cell *matCellDef="let element">
-                <div formArrayName="entrysseven">
-                  <div class="entrydata" *ngFor="let item of items7.controls; let g = index" [formGroupName]="g">
-                    <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                      <input matInput required readonly formControlName="batchNo">
-                      <mat-error> </mat-error>
-                    </mat-form-field>
-                  </div>
-                </div>
-              </td>
-            </ng-container>
-
-            <ng-container matColumnDef="rollno" sticky>
-              <th mat-header-cell *matHeaderCellDef> Roll No. </th>
-              <td mat-cell *matCellDef="let element">
-                <div formArrayName="entrysseven">
-                  <div *ngFor="let item of items7.controls; let g = index" [formGroupName]="g" class="entrydata">
-                    <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                      <input matInput required formControlName="rollNo" textOnly>
-                      <mat-error> </mat-error>
-                    </mat-form-field>
-                    <mat-form-field style="display: none;">
-                      <input type="text" matInput required formControlName="fabBarcode">
-                    </mat-form-field>
-                  </div>
-                </div>
-              </td>
-            </ng-container>
-
-            <ng-container matColumnDef="delWt">
-              <th mat-header-cell *matHeaderCellDef>Greige Wt</th>
-              <td mat-cell *matCellDef="let element">
-                <div formArrayName="entrysseven">
-                  <div *ngFor="let item of items7.controls; let g = index" [formGroupName]="g" class="entrydata">
-                    <div>
-                      <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                        <input formControlName = "entry_2" matInput required readonly>
-                        <mat-error></mat-error>
-                      </mat-form-field>
-                    </div>
-                  </div>
-                </div>
-              </td>
-            </ng-container>
-
-            <ng-container matColumnDef="PlanPcs">
-              <th mat-header-cell *matHeaderCellDef>PlanPcs</th>
-              <td mat-cell *matCellDef="let element">
-                <div formArrayName="entrysseven">
-                  <div *ngFor="let item of items7.controls; let g = index" [formGroupName]="g" class="entrydata">
-                    <div>
-                      <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                        <input formControlName = "entry_6" matInput required readonly>
-                        <mat-error></mat-error>
-                      </mat-form-field>
-                    </div>
-                  </div>
-                </div>
-              </td>
-            </ng-container>
-
-            <ng-container matColumnDef="actualcut">
-              <th mat-header-cell *matHeaderCellDef>Actual cut</th>
-              <td mat-cell *matCellDef="let element">
-                <div formArrayName="entrysseven">
-                  <div *ngFor="let item of items7.controls; let g = index" [formGroupName]="g" class="entrydata">
-                    <div>
-                      <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                        <input matInput required textOnly formControlName="entry_7" >
-                        <mat-error></mat-error>
-                      </mat-form-field>
-                    </div>
-                  </div>
-                </div>
-              </td>
-            </ng-container>
-
-            <ng-container matColumnDef="rejcause">
-              <th mat-header-cell *matHeaderCellDef>RejCause</th>
-              <td mat-cell *matCellDef="let element">
-                <div formArrayName="entrysseven">
-                  <div *ngFor="let item of items7.controls; let g = index" [formGroupName]="g" class="entrydata">
-                    <div style="display:flex ;">
-                      <mat-form-field appearance="outline" style="width:70px" class="full-width">
-                        <input matInput required textOnly>
-                        <mat-error></mat-error>
-                      </mat-form-field>
-                      <button type="button" class="btn btn-danger" style="height: 50px; display: none;" (click)="delete(g)"> &#10005;
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </td>
-            </ng-container>
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns7 sticky: true"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns7;"></tr>
-          </table>
-        </div>
-      </div>
-    </mat-tab>
-  </mat-tab-group>
-
+      </mat-tab>
+    </mat-tab-group>
