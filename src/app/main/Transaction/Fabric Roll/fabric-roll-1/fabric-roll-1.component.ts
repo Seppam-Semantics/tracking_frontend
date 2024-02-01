@@ -47,6 +47,7 @@ export class FabricRoll1Component implements OnInit {
   sizelist:any;
   sizeslist:any;
   workorderhide:boolean = true;
+  reason = new FormControl(false);
   fabcode:any[] =[];
   entry1:any[] = [];
   entry2:any[] = [];
@@ -490,7 +491,7 @@ delete5(index: number) {
       entry_2:[defaultValues.entry_2 || ''],
       entry_4:[defaultValues.entry_4 || ''],
       entry_5: [defaultValues.entry_2 - defaultValues.entry_4 || ''],
-      reason:[defaultValues.reason || '']
+      reason: [defaultValues.reason || false ]
     }));
   }
 
@@ -501,6 +502,7 @@ submit5(){
     "entry": "5",
     "entrys":this.form5.get('entrysfive') as FormArray
   })
+  console.log(this.entry1form.value)
   const proftoken = 'Bearer '+ sessionStorage.getItem('token')
   this.api.postfabricdetails(this.entry1form.value ).subscribe((res)=>{
     alert(res.message)

@@ -54,8 +54,13 @@
 </cdk-accordion>
 
 <!---===========================================================================================================-->
+<div style="display: flex; justify-content: end;">
+  <button class="btn btn-primary" style="display: flex; justify-content: left; margin-top: -2%;" (click)="exportexcel2()">Download File</button>
+  </div>
+  
+
 <div class="fixTableHead">
-<table>
+<table id="table-data2">
   <thead>
   <tr>
     <th>Sl.No</th>
@@ -64,18 +69,59 @@
     <th>Style</th>
     <th>Color</th>
     <th>size</th>
-    <th>fabType</th>
-    <th>fabDia</th>
-    <th>fabGsm</th>
-    <th>finishedKg</th>
+    <th>fab Type</th>
+    <th>fab Dia</th>
+    <th>fab GSM</th>
     <th>knitSL</th>
+    <th>yarn Kg</th>
+    <th>Greige Kg</th>
+    <th>Finished Kg</th>
     <th>spinFty</th>
     <th>knitFty</th>
-    <th>dyeingFty </th>
-    <th>yarnQty</th>
-    <th>noRolls</th>
-    <th>PrintStatus</th>
-
+    <th>dyeingFty</th>
+    <th>No Rolls</th>
+    <th colspan="2">Roll Total</th>
+    <th colspan="2">Greige Total</th>
+    <th colspan="2">Dye Total</th>
+    <th colspan="2">finished Total</th>
+    <th colspan="2">Delivery Total</th>
+    <th colspan="2">Plan Cut</th>
+    <th colspan="2">Actual Cut</th>
+    <th>Print Status</th>
+  </tr>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th>Roll</th>
+    <th>Total</th>
+    <th>Roll</th>
+    <th>Total</th>
+    <th>Roll</th>
+    <th>Total</th>
+    <th>Roll</th>
+    <th>Total</th>
+    <th>Roll</th>
+    <th>Total</th>
+    <th>Roll</th>
+    <th>Total</th>
+    <th>Roll</th>
+    <th>Total</th>
+    <th></th>
   </tr>
 </thead>
 <tbody>
@@ -89,21 +135,48 @@
     <td>{{work.fabType}}</td>
     <td>{{work.fabDia}}</td>
     <td>{{work.fabGsm}}</td>
-    <td>{{work.finishedKg}}</td>
     <td>{{work.knitSL}}</td>
+    <td>{{work.yarnLot}}</td>
+    <td>{{work.yarnType}}</td>
+    <td>{{work.yarnCount}}</td>
     <td>{{work.spinFty}}</td>
     <td>{{work.knitFty}}</td>
     <td>{{work.dyeinFty}}</td>
-    <td>{{work.yarnQty}}</td>
     <td>{{work.noRolls}}</td>
+
+    <td>{{work.firstRolls}}</td>
+    <td>{{work.rollTotal}}</td>
+    
+    <td>{{work.secondRolls}}</td>
+    <th>{{work.greigeTotal}}</th>
+    
+    <td>{{work.thirdRolls}}</td>
+    <th>{{work.dyeTotal}}</th>
+    
+    <td>{{work.fourthRolls}}</td>
+    <th>{{work.finishTotal}}</th>
+    
+    <td>{{work.fifthRolls}}</td>
+    <th>{{work.delTotal}}</th>
+    
+    <td>{{work.sixthRolls}}</td>
+    <th>{{work.planTotal}}</th>
+    
+    <td>{{work.seventhRolls}}</td>
+    <th>{{work.actualCutTotal}}</th>
+    
     <td>{{work.isPrint}}</td>
   </tr>
+
   <tbody>
 </table>
 </div>
 <!---===========================================================================================================-->
 
+<ngx-spinner *ngIf="LoadingTotal">Loading...!</ngx-spinner>
+
 <!---===========================================================================================================-->
+
 <div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-fullscreen" role="document">
      <div class="modal-content">
@@ -112,6 +185,7 @@
             <table id="table-data">
               <thead>
                 <tr>
+                  <th></th>
                   <th></th>
                   <th></th>
                   <th></th>

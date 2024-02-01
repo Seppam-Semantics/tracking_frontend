@@ -20,51 +20,13 @@ export class WorkorderDataComponent {
 
   }
 
-  displayedColumns: string[] = ['Sl.no', 'buyer', 'orderNo', 'style', 'color', 'size', 'fabType',
-    'fabDia', 'fabGsm', 'greigeKg', 'finishKg', 'knitSL', 'spinFty', 'knitFty', 'dyeingFty', 'yarnQty', 'noRolls', 'PrintStatus'
-  ];
-
-
-  workorder = new FormGroup({
-    Order: new FormControl(''),
-    Style: new FormControl(''),
-    Color: new FormControl(''),
-    Size: new FormControl(''),
-    FabType: new FormControl(''),
-    FabDia: new FormControl(''),
-    FabGSM: new FormControl(''),
-    Yarntype: new FormControl(''),
-    YarnCount: new FormControl(''),
-    KnitSL: new FormControl(''),
-    SpinFty: new FormControl(''),
-    KnitFty: new FormControl(''),
-    DyeingFty: new FormControl(''),
-    YarnLot: new FormControl(''),
-    NoofRolls: new FormControl(''),
-    PrintStatus: new FormControl(''),
-  })
-
-
-  dataSource: MatTableDataSource<PeriodicElement> = new MatTableDataSource<PeriodicElement>([])
+  dataSource:any[]=[]
   users: any;
   file: any;
 
 
   readfile(e: any) {
     this.file = e.target.files[0]
-  }
-  workordersubmit() {
-    this.spinner.show();
-    this.api.postworkorder(this.dataSource).subscribe((res)=>{
-      if(res.success){
-        alert("Your work order details have been saved....!!!!")
-        window.location.reload(); 
-      }
-      else{
-        alert("Error while saving...!!!")
-      }
-    })
-       
   }
 
   readexcelfile() {
@@ -78,78 +40,25 @@ export class WorkorderDataComponent {
 
       const sheetname = workbook.SheetNames[0];
       const sheet1 = workbook.Sheets[sheetname];
-
       this.users = xls.utils.sheet_to_json(sheet1, { raw: true });
-
-      this.users.sort((a: any, b: any) => {
-        const orderNumberA = a.orderNo;
-        const orderNumberB = b.orderNo;
-
-        if (orderNumberA < orderNumberB) {
-          return -1;
-        }
-        if (orderNumberA > orderNumberB) {
-          return 1;
-        }
-        return 0;
-      });
-
+      this.users.splice(0, 1)
       this.dataSource = this.users;
-
-      this.assignUniqueIDs()
-      this.uniqueid()
+      console.log(this.dataSource)
+      
     };
   }
 
-
-
-  assignUniqueIDs(): void {
-    const uniqueOrderNumbers = [...new Set(this.users.map((order: any) => order.orderNo))];
-    uniqueOrderNumbers.forEach(orderNumber => {
-    const ordersWithSameNumber = this.users.filter((wr: { orderNo: any; }) => wr.orderNo == orderNumber);
-    ordersWithSameNumber.forEach((wo: any, index: any) => {
-        wo.WOLineno = `${index + 1}`;
-      });
-    });
+  workordersubmit() {
+    this.spinner.show();
+    this.api.postworkorder(this.dataSource).subscribe((res)=>{
+      if(res.success){
+        alert("Your work order details have been saved....!!!!")
+        window.location.reload(); 
+      }
+      else{
+        alert("Error while saving...!!!")
+      }
+    })       
   }
-  
-  uniqueid(){
-    const uniqueWorkOrderNumbers = Array.from(new Set(this.users.map((order:any) => order.orderNo)));
-    uniqueWorkOrderNumbers.sort();
-    const workOrderNumberToIndex: { [key: string]: number } = {};
-    uniqueWorkOrderNumbers.forEach((workOrderNumber:any, index:any) => {
-      workOrderNumberToIndex[workOrderNumber] = index + 1;
-    });
 
-    this.users.forEach((order:any) => {
-      order.WOno = workOrderNumberToIndex[order.orderNo].toString().padStart(3, '0');
-    });
-  }
-}
-
-
-
-export interface PeriodicElement {
-
-  WOno: any;
-  WOLineno: any;
-  Order: any;
-  Style: any;
-  Color: any;
-  Size: any;
-  FabType: any;
-  FabDia: any;
-  FabGSM: any;
-  GreigeKg: any;
-  FinishKg: any;
-  KnitSL: any;
-  SpinFty: any;
-  KnitFty: any;
-  DyeingFty: any;
-  YarnQty: any;
-  NoofRolls: any;
-  PrintStatus: any;
-}
-interface NgxSpinnerConfig {
-  type?: string;
 }

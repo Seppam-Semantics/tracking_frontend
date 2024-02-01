@@ -38,3 +38,37 @@ td{
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+  td{
+    text-align: center;
+  }
+  thead {
+    position: sticky;
+    top: 0;
+    background-color: #f2f2f2;
+  }
+  th{
+    text-align: center;
+  }
+  ::ng-deep .modal-backdrop.show {
+    display: contents;
+  }
+  .fixTableHead{
+    overflow: scroll;
+    height: 100%;
+  }
