@@ -97,3 +97,102 @@ animation: spin 1s linear infinite;
 input[type=checkbox]{
   width: 21px;
 }
+
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+.table1 thead, .table1 tbody tr{
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}
+.table1 tbody{
+  display: block;
+  max-height: 320px;
+  overflow-y: scroll;
+}
+
+
+td{
+  text-align: center;
+}
+thead {
+  position: sticky;
+  top: 0;
+  background-color: #f2f2f2;
+}
+th{
+  text-align: center;
+}
+.sticky-header thead th {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 100;
+}
+
+
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  /* Firefox */
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+
+
+
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  .table2 thead, .table2 tbody tr{
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+  }
+  .table2 tbody{
+    display: block;
+    max-height: 400px;
+    overflow-y: scroll;
+  }
+  
+  td{
+    text-align: center;
+  }
+  thead {
+    position: sticky;
+    top: 0;
+    background-color: #f2f2f2;
+  }
+  th{
+    text-align: center;
+  }
+  .sticky-header thead th {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 100;
+  }

@@ -76,7 +76,6 @@ export class FabricRoll1Component implements OnInit {
   entry7total: any;
 
 
-
   constructor(private fb: FormBuilder, private api: ApiService, private http: HttpClient,
     private cdref: ChangeDetectorRef) {
 
@@ -377,8 +376,9 @@ export class FabricRoll1Component implements OnInit {
     this.api.postfabricdetails(this.entry1form.value).subscribe((res) => {
       alert(res.message);
       this.loading1 = false;
-      this.entrytotals();
+      this.loaddetails()
     })
+
   }
 
   //=======================================================================================
@@ -627,6 +627,7 @@ export class FabricRoll1Component implements OnInit {
     this.entry5 = [];
     this.entry6 = [];
     this.entry7 = [];
+
     this.rollnnumber.forEach((entry: any) => {
       if (entry.entry_1 != 0) {
         this.entry1.push(entry.entry_1);
