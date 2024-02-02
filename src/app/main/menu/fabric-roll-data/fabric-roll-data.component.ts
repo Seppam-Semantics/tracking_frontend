@@ -186,7 +186,7 @@ export class FabricRollDataComponent implements OnInit {
       this.loaddetails();
       setTimeout(()=>{
         this.spinner.hide()
-      },30000)
+      },3000)
     })
   }
 
