@@ -5,7 +5,6 @@ import { MainComponent } from './main/main/main.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { AuthGuard } from './auth.guard';
 import { MainRoutingModule } from './main/main-routing.module';
-import { TabletestComponent } from './tabletest/tabletest.component';
 
 
 const routes: Routes = [
@@ -16,7 +15,6 @@ const routes: Routes = [
     path:'main',
     component:MainComponent,
     loadChildren:() =>import('./main/main.module').then(x=>x.MainModule)},
-    {path:"test", component:TabletestComponent}
 
 ];
 

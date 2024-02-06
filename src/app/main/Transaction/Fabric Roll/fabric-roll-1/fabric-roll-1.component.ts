@@ -36,6 +36,7 @@ export class FabricRoll1Component implements OnInit {
   fabdetails: any;
   rollnnumber: any;
   entry1form!: FormGroup;
+  formArray!: FormArray;
   numberofrolls: any;
   numbers: any[] = [];
   buyers: any;
@@ -184,74 +185,59 @@ export class FabricRoll1Component implements OnInit {
 
   fabrollweight() {
     this.resetform();
-    this.loaddetails().subscribe(() => {
-      for (let noOfRolls of this.rollnnumber) {
-        this.add(noOfRolls);
-      }
+    this.loaddetails().subscribe(()=>{
+      this.add()
     })
   }
 
   greigefabDElEntry() {
     this.resetform();
-    this.loaddetails().subscribe(() => {
-      for (let noOfRolls of this.rollnnumber) {
-        this.add2(noOfRolls)
-      }
+    this.loaddetails().subscribe(()=>{
+      this.add2()
     })
   }
 
   dyeBatchEntry() {
     this.resetform();
-    this.loaddetails().subscribe(() => {
-      for (let noOfRolls of this.rollnnumber) {
-        this.add3(noOfRolls)
-      }
+    this.loaddetails().subscribe(()=>{
+      this.add3()
     })
   }
 
   dyeFinishEntry() {
     this.resetform();
-    this.loaddetails().subscribe(() => {
-      for (let noOfRolls of this.rollnnumber) {
-        this.add4(noOfRolls)
-      }
+    this.loaddetails().subscribe(()=>{
+      this.add4()
     })
   }
 
   dyedFabDelEntry() {
     this.resetform();
-    this.loaddetails().subscribe(() => {
-      for (let noOfRolls of this.rollnnumber) {
-        this.add5(noOfRolls)
-      }
+    this.loaddetails().subscribe(()=>{
+      this.add5()
     })
   }
 
   warehouseToCut() {
     this.resetform();
-    this.loaddetails().subscribe(() => {
-      for (let noOfRolls of this.rollnnumber) {
-        this.add6(noOfRolls)
-      }
+    this.loaddetails().subscribe(()=>{
+      this.add6()
     })
   }
 
   actualCutPanelEntry() {
     this.resetform();
-    this.loaddetails().subscribe(() => {
-      for (let noOfRolls of this.rollnnumber) {
-        this.add7(noOfRolls)
-      }
+    this.loaddetails().subscribe(()=>{
+      this.add7()
     })
   }
 
   loadworkorder() {
     this.resetform();
-    this.loaddetails().subscribe((res) => {
-      for (let noOfRolls of this.rollnnumber) {
-        this.add(noOfRolls);
-      }
-    });
+    this.loaddetails().subscribe(()=>{
+      this.add()
+    })
+
   }
 
   loaddetails() {
@@ -265,7 +251,7 @@ export class FabricRoll1Component implements OnInit {
           this.workorderId = this.rollnnumber[0].workorderId;
           this.entrytotals();
         })
-      );
+      )
   }
 
 
@@ -344,7 +330,7 @@ export class FabricRoll1Component implements OnInit {
   }
 
 
-  form = this.fb.group({
+  form: FormGroup = this.fb.group({
     entrys: this.fb.array([]),
   });
 
@@ -356,14 +342,17 @@ export class FabricRoll1Component implements OnInit {
     this.items.removeAt(index);
   }
 
-  add(defaultRollNo?: any) {
-    this.items.push(
+  add() {
+    this.formArray = new FormArray(
+    this.rollnnumber.map((defaultRollNo:any)=>
       this.fb.group({
-        rollNo: [defaultRollNo.rollNo || ''],
-        fabBarcode: [defaultRollNo.fabBarcode || ''],
-        entry_1: [defaultRollNo.entry_1 || '']
+        rollNo: [defaultRollNo.rollNo],
+        fabBarcode: [defaultRollNo.fabBarcode],
+        entry_1: [defaultRollNo.entry_1]
       })
     )
+    );
+    this.form.setControl('entrys', this.formArray);
   }
 
   submit() {
@@ -376,7 +365,6 @@ export class FabricRoll1Component implements OnInit {
     this.api.postfabricdetails(this.entry1form.value).subscribe((res) => {
       alert(res.message);
       this.loading1 = false;
-      this.loaddetails()
     })
 
   }
@@ -395,13 +383,18 @@ export class FabricRoll1Component implements OnInit {
     this.items2.removeAt(index);
   }
 
-  add2(defaultValues?: any) {
-    this.items2.push(this.fb.group({
+  add2() {
+    this.formArray = new FormArray(
+    this.rollnnumber.map((defaultValues:any)=>
+    this.fb.group({
       rollNo: [defaultValues.rollNo || ''],
       fabBarcode: [defaultValues.fabBarcode || ''],
       entry_1: [defaultValues.entry_1 || ''],
       entry_2: [defaultValues.entry_2 || '']
-    }));
+    })
+    )
+    )
+    this.form2.setControl('entrystwo', this.formArray);
   }
 
   submit2() {
@@ -411,7 +404,6 @@ export class FabricRoll1Component implements OnInit {
       "entry": "2",
       "entrys": this.form2.get('entrystwo') as FormArray
     })
-    console.log(this.entry1form.value);
     this.api.postfabricdetails(this.entry1form.value).subscribe((res) => {
       alert(res.message)
       this.loading2 = false;
@@ -433,14 +425,18 @@ export class FabricRoll1Component implements OnInit {
     this.items3.removeAt(index);
   }
 
-  add3(defaultValues?: any) {
-    this.items3.push(this.fb.group({
+  add3() {
+    this.formArray = new FormArray(
+    this.rollnnumber.map((defaultValues:any)=>
+    this.fb.group({
       batchNo: [defaultValues.batchNo || this.batchGenerate?.value],
       rollNo: [defaultValues.rollNo || ''],
       fabBarcode: [defaultValues.fabBarcode || ''],
       entry_2: [defaultValues.entry_2 || ''],
       entry_3: [defaultValues.entry_3 || '']
-    }));
+    }))
+    )
+    this.form3.setControl('entrysthree', this.formArray);
   }
 
   submit3() {
@@ -472,14 +468,18 @@ export class FabricRoll1Component implements OnInit {
     this.items3.removeAt(index);
   }
 
-  add4(defaultValues?: any) {
-    this.items4.push(this.fb.group({
+  add4() {
+    this.formArray = new FormArray(
+    this.rollnnumber.map((defaultValues?: any)=>
+      this.fb.group({
       batchNo: [defaultValues.batchNo || ''],
       rollNo: [defaultValues.rollNo || ''],
       fabBarcode: [defaultValues.fabBarcode || ''],
       entry_3: [defaultValues.entry_3 || ''],
       entry_4: [defaultValues.entry_4 || '']
-    }));
+    }))
+    )
+    this.form4.setControl('entrysfour', this.formArray);
   }
 
   submit4() {
@@ -512,8 +512,10 @@ export class FabricRoll1Component implements OnInit {
     this.items5.removeAt(index);
   }
 
-  add5(defaultValues?: any) {
-    this.items5.push(this.fb.group({
+  add5() {
+    this.formArray = new FormArray(
+    this.rollnnumber.map((defaultValues?: any)=>
+      this.fb.group({
       batchNo: [defaultValues.batchNo || ''],
       rollNo: [defaultValues.rollNo || ''],
       fabBarcode: [defaultValues.fabBarcode || ''],
@@ -521,7 +523,9 @@ export class FabricRoll1Component implements OnInit {
       entry_4: [defaultValues.entry_4 || ''],
       entry_5: [defaultValues.entry_2 - defaultValues.entry_4 || ''],
       reason: [defaultValues.reason || false]
-    }));
+    }))
+    )
+    this.form5.setControl('entrysfive', this.formArray);
   }
 
   submit5() {
@@ -531,7 +535,6 @@ export class FabricRoll1Component implements OnInit {
       "entry": "5",
       "entrys": this.form5.get('entrysfive') as FormArray
     })
-    console.log(this.entry1form.value)
     const proftoken = 'Bearer ' + sessionStorage.getItem('token')
     this.api.postfabricdetails(this.entry1form.value).subscribe((res) => {
       alert(res.message)
@@ -554,14 +557,18 @@ export class FabricRoll1Component implements OnInit {
     this.items6.removeAt(index);
   }
 
-  add6(defaultValues?: any) {
-    this.items6.push(this.fb.group({
+  add6() {
+    this.formArray = new FormArray(
+    this.rollnnumber.map((defaultValues?: any)=>
+    this.fb.group({
       batchNo: [defaultValues.batchNo || ''],
       rollNo: [defaultValues.rollNo || ''],
       fabBarcode: [defaultValues.fabBarcode || ''],
       entry_4: [defaultValues.entry_4 || ''],
       entry_6: [defaultValues.entry_6 || '']
-    }));
+    }))
+    )
+    this.form6.setControl('entryssix', this.formArray);
   }
 
   submit6() {
@@ -592,15 +599,18 @@ export class FabricRoll1Component implements OnInit {
     this.items7.removeAt(index);
   }
 
-  add7(defaultValues?: any) {
-    this.items7.push(this.fb.group({
+  add7() {
+    this.formArray = new FormArray(
+    this.rollnnumber.map((defaultValues?: any)=>this.fb.group({
       batchNo: [defaultValues.batchNo || ''],
       rollNo: [defaultValues.rollNo || ''],
       fabBarcode: [defaultValues.fabBarcode || ''],
       entry_2: [defaultValues.entry_2 || ''],
       entry_6: [defaultValues.entry_6 || ''],
       entry_7: [defaultValues.entry_7 || '']
-    }));
+    }))
+    )
+    this.form7.setControl('entrysseven', this.formArray);
   }
 
   submit7() {

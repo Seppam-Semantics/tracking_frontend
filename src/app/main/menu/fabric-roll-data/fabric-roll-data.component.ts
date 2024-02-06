@@ -18,21 +18,23 @@ import * as XLSX from 'xlsx'
     ]),
   ],
 })
+
+
 export class FabricRollDataComponent implements OnInit {
   dataSource: any[] = []
   data: any[] = [];
   fabricdetails: any
-  ordernumber: any;
+  ordernumber:any
   buyers: any;
-  buyerName: any;
+  buyerName: any = null
   order: any;
-  ordernumbers: any;
+  ordernumbers:any = null
   stylelist: any;
-  styleslist: any;
+  styleslist:any = null
   colorlist: any;
-  colorslist: any;
+  colorslist:any = null
   sizelist: any;
-  sizeslist: any;
+  sizeslist:any = null
   workorderhide: boolean = true;
   workorderId: any;
   WoNumber: any;
@@ -60,7 +62,6 @@ export class FabricRollDataComponent implements OnInit {
 
   constructor(private api: ApiService,
     private http: HttpClient,
-    private cdref: ChangeDetectorRef,
     private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
@@ -69,30 +70,7 @@ export class FabricRollDataComponent implements OnInit {
 
   fileName = "Fabricrolldata.xlsx"
   fileName2="Workorder-data.xlsx"
-  exportexcel2() {
-    /* Passing table id */
-    let data = document.getElementById("table-data2");
-    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(data);
-  
-    /* Generate workbook and append the worksheet */
-    const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-  
-    /* Save to file */
-    XLSX.writeFile(wb, this.fileName2);
-  }
-  exportexcel() {
-    /* Passing table id */
-    let data = document.getElementById("table-data");
-    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(data);
 
-    /* Generate workbook and append the worksheet */
-    const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-
-    /* Save to file */
-    XLSX.writeFile(wb, this.fileName);
-  }
 
   check(id: any) {
     const entry = 1
@@ -107,7 +85,7 @@ export class FabricRollDataComponent implements OnInit {
   }
 
   loaddetails() {
-    this.spinner.show();
+    this.spinner.show()
     this.LoadingTotal=true
     this.data.forEach((woId: any) => {
       const entry = 1
@@ -121,28 +99,33 @@ export class FabricRollDataComponent implements OnInit {
         this.entry6 = [];
         this.entry7 = [];
         this.dataSource.forEach((entry) => {
-          if (entry.entry_1 != 0) {
-            this.entry1.push(entry.entry_1);
+          switch (true) {
+            case entry.entry_1 !== 0:
+              this.entry1.push(entry.entry_1);
+              break;
+            case entry.entry_2 !== 0:
+              this.entry2.push(entry.entry_2);
+              break;
+            case entry.entry_3 !== 0:
+              this.entry3.push(entry.entry_3);
+              break;
+            case entry.entry_4 !== 0:
+              this.entry4.push(entry.entry_4);
+              break;
+            case entry.entry_4 !== 0 && entry.reason === 'yes':
+              this.entry5.push(entry.entry_4);
+              break;
+            case entry.entry_6 !== 0:
+              this.entry6.push(entry.entry_6);
+              break;
+            case entry.entry_7 !== 0:
+              this.entry7.push(entry.entry_7);
+              break;
+            default:
+              break;
           }
-          if (entry.entry_2 != 0) {
-            this.entry2.push(entry.entry_2);
-          }
-          if (entry.entry_3 != 0) {
-            this.entry3.push(entry.entry_3);
-          }
-          if (entry.entry_4 != 0) {
-            this.entry4.push(entry.entry_4);
-          }
-          if (entry.entry_4 != 0 && entry.reason == 'yes') {
-            this.entry5.push(entry.entry_4);
-          }
-          if (entry.entry_6 != 0) {
-            this.entry6.push(entry.entry_6);
-          }
-          if (entry.entry_7 != 0) {
-            this.entry7.push(entry.entry_7);
-          }
-        })
+        });
+        
         this.entry1total = this.entry1.reduce((acc, num) => acc + num, 0)
         this.entry2total = this.entry2.reduce((acc, num) => acc + num, 0)
         this.entry3total = this.entry3.reduce((acc, num) => acc + num, 0)
@@ -179,44 +162,17 @@ export class FabricRollDataComponent implements OnInit {
     this.api.getorders(buyer).subscribe((res) => {
       this.order = res.orders
     })
-    const proftoken = 'Bearer ' + sessionStorage.getItem('token')
-    const headers = new HttpHeaders().set('x-access-token', proftoken);
-    this.http.get<any>(`${this.api.apiUrl}/workorderapi/workorders-filter?buyer=${buyer}`, { headers }).subscribe((res) => {
-      this.data = res.workorders
-      this.loaddetails();
-      setTimeout(()=>{
-        this.spinner.hide()
-      },3000)
-    })
   }
 
   getstyle(buyer: any, orderNo: any) {
     this.api.getstyle(buyer, orderNo).subscribe((res) => {
       this.stylelist = res.styles;
     })
-    const proftoken = 'Bearer ' + sessionStorage.getItem('token')
-    const headers = new HttpHeaders().set('x-access-token', proftoken);
-    this.http.get<any>(`${this.api.apiUrl}/workorderapi/workorders-filter?buyer=${buyer}&orderNo=${orderNo}`, { headers }).subscribe((res) => {
-      this.data = res.workorders
-      this.loaddetails();
-      setTimeout(()=>{
-        this.spinner.hide()
-      },15000)
-    })
   }
 
   getcolor(buyer: any, orderNo: any, style: any) {
     this.api.getcolor(buyer, orderNo, style).subscribe((res) => {
       this.colorlist = res.colors;
-    })
-    const proftoken = 'Bearer ' + sessionStorage.getItem('token')
-    const headers = new HttpHeaders().set('x-access-token', proftoken);
-    this.http.get<any>(`${this.api.apiUrl}/workorderapi/workorders-filter?buyer=${buyer}&&orderNo=${orderNo}&&style=${style}`, { headers }).subscribe((res) => {
-      this.data = res.workorders
-      this.loaddetails();
-      setTimeout(()=>{
-        this.spinner.hide()
-      },10000)
     })
   }
 
@@ -231,34 +187,62 @@ export class FabricRollDataComponent implements OnInit {
   onSelectionChange() {
     if (this.buyerName) {
       this.getorders(this.buyerName);
+      this.loadworkorder(this.buyerName);
     }
     if (this.buyerName && this.ordernumbers) {
       this.getstyle(this.buyerName, this.ordernumbers)
+      this.loadworkorder(this.buyerName, this.ordernumbers);
     }
     if (this.buyerName && this.ordernumbers && this.styleslist) {
       this.getcolor(this.buyerName, this.ordernumbers, this.styleslist)
+      this.loadworkorder(this.buyerName, this.ordernumbers, this.styleslist);
     }
     if (this.buyerName && this.ordernumbers && this.styleslist && this.colorslist) {
       this.getsize(this.buyerName, this.ordernumbers, this.styleslist, this.colorslist)
-      this.api.getwodetails(this.buyerName, this.ordernumbers, this.styleslist, this.colorslist)
+      this.loadworkorder(this.buyerName, this.ordernumbers, this.styleslist, this.colorslist);
     }
     if (this.buyerName && this.ordernumbers && this.styleslist && this.colorslist && this.sizeslist) {
-      this.loadworkorder(this.buyerName, this.ordernumbers, this.styleslist, this.colorslist, this.sizeslist)
+      this.loadworkorder(this.buyerName, this.ordernumbers, this.styleslist, this.colorslist,this.sizeslist);
     }
   }
 
 
-  loadworkorder(buyer: any, orderNo: any, style: any, color: any, size: any) {
+  loadworkorder(buyer: any, orderNo?: string, style?: string, color?: string, size?: any) {
     const proftoken = 'Bearer ' + sessionStorage.getItem('token')
     const headers = new HttpHeaders().set('x-access-token', proftoken);
-    this.http.get<any>(`${this.api.apiUrl}/workorderapi/workorders-filter?buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&size=${size}`, { headers }).subscribe((res) => {
-      this.data = res.workorders
-      this.loaddetails();
-      setTimeout(()=>{
-        this.spinner.hide()
-      },5000)
-    })
+    let url = `${this.api.apiUrl}/workorderapi/workorders-filter?buyer=${buyer}`;
+  if (orderNo) url += `&orderNo=${orderNo}`;
+  if (style) url += `&style=${style}`;
+  if (color) url += `&color=${color}`;
+  if (size) url += `&size=${size}`;
+
+  this.http.get<any>(url, { headers }).subscribe((res) => {
+    this.data = res.workorders;
+    this.loaddetails();
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 5000);
+  });
   }
+
+  exportexcel2() {
+    let data = document.getElementById("table-data2");
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(data);
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+    XLSX.writeFile(wb, this.fileName2);
+  }
+  
+  exportexcel() {
+    let data = document.getElementById("table-data");
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(data);
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+    XLSX.writeFile(wb, this.fileName);
+  }
+
+
+
 }
 
 

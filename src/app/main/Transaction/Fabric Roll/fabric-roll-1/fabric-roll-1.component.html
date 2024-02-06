@@ -142,28 +142,22 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr *ngFor="let item of items.controls; let i = index" [formGroup]="item">
                 <td>
-                  <div formArrayName="entrys">
-                    <div class="entrydata" *ngFor="let item of items.controls; let i = index" [formGroupName]="i"
-                      style="display: flex; justify-content: center;">
+                  <div>
+                    <div class="entrydata" style="display: flex; justify-content: center;">
                       <mat-form-field style="width: 100px;">
                         <input type="text" matInput readonly style="direction: rtl;" formControlName="fabBarcode">
                       </mat-form-field>
                       <mat-form-field appearance="outline" class="full-width" style="width: 100px;">
-                        <input type="number" matInput required formControlName="rollNo" [matAutocomplete]="auto">
-                        <mat-autocomplete #auto="matAutocomplete">
-                          <mat-option *ngFor="let roll of this.rollnnumber"
-                            value="{{roll.rollNo}}">{{roll.rollNo}}</mat-option>
-                        </mat-autocomplete>
+                        <input type="number" matInput required formControlName="rollNo">
                       </mat-form-field>
-
                     </div>
                   </div>
                 </td>
                 <td>
-                  <div formArrayName="entrys">
-                    <div *ngFor="let item of items.controls; let i = index" [formGroupName]="i" class="entrydata">
+                  <div>
+                    <div class="entrydata">
                       <div style="display: flex; justify-content: center;">
                         <mat-form-field appearance="outline" class="full-width" style="width: 100px;">
                           <input matInput required formControlName="entry_1" type="number">
@@ -212,10 +206,10 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr *ngFor="let item of items2.controls; let i = index" [formGroup]="item">
                 <td>
-                  <div formArrayName="entrystwo">
-                    <div class="entrydata" *ngFor="let item of items2.controls; let a = index" [formGroupName]="a">
+                  <div>
+                    <div class="entrydata" >
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
                         <input matInput required formControlName="rollNo" readonly type="number">
                         <mat-error></mat-error>
@@ -227,8 +221,8 @@
                   </div>
                 </td>
                 <td>
-                  <div formArrayName="entrystwo">
-                    <div *ngFor="let item of items2.controls; let a = index" [formGroupName]="a" class="entrydata">
+                  <div >
+                    <div class="entrydata">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
                         <input formControlName="entry_1" matInput required readonly type="number">
                         <mat-error></mat-error>
@@ -237,8 +231,8 @@
                   </div>
                 </td>
                 <td>
-                  <div formArrayName="entrystwo">
-                    <div *ngFor="let item of items2.controls; let a = index" [formGroupName]="a" class="entrydata">
+                  <div >
+                    <div class="entrydata">
                       <div style="display: flex; justify-content: center;">
                         <mat-form-field appearance="outline" style="width:70px" class="full-width">
                           <input matInput required formControlName="entry_2" type="number">
@@ -294,22 +288,21 @@
               </tr>  
             </thead>
             <tbody>
-              <tr>
+              <tr *ngFor="let item of items3.controls; let i = index" [formGroup]="item">
                 <td style="width: 45%;">
-                  <div formArrayName="entrysthree">
-                    <div class="entrydata" *ngFor="let item of items3.controls; let i = index" [formGroupName]="i">
+                  <div>
+                    <div class="entrydata" >
                       <mat-form-field appearance="outline" style="width:85%" class="full-width">
                         <input matInput required formControlName="batchNo">
                         <mat-error> </mat-error>
                       </mat-form-field>
-  
                     </div>
                   </div>
                 </td>
 
                 <td>
-                  <div formArrayName="entrysthree">
-                    <div *ngFor="let item of items3.controls; let i = index" [formGroupName]="i" class="entrydata">
+                  <div>
+                    <div class="entrydata">
   
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
                         <input matInput required formControlName="rollNo" type="number">
@@ -323,8 +316,8 @@
                 </td>
 
                 <td>
-                  <div formArrayName="entrysthree">
-                    <div *ngFor="let item of items3.controls; let i = index" [formGroupName]="i" class="entrydata">
+                  <div>
+                    <div class="entrydata">
                       <div style="display: flex; justify-content: center;">
                         <mat-form-field appearance="outline" style="width:70px" class="full-width">
                           <input formControlName="entry_2" matInput required readonly type="number">
@@ -335,8 +328,8 @@
                   </div>    
                 </td>
                 <td>
-                  <div formArrayName="entrysthree">
-                    <div *ngFor="let item of items3.controls; let b = index" [formGroupName]="b" class="entrydata">
+                  <div >
+                    <div class="entrydata">
                       <div style="display: flex; justify-content: center;">
                         <mat-form-field appearance="outline" style="width:70px" class="full-width">
                           <input matInput required formControlName="entry_3" textOnly type="number">
@@ -389,10 +382,10 @@
 
             </thead>
             <tbody>
-              <tr>
+              <tr  *ngFor="let item of items4.controls; let c = index" [formGroup]="item">
                 <td>
-                    <div formArrayName="entrysfour">
-                      <div class="entrydata" *ngFor="let item of items4.controls; let c = index" [formGroupName]="c">
+                    <div>
+                      <div class="entrydata">
   
                         <mat-form-field appearance="outline" style="width:70px;" class="full-width">
                           <input matInput required readonly formControlName="batchNo">
@@ -403,8 +396,8 @@
                     </div>
                 </td>
                 <td>
-                  <div formArrayName="entrysfour">
-                    <div *ngFor="let item of items4.controls; let c = index" [formGroupName]="c" class="entrydata">
+                  <div>
+                    <div class="entrydata">
 
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
                         <input matInput required formControlName="rollNo" textOnly type="number"> 
@@ -418,8 +411,8 @@
                   </div>
                 </td>
                 <td>
-                  <div formArrayName="entrysfour">
-                    <div *ngFor="let item of items4.controls; let c = index" [formGroupName]="c" class="entrydata">
+                  <div>
+                    <div class="entrydata">
                       <div style="display: flex; justify-content: center">
                         <mat-form-field appearance="outline" style="width:70px" class="full-width">
                           <input formControlName="entry_3" matInput required readonly type="number">
@@ -430,8 +423,8 @@
                   </div>
                 </td>
                 <td>
-                  <div formArrayName="entrysfour">
-                    <div *ngFor="let item of items4.controls; let c = index" [formGroupName]="c" class="entrydata">
+                  <div>
+                    <div  class="entrydata">
                       <div style="display: flex; justify-content: center">
                         <mat-form-field appearance="outline" style="width:70px" class="full-width">
                           <input matInput required formControlName="entry_4" textOnly type="number">
@@ -486,10 +479,10 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr *ngFor="let item of items5.controls; let d = index" [formGroup]="item">
                 <td style="width: 20%;">
-                  <div formArrayName="entrysfive">
-                    <div class="entrydata" *ngFor="let item of items5.controls; let d = index" [formGroupName]="d">
+                  <div>
+                    <div class="entrydata">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
                         <input matInput required readonly formControlName="batchNo">
                         <mat-error> </mat-error>
@@ -498,8 +491,8 @@
                   </div>
                 </td>
                 <td style="width: 15%;">
-                  <div formArrayName="entrysfive">
-                    <div *ngFor="let item of items5.controls; let d = index" [formGroupName]="d" class="entrydata">
+                  <div>
+                    <div class="entrydata">
                       <mat-form-field appearance="outline" class="full-width" style="width: 57px; margin-left: -7%;">
                         <input matInput required formControlName="rollNo" textOnly type="number">
                         <mat-error> </mat-error>
@@ -511,8 +504,8 @@
                   </div>
                 </td>
                 <td>
-                  <div formArrayName="entrysfive">
-                    <div *ngFor="let item of items5.controls; let d = index" [formGroupName]="d" class="entrydata">
+                  <div>
+                    <div class="entrydata">
                       <div style="display: flex; justify-content: center">
                         <mat-form-field appearance="outline" style="margin-left: -5px; width: 62px;" class="full-width">
                           <input formControlName="entry_2" matInput required readonly type="number">
@@ -523,8 +516,8 @@
                   </div>
                 </td>
                 <td>
-                  <div formArrayName="entrysfive">
-                    <div *ngFor="let item of items5.controls; let d = index" [formGroupName]="d" class="entrydata">
+                  <div>
+                    <div class="entrydata">
                       <div style="display: flex; justify-content: center">
                         <mat-form-field appearance="outline" style="width:70px" class="full-width">
                           <input formControlName="entry_4" matInput required readonly type="number">
@@ -536,8 +529,8 @@
 
                 </td>
                 <td>
-                  <div formArrayName="entrysfive">
-                    <div *ngFor="let item of items5.controls; let d = index" [formGroupName]="d" class="entrydata">
+                  <div>
+                    <div class="entrydata">
                       <div style="display: flex; justify-content: center">
                         <mat-form-field appearance="outline" style="width:70px" class="full-width">
                           <input matInput formControlName="entry_5" required readonly>
@@ -548,8 +541,8 @@
                   </div>
                 </td>
                 <td>
-                  <div formArrayName="entrysfive">
-                    <div *ngFor="let item of items5.controls; let d = index" [formGroupName]="d" class="entrydata">
+                  <div>
+                    <div class="entrydata">
                       <div>
                         <input type="checkbox" formControlName="reason" [checked]="item.get('reason')?.value"
                           [value]="item.get('reason')?.value ? 'yes' : 'no'"
@@ -595,10 +588,10 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr *ngFor="let item of items6.controls; let f = index" [formGroup]="item" >
               <td>
-                <div formArrayName="entryssix">
-                  <div class="entrydata" *ngFor="let item of items6.controls; let f = index" [formGroupName]="f">
+                <div>
+                  <div class="entrydata">
                     <mat-form-field appearance="outline" style="width:70px" class="full-width">
                       <input matInput required readonly formControlName="batchNo">
                       <mat-error> </mat-error>
@@ -607,8 +600,8 @@
                 </div>
               </td>
               <td>
-                <div formArrayName="entryssix">
-                  <div *ngFor="let item of items6.controls; let f = index" [formGroupName]="f" class="entrydata">
+                <div>
+                  <div class="entrydata">
 
                     <mat-form-field appearance="outline" style="width:70px" class="full-width">
                       <input matInput required formControlName="rollNo" textOnly type="number">
@@ -622,8 +615,8 @@
                 </div>
               </td>
               <td>
-                <div formArrayName="entryssix">
-                  <div *ngFor="let item of items6.controls; let f = index" [formGroupName]="f" class="entrydata">
+                <div>
+                  <div class="entrydata">
                     <div style="display: flex; justify-content: center">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
                         <input formControlName="entry_4" matInput required readonly type="number">
@@ -634,8 +627,8 @@
                 </div>
               </td>
               <td>
-                <div formArrayName="entryssix">
-                  <div *ngFor="let item of items6.controls; let f = index" [formGroupName]="f" class="entrydata">
+                <div>
+                  <div class="entrydata">
                     <div style="display: flex; justify-content: center">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
                         <input matInput required formControlName="entry_6" textOnly type="number">
@@ -687,11 +680,11 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr *ngFor="let item of items7.controls; let g = index" [formGroup]="item">
                 
                 <td style="width: 20%;">
-                  <div formArrayName="entrysseven">
-                    <div class="entrydata" *ngFor="let item of items7.controls; let g = index" [formGroupName]="g">
+                  <div>
+                    <div class="entrydata">
                       <mat-form-field appearance="outline" style="width:70px" class="full-width">
                         <input matInput required readonly formControlName="batchNo">
                         <mat-error> </mat-error>
@@ -701,8 +694,8 @@
                 </td>
                 
                 <td>
-                  <div formArrayName="entrysseven">
-                    <div *ngFor="let item of items7.controls; let g = index" [formGroupName]="g" class="entrydata">
+                  <div>
+                    <div class="entrydata">
                       <mat-form-field appearance="outline" style="width:60px ; margin-left: -4px;" class="full-width">
                         <input matInput required formControlName="rollNo" textOnly type="number">
                         <mat-error> </mat-error>
@@ -716,8 +709,8 @@
                 </td>
                 
                 <td>
-                  <div formArrayName="entrysseven">
-                    <div *ngFor="let item of items7.controls; let g = index" [formGroupName]="g" class="entrydata">
+                  <div>
+                    <div class="entrydata">
                       <div>
                         <mat-form-field appearance="outline" style="margin-left: -5px; width: 62px" class="full-width">
                           <input formControlName="entry_2" matInput required readonly type="number">
@@ -729,8 +722,8 @@
                 </td>
 
                 <td>
-                  <div formArrayName="entrysseven">
-                    <div *ngFor="let item of items7.controls; let g = index" [formGroupName]="g" class="entrydata">
+                  <div>
+                    <div class="entrydata">
                       <div>
                         <mat-form-field appearance="outline" style="width:63px; margin-left: -5px; " class="full-width">
                           <input formControlName="entry_6" matInput required readonly type="number">
@@ -741,8 +734,8 @@
                   </div>
                 </td>
                 <td>
-                  <div formArrayName="entrysseven">
-                    <div *ngFor="let item of items7.controls; let g = index" [formGroupName]="g" class="entrydata">
+                  <div>
+                    <div class="entrydata">
                       <div>
                         <mat-form-field appearance="outline" style="width:64px; margin-left: -6px; " class="full-width">
                           <input matInput required textOnly formControlName="entry_7" type="number">
@@ -755,8 +748,8 @@
                 <td>
 
 
-                  <div formArrayName="entrysseven">
-                    <div *ngFor="let item of items7.controls; let g = index" [formGroupName]="g" class="entrydata">
+                  <div>
+                    <div class="entrydata">
                       <div style="display:flex ;">
                         <mat-form-field appearance="outline" style="width:70px" class="full-width">
                           <input matInput required textOnly>
