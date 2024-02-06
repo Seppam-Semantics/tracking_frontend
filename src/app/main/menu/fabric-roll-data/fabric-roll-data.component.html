@@ -88,6 +88,7 @@
     <th colspan="2">Plan Cut</th>
     <th colspan="2">Actual Cut</th>
     <th>Print Status</th>
+    <th>Edit</th>
   </tr>
   <tr>
     <th></th>
@@ -122,50 +123,55 @@
     <th>Roll</th>
     <th>Total</th>
     <th></th>
+    <th></th>
   </tr>
 </thead>
 <tbody>
-  <tr *ngFor="let work of this.data; let i=index" data-toggle="modal" data-target="#myModal" (click)="check(work.id)">
-    <td>{{i+1}}</td>
-    <td>{{work.buyer}}</td>
-    <td>{{work.orderNo}}</td>
-    <td>{{work.style}}</td>
-    <td>{{work.color}}</td>
-    <td>{{work.size}}</td>
-    <td>{{work.fabType}}</td>
-    <td>{{work.fabDia}}</td>
-    <td>{{work.fabGsm}}</td>
-    <td>{{work.knitSL}}</td>
-    <td>{{work.yarnLot}}</td>
-    <td>{{work.yarnType}}</td>
-    <td>{{work.yarnCount}}</td>
-    <td>{{work.spinFty}}</td>
-    <td>{{work.knitFty}}</td>
-    <td>{{work.dyeinFty}}</td>
-    <td>{{work.noRolls}}</td>
+  <tr *ngFor="let work of this.data; let i=index"  (click)="check(work.id)">
+   
+    <td data-toggle="modal" data-target="#myModal">{{i+1}}</td>
+    <td data-toggle="modal" data-target="#myModal">{{work.buyer}}</td>
+    <td data-toggle="modal" data-target="#myModal">{{work.orderNo}}</td>
+    <td data-toggle="modal" data-target="#myModal">{{work.style}}</td>
+    <td data-toggle="modal" data-target="#myModal">{{work.color}}</td>
+    <td data-toggle="modal" data-target="#myModal">{{work.size}}</td>
+    <td data-toggle="modal" data-target="#myModal">{{work.fabType}}</td>
+    <td data-toggle="modal" data-target="#myModal">{{work.fabDia}}</td>
+    <td data-toggle="modal" data-target="#myModal">{{work.fabGsm}}</td>
+    <td data-toggle="modal" data-target="#myModal">{{work.knitSL}}</td>
+    <td data-toggle="modal" data-target="#myModal">{{work.yarnLot}}</td>
+    <td data-toggle="modal" data-target="#myModal">{{work.yarnType}}</td>
+    <td data-toggle="modal" data-target="#myModal">{{work.yarnCount}}</td>
+    <td data-toggle="modal" data-target="#myModal">{{work.spinFty}}</td>
+    <td data-toggle="modal" data-target="#myModal">{{work.knitFty}}</td>
+    <td data-toggle="modal" data-target="#myModal">{{work.dyeinFty}}</td>
+    <td data-toggle="modal" data-target="#myModal">{{work.noRolls}}</td>
 
-    <td>{{work.firstRolls}}</td>
-    <td>{{work.rollTotal}}</td>
+    <td data-toggle="modal" data-target="#myModal">{{work.firstRolls}}</td>
+    <td data-toggle="modal" data-target="#myModal">{{work.rollTotal}}</td>
     
-    <td>{{work.secondRolls}}</td>
-    <th>{{work.greigeTotal}}</th>
+    <td data-toggle="modal" data-target="#myModal">{{work.secondRolls}}</td>
+    <th data-toggle="modal" data-target="#myModal">{{work.greigeTotal}}</th>
     
-    <td>{{work.thirdRolls}}</td>
-    <th>{{work.dyeTotal}}</th>
+    <td data-toggle="modal" data-target="#myModal">{{work.thirdRolls}}</td>
+    <th data-toggle="modal" data-target="#myModal">{{work.dyeTotal}}</th>
     
-    <td>{{work.fourthRolls}}</td>
-    <th>{{work.finishTotal}}</th>
+    <td data-toggle="modal" data-target="#myModal">{{work.fourthRolls}}</td>
+    <th data-toggle="modal" data-target="#myModal">{{work.finishTotal}}</th>
     
-    <td>{{work.fifthRolls}}</td>
-    <th>{{work.delTotal}}</th>
+    <td data-toggle="modal" data-target="#myModal">{{work.fifthRolls}}</td>
+    <th data-toggle="modal" data-target="#myModal">{{work.delTotal}}</th>
     
-    <td>{{work.sixthRolls}}</td>
-    <th>{{work.planTotal}}</th>
+    <td data-toggle="modal" data-target="#myModal">{{work.sixthRolls}}</td>
+    <th data-toggle="modal" data-target="#myModal">{{work.planTotal}}</th>
     
-    <td>{{work.seventhRolls}}</td>
-    <th>{{work.actualCutTotal}}</th>
-    
-    <td>{{work.isPrint}}</td>
+    <td data-toggle="modal" data-target="#myModal">{{work.seventhRolls}}</td>
+    <th data-toggle="modal" data-target="#myModal">{{work.actualCutTotal}}</th>
+  
+    <td data-toggle="modal" data-target="#myModal">{{work.isPrint}}</td>
+  
+    <td><button class="btn btn-primary" data-toggle="modal" data-target="#edit"
+      (click)="edit(work.id)">Edit</button></td>
   </tr>
 
   <tbody>
@@ -280,3 +286,120 @@
   </div>
 </div>
 <!---===========================================================================================================-->
+<form [formGroup]="woUpdateFrom">
+  <div class="modal fade" id="edit">
+    <div class="modal-dialog modal-fullscreen">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title" style="display: flex; margin-left: 45%;">Update WorkOrder</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div>
+          <div style="display: flex; justify-content: space-around; margin-bottom: 2%;">
+            <div style="display: flex; width : fit-content;">
+              <label style="display: inline-block; width: 100px;">Buyer : </label> 
+              <input type="text" matInput  formControlName="buyer">
+            </div>
+            <div style="display: flex; width : fit-content;">
+              <label style="display: inline-block; width: 100px;">Order No : </label> 
+              <input type="text" matInput  formControlName="orderNo">
+            </div>
+          </div>
+  
+  
+          <div style="display: flex; justify-content: space-around; margin-bottom: 2%;">
+            <div style="display: flex; width : fit-content;">
+              <label style="display: inline-block; width: 100px;">style : </label> 
+              <input type="text" matInput formControlName="style">
+            </div>
+            <div style="display: flex; width : fit-content;">
+              <label style="display: inline-block; width: 100px;">color : </label> 
+              <input type="text" matInput formControlName="color">
+            </div>
+          </div>
+  
+          <div style="display: flex; justify-content: space-around; margin-bottom: 2%;">
+            <div style="display: flex; width : fit-content;">
+              <label style="display: inline-block; width: 100px;">size : </label> 
+              <input type="text" matInput formControlName="size">
+            </div>
+            <div style="display: flex; width : fit-content;">
+              <label style="display: inline-block; width: 100px;">fabType : </label> 
+              <input type="text" matInput formControlName="fabType">
+            </div>
+          </div>
+          
+          <div style="display: flex; justify-content: space-around; margin-bottom: 2%;">
+            <div style="display: flex; width : fit-content;">
+              <label style="display: inline-block; width: 100px;">fabDia : </label> 
+              <input type="text" matInput formControlName="fabDia">
+            </div>
+            <div style="display: flex; width : fit-content;">
+              <label style="display: inline-block; width: 100px;">fabGsm : </label> 
+              <input type="text" matInput formControlName="fabGSM">
+            </div>
+          </div>
+  
+          <div style="display: flex; justify-content: space-around; margin-bottom: 2%;">
+            <div style="display: flex; width : fit-content;">
+              <label style="display: inline-block; width: 100px;">knitSL : </label> 
+              <input type="text" matInput formControlName="knitSL">
+            </div>
+            <div style="display: flex; width : fit-content;">
+              <label style="display: inline-block; width: 100px;">yarn Kg : </label> 
+              <input type="text" matInput formControlName="yarnLot">
+            </div>
+          </div>
+  
+          <div style="display: flex; justify-content: space-around; margin-bottom: 2%;">
+            <div style="display: flex; width : fit-content;">
+              <label style="display: inline-block; width: 100px;">Greige Kg : </label> 
+              <input type="text" matInput formControlName="yarnType">
+            </div>
+            <div style="display: flex; width : fit-content;">
+              <label style="display: inline-block; width: 100px;">Finished Kg : </label> 
+              <input type="text" matInput formControlName="yarnCount">
+            </div>
+          </div>
+  
+          <div style="display: flex; justify-content: space-around; margin-bottom: 2%;">
+            <div style="display: flex; width : fit-content;">
+              <label style="display: inline-block; width: 100px;">spinFty : </label> 
+              <input type="text" matInput formControlName="spinFty">
+            </div>
+            <div style="display: flex; width : fit-content;">
+              <label style="display: inline-block; width: 100px;">knitFty : </label> 
+              <input type="text" matInput formControlName="knitFty">
+            </div>
+          </div>
+  
+          <div style="display: flex; justify-content: space-around; margin-bottom: 2%;">
+            <div style="display: flex; width : fit-content;">
+              <label style="display: inline-block; width: 100px;">dyeingFty : </label> 
+              <input type="text" matInput formControlName="dyeinFty">
+            </div>
+  
+            <div style="display: flex; width : fit-content;">
+              <label style="display: inline-block; width: 100px;">No Of Rolls : </label> 
+              <input type="text" matInput formControlName="noRolls">
+            </div>
+          </div>
+        </div>
+      </div>
+   
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" style="display: flex; margin-right: 45%;"
+          (click)="woupdatesubmit()" data-dismiss="modal" >Update</button>
+          <!-- data-dismiss="modal" -->
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  </form>

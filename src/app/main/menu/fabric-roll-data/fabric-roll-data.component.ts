@@ -1,6 +1,7 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ApiService } from 'src/app/api.service';
 import * as XLSX from 'xlsx'
@@ -43,13 +44,13 @@ export class FabricRollDataComponent implements OnInit {
   wodetails: any;
   fabid: any;
   AllWoDetails: any[] = [];
-  entry1: any[] = [];
-  entry2: any[] = [];
-  entry3: any[] = [];
-  entry4: any[] = [];
-  entry5: any[] = [];
-  entry6: any[] = [];
-  entry7: any[] = [];
+  entry1: any
+  entry2: any
+  entry3: any
+  entry4: any
+  entry5: any
+  entry6: any
+  entry7: any
   entry1total: any;
   entry2total: any;
   entry3total: any;
@@ -58,7 +59,11 @@ export class FabricRollDataComponent implements OnInit {
   entry6total: any;
   entry7total: any;
   LoadingTotal:boolean=false;
-
+  totalcount: any;
+  totalvalues: any;
+  woupdateid:any;
+  fabentrydata:any;
+  Woupdate:any;
 
   constructor(private api: ApiService,
     private http: HttpClient,
@@ -71,13 +76,6 @@ export class FabricRollDataComponent implements OnInit {
   fileName = "Fabricrolldata.xlsx"
   fileName2="Workorder-data.xlsx"
 
-
-  check(id: any) {
-    const entry = 1
-    this.api.getfabricdetails(id, entry).subscribe((res) => {
-      this.dataSource = res.fabricRolls
-    })
-  }
   public getbuyers() {
     this.api.getbuyers().subscribe((res) => {
       this.buyers = res.buyers;
@@ -90,69 +88,29 @@ export class FabricRollDataComponent implements OnInit {
     this.data.forEach((woId: any) => {
       const entry = 1
       this.api.getfabricdetails(woId.id, entry).subscribe((res) => {
-        this.dataSource = res.fabricRolls
-        this.entry1 = [];
-        this.entry2 = [];
-        this.entry3 = [];
-        this.entry4 = [];
-        this.entry5 = [];
-        this.entry6 = [];
-        this.entry7 = [];
-        this.dataSource.forEach((entry) => {
-          switch (true) {
-            case entry.entry_1 !== 0:
-              this.entry1.push(entry.entry_1);
-              break;
-            case entry.entry_2 !== 0:
-              this.entry2.push(entry.entry_2);
-              break;
-            case entry.entry_3 !== 0:
-              this.entry3.push(entry.entry_3);
-              break;
-            case entry.entry_4 !== 0:
-              this.entry4.push(entry.entry_4);
-              break;
-            case entry.entry_4 !== 0 && entry.reason === 'yes':
-              this.entry5.push(entry.entry_4);
-              break;
-            case entry.entry_6 !== 0:
-              this.entry6.push(entry.entry_6);
-              break;
-            case entry.entry_7 !== 0:
-              this.entry7.push(entry.entry_7);
-              break;
-            default:
-              break;
-          }
-        });
+        this.totalcount = res.total_counts
+        this.totalvalues = res.total_values
+
+        woId['rollTotal'] = this.totalvalues[0].entry_1
+        woId['firstRolls'] = this.totalcount[0].entry_1_count;
+
+        woId['greigeTotal'] = this.totalvalues[0].entry_2
+        woId['secondRolls']=this.totalcount[0].entry_2_count;
         
-        this.entry1total = this.entry1.reduce((acc, num) => acc + num, 0)
-        this.entry2total = this.entry2.reduce((acc, num) => acc + num, 0)
-        this.entry3total = this.entry3.reduce((acc, num) => acc + num, 0)
-        this.entry4total = this.entry4.reduce((acc, num) => acc + num, 0)
-        this.entry5total = this.entry5.reduce((acc, num) => acc + num, 0)
-        this.entry6total = this.entry6.reduce((acc, num) => acc + num, 0)
-        this.entry7total = this.entry7.reduce((acc, num) => acc + num, 0)
-        woId['rollTotal'] = this.entry1total
-        woId['firstRolls'] = this.entry1.length
-
-        woId['greigeTotal'] = this.entry2total
-        woId['secondRolls']=this.entry2.length
+        woId['dyeTotal'] = this.totalvalues[0].entry_3
+        woId['thirdRolls']=this.totalcount[0].entry_3_count;
         
-        woId['dyeTotal'] = this.entry3total
-        woId['thirdRolls']=this.entry3.length
-        
-        woId['finishTotal'] = this.entry4total
-        woId['fourthRolls']=this.entry4.length
+        woId['finishTotal'] = this.totalvalues[0].entry_4
+        woId['fourthRolls']= this.totalcount[0].entry_4_count;
 
-        woId['delTotal'] = this.entry5total
-        woId['fifthRolls']=this.entry5.length
+        woId['delTotal'] = this.totalvalues[0].entry_5
+        woId['fifthRolls']= this.totalcount[0].entry_5_count;
 
-        woId['planTotal'] = this.entry6total
-        woId['sixthRolls']=this.entry6.length
+        woId['planTotal'] = this.totalvalues[0].entry_6
+        woId['sixthRolls']= this.totalcount[0].entry_6_count;
 
-        woId['actualCutTotal'] = this.entry7total
-        woId['seventhRolls']=this.entry7.length
+        woId['actualCutTotal'] = this.totalvalues[0].entry_7
+        woId['seventhRolls']= this.totalcount[0].entry_7_count;
 
       })
     })
@@ -221,7 +179,8 @@ export class FabricRollDataComponent implements OnInit {
     this.loaddetails();
     setTimeout(() => {
       this.spinner.hide();
-    }, 5000);
+      console.log(this.data)
+    }, 1000);
   });
   }
 
@@ -241,6 +200,71 @@ export class FabricRollDataComponent implements OnInit {
     XLSX.writeFile(wb, this.fileName);
   }
 
+  check(id: any) {
+    const entry = 1
+    this.api.getfabricdetails(id, entry).subscribe((res) => {
+      this.fabentrydata = res.fabricRolls
+    })
+  
+  }
+
+
+
+  edit(id: any) {
+    const entry = 1
+    this.woupdateid=id
+    this.api.getsinglewodetails(id).subscribe((res) => {
+      this.Woupdate = res.workorder
+      console.log(this.Woupdate)
+      this.woUpdateFrom.patchValue({
+        buyer: this.Woupdate.buyer,
+        orderNo: this.Woupdate.orderNo,
+        style: this.Woupdate.style,
+        color: this.Woupdate.color,
+        size: this.Woupdate.size,
+        fabType: this.Woupdate.fabType,
+        fabDia: this.Woupdate.fabDia,
+        fabGSM: this.Woupdate.fabGsm,
+        knitSL: this.Woupdate.knitSL,
+        yarnLot: this.Woupdate.yarnLot,
+        yarnType: this.Woupdate.yarnType,
+        yarnCount: this.Woupdate.yarnCount,
+        spinFty: this.Woupdate.spinFty,
+        knitFty: this.Woupdate.knitFty,
+        dyeinFty: this.Woupdate.dyeinFty,
+        noRolls: this.Woupdate.noRolls
+      })
+    })
+     }
+
+
+  woUpdateFrom = new FormGroup({
+    buyer: new FormControl(''),
+    orderNo: new FormControl(''),
+    style: new FormControl(''),
+    color: new FormControl(''),
+    size: new FormControl(''),
+    fabType: new FormControl(''),
+    fabDia: new FormControl(''),
+    fabGSM: new FormControl(''),
+    knitSL: new FormControl(''),
+    yarnLot: new FormControl(''),
+    yarnType: new FormControl(''),
+    yarnCount: new FormControl(''),
+    spinFty: new FormControl(''),
+    knitFty: new FormControl(''),
+    dyeinFty: new FormControl(''),
+    noRolls: new FormControl('')
+  })
+
+woupdatesubmit(){
+  const entry = 1
+  console.log(this.woUpdateFrom.value)
+  this.api.postsinglewodetails(this.woUpdateFrom.value,this.woupdateid).subscribe((res) => {
+    alert(res.message)
+    this.onSelectionChange()
+  })
+}
 
 
 }

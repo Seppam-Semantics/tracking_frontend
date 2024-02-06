@@ -15,6 +15,7 @@ const routes: Routes = [
     path:'main',
     component:MainComponent,
     loadChildren:() =>import('./main/main.module').then(x=>x.MainModule)},
+    
 
 ];
 

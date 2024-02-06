@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ApiService {
 
-constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   apiUrl = "https://tracker.seppam.com";
 
@@ -92,10 +92,17 @@ constructor(private http: HttpClient) { }
     return this.http.get(this.getUrl() + `/filtersapi/colors-sizes?buyer=${buyer}&orderNo=${order}&style=${style}&color=${color}`, this.getHeaders())
   }
 
-  getwodetails(buyer: any, orderNo: any, style: any, color: any):Observable<any>{
+  getwodetails(buyer: any, orderNo: any, style: any, color: any): Observable<any> {
     return this.http.get(this.getUrl() + `/workorderapi/workorders-filter?buyer=${buyer}&&orderNo=${orderNo}&&style=${style}&&color=${color}`, this.getHeaders())
   }
 
+  postsinglewodetails(data: any, id: any): Observable<any> {
+    return this.http.put(this.getUrl() + `/workorderapi/workorder/${id}`, data, this.getHeaders())
+  }
+  getsinglewodetails(id: any): Observable<any> {
+    return this.http.get(this.getUrl() + `/fabricrollapi/fabric-entrys?id=${id}`, this.getHeaders())
+  }
+
+
 
 }
- 
