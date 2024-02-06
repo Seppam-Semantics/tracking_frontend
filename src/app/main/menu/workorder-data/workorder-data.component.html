@@ -10,7 +10,7 @@
     <input type="file" class="form-control w-50 mat-elevation-z8" (change)="readfile($event)" style="display:flex; align-items: start;">
   
     <button class="btn btn-primary" (click)="readexcelfile()"> Load </button>
-    <a href="../assets/Workorder.xlsx" class="btn btn-primary" >Template</a>
+    <a href="../assets/WorkOrder template.xlsx" class="btn btn-primary" >Template</a>
   </div>
   
   </div>
@@ -23,8 +23,8 @@
   
     <ngx-spinner>Loading...!</ngx-spinner>
     
-      <div>
-        <table>
+      <div class="fixTableHead">
+        <table style="overflow: scroll;">
           <thead>
             <tr>
               <th>buyer</th>
