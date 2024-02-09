@@ -82,40 +82,6 @@ export class FabricRollDataComponent implements OnInit {
     })
   }
 
-  loaddetails() {
-    this.spinner.show()
-    this.LoadingTotal=true
-    this.data.forEach((woId: any) => {
-      const entry = 1
-      this.api.getfabricdetails(woId.id, entry).subscribe((res) => {
-        this.totalcount = res.total_counts
-        this.totalvalues = res.total_values
-
-        woId['rollTotal'] = this.totalvalues[0].entry_1
-        woId['firstRolls'] = this.totalcount[0].entry_1_count;
-
-        woId['greigeTotal'] = this.totalvalues[0].entry_2
-        woId['secondRolls']=this.totalcount[0].entry_2_count;
-        
-        woId['dyeTotal'] = this.totalvalues[0].entry_3
-        woId['thirdRolls']=this.totalcount[0].entry_3_count;
-        
-        woId['finishTotal'] = this.totalvalues[0].entry_4
-        woId['fourthRolls']= this.totalcount[0].entry_4_count;
-
-        woId['delTotal'] = this.totalvalues[0].entry_5
-        woId['fifthRolls']= this.totalcount[0].entry_5_count;
-
-        woId['planTotal'] = this.totalvalues[0].entry_6
-        woId['sixthRolls']= this.totalcount[0].entry_6_count;
-
-        woId['actualCutTotal'] = this.totalvalues[0].entry_7
-        woId['seventhRolls']= this.totalcount[0].entry_7_count;
-
-      })
-    })
-  }
-
   getorders(buyer: any) {
     this.api.getorders(buyer).subscribe((res) => {
       this.order = res.orders
@@ -140,8 +106,35 @@ export class FabricRollDataComponent implements OnInit {
     })
   }
 
+  loadworkorder(buyer: any, orderNo?: string, style?: string, color?: string, size?: any) {
+    this.LoadingTotal = true
+    this.spinner.show()
+    const proftoken = 'Bearer ' + sessionStorage.getItem('token')
+    const headers = new HttpHeaders().set('x-access-token', proftoken);
+    let url = `${this.api.apiUrl}/workorderapi/workorders-filter?buyer=${buyer}`;
+    if (orderNo) url += `&orderNo=${orderNo}`;
+    if (style) url += `&style=${style}`;
+    if (color) url += `&color=${color}`;
+    if (size) url += `&size=${size}`;
 
+    this.http.get<any>(url, { headers }).subscribe((res) => {
+      this.data = res.workorders;
+      this.totalcount = res.tota_count
+      this.totalvalues = res.total_value
+      setTimeout(() => {
+        this.spinner.hide()
+        this.LoadingTotal = false
+      }, 2000)
+    });
+  }
 
+  clear(){
+    this.buyerName = null
+    this.ordernumbers = null
+    this.styleslist = null
+    this.colorslist = null
+    this.styleslist = null
+  }
   onSelectionChange() {
     if (this.buyerName) {
       this.getorders(this.buyerName);
@@ -162,26 +155,6 @@ export class FabricRollDataComponent implements OnInit {
     if (this.buyerName && this.ordernumbers && this.styleslist && this.colorslist && this.sizeslist) {
       this.loadworkorder(this.buyerName, this.ordernumbers, this.styleslist, this.colorslist,this.sizeslist);
     }
-  }
-
-
-  loadworkorder(buyer: any, orderNo?: string, style?: string, color?: string, size?: any) {
-    const proftoken = 'Bearer ' + sessionStorage.getItem('token')
-    const headers = new HttpHeaders().set('x-access-token', proftoken);
-    let url = `${this.api.apiUrl}/workorderapi/workorders-filter?buyer=${buyer}`;
-  if (orderNo) url += `&orderNo=${orderNo}`;
-  if (style) url += `&style=${style}`;
-  if (color) url += `&color=${color}`;
-  if (size) url += `&size=${size}`;
-
-  this.http.get<any>(url, { headers }).subscribe((res) => {
-    this.data = res.workorders;
-    this.loaddetails();
-    setTimeout(() => {
-      this.spinner.hide();
-      console.log(this.data)
-    }, 1000);
-  });
   }
 
   exportexcel2() {
