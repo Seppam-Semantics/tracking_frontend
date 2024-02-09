@@ -27,15 +27,15 @@ export class FabricRollDataComponent implements OnInit {
   fabricdetails: any
   ordernumber:any
   buyers: any;
-  buyerName: any = null
+  buyerName: any
   order: any;
-  ordernumbers:any = null
+  ordernumbers:any
   stylelist: any;
-  styleslist:any = null
+  styleslist:any
   colorlist: any;
-  colorslist:any = null
+  colorslist:any
   sizelist: any;
-  sizeslist:any = null
+  sizeslist:any
   workorderhide: boolean = true;
   workorderId: any;
   WoNumber: any;
@@ -106,55 +106,40 @@ export class FabricRollDataComponent implements OnInit {
     })
   }
 
-  loadworkorder(buyer: any, orderNo?: string, style?: string, color?: string, size?: any) {
-    this.LoadingTotal = true
-    this.spinner.show()
-    const proftoken = 'Bearer ' + sessionStorage.getItem('token')
-    const headers = new HttpHeaders().set('x-access-token', proftoken);
-    let url = `${this.api.apiUrl}/workorderapi/workorders-filter?buyer=${buyer}`;
-    if (orderNo) url += `&orderNo=${orderNo}`;
-    if (style) url += `&style=${style}`;
-    if (color) url += `&color=${color}`;
-    if (size) url += `&size=${size}`;
-
-    this.http.get<any>(url, { headers }).subscribe((res) => {
+  loadworkorder(buyer: any, orderNo: string = '', style: string ='', color: string = '', size: string ='') {
+    this.api.getwodetails(buyer, orderNo, style, color, size).subscribe((res) => {
       this.data = res.workorders;
       this.totalcount = res.tota_count
       this.totalvalues = res.total_value
-      setTimeout(() => {
-        this.spinner.hide()
-        this.LoadingTotal = false
-      }, 2000)
     });
   }
-
-  clear(){
-    this.buyerName = null
-    this.ordernumbers = null
-    this.styleslist = null
-    this.colorslist = null
-    this.styleslist = null
+  
+  woByBuyer(){
+    this.getorders(this.buyerName);
+    this.loadworkorder(this.buyerName);
   }
-  onSelectionChange() {
-    if (this.buyerName) {
-      this.getorders(this.buyerName);
-      this.loadworkorder(this.buyerName);
-    }
-    if (this.buyerName && this.ordernumbers) {
-      this.getstyle(this.buyerName, this.ordernumbers)
+  wobyOrder(){
+    this.getstyle(this.buyerName, this.ordernumbers)
       this.loadworkorder(this.buyerName, this.ordernumbers);
-    }
-    if (this.buyerName && this.ordernumbers && this.styleslist) {
-      this.getcolor(this.buyerName, this.ordernumbers, this.styleslist)
+  }
+  wobystyle(){
+    this.getcolor(this.buyerName, this.ordernumbers, this.styleslist)
       this.loadworkorder(this.buyerName, this.ordernumbers, this.styleslist);
-    }
-    if (this.buyerName && this.ordernumbers && this.styleslist && this.colorslist) {
-      this.getsize(this.buyerName, this.ordernumbers, this.styleslist, this.colorslist)
-      this.loadworkorder(this.buyerName, this.ordernumbers, this.styleslist, this.colorslist);
-    }
-    if (this.buyerName && this.ordernumbers && this.styleslist && this.colorslist && this.sizeslist) {
-      this.loadworkorder(this.buyerName, this.ordernumbers, this.styleslist, this.colorslist,this.sizeslist);
-    }
+  }
+  wobycolor(){
+    this.getsize(this.buyerName, this.ordernumbers, this.styleslist, this.colorslist)
+    this.loadworkorder(this.buyerName, this.ordernumbers, this.styleslist, this.colorslist);
+  }
+  wobysize(){
+    this.loadworkorder(this.buyerName, this.ordernumbers, this.styleslist, this.colorslist, this.sizeslist);
+  }
+
+  clearAll(){
+    this.buyerName = ''
+    this.ordernumbers = ''
+    this.styleslist = ''
+    this.colorslist = ''
+    this.sizeslist = ''
   }
 
   exportexcel2() {
@@ -235,7 +220,7 @@ woupdatesubmit(){
   console.log(this.woUpdateFrom.value)
   this.api.postsinglewodetails(this.woUpdateFrom.value,this.woupdateid).subscribe((res) => {
     alert(res.message)
-    this.onSelectionChange()
+    this.woByBuyer()
   })
 }
 
