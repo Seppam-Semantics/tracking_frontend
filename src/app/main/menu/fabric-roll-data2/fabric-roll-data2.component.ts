@@ -8,9 +8,9 @@ import * as XLSX from 'xlsx'
 
 
 @Component({
-  selector: 'app-fabric-roll-data',
-  templateUrl: './fabric-roll-data.component.html',
-  styleUrls: ['./fabric-roll-data.component.css'],
+  selector: 'app-fabric-roll2-data',
+  templateUrl: './fabric-roll-data2.component.html',
+  styleUrls: ['./fabric-roll-data2.component.css'],
   animations: [
     trigger('detailExpand', [
       state('collapsed,void', style({ height: '0px', minHeight: '0' })),
@@ -21,7 +21,7 @@ import * as XLSX from 'xlsx'
 })
 
 
-export class FabricRollDataComponent implements OnInit {
+export class FabricRollData2Component implements OnInit {
   dataSource: any[] = []
   data: any[] = [];
   fabricdetails: any
@@ -63,7 +63,15 @@ export class FabricRollDataComponent implements OnInit {
   totalvalues: any;
   woupdateid:any;
   fabentrydata:any;
+  fabentryentry:any;
   Woupdate:any;
+  fabentrydata7: any;
+  fabentrydata6: any;
+  fabentrydata1: any;
+  fabentrydata2: any;
+  fabentrydata3: any;
+  fabentrydata4: any;
+  fabentrydata5: any;
 
   constructor(private api: ApiService,
     private http: HttpClient,
@@ -108,7 +116,7 @@ export class FabricRollDataComponent implements OnInit {
 
   loadworkorder(buyer: any, orderNo: string = '', style: string ='', color: string = '', size: string ='') {
     this.api.getwodetails(buyer, orderNo, style, color, size).subscribe((res) => {
-      this.data = res.workorder;
+      this.data = res.workorders;
     });
   }
   
@@ -157,9 +165,16 @@ export class FabricRollDataComponent implements OnInit {
   }
 
   check(id: any) {
-    const entry = 1
-    this.api.getfabricdetails(id, entry).subscribe((res) => {
-      this.fabentrydata = res.fabricRolls
+    this.api.getsingleFabricroll(id).subscribe((res) => {
+      this.fabentrydata1 = res.entry1
+      this.fabentrydata2 = res.entry2
+      this.fabentrydata3 = res.entry3
+      this.fabentrydata4 = res.entry4
+      this.fabentrydata5 = res.entry5
+      this.fabentrydata6 = res.entry6
+      this.fabentrydata7 = res.entry7
+      this.fabentryentry=res
+        console.log(this.fabentryentry)
     })
   
   }

@@ -46,6 +46,8 @@ import { BundleEntry2Component } from './Transaction/Bundle Entry/bundle-entry-2
 import { BundleEntry3Component } from './Transaction/Bundle Entry/bundle-entry-3/bundle-entry-3.component';
 import { FabricRoll1Component } from './Transaction/Fabric Roll/fabric-roll-1/fabric-roll-1.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { FabricRollEntryComponent } from './Transaction/Fabric Roll/fabric-roll-entry/fabric-roll-entry.component';
+import { FabricRollData2Component } from './menu/fabric-roll-data2/fabric-roll-data2.component';
 
 
 
@@ -71,6 +73,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     BundleEntry2Component,
     BundleEntry3Component,
     FabricRoll1Component,
+    FabricRollEntryComponent,
+    FabricRollData2Component,
   ],
   imports: [
     CommonModule,

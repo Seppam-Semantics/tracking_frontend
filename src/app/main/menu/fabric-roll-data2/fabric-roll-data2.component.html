@@ -1,0 +1,421 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row style="display: flex; justify-content: center;">
+      <span>Fabric Roll Data</span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <cdk-accordion class="example-accordion">
+    <cdk-accordion-item #accordionItem="cdkAccordionItem" class="example-accordion-item" role="button" tabindex="0"
+      style="display: flex; flex-direction: column; justify-content: center;">
+  
+      <div class="example-accordion-item-header" (click)="accordionItem.toggle()"
+        style="display: flex; justify-content: center; gap: 0.5%; margin-top: 2%;">
+  
+        <mat-form-field appearance="outline" style="width: 105px;" (click) = "clearAll()">
+          <mat-label>Buyer</mat-label>
+          <mat-select [(ngModel)]="buyerName" (selectionChange)="woByBuyer()">
+            <mat-option value=""> </mat-option>
+            <mat-option *ngFor="let buyer of this.buyers" value="{{buyer.buyer}}">{{buyer.buyer}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" style="width: 105px;" >
+          <mat-label>Order</mat-label>
+          <mat-select [(ngModel)]="ordernumbers" (selectionChange)="wobyOrder()">
+            <mat-option value=""> </mat-option>
+            <mat-option *ngFor="let order of this.order" value="{{order.orderNO}}">{{order.orderNO}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" style="width: 105px;" >
+          <mat-label>Style</mat-label>
+          <mat-select [(ngModel)]="styleslist" (selectionChange)="wobystyle()">
+            <mat-option value=""> </mat-option>
+            <mat-option *ngFor="let style of this.stylelist" value="{{style.style}}">{{style.style}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" style="width: 105px;" >
+          <mat-label>color</mat-label>
+          <mat-select [(ngModel)]="colorslist" (selectionChange)="wobycolor()">
+            <mat-option value=""> </mat-option>
+            <mat-option *ngFor="let color of this.colorlist" value="{{color.color}}">{{color.color}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" style="width: 105px;" >
+          <mat-label>Size</mat-label>
+          <mat-select [(ngModel)]="sizeslist" (selectionChange)="wobysize()">
+            <mat-option value=""> </mat-option>
+            <mat-option *ngFor="let size of this.sizelist" value="{{size.size}}">{{size.size}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </cdk-accordion-item>
+  </cdk-accordion>
+  
+  <!---===========================================================================================================-->
+  <div style="display: flex; justify-content: end;">
+    <button class="btn btn-primary" style="display: flex; justify-content: left; margin-top: -2%;" (click)="exportexcel2()">Download File</button>
+    </div>
+    
+  
+  <div class="fixTableHead">
+  <table id="table-data2">
+    <thead>
+    <tr>
+      <th>Sl.No</th>
+      <th>Buyer</th>
+      <th>Order No</th>
+      <th>Style</th>
+      <th>Color</th>
+      <th>size</th>
+      <th>fab Type</th>
+      <th>fab Dia</th>
+      <th>fab GSM</th>
+      <th>knitSL</th>
+      <th>yarn Kg</th>
+      <th>Greige Kg</th>
+      <th>Finished Kg</th>
+      <th>spinFty</th>
+      <th>knitFty</th>
+      <th>dyeingFty</th>
+      <th>No.Of Days</th>
+      <th colspan="2">Roll Total</th>
+      <th colspan="2">Greige Total</th>
+      <th colspan="2">Dye Total</th>
+      <th colspan="2">finished Total</th>
+      <th colspan="2">Delivery Total</th>
+      <th colspan="2">Plan Cut</th>
+      <th colspan="2">Actual Cut</th>
+      <th>Print Status</th>
+      <th>Edit</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>Roll</th>
+      <th>Total</th>
+      <th>Roll</th>
+      <th>Total</th>
+      <th>Roll</th>
+      <th>Total</th>
+      <th>Roll</th>
+      <th>Total</th>
+      <th>Roll</th>
+      <th>Total</th>
+      <th>Roll</th>
+      <th>Total</th>
+      <th>Roll</th>
+      <th>Total</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let work of this.data; let i=index"  (click)="check(work.id)">
+     
+      <td data-toggle="modal" data-target="#myModal">{{i+1}}</td>
+      <td data-toggle="modal" data-target="#myModal">{{work.buyer}}</td>
+      <td data-toggle="modal" data-target="#myModal">{{work.orderNo}}</td>
+      <td data-toggle="modal" data-target="#myModal">{{work.style}}</td>
+      <td data-toggle="modal" data-target="#myModal">{{work.color}}</td>
+      <td data-toggle="modal" data-target="#myModal">{{work.size}}</td>
+      <td data-toggle="modal" data-target="#myModal">{{work.fabType}}</td>
+      <td data-toggle="modal" data-target="#myModal">{{work.fabDia}}</td>
+      <td data-toggle="modal" data-target="#myModal">{{work.fabGsm}}</td>
+      <td data-toggle="modal" data-target="#myModal">{{work.knitSL}}</td>
+      <td data-toggle="modal" data-target="#myModal">{{work.yarnLot}}</td>
+      <td data-toggle="modal" data-target="#myModal">{{work.yarnType}}</td>
+      <td data-toggle="modal" data-target="#myModal">{{work.yarnCount}}</td>
+      <td data-toggle="modal" data-target="#myModal">{{work.spinFty}}</td>
+      <td data-toggle="modal" data-target="#myModal">{{work.knitFty}}</td>
+      <td data-toggle="modal" data-target="#myModal">{{work.dyeinFty}}</td>
+      <td data-toggle="modal" data-target="#myModal">{{work.noRolls}}</td>
+  
+      <td data-toggle="modal" data-target="#myModal">{{work.totalRolls_1 || 0}}</td>
+      <td data-toggle="modal" data-target="#myModal">{{work.total_1}}</td>
+      
+      <td data-toggle="modal" data-target="#myModal">{{work.totalRolls_2 || 0}}</td>
+      <th data-toggle="modal" data-target="#myModal">{{work.total_2}}</th>
+      
+      <td data-toggle="modal" data-target="#myModal">{{work.totalRolls_3 || 0}}</td>
+      <th data-toggle="modal" data-target="#myModal">{{work.total_3}}</th>
+      
+      <td data-toggle="modal" data-target="#myModal">{{work.totalRolls_4 || 0}}</td>
+      <th data-toggle="modal" data-target="#myModal">{{work.total_4}}</th>
+      
+      <td data-toggle="modal" data-target="#myModal">{{work.totalRolls_5 || 0}}</td>
+      <th data-toggle="modal" data-target="#myModal">{{work.total_5}}</th>
+      
+      <td data-toggle="modal" data-target="#myModal">{{work.totalRolls_6 || 0}}</td>
+      <th data-toggle="modal" data-target="#myModal">{{work.total_6}}</th>
+      
+      <td data-toggle="modal" data-target="#myModal">{{work.totalRolls_7 || 0}}</td>
+      <th data-toggle="modal" data-target="#myModal">{{work.total_7}}</th>
+    
+      <td data-toggle="modal" data-target="#myModal">{{work.isPrint}}</td>
+    
+      <td><button class="btn btn-primary" data-toggle="modal" data-target="#edit"
+        (click)="edit(work.id)">Edit</button></td>
+    </tr>
+  
+    <tbody>
+  </table>
+  </div>
+  <!---===========================================================================================================-->
+  
+  <ngx-spinner *ngIf="LoadingTotal">Loading...!</ngx-spinner>
+  
+  <!---===========================================================================================================-->
+  
+  <div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen" role="document">
+       <div class="modal-content">
+          <div class="modal-body">
+            <div style="table-layout: fixed;">
+              <table id="table-data">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th colspan="3">FirstrollWeight</th>
+                    <th colspan="3">GriegeFab</th>
+                    <th colspan="3">DyeBatching</th>
+                    <th colspan="3">DyeFinish</th>
+                    <th colspan="3">DeliverytoGarmenth</th>
+                    <th colspan="3">PlanCutPanels</th>
+                    <th colspan="3">ActualCutPanels</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+            
+                  <tr>
+                    <td><b>Sl.No</b></td>
+                    <th>WONo</th>
+                    <th>No.Of Days</th>
+
+                    <th>No.Of Rolls</th>
+                    <th>KGS</th>
+                    <th>Date</th>
+
+                    <th>No.Of Rolls</th>
+                    <th>KGS</th>
+                    <th>Date</th>
+            
+                    <th>No.Of Rolls</th>
+                    <th>KGS</th>
+                    <th>Date</th>
+            
+                    <th>No.Of Rolls</th>
+                    <th>KGS</th>
+                    <th>Date</th>
+            
+                    <th>No.Of Rolls</th>
+                    <th>KGS</th>
+                    <th>Date</th>
+            
+                    <th>No.Of Rolls</th>
+                    <th>Pcs</th>
+                    <th>Date</th>
+            
+                    <th>No.Of Rolls</th>
+                    <th>Pcs</th>
+                    <th>Date</th>
+            
+                    <th>PcsperBundle</th>
+                    <th>PlannedBundles</th>
+                    <th>ActualBundles </th>
+                    <th>PrintStatus</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let fab of this.fabentrydata1; let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{fab.workorderId}}</td>
+                    <td>{{fab.days}}</td>
+
+                    <td>{{fab.noOfRolls || 0}}</td>
+                    <td>{{fab.entry_1 || 0}}</td>
+                    <td>{{fab.production_date || '-'}}</td>
+                   
+                    <td>{{this.fabentrydata2[i].noOfRolls || 0}}</td>
+                    <td>{{this.fabentrydata2[i].entry_2 || 0}}</td>
+                    <td>{{this.fabentrydata2[i].production_date || '-'}}</td>
+                   
+                    <td>{{this.fabentrydata3[i].noOfRolls || 0}}</td>
+                    <td>{{this.fabentrydata3[i].entry_3 || 0}}</td>
+                    <td>{{this.fabentrydata3[i].production_date || '-'}}</td>
+                   
+                    <td>{{this.fabentrydata4[i].noOfRolls || 0}}</td>
+                    <td>{{this.fabentrydata4[i].entry_4 || 0}}</td>
+                    <td>{{this.fabentrydata4[i].production_date || '-'}}</td>
+                   
+                    <td>{{this.fabentrydata5[i].noOfRolls || 0}}</td>
+                    <td>{{this.fabentrydata5[i].entry_5 || 0}}</td>
+                    <td>{{this.fabentrydata5[i].production_date || '-'}}</td>
+                   
+                    <td>{{this.fabentrydata6[i].noOfRolls || 0}}</td>
+                    <td>{{this.fabentrydata6[i].entry_6 || 0}}</td>
+                    <td>{{this.fabentrydata6[i].production_date || '-'}}</td>
+
+                    <td>{{this.fabentrydata7[i].noOfRolls || 0}}</td>
+                    <td>{{this.fabentrydata7[i].entry_7 || 0}}</td>
+                    <td>{{this.fabentrydata7[i].production_date || '-'}}</td>
+                   
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                  </tr>
+                  
+                <tbody>
+              </table>
+            </div>
+          </div>
+  
+          <div class="modal-footer" style="display: flex;">
+      
+             <button type="button" class="btn btn-danger" data-dismiss="modal" style="margin-right: 40%;">Close</button>
+             <button class="btn btn-primary" (click)="exportexcel()" style="display: flex; justify-content: lefts;">
+              Download File
+             </button>
+            </div>
+       </div>
+    </div>
+  </div>
+  <!---===========================================================================================================-->
+  <form [formGroup]="woUpdateFrom">
+    <div class="modal fade" id="edit">
+      <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+    
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title" style="display: flex; margin-left: 45%;">Update WorkOrder</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+    
+          <!-- Modal body -->
+          <div class="modal-body">
+            <div>
+            <div style="display: flex; justify-content: space-around; margin-bottom: 2%;">
+              <div style="display: flex; width : fit-content;">
+                <label style="display: inline-block; width: 100px;">Buyer : </label> 
+                <input type="text" matInput  formControlName="buyer">
+              </div>
+              <div style="display: flex; width : fit-content;">
+                <label style="display: inline-block; width: 100px;">Order No : </label> 
+                <input type="text" matInput  formControlName="orderNo">
+              </div>
+            </div>
+    
+    
+            <div style="display: flex; justify-content: space-around; margin-bottom: 2%;">
+              <div style="display: flex; width : fit-content;">
+                <label style="display: inline-block; width: 100px;">style : </label> 
+                <input type="text" matInput formControlName="style">
+              </div>
+              <div style="display: flex; width : fit-content;">
+                <label style="display: inline-block; width: 100px;">color : </label> 
+                <input type="text" matInput formControlName="color">
+              </div>
+            </div>
+    
+            <div style="display: flex; justify-content: space-around; margin-bottom: 2%;">
+              <div style="display: flex; width : fit-content;">
+                <label style="display: inline-block; width: 100px;">size : </label> 
+                <input type="text" matInput formControlName="size">
+              </div>
+              <div style="display: flex; width : fit-content;">
+                <label style="display: inline-block; width: 100px;">fabType : </label> 
+                <input type="text" matInput formControlName="fabType">
+              </div>
+            </div>
+            
+            <div style="display: flex; justify-content: space-around; margin-bottom: 2%;">
+              <div style="display: flex; width : fit-content;">
+                <label style="display: inline-block; width: 100px;">fabDia : </label> 
+                <input type="text" matInput formControlName="fabDia">
+              </div>
+              <div style="display: flex; width : fit-content;">
+                <label style="display: inline-block; width: 100px;">fabGsm : </label> 
+                <input type="text" matInput formControlName="fabGSM">
+              </div>
+            </div>
+    
+            <div style="display: flex; justify-content: space-around; margin-bottom: 2%;">
+              <div style="display: flex; width : fit-content;">
+                <label style="display: inline-block; width: 100px;">knitSL : </label> 
+                <input type="text" matInput formControlName="knitSL">
+              </div>
+              <div style="display: flex; width : fit-content;">
+                <label style="display: inline-block; width: 100px;">yarn Kg : </label> 
+                <input type="text" matInput formControlName="yarnLot">
+              </div>
+            </div>
+    
+            <div style="display: flex; justify-content: space-around; margin-bottom: 2%;">
+              <div style="display: flex; width : fit-content;">
+                <label style="display: inline-block; width: 100px;">Greige Kg : </label> 
+                <input type="text" matInput formControlName="yarnType">
+              </div>
+              <div style="display: flex; width : fit-content;">
+                <label style="display: inline-block; width: 100px;">Finished Kg : </label> 
+                <input type="text" matInput formControlName="yarnCount">
+              </div>
+            </div>
+    
+            <div style="display: flex; justify-content: space-around; margin-bottom: 2%;">
+              <div style="display: flex; width : fit-content;">
+                <label style="display: inline-block; width: 100px;">spinFty : </label> 
+                <input type="text" matInput formControlName="spinFty">
+              </div>
+              <div style="display: flex; width : fit-content;">
+                <label style="display: inline-block; width: 100px;">knitFty : </label> 
+                <input type="text" matInput formControlName="knitFty">
+              </div>
+            </div>
+    
+            <div style="display: flex; justify-content: space-around; margin-bottom: 2%;">
+              <div style="display: flex; width : fit-content;">
+                <label style="display: inline-block; width: 100px;">dyeingFty : </label> 
+                <input type="text" matInput formControlName="dyeinFty">
+              </div>
+    
+              <div style="display: flex; width : fit-content;">
+                <label style="display: inline-block; width: 100px;">No Of Days : </label> 
+                <input type="text" matInput formControlName="noRolls" readonly>
+              </div>
+            </div>
+          </div>
+        </div>
+     
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" style="display: flex; margin-right: 45%;"
+            (click)="woupdatesubmit()" data-dismiss="modal" >Update</button>
+            <!-- data-dismiss="modal" -->
+          </div>
+    
+        </div>
+      </div>
+    </div>
+    </form>

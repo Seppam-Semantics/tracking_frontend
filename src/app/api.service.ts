@@ -11,6 +11,7 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   apiUrl = "https://tracker.seppam.com";
+  // apiUrl = "http://localhost:2000";
 
 
   token: any;
@@ -103,4 +104,30 @@ export class ApiService {
     return this.http.get(this.getUrl() + `/fabricrollapi/fabric-entrys?id=${id}`, this.getHeaders())
   }
 
+  Fabricroll1entry(data: any): Observable<any> {
+    return this.http.post(this.getUrl() + `/fabricrollapi/transcation-entry1`, data, this.getHeaders())
+  }
+  Fabricroll2entry(data: any): Observable<any> {
+    return this.http.post(this.getUrl() + `/fabricrollapi/transcation-entry2`, data, this.getHeaders())
+  }
+  Fabricroll3entry(data: any): Observable<any> {
+    return this.http.post(this.getUrl() + `/fabricrollapi/transcation-entry3`, data, this.getHeaders())
+  }
+  Fabricroll4entry(data: any): Observable<any> {
+    return this.http.post(this.getUrl() + `/fabricrollapi/transcation-entry4`, data, this.getHeaders())
+  }
+  Fabricroll5entry(data: any): Observable<any> {
+    return this.http.post(this.getUrl() + `/fabricrollapi/transcation-entry5`, data, this.getHeaders())
+  }
+  Fabricroll6entry(data: any): Observable<any> {
+    return this.http.post(this.getUrl() + `/fabricrollapi/transcation-entry6`, data, this.getHeaders())
+  }
+  Fabricroll7entry(data: any): Observable<any> {
+    return this.http.post(this.getUrl() + `/fabricrollapi/transcation-entry7`, data, this.getHeaders())
+  }
+
+  getsingleFabricroll(id: any): Observable<any> {
+    return this.http.get(this.getUrl() + `/fabricrollapi/transcation-entrys?id=${id}`, this.getHeaders())
+  }
+  
 }

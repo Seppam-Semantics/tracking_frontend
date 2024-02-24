@@ -1,0 +1,570 @@
+<cdk-accordion class="example-accordion">
+    <cdk-accordion-item #accordionItem="cdkAccordionItem" class="example-accordion-item" role="button" tabindex="0"
+      style="display: flex; flex-direction: column;">
+      <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
+        <mat-form-field appearance="outline" style="width: 105px;">
+          <mat-label>Buyer</mat-label>
+          <mat-select [(ngModel)]="buyerName" (selectionChange)="onSelectionChange()" (click)="resetform()">
+            <mat-option value=""> </mat-option>
+            <mat-option *ngFor="let buyer of this.buyers" value="{{buyer.buyer}}">{{buyer.buyer}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" style="width: 105px;">
+          <mat-label>Order</mat-label>
+          <mat-select [(ngModel)]="ordernumbers" (selectionChange)="onSelectionChange()" (click)="resetform()">
+            <mat-option value=""> </mat-option>
+            <mat-option *ngFor="let order of this.order" value="{{order.orderNO}}">{{order.orderNO}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" style="width: 105px;">
+          <mat-label>Style</mat-label>
+          <mat-select [(ngModel)]="styleslist" (selectionChange)="onSelectionChange()" (click)="resetform()">
+            <mat-option value=""> </mat-option>
+            <mat-option *ngFor="let style of this.stylelist" value="{{style.style}}">{{style.style}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" style="width: 105px;">
+          <mat-label>color</mat-label>
+          <mat-select [(ngModel)]="colorslist" (selectionChange)="onSelectionChange()" (click)="resetform()">
+            <mat-option value=""> </mat-option>
+            <mat-option *ngFor="let color of this.colorlist" value="{{color.color}}">{{color.color}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" style="width: 105px;">
+          <mat-label>Size</mat-label>
+          <mat-select [(ngModel)]="sizeslist" (selectionChange)="onSelectionChange()" (click)="resetform()">
+            <mat-option value=""> </mat-option>
+            <mat-option *ngFor="let size of this.sizelist" value="{{size.size}}">{{size.size}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </cdk-accordion-item>
+  </cdk-accordion>
+  
+  <!--=============================================================================================================================-->
+  
+  
+  <cdk-accordion class="example-accordion">
+    <cdk-accordion-item #accordionItem5="cdkAccordionItem" class="example-accordion-item" role="button" tabindex="0">
+      <cdk-accordion-item #accordionItem5="cdkAccordionItem" class="example-accordion-item" role="button" tabindex="0">
+  
+        <div class="example-accordion-item-header" (click)="accordionItem5.toggle()"
+          style="display: flex; justify-content: center; " (click)="show = !show">
+          <div><b style="font-size: 110%;">{{ show ? '&minus;': '&plus;' }} </b></div>
+        </div>
+        <div class="cdk-accordion-item-body" [style.display]="accordionItem5.expanded ? '' : 'none'">
+          <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
+            <mat-form-field appearance="outline" style="width: 105px;">
+              <mat-label>Fab Type</mat-label>
+              <input matInput value="{{fabdetails?.fabType}}" readonly>
+            </mat-form-field>
+  
+            <mat-form-field appearance="outline" style="width: 105px;">
+              <mat-label>Yarn Type</mat-label>
+              <input matInput value="{{fabdetails?.yarnType}}" readonly>
+            </mat-form-field>
+  
+            <mat-form-field appearance="outline" style="width: 105px;">
+              <mat-label>Yarn Cunt</mat-label>
+              <input matInput value="{{fabdetails?.yarnCount}}" readonly>
+            </mat-form-field>
+  
+            <mat-form-field appearance="outline" style="width: 105px;">
+              <mat-label>Knit SL</mat-label>
+              <input matInput value="{{fabdetails?.knitSL}}" readonly>
+            </mat-form-field>
+  
+            <mat-form-field appearance="outline" style="width: 105px;">
+              <mat-label>Fab Dia</mat-label>
+              <input matInput value="{{fabdetails?.fabDia}}" readonly>
+            </mat-form-field>
+  
+            <mat-form-field appearance="outline" style="width: 105px;">
+              <mat-label>GSM</mat-label>
+              <input matInput value="{{fabdetails?.fabGsm}}" readonly>
+            </mat-form-field>
+  
+            <mat-form-field appearance="outline" style="width: 105px;">
+              <mat-label>Knit Fty</mat-label>
+              <input matInput readonly value="{{fabdetails?.knitFty}}">
+            </mat-form-field>
+  
+            <mat-form-field appearance="outline" style="width: 105px;">
+              <mat-label>Dye Fty</mat-label>
+              <input matInput readonly value="{{fabdetails?.dyeinFty}}">
+            </mat-form-field>
+  
+            <mat-form-field appearance="outline" style="width: 105px;">
+              <mat-label>Spin Fty</mat-label>
+              <input matInput readonly value="{{fabdetails?.spinFty}}">
+            </mat-form-field>
+  
+            <mat-form-field appearance="outline" style="width: 105px;">
+              <mat-label>Yarn Lot</mat-label>
+              <input matInput readonly value="{{fabdetails?.yarnLot}}">
+            </mat-form-field>
+  
+          </div>
+  
+        </div>
+  
+      </cdk-accordion-item>
+  
+      <!--================================== Fab Entry 1 ==============================================================================-->
+  
+      <mat-tab-group (selectedTabChange)="changetab($event)">
+        <mat-tab label="First Roll Weight">
+          <div style="overflow: hidden;">
+  
+            <div style="display: flex; justify-content: center;" *ngIf="!loading1">
+              <button mat-raised-button color="primary" (click)="submit()" style="margin-top: 3%;">Save</button>
+            </div>
+            <div style="display: flex; justify-content: center;" *ngIf="loading1">
+              <button mat-raised-button color="primary" style="margin-top: 3%;">
+                <div class="loader"></div>
+              </button>
+            </div>
+  
+              <div class="table1" [formGroup]="form">
+                <div>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>No.Of Days</th>
+                        <th>Total Rolls</th>
+                        <th>Roll Wt</th>
+                        <th>Production Date</th>
+                      </tr>
+                      <tr>
+                        <th></th>
+                        <th></th>
+                        <th><input matInput style="width:50%; text-align: center;" value="{{entry1total}}" readonly></th>
+                      </tr>
+                    </thead>
+                    <tbody formArrayName="addprocess">
+                      <tr *ngFor="let process of items.controls; let i=index" [formGroupName]="i">
+                        <td><input type="text" class="form-control"  formControlName="days" type="number"></td>
+                        <td><input type="text" class="form-control"  formControlName="noOfRolls" type="number"></td>
+                        <td><input type="text" class="form-control"  formControlName="entry_1" type="number"></td>
+                        <td><input type="date" class="form-control"  formControlName="production_date"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="fabentry1save">
+                  <button class="btn btn-primary" (click)="addEntry1button()">
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </div>
+              </div>
+  
+          </div>
+  
+        </mat-tab>
+  
+        <!--================================== Fab Entry 2 ==============================================================================-->
+  
+        <mat-tab label="Greige Fab Del Entry">
+          <div style="display: flex; flex-direction: column;">
+  
+            <div style="display: flex; justify-content: center;" *ngIf="!loading2">
+              <button mat-raised-button color="primary" (click)="submit2()" style="margin-top: 3%;">Save</button>
+            </div>
+            <div style="display: flex; justify-content: center;" *ngIf="loading2">
+              <button mat-raised-button color="primary" style="margin-top: 3%;">
+                <div class="loader"></div>
+              </button>
+            </div>
+  
+            <div>
+              <table>
+                <tr>
+                  <th>
+                    First Roll Entry
+                  </th>
+                  <th>
+                    <input type="text" class="form-control" value="{{rollCount1}}" readonly>
+                  </th>
+                  <th>
+                    <input type="text" class="form-control" value="{{entry1total}}" readonly>
+                  </th>
+                </tr>
+              </table>
+            </div>
+  
+            <div class="table1" [formGroup]="form2">
+              <table>
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th colspan="3">Greige Weight
+                      <input matInput style="width:25%; text-align: center;" value="{{entry2total}}" readonly>
+                    </th>
+                  </tr>
+                  <tr>
+                    <th>No.Of Days</th>
+                    <th>Total Rolls</th>
+                    <th>Fab.Wt</th>
+                    <th>Production Date</th>
+                  </tr>
+                </thead>
+                <tbody formArrayName="addprocess2">
+                  <tr *ngFor="let process of items2.controls; let i=index" [formGroupName]="i">
+                    <td><input type="text" class="form-control"  formControlName="days" type="number"></td>
+                    <td><input type="text" class="form-control"  formControlName="noOfRolls" type="number"></td>
+                    <td><input type="text" class="form-control"  formControlName="entry_2" type="number"></td>
+                    <td><input type="date" class="form-control"  formControlName="production_date"></td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="fabentry1save">
+                <button class="btn btn-primary" (click)="addEntry2button()">
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+  
+        </mat-tab>
+  
+        <!--================================== Fab Entry 3 ==============================================================================-->
+  
+        <mat-tab label="Dye Batch Entry">
+  
+          <div style="display: flex; flex-direction: column;">
+            <div style="display: flex; gap: 20%">
+              <div style="display: flex;flex-direction: column; width: 50%;">
+                <input type="text" class="form-control" style="direction: rtl; text-align: center; width: 50%;"
+                  placeholder="batchCode" [formControl]="batchGenerate">
+                <button class="btn btn-primary" style="width: 50%;" (click)="dyeBatchEntry()">Generate</button>
+              </div>
+              <div style="display: flex; justify-content: center;" *ngIf="!loading3">
+                <button mat-raised-button color="primary" (click)="submit3()" style="margin-top: 3%;" class="entry3savebutton">Save</button>
+              </div>
+              <div style="display: flex; justify-content: center;" *ngIf="loading3">
+                <button mat-raised-button color="primary" style="margin-top: 3%;">
+                  <div class="loader"></div>
+                </button>
+              </div>
+            </div>
+  
+            <div>
+              <table>
+                <tr>
+                  <th>
+                    Greige Fab Del Entry
+                  </th>
+                  <th>
+                    <input type="text" class="form-control" value="{{rollCount2}}" readonly>
+                  </th>
+                  <th>
+                    <input type="text" class="form-control" value="{{entry2total}}" readonly>
+                  </th>
+                </tr>
+              </table>
+            </div>
+  
+            <div class="table1" [formGroup]="form3">
+              <table>
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th colspan="4">Dye.Wt
+                      <input matInput style="width:25%; text-align: center;" value="{{entry3total}}" readonly>
+                    </th>
+                  </tr>
+                  <tr>
+                    <th>Batch no</th>
+                    <th>No.Of Days</th>
+                    <th>Total Rolls</th>
+                    <th>Dye.Wt</th>
+                    <th>Production Date</th>
+                  </tr>
+                </thead>
+                <tbody formArrayName="addprocess3">
+                  <tr *ngFor="let process of items3.controls; let i=index" [formGroupName]="i">
+                    <td><input type="text" class="form-control" 
+                      formControlName="batchCode"></td>
+                    <td><input type="text" class="form-control" type="number"
+                      formControlName="days"></td>
+                    <td><input type="text" class="form-control" type="number"
+                      formControlName="noOfRolls"></td>
+                    <td><input type="text" class="form-control" type="number"
+                      formControlName="entry_3"></td>
+                    <td><input type="date" class="form-control" 
+                      formControlName="production_date"></td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="fabentry1save">
+                <button class="btn btn-primary" (click)="addEntry3button()">
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+  
+        </mat-tab>
+  
+        <!--========================= Fab Entry 4 =================================================================================-->
+        <mat-tab label="Dye Finish Entry">
+  
+          <div style="overflow: hidden;">
+  
+            <div style="display: flex; justify-content: center;" *ngIf="!loading4">
+              <button mat-raised-button color="primary" (click)="submit4()" style="margin-top: 3%;">Save</button>
+            </div>
+            <div style="display: flex; justify-content: center;" *ngIf="loading4">
+              <button mat-raised-button color="primary" style="margin-top: 3%;">
+                <div class="loader"></div>
+              </button>
+            </div>
+  
+  
+            <div class="table1" [formGroup]="form4">
+  
+              <table>
+                <thead>
+                  <tr>
+                    <th>Dye.Wt</th>
+                    <th><input type="text" class="form-control" value="{{rollCount3}}" readonly></th>
+                    <th><input type="text" class="form-control" value="{{entry3total}}" readonly></th>
+                  </tr>
+                </thead>
+              </table>
+  
+  
+              <table>
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th colspan="3">Fin.Wt <input type="text" style="width:25%; text-align: center;" value="{{entry4total}}" readonly></th>
+                  </tr>
+                  <tr>
+                    <th>Batchno</th>
+                    <th>No.Of Days</th>
+                    <th>Total Rolls</th>
+                    <th>Fin.Wt</th>
+                    <th>Production Date</th>
+                  </tr>
+  
+                </thead>
+                <tbody formArrayName="addprocess4">
+                  <tr *ngFor="let process of items4.controls; let i=index" [formGroupName]="i">
+                    <td><input type="text" class="form-control" placeholder="Batchno"
+                      formControlName="batchCode" readonly></td>
+                    <td><input type="text" class="form-control" type="number"
+                      formControlName="days"></td>
+                    <td><input type="text" class="form-control" type="number"
+                      formControlName="noOfRolls"></td>
+                    <td><input type="text" class="form-control" type="number"
+                      formControlName="entry_4"></td>
+                    <td><input type="date" class="form-control" 
+                      formControlName="production_date"></td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="fabentry1save">
+                <button class="btn btn-primary" (click)="addEntry4button()">
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
+            </div>
+  
+  
+          </div>
+        </mat-tab>
+  
+        <!--======================= Fab Entry 5 ==========================================================================-->
+        <mat-tab label="Dyed Fab Del Entry">
+          <div style="overflow: hidden;">
+  
+            <div style="display: flex; justify-content: center;" *ngIf="!loading5">
+              <button mat-raised-button color="primary" (click)="submit5()" style="margin-top: 3%;">Save</button>
+            </div>
+            <div style="display: flex; justify-content: center;" *ngIf="loading5">
+              <button mat-raised-button color="primary" style="margin-top: 3%;">
+                <div class="loader"></div>
+              </button>
+            </div>
+  
+            <div class="table1" [formGroup]="form5">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Fin.Wt</th>
+                    <th><input type="text" class="form-control" value="{{rollCount4}}" readonly></th>
+                    <th><input type="text" class="form-control" value="{{entry4total}}" readonly></th>
+                  </tr>
+                </thead>
+              </table>
+              <table>
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th colspan="3">Delivered: <input matInput style="width:30%; text-align: center;" value="{{entry5total}}" readonly>
+                    </th>
+                  </tr>
+                  <tr>
+                    <th>Batchno</th>
+                    <th>No.of Days</th>
+                    <th>No.Of Rolls</th>
+                    <th>delivery.Qty</th>
+                    <th>Delivered Date</th>
+                  </tr>
+                </thead>
+                <tbody formArrayName="addprocess5">
+                  <tr *ngFor="let process of items5.controls; let i=index" [formGroupName]="i">
+                    <td><input type="text" class="form-control" 
+                      formControlName="batchCode" readonly></td>
+                    <td><input type="text" class="form-control" type="number"
+                      formControlName="days"></td>
+                    <td><input type="text" class="form-control"type="number"
+                      formControlName="noOfRolls"></td>
+                    <td><input type="text" class="form-control"type="number"
+                      formControlName="entry_5"></td>
+                    <td><input type="date" class="form-control"
+                      formControlName="production_date"></td>
+                  </tr>
+  
+                </tbody>
+              </table>
+              <div class="fabentry1save">
+                <button class="btn btn-primary" (click)="addEntry5button()">
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
+            </div>
+  
+          </div>
+        </mat-tab>
+        <!--======================= Fab Entry 6 ==========================================================================-->
+        <mat-tab label="Transfer from warehouse to Cut">
+          <div [formGroup]="form6" style="overflow: hidden;">
+  
+            <div style="display: flex; justify-content: center;" *ngIf="!loading6">
+              <button mat-raised-button color="primary" (click)="submit6()" style=" margin-top: 3%;">Save</button>
+            </div>
+            <div style="display: flex; justify-content: center;" *ngIf="loading6">
+              <button mat-raised-button color="primary" style="margin-top: 3%;">
+                <div class="loader"></div>
+              </button>
+            </div>
+  
+            <table>
+              <thead>
+                <tr>
+                  <th>Dye Finish Wt</th>
+                  <th><input type="text" class="form-control" value="{{rollCount5}}" readonly></th>
+                  <th><input type="text" class="form-control" value="{{entry5total}}" readonly></th>
+                </tr>
+              </thead>
+            </table>
+            <table class="table1" [formGroup]="form6">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th colspan="4">planPcs <input type="text" readonly value="{{entry6total}}"></th>
+                </tr>
+                <tr>
+                  <th>Batch no</th>
+                  <th>No.Of Days</th>
+                  <th>Total Rolls</th>
+                  <th>planPcs</th>
+                  <th>Production Date</th>
+                </tr>
+              </thead>
+              <tbody formArrayName="addprocess6">
+                <tr *ngFor="let process of items6.controls; let i=index" [formGroupName]="i">
+                  <td><input type="text" class="form-control"
+                    formControlName="batchCode" readonly></td>
+                  <td><input type="text" class="form-control" type="number"
+                    formControlName="days"></td>
+                  <td><input type="text" class="form-control" type="number"
+                    formControlName="noOfRolls" ></td>
+                  <td><input type="text" class="form-control" type="number"
+                    formControlName="entry_6"></td>
+                  <td><input type="date" class="form-control"
+                    formControlName="production_date"></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="fabentry1save">
+              <button class="btn btn-primary" (click)="addEntry6button()">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+          </div>
+        </mat-tab>
+        <!--======================= Fab Entry 7 ==========================================================================-->
+        <mat-tab label="Actual Cut panels Entry">
+          <div [formGroup]="form7" style="overflow: hidden;">
+            <div style="display: flex; justify-content: center;" *ngIf="!loading7">
+              <button mat-raised-button color="primary" (click)="submit7()" style="margin-top: 3%;">Save</button>
+            </div>
+            <div style="display: flex; justify-content: center;" *ngIf="loading7">
+              <button mat-raised-button color="primary" style="margin-top: 3%;">
+                <div class="loader"></div>
+              </button>
+            </div>
+  
+            <div>
+              <table>
+                <thead>
+                  <tr>
+                    <th>
+                      planPcs
+                    </th>
+                    <th>
+                      <input type="text" class="form-control" value="{{rollCount6}}" readonly>
+                    </th>
+                    <th>
+                      <input type="text" class="form-control" value="{{entry6total}}" readonly>
+                    </th>
+                  </tr>
+                </thead>
+              </table>
+              <table class="table1" [formGroup]="form7">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th colspan="4">
+                      Actual cut <input type="text" value="{{entry7total}}" readonly>
+                    </th>
+                  </tr>
+                  <tr>
+                    <th>Batch no</th>
+                    <th>No.Of.Days</th>
+                    <th>Total Rolls</th>
+                    <th>Actual cut</th>
+                    <th>Production Date</th>
+                  </tr>
+                </thead>
+                <tbody formArrayName="addprocess7">
+                  <tr *ngFor="let process of items7.controls; let i=index" [formGroupName]="i">
+                    <th><input type="text" class="form-control"
+                      formControlName="batchCode" readonly></th>
+                    <th><input type="text" class="form-control" type="number"
+                      formControlName="days"></th>
+                    <th><input type="text" class="form-control" type="number"
+                      formControlName="noOfRolls"></th>
+                    <th><input type="text" class="form-control" type="number"
+                      formControlName="entry_7"></th>
+                    <th><input type="date" class="form-control"
+                      formControlName="production_date"></th>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="fabentry1save">
+                <button class="btn btn-primary" (click)="addEntry7button()">
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </mat-tab>
+      </mat-tab-group>

@@ -17,12 +17,14 @@ import { BundleEntry1Component } from './Transaction/Bundle Entry/bundle-entry-1
 import { BundleEntry2Component } from './Transaction/Bundle Entry/bundle-entry-2/bundle-entry-2.component';
 import { BundleEntry3Component } from './Transaction/Bundle Entry/bundle-entry-3/bundle-entry-3.component';
 import { AuthGuard } from '../auth.guard';
+import { FabricRollEntryComponent } from './Transaction/Fabric Roll/fabric-roll-entry/fabric-roll-entry.component';
+import { FabricRollData2Component } from './menu/fabric-roll-data2/fabric-roll-data2.component';
 
 const routes: Routes = [
   {path:'', component: AppComponent},
   
 
-  { path: 'FabricRollData', component: FabricRollDataComponent},
+  { path: 'FabricRollData', component: FabricRollData2Component},
   { path: 'WorkorderData', component: WorkorderDataComponent },
   { path: 'GarmentBundles' , component: GarmentBundlesComponent },
 
@@ -34,7 +36,7 @@ const routes: Routes = [
   { path: 'updateprofile' , component:EditProfileComponent},
   {path: 'viewemployees', component:ViewEmployeesComponent},
 
-  {path:'fabricroll1',component:FabricRoll1Component},
+  {path:'fabricroll1',component:FabricRollEntryComponent},
 
   {path:'bundleentry1',component:BundleEntry1Component},
   {path:'bundleentry2',component:BundleEntry2Component},
