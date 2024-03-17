@@ -22,6 +22,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatTableModule} from '@angular/material/table';
 import { NgxSpinner, NgxSpinnerModule } from "ngx-spinner";
 import { FormsModule } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 
 
 @NgModule({
@@ -51,7 +52,7 @@ import { FormsModule } from '@angular/forms';
 
 
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -203,7 +203,7 @@ export class FabricRollData2Component implements OnInit {
         spinFty: this.Woupdate.spinFty,
         knitFty: this.Woupdate.knitFty,
         dyeinFty: this.Woupdate.dyeinFty,
-        noRolls: this.Woupdate.noRolls
+        noOfRolls: this.Woupdate.noOfRolls
       })
     })
      }
@@ -225,7 +225,7 @@ export class FabricRollData2Component implements OnInit {
     spinFty: new FormControl(''),
     knitFty: new FormControl(''),
     dyeinFty: new FormControl(''),
-    noRolls: new FormControl('')
+    noOfRolls: new FormControl('')
   })
 
 woupdatesubmit(){

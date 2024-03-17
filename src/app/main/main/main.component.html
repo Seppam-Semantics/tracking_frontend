@@ -91,9 +91,36 @@
             </div>
           </a>
           </mat-nav-list>
+
+          <mat-nav-list>
+
+            <a mat-list-item [routerLink]="'ReportEntry'" (click)="snav.toggle()">
+              <div class="text">
+                Knit Report Entry
+              </div>
+            </a>
+            </mat-nav-list>
+
       </mat-expansion-panel>
 
 
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon class="nav-icon">workspaces</mat-icon>
+            Report
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+          <mat-nav-list>
+
+            <a mat-list-item [routerLink]="'Knite-Report'" (click)="snav.toggle()">
+              <div class="text">
+                Knite Report
+              </div>
+            </a>
+            </mat-nav-list>
+
+      </mat-expansion-panel>
 
     </mat-accordion>
   </mat-sidenav>

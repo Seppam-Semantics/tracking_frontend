@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FabricRollEntryComponent } from './fabric-roll-entry.component';
+import { FabricRollEntry2Component } from './fabric-roll-entry-2.component';
 
 describe('FabricRollEntryComponent', () => {
-  let component: FabricRollEntryComponent;
-  let fixture: ComponentFixture<FabricRollEntryComponent>;
+  let component: FabricRollEntry2Component;
+  let fixture: ComponentFixture<FabricRollEntry2Component>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [FabricRollEntryComponent]
+      declarations: [FabricRollEntry2Component]
     });
-    fixture = TestBed.createComponent(FabricRollEntryComponent);
+    fixture = TestBed.createComponent(FabricRollEntry2Component);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -402,8 +402,17 @@
     
               <div style="display: flex; width : fit-content;">
                 <label style="display: inline-block; width: 100px;">No Of Days : </label> 
-                <input type="text" matInput formControlName="noRolls" readonly>
+                <input type="text" matInput formControlName="noOfRolls" readonly>
               </div>
+
+              <div style="display: flex; width : fit-content;">
+                <label style="display: inline-block; width: 100px;" for="status">Status : </label> 
+                <select id="status" class="form-control">
+                  <option value="open">Open</option>
+                  <option value="close">Close</option>
+                </select>
+              </div>
+
             </div>
           </div>
         </div>

@@ -10,8 +10,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  apiUrl = "https://tracker.seppam.com";
-  // apiUrl = "http://localhost:2000";
+  // apiUrl = "https://tracker.seppam.com";
+  apiUrl = "http://localhost:2000";
 
 
   token: any;
@@ -129,5 +129,41 @@ export class ApiService {
   getsingleFabricroll(id: any): Observable<any> {
     return this.http.get(this.getUrl() + `/fabricrollapi/transcation-entrys?id=${id}`, this.getHeaders())
   }
+
+  knit_entry(data:any):Observable<any>{
+    return this.http.post(this.getUrl()+`/knitapi/knit` , data , this.getHeaders())
+  }
+  knitfty_name():Observable<any>{
+    return this.http.get(this.getUrl()+`/knitapi/knit-factory`, this.getHeaders())
+  }
+
+
+  ftydetailsFilter(factory : any , date : any): Observable<any> {
+    return this.http.get(this.getUrl() + `/knitapi/knit-filter?id=&factory=${factory}&date=${date}&buyer=&orderNo=&style=&color=&size=`, this.getHeaders())
+  }
+
+  // ftyfactory_Filter(factory:any): Observable<any> {
+  //   return this.http.get(this.getUrl() + `/knitapi/knit-filter?factory=${factory}`, this.getHeaders())
+  // }
+
+  // ftydate_Filter(date:any): Observable<any> {
+  //   return this.http.get(this.getUrl() + `/knitapi/knit-filter?factory=&date=${date}`, this.getHeaders())
+  // }
+
+  knitDetailsFilter(buyer:any , orderNo:any, style:any, color:any, size:any):Observable<any>{
+    return this.http.get(this.getUrl() + `/knitapi/knit-filter?id=&factory=&date=&buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&size=${size}`, this.getHeaders())
+  }
+  getallfty_details():Observable<any>{
+    return this.http.get(this.getUrl()+`/knitapi/knit`, this.getHeaders())
+  }
+  getsingleknit_details(id:any):Observable<any>{
+    return this.http.get(this.getUrl()+`/knitapi/knit/${id}`, this.getHeaders())
+  }
   
+  deleteKnitDetails(id:any):Observable<any>{
+    return this.http.delete(this.getUrl()+`/knitapi/knit/${id}`, this.getHeaders())
+  }
+  updateKnitEntry(data:any):Observable<any>{
+    return this.http.post(this.getUrl()+`/knitapi/knit` , data , this.getHeaders())
+  }
 }

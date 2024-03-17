@@ -8,10 +8,10 @@ import { __values } from 'tslib';
 
 @Component({
   selector: 'app-fabric-roll-entry',
-  templateUrl: './fabric-roll-entry.component.html',
-  styleUrls: ['./fabric-roll-entry.component.css']
+  templateUrl: './fabric-roll-entry-2.component.html',
+  styleUrls: ['./fabric-roll-entry-2.component.css']
 })
-export class FabricRollEntryComponent {
+export class FabricRollEntry2Component {
 
   show = false;
 
@@ -437,6 +437,10 @@ get items() {
     return this.form.get("addprocess") as FormArray;
   }
 
+  deleteEntry1(i: number) {
+    this.items.removeAt(i);
+  }
+
   submit() {
     this.loading1 = true;
     this.entry1form = this.fb.group({
@@ -491,6 +495,10 @@ get items() {
     this.form2.setControl('addprocess2', this.formArray);
   }
 
+  deleteEntry2(i: number) {
+    this.items2.removeAt(i);
+  }
+
   submit2() {
     this.loading1 = true;
     this.entry1form = this.fb.group({
@@ -532,6 +540,11 @@ get items() {
       production_date: new FormControl(),
     }));
   }
+
+  deleteEntry3(i: number) {
+    this.items3.removeAt(i);
+  }
+
 
   add3() {
     this.formArray = new FormArray(
@@ -588,6 +601,10 @@ get items() {
 
   get items4() {
     return this.form4.get('addprocess4') as FormArray;
+  }
+
+  deleteEntry4(i: number) {
+    this.items4.removeAt(i);
   }
 
 
@@ -649,6 +666,10 @@ get items() {
     }));
   }
 
+  deleteEntry5(i: number) {
+    this.items5.removeAt(i);
+  }
+
 
   add5() {
     this.formArray = new FormArray(
@@ -706,6 +727,11 @@ get items() {
     }));
   }
 
+  deleteEntry6(i: number) {
+    this.items6.removeAt(i);
+  }
+
+
   add6() {
     this.formArray = new FormArray(
     this.rollnnumber6.map((defaultValues?: any)=>
@@ -760,6 +786,10 @@ get items() {
       entry_7: new FormControl(),
       production_date: new FormControl(),
     }));
+  }
+
+  deleteEntry7(i: number) {
+    this.items7.removeAt(i);
   }
 
 

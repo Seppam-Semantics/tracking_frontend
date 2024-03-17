@@ -135,9 +135,11 @@
                     <thead>
                       <tr>
                         <th>No.Of Days</th>
+                        <th>Notes</th>
                         <th>Total Rolls</th>
                         <th>Roll Wt</th>
                         <th>Production Date</th>
+                        <th>Delete</th>
                       </tr>
                       <tr>
                         <th></th>
@@ -147,10 +149,12 @@
                     </thead>
                     <tbody formArrayName="addprocess">
                       <tr *ngFor="let process of items.controls; let i=index" [formGroupName]="i">
-                        <td><input type="text" class="form-control"  formControlName="days" type="number"></td>
+                        <td><input type="text" class="form-control"  formControlName="days" type="number" [value]="i+1" required></td>
+                        <td><input type="text" class="form-control"  formControlName="notes" type="text"></td>
                         <td><input type="text" class="form-control"  formControlName="noOfRolls" type="number"></td>
                         <td><input type="text" class="form-control"  formControlName="entry_1" type="number"></td>
                         <td><input type="date" class="form-control"  formControlName="production_date"></td>
+                        <td><button class="btn btn-danger" (click)="deleteEntry1(i)">x</button></td>
                       </tr>
                     </tbody>
                   </table>
@@ -179,7 +183,7 @@
                 <div class="loader"></div>
               </button>
             </div>
-  
+
             <div>
               <table>
                 <tr>
@@ -207,17 +211,21 @@
                   </tr>
                   <tr>
                     <th>No.Of Days</th>
+                    <th>Notes</th>
                     <th>Total Rolls</th>
                     <th>Fab.Wt</th>
                     <th>Production Date</th>
+                    <th>Delete</th>
                   </tr>
                 </thead>
                 <tbody formArrayName="addprocess2">
                   <tr *ngFor="let process of items2.controls; let i=index" [formGroupName]="i">
                     <td><input type="text" class="form-control"  formControlName="days" type="number"></td>
+                    <td><input type="text" class="form-control"  formControlName="notes" type="text"></td>
                     <td><input type="text" class="form-control"  formControlName="noOfRolls" type="number"></td>
                     <td><input type="text" class="form-control"  formControlName="entry_2" type="number"></td>
                     <td><input type="date" class="form-control"  formControlName="production_date"></td>
+                    <td><button class="btn btn-danger" (click)="deleteEntry2(i)">x</button></td>
                   </tr>
                 </tbody>
               </table>
@@ -238,9 +246,9 @@
           <div style="display: flex; flex-direction: column;">
             <div style="display: flex; gap: 20%">
               <div style="display: flex;flex-direction: column; width: 50%;">
-                <input type="text" class="form-control" style="direction: rtl; text-align: center; width: 50%;"
+                <!-- <input type="text" class="form-control" style="direction: rtl; text-align: center; width: 50%;"
                   placeholder="batchCode" [formControl]="batchGenerate">
-                <button class="btn btn-primary" style="width: 50%;" (click)="dyeBatchEntry()">Generate</button>
+                <button class="btn btn-primary" style="width: 50%;" (click)="dyeBatchEntry()">Generate</button> -->
               </div>
               <div style="display: flex; justify-content: center;" *ngIf="!loading3">
                 <button mat-raised-button color="primary" (click)="submit3()" style="margin-top: 3%;" class="entry3savebutton">Save</button>
@@ -280,23 +288,25 @@
                   <tr>
                     <th>Batch no</th>
                     <th>No.Of Days</th>
+                    <th>Notes</th>
                     <th>Total Rolls</th>
                     <th>Dye.Wt</th>
                     <th>Production Date</th>
+                    <th>Delete</th>
                   </tr>
                 </thead>
                 <tbody formArrayName="addprocess3">
                   <tr *ngFor="let process of items3.controls; let i=index" [formGroupName]="i">
-                    <td><input type="text" class="form-control" 
-                      formControlName="batchCode"></td>
-                    <td><input type="text" class="form-control" type="number"
-                      formControlName="days"></td>
-                    <td><input type="text" class="form-control" type="number"
-                      formControlName="noOfRolls"></td>
-                    <td><input type="text" class="form-control" type="number"
-                      formControlName="entry_3"></td>
-                    <td><input type="date" class="form-control" 
-                      formControlName="production_date"></td>
+                    <td><input type="text" class="form-control" formControlName="batchCode"></td>
+                    
+                      <td><input type="text" class="form-control" type="number" formControlName="days"></td>
+
+                      <td><input type="text" class="form-control" type="text" formControlName="notes"></td>
+
+                      <td><input type="text" class="form-control" type="number" formControlName="noOfRolls"></td>
+                    <td><input type="text" class="form-control" type="number" formControlName="entry_3"></td>
+                    <td><input type="date" class="form-control" formControlName="production_date"></td>
+                      <td><button class="btn btn-danger" (click)="deleteEntry3(i)">x</button></td>
                   </tr>
                 </tbody>
               </table>
@@ -347,9 +357,11 @@
                   <tr>
                     <th>Batchno</th>
                     <th>No.Of Days</th>
+                    <th>Notes</th>
                     <th>Total Rolls</th>
                     <th>Fin.Wt</th>
                     <th>Production Date</th>
+                    <th>Delete</th>
                   </tr>
   
                 </thead>
@@ -357,14 +369,12 @@
                   <tr *ngFor="let process of items4.controls; let i=index" [formGroupName]="i">
                     <td><input type="text" class="form-control" placeholder="Batchno"
                       formControlName="batchCode" readonly></td>
-                    <td><input type="text" class="form-control" type="number"
-                      formControlName="days"></td>
-                    <td><input type="text" class="form-control" type="number"
-                      formControlName="noOfRolls"></td>
-                    <td><input type="text" class="form-control" type="number"
-                      formControlName="entry_4"></td>
-                    <td><input type="date" class="form-control" 
-                      formControlName="production_date"></td>
+                    <td><input type="text" class="form-control" type="number" formControlName="days"></td>
+                    <td><input type="text" class="form-control" type="text" formControlName="notes"></td>
+                    <td><input type="text" class="form-control" type="number"  formControlName="noOfRolls"></td>
+                    <td><input type="text" class="form-control" type="number"  formControlName="entry_4"></td>
+                    <td><input type="date" class="form-control"   formControlName="production_date"></td>
+                      <td><button class="btn btn-danger" (click)="deleteEntry4(i)">x</button></td>
                   </tr>
                 </tbody>
               </table>
@@ -412,23 +422,22 @@
                   <tr>
                     <th>Batchno</th>
                     <th>No.of Days</th>
+                    <th>Notes</th>
                     <th>No.Of Rolls</th>
                     <th>delivery.Qty</th>
                     <th>Delivered Date</th>
+                    <th>Delete</th>
                   </tr>
                 </thead>
                 <tbody formArrayName="addprocess5">
                   <tr *ngFor="let process of items5.controls; let i=index" [formGroupName]="i">
-                    <td><input type="text" class="form-control" 
-                      formControlName="batchCode" readonly></td>
-                    <td><input type="text" class="form-control" type="number"
-                      formControlName="days"></td>
-                    <td><input type="text" class="form-control"type="number"
-                      formControlName="noOfRolls"></td>
-                    <td><input type="text" class="form-control"type="number"
-                      formControlName="entry_5"></td>
-                    <td><input type="date" class="form-control"
-                      formControlName="production_date"></td>
+                    <td><input type="text" class="form-control"   formControlName="batchCode" readonly></td>
+                    <td><input type="text" class="form-control" type="number"  formControlName="days"></td>
+                    <td><input type="text" class="form-control" type="text"  formControlName="notes"></td>
+                    <td><input type="text" class="form-control"type="number"  formControlName="noOfRolls"></td>
+                    <td><input type="text" class="form-control"type="number"  formControlName="entry_5"></td>
+                    <td><input type="date" class="form-control"  formControlName="production_date"></td>
+                      <td><button class="btn btn-danger" (click)="deleteEntry5(i)">x</button></td>
                   </tr>
   
                 </tbody>
@@ -473,23 +482,22 @@
                 <tr>
                   <th>Batch no</th>
                   <th>No.Of Days</th>
+                  <th>Notes</th>
                   <th>Total Rolls</th>
                   <th>planPcs</th>
                   <th>Production Date</th>
+                  <th>Delete</th>
                 </tr>
               </thead>
               <tbody formArrayName="addprocess6">
                 <tr *ngFor="let process of items6.controls; let i=index" [formGroupName]="i">
-                  <td><input type="text" class="form-control"
-                    formControlName="batchCode" readonly></td>
-                  <td><input type="text" class="form-control" type="number"
-                    formControlName="days"></td>
-                  <td><input type="text" class="form-control" type="number"
-                    formControlName="noOfRolls" ></td>
-                  <td><input type="text" class="form-control" type="number"
-                    formControlName="entry_6"></td>
-                  <td><input type="date" class="form-control"
-                    formControlName="production_date"></td>
+                  <td><input type="text" class="form-control" formControlName="batchCode" readonly></td>
+                  <td><input type="text" class="form-control" type="number"  formControlName="days"></td>
+                  <td><input type="text" class="form-control" type="text"  formControlName="notes"></td>
+                  <td><input type="text" class="form-control" type="number"  formControlName="noOfRolls" ></td>
+                  <td><input type="text" class="form-control" type="number"  formControlName="entry_6"></td>
+                  <td><input type="date" class="form-control"  formControlName="production_date"></td>
+                    <td><button class="btn btn-danger" (click)="deleteEntry6(i)">x</button></td>
                 </tr>
               </tbody>
             </table>
@@ -539,23 +547,22 @@
                   <tr>
                     <th>Batch no</th>
                     <th>No.Of.Days</th>
+                    <th>Notes</th>
                     <th>Total Rolls</th>
                     <th>Actual cut</th>
                     <th>Production Date</th>
+                    <th>Delete</th>
                   </tr>
                 </thead>
                 <tbody formArrayName="addprocess7">
                   <tr *ngFor="let process of items7.controls; let i=index" [formGroupName]="i">
-                    <th><input type="text" class="form-control"
-                      formControlName="batchCode" readonly></th>
-                    <th><input type="text" class="form-control" type="number"
-                      formControlName="days"></th>
-                    <th><input type="text" class="form-control" type="number"
-                      formControlName="noOfRolls"></th>
-                    <th><input type="text" class="form-control" type="number"
-                      formControlName="entry_7"></th>
-                    <th><input type="date" class="form-control"
-                      formControlName="production_date"></th>
+                    <th><input type="text" class="form-control"  formControlName="batchCode" readonly></th>
+                    <th><input type="text" class="form-control" type="number"  formControlName="days"></th>
+                    <th><input type="text" class="form-control" type="text"  formControlName="notes"></th>
+                    <th><input type="text" class="form-control" type="number"  formControlName="noOfRolls"></th>
+                    <th><input type="text" class="form-control" type="number"  formControlName="entry_7"></th>
+                    <th><input type="date" class="form-control"  formControlName="production_date"></th>
+                      <td><button class="btn btn-danger" (click)="deleteEntry7(i)">x</button></td>
                   </tr>
                 </tbody>
               </table>

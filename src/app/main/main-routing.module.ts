@@ -10,15 +10,18 @@ import { AppComponent } from '../app.component';
 import { ViewEmployeesComponent } from './masters/employees/view-employees/view-employees.component';
 import { WelcomeComponent } from '../welcome/welcome.component';
 import { EditProfileComponent } from './masters/Roles and profiles/profiles/edit-profile/edit-profile.component';
-import { FabricRoll1Component } from './Transaction/Fabric Roll/fabric-roll-1/fabric-roll-1.component';
+import { FabricRoll1Component } from './Transaction/Fabric Roll/fabric-roll-v1/fabric-roll-1.component';
 
 
 import { BundleEntry1Component } from './Transaction/Bundle Entry/bundle-entry-1/bundle-entry-1.component';
 import { BundleEntry2Component } from './Transaction/Bundle Entry/bundle-entry-2/bundle-entry-2.component';
 import { BundleEntry3Component } from './Transaction/Bundle Entry/bundle-entry-3/bundle-entry-3.component';
 import { AuthGuard } from '../auth.guard';
-import { FabricRollEntryComponent } from './Transaction/Fabric Roll/fabric-roll-entry/fabric-roll-entry.component';
+import { FabricRollEntry2Component } from './Transaction/Fabric Roll/fabric-roll-entry-v2/fabric-roll-entry-2.component';
 import { FabricRollData2Component } from './menu/fabric-roll-data2/fabric-roll-data2.component';
+import { ReportEntryComponent } from './Transaction/Fabric Roll/report-entry/report-entry.component';
+import { KnitReportComponent } from './Report/knit-report/knit-report.component';
+import { FabricRollEntry3Component } from './Transaction/Fabric Roll/fabric-roll-entry-v3/fabric-roll-entry-3.component';
 
 const routes: Routes = [
   {path:'', component: AppComponent},
@@ -36,11 +39,13 @@ const routes: Routes = [
   { path: 'updateprofile' , component:EditProfileComponent},
   {path: 'viewemployees', component:ViewEmployeesComponent},
 
-  {path:'fabricroll1',component:FabricRollEntryComponent},
+  {path:'fabricroll1',component:FabricRollEntry3Component},
 
   {path:'bundleentry1',component:BundleEntry1Component},
   {path:'bundleentry2',component:BundleEntry2Component},
   {path:'bundleentry3',component:BundleEntry3Component},
+  {path:'ReportEntry', component: ReportEntryComponent},
+  {path:"Knite-Report" , component:KnitReportComponent}
 ];
 
 @NgModule({
@@ -52,6 +57,5 @@ const routes: Routes = [
 })
 export class MainRoutingModule { 
 
-  
 
 }

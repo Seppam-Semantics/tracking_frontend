@@ -44,11 +44,14 @@ import { EditProfileComponent } from './masters/Roles and profiles/profiles/edit
 import { BundleEntry1Component } from './Transaction/Bundle Entry/bundle-entry-1/bundle-entry-1.component';
 import { BundleEntry2Component } from './Transaction/Bundle Entry/bundle-entry-2/bundle-entry-2.component';
 import { BundleEntry3Component } from './Transaction/Bundle Entry/bundle-entry-3/bundle-entry-3.component';
-import { FabricRoll1Component } from './Transaction/Fabric Roll/fabric-roll-1/fabric-roll-1.component';
+import { FabricRoll1Component } from './Transaction/Fabric Roll/fabric-roll-v1/fabric-roll-1.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { FabricRollEntryComponent } from './Transaction/Fabric Roll/fabric-roll-entry/fabric-roll-entry.component';
+import { FabricRollEntry2Component } from './Transaction/Fabric Roll/fabric-roll-entry-v2/fabric-roll-entry-2.component';
 import { FabricRollData2Component } from './menu/fabric-roll-data2/fabric-roll-data2.component';
-
+import { ReportEntryComponent } from './Transaction/Fabric Roll/report-entry/report-entry.component';
+import { KnitReportComponent } from './Report/knit-report/knit-report.component';
+import { DatePipe } from '@angular/common';
+import { FabricRollEntry3Component } from './Transaction/Fabric Roll/fabric-roll-entry-v3/fabric-roll-entry-3.component';
 
 
 @NgModule({
@@ -73,8 +76,11 @@ import { FabricRollData2Component } from './menu/fabric-roll-data2/fabric-roll-d
     BundleEntry2Component,
     BundleEntry3Component,
     FabricRoll1Component,
-    FabricRollEntryComponent,
+    FabricRollEntry2Component,
     FabricRollData2Component,
+    ReportEntryComponent,
+    KnitReportComponent,
+    FabricRollEntry3Component,
   ],
   imports: [
     CommonModule,
