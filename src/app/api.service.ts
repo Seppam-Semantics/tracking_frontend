@@ -97,6 +97,28 @@ export class ApiService {
     return this.http.get(this.getUrl() + `/workorderapi/workorders-filter?buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&size=${size}`, this.getHeaders())
   }
 
+
+  getbuyersData(): Observable<any> {
+    return this.http.get(this.getUrl() + `/filtersapi/buyers_data`, this.getHeaders())
+  }
+
+  getordersData(buyer: any): Observable<any> {
+    return this.http.get(this.getUrl() + `/filtersapi/buyers-orders_data?buyer=${buyer}`, this.getHeaders())
+  }
+
+  getstyleData(buyer: any, order: any): Observable<any> {
+    return this.http.get(this.getUrl() + `/filtersapi/orders-styles_data?buyer=${buyer}&orderNo=${order}`, this.getHeaders())
+  }
+
+  getcolorData(buyer: any, order: any, style: any): Observable<any> {
+    return this.http.get(this.getUrl() + `/filtersapi/styles-colors_data?buyer=${buyer}&orderNo=${order}&style=${style}`, this.getHeaders())
+  }
+
+  getsizeData(buyer: any, order: any, style: any, color: any): Observable<any> {
+    return this.http.get(this.getUrl() + `/filtersapi/colors-sizes_data?buyer=${buyer}&orderNo=${order}&style=${style}&color=${color}`, this.getHeaders())
+  }
+
+
   postsinglewodetails(data: any, id: any): Observable<any> {
     return this.http.put(this.getUrl() + `/workorderapi/workorder/${id}`, data, this.getHeaders())
   }

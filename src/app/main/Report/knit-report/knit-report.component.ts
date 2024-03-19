@@ -68,6 +68,7 @@ export class KnitReportComponent {
     style:any;
     color:any;
     size:any;
+  knitdetails2: any;
 
 
     onCheckboxChange11(event: any) {
@@ -107,6 +108,7 @@ export class KnitReportComponent {
   ngOnInit(): void {
     this.factoryName();
     this.allknitDetails();
+    this.buyername()
   }
 
 
@@ -165,6 +167,53 @@ export class KnitReportComponent {
     this.loadftydetails(this.buyerName, this.ordernumbers, this.styleslist, this.colorslist, this.sizeslist);
   }
 
+
+  buyername(){
+    this.api.getbuyers().subscribe((res)=>{
+      this.buyer = res.buyers
+    })
+  }
+  getBuyerValue(event: any) {
+    this.buyerName = event.target.value;
+  }
+
+  getorders() {
+    this.api.getorders(this.buyerName).subscribe((res) => {
+      this.order = res.orders
+    })
+  }
+  
+  getOrderValue(event:any){
+    this.orderNo = event.target.value
+  }
+
+  getstyle() {
+    this.api.getstyle(this.buyerName, this.orderNo).subscribe((res) => {
+      this.stylelist = res.styles;
+    })
+  }
+
+  getstylevalue(event:any){
+    this.style = event.target.value
+  }
+
+  getcolor() {
+    this.api.getcolor(this.buyerName, this.orderNo, this.style).subscribe((res) => {
+      this.colorlist = res.colors;
+    })
+  }
+
+  getcolorvalue(event:any){
+    this.color = event.target.value
+  }
+
+  getsize() {
+    this.api.getsize(this.buyerName, this.orderNo, this.style, this.color).subscribe((res) => {
+      this.sizelist = res.sizes;
+    })
+  }
+
+
   clearAll() {
     this.buyerName = ''
     this.ordernumbers = ''
@@ -193,6 +242,7 @@ export class KnitReportComponent {
     console.log(id)
     this.api.getsingleknit_details(id).subscribe((res) => {
       this.knitdetails=res.lineData
+      this.knitdetails2=res.headerData
       console.log(this.knitdetails)
     })
 
@@ -301,18 +351,18 @@ export class KnitReportComponent {
     allocatedDay: new FormControl(''),
   })
 
-  onCheckboxChange1(event: any) {
-    this.KtyFrom.controls['houseKeepingStatus'].setValue(event.target.checked ? 'active' : 'inactive');
-  }
-  onCheckboxChange2(event: any) {
-    this.KtyFrom.controls['floorLightingStatus'].setValue(event.target.checked ? 'active' : 'inactive');
-  }
-  onCheckboxChange3(event: any) {
-    this.KtyFrom.controls['gasElecAvailability'].setValue(event.target.checked ? 'active' : 'inactive');
-  }
-  onCheckboxChange4(event: any) {
-    this.KtyFrom.controls['storageAreaStatus'].setValue(event.target.checked ? 'active' : 'inactive');
-  }
+  // onCheckboxChange1(event: any) {
+  //   this.KtyFrom.controls['houseKeepingStatus'].setValue(event.target.checked ? 'active' : 'inactive');
+  // }
+  // onCheckboxChange2(event: any) {
+  //   this.KtyFrom.controls['floorLightingStatus'].setValue(event.target.checked ? 'active' : 'inactive');
+  // }
+  // onCheckboxChange3(event: any) {
+  //   this.KtyFrom.controls['gasElecAvailability'].setValue(event.target.checked ? 'active' : 'inactive');
+  // }
+  // onCheckboxChange4(event: any) {
+  //   this.KtyFrom.controls['storageAreaStatus'].setValue(event.target.checked ? 'active' : 'inactive');
+  // }
 
   ktysubmit() {
     console.log(this.KtyFrom.value)

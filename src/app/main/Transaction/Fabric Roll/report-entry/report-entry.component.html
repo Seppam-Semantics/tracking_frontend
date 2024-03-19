@@ -39,36 +39,28 @@
                     <label style="display: inline-block;">House Keeping Status</label>
                 </div>
                 <div>    
-                    <input type="checkbox" formControlName="houseKeepingStatus"
-                    [checked]="load.controls['houseKeepingStatus'].value == 'active'"
-                    (change)="onCheckboxChange1($event)" style="    width: 17px; height: 36px;">
+                    <input type="checkbox" formControlName="houseKeepingStatus" style="    width: 17px; height: 36px;">
                 </div>
             </div>
         </div>
         <div class="d-flex">
             <div style="display: flex; gap: 10px">
                 <div><label style="display: inline-block;">Gas/Elec Availability</label></div>
-                <div><input type="checkbox" formControlName="gasElecAvailability"
-                        [checked]="load.controls['gasElecAvailability'].value == 'active'"
-                        (change)="onCheckboxChange2($event)" style="    width: 17px; height: 36px;"></div>
+                <div><input type="checkbox" formControlName="gasElecAvailability" style="    width: 17px; height: 36px;"></div>
             </div>
         </div>
 
         <div class="d-flex">
             <div style="display: flex; gap: 10px">
                 <div><label style="display: inline-block;">Floor Lighting Status</label></div>
-                <div><input type="checkbox" formControlName="floorLightingStatus"
-                        [checked]="load.controls['floorLightingStatus'].value == 'active'"
-                        (change)="onCheckboxChange3($event)" style="    width: 17px; height: 36px;"></div>
+                <div><input type="checkbox" formControlName="floorLightingStatus" style="    width: 17px; height: 36px;"></div>
             </div>
         </div>
 
         <div class="d-flex">
             <div style="display: flex; gap: 10px">
                 <div><label style="display: inline-block;">Storage Area Status</label></div>
-                <div><input type="checkbox" formControlName="storageAreaStatus"
-                        [checked]="load.controls['storageAreaStatus'].value == 'active'"
-                        (change)="onCheckboxChange4($event)" style="    width: 17px; height: 36px;"></div>
+                <div><input type="checkbox" formControlName="storageAreaStatus" style="    width: 17px; height: 36px;"></div>
             </div>
         </div>
 
@@ -174,7 +166,7 @@
                             <option value="">
                         </datalist>
                     </td>
-                    <td><input type="text" class="form-control" formControlName="noOfRollsProduction" list="9">
+                    <td><input type="text" class="form-control" formControlName="noOfRollsProduced" list="9">
                         <datalist id="9">
                             <option value="">
                         </datalist>

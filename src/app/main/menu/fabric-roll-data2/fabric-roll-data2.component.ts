@@ -87,31 +87,31 @@ export class FabricRollData2Component implements OnInit {
   fileName2="Workorder-data.xlsx"
 
   public getbuyers() {
-    this.api.getbuyers().subscribe((res) => {
+    this.api.getbuyersData().subscribe((res) => {
       this.buyers = res.buyers;
     })
   }
 
   getorders(buyer: any) {
-    this.api.getorders(buyer).subscribe((res) => {
+    this.api.getordersData(buyer).subscribe((res) => {
       this.order = res.orders
     })
   }
 
   getstyle(buyer: any, orderNo: any) {
-    this.api.getstyle(buyer, orderNo).subscribe((res) => {
+    this.api.getstyleData(buyer, orderNo).subscribe((res) => {
       this.stylelist = res.styles;
     })
   }
 
   getcolor(buyer: any, orderNo: any, style: any) {
-    this.api.getcolor(buyer, orderNo, style).subscribe((res) => {
+    this.api.getcolorData(buyer, orderNo, style).subscribe((res) => {
       this.colorlist = res.colors;
     })
   }
 
   getsize(buyer: any, orderNo: any, style: any, color: any) {
-    this.api.getsize(buyer, orderNo, style, color).subscribe((res) => {
+    this.api.getsizeData(buyer, orderNo, style, color).subscribe((res) => {
       this.sizelist = res.sizes;
     })
   }

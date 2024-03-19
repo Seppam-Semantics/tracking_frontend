@@ -70,14 +70,10 @@
         <td data-toggle="modal" data-target="#myModal" (click)="check(detail.id)">{{i+1}}</td>
         <td data-toggle="modal" data-target="#myModal" (click)="check(detail.id)">{{detail.code}}</td>
         <td data-toggle="modal" data-target="#myModal" (click)="check(detail.id)">{{detail.factory}}</td>
-        <td data-toggle="modal" data-target="#myModal" (click)="check(detail.id)">{{detail.houseKeepingStatus == '' ||
-          detail.houseKeepingStatus == "inactive" ? "Inactive" : "Active" }}</td>
-        <td data-toggle="modal" data-target="#myModal" (click)="check(detail.id)">{{detail.floorLightingStatus == '' ||
-          detail.floorLightingStatus == 'inactive' ? "Inactive" : "Active"}}</td>
-        <td data-toggle="modal" data-target="#myModal" (click)="check(detail.id)">{{detail.gasElecAvailability == '' ||
-          detail.gasElecAvailability == 'inactive' ? "Inactive" : "Active"}}</td>
-        <td data-toggle="modal" data-target="#myModal" (click)="check(detail.id)">{{detail.storageAreaStatus == '' ||
-          detail.storageAreaStatus == 'inactive' ? "Inactive" : "Active"}}</td>
+        <td data-toggle="modal" data-target="#myModal" (click)="check(detail.id)">{{detail.houseKeepingStatus == 1 ? "Active":"InActive" }}</td>
+        <td data-toggle="modal" data-target="#myModal" (click)="check(detail.id)">{{detail.floorLightingStatus == 1 ? "Active":"InActive"}}</td>
+        <td data-toggle="modal" data-target="#myModal" (click)="check(detail.id)">{{detail.gasElecAvailability == 1 ? "Active":"InActive"}}</td>
+        <td data-toggle="modal" data-target="#myModal" (click)="check(detail.id)">{{detail.storageAreaStatus == 1 ? "Active":"InActive"}}</td>
         <td data-toggle="modal" data-target="#myModal" (click)="check(detail.id)">{{detail.allocatedDay}}</td>
         <td data-toggle="modal" data-target="#myModal" (click)="check(detail.id)">{{detail.date}}</td>
         <td>
@@ -153,8 +149,25 @@
 
 
         <!------------------------------------------------------------------------------>
-        <div style="table-layout: fixed;">
-          <table id="table-data">
+        <div style="table-layout: fixed;" id="table-data">
+
+
+
+          <table>            
+            <tbody>
+               <tr *ngFor="let data of this.knitdetails2; let i = index;">
+                 <td><b>Factory</b> : {{data.factory}}</td>
+                 <td><b>HouseKeepingStatus</b> : {{data.houseKeepingStatus == 1 ? "Active":"InActive" }}</td>
+                 <td><b>FloorLightingStatus</b> : {{data.floorLightingStatus == 1 ? "Active":"InActive" }}</td>
+                 <td><b>GasElecAvailability</b> : {{data.gasElecAvailability == 1 ? "Active":"InActive" }}</td>
+                 <td><b>StorageAreaStatus</b> : {{data.storageAreaStatus == 1 ? "Active":"InActive" }}</td>
+                 <td><b>AllocatedDay</b> : {{data.allocatedDay}}</td>
+               </tr>
+             </tbody>
+           </table>
+
+
+          <table>
             <thead>
               <tr>
                 <th>S.no</th>
@@ -252,7 +265,7 @@
                 </div>
                 <div style="display: flex;">
                   <div>
-                    <input class="form-control me-2" id="numberOfEntries" type="number" formControlName="allocatedDay">
+                    <input class="form-control me-2" id="numberOfEntries" type="number" formControlName="allocatedDay" readonly>
                   </div>
                   <!-- <div>
                     <button class="btn btn-primary" id="loadcls" (click)="add()">Load</button>
@@ -274,36 +287,28 @@
                     <label style="display: inline-block;">House Keeping Status</label>
                   </div>
                   <div>
-                    <input type="checkbox" formControlName="houseKeepingStatus"
-                      [checked]="load.controls['houseKeepingStatus'].value == 'active'"
-                      (change)="onCheckboxChange11($event)" style="    width: 17px; height: 36px;">
+                    <input type="checkbox" formControlName="houseKeepingStatus" style="    width: 17px; height: 36px;">
                   </div>
                 </div>
               </div>
               <div class="d-flex">
                 <div style="display: flex; gap: 10px">
                   <div><label style="display: inline-block;">Gas/Elec Availability</label></div>
-                  <div><input type="checkbox" formControlName="gasElecAvailability"
-                      [checked]="load.controls['gasElecAvailability'].value == 'active'"
-                      (change)="onCheckboxChange22($event)" style="    width: 17px; height: 36px;"></div>
+                  <div><input type="checkbox" formControlName="gasElecAvailability"  style="    width: 17px; height: 36px;"></div>
                 </div>
               </div>
 
               <div class="d-flex">
                 <div style="display: flex; gap: 10px">
                   <div><label style="display: inline-block;">Floor Lighting Status</label></div>
-                  <div><input type="checkbox" formControlName="floorLightingStatus"
-                      [checked]="load.controls['floorLightingStatus'].value == 'active'"
-                      (change)="onCheckboxChange33($event)" style="    width: 17px; height: 36px;"></div>
+                  <div><input type="checkbox" formControlName="floorLightingStatus"  style="    width: 17px; height: 36px;"></div>
                 </div>
               </div>
 
               <div class="d-flex">
                 <div style="display: flex; gap: 10px">
                   <div><label style="display: inline-block;">Storage Area Status</label></div>
-                  <div><input type="checkbox" formControlName="storageAreaStatus"
-                      [checked]="load.controls['storageAreaStatus'].value == 'active'"
-                      (change)="onCheckboxChange44($event)" style="    width: 17px; height: 36px;"></div>
+                  <div><input type="checkbox" formControlName="storageAreaStatus" style="    width: 17px; height: 36px;"></div>
                 </div>
               </div>
 
@@ -365,13 +370,33 @@
                 </thead>
                 <tbody formArrayName="data">
                   <tr *ngFor="let list of items.controls; let i=index" [formGroupName]="i">
-                    <td><input type="text" class="form-control" formControlName="knitId" [value]="i+1"></td>
-                    <td><input type="text" class="form-control" formControlName="buyer"></td>
-                    <td><input type="text" class="form-control" formControlName="orderNo"></td>
-                    <td><input type="text" class="form-control" formControlName="style"></td>
-                    <td><input type="text" class="form-control" formControlName="color"></td>
-                    <td><input type="text" class="form-control" formControlName="size"></td>
-                    <td><input type="text" class="form-control" formControlName="knitMachineno"></td>
+                    <td><input type="text" class="form-control" [value]="i+1"></td>
+                                        <td>
+                        <input type="text" class="form-control" formControlName="buyer" list="1" (input)="getBuyerValue($event)" (change)="getorders()">
+                        <datalist id="1">
+                            <option *ngFor="let name of this.buyer" [value]="name.buyer">{{name.buyer}}</option>
+                        </datalist>
+                    </td>
+                    <td><input type="text" class="form-control" formControlName="orderNo" list="2" (input)="getOrderValue($event)" (change)="getstyle()">
+                        <datalist id="2">
+                            <option *ngFor="let number of this.order" [value]="number.orderNO" >
+                        </datalist>
+                    </td>
+                    <td><input type="text" class="form-control" formControlName="style" list="3"  (input)="getstylevalue($event)" (change)="getcolor()">
+                        <datalist id="3">
+                            <option *ngFor="let style of this.stylelist" [value]="style.style">
+                        </datalist>
+                    </td>
+                    <td><input type="text" class="form-control" formControlName="color" list="4"  (input)="getcolorvalue($event)" (change)="getsize()">
+                        <datalist id="4">
+                            <option *ngFor="let color of this.colorlist" [value]="color.color">
+                        </datalist>
+                    </td>
+                    <td><input type="text" class="form-control" formControlName="size" list="5" >
+                        <datalist id="5">
+                            <option *ngFor="let size of this.sizelist" [value]="size.size">
+                        </datalist>
+                    </td>                    <td><input type="text" class="form-control" formControlName="knitMachineno"></td>
                     <td><input type="text" class="form-control" formControlName="yarnLot"></td>
                     <td><input type="text" class="form-control" formControlName="dayProductionKgs"></td>
                     <td><input type="text" class="form-control" formControlName="noOfRollsProduced"></td>
