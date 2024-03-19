@@ -72,6 +72,8 @@ export class FabricRollData2Component implements OnInit {
   fabentrydata3: any;
   fabentrydata4: any;
   fabentrydata5: any;
+  dataIndex:any;
+  newfabEntry:any[] = []
 
   constructor(private api: ApiService,
     private http: HttpClient,
@@ -166,27 +168,54 @@ export class FabricRollData2Component implements OnInit {
 
   check(id: any) {
     this.api.getsingleFabricroll(id).subscribe((res) => {
-      this.fabentrydata1 = res.entry1
-      this.fabentrydata2 = res.entry2
-      this.fabentrydata3 = res.entry3
-      this.fabentrydata4 = res.entry4
-      this.fabentrydata5 = res.entry5
-      this.fabentrydata6 = res.entry6
-      this.fabentrydata7 = res.entry7
-      this.fabentryentry=res
-        console.log(this.fabentryentry)
-    })
+      this.fabentrydata1 = res.entry1;
+      this.fabentrydata2 = res.entry2;
+      this.fabentrydata3 = res.entry3;
+      this.fabentrydata4 = res.entry4;
+      this.fabentrydata5 = res.entry5;
+      this.fabentrydata6 = res.entry6;
+      this.fabentrydata7 = res.entry7;
   
+      // Creating an array containing all entry arrays
+      const fabEntryArray = [this.fabentrydata1, this.fabentrydata2, this.fabentrydata3, this.fabentrydata4, this.fabentrydata5, this.fabentrydata6, this.fabentrydata7];
+  
+      // Finding the index of the longest entry array
+      let maxIndex = 0;
+      for (let i = 1; i < fabEntryArray.length; i++) {
+        if (fabEntryArray[i].length > fabEntryArray[maxIndex].length) {
+          maxIndex = i;
+        }
+      }
+  
+      // Setting the index of the longest entry array
+      this.dataIndex = maxIndex;
+      console.log(this.dataIndex);
+  
+      // Creating an array from 1 to the length of the longest entry array
+      this.newfabEntry = Array.from({length: fabEntryArray[this.dataIndex].length}, (_, i) => i + 1);
+    });
+  }
+  
+  getMaxIndex(): number {
+    let maxLength = 0;
+    let maxIndex = 0;
+    for (let i = 0; i < this.fabentryentry.length; i++) {
+      if (this.fabentryentry[i].length > maxLength) {
+        maxLength = this.fabentryentry[i].length;
+        maxIndex = i;
+      }
+    }
+    return maxIndex;
   }
 
-
+  generateArray(maxIndex: number): number[] {
+    return Array.from({ length: maxIndex }, (_, index) => index + 1);
+  }
 
   edit(id: any) {
-    const entry = 1
     this.woupdateid=id
     this.api.getsinglewodetails(id).subscribe((res) => {
       this.Woupdate = res.workorder
-      console.log(this.Woupdate)
       this.woUpdateFrom.patchValue({
         buyer: this.Woupdate.buyer,
         orderNo: this.Woupdate.orderNo,
@@ -203,7 +232,8 @@ export class FabricRollData2Component implements OnInit {
         spinFty: this.Woupdate.spinFty,
         knitFty: this.Woupdate.knitFty,
         dyeinFty: this.Woupdate.dyeinFty,
-        noOfRolls: this.Woupdate.noOfRolls
+        noRolls: this.Woupdate.noRolls,
+        status: this.Woupdate.status
       })
     })
      }
@@ -225,12 +255,12 @@ export class FabricRollData2Component implements OnInit {
     spinFty: new FormControl(''),
     knitFty: new FormControl(''),
     dyeinFty: new FormControl(''),
-    noOfRolls: new FormControl('')
+    noRolls: new FormControl(''),
+    status:new FormControl('')
   })
 
 woupdatesubmit(){
-  const entry = 1
-  console.log(this.woUpdateFrom.value)
+
   this.api.postsinglewodetails(this.woUpdateFrom.value,this.woupdateid).subscribe((res) => {
     alert(res.message)
     this.woByBuyer()
@@ -239,6 +269,3 @@ woupdatesubmit(){
 
 
 }
-
-
-
