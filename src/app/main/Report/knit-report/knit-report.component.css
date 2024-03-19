@@ -172,3 +172,8 @@ thead{
 }
 
   /* ///////////////////////////////////////////////// */
+.ovralltable{
+  overflow-x: scroll;
+    height: 63vh;
+    width: 100%;
+}

@@ -81,3 +81,8 @@ thead {
   top: 0;
   background-color: #f2f2f2;
 }
+.ovralltable{
+  overflow-x: scroll;
+    height: 63vh;
+    width: 100%;
+}
