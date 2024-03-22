@@ -38,26 +38,6 @@ no:any
 
     }
 
-    // onCheckboxChange1(event: any) {
-    //   const ischecked = event.target.checked;
-    //   this.load.controls['houseKeepingStatus'].setValue(ischecked ? 'active' : 'inactive');
-    // }
-
-    // onCheckboxChange2(event: any) {
-    //   const ischecked = event.target.checked
-    //   this.load.controls['gasElecAvailability'].setValue(ischecked ? 'active' : 'inactive');
-    // }
-
-    // onCheckboxChange3(event: any) {
-    //   const ischecked = event.target.checked
-    //   this.load.controls['floorLightingStatus'].setValue(ischecked ? 'active' : 'inactive');
-    // }
-
-    // onCheckboxChange4(event: any) {
-    //   const ischecked = event.target.checked
-    //   this.load.controls['storageAreaStatus'].setValue(ischecked ? 'active' : 'inactive');
-    // }
-
 
   ngOnInit() {  
     this.factoryname()
@@ -70,6 +50,8 @@ no:any
       })
     }
 
+
+// <!------------------------------------------------------------>
     buyername(){
       this.api.getbuyers().subscribe((res)=>{
         this.buyer = res.buyers
@@ -114,7 +96,7 @@ no:any
         this.sizelist = res.sizes;
       })
     }
-  
+  // <!------------------------------------------------------------>
 
 
   

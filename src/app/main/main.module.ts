@@ -26,6 +26,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MbscFormValueBase } from '@mobiscroll/angular-lite/src/js/input.angular';
 
 
 import { RolesProfileRootComponent } from './masters/Roles and profiles/roles/roles-profile-root/roles-profile-root.component';
@@ -48,10 +49,11 @@ import { FabricRoll1Component } from './Transaction/Fabric Roll/fabric-roll-v1/f
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { FabricRollEntry2Component } from './Transaction/Fabric Roll/fabric-roll-entry-v2/fabric-roll-entry-2.component';
 import { FabricRollData2Component } from './menu/fabric-roll-data2/fabric-roll-data2.component';
-import { ReportEntryComponent } from './Transaction/Fabric Roll/report-entry/report-entry.component';
+import { ReportEntryComponent } from './Transaction/knit-entry/report-entry.component';
 import { KnitReportComponent } from './Report/knit-report/knit-report.component';
 import { DatePipe } from '@angular/common';
 import { FabricRollEntry3Component } from './Transaction/Fabric Roll/fabric-roll-entry-v3/fabric-roll-entry-3.component';
+import { DyeBatchEntryComponent } from './Transaction/dye-batch-entry/dye-batch-entry.component';
 
 
 @NgModule({
@@ -81,6 +83,7 @@ import { FabricRollEntry3Component } from './Transaction/Fabric Roll/fabric-roll
     ReportEntryComponent,
     KnitReportComponent,
     FabricRollEntry3Component,
+    DyeBatchEntryComponent,
   ],
   imports: [
     CommonModule,
@@ -108,7 +111,7 @@ import { FabricRollEntry3Component } from './Transaction/Fabric Roll/fabric-roll
     HttpClientModule,
     MatAutocompleteModule,
     NgxSpinnerModule.forRoot({type: 'ball-scale-multiple'}),
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
   ]
 })
 export class MainModule { }

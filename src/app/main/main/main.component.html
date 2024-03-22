@@ -59,14 +59,6 @@
         </mat-nav-list>
 
         <mat-nav-list>
-          <a mat-list-item [routerLink]="'FabricRollData'" (click)="snav.toggle()">
-            <div class="text">
-              Fabric Rolls
-            </div>
-          </a>
-        </mat-nav-list>
-
-        <mat-nav-list>
           <a mat-list-item [routerLink]="'GarmentBundles'" (click)="snav.toggle()">
             <div class="text">
               Garment bundles
@@ -101,6 +93,15 @@
             </a>
             </mat-nav-list>
 
+            <mat-nav-list>
+
+              <a mat-list-item [routerLink]="'DyeBatchEntry'" (click)="snav.toggle()">
+                <div class="text">
+                  Dye Batch Report Entry
+                </div>
+              </a>
+              </mat-nav-list>
+
       </mat-expansion-panel>
 
 
@@ -112,6 +113,16 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
           <mat-nav-list>
+
+            <mat-nav-list>
+              <a mat-list-item [routerLink]="'FabricRollData'" (click)="snav.toggle()">
+                <div class="text">
+                  Fabric Rolls Report
+                </div>
+              </a>
+            </mat-nav-list>
+    
+    
 
             <a mat-list-item [routerLink]="'Knite-Report'" (click)="snav.toggle()">
               <div class="text">

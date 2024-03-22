@@ -19,9 +19,10 @@ import { BundleEntry3Component } from './Transaction/Bundle Entry/bundle-entry-3
 import { AuthGuard } from '../auth.guard';
 import { FabricRollEntry2Component } from './Transaction/Fabric Roll/fabric-roll-entry-v2/fabric-roll-entry-2.component';
 import { FabricRollData2Component } from './menu/fabric-roll-data2/fabric-roll-data2.component';
-import { ReportEntryComponent } from './Transaction/Fabric Roll/report-entry/report-entry.component';
+import { ReportEntryComponent } from './Transaction/knit-entry/report-entry.component';
 import { KnitReportComponent } from './Report/knit-report/knit-report.component';
 import { FabricRollEntry3Component } from './Transaction/Fabric Roll/fabric-roll-entry-v3/fabric-roll-entry-3.component';
+import { DyeBatchEntryComponent } from './Transaction/dye-batch-entry/dye-batch-entry.component';
 
 const routes: Routes = [
   {path:'', component: AppComponent},
@@ -45,7 +46,8 @@ const routes: Routes = [
   {path:'bundleentry2',component:BundleEntry2Component},
   {path:'bundleentry3',component:BundleEntry3Component},
   {path:'ReportEntry', component: ReportEntryComponent},
-  {path:"Knite-Report" , component:KnitReportComponent}
+  {path:"Knite-Report" , component:KnitReportComponent},
+  {path:"DyeBatchEntry" , component:DyeBatchEntryComponent}
 ];
 
 @NgModule({

@@ -1,0 +1,87 @@
+.buyerbox{
+    margin-top: 18px;
+}
+.maindatails{
+    overflow: scroll;
+    height: 100vh;
+}
+
+.Batch-Entry2{
+    width: 100vh;
+    display: inline-table;
+    height: 45vh;
+}
+.Batch-Entry1{
+    width: 100vh;
+    display: inline-table;
+    height: 49vh;
+}
+
+.Dryer1{
+    width: 100vh;
+    display: inline-table;
+    height: 49vh;
+}
+
+.Dryer2{
+    width: 100vh;
+    display: inline-table;
+    height: 45vh;
+}
+
+.Shade-Check1{
+    width: 100vh;
+    display: inline-table;
+    height: 70vh;
+}
+.Shade-Check2{
+    width: 100vh;
+    display: inline-table;
+    height: 66vh;
+}
+.Slitting1{
+    width: 100vh;
+    display: inline-table;
+    height: 59vh;
+}
+.Slitting2{
+    width: 100vh;
+    display: inline-table;
+    height: 55vh;
+}
+.Open-Compact1{
+    width: 100vh;
+    display: inline-table;
+    height: 76vh;
+}
+.Open-Compact2{
+    width: 100vh;
+    display: inline-table;
+    height: 69vh;
+}
+.Final-Batch-Report1{
+    width: 100vh;
+    display: inline-table;
+    height: 45vh;
+}
+
+.Final-Batch-Report2{
+    width: 100vh;
+    display: inline-table;
+    height: 45vh;
+}
+table, th, td {
+    border: 1px solid white;
+  }
+
+  th,td{
+    text-align: center;
+  }
+
+  ::ng-deep .mat-mdc-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-mdc-text-field-wrapper{
+    background-color: white;
+    width: 32vh;
+  }
+  ::ng-deep .mat-mdc-text-field-wrapper{
+    background-color: white;
+  } 

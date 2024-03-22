@@ -10,8 +10,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  // apiUrl = "https://tracker.seppam.com";
-  apiUrl = "http://localhost:2000";
+  apiUrl = "https://tracker.seppam.com";
+  // apiUrl = "http://localhost:2000";
 
 
   token: any;
@@ -187,5 +187,18 @@ export class ApiService {
   }
   updateKnitEntry(data:any):Observable<any>{
     return this.http.post(this.getUrl()+`/knitapi/knit` , data , this.getHeaders())
+  }
+
+
+  post_dyereport_entry(data:any):Observable<any>{
+    return this.http.post(this.getUrl()+`/dyeapi/dye` , data , this.getHeaders())
+  }
+  
+  dye_factory_name():Observable<any>{
+    return this.http.get(this.getUrl()+`/dyeapi/dye-factory` , this.getHeaders())
+  }
+
+  dye_fabrictype_dropdown():Observable<any>{
+    return this.http.get(this.getUrl()+`/dyeapi/dye-fabrictype` , this.getHeaders())
   }
 }
