@@ -423,6 +423,7 @@ export class DyeBatchReportComponent implements OnInit {
       console.log(res.message)
       alert(res.message)
     })
+    window.location.reload()
     console.log(this.dye_Entery.value)
   }
 

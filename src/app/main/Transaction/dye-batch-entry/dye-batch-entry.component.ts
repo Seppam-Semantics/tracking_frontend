@@ -165,6 +165,7 @@ dyesubmit(){
     alert(res.message)
   })
   console.log(this.dye_Entery.value)
+window.location.reload()
 }
 
 //==============================================================================
