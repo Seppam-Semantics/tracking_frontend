@@ -26,7 +26,6 @@ import {MatNativeDateModule} from '@angular/material/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { MbscFormValueBase } from '@mobiscroll/angular-lite/src/js/input.angular';
 
 
 import { RolesProfileRootComponent } from './masters/Roles and profiles/roles/roles-profile-root/roles-profile-root.component';

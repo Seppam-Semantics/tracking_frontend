@@ -160,10 +160,10 @@ add() {
 }
 
 dyesubmit(){
-  // this.api.post_dyereport_entry(this.dye_Entery.value).subscribe((res)=>{
-  //   console.log(res.message)
-  //   alert(res.message)
-  // })
+  this.api.post_dyereport_entry(this.dye_Entery.value).subscribe((res)=>{
+    console.log(res.message)
+    alert(res.message)
+  })
   console.log(this.dye_Entery.value)
 }
 
