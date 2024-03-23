@@ -20,42 +20,23 @@
             <th>Delect</th>
         </tr>
     </thead>
-    <!-- <tbody *ngFor="let data of this.dyebatch_alldata; let i = index"> -->
-        <tbody>
-        <!-- <tr>
+    <tbody>
+         <tr *ngFor="let data of this.dyebatch_alldata; let i = index">
             <td>{{i+1}}</td>
             <td>{{data.code}}</td>
-            <td>{{data.bathNo}}</td>
+            <td>{{data.batchNo}}</td>
             <td>{{data.dyeFactory}}</td>
             <td>{{data.buyer}}</td>
             <td>{{data.orderNo}}</td>
             <td>{{data.style}}</td>
             <td>{{data.color}}</td>
             <td>{{data.fabricType}}</td>
-            <td>{{data.softher}}</td>
-            <td>{{data.silicon}}</td>
-            <td>{{data.enzyme}}</td>
-            <td><button class="btn btn-primary" data-toggle="modal" data-target="#edit" (click)="getid(data.id)"><mat-icon>edit</mat-icon></button></td>
-            <td><button class="btn btn-danger"><mat-icon>delete</mat-icon></button></td>
-        </tr> -->
-
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td><button class="btn btn-primary" data-toggle="modal" data-target="#edit"><mat-icon>edit</mat-icon></button></td>
-            <td><button class="btn btn-danger"><mat-icon>delete</mat-icon></button></td>
+            <td>{{data.softner == 1 ? "True":"false"}}</td>
+            <td>{{data.silicon == 1 ? "True":"false"}}</td>
+            <td>{{data.enzyme == 1 ? "True":"false"}}</td>
+            <td><button class="btn btn-primary" (click)="getid(data.id)" data-toggle="modal" data-target="#edit" ><mat-icon>edit</mat-icon></button></td>
+            <td><button class="btn btn-danger" (click)="delect(data.id)"><mat-icon>delete</mat-icon></button></td>
         </tr>
-
     </tbody>
 </table>
 
@@ -110,53 +91,35 @@
                                 <div style="display: flex; flex-wrap: wrap;">
                                     <div style="margin-top: 1%;">
                                         <!------------------------------------------------------------------------------------------------------>
-                                        <div style="display: flex; flex-wrap: wrap; width: 800px; gap:6px">
-                                            <mat-form-field appearance="outline"  (click) = "clearAll()">
+                                        <div style="display: flex; flex-wrap: wrap; width: 120vh; gap:6px">
+                                            <mat-form-field appearance="outline">
                                                 <mat-label>Buyer</mat-label>
-                                                <mat-select [(ngModel)]="buyerName" (selectionChange)="woByBuyer()" formControlName="buyer">
-                                                  <mat-option value=""> </mat-option>
-                                                  <mat-option *ngFor="let buyer of this.buyers" value="{{buyer.buyer}}">{{buyer.buyer}}</mat-option>
-                                                </mat-select>
-                                              </mat-form-field>
-                                        
-                                              <mat-form-field appearance="outline"  >
-                                                <mat-label>Order</mat-label>
-                                                <mat-select [(ngModel)]="ordernumbers" (selectionChange)="wobyOrder()" formControlName="orderNo">
-                                                  <mat-option value=""> </mat-option>
-                                                  <mat-option *ngFor="let order of this.order" value="{{order.orderNO}}">{{order.orderNO}}</mat-option>
-                                                </mat-select>
-                                              </mat-form-field>
-                                        
-                                              <mat-form-field appearance="outline"  >
+                                                <input matInput formControlName="buyer" readonly>
+                                            </mat-form-field>
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>OrderNo</mat-label>
+                                                <input matInput formControlName="orderNo" readonly>
+                                            </mat-form-field>
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>Color</mat-label>
+                                                <input matInput formControlName="color" readonly>
+                                            </mat-form-field>
+                                            <mat-form-field appearance="outline">
                                                 <mat-label>Style</mat-label>
-                                                <mat-select [(ngModel)]="styleslist" (selectionChange)="wobystyle()" formControlName="style">
-                                                  <mat-option value=""> </mat-option>
-                                                  <mat-option *ngFor="let style of this.stylelist" value="{{style.style}}">{{style.style}}</mat-option>
-                                                </mat-select>
-                                              </mat-form-field>
-                                        
-                                              <mat-form-field appearance="outline"  >
-                                                <mat-label>color</mat-label>
-                                                <mat-select [(ngModel)]="colorslist" (selectionChange)="wobycolor()" formControlName="color">
-                                                  <mat-option value=""> </mat-option>
-                                                  <mat-option *ngFor="let color of this.colorlist" value="{{color.color}}">{{color.color}}</mat-option>
-                                                </mat-select>
-                                              </mat-form-field>
+                                                <input matInput formControlName="style" readonly>
+                                            </mat-form-field>
                                         </div>
                 
                                         <!------------------------------------------------------------------------------------------------------>
                 
-                                        <div style="display: flex; width: 800px; margin-top: 3%;">
+                                        <div style="display: flex; width: 120vh; margin-top: 3%;">
                                             <div style="display: flex; gap: 20px;">
                                                 <div style="display: flex; gap: 10px;">
                                                     <span style="font-size:15px; display: inline-block;">
                                                         Fabric Type / Special Requirement</span>
-                                                    <div>
+                                                    <div >
                                                          <mat-form-field appearance="outline">
-                                                            <mat-select formControlName="fabricType">
-                                                                <mat-option value=""></mat-option>
-                                                                <mat-option *ngFor="let data of this.fabrictype_dropdown;" [value]="data.fabricType">{{data.fabricType}}</mat-option>
-                                                            </mat-select>
+                                                            <input  matInput type="text"  formControlName="fabricType">
                                                         </mat-form-field>
                                                     </div>
                                                 </div>
@@ -191,8 +154,8 @@
                                                 <th style="font-size:small; width: 75px; background-color: white;">Size</th>
                                                 <th style="font-size:small; width: 75px; background-color: white;">Griege</th>
                                                 <th style="font-size:small; width: 75px; background-color: white;">Finish</th>
-                                                <th style="font-size:small; width: 75px; background-color: white;">Diff</th>
-                                                <th style="font-size:small; width: 75px; background-color: white;">PL</th>
+                                                <th style="font-size:small; width: 75px; background-color: white;">difference</th>
+                                                <!-- <th style="font-size:small; width: 75px; background-color: white;">PL</th> -->
                                             </tr>
                                         </thead>
                                         <tbody formArrayName="data">
@@ -200,8 +163,8 @@
                                                 <td><input type="text" style="width: 15vh; height: 6vh;" formControlName="size"></td>
                                                 <td><input type="text" style="width: 15vh; height: 6vh;" formControlName="griege"></td>
                                                 <td><input type="text" style="width: 15vh; height: 6vh;" formControlName="finish"></td>
-                                                <td><input type="text" style="width: 15vh; height: 6vh;" formControlName="diff"></td>
-                                                <td><input type="text" style="width: 15vh; height: 6vh;" formControlName="PL"></td>
+                                                <td><input type="text" style="width: 15vh; height: 6vh;" formControlName="difference"></td>
+                                                <!-- <td><input type="text" style="width: 15vh; height: 6vh;" formControlName="PL"></td> -->
                                             </tr>
                 
                 
@@ -749,7 +712,7 @@
                                                     <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
                                                 </div>
                 
-                                                <div style="display: flex; gap: 10px; ">
+                                                <div style="display: flex; gap: 190px; ">
                                                     <label class="form-control" style="border: none; display: inline-block;
                                                     width: 45vh;">SideLoose/PileCheck (Y/N)</label>
                                                     <!-- <textarea class="form-control" style="height: 30px;" formControlName="tubtex_sideLoosePileCheck"></textarea> -->
@@ -757,7 +720,7 @@
                                                     <mat-checkbox formControlName="tubtex_sideLoosePileCheck"></mat-checkbox>
                                                 </div>
                 
-                                                <div style="display: flex; gap: 10px; ">
+                                                <div style="display: flex; gap: 190px; ">
                                                     <label class="form-control" style="border: none; display: inline-block;
                                                     width: 45vh;">Dia / GSM Check (Y/N)</label>
                                                     <!-- <textarea class="form-control" style="height: 30px; display: none;"></textarea> -->
@@ -905,7 +868,7 @@
                             </div>
                 
                             <div style="display: flex; justify-content: center;">
-                                <div><Button class="btn btn-primary"> Save </Button></div>
+                                <div><Button class="btn btn-primary" (click)="update()"> Update </Button></div>
                             </div>
                         </div>
                 

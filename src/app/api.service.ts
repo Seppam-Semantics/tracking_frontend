@@ -202,11 +202,15 @@ export class ApiService {
     return this.http.get(this.getUrl()+`/dyeapi/dye-fabrictype` , this.getHeaders())
   }
 
-  dye_batch_all_data_():Observable<any>{
-    return this.http.get(this.getUrl+`/dyeapi/dye` , this.getHeaders())
+  dyeBatchAllData():Observable<any>{
+    return this.http.get(this.getUrl() + `/dyeapi/dye` , this.getHeaders())
   }
 
   dye_batch_single_data(id:any):Observable<any>{
-    return this.http.get(this.getUrl+`/dyeapi/dye/${id}` , this.getHeaders())
+    return this.http.get(this.getUrl()+`/dyeapi/dye/${id}` , this.getHeaders())
+  }
+
+  DyeBatchDelect(id:any):Observable<any>{
+    return this.http.delete(this.getUrl()+`/dyeapi/dye/${id}` , this.getHeaders())
   }
 }
