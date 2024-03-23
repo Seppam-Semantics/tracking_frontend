@@ -12,8 +12,8 @@ export class LocalService {
 
   constructor(private http:HttpClient) { }
 
-  // apiUrl = "https://tracker.seppam.com";
-  apiUrl = "http://localhost:2000";
+  apiUrl = "https://tracker.seppam.com";
+  // apiUrl = "http://localhost:2000";
 
 
   update:boolean = false;

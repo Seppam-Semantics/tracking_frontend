@@ -31,8 +31,8 @@ style:any;
 color:any;
 size:any;
 inputValue:any;
-  data: any;
-  fabrictype_dropdown: any;
+data: any;
+fabrictype_dropdown: any;
 
 constructor(private fb : FormBuilder , private api : ApiService){
 
@@ -149,14 +149,28 @@ get items() {
 
 
 add() {
-  const newGroup = this.fb.group({
+  const row  = this.fb.group({
     size: new FormControl(''),
     griege: new FormControl(''),
     finish: new FormControl(''),
     diff: new FormControl(''),
     PL: new FormControl(''),
   });
-  this.items.push(newGroup);
+
+  row.get('griege')?.valueChanges.subscribe(() => this.calculateDiff(row));
+  row.get('finish')?.valueChanges.subscribe(() => this.calculateDiff(row));
+
+  this.items.push(row );
+}
+
+calculateDiff(row: FormGroup) {
+  const griegeValue = parseFloat(row.get('griege')?.value) || 0;
+  const finishValue = parseFloat(row.get('finish')?.value) || 0;
+  const diff = griegeValue - finishValue;
+
+  const PL = diff/griegeValue*100
+  row.patchValue({ diff });
+  row.patchValue({ PL });
 }
 
 dyesubmit(){

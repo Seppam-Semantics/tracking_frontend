@@ -80,8 +80,18 @@ table, th, td {
 
   ::ng-deep .mat-mdc-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-mdc-text-field-wrapper{
     background-color: white;
-    width: 32vh;
   }
   ::ng-deep .mat-mdc-text-field-wrapper{
     background-color: white;
   } 
+  /* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

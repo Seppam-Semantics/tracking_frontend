@@ -34,7 +34,7 @@
                     <div style="margin-top: 1%;">
                         <!------------------------------------------------------------------------------------------------------>
                         <div style="display: flex; flex-wrap: wrap; width: 130vh; gap:6px">
-                            <mat-form-field appearance="outline"  (click) = "clearAll()">
+                            <mat-form-field appearance="outline"  (click) = "clearAll()" style=" width: 32vh;">
                                 <mat-label>Buyer</mat-label>
                                 <mat-select [(ngModel)]="buyerName" (selectionChange)="woByBuyer()" formControlName="buyer">
                                   <mat-option value=""> </mat-option>
@@ -42,7 +42,7 @@
                                 </mat-select>
                               </mat-form-field>
                         
-                              <mat-form-field appearance="outline"  >
+                              <mat-form-field appearance="outline"   style=" width: 32vh;">
                                 <mat-label>Order</mat-label>
                                 <mat-select [(ngModel)]="ordernumbers" (selectionChange)="wobyOrder()" formControlName="orderNo">
                                   <mat-option value=""> </mat-option>
@@ -50,7 +50,7 @@
                                 </mat-select>
                               </mat-form-field>
                         
-                              <mat-form-field appearance="outline"  >
+                              <mat-form-field appearance="outline"  style=" width: 32vh;">
                                 <mat-label>Style</mat-label>
                                 <mat-select [(ngModel)]="styleslist" (selectionChange)="wobystyle()" formControlName="style">
                                   <mat-option value=""> </mat-option>
@@ -58,7 +58,7 @@
                                 </mat-select>
                               </mat-form-field>
                         
-                              <mat-form-field appearance="outline"  >
+                              <mat-form-field appearance="outline"  style=" width: 32vh;">
                                 <mat-label>color</mat-label>
                                 <mat-select [(ngModel)]="colorslist" (selectionChange)="wobycolor()" formControlName="color">
                                   <mat-option value=""> </mat-option>
@@ -75,7 +75,7 @@
                                     <span style="font-size:15px; display: inline-block;">
                                         Fabric Type / Special Requirement</span>
                                     <div>
-                                         <mat-form-field appearance="outline">
+                                         <mat-form-field appearance="outline" style=" width: 32vh;">
                                             <mat-label>Fab Type</mat-label>
                                             <input type="text" formControlName="fabricType" matInput>
                                         </mat-form-field>
@@ -118,11 +118,16 @@
                         </thead>
                         <tbody formArrayName="data">
                             <tr *ngFor="let process of items.controls; let i=index" [formGroupName]="i">
-                                <td><input type="text" style="width: 15vh; height: 6vh;" formControlName="size"></td>
-                                <td><input type="text" style="width: 15vh; height: 6vh;" formControlName="griege"></td>
-                                <td><input type="text" style="width: 15vh; height: 6vh;" formControlName="finish"></td>
-                                <td><input type="text" style="width: 15vh; height: 6vh;" formControlName="diff"></td>
-                                <td><input type="text" style="width: 15vh; height: 6vh;" formControlName="PL"></td>
+                                <td>
+                                    <input type="text" style="width: 15vh; height: 6vh;" formControlName="size" list="size" >
+                                    <datalist id="size">
+                                        <option *ngFor="let size of this.sizelist" value="{{size.size}}">{{size.size}}</option>
+                                    </datalist>
+                                </td>
+                                <td><input type="number" style="width: 15vh; height: 6vh;" formControlName="griege"></td>
+                                <td><input type="number" style="width: 15vh; height: 6vh;" formControlName="finish"></td>
+                                <td><input type="number" style="width: 15vh; height: 6vh;" formControlName="diff"></td>
+                                <td><input type="number" style="width: 15vh; height: 6vh;" formControlName="PL"></td>
                             </tr>
 
 
