@@ -36,20 +36,8 @@ fabrictype_dropdown: any;
 
 constructor(private fb : FormBuilder , private api : ApiService){
 
-  this.api.dye_factory_name().subscribe((res)=>{
-    this.factoryname=res.factorys
-  })
 
-  this.api.dye_fabrictype_dropdown().subscribe((res)=>{
-    this.fabrictype_dropdown=res.buyers
-  })
-}
-
-
-//============================================================================================
-ngOnInit(): void {
-  this.getbuyers()
- this.dye_Entery = new FormGroup({
+  this.dye_Entery = new FormGroup({
     "dyeFactory" : new FormControl(''),
   
     'buyer': new FormControl(''),
@@ -66,22 +54,22 @@ ngOnInit(): void {
     
     "batchRemarks": new FormControl(''),
   
-    "batch_batchMakeDate": new FormControl(''),
+    "batch_batchMakeDate": new FormControl(null),
     "batch_batchRollsSLCheck": new FormControl(''),
     
-    "dyeing_loadDatetime": new FormControl(''),
-    "dyeing_unloadingDateTime": new FormControl(''),
+    "dyeing_loadDatetime": new FormControl(),
+    "dyeing_unloadingDateTime": new FormControl(),
     "dyeing_totalRunTime": new FormControl(''),
     "dyeing_receipeChart": new FormControl(''),
     
     "shade_lapDipOriginalQTX": new FormControl(''),
     "shade_masterBatchCheck": new FormControl(''),
     "shade_dyeUnloadShadeCheck": new FormControl(''),
-    "shade_shadeSubmissionDate": new FormControl(''),
-    "shade_shadeApprovalDate": new FormControl(''),
+    "shade_shadeSubmissionDate": new FormControl(),
+    "shade_shadeApprovalDate": new FormControl(),
     "shade_firstBatchNotOkReason": new FormControl(''),
     
-    "squeezer_squeezerDateTime": new FormControl(''),
+    "squeezer_squeezerDateTime": new FormControl(),
     "squeezer_rpmValue": new FormControl(''),
     "squeezer_trolleyPlate": new FormControl(''),
     "squeezer_overfeedValue": new FormControl(''),
@@ -89,7 +77,7 @@ ngOnInit(): void {
     "squeezer_shape": new FormControl(''),
     "squeezer_backAngle": new FormControl(''),
     
-    "dryer_dryerDatetime": new FormControl(''),
+    "dryer_dryerDatetime": new FormControl(),
     "dryer_temperatureValue": new FormControl(''),
     "dryer_rpmValue": new FormControl(''),
     "dryer_overfeedValue": new FormControl(''),
@@ -97,23 +85,23 @@ ngOnInit(): void {
     "calendar_rpmValue": new FormControl(''),
     "calendar_steamHighLow": new FormControl(''),
     
-    "slitting_slittingDatetime": new FormControl(''),
+    "slitting_slittingDatetime": new FormControl(),
     "slitting_DTwister": new FormControl(''),
     "slitting_trolleyPlate": new FormControl(''),
     
-    "stenter_stenterDatetime": new FormControl(''),
+    "stenter_stenterDatetime": new FormControl(),
     "stenter_temperatureValue": new FormControl(''),
     "stenter_overfeedValue": new FormControl(''),
     "stenter_diasettingValue": new FormControl(''),
     "stenter_softnerSiliconUsage": new FormControl(''),
     
-    "compact_openCompactDatetime": new FormControl(''),
+    "compact_openCompactDatetime": new FormControl(),
     "compact_rpmValue": new FormControl(''),
     "compact_overfeedValue":new FormControl(''),
     "compact_diasettingValue": new FormControl(''),
     "compact_steamHighLow":new FormControl(''),
     
-    "tubtex_tubtexDatetime": new FormControl(''),
+    "tubtex_tubtexDatetime": new FormControl(),
     "tubtex_yarnLot":new FormControl(''),
     "tubtex_overfeedValue": new FormControl(''),
     "tubtex_steamHighLow": new FormControl(''),
@@ -132,15 +120,32 @@ ngOnInit(): void {
     "finalbatch_batchRollsWeight": new FormControl(''),
     "finalbatch_finishRollsWeight":new FormControl(''),
     "finalbatch_processLoss": new FormControl(''),
-    "finalbatch_fabricDeliveryDatetime": new FormControl(''),
+    "finalbatch_fabricDeliveryDatetime": new FormControl(),
     data: this.fb.array([]),
     "GriegeTotal" : new FormControl(''),
     "FinishTotal" : new FormControl(''),
+    "differenceTotal" : new FormControl(''),
+    "PLTotal" : new FormControl(''),
     
   })
   for (let i = 0; i < 6; i++) {
     this.add();
   }
+
+}
+
+
+//============================================================================================
+ngOnInit(): void {
+  this.getbuyers()
+  this.api.dye_factory_name().subscribe((res)=>{
+    this.factoryname=res.factorys
+  })
+
+  this.api.dye_fabrictype_dropdown().subscribe((res)=>{
+    this.fabrictype_dropdown=res.buyers
+  })
+ 
 }
 
 
@@ -190,6 +195,8 @@ calculateDiff() {
 calculateGriegeTotal() {
   let total1 = 0;
   let total2 = 0;
+  let total3 = 0;
+  let total4 = 0;
   this.items.controls.forEach((control: AbstractControl) => {
     const row = control as FormGroup;
     if (row instanceof FormGroup) {
@@ -198,18 +205,25 @@ calculateGriegeTotal() {
 
       const FinishTotal = parseFloat(row.get('finish')?.value) || 0;
       total2 += FinishTotal;
+
+      const DiffTotal = parseFloat(row.get('diff')?.value) || 0;
+      total3 += DiffTotal;
+
+      const PLTotal = parseFloat(row.get('PL')?.value) || 0;
+      total4 += PLTotal;
     }
   });
   this.dye_Entery.get('GriegeTotal')?.setValue(total1);
   this.dye_Entery.get('FinishTotal')?.setValue(total2);
+  this.dye_Entery.get('differenceTotal')?.setValue(total3);
+  this.dye_Entery.get('PLTotal')?.setValue(total4);
 }
-dyesubmit(){
+
+
+dyesubmit() {
   this.api.post_dyereport_entry(this.dye_Entery.value).subscribe((res)=>{
-    console.log(res.message)
-    alert(res.message)
+        alert(res.message);
   })
-  console.log(this.dye_Entery.value)
-window.location.reload()
 }
 
 //==============================================================================

@@ -80,3 +80,7 @@ th,td,tr{
     display: inline-table;
     height: 45vh;
 }
+
+::ng-deep .form-control{
+    border: revert-layer;
+}
