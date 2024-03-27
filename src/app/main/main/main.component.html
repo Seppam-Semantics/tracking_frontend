@@ -76,7 +76,6 @@
         </mat-expansion-panel-header>
 
         <mat-nav-list>
-
           <a mat-list-item [routerLink]="'fabricroll1'" (click)="snav.toggle()">
             <div class="text">
               Fabric Roll Entry
@@ -85,7 +84,6 @@
         </mat-nav-list>
 
         <mat-nav-list>
-
           <a mat-list-item [routerLink]="'ReportEntry'" (click)="snav.toggle()">
             <div class="text">
               Knit Report Entry
@@ -94,10 +92,17 @@
         </mat-nav-list>
 
         <mat-nav-list>
-
           <a mat-list-item [routerLink]="'DyeBatchEntry'" (click)="snav.toggle()">
             <div class="text">
               Dye Batch Report Entry
+            </div>
+          </a>
+        </mat-nav-list>
+
+        <mat-nav-list>
+          <a mat-list-item [routerLink]="'yarn-Entry'" (click)="snav.toggle()">
+            <div class="text">
+              Yarn Entry
             </div>
           </a>
         </mat-nav-list>

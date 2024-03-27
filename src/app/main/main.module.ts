@@ -54,6 +54,7 @@ import { DatePipe } from '@angular/common';
 import { FabricRollEntry3Component } from './Transaction/Fabric Roll/fabric-roll-entry-v3/fabric-roll-entry-3.component';
 import { DyeBatchEntryComponent } from './Transaction/dye-batch-entry/dye-batch-entry.component';
 import { DyeBatchReportComponent } from './Report/dye-batch-report/dye-batch-report.component';
+import { YarnEntryComponent } from './Transaction/yarn-entry/yarn-entry.component';
 
 
 @NgModule({
@@ -85,6 +86,7 @@ import { DyeBatchReportComponent } from './Report/dye-batch-report/dye-batch-rep
     FabricRollEntry3Component,
     DyeBatchEntryComponent,
     DyeBatchReportComponent,
+    YarnEntryComponent,
   ],
   imports: [
     CommonModule,
