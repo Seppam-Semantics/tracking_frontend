@@ -10,7 +10,12 @@ import { ApiService } from 'src/app/api.service';
 export class YarnEntryComponent implements OnInit {
   total1: any;
   allYarn:any
+<<<<<<< HEAD
   yarnSpinnerDropdown: any;
+=======
+  yarnData: any;
+  yarnType: any;
+>>>>>>> e9f3a231490de378aa0adb5713f414e535ca32d0
 
   constructor(private fb:FormBuilder, private api: ApiService){}
   ngOnInit(): void {
@@ -219,4 +224,21 @@ YarnQCAddButton(){
     this.items4.removeAt(index);
   }
 // <!----------------------------------------------------------------------------------------------------->
+
+
+getYarnTypeData(spinner:any){
+  this.api.gettingYarnType(spinner).subscribe((res)=>{
+    this.yarnData = res.knit;
+    for(let id of this.yarnData){   
+      this.api.getSingleYarnData(id.id).subscribe((res)=>{
+        this.yarnType = res.yarn_lc_lines
+      })
+    }
+  })
+}
+
+
+
+
+
 }

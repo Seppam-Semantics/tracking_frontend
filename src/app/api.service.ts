@@ -242,4 +242,32 @@ export class ApiService {
     return this.http.get(this.getUrl() + `/yarnapi/yarn-spinner` , this.getHeaders())
   }
 
+  yarnLcNo():Observable<any>{
+    return this.http.get(this.getUrl() + `/yarnapi/yarn-lcNo`, this.getHeaders())
+  }
+
+  yarnLcValue():Observable<any>{
+    return this.http.get(this.getUrl() + `/yarnapi/yarn-lcValue`, this.getHeaders())
+  }
+
+  yarnStatus():Observable<any>{
+    return this.http.get(this.getUrl() + `/yarnapi/yarn-status`, this.getHeaders())
+  }
+
+  yarnPi():Observable<any>{
+    return this.http.get(this.getUrl() + `/yarnapi/yarn-status`, this.getHeaders())
+  }
+
+  yarnFilter(spinner:any , lcNo:any, lcValue:any, yarnStatus:any, pi:any):Observable<any>{
+    return this.http.get(this.getUrl() + `/yarnapi/yarn-filter?id=&spinner=${spinner}&lcNo=${lcNo}&lcValue=${lcValue}&yarnStatus=${yarnStatus}&pi=${pi}`, this.getHeaders())
+  }
+  
+  getSingleYarnData(id:any):Observable<any>{
+    return this.http.get(this.getUrl() + `/yarnapi/yarn/${id}`, this.getHeaders())
+  }
+
+  gettingYarnType(spinner:any ):Observable<any>{
+    return this.http.get(this.getUrl()+`/yarnapi/yarn-filter?id=&spinner=${spinner}&lcNo=&lcValue=&yarnStatus=&pi=`)
+  }
+
 }

@@ -124,7 +124,7 @@
         </div>
     </mat-tab>
     <!-------------------------------Header[Ends]----------------------------------->
-
+<!-- ============================================================================================================================================================================ -->
     <!-------------------------------Lot Check[Start]----------------------------------->
     <mat-tab label="Lot Check" [formGroup]="LotCheck">
         <div style="overflow: scroll; height: 80vh;">
@@ -150,9 +150,8 @@
                             <td>
                                 <mat-form-field appearance="outline">
                                     <mat-label>Spin Fty</mat-label>
-                                    <mat-select formControlName="7">
-                                        <mat-option *ngFor="let spinner of yarnSpinnerDropdown; let i = index"
-                                            [value]="spinner.spinner">{{spinner.spinner}}</mat-option>
+                                    <mat-select formControlName="1">
+                                        <mat-option></mat-option>
                                     </mat-select>
                                 </mat-form-field>
                             </td>
