@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { AbstractType, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -212,5 +212,25 @@ export class ApiService {
 
   DyeBatchDelect(id:any):Observable<any>{
     return this.http.delete(this.getUrl()+`/dyeapi/dye/${id}` , this.getHeaders())
+  }
+
+  addUpdateYarn(data:any):Observable<any>{
+    return this.http.post(this.getUrl() + `/yarnapi/yarn`, data, this.getHeaders())
+  }
+
+  addUpdateYarnCheck(data:any):Observable<any>{
+    return this.http.post(this.getUrl() + `/yarnapi/yarn_lot_check`, data, this.getHeaders())
+  }
+
+  addUpdateOrderAllocation(data:any):Observable<any>{
+    return this.http.post(this.getUrl() + `/yarnapi/yarn_order_allocations`, data, this.getHeaders())
+  }
+
+  addUpdateYarnreceipt(data:any):Observable<any>{
+    return this.http.post(this.getUrl() + `/yarnapi/yarn_receipts_lines`, data, this.getHeaders())
+  }
+
+  addUpdateYarnQuality(data:any):Observable<any>{
+    return this.http.post(this.getUrl + `/yarnapi/yarn_quality_check`, data, this.getHeaders())
   }
 }
