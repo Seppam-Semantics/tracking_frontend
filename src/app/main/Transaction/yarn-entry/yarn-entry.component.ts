@@ -159,8 +159,40 @@ ReceiptAddButton(){
   
   this.items3.push(Row3);  
   }
+
+  ReceiptDelete(index: number) {
+    this.items3.removeAt(index);
+  }
+  
   
 // <!----------------------------------------------------------------------------------------------------->
+Yarn_QC = new FormGroup({
+  111: new FormControl(''),
+  222: new FormControl(''),
+  333: new FormControl(''),
+  444: new FormControl(''),
+  555: new FormControl(''),
+  666: new FormControl(''),
+  777: new FormControl(''),
+  888: new FormControl(''), 
+  data4: this.fb.array([]),
 
+})
+get items4() {
+  return this.Yarn_QC.get("data4") as FormArray;
+}
+YarnQCAddButton(){
+  const Row4 = this.fb.group({
+    1: new FormControl(''),
+    2: new FormControl(''),
+    3: new FormControl(''),
+    });
+  
+  this.items4.push(Row4);  
+  }
 
+  YarnQCDelete(index: number) {
+    this.items4.removeAt(index);
+  }
+// <!----------------------------------------------------------------------------------------------------->
 }
