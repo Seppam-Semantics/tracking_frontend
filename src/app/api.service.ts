@@ -231,6 +231,11 @@ export class ApiService {
   }
 
   addUpdateYarnQuality(data:any):Observable<any>{
-    return this.http.post(this.getUrl + `/yarnapi/yarn_quality_check`, data, this.getHeaders())
+    return this.http.post(this.getUrl() + `/yarnapi/yarn_quality_check`, data, this.getHeaders())
   }
+
+  getAllYarn():Observable<any>{
+    return this.http.get(this.getUrl() + `/yarnapi/yarn`, this.getHeaders())
+  }
+
 }

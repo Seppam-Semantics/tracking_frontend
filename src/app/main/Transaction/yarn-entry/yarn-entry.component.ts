@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ApiService } from 'src/app/api.service';
 
@@ -7,10 +7,16 @@ import { ApiService } from 'src/app/api.service';
   templateUrl: './yarn-entry.component.html',
   styleUrls: ['./yarn-entry.component.css']
 })
-export class YarnEntryComponent {
+export class YarnEntryComponent implements OnInit {
   total1: any;
+  allYarn:any
 
   constructor(private fb:FormBuilder, private api: ApiService){}
+  ngOnInit(): void {
+   this.api.getAllYarn().subscribe((res)=>{
+    this.allYarn = res.yarn
+   })
+  }
   Yarn_Entry_1 = new FormGroup({
     spinner : new FormControl(),
     lcDate : new FormControl(),
@@ -78,6 +84,7 @@ get items() {
 
     this.api.addUpdateYarn(this.Yarn_Entry_1.value).subscribe((res)=>{
       alert(res.message)
+      window.location.reload()
     })
   }
   

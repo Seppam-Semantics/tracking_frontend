@@ -91,29 +91,29 @@
                 <table class="table">
                     <thead class="thead-dark">
                         <tr>
+                            <th>Sl.No</th>
                             <th><span>Spin Fty</span></th>
                             <th>LC Date</th>
                             <th>LC no</th>
                             <th>PI</th>
                             <th>PI Date</th>
-                            <th>LC Yarn Kgs</th>
                             <th>LC Value</th>
                             <th>Status</th>
                             <th>Edit</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
+                        <tr *ngFor="let yarn of this.allYarn; let i = index;">
+                            <td>{{i+1}}</td>
+                            <td>{{yarn.spinner}}</td>
+                            <td>{{yarn.lcDate}}</td>
+                            <td>{{yarn.lcNo}}</td>
 
-                            <td>4</td>
-                            <td>5</td>
-                            <td>6</td>
+                            <td>{{yarn.pi}}</td>
+                            <td>{{yarn.piDate}}</td>
+                            <td>{{yarn.lcValue}}</td>
 
-                            <td>7</td>
-                            <td>8</td>
+                            <td>{{yarn.yarnStatus}}</td>
                             <td><button class="btn btn-primary"
                                     style="font-size: inherit;"><mat-icon>edit</mat-icon></button></td>
                         </tr>
