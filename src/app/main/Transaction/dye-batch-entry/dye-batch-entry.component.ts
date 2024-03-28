@@ -36,7 +36,6 @@ fabrictype_dropdown: any;
 
 constructor(private fb : FormBuilder , private api : ApiService){
 
-
   this.dye_Entery = new FormGroup({
     "dyeFactory" : new FormControl(''),
   
@@ -179,7 +178,7 @@ add() {
 
 calculateDiff() {
   this.items.controls.forEach((control: AbstractControl) => {
-    const row = control as FormGroup; // Explicitly cast control to FormGroup
+    const row = control as FormGroup;
     if (row instanceof FormGroup) {
       const griegeValue = parseFloat(row.get('griege')?.value) || 0;
       const finishValue = parseFloat(row.get('finish')?.value) || 0;

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
@@ -9,7 +9,7 @@ import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from 
 export class YarnEntryComponent {
   total1: any;
 
-  constructor(private fb:FormBuilder , private cdr: ChangeDetectorRef){}
+  constructor(private fb:FormBuilder){}
   Yarn_Entry_1 = new FormGroup({
     1 : new FormControl(),
     2 : new FormControl(),
@@ -28,7 +28,7 @@ export class YarnEntryComponent {
     let total10 = 0; 
   let total12 = 0;
   this.items.controls.forEach((control: AbstractControl) => {
-    const row = control as FormGroup;
+    const row = control as FormGroup; 
     if (row instanceof FormGroup) {
       const Value10 = parseFloat(row.get('10')?.value) || 0;
       const Value12 = parseFloat(row.get('12')?.value) || 0;
@@ -36,7 +36,7 @@ export class YarnEntryComponent {
       total12 += Value12;
     }
   });
-  this.Yarn_Entry_1.get('Total10')?.setValue(total10);
+  this.Yarn_Entry_1.get('Total10')?.setValue(total10); 
   this.Yarn_Entry_1.get('Total12')?.setValue(total12);
 }
 
