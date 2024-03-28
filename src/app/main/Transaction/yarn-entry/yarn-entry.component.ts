@@ -10,14 +10,19 @@ import { ApiService } from 'src/app/api.service';
 export class YarnEntryComponent implements OnInit {
   total1: any;
   allYarn:any
-<<<<<<< HEAD
   yarnSpinnerDropdown: any;
-=======
   yarnData: any;
   yarnType: any;
->>>>>>> e9f3a231490de378aa0adb5713f414e535ca32d0
+  yarn_Id: any;
+  spinftyYarnType:any;
+  yarnTypeOrder: any;
+  yarnorder_Id: any;
+  spinftyOrder: any;
+  spinftyReceipt:any
 
   constructor(private fb:FormBuilder, private api: ApiService){}
+
+
   ngOnInit(): void {
    this.api.getAllYarn().subscribe((res)=>{
     this.allYarn = res.yarn
@@ -27,6 +32,8 @@ export class YarnEntryComponent implements OnInit {
     this.yarnSpinnerDropdown=res.spinners
    })
   }
+
+
   Yarn_Entry_1 = new FormGroup({
     spinner : new FormControl(),
     lcDate : new FormControl(),
@@ -98,14 +105,34 @@ get items() {
     })
   }
   
-// <!----------------------------------------------------------------------------------------------------->
-LotCheck = new FormGroup({
+// <!-----------------------------Lot Check------------------------------------------------------------------------>
+
+
+getYarnTypeData(){
+  this.api.gettingYarnType(this.spinftyYarnType).subscribe((res)=>{
+    this.yarnData = res.knit;
+    for(let id of this.yarnData){   
+      this.api.getSingleYarnData(id.id).subscribe((res)=>{
+        this.yarnType = res.yarn_lc_lines
+        this.yarn_Id = res.yarn_lc_lines[0].yarnId
+        console.log(this.yarn_Id)
+
+        this.LotCheck.controls['yarnId'].setValue(this.yarn_Id);
+      })
+    }
+  })
+}
+
+
+LotCheck = this.fb.group({
+  yarnId: [],
   data: this.fb.array([]),
 })
 
 get LotCheckItems() {
   return this.LotCheck.get("data") as FormArray;
 }
+
 LotCheckAddButton(){
   const LotCheckDetails = this.fb.group({
     yarnType : new FormControl(),
@@ -113,8 +140,7 @@ LotCheckAddButton(){
     sampleDate : new FormControl(),
     resultDate : new FormControl(),
     checkResults : new FormControl(),
-    acceptRejectStatus : new FormControl(),
-    7 : new FormControl(),
+    acceptRejectStatus : new FormControl()
   });
   
   this.LotCheckItems.push(LotCheckDetails);  
@@ -123,31 +149,50 @@ LotCheckAddButton(){
 
 LotCheck_Button(){
   console.log(this.LotCheck.value)
+  this.api.addUpdateYarnCheck(this.LotCheck.value).subscribe((res)=>{
+    alert(res.message)
+  })
 }
 
-// <!----------------------------------------------------------------------------------------------------->
-OrderAllocation = new FormGroup({
-  data2: this.fb.array([]),
+// <!------------------------------------Order Allocation----------------------------------------------------------------->
+
+getOrderAllocationData(){
+  this.api.gettingYarnType(this.spinftyOrder).subscribe((res)=>{
+    this.yarnData = res.knit;
+    for(let id of this.yarnData){   
+      this.api.getSingleYarnData(id.id).subscribe((res)=>{
+        this.yarnTypeOrder = res.yarn_lot_check
+        this.yarnorder_Id = res.yarn_lot_check[0].yarnId
+        console.log(this.yarnorder_Id)
+
+        this.OrderAllocation.controls['yarnId'].setValue(this.yarnorder_Id);
+      })
+    }
+  })
+}
+
+
+OrderAllocation = this.fb.group({
+  yarnId: [],
+  data: this.fb.array([]),
 })
 
 OrderAllocationAddButton(){
 const Row2 = this.fb.group({
-  1: new FormControl(''),
-  2: new FormControl(''),
-  3: new FormControl(''),
-  4: new FormControl(''),
-  5: new FormControl(''),
-  6: new FormControl(''),
-  7: new FormControl(''),
-  8: new FormControl(''),
-
+  lcNo: new FormControl(''),
+  yarnType: new FormControl(''),
+  utilisationOrderNo: new FormControl(''),
+  colour: new FormControl(''),
+  lotNo: new FormControl(''),
+  allocatedYarnKgs: new FormControl(''),
+  unallocatedYarnKgs: new FormControl('')
 });
 
 this.items2.push(Row2);  
 }
 
 get items2() {
-  return this.OrderAllocation.get("data2") as FormArray;
+  return this.OrderAllocation.get("data") as FormArray;
 }
 
 OrderAllocationDelete(index: number) {
@@ -156,10 +201,15 @@ OrderAllocationDelete(index: number) {
 
 OrderAllocationSave(){
   console.log(this.OrderAllocation.value)
+
+  this.api.addUpdateOrderAllocation(this.OrderAllocation.value).subscribe((res)=>{
+    alert(res.message)
+  })
 }
 
 
-// <!----------------------------------------------------------------------------------------------------->
+// <!-------------------------- Receipt --------------------------------------------------------------------------->
+
 Receipt = new FormGroup({
   11: new FormControl(''),
   22: new FormControl(''),
@@ -224,21 +274,6 @@ YarnQCAddButton(){
     this.items4.removeAt(index);
   }
 // <!----------------------------------------------------------------------------------------------------->
-
-
-getYarnTypeData(spinner:any){
-  this.api.gettingYarnType(spinner).subscribe((res)=>{
-    this.yarnData = res.knit;
-    for(let id of this.yarnData){   
-      this.api.getSingleYarnData(id.id).subscribe((res)=>{
-        this.yarnType = res.yarn_lc_lines
-      })
-    }
-  })
-}
-
-
-
 
 
 }

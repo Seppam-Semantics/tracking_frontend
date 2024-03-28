@@ -267,7 +267,7 @@ export class ApiService {
   }
 
   gettingYarnType(spinner:any ):Observable<any>{
-    return this.http.get(this.getUrl()+`/yarnapi/yarn-filter?id=&spinner=${spinner}&lcNo=&lcValue=&yarnStatus=&pi=`)
+    return this.http.get(this.getUrl()+`/yarnapi/yarn-filter?id=&spinner=${spinner}&lcNo=&lcValue=&yarnStatus=&pi=`, this.getHeaders())
   }
 
 }
