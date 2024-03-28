@@ -1,21 +1,332 @@
 <mat-tab-group>
     <!-------------------------------Header[Start]----------------------------------->
-    <mat-tab label="Header">
+    <mat-tab label="Header" [formGroup]="Yarn_Entry_1">
+        <div style="overflow: scroll; height: 80vh;">
+            <!-------------------------------->
+            <div>
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Spin Fty</th>
+                            <th>LC Date</th>
+                            <th>LC no</th>
+                            <th>PI</th>
+                            <th>PI Date</th>
+                            <th>LC Yarn Kgs</th>
+                            <th>LC Value</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
 
+                    <tbody>
+                        <tr>
+                            <td><input type="text" class="form-control" formControlName="1"></td>
+                            <td><input type="date" class="form-control" formControlName="2"></td>
+                            <td><input type="text" class="form-control" formControlName="3"></td>
+                            <td><input type="text" class="form-control" formControlName="4"></td>
+                            <td><input type="date" class="form-control" formControlName="5"></td>
+                            <td><input type="text" class="form-control" readonly formControlName="6"></td>
+                            <td><input type="text" class="form-control" readonly formControlName="7"></td>
+                            <td><select class="form-control" formControlName="8">
+                                    <option value="Status"></option>
+                                    <option value="open">open</option>
+                                    <option value="close">close</option>
+                                </select></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-------------------------------->
+            <div style="display: flex; justify-content: center;">
+                <button class="btn btn-primary" (click)="Yarn_Entry_save()">Save</button>
+            </div>
+            <!-------------------------------->
+            <div>
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th><button class="btn btn-danger" (click)="add1button()" style="font-size:inherit">Add
+                                    lines</button></th>
+                            <th>Yarn Type</th>
+                            <th>LC Yarn Kgs</th>
+                            <th>Yarn Rate</th>
+                            <th>LC Value</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody formArrayName="data">
+
+                        <tr *ngFor="let process of items.controls; let i=index" [formGroupName]="i">
+                            <td></td>
+                            <td><input type="text" class="form-control" formControlName="9" type="text"></td>
+                            <td><input type="text" class="form-control" formControlName="10" type="number"></td>
+                            <td><input type="text" class="form-control" formControlName="11" type="number"></td>
+                            <td><input type="number" class="form-control" formControlName="12"></td>
+                            <td><button class="btn-danger" (click)="Yarn_Entry_Delete(i)">x</button></td>
+                        </tr>
+                    </tbody>
+                    <tr>
+                        <td><b>Total</b></td>
+                        <td></td>
+                        <td><input type="number" class="form-control" readonly formGroupName="Total10"></td>
+                        <td></td>
+                        <td><input type="number" class="form-control" readonly formGroupName="Total12"></td>
+                        <td></td>
+                    </tr>
+
+                </table>
+
+            </div>
+            <!-------------------------------->
+
+            <div>
+                <mat-toolbar style="display: flex; justify-content: center;">
+                    <span style="font-size: large;">Header Listing</span>
+                    <span style="flex: 1 1 auto;"></span>
+                    <input type="text" placeholder="search" class="form-control" style="width: 26vh;">
+                </mat-toolbar>
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th><span>Spin Fty</span></th>
+                            <th>LC Date</th>
+                            <th>LC no</th>
+                            <th>PI</th>
+                            <th>PI Date</th>
+                            <th>LC Yarn Kgs</th>
+                            <th>LC Value</th>
+                            <th>Status</th>
+                            <th>Edit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+
+                            <td>4</td>
+                            <td>5</td>
+                            <td>6</td>
+
+                            <td>7</td>
+                            <td>8</td>
+                            <td><button class="btn btn-primary"
+                                    style="font-size: inherit;"><mat-icon>edit</mat-icon></button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-------------------------------->
+        </div>
     </mat-tab>
     <!-------------------------------Header[Ends]----------------------------------->
 
     <!-------------------------------Lot Check[Start]----------------------------------->
-    <mat-tab label="Lot Check">
+    <mat-tab label="Lot Check" [formGroup]="LotCheck">
+        <div style="overflow: scroll; height: 80vh;">
+            <!------------------------------------>
+            <div>
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Spin Fty</th>
+                            <th>Yarn Type</th>
+                            <th>Lot no</th>
+                            <th>Sample Dt</th>
+                            <th>Result Dt</th>
+                            <th>Results</th>
+                            <th>Accept / Reject</th>
+                        </tr>
+                    </thead>
 
+                    <tbody>
+                        <tr>
+                            <td>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Spin Fty</mat-label>
+                                    <mat-select formControlName="1">
+                                        <mat-option></mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </td>
+                            <td>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Yarn Type</mat-label>
+                                    <mat-select formControlName="2">
+                                        <mat-option></mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </td>
+                            <td>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Lot no</mat-label>
+                                    <mat-select formControlName="3">
+                                        <mat-option></mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </td>
+
+                            <td>
+                                <input type="date" class="form-control" formControlName="4">
+                            </td>
+                            <td>
+                                <input type="date" class="form-control" formControlName="5">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" formControlName="6">
+                            </td>
+
+                            <td>
+                                <mat-checkbox formControlName="7"></mat-checkbox>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!------------------------------------>
+            <div style="display: flex; justify-content: center;"> <button class="btn btn-primary"
+                    (click)="LotCheck_Button()">Save</button></div>
+            <!------------------------------------>
+            <div>
+                <mat-toolbar style="display: flex; justify-content: center;">
+                    <span style="font-size: large;">Yarn Lot Check Listing</span>
+                    <span style="flex: 1 1 auto;"></span>
+                    <input type="text" placeholder="search" class="form-control" style="width: 26vh;">
+                </mat-toolbar>
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th><span>Spin Fty</span></th>
+                            <th>LC Date</th>
+                            <th>LC no</th>
+
+                            <th>Sample Dt</th>
+                            <th>Result Dt</th>
+                            <th>Results</th>
+                            <th>Accept / Reject</th>
+                            <th></th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+
+                            <td>4</td>
+                            <td>5</td>
+                            <td>6</td>
+
+                            <td><mat-checkbox></mat-checkbox></td>
+                            <td><button class="btn btn-primary"
+                                    style="font-size: inherit;"><mat-icon>edit</mat-icon></button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!------------------------------------>
+        </div>
     </mat-tab>
     <!-------------------------------Lot Check[Ends]----------------------------------->
 
-    <!-------------------------------OR Alloc[Start]----------------------------------->
-    <mat-tab label="OR Alloc">
+    <!-------------------------------Order Allocation[Start]----------------------------------->
+    <mat-tab label="Order Allocation" [formGroup]="OrderAllocation">
+        <div style="overflow: scroll; height: 80vh;">
+    <!--------------------------------------------------------------------------->
+        <div style="display: flex; justify-content: center;">
+            <button class="btn btn-primary" (click)="OrderAllocationSave()">Save</button>
+        </div>
+    <!--------------------------------------------------------------------------->
+            <div>
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th><button class="btn btn-danger" (click)="OrderAllocationAddButton()"
+                                    style="font-size: inherit;">+</button></th>
+                            <th>Spin Fty</th>
+                            <th>LC No</th>
+                            <th>Yarn Type</th>
 
+                            <th>Order No</th>
+                            <th>Colour</th>
+                            <th>Lot No</th>
+
+                            <th>Allocated Yarn Kgs</th>
+                            <th>Unallocated Yarn Kgs</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody formArrayName="data2">
+                        <tr *ngFor="let process of items2.controls; let i=index" [formGroupName]="i">
+                            <td></td>
+                            <td><input type="text" class="form-control" formControlName="1"></td>
+                            <td><input type="text" class="form-control" formControlName="2"></td>
+                            <td><input type="text" class="form-control" formControlName="3"></td>
+
+                            <td><input type="text" class="form-control" formControlName="4"></td>
+                            <td><input type="text" class="form-control" formControlName="5"></td>
+                            <td><input type="text" class="form-control" formControlName="6"></td>
+
+                            <td><input type="number" class="form-control" formControlName="7"></td>
+                            <td><input type="text" class="form-control" formControlName="8"></td>
+                            <td><button class="btn-danger" (click)="OrderAllocationDelete(i)">x</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div>
+                    <mat-toolbar style="display: flex; justify-content: center;">
+                        <span style="font-size: large;">Order Allocation Listing</span>
+                        <span style="flex: 1 1 auto;"></span>
+                        <input type="text" placeholder="search" class="form-control" style="width: 26vh;">
+                    </mat-toolbar>
+
+                    <div>
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Spin Fty</th>
+                                    <th>LC No</th>
+                                    <th>Yarn Type</th>
+
+                                    <th>Order No</th>
+                                    <th>Colour</th>
+                                    <th>Lot No</th>
+
+                                    <th>Allocated Yarn Kgs</th>
+                                    <th>Unallocated Yarn Kgs</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td><button class="btn-primary"><mat-icon>edit</mat-icon></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+            </div>
+
+
+        </div>
     </mat-tab>
-    <!-------------------------------OR Alloc[Ends]----------------------------------->
+    <!-------------------------------Order Allocationc[Ends]----------------------------------->
 
 
     <!-------------------------------Receipt[Start]----------------------------------->
