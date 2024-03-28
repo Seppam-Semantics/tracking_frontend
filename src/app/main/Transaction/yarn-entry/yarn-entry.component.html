@@ -133,6 +133,7 @@
                 <table class="table">
                     <thead class="thead-dark">
                         <tr>
+                            <th><button class="btn btn-danger" style="font-size: inherit;" (click)="LotCheckAddButton()">Add Lines</button></th>
                             <th>Spin Fty</th>
                             <th>Yarn Type</th>
                             <th>Lot no</th>
@@ -143,20 +144,22 @@
                         </tr>
                     </thead>
 
-                    <tbody>
-                        <tr>
+                    <tbody formArrayName="data">
+                        <tr *ngFor="let process of LotCheckItems.controls; let i = index;" [formGroupName]="i">
+                            <td></td>
                             <td>
                                 <mat-form-field appearance="outline">
                                     <mat-label>Spin Fty</mat-label>
-                                    <mat-select formControlName="1">
-                                        <mat-option></mat-option>
+                                    <mat-select formControlName="7">
+                                        <mat-option *ngFor="let spinner of yarnSpinnerDropdown; let i = index"
+                                            [value]="spinner.spinner">{{spinner.spinner}}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
                             </td>
                             <td>
                                 <mat-form-field appearance="outline">
                                     <mat-label>Yarn Type</mat-label>
-                                    <mat-select formControlName="2">
+                                    <mat-select formControlName="yarnType">
                                         <mat-option></mat-option>
                                     </mat-select>
                                 </mat-form-field>
@@ -164,24 +167,24 @@
                             <td>
                                 <mat-form-field appearance="outline">
                                     <mat-label>Lot no</mat-label>
-                                    <mat-select formControlName="3">
+                                    <mat-select formControlName="lotNo">
                                         <mat-option></mat-option>
                                     </mat-select>
                                 </mat-form-field>
                             </td>
 
                             <td>
-                                <input type="date" class="form-control" formControlName="4">
+                                <input type="date" class="form-control" formControlName="sampleDate">
                             </td>
                             <td>
-                                <input type="date" class="form-control" formControlName="5">
+                                <input type="date" class="form-control" formControlName="resultDate">
                             </td>
                             <td>
-                                <input type="text" class="form-control" formControlName="6">
+                                <input type="text" class="form-control" formControlName="checkResults">
                             </td>
 
                             <td>
-                                <mat-checkbox formControlName="7"></mat-checkbox>
+                                <mat-checkbox formControlName="acceptRejectStatus"></mat-checkbox>
                             </td>
                         </tr>
                     </tbody>

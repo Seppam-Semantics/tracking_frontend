@@ -10,6 +10,7 @@ import { ApiService } from 'src/app/api.service';
 export class YarnEntryComponent implements OnInit {
   total1: any;
   allYarn:any
+  yarnSpinnerDropdown: any;
 
   constructor(private fb:FormBuilder, private api: ApiService){}
   ngOnInit(): void {
@@ -17,9 +18,9 @@ export class YarnEntryComponent implements OnInit {
     this.allYarn = res.yarn
    })
 
-  //  this.api.yarnSpinnerDropdown().subscribe((res)=>{
-
-  //  })
+   this.api.yarnSpinnerDropdown().subscribe((res)=>{
+    this.yarnSpinnerDropdown=res.spinners
+   })
   }
   Yarn_Entry_1 = new FormGroup({
     spinner : new FormControl(),
@@ -94,14 +95,26 @@ get items() {
   
 // <!----------------------------------------------------------------------------------------------------->
 LotCheck = new FormGroup({
-  1 : new FormControl(),
-  2 : new FormControl(),
-  3 : new FormControl(),
-  4 : new FormControl(),
-  5 : new FormControl(),
-  6 : new FormControl(),
-  7 : new FormControl(),
+  data: this.fb.array([]),
 })
+
+get LotCheckItems() {
+  return this.LotCheck.get("data") as FormArray;
+}
+LotCheckAddButton(){
+  const LotCheckDetails = this.fb.group({
+    yarnType : new FormControl(),
+    lotNo : new FormControl(),
+    sampleDate : new FormControl(),
+    resultDate : new FormControl(),
+    checkResults : new FormControl(),
+    acceptRejectStatus : new FormControl(),
+    7 : new FormControl(),
+  });
+  
+  this.LotCheckItems.push(LotCheckDetails);  
+  }
+  
 
 LotCheck_Button(){
   console.log(this.LotCheck.value)
