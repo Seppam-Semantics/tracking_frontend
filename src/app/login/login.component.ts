@@ -16,7 +16,8 @@ export class LoginComponent implements OnInit {
   constructor(private router:Router, private api: ApiService){}
 
   ngOnInit(): void {
-    
+    history.pushState(null, document.title, window.location.href);
+    this.router.navigate(['login'], { skipLocationChange: true });
   }
   
   // routermain(){

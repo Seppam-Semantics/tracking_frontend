@@ -1,5 +1,8 @@
 
 #overalllogin{
+    background-image: url(src/assets/img/Background.jpg);
+    background-size:cover;
+    background-repeat: no-repeat;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -11,7 +14,7 @@
 
   #loginpage{
     flex-direction: column;
-    margin-top: 5%;
+    margin-top: 4%;
     justify-content: center;
     align-items: center;
     background-color:#A8DF8E;
@@ -20,11 +23,19 @@
     border: 1px solid white;
     border-radius: 20px;
   }
-
+#head{
+    text-align: center;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-size: large;
+    font-weight: bold;
+    margin-top: 3%;
+}
 
   #container{
     display: flex;
-    margin-top: 15%;
+    margin-top: 10%;
+    background-color: transparent;
+    
 }
 
 #outborder-for-login{
@@ -35,70 +46,81 @@
   border: 1px solid white;
   margin-left: 0%;
   margin-top:-40%;
-  background-color: white;
+  background-color: transparent;
   border-radius: 20px;
+  backdrop-filter: blur(35px);
 }
 
-#username{
-    margin-top: 8%;
-    margin-left: 13%;
-    width: 75%;
+#outborder-for-login:hover{
+    box-shadow: 0 0 10px 5px rgb(233, 222, 188);
 }
-#password{
-    margin-left: 13%;
-    margin-top: 10%;
-    width: 75%;
-}
+
 #Login{
     margin-top: 15%;
     width: 75%;
     margin-left: 13%;
+    font-size: large;
 }
-#RegisterEmail{
-    width: 75%;
-    margin-left: 13%;
-    margin-top: 2%;
-}
-#RegisterPhonenumber{
-    width: 75%;
-    margin-left: 13%;
-    margin-top: 2%;
-}
-#RegisterPassword{
-    width: 75%;
-    margin-left: 13%;
-    margin-top: 2%;
-}
-#Retype{
-    width: 75%;
-    margin-left: 13%;
-    margin-top: 2%;
-}
-#Register{
-    margin-left: 13%;
-    margin-top: 8%;
-    width: 75%;
-}
+
 img{
   margin-top: -17%;
     margin-left: 36%;
     height: 25%;
     width: 30%;
 }
+
 #loginform{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
-    margin-top: 10%;
+    height: 150px;
+}
 
-}
 .logindetails{
+    display: flex;
     width: 80%;
+    border: 1px solid white;
+    border-radius: 30px;
+    height: 50px;
 }
+.logindetails:hover{
+    box-shadow: 0 0 10px 5px rgb(253, 253, 253);
+}
+
+.logindetails:focus-within{
+    box-shadow: 0 0 10px 5px rgb(253, 253, 253);
+}
+
+button:hover{
+    box-shadow: 0 0 10px 5px rgb(253, 253, 253);
+}
+
+input::placeholder{
+    color: white;
+    font-size: medium;
+    text-align: center;
+}
+
 #Logintab{
+    height: 100%;
+    border-radius: 20px;
     font-weight: 900;
     font-size: x-large;
     font-family: none;
-    margin-left: 16%;
+    backdrop-filter: blur(25px);
+    color: white;
+}
+
+#user, #pass{
+    color: white; 
+    background-color: transparent; 
+    border: transparent;
+    border-radius: 30px;
+    margin-left: 20px;
+    font-size: medium;
+}
+input:focus {
+    border-color: transparent;
+    outline: none;
 }
