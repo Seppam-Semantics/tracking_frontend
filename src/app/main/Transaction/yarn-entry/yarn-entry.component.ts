@@ -206,4 +206,16 @@ YarnQCAddButton(){
     this.items4.removeAt(index);
   }
 // <!----------------------------------------------------------------------------------------------------->
+
+
+getYarnTypeData(spinner:any){
+  this.api.gettingYarnType(spinner).subscribe((res)=>{
+
+  })
+}
+
+
+
+
+
 }
