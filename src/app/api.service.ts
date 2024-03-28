@@ -238,4 +238,8 @@ export class ApiService {
     return this.http.get(this.getUrl() + `/yarnapi/yarn`, this.getHeaders())
   }
 
+  yarnSpinnerDropdown():Observable<any>{
+    return this.http.get(this.getUrl() + `/yarnapi/yarn-spinner` , this.getHeaders())
+  }
+
 }

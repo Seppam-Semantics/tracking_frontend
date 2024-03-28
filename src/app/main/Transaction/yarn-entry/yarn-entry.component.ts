@@ -16,6 +16,10 @@ export class YarnEntryComponent implements OnInit {
    this.api.getAllYarn().subscribe((res)=>{
     this.allYarn = res.yarn
    })
+
+  //  this.api.yarnSpinnerDropdown().subscribe((res)=>{
+
+  //  })
   }
   Yarn_Entry_1 = new FormGroup({
     spinner : new FormControl(),
