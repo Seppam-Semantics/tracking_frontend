@@ -124,6 +124,36 @@ OrderAllocationSave(){
 
 
 // <!----------------------------------------------------------------------------------------------------->
+Receipt = new FormGroup({
+  11: new FormControl(''),
+  22: new FormControl(''),
+  33: new FormControl(''),
+  44: new FormControl(''),
+  55: new FormControl(''),
+  66: new FormControl(''),
+  77: new FormControl(''),
+  88: new FormControl(''),
+ 
+  data3: this.fb.array([]),
+})
+get items3() {
+  return this.Receipt.get("data3") as FormArray;
+}
+ReceiptAddButton(){
+  const Row3 = this.fb.group({
+    1: new FormControl(''),
+    2: new FormControl(''),
+    3: new FormControl(''),
+    4: new FormControl(''),
+    5: new FormControl(''),
+    6: new FormControl(''),
+    7: new FormControl(''),
+  });
+  
+  this.items3.push(Row3);  
+  }
+  
+// <!----------------------------------------------------------------------------------------------------->
 
 
 }

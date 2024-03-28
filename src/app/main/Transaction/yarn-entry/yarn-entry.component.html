@@ -330,8 +330,133 @@
 
 
     <!-------------------------------Receipt[Start]----------------------------------->
-    <mat-tab label="Receipt">
+    <mat-tab label="Receipt" [formGroup]="Receipt">
+        <div>
+            <div>
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Spin Fty</th>
+                            <th>LC No</th>
+                            <th>Yarn Type</th>
 
+                            <th>Order No</th>
+                            <th>Colour</th>
+                            <th>Lot No</th>
+
+                            <th>Allocated Yarn Kgs</th>
+                            <th>Unallocated Yarn Kgs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <mat-form-field appearance="outline" style="width: 20vh;">
+                                    <mat-label>Spin Fty</mat-label>
+                                    <mat-select formControlName="11">
+                                        <mat-option></mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </td>
+                            <td>
+                                <mat-form-field appearance="outline" style="width: 20vh;" >
+                                    <mat-label>LC No</mat-label>
+                                    <mat-select formControlName="22">
+                                        <mat-option></mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </td>
+                            <td>
+                                <mat-form-field appearance="outline" style="width: 20vh;">
+                                    <mat-label>Yarn Type</mat-label>
+                                    <mat-select  formControlName="33">
+                                        <mat-option></mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </td>
+
+                            <td>
+                                <mat-form-field appearance="outline" style="width: 20vh;" >
+                                    <mat-label>Order No</mat-label>
+                                    <mat-select formControlName="44">
+                                        <mat-option></mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </td>
+                            <td>
+                                <mat-form-field appearance="outline" style="width: 20vh;" >
+                                    <mat-label>Colour</mat-label>
+                                    <mat-select formControlName="55">
+                                        <mat-option></mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </td>
+                            <td>
+                                <mat-form-field appearance="outline" style="width: 20vh;">
+                                    <mat-label>Lot No</mat-label>
+                                    <mat-select  formControlName="66">
+                                        <mat-option></mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </td>
+
+                            <td><input type="text" class="form-control" readonly formControlName="77"></td>
+                            <td><input type="text" class="form-control" readonly formControlName="88"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div>
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th><button class="btn-primary" (click)="ReceiptAddButton()">+</button></th>
+                            <th>Spin Challan</th>
+                            <th>SBDL Challan</th>
+                            <th>Receipt Dt</th>
+
+                            <th>Knit Factory</th>
+                            <th>Bags/Ctn - nos</th>
+                            <th>Receipt Yarn Kgs</th>
+
+                            <th>Pending Receipts - Kgs</th>
+
+                        </tr>
+                    </thead>
+                    <tbody formArrayName="data3">
+                        <tr *ngFor="let process of items3.controls; let i=index" [formGroupName]="i">
+                            <td></td>
+                            <td>
+                                <input type="text" class="form-control" formControlName="1">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" formControlName="2">
+                            </td>
+                            <td>
+                                <input type="date" class="form-control" formControlName="3">                           
+                             </td>
+                            <td>
+                                <input type="text" class="form-control" formControlName="4">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" formControlName="5">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" formControlName="6">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" formControlName="7">
+                            </td>
+
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
     </mat-tab>
     <!-------------------------------Receipt[Ends]----------------------------------->
 
