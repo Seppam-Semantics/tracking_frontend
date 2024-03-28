@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ApiService } from 'src/app/api.service';
 
 @Component({
   selector: 'app-yarn-entry',
@@ -9,16 +10,16 @@ import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from 
 export class YarnEntryComponent {
   total1: any;
 
-  constructor(private fb:FormBuilder){}
+  constructor(private fb:FormBuilder, private api: ApiService){}
   Yarn_Entry_1 = new FormGroup({
-    1 : new FormControl(),
-    2 : new FormControl(),
-    3 : new FormControl(),
-    4 : new FormControl(),
-    5 : new FormControl(),
-    6 : new FormControl(),
-    7 : new FormControl(),
-    8 : new FormControl(),
+    spinner : new FormControl(),
+    lcDate : new FormControl(),
+    lcNo : new FormControl(),
+    pi : new FormControl(),
+    piDate : new FormControl(),
+    lcYarnKgs:new FormControl(),
+    lcValue : new FormControl(),
+    yarnStatus : new FormControl(),
     data: this.fb.array([]),
     Total10 : new FormControl(),
     Total12 : new FormControl(),
@@ -30,12 +31,14 @@ export class YarnEntryComponent {
   this.items.controls.forEach((control: AbstractControl) => {
     const row = control as FormGroup; 
     if (row instanceof FormGroup) {
-      const Value10 = parseFloat(row.get('10')?.value) || 0;
-      const Value12 = parseFloat(row.get('12')?.value) || 0;
+      const Value10 = parseFloat(row.get('lcYarnKgs')?.value) || 0;
+      const Value12 = parseFloat(row.get('yarnValue')?.value) || 0;
       total10 += Value10;
       total12 += Value12;
     }
   });
+  this.Yarn_Entry_1.get('lcYarnKgs')?.setValue(total10); 
+  this.Yarn_Entry_1.get('lcValue')?.setValue(total12);
   this.Yarn_Entry_1.get('Total10')?.setValue(total10); 
   this.Yarn_Entry_1.get('Total12')?.setValue(total12);
 }
@@ -47,17 +50,17 @@ get items() {
 
   add1button(){
     const row = this.fb.group({
-      9: new FormControl(''),
-      10: new FormControl(''),
-      11: new FormControl(''),
-      12: new FormControl(''),
+      "yarnType": new FormControl(''),
+      "lcYarnKgs": new FormControl(''),
+      "yarnRate": new FormControl(''),
+      "yarnValue": new FormControl(''),
     });
   
-    row.get('10')?.valueChanges.subscribe(() => {
+    row.get('lcYarnKgs')?.valueChanges.subscribe(() => {
       this.calculateDiff();
     });
   
-    row.get('12')?.valueChanges.subscribe(() => {
+    row.get('yarnValue')?.valueChanges.subscribe(() => {
       this.calculateDiff();
     });
   
@@ -72,6 +75,10 @@ get items() {
 
   Yarn_Entry_save(){
     console.log(this.Yarn_Entry_1.value)
+
+    this.api.addUpdateYarn(this.Yarn_Entry_1.value).subscribe((res)=>{
+      alert(res.message)
+    })
   }
   
 // <!----------------------------------------------------------------------------------------------------->

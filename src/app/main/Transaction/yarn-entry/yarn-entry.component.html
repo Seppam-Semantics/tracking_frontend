@@ -24,14 +24,14 @@
 
                     <tbody>
                         <tr>
-                            <td><input type="text" class="form-control" formControlName="1"></td>
-                            <td><input type="date" class="form-control" formControlName="2"></td>
-                            <td><input type="text" class="form-control" formControlName="3"></td>
-                            <td><input type="text" class="form-control" formControlName="4"></td>
-                            <td><input type="date" class="form-control" formControlName="5"></td>
-                            <td><input type="text" class="form-control" readonly formControlName="6"></td>
-                            <td><input type="text" class="form-control" readonly formControlName="7"></td>
-                            <td><select class="form-control" formControlName="8">
+                            <td><input type="text" class="form-control" formControlName="spinner"></td>
+                            <td><input type="date" class="form-control" formControlName="lcDate"></td>
+                            <td><input type="text" class="form-control" formControlName="lcNo"></td>
+                            <td><input type="text" class="form-control" formControlName="pi"></td>
+                            <td><input type="date" class="form-control" formControlName="piDate"></td>
+                            <td><input type="text" class="form-control" readonly formControlName="lcYarnKgs"></td>
+                            <td><input type="text" class="form-control" readonly formControlName="lcValue"></td>
+                            <td><select class="form-control" formControlName="yarnStatus">
                                     <option value="Status"></option>
                                     <option value="open">open</option>
                                     <option value="close">close</option>
@@ -59,10 +59,10 @@
 
                         <tr *ngFor="let process of items.controls; let i=index" [formGroupName]="i">
                             <td></td>
-                            <td><input type="text" class="form-control" formControlName="9" type="text"></td>
-                            <td><input type="text" class="form-control" formControlName="10" type="number"></td>
-                            <td><input type="text" class="form-control" formControlName="11" type="number"></td>
-                            <td><input type="number" class="form-control" formControlName="12"></td>
+                            <td><input type="text" class="form-control" formControlName="yarnType" type="text"></td>
+                            <td><input type="text" class="form-control" formControlName="lcYarnKgs" type="number"></td>
+                            <td><input type="text" class="form-control" formControlName="yarnRate" type="number"></td>
+                            <td><input type="number" class="form-control" formControlName="yarnValue"></td>
                             <td><button class="btn-danger" (click)="Yarn_Entry_Delete(i)">x</button></td>
                         </tr>
                     </tbody>
