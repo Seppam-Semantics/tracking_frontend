@@ -87,44 +87,6 @@
             </div>
             <!-------------------------------->
 
-            <div>
-                <mat-toolbar style="display: flex; justify-content: center;">
-                    <span style="font-size: large;">Header Listing</span>
-                    <span style="flex: 1 1 auto;"></span>
-                    <input type="text" placeholder="search" class="form-control" style="width: 26vh;">
-                </mat-toolbar>
-                <table class="table">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>Sl.No</th>
-                            <th><span>Spin Fty</span></th>
-                            <th>LC Date</th>
-                            <th>LC no</th>
-                            <th>PI</th>
-                            <th>PI Date</th>
-                            <th>LC Value</th>
-                            <th>Status</th>
-                            <th>Edit</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let yarn of this.allYarn; let i = index;">
-                            <td>{{i+1}}</td>
-                            <td>{{yarn.spinner}}</td>
-                            <td>{{yarn.lcDate}}</td>
-                            <td>{{yarn.lcNo}}</td>
-
-                            <td>{{yarn.pi}}</td>
-                            <td>{{yarn.piDate}}</td>
-                            <td>{{yarn.lcValue}}</td>
-
-                            <td>{{yarn.yarnStatus}}</td>
-                            <td><button class="btn btn-primary"
-                                    style="font-size: inherit;"><mat-icon>edit</mat-icon></button></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
             <!-------------------------------->
         </div>
     </mat-tab>
@@ -197,44 +159,7 @@
             <div style="display: flex; justify-content: center;"> <button class="btn btn-primary"
                     (click)="LotCheck_Button()">Save</button></div>
             <!------------------------------------>
-            <div>
-                <mat-toolbar style="display: flex; justify-content: center;">
-                    <span style="font-size: large;">Yarn Lot Check Listing</span>
-                    <span style="flex: 1 1 auto;"></span>
-                    <input type="text" placeholder="search" class="form-control" style="width: 26vh;">
-                </mat-toolbar>
-                <table class="table">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th><span>Spin Fty</span></th>
-                            <th>LC Date</th>
-                            <th>LC no</th>
-
-                            <th>Sample Dt</th>
-                            <th>Result Dt</th>
-                            <th>Results</th>
-                            <th>Accept / Reject</th>
-                            <th></th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-
-                            <td>4</td>
-                            <td>5</td>
-                            <td>6</td>
-
-                            <td><mat-checkbox></mat-checkbox></td>
-                            <td><button class="btn btn-primary"
-                                    style="font-size: inherit;"><mat-icon>edit</mat-icon></button></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+  
             <!------------------------------------>
         </div>
     </mat-tab>
@@ -314,49 +239,7 @@
                 <button class="btn btn-primary" (click)="OrderAllocationSave()">Save</button>
             </div>
             <!--------------------------------------------->
-            <div>
-                <mat-toolbar style="display: flex; justify-content: center;">
-                    <span style="font-size: large;">Order Allocation Listing</span>
-                    <span style="flex: 1 1 auto;"></span>
-                    <input type="text" placeholder="search" class="form-control" style="width: 26vh;">
-                </mat-toolbar>
 
-                <div>
-                    <table class="table">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th>Spin Fty</th>
-                                <th>LC No</th>
-                                <th>Yarn Type</th>
-
-                                <th>Order No</th>
-                                <th>Colour</th>
-                                <th>Lot No</th>
-
-                                <th>Allocated Yarn Kgs</th>
-                                <th>Unallocated Yarn Kgs</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-
-                                <td>0</td>
-                                <td>0</td>
-                                <td><button class="btn-primary"><mat-icon>edit</mat-icon></button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
 
 
         </div>
@@ -503,49 +386,6 @@
             </div>
             <!--------------------------------------------->
 
-            <div>
-                <mat-toolbar style="display: flex; justify-content: center;">
-                    <span style="font-size: large;">Receipt Listing</span>
-                    <span style="flex: 1 1 auto;"></span>
-                    <input type="text" placeholder="search" class="form-control" style="width: 26vh;">
-                </mat-toolbar>
-
-                <div>
-                    <table class="table">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th>Spin Fty</th>
-                                <th>Spin Challan</th>
-                                <th>SBDL Challan</th>
-
-                                <th>Receipt Dt</th>
-                                <th>Knit Factory</th>
-                                <th>Bags/Ctn - nos</th>
-
-                                <th>Receipt Yarn Kgs</th>
-                                <th>Pending Receipts - Kgs</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-
-                                <td>0</td>
-                                <td>0</td>
-                                <td><button class="btn-primary"><mat-icon>edit</mat-icon></button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
         </div>
     </mat-tab>
     <!-------------------------------Receipt[Ends]----------------------------------->
@@ -701,45 +541,7 @@
             <!--------------------------------------------->
 
             <!--------------------------------------------->
-            <div>
-                <mat-toolbar style="display: flex; justify-content: center;">
-                    <span style="font-size: large;">Yarn QC Listing</span>
-                    <span style="flex: 1 1 auto;"></span>
-                    <input type="text" placeholder="search" class="form-control" style="width: 26vh;">
-                </mat-toolbar>
 
-                <div>
-                    <table class="table">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th>Spin Fty</th>
-                                <th>Lot No</th>
-                                <th>Spin Challan</th>
-
-                                <th>Check Dt</th>
-                                <th>Results</th>
-                                <th>Accept / Reject</th>
-
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-
-                                <td>0</td>
-                                <td>0</td>
-                                <td><mat-checkbox></mat-checkbox></td>
-
-                                <td><button class="btn-primary"><mat-icon>edit</mat-icon></button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
         </div>
 
     </mat-tab>
