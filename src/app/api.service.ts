@@ -242,8 +242,8 @@ export class ApiService {
     return this.http.get(this.getUrl() + `/yarnapi/yarn-spinner` , this.getHeaders())
   }
 
-  yarnLcNo():Observable<any>{
-    return this.http.get(this.getUrl() + `/yarnapi/yarn-lcNo`, this.getHeaders())
+  yarnLcNo(spinner:any):Observable<any>{
+    return this.http.get(this.getUrl() + `/yarnapi/yarn-lcNo?spinner=${spinner}`, this.getHeaders())
   }
 
   yarnLcValue():Observable<any>{
@@ -266,8 +266,20 @@ export class ApiService {
     return this.http.get(this.getUrl() + `/yarnapi/yarn/${id}`, this.getHeaders())
   }
 
-  gettingYarnType(spinner:any ):Observable<any>{
-    return this.http.get(this.getUrl()+`/yarnapi/yarn-filter?id=&spinner=${spinner}&lcNo=&lcValue=&yarnStatus=&pi=`, this.getHeaders())
+  gettingYarnType(spinner:any, lcNo:string = ''):Observable<any>{
+    return this.http.get(this.getUrl()+`/yarnapi/yarn-filter?id=&spinner=${spinner}&lcNo=${lcNo}&lcValue=&yarnStatus=&pi=`, this.getHeaders())
   }
 
+  getallSpinfty():Observable<any>{
+    return this.http.get(this.getUrl() + `/yarnapi/spinfty`, this.getHeaders())
+  }
+
+  getSpinOrder(spinner:any):Observable<any>{
+    return this.http.get(this.getUrl() + `/yarnapi/spinfty-orders_data?spin=${spinner}`, this.getHeaders())
+  }
+
+
+  yarnTotal(id:any, type:any):Observable<any>{
+    return this.http.get(this.getUrl() + `/yarnapi/yarn_total?id=${id}&yarnType=${type}`, this.getHeaders())
+  }
 }

@@ -24,7 +24,12 @@
 
                     <tbody>
                         <tr>
-                            <td><input type="text" class="form-control" formControlName="spinner"></td>
+                            <td>
+                                <input type="text" class="form-control" formControlName="spinner" list="spin">
+                                <datalist id="spin">
+                                    <option *ngFor="let spin of this.spinfty" value="{{spin.spinfty}}"></option>
+                                </datalist>
+                            </td>
                             <td><input type="date" class="form-control" formControlName="lcDate"></td>
                             <td><input type="text" class="form-control" formControlName="lcNo"></td>
                             <td><input type="text" class="form-control" formControlName="pi"></td>
@@ -131,9 +136,16 @@
             <div style="display: flex; justify-content: center; align-items: center; margin-top: 2%;">
             <mat-form-field appearance="outline">
                 <mat-label>Spin Fty</mat-label>
-                <mat-select [(ngModel)]="spinftyYarnType" (selectionChange)="getYarnTypeData()">
+                <mat-select [(ngModel)]="spinftyYarnType" (selectionChange)="getYarnLcNo()">
                   <mat-option></mat-option>
-                  <mat-option *ngFor="let spin of yarnSpinnerDropdown" [value]="spin.spinner">{{spin.spinner}}</mat-option>
+                  <mat-option *ngFor="let spin of yarnSpinnerDropdown" value="{{spin.spinner}}">{{spin.spinner}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Lc No</mat-label>
+                <mat-select [(ngModel)]="spinLotliNo" (selectionChange)="getYarnTypeData()">
+                  <mat-option></mat-option>
+                  <mat-option *ngFor="let lc of this.spinnerLotlcNo" value="{{lc.lcNo}}">{{lc.lcNo}}</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>      
@@ -156,13 +168,11 @@
                         <tr *ngFor="let process of LotCheckItems.controls; let i = index;" [formGroupName]="i">
                             <td></td>
                             <td>
-                                <mat-form-field appearance="outline">
-                                    <mat-label>Yarn Type</mat-label>
-                                    <mat-select formControlName="yarnType">
-                                        <mat-option></mat-option>
-                                        <mat-option *ngFor="let type of this.yarnType" value="{{type.yarnType}}">{{type.yarnType}}</mat-option>
-                                    </mat-select>
-                                </mat-form-field>
+                                <select formControlName="yarnType" style="width: -webkit-fill-available;" class="form-control">
+                                    <option value=""></option>
+                                    <option value=""
+                                    *ngFor="let type of this.yarnType" value="{{type.yarnType}}">{{type.yarnType}}</option>
+                                </select>
                             </td>
                             <td><input formControlName="lotNo" class="form-control"></td>
 
@@ -237,9 +247,16 @@
             <div style="display: flex; justify-content: center; align-items: center; margin-top: 2%;">
                 <mat-form-field appearance="outline">
                     <mat-label>Spin Fty</mat-label>
-                    <mat-select [(ngModel)]="spinftyOrder" (selectionChange)="getOrderAllocationData()">
+                    <mat-select [(ngModel)]="spinftyOrder" (selectionChange)="getYarnorderLcNo()">
                       <mat-option></mat-option>
                       <mat-option *ngFor="let spin of yarnSpinnerDropdown" [value]="spin.spinner">{{spin.spinner}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Lc No</mat-label>
+                    <mat-select [(ngModel)]="spinorderliNo" (selectionChange)="getOrderAllocationData()">
+                      <mat-option></mat-option>
+                      <mat-option *ngFor="let lc of this.spinnerorderlcNo" value="{{lc.lcNo}}">{{lc.lcNo}}</mat-option>
                     </mat-select>
                   </mat-form-field>
                 </div> 
@@ -250,7 +267,6 @@
                         <tr>
                             <th><button class="btn btn-danger" (click)="OrderAllocationAddButton()"
                                     style="font-size: inherit;">+</button></th>
-                            <th>LC No</th>
                             <th>Yarn Type</th>
 
                             <th>Order No</th>
@@ -266,17 +282,26 @@
                     <tbody formArrayName="data">
                         <tr *ngFor="let process of items2.controls; let i=index" [formGroupName]="i">
                             <td></td>
-                            <td><input type="text" class="form-control" formControlName="lcNo"></td>
                             <td>
-                                <input type="text" class="form-control" formControlName="yarnType" list="order">
-                                <datalist id="order">
+                                <input type="text" class="form-control" formControlName="yarnType" list="yarnType" (input)="getTotal($event.target.value, i)">
+                                <datalist id="yarnType">
                                     <option *ngFor="let order of this.yarnTypeOrder" value="{{order.yarnType}}"></option>
                                 </datalist>
                             </td>
 
-                            <td><input type="text" class="form-control" formControlName="utilisationOrderNo"></td>
+                            <td>
+                                <input type="text" class="form-control" formControlName="utilisationOrderNo" list="order">
+                                <datalist id="order">
+                                    <option *ngFor="let order of this.orderNo" value="{{order.orderNo}}"></option>
+                                </datalist>
+                            </td>
                             <td><input type="text" class="form-control" formControlName="colour"></td>
-                            <td><input type="text" class="form-control" formControlName="lotNo"></td>
+                            <td>
+                                <input type="text" class="form-control" formControlName="lotNo" list="spinLot">
+                                <datalist id="spinLot">
+                                    <option *ngFor="let lot of yarnTypeOrder" value="{{lot.lotNo}}"></option>
+                                </datalist>
+                            </td>
 
                             <td><input type="number" class="form-control" formControlName="allocatedYarnKgs"></td>
                             <td><input type="text" class="form-control" formControlName="unallocatedYarnKgs" readonly></td>
@@ -346,13 +371,12 @@
             <div style="display: flex; justify-content: center; align-items: center; margin-top: 2%;">
                 <mat-form-field appearance="outline">
                     <mat-label>Spin Fty</mat-label>
-                    <mat-select [(ngModel)]="spinftyReceipt" (selectionChange)="getYarnTypeData()">
+                    <mat-select [(ngModel)]="spinftyreceipt" (selectionChange)="getreceiptData()">
                       <mat-option></mat-option>
                       <mat-option *ngFor="let spin of yarnSpinnerDropdown" [value]="spin.spinner">{{spin.spinner}}</mat-option>
                     </mat-select>
-                  </mat-form-field>
-                </div> 
-            
+                </mat-form-field>
+            </div> 
             <!--------------------------------------------->
             <div [formGroup]="Receipt">
                 <div>
@@ -376,7 +400,7 @@
                                 <mat-form-field appearance="outline" style="width: 20vh;">
                                     <mat-label>LC No</mat-label>
                                     <mat-select formControlName="22">
-                                        <mat-option></mat-option>
+                                        <mat-option *ngFor="let lc of this.spinLcNo" value="{{lc.lcNo}}">{{lc.lcNo}}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
                             </td>
@@ -384,7 +408,7 @@
                                 <mat-form-field appearance="outline" style="width: 20vh;">
                                     <mat-label>Yarn Type</mat-label>
                                     <mat-select formControlName="33">
-                                        <mat-option></mat-option>
+                                        <mat-option *ngFor="let type of this.yarnTypereceipt" value="{{type.yarnType}}">{{type.yarnType}}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
                             </td>
@@ -392,8 +416,8 @@
                             <td>
                                 <mat-form-field appearance="outline" style="width: 20vh;">
                                     <mat-label>Order No</mat-label>
-                                    <mat-select formControlName="44">
-                                        <mat-option></mat-option>
+                                    <mat-select formControlName="yarnOrderId">
+                                        <mat-option *ngFor="let order of this.orderNo" value="{{order.orderNo}}">{{order.orderNo}}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
                             </td>
@@ -420,10 +444,12 @@
                     </tbody>
                 </table>
             </div>
-            <div style="display: flex; justify-content: center;"><button class="btn btn-primary">Save</button></div>
+            <div style="display: flex; justify-content: center;">
+                <button class="btn btn-primary" (click)="receiptSave()">Save</button>
+            </div>
             <!--------------------------------------------->
 
-            <div>
+            <div [formGroup]="receiptForm">
                 <table class="table">
                     <thead class="thead-dark">
                         <tr>
@@ -442,29 +468,29 @@
 
                         </tr>
                     </thead>
-                    <tbody formArrayName="data3">
+                    <tbody formArrayName="data">
                         <tr *ngFor="let process of items3.controls; let i=index" [formGroupName]="i">
                             <td></td>
                             <td>
-                                <input type="text" class="form-control" formControlName="1">
+                                <input type="text" class="form-control" formControlName="spinningChallan">
                             </td>
                             <td>
-                                <input type="text" class="form-control" formControlName="2">
+                                <input type="text" class="form-control" formControlName="scandexChallan">
                             </td>
                             <td>
-                                <input type="date" class="form-control" formControlName="3">
+                                <input type="date" class="form-control" formControlName="receiptDt">
                             </td>
                             <td>
-                                <input type="text" class="form-control" formControlName="4">
+                                <input type="text" class="form-control" formControlName="knitFactory">
                             </td>
                             <td>
-                                <input type="number" class="form-control" formControlName="5">
+                                <input type="number" class="form-control" formControlName="BagsCtnNos">
                             </td>
                             <td>
-                                <input type="number" class="form-control" formControlName="6">
+                                <input type="number" class="form-control" formControlName="receiptYarnKgs">
                             </td>
                             <td>
-                                <input type="text" class="form-control" formControlName="7">
+                                <input type="text" class="form-control" formControlName="pendingReceiptKgs">
                             </td>
                             <td>
                                 <button class="btn-danger" (click)="ReceiptDelete(i)">x</button>
