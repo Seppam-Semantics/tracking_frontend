@@ -58,13 +58,7 @@
           </a>
         </mat-nav-list>
 
-        <mat-nav-list>
-          <a mat-list-item [routerLink]="'GarmentBundles'" (click)="snav.toggle()">
-            <div class="text">
-              Garment bundles
-            </div>
-          </a>
-        </mat-nav-list>
+
       </mat-expansion-panel>
 
       <mat-expansion-panel>
@@ -76,9 +70,9 @@
         </mat-expansion-panel-header>
 
         <mat-nav-list>
-          <a mat-list-item [routerLink]="'fabricroll1'" (click)="snav.toggle()">
+          <a mat-list-item [routerLink]="'yarn-Entry'" (click)="snav.toggle()">
             <div class="text">
-              Fabric Roll Entry
+              Yarn Entry
             </div>
           </a>
         </mat-nav-list>
@@ -100,9 +94,9 @@
         </mat-nav-list>
 
         <mat-nav-list>
-          <a mat-list-item [routerLink]="'yarn-Entry'" (click)="snav.toggle()">
+          <a mat-list-item [routerLink]="'fabricroll1'" (click)="snav.toggle()">
             <div class="text">
-              Yarn Entry
+              Fabric Roll Entry
             </div>
           </a>
         </mat-nav-list>
@@ -117,15 +111,15 @@
             Report
           </mat-panel-title>
         </mat-expansion-panel-header>
-       
+
         <mat-nav-list>
-          <a mat-list-item [routerLink]="'FabricRollData'" (click)="snav.toggle()">
+          <a mat-list-item [routerLink]="'Yarn-Report'" (click)="snav.toggle()">
             <div class="text">
-              Fabric Rolls Report
+              Yarn Report
             </div>
           </a>
         </mat-nav-list>
-       
+        
         <mat-nav-list>
           <a mat-list-item [routerLink]="'Knite-Report'" (click)="snav.toggle()">
             <div class="text">
@@ -138,6 +132,14 @@
           <a mat-list-item [routerLink]="'Dye-Report'" (click)="snav.toggle()">
             <div class="text">
               Dye Batch Report
+            </div>
+          </a>
+        </mat-nav-list>
+
+        <mat-nav-list>
+          <a mat-list-item [routerLink]="'FabricRollData'" (click)="snav.toggle()">
+            <div class="text">
+              Fabric Rolls Report
             </div>
           </a>
         </mat-nav-list>

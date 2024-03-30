@@ -55,6 +55,7 @@ import { FabricRollEntry3Component } from './Transaction/Fabric Roll/fabric-roll
 import { DyeBatchEntryComponent } from './Transaction/dye-batch-entry/dye-batch-entry.component';
 import { DyeBatchReportComponent } from './Report/dye-batch-report/dye-batch-report.component';
 import { YarnEntryComponent } from './Transaction/yarn-entry/yarn-entry.component';
+import { YarnReportComponent } from './Report/yarn-report/yarn-report.component';
 
 
 @NgModule({
@@ -87,6 +88,7 @@ import { YarnEntryComponent } from './Transaction/yarn-entry/yarn-entry.componen
     DyeBatchEntryComponent,
     DyeBatchReportComponent,
     YarnEntryComponent,
+    YarnReportComponent,
   ],
   imports: [
     CommonModule,
