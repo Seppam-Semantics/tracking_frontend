@@ -34,6 +34,10 @@ export class YarnEntryComponent implements OnInit {
   buyerName:any;
   buyers: any;
   spinnerreceiptlcNo: any;
+  spinnerQualitylcNo: any;
+  yarnTypeQuality: any;
+  yarnQuality_Id: any;
+  qualityreceiptcellan: any;
 
   constructor(private fb:FormBuilder, private api: ApiService){}
 
@@ -332,26 +336,55 @@ ReceiptAddButton(){
 
 
 
-Yarn_QC = new FormGroup({
-  111: new FormControl(''),
-  222: new FormControl(''),
-  333: new FormControl(''),
-  444: new FormControl(''),
-  555: new FormControl(''),
-  666: new FormControl(''),
-  777: new FormControl(''),
-  888: new FormControl(''), 
-  data4: this.fb.array([]),
-
-})
-get items4() {
-  return this.Yarn_QC.get("data4") as FormArray;
+getYarnQualityLcNo(){
+  this.api.yarnLcNo(this.Yarn_QC.get('spinftyQuality')?.value).subscribe((res)=>{
+    this.spinnerQualitylcNo = res.lcNo
+    console.log(res)
+  })
 }
+
+getQualityData(){
+  this.api.gettingYarnType(this.Yarn_QC.get('spinftyQuality')?.value, this.Receipt.get('spinQualityLno')?.value).subscribe((res)=>{
+    this.yarnData = res.knit;
+    for(let id of this.yarnData){   
+      this.api.getSingleYarnData(id.id).subscribe((res)=>{
+        this.yarnTypeQuality = res.yarn_order_allocations
+        this.qualityreceiptcellan = res.yarn_receipts_lines
+        this.yarnQuality_Id = res.yarn[0].id
+        this.yarnQuality.controls['yarnId'].setValue(this.yarnQuality_Id);
+      })
+    }
+  })
+}
+
+
+Yarn_QC = new FormGroup({
+  spinftyQuality: new FormControl(''),
+  spinQualityLno: new FormControl(''),
+  QualityYarnType: new FormControl(''),
+  qualityOrder: new FormControl(''),
+  qualityColor: new FormControl(''),
+  QualityLot: new FormControl(''),
+  qualityAllocated: new FormControl(''),
+  qusalityUnallocated: new FormControl(''), 
+  data: this.fb.array([]),
+})
+
+
+yarnQuality = this.fb.group({
+  yarnId:[],
+  data:this.fb.array([])
+})
+
+get items4() {
+  return this.yarnQuality.get("data") as FormArray;
+}
+
 YarnQCAddButton(){
   const Row4 = this.fb.group({
-    1: new FormControl(''),
-    2: new FormControl(''),
-    3: new FormControl(''),
+    checkDate: new FormControl(''),
+    checkResults: new FormControl(''),
+    yarnAcceptRejectStatus: new FormControl(''),
     });
   
   this.items4.push(Row4);  
@@ -359,6 +392,13 @@ YarnQCAddButton(){
 
   YarnQCDelete(index: number) {
     this.items4.removeAt(index);
+  }
+
+  yarnQcSave(){
+    console.log(this.yarnQuality.value)
+    this.api.addUpdateYarnQuality(this.yarnQuality.value).subscribe((res)=>{
+      alert(res.message)
+    })
   }
 // <!----------------------------------------------------------------------------------------------------->
 
