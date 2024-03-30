@@ -25,6 +25,7 @@ import { FabricRollEntry3Component } from './Transaction/Fabric Roll/fabric-roll
 import { DyeBatchEntryComponent } from './Transaction/dye-batch-entry/dye-batch-entry.component';
 import { DyeBatchReportComponent } from './Report/dye-batch-report/dye-batch-report.component';
 import { YarnEntryComponent } from './Transaction/yarn-entry/yarn-entry.component';
+import { YarnReportComponent } from './Report/yarn-report/yarn-report.component';
 
 const routes: Routes = [
   {path:'', component: AppComponent},
@@ -51,7 +52,9 @@ const routes: Routes = [
   {path:"Knite-Report" , component:KnitReportComponent},
   {path:"DyeBatchEntry" , component:DyeBatchEntryComponent},
   {path:"Dye-Report" , component:DyeBatchReportComponent},
-  {path:"yarn-Entry" , component:YarnEntryComponent}
+  {path:"yarn-Entry" , component:YarnEntryComponent},
+  {path:"Yarn-Report" , component:YarnReportComponent}
+
 ];
 
 @NgModule({
