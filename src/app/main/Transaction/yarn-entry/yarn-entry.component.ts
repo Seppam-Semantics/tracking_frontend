@@ -31,6 +31,9 @@ export class YarnEntryComponent implements OnInit {
   spinnerLotlcNo: any;
   spinnerorderlcNo: any;
   orderTotal:any;
+  buyerName:any;
+  buyers: any;
+  spinnerreceiptlcNo: any;
 
   constructor(private fb:FormBuilder, private api: ApiService){}
 
@@ -48,8 +51,15 @@ export class YarnEntryComponent implements OnInit {
    this.api.yarnSpinnerDropdown().subscribe((res)=>{
     this.yarnSpinnerDropdown=res.spinners
    })
+
+   this.getbuyers();
   }
 
+  public getbuyers() {
+    this.api.getbuyers().subscribe((res) => {
+      this.buyers = res.buyers;
+    })
+  }
 
   Yarn_Entry_1 = new FormGroup({
     spinner : new FormControl(),
@@ -188,14 +198,17 @@ getOrderAllocationData(){
     this.yarnData = res.knit;
     for(let id of this.yarnData){   
       this.api.getSingleYarnData(id.id).subscribe((res)=>{
-        this.yarnTypeOrder = res.yarn_lot_check
-        this.yarnorder_Id = res.yarn_lot_check[0].yarnId
+        this.yarnTypeOrder = res.yarn_lc_lines
+        this.yarnorder_Id = res.yarn[0].id
         console.log(this.yarnorder_Id)
         this.OrderAllocation.controls['yarnId'].setValue(this.yarnorder_Id);
       })
     }
   })
-  this.api.getSpinOrder(this.spinftyOrder).subscribe((res)=>{
+}
+
+getorders() {
+  this.api.getorders(this.buyerName).subscribe((res) => {
     this.orderNo = res.orders
   })
 }
@@ -246,32 +259,37 @@ OrderAllocationSave(){
 
 // <!-------------------------- Receipt --------------------------------------------------------------------------->
 
+getYarnReceiptLcNo(){
+  this.api.yarnLcNo(this.Receipt.get('spinftyreceipt')?.value).subscribe((res)=>{
+    this.spinnerreceiptlcNo = res.lcNo
+    console.log(res)
+  })
+}
+
 getreceiptData(){
-  this.api.gettingYarnType(this.spinftyreceipt, this.spinreceiptLno).subscribe((res)=>{
+  this.api.gettingYarnType(this.Receipt.get('spinftyreceipt')?.value, this.Receipt.get('spinreceiptLno')?.value).subscribe((res)=>{
     this.yarnData = res.knit;
     for(let id of this.yarnData){   
       this.api.getSingleYarnData(id.id).subscribe((res)=>{
-        this.yarnTypereceipt = res.yarn_lot_check
+        this.yarnTypereceipt = res.yarn_order_allocations
         this.spinLcNo = res.yarn
-        this.yarnreceipt_Id = res.yarn_lot_check[0].yarnId
+        this.yarnreceipt_Id = res.yarn[0].id
         this.receiptForm.controls['yarnId'].setValue(this.yarnreceipt_Id);
       })
     }
   })
-  this.api.getSpinOrder(this.spinftyOrder).subscribe((res)=>{
-    this.orderNo = res.orders
-  })
 }
 
+
 Receipt = new FormGroup({
-  11: new FormControl(''),
-  22: new FormControl(''),
-  33: new FormControl(''),
+  spinftyreceipt:new FormControl(''),
+  receiptLc: new FormControl(''),
+  receiptYarnType: new FormControl(''),
   yarnOrderId: new FormControl(''),
-  55: new FormControl(''),
-  66: new FormControl(''),
-  77: new FormControl(''),
-  88: new FormControl(''),
+  receiptOrderColor: new FormControl(''),
+  receiptLotNo: new FormControl(''),
+  AllocatedYarnTotal: new FormControl(''),
+  unallocatedYarnTotal: new FormControl(''),
   data: this.fb.array([]),
 })
 
@@ -286,7 +304,7 @@ get items3() {
 
 ReceiptAddButton(){
   const Row3 = this.fb.group({
-    yarnOrderId: new FormControl(''),
+    yarnOrderId: new FormControl(this.Receipt.get('yarnOrderId')?.value),
     spinningChallan: new FormControl(''),
     scandexChallan: new FormControl(''),
     receiptDt: new FormControl(''),
@@ -302,6 +320,7 @@ ReceiptAddButton(){
   ReceiptDelete(index: number) {
     this.items3.removeAt(index);
   }
+
   receiptSave(){
     console.log(this.receiptForm.value)
     this.api.addUpdateYarnreceipt(this.receiptForm.value).subscribe((res)=>{
@@ -310,6 +329,9 @@ ReceiptAddButton(){
   }
   
 // <!----------------------------------------------------------------------------------------------------->
+
+
+
 Yarn_QC = new FormGroup({
   111: new FormControl(''),
   222: new FormControl(''),

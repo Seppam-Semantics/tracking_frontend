@@ -40,6 +40,8 @@ export class ApiService {
     let url: String = environment.URL;
     return url;
   }
+// ========================================================================================================================================================
+
 
   login(data: any): Observable<any> {
     return this.http.post(this.getUrl() + `/auth/authentication`, data)
@@ -56,6 +58,10 @@ export class ApiService {
   getSingleRoles(id: any): Observable<any> {
     return this.http.get(this.getUrl() + `/roleapi/roles/${id}`, this.getHeaders())
   }
+
+
+// =============================  WorkOrder and Fabric roll data and Transcation =========================================================================================================
+
 
   getworkorderdetails(): Observable<any> {
     return this.http.get(this.getUrl() + `/workorderapi/workorders-filter`, this.getHeaders())
@@ -163,14 +169,6 @@ export class ApiService {
   ftydetailsFilter(factory : any , date : any): Observable<any> {
     return this.http.get(this.getUrl() + `/knitapi/knit-filter?id=&factory=${factory}&date=${date}&buyer=&orderNo=&style=&color=&size=`, this.getHeaders())
   }
-
-  // ftyfactory_Filter(factory:any): Observable<any> {
-  //   return this.http.get(this.getUrl() + `/knitapi/knit-filter?factory=${factory}`, this.getHeaders())
-  // }
-
-  // ftydate_Filter(date:any): Observable<any> {
-  //   return this.http.get(this.getUrl() + `/knitapi/knit-filter?factory=&date=${date}`, this.getHeaders())
-  // }
 
   knitDetailsFilter(buyer:any , orderNo:any, style:any, color:any, size:any):Observable<any>{
     return this.http.get(this.getUrl() + `/knitapi/knit-filter?id=&factory=&date=&buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&size=${size}`, this.getHeaders())
