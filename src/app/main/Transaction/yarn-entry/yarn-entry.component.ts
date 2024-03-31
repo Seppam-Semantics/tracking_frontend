@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 
 @Component({
@@ -38,8 +39,9 @@ export class YarnEntryComponent implements OnInit {
   yarnTypeQuality: any;
   yarnQuality_Id: any;
   qualityreceiptcellan: any;
+  entry:boolean = true;
 
-  constructor(private fb:FormBuilder, private api: ApiService){}
+  constructor(private fb:FormBuilder, private api: ApiService, private router:Router){}
 
 
   ngOnInit(): void {
@@ -64,6 +66,16 @@ export class YarnEntryComponent implements OnInit {
       this.buyers = res.buyers;
     })
   }
+
+
+  newEntryBtn(){
+    this.entry = false
+  }
+
+  existingEntryBtn(){
+    this.router.navigate(['Yarn-Report']);
+  }
+
 
   Yarn_Entry_1 = new FormGroup({
     spinner : new FormControl(),
