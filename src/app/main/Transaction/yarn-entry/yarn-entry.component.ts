@@ -54,7 +54,7 @@ export class YarnEntryComponent implements OnInit {
     this.allYarn = res.yarn
    })
 
-   this.api.yarnSpinnerDropdown().subscribe((res)=>{
+   this.api.yarnSpinner().subscribe((res)=>{
     this.yarnSpinnerDropdown=res.spinners
    })
 

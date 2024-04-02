@@ -1,0 +1,92 @@
+<div label="Header" [formGroup]="Yarn_Entry_1">
+    <div style="display: flex; justify-content: center; align-items: center; margin-top: 2%;">
+        <button class="btn btn-primary" (click)="Yarn_Entry_save()">Save</button>
+    </div>
+    <!-------------------------------->
+    <div style="margin-top: 1%;">
+        <!-------------------------------->
+        <div>
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Spin Fty</th>
+                        <th>LC Date</th>
+                        <th>LC no</th>
+                        <th>PI</th>
+                        <th>PI Date</th>
+                        <th>LC Yarn Kgs</th>
+                        <th>LC Value</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>
+                            <input type="text" class="form-control" formControlName="spinner" list="spin">
+                            <datalist id="spin">
+                                <option *ngFor="let spin of this.spinfty" value="{{spin.spinfty}}"></option>
+                            </datalist>
+                        </td>
+                        <td><input type="date" class="form-control" formControlName="lcDate"></td>
+                        <td><input type="text" class="form-control" formControlName="lcNo"></td>
+                        <td><input type="text" class="form-control" formControlName="pi"></td>
+                        <td><input type="date" class="form-control" formControlName="piDate"></td>
+                        <td><input type="text" class="form-control" readonly formControlName="lcYarnKgs"></td>
+                        <td><input type="text" class="form-control" readonly formControlName="lcValue"></td>
+                        <td>
+                            <select class="form-control" formControlName="yarnStatus">
+                                <option value="open" [selected]="yarnStatus === 'open'">open</option>
+                                <option value="close" [selected]="yarnStatus === 'close'">close</option>
+                            </select>
+                            
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-------------------------------->
+        <div>
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th><button class="btn btn-danger" (click)="add1button()" style="font-size:inherit">Add
+                                lines</button></th>
+                        <th>Yarn Type</th>
+                        <th>LC Yarn Kgs</th>
+                        <th>Yarn Rate</th>
+                        <th>LC Value</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody formArrayName="data">
+
+                    <tr *ngFor="let process of items.controls; let i=index" [formGroupName]="i">
+                        <td></td>
+                        <td><input type="text" class="form-control" formControlName="yarnType" type="text"></td>
+                        <td><input type="text" class="form-control" formControlName="lcYarnKgs" type="number"></td>
+                        <td><input type="text" class="form-control" formControlName="yarnRate" type="number"></td>
+                        <td><input type="number" class="form-control" formControlName="yarnValue"></td>
+                        <td><button class="btn-danger" (click)="Yarn_Entry_Delete(i)">x</button></td>
+                    </tr>
+                </tbody>
+                <tr>
+                    <td><b>Total</b></td>
+                    <td></td>
+                    <td><input type="number" class="form-control" readonly
+                            [value]="Yarn_Entry_1.get('Total10')?.value"></td>
+                    <td></td>
+                    <td><input type="number" class="form-control" readonly
+                            [value]="Yarn_Entry_1.get('Total12')?.value"></td>
+                    <td></td>
+                </tr>
+
+            </table>
+
+        </div>
+        <!-------------------------------->
+
+        <!-------------------------------->
+    </div>
+</div>

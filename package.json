@@ -21,7 +21,6 @@
     "@angular/platform-browser-dynamic": "^16.2.0",
     "@angular/router": "^16.2.0",
     "@mobiscroll/angular-lite": "^4.5.2",
-    "@ng-bootstrap/ng-bootstrap": "^16.0.0",
     "@syncfusion/ej2-angular-buttons": "^23.2.4",
     "bootstrap": "^5.3.2",
     "bootstrap-icons": "^1.11.2",

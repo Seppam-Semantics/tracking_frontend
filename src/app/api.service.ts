@@ -10,8 +10,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  apiUrl = "https://tracker.seppam.com";
-  // apiUrl = "http://localhost:2000";
+  // apiUrl = "https://tracker.seppam.com";
+  apiUrl = "http://localhost:2000";
 
 
   token: any;
@@ -236,7 +236,7 @@ export class ApiService {
     return this.http.get(this.getUrl() + `/yarnapi/yarn`, this.getHeaders())
   }
 
-  yarnSpinnerDropdown():Observable<any>{
+  yarnSpinner():Observable<any>{
     return this.http.get(this.getUrl() + `/yarnapi/yarn-spinner` , this.getHeaders())
   }
 
@@ -252,14 +252,22 @@ export class ApiService {
     return this.http.get(this.getUrl() + `/yarnapi/yarn-status`, this.getHeaders())
   }
 
+  yarnSomeStatus(spinner:any, lcNo:any):Observable<any>{
+    return this.http.get(this.getUrl() + `/yarnapi/yarn-some-status?spinner=${spinner}&lcNo=${lcNo}`, this.getHeaders())
+  }
+
   yarnPi():Observable<any>{
     return this.http.get(this.getUrl() + `/yarnapi/yarn-status`, this.getHeaders())
   }
 
-  yarnFilter(spinner:any , lcNo:any, lcValue:any, yarnStatus:any, pi:any):Observable<any>{
+  yarnFilter(spinner:any , lcNo:any = '', lcValue:any = '', yarnStatus:any = '', pi:any = ''):Observable<any>{
     return this.http.get(this.getUrl() + `/yarnapi/yarn-filter?id=&spinner=${spinner}&lcNo=${lcNo}&lcValue=${lcValue}&yarnStatus=${yarnStatus}&pi=${pi}`, this.getHeaders())
   }
   
+  receiptDetailsForQc(id:any, receiptId:any):Observable<any>{
+    return this.http.get(this.getUrl() + `/yarnapi/yarnReceiptForQC?id=${id}&receiptId=${receiptId}`, this.getHeaders())
+  }
+
   getSingleYarnData(id:any):Observable<any>{
     return this.http.get(this.getUrl() + `/yarnapi/yarn/${id}`, this.getHeaders())
   }

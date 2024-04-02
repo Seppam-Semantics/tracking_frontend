@@ -1,0 +1,21 @@
+th,tr,td{
+    font-weight: normal;
+    text-align: center;
+    
+}
+::ng-deep .modal-backdrop.show {
+    display: contents;
+  }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input {
+    -moz-appearance: textfield;
+}
+
+::ng-deeg .mat-mdc-tab-header{
+    --mdc-tab-indicator-active-indicator-height:48px
+}

@@ -48,7 +48,7 @@ import { DatePipe } from '@angular/common';
     MainModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
 
 
   ],

@@ -26,6 +26,8 @@ import { DyeBatchEntryComponent } from './Transaction/dye-batch-entry/dye-batch-
 import { DyeBatchReportComponent } from './Report/dye-batch-report/dye-batch-report.component';
 import { YarnEntryComponent } from './Transaction/yarn-entry/yarn-entry.component';
 import { YarnReportComponent } from './Report/yarn-report/yarn-report.component';
+import { YarnHeaderComponent } from './Transaction/yarn-entry/yarn-header/yarn-header.component';
+import { YarnTranscationComponent } from './Transaction/yarn-entry/yarn-transcation/yarn-transcation.component';
 
 const routes: Routes = [
   {path:'', component: AppComponent},
@@ -53,7 +55,9 @@ const routes: Routes = [
   {path:"DyeBatchEntry" , component:DyeBatchEntryComponent},
   {path:"Dye-Report" , component:DyeBatchReportComponent},
   {path:"yarn-Entry" , component:YarnEntryComponent},
-  {path:"Yarn-Report" , component:YarnReportComponent}
+  {path:"Yarn-Report" , component:YarnReportComponent},
+  {path:"yarn-header", component:YarnHeaderComponent},
+  {path:"yarn-transcation", component:YarnTranscationComponent}
 
 ];
 
