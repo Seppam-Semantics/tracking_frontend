@@ -88,4 +88,5 @@ thead {
   overflow-x: scroll;
     height: 63vh;
     width: 100%;
+    scrollbar-width: none;
 }

@@ -2,7 +2,7 @@
     <cdk-accordion-item #accordionItem="cdkAccordionItem" class="example-accordion-item" role="button" tabindex="0"
       style="display: flex; flex-direction: column;">
       <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
-        <mat-form-field appearance="outline" style="width: 105px;">
+        <mat-form-field appearance="outline" >
           <mat-label>Buyer</mat-label>
           <mat-select [(ngModel)]="buyerName" (selectionChange)="onSelectionChange()" (click)="resetform()">
             <mat-option value=""> </mat-option>
@@ -10,7 +10,7 @@
           </mat-select>
         </mat-form-field>
   
-        <mat-form-field appearance="outline" style="width: 105px;">
+        <mat-form-field appearance="outline" >
           <mat-label>Order</mat-label>
           <mat-select [(ngModel)]="ordernumbers" (selectionChange)="onSelectionChange()" (click)="resetform()">
             <mat-option value=""> </mat-option>
@@ -18,7 +18,7 @@
           </mat-select>
         </mat-form-field>
   
-        <mat-form-field appearance="outline" style="width: 105px;">
+        <mat-form-field appearance="outline" >
           <mat-label>Style</mat-label>
           <mat-select [(ngModel)]="styleslist" (selectionChange)="onSelectionChange()" (click)="resetform()">
             <mat-option value=""> </mat-option>
@@ -26,7 +26,7 @@
           </mat-select>
         </mat-form-field>
   
-        <mat-form-field appearance="outline" style="width: 105px;">
+        <mat-form-field appearance="outline" >
           <mat-label>color</mat-label>
           <mat-select [(ngModel)]="colorslist" (selectionChange)="onSelectionChange()" (click)="resetform()">
             <mat-option value=""> </mat-option>
@@ -34,7 +34,7 @@
           </mat-select>
         </mat-form-field>
   
-        <mat-form-field appearance="outline" style="width: 105px;">
+        <mat-form-field appearance="outline" >
           <mat-label>Size</mat-label>
           <mat-select [(ngModel)]="sizeslist" (selectionChange)="onSelectionChange()" (click)="resetform()">
             <mat-option value=""> </mat-option>
@@ -58,52 +58,52 @@
         </div>
         <div class="cdk-accordion-item-body" [style.display]="accordionItem5.expanded ? '' : 'none'">
           <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
-            <mat-form-field appearance="outline" style="width: 105px;">
+            <mat-form-field appearance="outline" >
               <mat-label>Fab Type</mat-label>
               <input matInput value="{{fabdetails?.fabType}}" readonly>
             </mat-form-field>
   
-            <mat-form-field appearance="outline" style="width: 105px;">
+            <mat-form-field appearance="outline" >
               <mat-label>Yarn Type</mat-label>
               <input matInput value="{{fabdetails?.yarnType}}" readonly>
             </mat-form-field>
   
-            <mat-form-field appearance="outline" style="width: 105px;">
+            <mat-form-field appearance="outline" >
               <mat-label>Yarn Cunt</mat-label>
               <input matInput value="{{fabdetails?.yarnCount}}" readonly>
             </mat-form-field>
   
-            <mat-form-field appearance="outline" style="width: 105px;">
+            <mat-form-field appearance="outline" >
               <mat-label>Knit SL</mat-label>
               <input matInput value="{{fabdetails?.knitSL}}" readonly>
             </mat-form-field>
   
-            <mat-form-field appearance="outline" style="width: 105px;">
+            <mat-form-field appearance="outline" >
               <mat-label>Fab Dia</mat-label>
               <input matInput value="{{fabdetails?.fabDia}}" readonly>
             </mat-form-field>
   
-            <mat-form-field appearance="outline" style="width: 105px;">
+            <mat-form-field appearance="outline" >
               <mat-label>GSM</mat-label>
               <input matInput value="{{fabdetails?.fabGsm}}" readonly>
             </mat-form-field>
   
-            <mat-form-field appearance="outline" style="width: 105px;">
+            <mat-form-field appearance="outline" >
               <mat-label>Knit Fty</mat-label>
               <input matInput readonly value="{{fabdetails?.knitFty}}">
             </mat-form-field>
   
-            <mat-form-field appearance="outline" style="width: 105px;">
+            <mat-form-field appearance="outline" >
               <mat-label>Dye Fty</mat-label>
               <input matInput readonly value="{{fabdetails?.dyeinFty}}">
             </mat-form-field>
   
-            <mat-form-field appearance="outline" style="width: 105px;">
+            <mat-form-field appearance="outline" >
               <mat-label>Spin Fty</mat-label>
               <input matInput readonly value="{{fabdetails?.spinFty}}">
             </mat-form-field>
   
-            <mat-form-field appearance="outline" style="width: 105px;">
+            <mat-form-field appearance="outline" >
               <mat-label>Yarn Lot</mat-label>
               <input matInput readonly value="{{fabdetails?.yarnLot}}">
             </mat-form-field>
@@ -131,8 +131,8 @@
   
               <div class="table1" [formGroup]="form">
                 <div>
-                  <table>
-                    <thead>
+                  <table class="table table-hover">
+                    <thead class="thead-dark">
                       <tr>
                         <th style="display: none;">No.Of Days</th>
                         <th>Notes</th>
@@ -145,6 +145,8 @@
                         <th></th>
                         <th></th>
                         <th><input matInput style="width:50%; text-align: center;" value="{{entry1total}}" readonly></th>
+                        <th></th>
+                        <th></th>
                       </tr>
                     </thead>
                     <tbody formArrayName="addprocess">
@@ -201,13 +203,14 @@
             </div>
   
             <div class="table1" [formGroup]="form2">
-              <table>
-                <thead>
+              <table class="table table-hover">
+                <thead class="thead-dark">
                   <tr>
                     <th></th>
                     <th colspan="3">Greige Weight
                       <input matInput style="width:25%; text-align: center;" value="{{entry2total}}" readonly>
                     </th>
+                    <th></th>
                   </tr>
                   <tr>
                     <th style="display: none;">No.Of Days</th>
@@ -277,13 +280,14 @@
             </div>
   
             <div class="table1" [formGroup]="form3">
-              <table>
-                <thead>
+              <table class="table table-hover">
+                <thead class="thead-dark">
                   <tr>
                     <th></th>
                     <th colspan="4">Dye.Wt
                       <input matInput style="width:25%; text-align: center;" value="{{entry3total}}" readonly>
                     </th>
+                    <th></th>
                   </tr>
                   <tr>
                     <th>Batch no</th>
@@ -348,11 +352,13 @@
               </table>
   
   
-              <table>
-                <thead>
+              <table class="table table-hover">
+                <thead class="thead-dark">
                   <tr>
                     <th></th>
                     <th colspan="3">Fin.Wt <input type="text" style="width:25%; text-align: center;" value="{{entry4total}}" readonly></th>
+                    <th></th>
+                    <th></th>
                   </tr>
                   <tr>
                     <th>Batchno</th>
@@ -412,12 +418,14 @@
                   </tr>
                 </thead>
               </table>
-              <table>
-                <thead>
+              <table class="table table-hover">
+                <thead class="thead-dark">
                   <tr>
                     <th></th>
                     <th colspan="3">Delivered: <input matInput style="width:30%; text-align: center;" value="{{entry5total}}" readonly>
                     </th>
+                    <th></th>
+                    <th></th>
                   </tr>
                   <tr>
                     <th>Batchno</th>
@@ -473,11 +481,12 @@
                 </tr>
               </thead>
             </table>
-            <table class="table1" [formGroup]="form6">
-              <thead>
+            <table class="table1 table table-hover" [formGroup]="form6">
+              <thead class="thead-dark">
                 <tr>
                   <th></th>
                   <th colspan="4">planPcs <input type="text" readonly value="{{entry6total}}"></th>
+                  <th></th>
                 </tr>
                 <tr>
                   <th>Batch no</th>
@@ -536,13 +545,14 @@
                   </tr>
                 </thead>
               </table>
-              <table class="table1" [formGroup]="form7">
-                <thead>
+              <table class="table1 table table-hover" [formGroup]="form7">
+                <thead class="thead-dark">
                   <tr>
                     <th></th>
                     <th colspan="4">
                       Actual cut <input type="text" value="{{entry7total}}" readonly>
                     </th>
+                    <th></th>
                   </tr>
                   <tr>
                     <th>Batch no</th>

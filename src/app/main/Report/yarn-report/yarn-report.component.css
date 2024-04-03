@@ -15,3 +15,13 @@ input::-webkit-inner-spin-button {
 input {
     -moz-appearance: textfield;
 }
+.YarnReportScrol{
+    display: block;
+    height: 600px;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+thead {
+    position: sticky;
+    top: 0;
+  }

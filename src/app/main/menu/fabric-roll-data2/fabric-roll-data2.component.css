@@ -96,6 +96,7 @@ table {
   .fixTableHead{
     overflow: scroll;
     height: 75%;
+    scrollbar-width: none;
   }
 
   th,tr,td{

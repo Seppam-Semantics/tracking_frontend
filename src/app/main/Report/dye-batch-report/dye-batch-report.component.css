@@ -14,6 +14,7 @@ th,td,tr{
 .maindatails{
     overflow: scroll;
     height: 100vh;
+    scrollbar-width: none;
 }
 
 .Batch-Entry2{
@@ -87,4 +88,8 @@ th,td,tr{
 
 th,tr,td{
     font-weight: normal;
+}
+::ng-deep .modal-fullscreen .modal-body{
+    overflow-y: auto;
+    scrollbar-width: none;
 }

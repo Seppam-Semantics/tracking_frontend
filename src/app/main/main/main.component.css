@@ -14,7 +14,7 @@ mat-sidenav{
     width: 280px;
     overflow: scroll;
     border-right: #662d91 4px solid;
-
+    scrollbar-width: none;
     background-color: white;
 }
 .mat-list-item{

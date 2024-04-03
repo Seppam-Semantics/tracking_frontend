@@ -75,6 +75,7 @@ table, th, td {
   }
 
   th,td{
+    font-weight: normal;
     text-align: center;
   }
 

@@ -29,3 +29,13 @@ th,tr,td{
     border-radius: 50px;
     box-shadow: 0 0 10px 5px rgb(24, 55, 231);
   }
+
+  .table1{
+    height: 400px;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+thead{
+    position: sticky;
+    top: 0;
+}

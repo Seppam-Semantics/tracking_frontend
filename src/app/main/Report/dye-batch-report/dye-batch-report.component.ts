@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ApiService } from 'src/app/api.service';
 
 @Component({
@@ -124,6 +124,10 @@ export class DyeBatchReportComponent implements OnInit {
       "finalbatch_finishRollsWeight": new FormControl(''),
       "finalbatch_processLoss": new FormControl(''),
       "finalbatch_fabricDeliveryDatetime": new FormControl(''),
+      GriegeTotal : new FormControl(''),
+      FinishTotal : new FormControl(''),
+      differenceTotal : new FormControl(''),
+      PLTotal : new FormControl(''),
       data: this.fb.array([])
 
     })
@@ -133,6 +137,10 @@ export class DyeBatchReportComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.api.dye_factory_name().subscribe((res)=>{
+      this.factoryname=res.factorys
+    })
 
     this.api.dyeBatchAllData().subscribe((res) => {
       this.dyebatch_alldata = res.workorders
@@ -155,11 +163,64 @@ export class DyeBatchReportComponent implements OnInit {
       size: new FormControl(''),
       griege: new FormControl(''),
       finish: new FormControl(''),
-      difference: new FormControl(''),
+      diff: new FormControl(''),
       PL: new FormControl(''),
     });
     this.items.push(newGroup);
+
+    newGroup.get('griege')?.valueChanges.subscribe(() => {
+      this.calculateDiff();
+      this.calculateGriegeTotal();
+    });
+  
+    newGroup.get('finish')?.valueChanges.subscribe(() => {
+      this.calculateDiff();
+      this.calculateGriegeTotal();
+    });
   }
+
+  calculateDiff() {
+    this.items.controls.forEach((control: AbstractControl) => {
+      const row = control as FormGroup;
+      if (row instanceof FormGroup) {
+        const griegeValue = parseFloat(row.get('griege')?.value) || 0;
+        const finishValue = parseFloat(row.get('finish')?.value) || 0;
+        const diff = griegeValue - finishValue;
+        const PLs = diff / griegeValue * 100;
+        const PL = parseFloat(PLs.toFixed(2));
+  
+        row.patchValue({ diff, PL });
+      }
+    });
+  }
+
+  calculateGriegeTotal() {
+    let total1 = 0;
+    let total2 = 0;
+    let total3 = 0;
+    let total4 = 0;
+    this.items.controls.forEach((control: AbstractControl) => {
+      const row = control as FormGroup;
+      if (row instanceof FormGroup) {
+        const griegeValue = parseFloat(row.get('griege')?.value) || 0;
+        total1 += griegeValue;
+  
+        const FinishTotal = parseFloat(row.get('finish')?.value) || 0;
+        total2 += FinishTotal;
+  
+        const DiffTotal = parseFloat(row.get('diff')?.value) || 0;
+        total3 += DiffTotal;
+  
+        const PLTotal = parseFloat(row.get('PL')?.value) || 0;
+        total4 += PLTotal;
+      }
+    });
+    this.dye_Entery.get('GriegeTotal')?.setValue(total1);
+    this.dye_Entery.get('FinishTotal')?.setValue(total2);
+    this.dye_Entery.get('differenceTotal')?.setValue(total3);
+    this.dye_Entery.get('PLTotal')?.setValue(total4);
+  }
+  
 
   //=====================================================================================================
   public getbuyers() {
@@ -383,7 +444,7 @@ export class DyeBatchReportComponent implements OnInit {
     );
 
     const dataControl = this.dye_Entery.get('data') as FormArray;
-    if (!dataControl.controls.length) { // corrected the condition here
+    if (!dataControl.controls.length) { 
       const formControls = this.dye_batch_data.lineData.map((lineItem: any) => {
         return this.fb.group({
           size: [lineItem.size],
@@ -396,7 +457,6 @@ export class DyeBatchReportComponent implements OnInit {
     
       this.dye_Entery.setControl('data', this.fb.array(formControls));
     } else {
-      // If the form array is already initialized, patch values to existing controls
       this.dye_batch_data.lineData.forEach((lineItem: any, i: number) => {
         this.items.at(i).patchValue({
           size: lineItem.size,

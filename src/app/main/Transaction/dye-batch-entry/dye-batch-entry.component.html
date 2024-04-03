@@ -127,11 +127,11 @@
                                 <table class="table table-hover">
                                     <thead class="thead-dark">
                                         <tr>
-                                            <th style="font-size:small;  background-color: white;">Size</th>
-                                            <th style="font-size:small;  background-color: white;">Griege</th>
-                                            <th style="font-size:small;  background-color: white;">Finish</th>
-                                            <th style="font-size:small;  background-color: white;">Diff</th>
-                                            <th style="font-size:small;  background-color: white;">PL</th>
+                                            <th style="font-size:small;">Size</th>
+                                            <th style="font-size:small;">Griege</th>
+                                            <th style="font-size:small;">Finish</th>
+                                            <th style="font-size:small;">Diff</th>
+                                            <th style="font-size:small;">PL</th>
                                         </tr>
                                     </thead>
                                     <tbody formArrayName="data">
@@ -151,14 +151,15 @@
                                             <td><input type="number" class="form-control" formControlName="PL" readonly style="width: 15vh; display: inline;"></td>
                                         </tr>
                                     </tbody>
-                                    <tr>
-                                        <td><span>Total</span></td>
-                                        <td><input type="number" class="form-control" readonly formControlName="GriegeTotal" style="width: 15vh; display: inline;"></td>
-                                        <td><input type="number" class="form-control" readonly formControlName="FinishTotal" style="width: 15vh; display: inline;"></td>
-                                        <td><input type="number" class="form-control" readonly formControlName="differenceTotal" style="width: 15vh; display: inline;"></td>
-                                        <td><input type="number" class="form-control" readonly formControlName="PLTotal" style="width: 15vh; display: inline;"></td>
-                                        <td></td>
+                                    <thead class="thead-dark">
+                                    <tr >
+                                        <th><span>Total</span></th>
+                                        <th><input type="number" class="form-control" readonly formControlName="GriegeTotal" style="width: 15vh; display: inline;"></th>
+                                        <th><input type="number" class="form-control" readonly formControlName="FinishTotal" style="width: 15vh; display: inline;"></th>
+                                        <th><input type="number" class="form-control" readonly formControlName="differenceTotal" style="width: 15vh; display: inline;"></th>
+                                        <th><input type="number" class="form-control" readonly formControlName="PLTotal" style="width: 15vh; display: inline;"></th>
                                     </tr>
+                                </thead>
                                 </table>
                             </div>
         

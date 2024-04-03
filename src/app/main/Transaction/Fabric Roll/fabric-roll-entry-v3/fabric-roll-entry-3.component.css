@@ -166,6 +166,7 @@
     td, th {
       border: 1px solid #dddddd;
       text-align: left;
+      font-weight: normal;
       padding: 8px;
     }
     .table2 thead, .table2 tbody tr{
