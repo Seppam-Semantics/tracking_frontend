@@ -97,3 +97,8 @@ table {
     overflow: scroll;
     height: 75%;
   }
+
+  th,tr,td{
+    text-align: center;
+    font-weight: normal;
+  }

@@ -84,3 +84,7 @@ th,td,tr{
 ::ng-deep .form-control{
     border: revert-layer;
 }
+
+th,tr,td{
+    font-weight: normal;
+}

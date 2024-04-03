@@ -19,3 +19,35 @@ input {
 ::ng-deeg .mat-mdc-tab-header{
     --mdc-tab-indicator-active-indicator-height:48px
 }
+
+::ng-deep .mat-mdc-tab-group, .mat-mdc-tab-nav-bar{
+    --mdc-tab-indicator-active-indicator-color: white;
+    --mat-tab-header-disabled-ripple-color: white;
+    --mat-tab-header-pagination-icon-color: white;
+    --mat-tab-header-inactive-label-text-color: white;
+    --mat-tab-header-active-label-text-color: black;
+    --mat-tab-header-active-ripple-color: red;
+    --mat-tab-header-inactive-ripple-color: yellow;
+    --mat-tab-header-inactive-focus-label-text-color: white;
+    --mat-tab-header-inactive-hover-label-text-color: black;
+    --mat-tab-header-active-focus-label-text-color: black;
+    --mat-tab-header-active-hover-label-text-color: black;
+    --mat-tab-header-active-hover-indicator-color: white;
+    --mat-tab-header-active-focus-indicator-color:white;
+
+  }
+  
+  :host ::ng-deep ::ng-deep.mat-mdc-tab-header {
+    --mdc-tab-indicator-active-indicator-height: 48px;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+    --mat-tab-indicator-active-indicator-shape: 0;
+    --mat-secondary-navigation-tab-container-height: 48px;
+    background-color: #662d91;
+}
+
+:host ::ng-deep ::ng-deep.mat-mdc-tab-header .mdc-tab-indicator {
+    clip-path: polygon(0 0, 85% 0, 100% 100%, 0 100%);
+}
