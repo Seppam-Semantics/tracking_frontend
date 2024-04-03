@@ -108,12 +108,12 @@ export class YarnReportComponent implements OnInit {
 
 
   yarnHead(){
-    this.router.navigate(['/yarn-header'])
+    this.router.navigate(['/main/yarn-header'])
   }
 
 
   EditAllData(id:any){
     sessionStorage.setItem('singleData', id)
-    this.router.navigate(['/yarn-transcation'])
+    this.router.navigate(['/main/yarn-transcation'])
   }
 }
