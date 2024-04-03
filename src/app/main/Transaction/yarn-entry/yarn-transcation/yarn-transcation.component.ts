@@ -54,6 +54,7 @@ export class YarnTranscationComponent implements OnInit {
   yarnlotcheckLotNo: any;
   receiptDetails: any;
   knitFty: any;
+  allyarnType: any;
 
   constructor(private fb: FormBuilder, private api: ApiService, private datePipe: DatePipe) { }
 
@@ -71,6 +72,10 @@ export class YarnTranscationComponent implements OnInit {
 
     this.api.knitfty_name().subscribe((res)=>{
       this.knitFty = res.factorys
+    })
+
+    this.api.yarnType().subscribe((res)=>{
+      this.allyarnType = res.types
     })
 
     this.getbuyers();

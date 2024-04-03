@@ -96,7 +96,10 @@
                                     <tbody formArrayName="data">
                                         <tr *ngFor="let process of LotCheckItems.controls; let i = index;" [formGroupName]="i">
                                             <td>
-                                                <input formControlName="yarnType" class="form-control" style="width: 100px;">
+                                                <input formControlName="yarnType" class="form-control" style="width: 100px;" list="type">
+                                                <datalist id="type">
+                                                    <option *ngFor="let order of this.allyarnType" value="{{order.yarnType}}"></option>
+                                                </datalist>
                                             </td>
                                             <td><input formControlName="lotNo" class="form-control" style="width: 100px;"></td>
         
@@ -170,7 +173,7 @@
                                             <td>
                                                 <input type="text" class="form-control" formControlName="yarnType" list="yarnType">
                                                 <datalist id="yarnType">
-                                                    <option *ngFor="let order of this.yarnTypeOrder" value="{{order.yarnType}}"></option>
+                                                    <option *ngFor="let order of this.allyarnType" value="{{order.yarnType}}"></option>
                                                 </datalist>
                                             </td>
                 

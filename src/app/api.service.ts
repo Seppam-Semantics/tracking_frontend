@@ -10,8 +10,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  apiUrl = "https://tracker.seppam.com";
-  // apiUrl = "http://localhost:2000";
+  // apiUrl = "https://tracker.seppam.com";
+  apiUrl = "http://localhost:2000";
 
 
   token: any;
@@ -258,6 +258,10 @@ export class ApiService {
 
   yarnPi():Observable<any>{
     return this.http.get(this.getUrl() + `/yarnapi/yarn-status`, this.getHeaders())
+  }
+
+  yarnType():Observable<any>{
+    return this.http.get(this.getUrl() + `/yarnapi/yarn_type`, this.getHeaders())
   }
 
   yarnFilter(spinner:any , lcNo:any = '', lcValue:any = '', yarnStatus:any = '', pi:any = ''):Observable<any>{
