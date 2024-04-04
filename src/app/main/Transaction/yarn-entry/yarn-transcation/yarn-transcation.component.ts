@@ -55,6 +55,8 @@ export class YarnTranscationComponent implements OnInit {
   receiptDetails: any;
   knitFty: any;
   allyarnType: any;
+  lineDetails: any;
+  unallocatedYarnKgs: any;
 
   constructor(private fb: FormBuilder, private api: ApiService, private datePipe: DatePipe) { }
 
@@ -295,40 +297,49 @@ export class YarnTranscationComponent implements OnInit {
   orderAllotAddUpdate(index:any){
     this.yarnLineId = this.yarnLcLines[index].id;
     this.OrderAllocation.controls['yarnId'].setValue(this.yarn[0].id);
+    const yarnDataId = this.yarn[0].id
+    this.api.yarnLineData(yarnDataId, this.yarnLineId).subscribe((res)=>{
+      this.lineDetails = res.data
+      console.log(res)
+
 
     const receivedData = this.yarnOrderAllocations;
   
     const yarnEntryData = this.OrderAllocation.get('data') as FormArray;
     yarnEntryData.clear();
-  
+    this.buyerName = receivedData[0].buyer
+
     receivedData.forEach((dataItem: any) => {
+       this.unallocatedYarnKgs = this.lineDetails[0].lcYarnKgs - dataItem.allocatedYarnKgs;
+
       const Row2 = this.fb.group({
         id: dataItem.id,
         yarnLineId: this.yarnLineId,
         yarnType: dataItem.yarnType,
-        buyer:dataItem.buyer,
+        buyer: this.buyerName,
         utilisationOrderNo: dataItem.utilisationOrderNo,
         style:dataItem.style,
         colour: dataItem.colour,
         lotNo: dataItem.lotNo,
         allocatedYarnKgs: dataItem.allocatedYarnKgs,
-        unallocatedYarnKgs:dataItem.unallocatedYarnKgs
+        unallocatedYarnKgs:this.unallocatedYarnKgs >= 0 ? this.unallocatedYarnKgs : 0
       });
       yarnEntryData.push(Row2);
     });
+  })
     this.getbuyers()
   }
 
-  getorders(buyer:any) {
-    this.buyerName = buyer
-    this.api.getorders(buyer).subscribe((res) => {
+  getorders() {
+    this.api.getorders(this.buyerName).subscribe((res) => {
       this.orderNo = res.orders
     })
   }
   getstyle(order: any) {
-    this.api.getstyle(this.buyerName, order).subscribe((res) => {
+    this.api.getstyle(sessionStorage.getItem('buyer'), order).subscribe((res) => {
       this.style = res.styles;
     })
+    console.log(this.buyerName)
   }
 
   getTotal(type: any) {
@@ -340,7 +351,6 @@ export class YarnTranscationComponent implements OnInit {
 
   OrderAllocation = this.fb.group({
     yarnId: [],
-    buyer: new FormControl(''),
     data: this.fb.array([]),
   })
 
@@ -350,6 +360,7 @@ export class YarnTranscationComponent implements OnInit {
       yarnLineId: new FormControl(this.yarnLineId),
       lcNo: new FormControl(''),
       yarnType: new FormControl(''),
+      buyer : new FormControl(this.buyerName),
       utilisationOrderNo: new FormControl(''),
       style: new FormControl(''),
       colour: new FormControl(''),
@@ -370,7 +381,7 @@ export class YarnTranscationComponent implements OnInit {
   }
 
   OrderAllocationSave() {
-    console.log(this.OrderAllocation.value)
+    // console.log(this.OrderAllocation.value)
     this.api.addUpdateOrderAllocation(this.OrderAllocation.value).subscribe((res) => {
       alert(res.message)
       window.location.reload()

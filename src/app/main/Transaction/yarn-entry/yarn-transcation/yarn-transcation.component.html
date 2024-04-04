@@ -36,9 +36,9 @@
 </div>
 <mat-tab-group>
     <!-------------------------------Header[Start]----------------------------------->
-    <mat-tab label="Header" [formGroup]="Yarn_Entry_1">
-        <div style="margin-top: 1%;">
-            <div class="table1">
+    <mat-tab label="Header">
+        <div style="margin-top: 1%;" [formGroup]="Yarn_Entry_1">
+            <div class="table1" >
                 <table class="table">
                     <thead class="thead-dark">
                         <tr>
@@ -110,7 +110,7 @@
                                                 <input type="date" class="form-control" formControlName="resultDate">
                                             </td>
                                             <td>
-                                                <input type="text" class="form-control" formControlName="checkResults">
+                                                <textarea type="text" class="form-control" formControlName="checkResults"></textarea>
                                             </td>
         
                                             <td>
@@ -141,26 +141,27 @@
             <div class="modal-dialog modal-xl" role="document" style="margin-top: 10%;">
                 <div class="modal-content">
                     <div class="modal-body">
-                        <div [formGroup]="OrderAllocation">
+                        <div >
                             <div style="display: flex; justify-content: center; align-items: center;">
-                                    <select formControlName="buyer" (change)="getorders($event.target.value)" class="form-select" style="width: 200px;">
-                                      <option value="">--Buyers-- </option>
-                                      <option *ngFor="let buyer of this.buyers" value="{{buyer.buyer}}">{{buyer.buyer}}</option>
-                                    </select>
+                                <mat-form-field appearance="outline">
+                                    <mat-select [(ngModel)]="this.buyerName" (selectionChange)="getorders()">
+                                      <mat-option value="">--Buyers-- </mat-option>
+                                      <mat-option *ngFor="let buyer of this.buyers" value="{{buyer.buyer}}">{{buyer.buyer}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
                             </div>
-                            <div style="margin-top: 2%;" class="table1">
+                            <div style="margin-top: 2%;" class="table1" [formGroup]="OrderAllocation">
                                 <table class="table">
                                     <thead class="thead-dark">
                                         <tr>
-                                            <th><button class="btn btn-danger" (click)="OrderAllocationAddButton()"
-                                                    style="font-size: inherit;">+</button></th>
+                                            <th>
+                                                <button class="btn btn-danger" (click)="OrderAllocationAddButton()" style="font-size: inherit;">+</button>
+                                            </th>
                                             <th>Yarn Type</th>
-                
                                             <th>Order No</th>
                                             <th>Style</th>
                                             <th>Colour</th>
                                             <th>Lot No</th>
-                
                                             <th>Allocated Yarn Kgs</th>
                                             <th>Unallocated Yarn Kgs</th>
                                             <th></th>
@@ -171,7 +172,7 @@
                                         <tr *ngFor="let process of items2.controls; let i=index" [formGroupName]="i" style="overflow: scroll;">
                                             <td></td>
                                             <td>
-                                                <input type="text" class="form-control" formControlName="yarnType" list="yarnType">
+                                                <input type="text" class="form-control" formControlName="yarnType" list="yarnType" (input)="getstyle()">
                                                 <datalist id="yarnType">
                                                     <option *ngFor="let order of this.allyarnType" value="{{order.yarnType}}"></option>
                                                 </datalist>
@@ -186,7 +187,6 @@
                                             <td>
                                                 <input type="text" class="form-control" formControlName="style" list="styles">
                                                 <datalist id="styles">
-                                                    <option></option>
                                                     <option *ngFor="let style of this.style" value="{{style.style}}">{{style.style}}</option>
                                                 </datalist>
                                             </td>

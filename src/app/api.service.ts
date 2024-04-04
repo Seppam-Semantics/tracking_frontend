@@ -292,4 +292,8 @@ export class ApiService {
   yarnTotal(id:any, type:any):Observable<any>{
     return this.http.get(this.getUrl() + `/yarnapi/yarn_total?id=${id}&yarnType=${type}`, this.getHeaders())
   }
+
+  yarnLineData(id:any, lineId:any):Observable<any>{
+    return this.http.get(this.getUrl() + `/yarnapi/yarn_line_data?id=${id}&lineId=${lineId}`, this.getHeaders())
+  }
 }
