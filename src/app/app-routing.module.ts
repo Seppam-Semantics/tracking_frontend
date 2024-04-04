@@ -3,9 +3,6 @@ import { Router, RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main/main.component';
 import { WelcomeComponent } from './welcome/welcome.component';
-import { AuthGuard } from './auth.guard';
-import { MainRoutingModule } from './main/main-routing.module';
-
 
 const routes: Routes = [
   {path:"" ,component:WelcomeComponent},

@@ -57,6 +57,7 @@ export class YarnTranscationComponent implements OnInit {
   allyarnType: any;
   lineDetails: any;
   unallocatedYarnKgs: any;
+  lotlineDetails: any;
 
   constructor(private fb: FormBuilder, private api: ApiService, private datePipe: DatePipe) { }
 
@@ -236,6 +237,10 @@ export class YarnTranscationComponent implements OnInit {
   lotcheckaddUpdate(index: number) {
     this.yarnLineId = this.yarnLcLines[index].id;
     this.LotCheck.controls['yarnId'].setValue(this.yarn[0].id);
+    const yarnDataId = this.yarn[0].id
+    this.api.yarnLineData(yarnDataId, this.yarnLineId).subscribe((res)=>{
+      this.lotlineDetails = res.data
+
     const receivedData = this.yarnLotCheck;
   
     const yarnEntryData = this.LotCheck.get('data') as FormArray;
@@ -254,6 +259,7 @@ export class YarnTranscationComponent implements OnInit {
       });
       yarnEntryData.push(LotCheckDetails);
     });
+  })
   }
   
   LotCheck = this.fb.group({
@@ -269,7 +275,7 @@ export class YarnTranscationComponent implements OnInit {
     const LotCheckDetails = this.fb.group({
       id:new FormControl(),
       yarnLineId: new FormControl(this.yarnLineId),
-      yarnType: new FormControl(''),
+      yarnType: new FormControl(this.lotlineDetails[0].yarnType),
       lotNo: new FormControl(),
       sampleDate: new FormControl(),
       resultDate: new FormControl(),
@@ -300,14 +306,12 @@ export class YarnTranscationComponent implements OnInit {
     const yarnDataId = this.yarn[0].id
     this.api.yarnLineData(yarnDataId, this.yarnLineId).subscribe((res)=>{
       this.lineDetails = res.data
-      console.log(res)
 
 
     const receivedData = this.yarnOrderAllocations;
   
     const yarnEntryData = this.OrderAllocation.get('data') as FormArray;
     yarnEntryData.clear();
-    this.buyerName = receivedData[0].buyer
 
     receivedData.forEach((dataItem: any) => {
        this.unallocatedYarnKgs = this.lineDetails[0].lcYarnKgs - dataItem.allocatedYarnKgs;
@@ -316,7 +320,7 @@ export class YarnTranscationComponent implements OnInit {
         id: dataItem.id,
         yarnLineId: this.yarnLineId,
         yarnType: dataItem.yarnType,
-        buyer: this.buyerName,
+        buyer: dataItem.buyer,
         utilisationOrderNo: dataItem.utilisationOrderNo,
         style:dataItem.style,
         colour: dataItem.colour,
@@ -330,21 +334,20 @@ export class YarnTranscationComponent implements OnInit {
     this.getbuyers()
   }
 
-  getorders() {
-    this.api.getorders(this.buyerName).subscribe((res) => {
+  getorders(buyer:any) {
+    this.buyerName = buyer
+    this.api.getorders(buyer).subscribe((res) => {
       this.orderNo = res.orders
     })
   }
   getstyle(order: any) {
-    this.api.getstyle(sessionStorage.getItem('buyer'), order).subscribe((res) => {
+    this.api.getstyle(this.buyerName, order).subscribe((res) => {
       this.style = res.styles;
     })
-    console.log(this.buyerName)
   }
 
   getTotal(type: any) {
     this.api.yarnTotal(this.yarnorder_Id, type).subscribe((res) => {
-      console.log(res.total)
       this.orderTotal = res.total[0].lctotal
     })
   }
@@ -359,8 +362,8 @@ export class YarnTranscationComponent implements OnInit {
       id: new FormControl(),
       yarnLineId: new FormControl(this.yarnLineId),
       lcNo: new FormControl(''),
-      yarnType: new FormControl(''),
-      buyer : new FormControl(this.buyerName),
+      yarnType: new FormControl(this.lineDetails[0].yarnType),
+      buyer : new FormControl(''),
       utilisationOrderNo: new FormControl(''),
       style: new FormControl(''),
       colour: new FormControl(''),
@@ -381,7 +384,6 @@ export class YarnTranscationComponent implements OnInit {
   }
 
   OrderAllocationSave() {
-    // console.log(this.OrderAllocation.value)
     this.api.addUpdateOrderAllocation(this.OrderAllocation.value).subscribe((res) => {
       alert(res.message)
       window.location.reload()
@@ -447,7 +449,6 @@ export class YarnTranscationComponent implements OnInit {
   }
 
   receiptSave() {
-    console.log(this.receiptForm.value)
     this.api.addUpdateYarnreceipt(this.receiptForm.value).subscribe((res) => {
       alert(res.message)
       window.location.reload()
@@ -507,7 +508,6 @@ export class YarnTranscationComponent implements OnInit {
   }
 
   yarnQcSave(){
-    console.log(this.Yarn_QC.value)
     this.api.addUpdateYarnQuality(this.Yarn_QC.value).subscribe((res)=>{
       alert(res.message)
       window.location.reload()

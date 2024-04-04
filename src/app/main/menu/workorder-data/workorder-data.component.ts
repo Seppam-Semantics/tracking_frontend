@@ -41,7 +41,6 @@ export class WorkorderDataComponent {
       const sheetname = workbook.SheetNames[0];
       const sheet1 = workbook.Sheets[sheetname];
       this.users = xls.utils.sheet_to_json(sheet1, { raw: true });
-      this.users.splice(0, 1)
       this.dataSource = this.users;
       console.log(this.dataSource)
       

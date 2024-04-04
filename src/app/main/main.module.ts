@@ -5,7 +5,6 @@ import { WorkorderDataComponent } from './menu/workorder-data/workorder-data.com
 import { MainComponent } from './main/main.component';
 import { RouterModule } from '@angular/router';
 import { MainRoutingModule } from './main-routing.module';
-import { GarmentBundlesComponent } from './menu/garment-bundles/garment-bundles.component';
 import { MatTabsModule } from '@angular/material/tabs'
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -65,7 +64,6 @@ import { YarnTranscationComponent } from './Transaction/yarn-entry/yarn-transcat
     MainComponent,
     WorkorderDataComponent,
     FabricRollDataComponent,
-    GarmentBundlesComponent,
     RolesProfileRootComponent,
     ConfirmDeleteComponent,
     RolesComponent,

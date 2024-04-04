@@ -96,10 +96,7 @@
                                     <tbody formArrayName="data">
                                         <tr *ngFor="let process of LotCheckItems.controls; let i = index;" [formGroupName]="i">
                                             <td>
-                                                <input formControlName="yarnType" class="form-control" style="width: 100px;" list="type">
-                                                <datalist id="type">
-                                                    <option *ngFor="let order of this.allyarnType" value="{{order.yarnType}}"></option>
-                                                </datalist>
+                                                <input formControlName="yarnType" class="form-control" style="width: 100px;" readonly>
                                             </td>
                                             <td><input formControlName="lotNo" class="form-control" style="width: 100px;"></td>
         
@@ -142,14 +139,6 @@
                 <div class="modal-content">
                     <div class="modal-body">
                         <div >
-                            <div style="display: flex; justify-content: center; align-items: center;">
-                                <mat-form-field appearance="outline">
-                                    <mat-select [(ngModel)]="this.buyerName" (selectionChange)="getorders()">
-                                      <mat-option value="">--Buyers-- </mat-option>
-                                      <mat-option *ngFor="let buyer of this.buyers" value="{{buyer.buyer}}">{{buyer.buyer}}</mat-option>
-                                    </mat-select>
-                                </mat-form-field>
-                            </div>
                             <div style="margin-top: 2%;" class="table1" [formGroup]="OrderAllocation">
                                 <table class="table">
                                     <thead class="thead-dark">
@@ -158,6 +147,7 @@
                                                 <button class="btn btn-danger" (click)="OrderAllocationAddButton()" style="font-size: inherit;">+</button>
                                             </th>
                                             <th>Yarn Type</th>
+                                            <th>Buyer</th>
                                             <th>Order No</th>
                                             <th>Style</th>
                                             <th>Colour</th>
@@ -172,9 +162,12 @@
                                         <tr *ngFor="let process of items2.controls; let i=index" [formGroupName]="i" style="overflow: scroll;">
                                             <td></td>
                                             <td>
-                                                <input type="text" class="form-control" formControlName="yarnType" list="yarnType" (input)="getstyle()">
-                                                <datalist id="yarnType">
-                                                    <option *ngFor="let order of this.allyarnType" value="{{order.yarnType}}"></option>
+                                                <input type="text" class="form-control" formControlName="yarnType" readonly>
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control" formControlName="buyer" list="buyer" (input)="getorders($event.target.value)">
+                                                <datalist id="buyer">
+                                                    <option *ngFor="let buyer of this.buyers" value="{{buyer.buyer}}">{{buyer.buyer}}</option>
                                                 </datalist>
                                             </td>
                 
