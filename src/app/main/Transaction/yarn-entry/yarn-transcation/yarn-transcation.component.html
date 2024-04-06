@@ -1,5 +1,5 @@
 <div [formGroup]="yarnHeader">
-    <table class="table">
+    <table class="table table-hover">
         <thead class="thead-dark">
             <tr>
                 <th>Spin Fty</th>
@@ -39,7 +39,7 @@
     <mat-tab label="Header">
         <div style="margin-top: 1%;" [formGroup]="Yarn_Entry_1">
             <div class="table1" >
-                <table class="table">
+                <table class="table table-hover">
                     <thead class="thead-dark">
                         <tr>
                             <th>
@@ -80,7 +80,7 @@
                     <div class="modal-body">
                         <div>
                             <div [formGroup]="LotCheck" class="table1">
-                                <table class="table">
+                                <table class="table table-hover">
                                     <thead class="thead-dark">
                                         <tr>
                                             <th>Yarn Type</th>
@@ -140,7 +140,7 @@
                     <div class="modal-body">
                         <div >
                             <div style="margin-top: 2%;" class="table1" [formGroup]="OrderAllocation">
-                                <table class="table">
+                                <table class="table table-hover">
                                     <thead class="thead-dark">
                                         <tr>
                                             <th>
@@ -178,7 +178,7 @@
                                                 </datalist>
                                             </td>
                                             <td>
-                                                <input type="text" class="form-control" formControlName="style" list="styles">
+                                                <input type="text" class="form-control" formControlName="style" list="styles" (input)="getcolor($event.target.value)">
                                                 <datalist id="styles">
                                                     <option *ngFor="let style of this.style" value="{{style.style}}">{{style.style}}</option>
                                                 </datalist>
@@ -186,7 +186,7 @@
                                             <td>
                                                 <input type="text" class="form-control" formControlName="colour" list="color">
                                                 <datalist id="color">
-                                                    <option *ngFor="let color of this.color" value="{{color.color}}">{{color.color}}</option>
+                                                    <option *ngFor="let color of this.colorlist" value="{{color.color}}">{{color.color}}</option>
                                                 </datalist>
                                             </td>
                                             <td>
@@ -226,7 +226,7 @@
     <mat-tab label="Lot Check" >
         <div style="margin-top: 3%;">
             <div [formGroup]="LotCheck" class="table1">
-                <table class="table">
+                <table class="table table-hover">
                     <thead class="thead-dark">
                         <tr>
                             <th>Sl.No</th>
@@ -260,7 +260,7 @@
     <mat-tab label="Order Allocation">
         <div style="margin-top: 3%;">
             <div class="table1">
-                <table class="table">
+                <table class="table table-hover">
                     <thead class="thead-dark">
                         <tr>
                             <th>Sl.No</th>
@@ -297,7 +297,7 @@
                     <div class="modal-body">
                         <div>
                             <div [formGroup]="receiptForm" class="table1">
-                                <table class="table">
+                                <table class="table table-hover">
                                     <thead class="thead-dark">
                                         <tr>
                                             <th>Spin Challan</th>
@@ -369,7 +369,7 @@
         <div style="margin-top: 3%;">
             <div>
             <div [formGroup]="receiptForm" class="table1">
-                <table class="table">
+                <table class="table table-hover">
                     <thead class="thead-dark">
                         <tr>
                             <th>Sl.No</th>
@@ -406,7 +406,7 @@
                 <div class="modal-body">
                     <div>
                         <div>
-                            <table class="table">
+                            <table class="table table-hover">
                                 <thead class="thead-dark">
                                     <tr>
                                         <th>Spin Challan</th>
@@ -433,7 +433,7 @@
                         </div>
 
                         <div class="table1">
-                            <table class="table" [formGroup]="Yarn_QC">
+                            <table class="table table-hover" [formGroup]="Yarn_QC">
                                 <thead class="thead-dark">
                                     <tr>
                                         <th><button class="btn btn-danger" (click)="YarnQCAddButton()"
@@ -479,7 +479,7 @@
     <mat-tab label="Yarn QC">
         <div style="margin-top:3% ">
             <div class="table1">
-                <table class="table">
+                <table class="table table-hover">
                     <thead class="thead-dark">
                         <tr>
                             <th>Sl.No</th>

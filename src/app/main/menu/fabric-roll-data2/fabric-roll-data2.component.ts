@@ -279,4 +279,7 @@ Dye(){
   fabricEntry(){
     this.router.navigate(['/main/fabricroll1'])
   }
+  workorder(){
+    this.router.navigate(['/main/WorkorderData'])
+  }
 }

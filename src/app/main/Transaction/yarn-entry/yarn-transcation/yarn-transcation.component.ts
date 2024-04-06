@@ -58,6 +58,8 @@ export class YarnTranscationComponent implements OnInit {
   lineDetails: any;
   unallocatedYarnKgs: any;
   lotlineDetails: any;
+  colorlist: any;
+  orderNumber: any;
 
   constructor(private fb: FormBuilder, private api: ApiService, private datePipe: DatePipe) { }
 
@@ -341,8 +343,17 @@ export class YarnTranscationComponent implements OnInit {
     })
   }
   getstyle(order: any) {
+    this.orderNumber = order
     this.api.getstyle(this.buyerName, order).subscribe((res) => {
       this.style = res.styles;
+    })
+  }
+
+  getcolor(style: any) {
+    console.log(style)
+    this.api.getcolor(this.buyerName, this.orderNumber, style).subscribe((res) => {
+      this.colorlist = res.colors;
+      console.log(res)
     })
   }
 

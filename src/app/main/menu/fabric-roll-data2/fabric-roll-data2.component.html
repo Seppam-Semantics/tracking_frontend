@@ -1,4 +1,5 @@
 <mat-toolbar style="display: flex; justify-content: space-around;">
+  <button  (click)="workorder()" class="btn btn-primary">WorkOrder</button>
   <button  (click)="yarn()" class="btn btn-primary">Yarn-Entry</button>
   <button  (click)="knite()" class="btn btn-primary">Knite-Entry</button>
   <button  (click)="Dye()" class="btn btn-primary">Dye-Entry</button>
@@ -215,7 +216,7 @@
               </tr>
 
               <tr>
-                <td><b>Sl.No</b></td>
+                <th>Sl.No</th>
                 <th>WONo</th>
 
                 <th>No.Of Days</th>
