@@ -59,6 +59,10 @@ export class YarnHeaderComponent implements OnInit{
     this.yarnSpinnerDropdown=res.spinners
    })
 
+   this.api.yarnType().subscribe((res)=>{
+    this.yarnType = res.types
+   })
+
    this.getbuyers();
   }
 

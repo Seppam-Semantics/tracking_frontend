@@ -26,7 +26,7 @@ no:any
   size:any;
   constructor(private fb: FormBuilder , private api : ApiService , private router : Router) {
     this.load = this.fb.group({
-      id:0,
+      id:new FormControl(0),
       date: new FormControl(''),
       factory : new FormControl(''),
       houseKeepingStatus: new FormControl(''),
@@ -112,8 +112,7 @@ no:any
     for (let i = 0; i < numberOfEntries; i++) {
       formControls.push(
         this.fb.group({
-          "id": [0],
-          "knitId": [i+1],
+          "id": [i+1],
           "buyer": [''],
           "orderNo": [''],
           "style": [''],

@@ -145,7 +145,6 @@ export class DyeBatchReportComponent implements OnInit {
 
     this.api.dyeBatchAllData().subscribe((res) => {
       this.dyebatch_alldata = res.workorders
-      console.log(this.dyebatch_alldata)
     })
 
     this.getbuyers()
@@ -292,11 +291,8 @@ export class DyeBatchReportComponent implements OnInit {
 
   getid(id: any) {
     this.singledataid = id
-    console.log(this.singledataid)
     this.api.dye_batch_single_data(this.singledataid).subscribe((res) => {
       this.dye_batch_data = res
-      console.log(this.dye_batch_data)
-
     const formattedDate1 = this.datePipe.transform(
       this.dye_batch_data.headerData[0].batch_batchMakeDate,
     'yyyy-MM-dd'
@@ -481,11 +477,9 @@ export class DyeBatchReportComponent implements OnInit {
 
   update(){
     this.api.post_dyereport_entry(this.dye_Entery.value).subscribe((res)=>{
-      console.log(res.message)
       alert(res.message)
+      window.location.reload()
     })
-    window.location.reload()
-    console.log(this.dye_Entery.value)
   }
   DyeBatchButton(){
     this.router.navigate(['/DyeBatchEntry'])

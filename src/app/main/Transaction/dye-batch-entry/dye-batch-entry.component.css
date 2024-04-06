@@ -99,3 +99,13 @@ input[type=number] {
 /* ::ng-deep .form-control{
     border: revert-layer;
 } */
+::ng-deep.p-panel .p-panel-header{
+    border: 1px solid #e5e7eb;
+    padding: 1.25rem;
+    background: #f9fafb;
+    color: #374151;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+    background-color: darkorchid;
+    color: white;
+}

@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 
 @Component({
@@ -34,9 +35,10 @@ inputValue:any;
 data: any;
 fabrictype_dropdown: any;
 
-constructor(private fb : FormBuilder , private api : ApiService){
+constructor(private fb : FormBuilder , private api : ApiService , private router : Router){
 
   this.dye_Entery = new FormGroup({
+    "id" : new FormControl(),
     "dyeFactory" : new FormControl(''),
   
     'buyer': new FormControl(''),
@@ -221,7 +223,10 @@ calculateGriegeTotal() {
 
 dyesubmit() {
   this.api.post_dyereport_entry(this.dye_Entery.value).subscribe((res)=>{
-        alert(res.message);
+    alert(res.message)    
+    if(res.success== true){
+      this.router.navigate(['/main/Dye-Report'])    
+    }
   })
 }
 

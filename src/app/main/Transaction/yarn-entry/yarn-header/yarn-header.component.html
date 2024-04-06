@@ -64,7 +64,12 @@
 
                     <tr *ngFor="let process of items.controls; let i=index" [formGroupName]="i">
                         <td></td>
-                        <td><input type="text" class="form-control" formControlName="yarnType" type="text"></td>
+                        <td>
+                            <input type="text" class="form-control" formControlName="yarnType" type="text" list="type">
+                            <datalist id="type">
+                                <option *ngFor="let type of this.yarnType" value="{{type.yarnType}}">{{type.yarnType}}</option>
+                            </datalist>
+                        </td>
                         <td><input type="text" class="form-control" formControlName="lcYarnKgs" type="number"></td>
                         <td><input type="text" class="form-control" formControlName="yarnRate" type="number"></td>
                         <td><input type="number" class="form-control" formControlName="yarnValue"></td>

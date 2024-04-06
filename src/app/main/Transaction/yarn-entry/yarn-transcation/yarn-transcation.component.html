@@ -16,12 +16,12 @@
         <tbody>
             <tr>
                 <td>
-                    <input type="text" class="form-control" formControlName="spinner" readonly>
+                    <input type="text" class="form-control" formControlName="spinner" >
                 </td>
-                <td><input type="date" class="form-control" formControlName="lcDate" readonly></td>
-                <td><input type="text" class="form-control" formControlName="lcNo" readonly></td>
-                <td><input type="text" class="form-control" formControlName="pi" readonly></td>
-                <td><input type="date" class="form-control" formControlName="piDate" readonly></td>
+                <td><input type="date" class="form-control" formControlName="lcDate" ></td>
+                <td><input type="text" class="form-control" formControlName="lcNo" ></td>
+                <td><input type="text" class="form-control" formControlName="pi" ></td>
+                <td><input type="date" class="form-control" formControlName="piDate" ></td>
                 <td><input type="text" class="form-control" readonly formControlName="lcYarnKgs"></td>
                 <td><input type="text" class="form-control" readonly formControlName="lcValue"></td>
                 <td>
@@ -183,7 +183,12 @@
                                                     <option *ngFor="let style of this.style" value="{{style.style}}">{{style.style}}</option>
                                                 </datalist>
                                             </td>
-                                            <td><input type="text" class="form-control" formControlName="colour"></td>
+                                            <td>
+                                                <input type="text" class="form-control" formControlName="colour" list="color">
+                                                <datalist id="color">
+                                                    <option *ngFor="let color of this.color" value="{{color.color}}">{{color.color}}</option>
+                                                </datalist>
+                                            </td>
                                             <td>
                                                 <input type="text" class="form-control" formControlName="lotNo" list="spinLot">
                                                 <datalist id="spinLot">

@@ -125,7 +125,7 @@
             <tbody formArrayName="data">
                 <tr *ngFor="let list of items.controls; let i=index" [formGroupName]="i">
                     <td>
-                        <input type="text" class="form-control" formControlName="knitId" [value]="i+1">
+                        <input type="text" class="form-control" formControlName="id" [value]="i+1">
                     </td>
                     <td>
                         <input type="text" class="form-control" formControlName="buyer" list="1" (input)="getBuyerValue($event)" (change)="getorders()">

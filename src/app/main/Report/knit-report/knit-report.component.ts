@@ -60,11 +60,6 @@ export class KnitReportComponent {
   no:any
     fty_name: any;
     buyer: any;
-    // order: any;
-    // stylelist: any;
-    // colorlist: any;
-    // sizelist: any;
-    // buyerName : any;
     orderNo:any;
     style:any;
     color:any;
@@ -94,7 +89,7 @@ export class KnitReportComponent {
   // ---------------------------
   constructor(private api: ApiService , private fb: FormBuilder, private datePipe: DatePipe , private router : Router) { 
     this.load = this.fb.group({
-      id:0,
+      id:new FormControl(),
       date: new FormControl(''),
       factory : new FormControl(''),
       houseKeepingStatus: new FormControl(''),
@@ -127,7 +122,6 @@ export class KnitReportComponent {
 
   factory() {
     this.loadknitdetails(this.factoryvalue, this.knitdate)
-    console.log(this.knitdate)
   }
   
 
@@ -240,32 +234,22 @@ export class KnitReportComponent {
   }
 
   check(id: any) {
-    console.log(id)
+    this.ktyid = id
     this.api.getsingleknit_details(id).subscribe((res) => {
       this.knitdetails=res.lineData
       this.knitdetails2=res.headerData
-      console.log(this.knitdetails)
     })
-
   }
 
 
 
   edit(id: any) {
     this.ktyid = id;
-    console.log(this.ktyid);
-  
     this.api.getsingleknit_details(this.ktyid).subscribe((res) => {
       this.ktydata = res;
-  
-      const formattedDate = this.datePipe.transform(
-        this.ktydata.headerData[0].date,
-        'yyyy-MM-dd'
-      );
-      console.log(formattedDate);
-  
+
       this.load.patchValue({
-        date: formattedDate,
+        date: this.datePipe.transform(this.ktydata.headerData[0].date, 'yyyy-MM-dd'),
         id:this.ktyid,
         factory: this.ktydata.headerData[0].factory,
         houseKeepingStatus: this.ktydata.headerData[0].houseKeepingStatus,
@@ -281,6 +265,7 @@ export class KnitReportComponent {
       for (let i = 0; i < numberOfEntries; i++) {
         formControls.push(
           this.fb.group({
+            id:'',
             knitId: [i + 1],
             buyer: [''],
             orderNo: [''],
@@ -315,6 +300,7 @@ export class KnitReportComponent {
       });
       this.ktydata.lineData.forEach((lineItem:any, i:any) => {
         this.items.at(i).patchValue({
+          id:lineItem?.id,
           knitId: lineItem?.knitId,
           buyer: lineItem?.buyer || '',
           orderNo: lineItem?.orderNo || '',
@@ -343,36 +329,6 @@ export class KnitReportComponent {
   
   
 
-  KtyFrom = new FormGroup({
-    factory: new FormControl(''),
-    houseKeepingStatus: new FormControl(''),
-    floorLightingStatus: new FormControl(''),
-    gasElecAvailability: new FormControl(''),
-    storageAreaStatus: new FormControl(''),
-    allocatedDay: new FormControl(''),
-  })
-
-  // onCheckboxChange1(event: any) {
-  //   this.KtyFrom.controls['houseKeepingStatus'].setValue(event.target.checked ? 'active' : 'inactive');
-  // }
-  // onCheckboxChange2(event: any) {
-  //   this.KtyFrom.controls['floorLightingStatus'].setValue(event.target.checked ? 'active' : 'inactive');
-  // }
-  // onCheckboxChange3(event: any) {
-  //   this.KtyFrom.controls['gasElecAvailability'].setValue(event.target.checked ? 'active' : 'inactive');
-  // }
-  // onCheckboxChange4(event: any) {
-  //   this.KtyFrom.controls['storageAreaStatus'].setValue(event.target.checked ? 'active' : 'inactive');
-  // }
-
-  ktysubmit() {
-    console.log(this.KtyFrom.value)
-    this.api.knit_entry(this.KtyFrom.value).subscribe((res) => {
-      alert(res.message)
-      this.woByBuyer()
-    })
-  }
-
 
   deleteKnit(id:any){
     this.api.deleteKnitDetails(id).subscribe((res)=>{
@@ -394,6 +350,7 @@ export class KnitReportComponent {
     for (let i = 0; i < numberOfEntries; i++) {
       formControls.push(
         this.fb.group({
+          "id":'',
           "knitId": [i+1],
           "buyer": [''],
           "orderNo": [''],

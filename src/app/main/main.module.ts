@@ -57,7 +57,7 @@ import { YarnEntryComponent } from './Transaction/yarn-entry/yarn-entry.componen
 import { YarnReportComponent } from './Report/yarn-report/yarn-report.component';
 import { YarnHeaderComponent } from './Transaction/yarn-entry/yarn-header/yarn-header.component';
 import { YarnTranscationComponent } from './Transaction/yarn-entry/yarn-transcation/yarn-transcation.component';
-
+import { PanelModule } from 'primeng/panel';
 
 @NgModule({
   declarations: [
@@ -119,6 +119,7 @@ import { YarnTranscationComponent } from './Transaction/yarn-entry/yarn-transcat
     MatAutocompleteModule,
     NgxSpinnerModule.forRoot({type: 'ball-scale-multiple'}),
     MatProgressSpinnerModule,
+    PanelModule,
   ]
 })
 export class MainModule { }
