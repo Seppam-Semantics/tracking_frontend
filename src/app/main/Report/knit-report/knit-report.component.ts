@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 import * as XLSX from 'xlsx'
 
@@ -91,7 +92,7 @@ export class KnitReportComponent {
       this.load.controls['storageAreaStatus'].setValue(ischecked ? 'active' : 'inactive');
     }
   // ---------------------------
-  constructor(private api: ApiService , private fb: FormBuilder, private datePipe: DatePipe) { 
+  constructor(private api: ApiService , private fb: FormBuilder, private datePipe: DatePipe , private router : Router) { 
     this.load = this.fb.group({
       id:0,
       date: new FormControl(''),
@@ -425,6 +426,9 @@ save(){
   this.api.updateKnitEntry(this.load.value).subscribe((res)=>{
   console.log(res.message)
 })
+}
+Report(){
+  this.router.navigate(['/ReportEntry']);
 }
 
 }

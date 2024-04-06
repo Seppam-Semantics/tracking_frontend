@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 
 @Component({
@@ -23,7 +24,7 @@ no:any
   style:any;
   color:any;
   size:any;
-  constructor(private fb: FormBuilder , private api : ApiService) {
+  constructor(private fb: FormBuilder , private api : ApiService , private router : Router) {
     this.load = this.fb.group({
       id:0,
       date: new FormControl(''),
@@ -146,5 +147,6 @@ save(){
   window.location.reload()
 })
 }
+
 
 }

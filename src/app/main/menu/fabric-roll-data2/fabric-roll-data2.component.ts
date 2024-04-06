@@ -2,6 +2,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ApiService } from 'src/app/api.service';
 import * as XLSX from 'xlsx'
@@ -77,7 +78,7 @@ export class FabricRollData2Component implements OnInit {
 
   constructor(private api: ApiService,
     private http: HttpClient,
-    private spinner: NgxSpinnerService) { }
+    private spinner: NgxSpinnerService, private router : Router) { }
 
   ngOnInit(): void {
     this.getbuyers();
@@ -266,6 +267,16 @@ woupdatesubmit(){
     this.woByBuyer()
   })
 }
-
-
+knite(){
+this.router.navigate(['/main/Knite-Report'])
+}
+Dye(){
+  this.router.navigate(['/main/Dye-Report'])
+  }
+  yarn(){
+    this.router.navigate(['/main/Yarn-Report'])
+  }
+  fabricEntry(){
+    this.router.navigate(['/main/fabricroll1'])
+  }
 }

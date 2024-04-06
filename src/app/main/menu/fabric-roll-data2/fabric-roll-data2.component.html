@@ -1,14 +1,15 @@
-<mat-toolbar>
-  <mat-toolbar-row style="display: flex; justify-content: center;">
-    <span>Fabric Roll Data</span>
-  </mat-toolbar-row>
+<mat-toolbar style="display: flex; justify-content: space-around;">
+  <button  (click)="knite()" class="btn btn-primary">Knite-Entry</button>
+  <button  (click)="Dye()" class="btn btn-primary">Dye-Entry</button>
+  <button  (click)="yarn()" class="btn btn-primary">Yarn-Entry</button>
 </mat-toolbar>
+
 <cdk-accordion class="example-accordion">
   <cdk-accordion-item #accordionItem="cdkAccordionItem" class="example-accordion-item" role="button" tabindex="0"
     style="display: flex; flex-direction: column; justify-content: center;">
 
     <div class="example-accordion-item-header" (click)="accordionItem.toggle()"
-      style="display: flex; justify-content: center; gap: 0.5%; margin-top: 2%;">
+      style="display: flex; justify-content: space-around; gap: 0.5%; margin-top: 2%;">
 
       <mat-form-field appearance="outline" (click)="clearAll()">
         <mat-label>Buyer</mat-label>
@@ -54,10 +55,13 @@
 </cdk-accordion>
 
 <!---===========================================================================================================-->
-<div style="display: flex; justify-content: end;">
-  <button class="btn btn-primary" style="display: flex; justify-content: left; margin-top: -2%;"
-    (click)="exportexcel2()">Download File</button>
-</div>
+
+
+<mat-toolbar style="height: fit-content; padding: 10px;">
+  <span style="flex: 1 1 auto;"></span>
+  <button mat-button color='primary' style="margin-right: 12px;" (click)="exportexcel2()">Download</button>
+  <button mat-button color='primary' style="margin-right: 12px;" (click)="fabricEntry()">New</button>
+</mat-toolbar>
 
 
 <div class="fixTableHead">

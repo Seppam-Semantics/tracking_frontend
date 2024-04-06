@@ -25,10 +25,12 @@
 
 <!---===========================================================================================================-->
 <div style="display: flex; justify-content: end;">
-  <button class="btn btn-primary" style="display: flex; justify-content: left; margin-top: -2%;"
-    (click)="exportexcel2()">Download File</button>
 </div>
-
+<mat-toolbar style="height: fit-content; padding: 10px;">
+  <span style="flex: 1 1 auto;"></span>
+  <button mat-button color='primary' style="margin-right: 12px;" (click)="Report()">New</button>
+  <button mat-button color='primary' style="margin-right: 12px;" (click)="exportexcel2()">Download</button>
+</mat-toolbar>
 
 <div class="fixTableHead">
   <table id="table-data2" class="table table-hover">

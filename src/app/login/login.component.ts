@@ -37,7 +37,7 @@ token:any;
   if (res.success == true){
     const token = res.token;
     sessionStorage.setItem('token', token)
-    this.router.navigate(['/main']);
+    this.router.navigate(['/main/FabricRollData']);
     alert(res.message)
   }
   else{

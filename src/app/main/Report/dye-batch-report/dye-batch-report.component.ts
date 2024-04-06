@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 
 @Component({
@@ -38,7 +39,7 @@ export class DyeBatchReportComponent implements OnInit {
 
 
 
-  constructor(private api: ApiService, private fb: FormBuilder, private datePipe: DatePipe) {
+  constructor(private api: ApiService, private fb: FormBuilder, private datePipe: DatePipe , private router : Router) {
     this.dye_Entery = new FormGroup({
       "id" : new FormControl(''),
       "dyeFactory": new FormControl(''),
@@ -486,5 +487,7 @@ export class DyeBatchReportComponent implements OnInit {
     window.location.reload()
     console.log(this.dye_Entery.value)
   }
-
+  DyeBatchButton(){
+    this.router.navigate(['/DyeBatchEntry'])
+  }
 }

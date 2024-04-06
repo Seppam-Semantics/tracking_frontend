@@ -1,172 +1,172 @@
-        <div [formGroup]="dye_Entery">
-            <mat-toolbar>
-                <span>
-                    Dye Batch Entry
-                </span>
-                <span style="flex: 1 1 auto;"></span>
-        
-                <div style="display: flex; gap: 10px; margin-top: -1vh;">
-                    <div>
-                        <mat-form-field appearance="outline" style="margin-top: 4vh;">
-                            <mat-select formControlName="dyeFactory">
-                                <mat-option *ngFor="let data of this.factoryname;"
-                                    [value]="data.dyeinFty">{{data.dyeinFty}}</mat-option>
-                            </mat-select>
-                            <mat-label>Dye Factory</mat-label>
-                        </mat-form-field>
-                    </div>
-        
-                    <div>
-                        <mat-form-field style="margin-top: 4vh;" appearance="outline">
-                            <input matInput type="text" formControlName="batchNo">
-                            <mat-label>Batch No</mat-label>
-                        </mat-form-field>
-                    </div>
-                </div>
-        
-            </mat-toolbar>
-        
-            <mat-toolbar style="display: contents;">
-                <div style="display: flex; justify-content: center;background-color: darkgray;">
-                    <div><Button class="btn btn-primary" (click)="dyesubmit()"> Save </Button></div>
-                </div>
-            </mat-toolbar>
-            <div style="overflow: scroll; height:76vh;">
-        
-            <mat-toolbar style="display: inline-table;">
-                <div style="display: flex; justify-content: space-between;">
-        
-                    <div>
-                        <div style="display: flex; flex-direction: column;">
-                            <div>
-                                <mat-toolbar style="display: inline-table;">
-                                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                                        <mat-form-field appearance="outline" (click)="clearAll()"
-                                            style="margin-top: 4vh;">
-                                            <mat-label>Buyer</mat-label>
-                                            <mat-select [(ngModel)]="buyerName" (selectionChange)="woByBuyer()"
-                                                formControlName="buyer">
-                                                <mat-option value=""> </mat-option>
-                                                <mat-option *ngFor="let buyer of this.buyers"
-                                                    value="{{buyer.buyer}}">{{buyer.buyer}}</mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
-        
-                                        <mat-form-field appearance="outline" style="margin-top: 4vh; ;">
-                                            <mat-label>Order</mat-label>
-                                            <mat-select [(ngModel)]="ordernumbers" (selectionChange)="wobyOrder()"
-                                                formControlName="orderNo">
-                                                <mat-option value=""> </mat-option>
-                                                <mat-option *ngFor="let order of this.order"
-                                                    value="{{order.orderNO}}">{{order.orderNO}}</mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
-        
-                                        <mat-form-field appearance="outline" style="margin-top: 4vh; ;">
-                                            <mat-label>Style</mat-label>
-                                            <mat-select [(ngModel)]="styleslist" (selectionChange)="wobystyle()"
-                                                formControlName="style">
-                                                <mat-option value=""> </mat-option>
-                                                <mat-option *ngFor="let style of this.stylelist"
-                                                    value="{{style.style}}">{{style.style}}</mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
-        
-                                        <mat-form-field appearance="outline" style="margin-top: 4vh; ;">
-                                            <mat-label>color</mat-label>
-                                            <mat-select [(ngModel)]="colorslist" (selectionChange)="wobycolor()"
-                                                formControlName="color">
-                                                <mat-option value=""> </mat-option>
-                                                <mat-option *ngFor="let color of this.colorlist"
-                                                    value="{{color.color}}">{{color.color}}</mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
-                                    </div>
-                                </mat-toolbar>
+<div [formGroup]="dye_Entery">
+    
+    <mat-toolbar>
+        <span>
+            Dye Batch Entry
+        </span>
+        <span style="flex: 1 1 auto;"></span>
+
+        <div style="display: flex; gap: 10px; margin-top: 20px;">
+            <div>
+                <mat-form-field appearance="outline">
+                    <mat-select formControlName="dyeFactory">
+                        <mat-option *ngFor="let data of this.factoryname;"
+                            [value]="data.dyeinFty">{{data.dyeinFty}}</mat-option>
+                    </mat-select>
+                    <mat-label>Dye Factory</mat-label>
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field appearance="outline">
+                    <input matInput type="text" formControlName="batchNo">
+                    <mat-label>Batch No</mat-label>
+                </mat-form-field>
+            </div>
+        </div>
+
+    </mat-toolbar>
+
+    <mat-toolbar style="display: contents;">
+        <div style="display: flex; justify-content: center;background-color: darkgray;">
+            <div><Button class="btn btn-primary" (click)="dyesubmit()"> Save </Button></div>
+        </div>
+    </mat-toolbar>
+    <div style="overflow: scroll; height:76vh;">
+
+    <mat-toolbar style="display: inline-table;">
+        <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+
+            <div>
+                <div style="display: flex; flex-direction: column;">
+                    <div style="display: flex;">
+                        <mat-toolbar style="display: inline-table;">
+                            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                                <mat-form-field appearance="outline" (click)="clearAll()" style="margin-top: 4vh; ">
+                                    <mat-label>Buyer</mat-label>
+                                    <mat-select [(ngModel)]="buyerName" (selectionChange)="woByBuyer()"
+                                        formControlName="buyer">
+                                        <mat-option value=""> </mat-option>
+                                        <mat-option *ngFor="let buyer of this.buyers"
+                                            value="{{buyer.buyer}}">{{buyer.buyer}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline" style="margin-top: 4vh; ">
+                                    <mat-label>Order</mat-label>
+                                    <mat-select [(ngModel)]="ordernumbers" (selectionChange)="wobyOrder()"
+                                        formControlName="orderNo">
+                                        <mat-option value=""> </mat-option>
+                                        <mat-option *ngFor="let order of this.order"
+                                            value="{{order.orderNO}}">{{order.orderNO}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline" style="margin-top: 4vh; ">
+                                    <mat-label>Style</mat-label>
+                                    <mat-select [(ngModel)]="styleslist" (selectionChange)="wobystyle()"
+                                        formControlName="style">
+                                        <mat-option value=""> </mat-option>
+                                        <mat-option *ngFor="let style of this.stylelist"
+                                            value="{{style.style}}">{{style.style}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline" style="margin-top: 4vh; ">
+                                    <mat-label>color</mat-label>
+                                    <mat-select [(ngModel)]="colorslist" (selectionChange)="wobycolor()"
+                                        formControlName="color">
+                                        <mat-option value=""> </mat-option>
+                                        <mat-option *ngFor="let color of this.colorlist"
+                                            value="{{color.color}}">{{color.color}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
                             </div>
-        
-        
-                            <div>
-                                <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                                    <mat-toolbar>
-                                        <mat-form-field appearance="outline" style="margin-top: 4vh; ;">
-                                            <mat-label>Fabric Type</mat-label>
-                                            <input type="text" formControlName="fabricType" matInput>
-                                        </mat-form-field>
-                                        <div
-                                            style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 0vh; margin-left: 1vh;">
-                                            <div style="display: flex; gap: 10px;">
-                                                <span style="font-size:15px; display: inline-block;">Softner (Y/N)</span>
-                                                <div>
-                                                    <input type="checkbox" style="height: 20px; width: 20px; margin-top: 1vh;"
-                                                        formControlName="softner">
-                                                </div>
-                                            </div>
-        
-                                            <div style="display: flex; gap: 10px;">
-                                                <span style="font-size:15px; display: inline-block;">Silicon (Y/N)</span>
-                                                <div><input type="checkbox" style="height: 20px; width: 20px; margin-top: 1vh;"
-                                                        formControlName="silicon"></div>
-                                            </div>
-        
-                                            <div style="display: flex; gap: 10px;">
-                                                <span style="font-size:15px; display: inline-block;">Enzyme (Y/N)</span>
-                                                <div><input type="checkbox" style="height: 20px; width: 20px; margin-top: 1vh;"
-                                                        formControlName="enzyme"></div>
-                                            </div>
+                        </mat-toolbar>
+                    </div>
+
+
+                    <div>
+                        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                            <mat-toolbar>
+
+                                <mat-form-field appearance="outline" style="margin-top: 4vh; ;">
+                                    <mat-label>Fabric Type</mat-label>
+                                    <input type="text" formControlName="fabricType" matInput>
+                                </mat-form-field>
+                                <div style="display: flex; gap: 20px; flex-wrap: wrap;  margin-left: 1vh;">
+                                    <div style="display: flex; gap: 10px;">
+                                        <span style="font-size:15px; display: inline-block;">Softner (Y/N)</span>
+                                        <div>
+                                            <input type="checkbox" style="height: 20px; width: 20px; margin-top: 1vh;"
+                                                formControlName="softner">
                                         </div>
-                                    </mat-toolbar>
+                                    </div>
+
+                                    <div style="display: flex; gap: 10px;">
+                                        <span style="font-size:15px; display: inline-block;">Silicon (Y/N)</span>
+                                        <div><input type="checkbox" style="height: 20px; width: 20px; margin-top: 1vh;"
+                                                formControlName="silicon"></div>
+                                    </div>
+
+                                    <div style="display: flex; gap: 10px;">
+                                        <span style="font-size:15px; display: inline-block;">Enzyme (Y/N)</span>
+                                        <div><input type="checkbox" style="height: 20px; width: 20px; margin-top: 1vh;"
+                                                formControlName="enzyme"></div>
+                                    </div>
                                 </div>
-                            </div>
+                            </mat-toolbar>
                         </div>
                     </div>
-          <!--------------------------------------------->
-                    <div>
-                     
-                            <div style="display: flex; justify-content: center;">
-                                <table class="table table-hover">
-                                    <thead class="thead-dark">
-                                        <tr>
-                                            <th style="font-size:small;">Size</th>
-                                            <th style="font-size:small;">Griege</th>
-                                            <th style="font-size:small;">Finish</th>
-                                            <th style="font-size:small;">Diff</th>
-                                            <th style="font-size:small;">PL</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody formArrayName="data">
-                                        <tr *ngFor="let process of items.controls; let i=index" [formGroupName]="i">
-                                            <td>
-                                                <input type="text" formControlName="size" list="size" class="form-control" style="width: 15vh; display: inline;">
-                                                <datalist id="size">
-                                                    <option *ngFor="let size of this.sizelist" value="{{size.size}}">{{size.size}}
-                                                    </option>
-                                                </datalist>
-                                            </td>
-                                            <td><input type="number" class="form-control" formControlName="griege" style="width: 15vh; display: inline;">
-                                            </td>
-                                            <td><input type="number" class="form-control" formControlName="finish" style="width: 15vh; display: inline;">
-                                            </td>
-                                            <td><input type="number" class="form-control" formControlName="diff" readonly style="width: 15vh; display: inline;"></td>
-                                            <td><input type="number" class="form-control" formControlName="PL" readonly style="width: 15vh; display: inline;"></td>
-                                        </tr>
-                                    </tbody>
-                                    <thead class="thead-dark">
-                                    <tr >
-                                        <th><span>Total</span></th>
-                                        <th><input type="number" class="form-control" readonly formControlName="GriegeTotal" style="width: 15vh; display: inline;"></th>
-                                        <th><input type="number" class="form-control" readonly formControlName="FinishTotal" style="width: 15vh; display: inline;"></th>
-                                        <th><input type="number" class="form-control" readonly formControlName="differenceTotal" style="width: 15vh; display: inline;"></th>
-                                        <th><input type="number" class="form-control" readonly formControlName="PLTotal" style="width: 15vh; display: inline;"></th>
-                                    </tr>
-                                </thead>
-                                </table>
-                            </div>
-        
-                    </div>
-        
                 </div>
-            </mat-toolbar>
+            </div>
+    <!--------------------------------------------->
+            <div>
+             
+                    <div style="display: flex; justify-content: center; margin-top: 5px;">
+                        <table class="table table-hover">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th style="font-size:small;">Size</th>
+                                    <th style="font-size:small;">Griege</th>
+                                    <th style="font-size:small;">Finish</th>
+                                    <th style="font-size:small;">Diff</th>
+                                    <th style="font-size:small;">PL</th>
+                                </tr>
+                            </thead>
+                            <tbody formArrayName="data">
+                                <tr *ngFor="let process of items.controls; let i=index" [formGroupName]="i">
+                                    <td>
+                                        <input type="text" formControlName="size" list="size" class="form-control" style="width: 15vh; display: inline;">
+                                        <datalist id="size">
+                                            <option *ngFor="let size of this.sizelist" value="{{size.size}}">{{size.size}}
+                                            </option>
+                                        </datalist>
+                                    </td>
+                                    <td><input type="number" class="form-control" formControlName="griege" style="width: 15vh; display: inline;">
+                                    </td>
+                                    <td><input type="number" class="form-control" formControlName="finish" style="width: 15vh; display: inline;">
+                                    </td>
+                                    <td><input type="number" class="form-control" formControlName="diff" readonly style="width: 15vh; display: inline;"></td>
+                                    <td><input type="number" class="form-control" formControlName="PL" readonly style="width: 15vh; display: inline;"></td>
+                                </tr>
+                            </tbody>
+                            <thead class="thead-dark">
+                            <tr >
+                                <th><span>Total</span></th>
+                                <th><input type="number" class="form-control" readonly formControlName="GriegeTotal" style="width: 15vh; display: inline;"></th>
+                                <th><input type="number" class="form-control" readonly formControlName="FinishTotal" style="width: 15vh; display: inline;"></th>
+                                <th><input type="number" class="form-control" readonly formControlName="differenceTotal" style="width: 15vh; display: inline;"></th>
+                                <th><input type="number" class="form-control" readonly formControlName="PLTotal" style="width: 15vh; display: inline;"></th>
+                            </tr>
+                        </thead>
+                        </table>
+                    </div>
+
+            </div>
+
+        </div>
+    </mat-toolbar>
          <!--------------------------------------------------------------------------->
          <div>
             <div
@@ -174,12 +174,14 @@
                 <!------------------------ Batch Entry [Start]--------------------------------------------------->
                 <div>
                     <mat-card class="Batch-Entry1">
+                        <mat-card-header>
                         <mat-card-title>
                             Batch Entry
                         </mat-card-title>
                         <mat-card-subtitle>
                             Entry Details
                         </mat-card-subtitle>
+                    </mat-card-header>
                         <mat-card-content>
                             <div>
 
@@ -210,12 +212,14 @@
                 <!------------------------ Dyeing Process Entry [Start]--------------------------------------------------->
                 <div style="margin-top: 2%;">
                     <mat-card class="Batch-Entry2">
+                        <mat-card-header>
                         <mat-card-title>
                             Dyeing Process
                         </mat-card-title>
                         <mat-card-subtitle>
                             Entry Details
                         </mat-card-subtitle>
+                        </mat-card-header>
                         <mat-card-content>
                             <div>
 
@@ -265,12 +269,14 @@
                 <!------------------------------------Shade Check [Start] ------------------------------------------------------->
                 <div>
                     <mat-card class="Shade-Check1">
+                        <mat-card-header>
                         <mat-card-title>
                             Shade Check
                         </mat-card-title>
                         <mat-card-subtitle>
                             Entry Details
                         </mat-card-subtitle>
+                    </mat-card-header>
                         <mat-card-content>
                             <div>
 
@@ -330,12 +336,14 @@
                 <!------------------------------------Squeezer [Start] ------------------------------------------------------->
                 <div style="margin-top: 2%;">
                     <mat-card class="Shade-Check2">
+                    <mat-card-header>
                         <mat-card-title>
                             Squeezer
                         </mat-card-title>
                         <mat-card-subtitle>
                             Entry Details
                         </mat-card-subtitle>
+                    </mat-card-header>
                         <mat-card-content>
                             <div>
 
@@ -408,12 +416,14 @@
                 <!---------------------------------------Dryer[ start ]--------------------------------------------------------->
                 <div>
                     <mat-card class="Dryer1">
+                    <mat-card-header>
                         <mat-card-title>
                             Dryer
                         </mat-card-title>
                         <mat-card-subtitle>
                             Entry Details
                         </mat-card-subtitle>
+                    </mat-card-header>
                         <mat-card-content>
                             <div>
 
@@ -459,12 +469,14 @@
                 <!-------------------------------------------------Calender[ Start ]---------------------------------------------------->
                 <div style="margin-top: 2%;">
                     <mat-card class="Dryer2">
+                    <mat-card-header>
                         <mat-card-title>
                             Calendar
                         </mat-card-title>
                         <mat-card-subtitle>
                             Entry Details
                         </mat-card-subtitle>
+                    </mat-card-header>
                         <mat-card-content>
                             <div>
 
@@ -494,12 +506,14 @@
                 style="display: flex; flex-wrap: wrap; justify-content: space-between; margin-top: 3%; margin-bottom: 3%;">
                 <div>
                     <mat-card class="Slitting1">
+                    <mat-card-header>
                         <mat-card-title>
                             Slitting
                         </mat-card-title>
                         <mat-card-subtitle>
                             Entry Details
                         </mat-card-subtitle>
+                    </mat-card-header>
                         <mat-card-content>
                             <div>
 
@@ -535,12 +549,14 @@
                 <!--------------------------------------------------Stenter [Start]------------------------------------------------->
                 <div style="margin-top: 2%;">
                     <mat-card class="Slitting2">
+                    <mat-card-header>
                         <mat-card-title>
                             Stenter
                         </mat-card-title>
                         <mat-card-subtitle>
                             Entry Details
                         </mat-card-subtitle>
+                    </mat-card-header>
                         <mat-card-content>
                             <div>
 
@@ -598,12 +614,14 @@
                 <!----------------------------------Open Compact [Start]--------------------------------------------------------->
                 <div>
                     <mat-card class="Open-Compact1">
+                    <mat-card-header>
                         <mat-card-title>
                             Open Compact
                         </mat-card-title>
                         <mat-card-subtitle>
                             Entry Details
                         </mat-card-subtitle>
+                    </mat-card-header>
                         <mat-card-content>
                             <div>
 
@@ -655,12 +673,14 @@
                 <!-----------------------------------------Tubtex [ start ]------------------------------------------------>
                 <div style="margin-top: 2%;">
                     <mat-card class="Open-Compact2">
+                    <mat-card-header>
                         <mat-card-title>
                             Tubtex
                         </mat-card-title>
                         <mat-card-subtitle>
                             Entry Details
                         </mat-card-subtitle>
+                    </mat-card-header>
                         <mat-card-content>
                             <div>
 
@@ -738,12 +758,14 @@
                 <!-----------------------------------------Final-Batch-Report [ Start ]------------------------------------------------>
                 <div>
                     <mat-card class="Final-Batch-Report">
+                    <mat-card-header>
                         <mat-card-title>
                             Final Batch Report
                         </mat-card-title>
                         <mat-card-subtitle>
                             Entry Details
                         </mat-card-subtitle>
+                    </mat-card-header>
                         <mat-card-content>
                             <div>
 
@@ -842,12 +864,14 @@
                 <!-----------------------------------------Final-Batch-Report [ Ends ]------------------------------------------------>
                 <div style="margin-top: 2%;">
                     <mat-card class="Final-Batch-Report">
+                    <mat-card-header>
                         <mat-card-title>
                             Batch Remarks
                         </mat-card-title>
                         <mat-card-subtitle>
                             Entry Details
                         </mat-card-subtitle>
+                    </mat-card-header>
                         <mat-card-content>
                             <div>
                                 <textarea class="form-control" style="height: 40vh; width: 60vh;"

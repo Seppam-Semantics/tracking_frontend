@@ -69,6 +69,15 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
 
+
+        <mat-nav-list >
+          <a mat-list-item [routerLink]="'FabricRollData'" (click)="snav.toggle()">
+            <div class="text">
+              Fabric Rolls Report
+            </div>
+          </a>
+        </mat-nav-list>
+<!-- 
         <mat-nav-list>
           <a mat-list-item [routerLink]="'Yarn-Report'" (click)="snav.toggle()">
             <div class="text">
@@ -99,18 +108,18 @@
               Fabric Roll Entry
             </div>
           </a>
-        </mat-nav-list>
+        </mat-nav-list> -->
 
       </mat-expansion-panel>
 
 
-      <mat-expansion-panel>
+      <!-- <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title>
             <mat-icon class="nav-icon">workspaces</mat-icon>
             Report
           </mat-panel-title>
-        </mat-expansion-panel-header>
+        </mat-expansion-panel-header> -->
 
         <!-- <mat-nav-list>
           <a mat-list-item [routerLink]="'Yarn-Report'" (click)="snav.toggle()">
@@ -120,7 +129,7 @@
           </a>
         </mat-nav-list> -->
         
-        <mat-nav-list>
+        <!-- <mat-nav-list>
           <a mat-list-item [routerLink]="'Knite-Report'" (click)="snav.toggle()">
             <div class="text">
               Knite Report
@@ -142,14 +151,14 @@
               Fabric Rolls Report
             </div>
           </a>
-        </mat-nav-list>
+        </mat-nav-list> -->
 
-      </mat-expansion-panel>
+      <!-- </mat-expansion-panel> -->
 
     </mat-accordion>
   </mat-sidenav>
 
-  <mat-sidenav-content style="overflow: hidden;">
+  <mat-sidenav-content style="overflow: scroll; scrollbar-width: none;">
 
     <router-outlet></router-outlet>
 
