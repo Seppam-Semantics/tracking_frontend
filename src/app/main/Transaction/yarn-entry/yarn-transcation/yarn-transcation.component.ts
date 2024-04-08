@@ -60,6 +60,8 @@ export class YarnTranscationComponent implements OnInit {
   lotlineDetails: any;
   colorlist: any;
   orderNumber: any;
+  yarnId: any;
+  yarnKg: any;
 
   constructor(private fb: FormBuilder, private api: ApiService, private datePipe: DatePipe) { }
 
@@ -108,6 +110,7 @@ export class YarnTranscationComponent implements OnInit {
       this.yarnQualityCheck = res.yarn_quality_check;
       this.yarnReceiptsLines = res.yarn_receipts_lines
       this.yarnlotcheckLotNo = res.lotNo
+      this.yarnId = this.yarn[0].id
 
       const formattedDate1 = this.datePipe.transform(
         this.yarn[0].lcDate,
@@ -192,6 +195,7 @@ export class YarnTranscationComponent implements OnInit {
 
   add1button() {
     const row = this.fb.group({
+      "id":new FormControl(''),
       "yarnType": new FormControl(''),
       "lcYarnKgs": new FormControl(''),
       "yarnRate": new FormControl(''),
@@ -217,7 +221,7 @@ export class YarnTranscationComponent implements OnInit {
 
   Yarn_Entry_save() {
     const yarnHeaderData = this.fb.group({
-      id : this.yarnHeader.get('id')?.value, 
+      id : this.yarnId,
       spinner: this.yarnHeader.get('spinner')?.value,
       lcDate: this.yarnHeader.get('lcDate')?.value,
       lcNo: this.yarnHeader.get('lcNo')?.value,
@@ -228,6 +232,7 @@ export class YarnTranscationComponent implements OnInit {
       yarnStatus: this.yarnHeader.get('yarnStatus')?.value,
       data: this.Yarn_Entry_1.get('data')
     })
+    console.log(yarnHeaderData.value)
     this.api.addUpdateYarn(yarnHeaderData.value).subscribe((res) => {
       alert(res.message)
       window.location.reload()
@@ -308,7 +313,7 @@ export class YarnTranscationComponent implements OnInit {
     const yarnDataId = this.yarn[0].id
     this.api.yarnLineData(yarnDataId, this.yarnLineId).subscribe((res)=>{
       this.lineDetails = res.data
-
+      this.yarnKg = res.data[0].lcYarnKgs
 
     const receivedData = this.yarnOrderAllocations;
   
@@ -383,8 +388,46 @@ export class YarnTranscationComponent implements OnInit {
       unallocatedYarnKgs: new FormControl('')
     });
 
+    Row2.get('allocatedYarnKgs')?.valueChanges.subscribe(() => {
+      this.calculateDiff2();
+  });
+
     this.items2.push(Row2);
   }
+
+  calculateDiff2() {
+    let lastUnallocatedYarnKgsArray: number[] = [this.yarnKg];
+    let lastAllocatedYarnKgsControl: number[] = [];
+
+    (this.OrderAllocation.get('data') as FormArray).controls.forEach((control: AbstractControl) => {
+      const row = control as FormGroup;
+      if (row instanceof FormGroup) {
+        const controls = Object.keys(row.controls);
+        
+        const lastControlName = controls[controls.length - 1];
+        const AllocatedYarnKgs = controls[controls.length - 2];
+
+        const lastControl = row.get(lastControlName);
+        const AllocatedYarnKgsControl = row.get(AllocatedYarnKgs);
+
+        let lastUnallocatedYarnKg = 0;
+        let AllocatedYarnKgsvalue = 0;
+        if (lastControl && AllocatedYarnKgsControl instanceof FormControl) {
+          lastUnallocatedYarnKg = parseFloat(lastControl.value) || 0;
+          AllocatedYarnKgsvalue = parseFloat(AllocatedYarnKgsControl.value) || 0;
+        }
+        lastUnallocatedYarnKgsArray.push(lastUnallocatedYarnKg);
+        lastAllocatedYarnKgsControl.push(AllocatedYarnKgsvalue);
+
+
+        const lastunallocatedYarnKgs = lastUnallocatedYarnKgsArray[lastUnallocatedYarnKgsArray.length - 2];
+        const lastallocatedYarnKgs = lastAllocatedYarnKgsControl[lastAllocatedYarnKgsControl.length - 1];
+        const unallocatedYarnKgs = lastunallocatedYarnKgs - lastallocatedYarnKgs;
+        row.patchValue({ unallocatedYarnKgs });
+      }
+    });
+  }
+
 
   get items2() {
     return this.OrderAllocation.get("data") as FormArray;
