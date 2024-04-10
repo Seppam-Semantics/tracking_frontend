@@ -60,3 +60,17 @@ thead{
     position: sticky;
     top: 0;
 }
+::ng-deep .p-dialog-draggable .p-dialog-header{
+    cursor: move;
+    height: 0px;
+}
+::ng-deep.p-dialog .p-dialog-footer{
+    border-top: 0 none;
+    background: #ffffff;
+    color: #4b5563;
+    padding: 0 1.5rem 1.5rem 1.5rem;
+    text-align: right;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    height: 8vh;
+}

@@ -116,4 +116,22 @@ export class YarnReportComponent implements OnInit {
     sessionStorage.setItem('singleData', id)
     this.router.navigate(['/main/yarn-transcation'])
   }
+
+  delete(id: any) {
+    let text = "Press a button!\nEither OK or Cancel.";
+    if (confirm(text) == true) {
+      this.api.deleteYarn(id).subscribe(
+        (res) => {
+          alert(res.message);
+          window.location.reload();
+        },
+        (error) => {
+          alert("An error occurred while deleting the yarn: " + error.message);
+        }
+      );
+    } else {
+      alert("Cancelled");
+    }
+  }
+  
 }

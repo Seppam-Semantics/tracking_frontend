@@ -62,6 +62,13 @@ export class YarnTranscationComponent implements OnInit {
   orderNumber: any;
   yarnId: any;
   yarnKg: any;
+  orderDetails: any;
+  lotYarnType: any;
+  Receipttest: any;
+  lotCheckModal: boolean = false;
+  orderAllocationModal : boolean = false;
+  receiptModal : boolean = false;
+  yarnQcModal : boolean =false;
 
   constructor(private fb: FormBuilder, private api: ApiService, private datePipe: DatePipe) { }
 
@@ -232,7 +239,6 @@ export class YarnTranscationComponent implements OnInit {
       yarnStatus: this.yarnHeader.get('yarnStatus')?.value,
       data: this.Yarn_Entry_1.get('data')
     })
-    console.log(yarnHeaderData.value)
     this.api.addUpdateYarn(yarnHeaderData.value).subscribe((res) => {
       alert(res.message)
       window.location.reload()
@@ -245,10 +251,15 @@ export class YarnTranscationComponent implements OnInit {
     this.yarnLineId = this.yarnLcLines[index].id;
     this.LotCheck.controls['yarnId'].setValue(this.yarn[0].id);
     const yarnDataId = this.yarn[0].id
-    this.api.yarnLineData(yarnDataId, this.yarnLineId).subscribe((res)=>{
-      this.lotlineDetails = res.data
 
-    const receivedData = this.yarnLotCheck;
+    this.api.yarnLineData(yarnDataId, this.yarnLineId).subscribe((res)=>{
+      this.lotYarnType = res.data[0]
+    })
+
+    this.api.lcDetailsForlot(yarnDataId, this.yarnLineId).subscribe((res)=>{
+      this.lotlineDetails = res.lcData
+
+    const receivedData = this.lotlineDetails;
   
     const yarnEntryData = this.LotCheck.get('data') as FormArray;
     yarnEntryData.clear();
@@ -257,7 +268,7 @@ export class YarnTranscationComponent implements OnInit {
       const LotCheckDetails = this.fb.group({
         id: dataItem.id,
         yarnLineId: this.yarnLineId,
-        yarnType: dataItem.yarnType,
+        yarnType: this.lotYarnType.yarnType,
         lotNo: dataItem.lotNo,
         sampleDate: this.datePipe.transform(dataItem.sampleDate,'yyyy-MM-dd'),
         resultDate: this.datePipe.transform(dataItem.resultDate,'yyyy-MM-dd'),
@@ -267,6 +278,7 @@ export class YarnTranscationComponent implements OnInit {
       yarnEntryData.push(LotCheckDetails);
     });
   })
+  this.lotCheckModal=true;
   }
   
   LotCheck = this.fb.group({
@@ -282,7 +294,7 @@ export class YarnTranscationComponent implements OnInit {
     const LotCheckDetails = this.fb.group({
       id:new FormControl(),
       yarnLineId: new FormControl(this.yarnLineId),
-      yarnType: new FormControl(this.lotlineDetails[0].yarnType),
+      yarnType: new FormControl(this.lotYarnType.yarnType),
       lotNo: new FormControl(),
       sampleDate: new FormControl(),
       resultDate: new FormControl(),
@@ -312,10 +324,14 @@ export class YarnTranscationComponent implements OnInit {
     this.OrderAllocation.controls['yarnId'].setValue(this.yarn[0].id);
     const yarnDataId = this.yarn[0].id
     this.api.yarnLineData(yarnDataId, this.yarnLineId).subscribe((res)=>{
-      this.lineDetails = res.data
       this.yarnKg = res.data[0].lcYarnKgs
+      this.lineDetails = res.data
+    })
 
-    const receivedData = this.yarnOrderAllocations;
+    this.api.lcDetailsForOrder(yarnDataId, this.yarnLineId).subscribe((res)=>{
+      this.orderDetails = res.lcData
+
+    const receivedData = this.orderDetails;
   
     const yarnEntryData = this.OrderAllocation.get('data') as FormArray;
     yarnEntryData.clear();
@@ -339,6 +355,7 @@ export class YarnTranscationComponent implements OnInit {
     });
   })
     this.getbuyers()
+    this.orderAllocationModal = true;
   }
 
   getorders(buyer:any) {
@@ -355,10 +372,8 @@ export class YarnTranscationComponent implements OnInit {
   }
 
   getcolor(style: any) {
-    console.log(style)
     this.api.getcolor(this.buyerName, this.orderNumber, style).subscribe((res) => {
       this.colorlist = res.colors;
-      console.log(res)
     })
   }
 
@@ -449,10 +464,11 @@ export class YarnTranscationComponent implements OnInit {
 
   orderId(index:any){
     this.yarnOrderId = this.yarnOrderAllocations[index].id
-
+    this.Receipttest = this.yarnOrderAllocations[index].allocatedYarnKgs
     this.receiptForm.controls['yarnId'].setValue(this.yarn[0].id);
-
-    const receivedData = this.yarnReceiptsLines;
+    const yarnDataId = this.yarn[0].id
+    this.api.lcDetailsForReceipt(yarnDataId,this.yarnOrderId).subscribe((res)=>{
+    const receivedData = res.lcData;
   
     const yarnEntryData = this.receiptForm.get('data') as FormArray;
     yarnEntryData.clear();
@@ -471,6 +487,8 @@ export class YarnTranscationComponent implements OnInit {
       });
       yarnEntryData.push(Row3);
     });
+  })
+  this.receiptModal=true
   }
 
   receiptForm = this.fb.group({
@@ -496,6 +514,42 @@ export class YarnTranscationComponent implements OnInit {
     });
 
     this.items3.push(Row3);
+
+    Row3.get('receiptYarnKgs')?.valueChanges.subscribe(() => {
+      this.calculateDiff3();
+  });
+  }
+  calculateDiff3() {
+    let lastPendingReceipts: number[] = [this.Receipttest];
+    let lastAllocatedYarnKgsControl: number[] = [];
+
+    (this.receiptForm.get('data') as FormArray).controls.forEach((control: AbstractControl) => {
+      const row = control as FormGroup;
+      if (row instanceof FormGroup) {
+        const controls = Object.keys(row.controls);
+        
+        const lastControlName = controls[controls.length - 1];
+        const AllocatedYarnKgs = controls[controls.length - 2];
+
+        const lastControl = row.get(lastControlName);
+        const AllocatedYarnKgsControl = row.get(AllocatedYarnKgs);
+
+        let lastUnallocatedYarnKg = 0;
+        let AllocatedYarnKgsvalue = 0;
+        if (lastControl && AllocatedYarnKgsControl instanceof FormControl) {
+          lastUnallocatedYarnKg = parseFloat(lastControl.value) || 0;
+          AllocatedYarnKgsvalue = parseFloat(AllocatedYarnKgsControl.value) || 0;
+        }
+        lastPendingReceipts.push(lastUnallocatedYarnKg);
+        lastAllocatedYarnKgsControl.push(AllocatedYarnKgsvalue);
+
+
+        const lastunallocatedYarnKgs = lastPendingReceipts[lastPendingReceipts.length - 2];
+        const lastallocatedYarnKgs = lastAllocatedYarnKgsControl[lastAllocatedYarnKgsControl.length - 1];
+        const pendingReceiptKgs = lastunallocatedYarnKgs - lastallocatedYarnKgs;
+        row.patchValue({ pendingReceiptKgs });
+      }
+    });
   }
 
   ReceiptDelete(index: number) {
@@ -514,13 +568,13 @@ export class YarnTranscationComponent implements OnInit {
   receiptId(index:any){
     this.QCindexvalue = index
     this.yarnreceiptId = this.yarnReceiptsLines[index].id
-
-    this.api.receiptDetailsForQc(parseInt(this.singleId), this.yarnreceiptId).subscribe((res)=>{
+    const yarnId = this.yarn[0].id
+    this.api.receiptDetailsForQc(yarnId, this.yarnreceiptId).subscribe((res)=>{
       this.receiptDetails = res.receipt
-    })
+
     this.Yarn_QC.controls['yarnId'].setValue(this.yarn[0].id);
 
-    const receivedData = this.yarnQualityCheck;
+    const receivedData = res.yarnQc;
   
     const yarnEntryData = this.Yarn_QC.get('data') as FormArray;
     yarnEntryData.clear();
@@ -535,6 +589,8 @@ export class YarnTranscationComponent implements OnInit {
       });
       yarnEntryData.push(Row4);
     });
+  })
+  this.yarnQcModal = true;
   }
 
   Yarn_QC = this.fb.group({

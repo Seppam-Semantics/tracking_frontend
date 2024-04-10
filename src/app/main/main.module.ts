@@ -59,6 +59,12 @@ import { YarnHeaderComponent } from './Transaction/yarn-entry/yarn-header/yarn-h
 import { YarnTranscationComponent } from './Transaction/yarn-entry/yarn-transcation/yarn-transcation.component';
 import { PanelModule } from 'primeng/panel';
 
+import { TableModule } from 'primeng/table';
+import { DropdownModule } from 'primeng/dropdown';
+import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
+import { SplitterModule } from 'primeng/splitter';
+
 @NgModule({
   declarations: [
     MainComponent,
@@ -120,6 +126,11 @@ import { PanelModule } from 'primeng/panel';
     NgxSpinnerModule.forRoot({type: 'ball-scale-multiple'}),
     MatProgressSpinnerModule,
     PanelModule,
+    TableModule,
+    DropdownModule,
+    DialogModule,
+    ButtonModule,
+    SplitterModule,
   ]
 })
 export class MainModule { }
