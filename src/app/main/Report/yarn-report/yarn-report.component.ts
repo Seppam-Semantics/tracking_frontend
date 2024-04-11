@@ -118,7 +118,7 @@ export class YarnReportComponent implements OnInit {
   }
 
   delete(id: any) {
-    let text = "Press a button!\nEither OK or Cancel.";
+    let text = "Press Ok to delete the details";
     if (confirm(text) == true) {
       this.api.deleteYarn(id).subscribe(
         (res) => {
