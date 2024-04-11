@@ -1,12 +1,10 @@
 <div [formGroup]="dye_Entery">
     
     <mat-toolbar>
-        <span>
+        <div style="display: flex;">
             Dye Batch Entry
-        </span>
-        <span style="flex: 1 1 auto;"></span>
-
-        <div style="display: flex; gap: 10px; margin-top: 20px;">
+        </div>
+        <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; width: 90%">
             <div>
                 <mat-form-field appearance="outline">
                     <mat-select formControlName="dyeFactory">
@@ -37,10 +35,8 @@
     <mat-toolbar style="display: inline-table;">
         <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
 
-            <div>
                 <div style="display: flex; flex-direction: column;">
                     <div style="display: flex;">
-                        <mat-toolbar style="display: inline-table;">
                             <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                                 <mat-form-field appearance="outline" (click)="clearAll()" style="margin-top: 4vh; ">
                                     <mat-label>Buyer</mat-label>
@@ -82,14 +78,10 @@
                                     </mat-select>
                                 </mat-form-field>
                             </div>
-                        </mat-toolbar>
                     </div>
 
-
                     <div>
-                        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                            <mat-toolbar>
-
+                        <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 10px;">
                                 <mat-form-field appearance="outline" style="margin-top: 4vh; ;">
                                     <mat-label>Fabric Type</mat-label>
                                     <input type="text" formControlName="fabricType" matInput>
@@ -97,29 +89,23 @@
                                 <div style="display: flex; gap: 20px; flex-wrap: wrap;  margin-left: 1vh;">
                                     <div style="display: flex; gap: 10px;">
                                         <span style="font-size:15px; display: inline-block;">Softner (Y/N)</span>
-                                        <div>
-                                            <input type="checkbox" style="height: 20px; width: 20px; margin-top: 1vh;"
-                                                formControlName="softner">
-                                        </div>
+                                            <input type="checkbox" style="height: 20px; width: 20px; margin-top: 1vh;" formControlName="softner">
                                     </div>
 
                                     <div style="display: flex; gap: 10px;">
                                         <span style="font-size:15px; display: inline-block;">Silicon (Y/N)</span>
-                                        <div><input type="checkbox" style="height: 20px; width: 20px; margin-top: 1vh;"
-                                                formControlName="silicon"></div>
+                                            <input type="checkbox" style="height: 20px; width: 20px; margin-top: 1vh;" formControlName="silicon">
                                     </div>
 
                                     <div style="display: flex; gap: 10px;">
                                         <span style="font-size:15px; display: inline-block;">Enzyme (Y/N)</span>
-                                        <div><input type="checkbox" style="height: 20px; width: 20px; margin-top: 1vh;"
-                                                formControlName="enzyme"></div>
+                                            <input type="checkbox" style="height: 20px; width: 20px; margin-top: 1vh;" formControlName="enzyme">
                                     </div>
                                 </div>
-                            </mat-toolbar>
                         </div>
                     </div>
                 </div>
-            </div>
+            
     <!--------------------------------------------->
             <div>
              

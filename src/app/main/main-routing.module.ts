@@ -46,7 +46,7 @@ const routes: Routes = [
   {path:'bundleentry2',component:BundleEntry2Component},
   {path:'bundleentry3',component:BundleEntry3Component},
   {path:'ReportEntry', component: ReportEntryComponent},
-  {path:"Knite-Report" , component:KnitReportComponent},
+  {path:"Knit-Report" , component:KnitReportComponent},
   {path:"DyeBatchEntry" , component:DyeBatchEntryComponent},
   {path:"Dye-Report" , component:DyeBatchReportComponent},
   {path:"yarn-Entry" , component:YarnEntryComponent},

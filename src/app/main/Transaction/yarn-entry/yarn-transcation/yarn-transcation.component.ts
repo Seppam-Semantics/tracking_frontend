@@ -349,7 +349,7 @@ export class YarnTranscationComponent implements OnInit {
         colour: dataItem.colour,
         lotNo: dataItem.lotNo,
         allocatedYarnKgs: dataItem.allocatedYarnKgs,
-        unallocatedYarnKgs:this.unallocatedYarnKgs >= 0 ? this.unallocatedYarnKgs : 0
+        unallocatedYarnKgs:dataItem.unallocatedYarnKgs 
       });
       yarnEntryData.push(Row2);
     });
@@ -483,7 +483,7 @@ export class YarnTranscationComponent implements OnInit {
         knitFactory:dataItem.knitFactory,
         BagsCtnNos: dataItem.BagsCtnNos,
         receiptYarnKgs: dataItem.receiptYarnKgs,
-        pendingReceiptKgs: dataItem.pendingReceiptKgs
+        pendingReceiptKgs: dataItem.pendingReceiptKgs? dataItem.pendingReceiptKgs:  this.Receipttest-dataItem.receiptYarnKgs
       });
       yarnEntryData.push(Row3);
     });

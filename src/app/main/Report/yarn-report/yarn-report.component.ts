@@ -124,14 +124,10 @@ export class YarnReportComponent implements OnInit {
         (res) => {
           alert(res.message);
           window.location.reload();
-        },
-        (error) => {
-          alert("An error occurred while deleting the yarn: " + error.message);
         }
-      );
+      )
     } else {
       alert("Cancelled");
     }
   }
-  
 }

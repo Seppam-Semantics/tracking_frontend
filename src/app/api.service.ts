@@ -310,7 +310,7 @@ export class ApiService {
   }
 
   deleteYarn(id:any):Observable<any>{
-    return this.http.delete(this.getUrl() + `/yarn/${id}`, this.getHeaders())
+    return this.http.delete(this.getUrl() + `/yarnapi/yarn/${id}`, this.getHeaders())
   }
 
 }

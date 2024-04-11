@@ -268,7 +268,7 @@ woupdatesubmit(){
   })
 }
 knite(){
-this.router.navigate(['/main/Knite-Report'])
+this.router.navigate(['/main/Knit-Report'])
 }
 Dye(){
   this.router.navigate(['/main/Dye-Report'])

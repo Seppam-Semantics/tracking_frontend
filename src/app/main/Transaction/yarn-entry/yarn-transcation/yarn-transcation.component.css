@@ -52,10 +52,17 @@ input {
     clip-path: polygon(0 0, 85% 0, 100% 100%, 0 100%);
 }
 .table1{
-    height: 400px;
+    height: 500px;
     overflow-y: auto;
     scrollbar-width: none;
 }
+
+.table2{
+    height: 450px;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+
 thead{
     position: sticky;
     top: 0;
