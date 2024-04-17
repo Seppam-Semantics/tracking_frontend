@@ -109,3 +109,6 @@ input[type=number] {
     background-color: darkorchid;
     color: white;
 }
+::ng-deep.p-dropdown-panel .p-dropdown-items {
+    margin-left:-27px
+}

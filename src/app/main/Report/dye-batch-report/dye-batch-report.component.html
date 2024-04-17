@@ -62,16 +62,14 @@
             <div class="modal-body">
 
                 <div [formGroup]="dye_Entery">
-
+    
                     <mat-toolbar>
-                        <span>
+                        <!-- <div style="display: flex;">
                             Dye Batch Entry
-                        </span>
-                        <span style="flex: 1 1 auto;"></span>
-                
-                        <div style="display: flex; gap: 10px; margin-top: -1vh;">
+                        </div>
+                        <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; width: 90%">
                             <div>
-                                <mat-form-field appearance="outline" style="margin-top: 4vh;">
+                                <mat-form-field appearance="outline">
                                     <mat-select formControlName="dyeFactory">
                                         <mat-option *ngFor="let data of this.factoryname;"
                                             [value]="data.dyeinFty">{{data.dyeinFty}}</mat-option>
@@ -81,156 +79,184 @@
                             </div>
                 
                             <div>
-                                <mat-form-field style="margin-top: 4vh;" appearance="outline">
+                                <mat-form-field appearance="outline">
                                     <input matInput type="text" formControlName="batchNo">
                                     <mat-label>Batch No</mat-label>
                                 </mat-form-field>
                             </div>
+                        </div> -->
+                        <div style="display: flex;">
+                            Dye Batch Entry
+                        </div>
+                        <div style="display: flex; justify-content: flex-end; gap: 10px;  width: 90%">
+                            <div>
+                                <p-dropdown placeholder="Dye Factory" formControlName="dyeFactory" [options]="factoryname" optionLabel="dyeinFty" optionValue="dyeinFty" [filter]="true" filterBy="dyeinFty" ></p-dropdown>
+                            </div>
+                
+                            <div>
+                                <input type="text" pInputText formControlName="batchNo" placeholder="Batch No">
+                            </div>
                         </div>
                 
                     </mat-toolbar>
-
+                
                     <mat-toolbar style="display: contents;">
                         <div style="display: flex; justify-content: center;background-color: darkgray;">
-                            <div><Button class="btn btn-primary" (click)="update()"> update </Button></div>
+                            <div><Button class="btn btn-primary" (click)="update()"> Update </Button></div>
                         </div>
                     </mat-toolbar>
-
-                    <div style="overflow: scroll; height:76vh; scrollbar-width: none;">
+                    <div style="overflow: scroll; height:76vh;">
                 
-                        <mat-toolbar style="display: inline-table;">
-                            <div style="display: flex; justify-content: space-between;">
-                    
-                                <div>
-                                    <div style="display: flex; flex-direction: column;">
-                                        <div>
-                                            <mat-toolbar style="display: inline-table;">
-                                                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                                                    <mat-form-field appearance="outline" (click)="clearAll()"
-                                                        style="margin-top: 4vh;">
-                                                        <mat-label>Buyer</mat-label>
-                                                        <mat-select [(ngModel)]="buyerName" (selectionChange)="woByBuyer()"
-                                                            formControlName="buyer">
-                                                            <mat-option value=""> </mat-option>
-                                                            <mat-option *ngFor="let buyer of this.buyers"
-                                                                value="{{buyer.buyer}}">{{buyer.buyer}}</mat-option>
-                                                        </mat-select>
-                                                    </mat-form-field>
-                    
-                                                    <mat-form-field appearance="outline" style="margin-top: 4vh; ;">
-                                                        <mat-label>Order</mat-label>
-                                                        <mat-select [(ngModel)]="ordernumbers" (selectionChange)="wobyOrder()"
-                                                            formControlName="orderNo">
-                                                            <mat-option value=""> </mat-option>
-                                                            <mat-option *ngFor="let order of this.order"
-                                                                value="{{order.orderNO}}">{{order.orderNO}}</mat-option>
-                                                        </mat-select>
-                                                    </mat-form-field>
-                    
-                                                    <mat-form-field appearance="outline" style="margin-top: 4vh; ;">
-                                                        <mat-label>Style</mat-label>
-                                                        <mat-select [(ngModel)]="styleslist" (selectionChange)="wobystyle()"
-                                                            formControlName="style">
-                                                            <mat-option value=""> </mat-option>
-                                                            <mat-option *ngFor="let style of this.stylelist"
-                                                                value="{{style.style}}">{{style.style}}</mat-option>
-                                                        </mat-select>
-                                                    </mat-form-field>
-                    
-                                                    <mat-form-field appearance="outline" style="margin-top: 4vh; ;">
-                                                        <mat-label>color</mat-label>
-                                                        <mat-select [(ngModel)]="colorslist" (selectionChange)="wobycolor()"
-                                                            formControlName="color">
-                                                            <mat-option value=""> </mat-option>
-                                                            <mat-option *ngFor="let color of this.colorlist"
-                                                                value="{{color.color}}">{{color.color}}</mat-option>
-                                                        </mat-select>
-                                                    </mat-form-field>
-                                                </div>
-                                            </mat-toolbar>
-                                        </div>
-                    
-                    
-                                        <div>
-                                            <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                                                <mat-toolbar>
-                                                    <mat-form-field appearance="outline" style="margin-top: 4vh; ;">
-                                                        <mat-label>Fabric Type</mat-label>
-                                                        <input type="text" formControlName="fabricType" matInput>
-                                                    </mat-form-field>
-                                                    <div
-                                                        style="display: flex; gap: 20px; margin-top: 0vh; margin-left: 1vh;">
-                                                        <div style="display: flex; gap: 10px;">
-                                                            <span style="font-size:15px; display: inline-block;">Softner (Y/N)</span>
-                                                            <div>
-                                                                <input type="checkbox" style="height: 20px; width: 20px; margin-top: 1vh;"
-                                                                    formControlName="softner">
-                                                            </div>
-                                                        </div>
-                    
-                                                        <div style="display: flex; gap: 10px;">
-                                                            <span style="font-size:15px; display: inline-block;">Silicon (Y/N)</span>
-                                                            <div><input type="checkbox" style="height: 20px; width: 20px; margin-top: 1vh;"
-                                                                    formControlName="silicon"></div>
-                                                        </div>
-                    
-                                                        <div style="display: flex; gap: 10px;">
-                                                            <span style="font-size:15px; display: inline-block;">Enzyme (Y/N)</span>
-                                                            <div><input type="checkbox" style="height: 20px; width: 20px; margin-top: 1vh;"
-                                                                    formControlName="enzyme"></div>
-                                                        </div>
-                                                    </div>
-                                                </mat-toolbar>
+                    <mat-toolbar style="display: inline-table;">
+                        <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+                
+                                <div style="display: flex; flex-direction: column;">
+                                    <div style="display: flex;">
+                                            <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 2vh;">
+                                                <!-- <mat-form-field appearance="outline" (click)="clearAll()" style="margin-top: 4vh; ">
+                                                    <mat-label>Buyer</mat-label>
+                                                    <mat-select [(ngModel)]="buyerName" (selectionChange)="woByBuyer()"
+                                                        formControlName="buyer">
+                                                        <mat-option value=""> </mat-option>
+                                                        <mat-option *ngFor="let buyer of this.buyers"
+                                                            value="{{buyer.buyer}}">{{buyer.buyer}}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field> -->
+
+                                                <input type="text" pInputText formControlName="buyer" readonly style="width: 15vh;">
+
+
+                                                <!-- <mat-form-field appearance="outline" style="margin-top: 4vh; ">
+                                                    <mat-label>Order</mat-label>
+                                                    <mat-select [(ngModel)]="ordernumbers" (selectionChange)="wobyOrder()"
+                                                        formControlName="orderNo">
+                                                        <mat-option value=""> </mat-option>
+                                                        <mat-option *ngFor="let order of this.order"
+                                                            value="{{order.orderNO}}">{{order.orderNO}}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field> -->
+                
+
+                                                
+                                                <input type="text" pInputText formControlName="orderNo"  readonly style="width: 15vh;">
+
+                                                <!-- <mat-form-field appearance="outline" style="margin-top: 4vh; ">
+                                                    <mat-label>Style</mat-label>
+                                                    <mat-select [(ngModel)]="styleslist" (selectionChange)="wobystyle()"
+                                                        formControlName="style">
+                                                        <mat-option value=""> </mat-option>
+                                                        <mat-option *ngFor="let style of this.stylelist"
+                                                            value="{{style.style}}">{{style.style}}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field> -->
+                
+                
+                                                <input type="text" pInputText formControlName="style"  readonly style="width: 15vh;">
+
+                
+                                                <!-- <mat-form-field appearance="outline" style="margin-top: 4vh; ">
+                                                    <mat-label>color</mat-label>
+                                                    <mat-select [(ngModel)]="colorslist" (selectionChange)="wobycolor()"
+                                                        formControlName="color">
+                                                        <mat-option value=""> </mat-option>
+                                                        <mat-option *ngFor="let color of this.colorlist"
+                                                            value="{{color.color}}">{{color.color}}</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field> -->
+                
+                                                <input type="text" pInputText formControlName="color"  readonly style="width: 15vh;">
+                
+                
                                             </div>
+                                    </div>
+                
+                                    <div>
+                                        <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 3vh;">
+                                                <!-- <mat-form-field appearance="outline" style="margin-top: 4vh; ;">
+                                                    <mat-label>Fabric Type</mat-label>
+                                                    <input type="text" formControlName="fabricType" matInput>
+                                                </mat-form-field> -->
+                                                <input pInputText type="text" class="p-inputtext-sm"  placeholder="Fabric Type" formControlName="fabricType" />
+                                                <div style="display: flex; gap: 20px; flex-wrap: wrap;  margin-left: 1vh;">
+                                                    <div style="display: flex; gap: 10px;">
+                                                        <span style="font-size:15px; display: inline-block;">Softner (Y/N)</span>
+                                                            <input type="checkbox" style="height: 20px; width: 20px; margin-top: 1vh;" formControlName="softner">
+                                                    </div>
+                
+                                                    <div style="display: flex; gap: 10px;">
+                                                        <span style="font-size:15px; display: inline-block;">Silicon (Y/N)</span>
+                                                            <input type="checkbox" style="height: 20px; width: 20px; margin-top: 1vh;" formControlName="silicon">
+                                                    </div>
+                
+                                                    <div style="display: flex; gap: 10px;">
+                                                        <span style="font-size:15px; display: inline-block;">Enzyme (Y/N)</span>
+                                                            <input type="checkbox" style="height: 20px; width: 20px; margin-top: 1vh;" formControlName="enzyme">
+                                                    </div>
+                                                </div>
                                         </div>
                                     </div>
                                 </div>
-                      <!--------------------------------------------->
-                                <div>
-                                 
-                                        <div style="display: flex; justify-content: center;">
-                                            <table class="table">
-                                                <thead class="thead-dark">
-                                                    <tr>
-                                                        <th style="font-size:small;">Size</th>
-                                                        <th style="font-size:small; ">Griege</th>
-                                                        <th style="font-size:small; ">Finish</th>
-                                                        <th style="font-size:small; ">Diff</th>
-                                                        <th style="font-size:small; ">PL</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody formArrayName="data">
-                                                    <tr *ngFor="let process of items.controls; let i=index" [formGroupName]="i">
-                                                        <td>
-                                                            <input type="text" formControlName="size" list="size" class="form-control" style="width: 15vh; display: inline;">
-                                                            <datalist id="size">
-                                                                <option *ngFor="let size of this.sizelist" value="{{size.size}}">{{size.size}}
-                                                                </option>
-                                                            </datalist>
-                                                        </td>
-                                                        <td><input type="number" class="form-control" formControlName="griege" style="width: 15vh; display: inline;">
-                                                        </td>
-                                                        <td><input type="number" class="form-control" formControlName="finish" style="width: 15vh; display: inline;">
-                                                        </td>
-                                                        <td><input type="number" class="form-control" formControlName="diff" readonly style="width: 15vh; display: inline;"></td>
-                                                        <td><input type="number" class="form-control" formControlName="PL" readonly style="width: 15vh; display: inline;"></td>
-                                                    </tr>
-                                                </tbody>
-                                                <tr>
-                                                    <td><span>Total</span></td>
-                                                    <td><input type="number" class="form-control" readonly formControlName="GriegeTotal" style="width: 15vh; display: inline;"></td>
-                                                    <td><input type="number" class="form-control" readonly formControlName="FinishTotal" style="width: 15vh; display: inline;"></td>
-                                                    <td><input type="number" class="form-control" readonly formControlName="differenceTotal" style="width: 15vh; display: inline;"></td>
-                                                    <td><input type="number" class="form-control" readonly formControlName="PLTotal" style="width: 15vh; display: inline;"></td>
-                                                    <td></td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                    
+                            
+                    <!--------------------------------------------->
+                            <div>
+                             
+                                <div style="display: flex; justify-content: center; margin-top: 5px;">
+                                    <table class="table table-hover" style="width:100%">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th><button class="btn btn-danger" (click)="add()">+</button></th>
+                                                <th style="font-size:small; width: 10px;">Size</th>
+                                                <th style="font-size:small; width: 10px;">Griege Roll</th>
+                                                <th style="font-size:small; width: 10px;">Griege</th>
+                                                <th style="font-size:small; width: 10px;">Finish Roll</th>
+                                                <th style="font-size:small; width: 10px;">Finish</th>
+                                                <th style="font-size:small; width: 10px;">Diff</th>
+                                                <th style="font-size:small; width: 10px;">PL</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody formArrayName="data">
+                                            <tr *ngFor="let process of items.controls; let i=index" [formGroupName]="i">
+                                                  <td></td>
+                                                <td>
+                                                    <input type="text" formControlName="size" list="size" class="form-control" style="width: 15vh; display: inline;" (input)="getwoId($event.target.value, i)">
+                                                    <datalist id="size">
+                                                        <option *ngFor="let size of this.sizelist" value="{{size.size}}">{{size.size}}
+                                                        </option>
+                                                    </datalist>
+                                                </td>
+                                                <td><input type="number" class="form-control" formControlName="griegerolls" style="width: 10vh; display: inline;"></td>
+                                                <td><input type="number" class="form-control" formControlName="griege" style="width: 10vh; display: inline;">
+                                                </td>
+                                                <td><input type="number" class="form-control" formControlName="finishrolls" style="width: 10vh; display: inline;"></td>
+                                                <td><input type="number" class="form-control" formControlName="finish" style="width: 10vh; display: inline;">
+                                                </td>
+                                                <td><input type="number" class="form-control" formControlName="diff" readonly style="width: 10vh; display: inline;"></td>
+                                                <td><input type="number" class="form-control" formControlName="PL" readonly style="width: 10vh; display: inline;"></td>
+                                                <td><button class="btn btn-danger" (click)="removeSize(i)">x</button></td>
+                                               
+                                            </tr>
+                                        </tbody>
+                                        <thead class="thead-dark">
+                                        <tr >
+                                            <th><span>Total</span></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th><input type="number" class="form-control" readonly formControlName="GriegeTotal" style="width: 10vh; display: inline;"></th>
+                                            <th></th>
+                                            <th><input type="number" class="form-control" readonly formControlName="FinishTotal" style="width: 10vh; display: inline;"></th>
+                                            <th><input type="number" class="form-control" readonly formControlName="differenceTotal" style="width: 10vh; display: inline;"></th>
+                                            <th><input type="number" class="form-control" readonly formControlName="PLTotal" style="width: 10vh; display: inline;"></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    </table>
                                 </div>
-                    
+                
                             </div>
-                        </mat-toolbar>
+                
+                        </div>
+                    </mat-toolbar>
                      <!--------------------------------------------------------------------------->
                      <p-panel header="Entry Details">
                         <div>

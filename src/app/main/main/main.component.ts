@@ -31,5 +31,23 @@ logo:boolean = true
     this.router.navigate(['login']);
     window.sessionStorage.clear();
   }
-
+  home(){
+    this.router.navigate(['/main/FabricRollData'])  
+  }
+  
+    knite() {
+      this.router.navigate(['/main/Knit-Report'])
+    }
+    Dye() {
+      this.router.navigate(['/main/Dye-Report'])
+    }
+    yarn() {
+      this.router.navigate(['/main/Yarn-Report'])
+    }
+    fabricEntry() {
+      this.router.navigate(['/main/fabricroll1'])
+    }
+    workorder1() {
+      this.router.navigate(['/main/WorkorderData'])
+    }
 }

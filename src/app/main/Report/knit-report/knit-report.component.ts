@@ -272,6 +272,7 @@ export class KnitReportComponent {
             style: [''],
             color: [''],
             size: [''],
+            woId:[],
             knitMachineno: [''],
             yarnLot: [''],
             dayProductionKgs: [''],
@@ -307,6 +308,7 @@ export class KnitReportComponent {
           style: lineItem?.style || '',
           color: lineItem?.color || '',
           size: lineItem?.size || '',
+          woId: lineItem?.woId || '',
           knitMachineno: lineItem?.knitMachineno || '',
           yarnLot: lineItem?.yarnLot || '',
           dayProductionKgs: lineItem?.dayProductionKgs || '',
@@ -357,6 +359,7 @@ export class KnitReportComponent {
           "style": [''],
           "color": [''],
           "size": [''],
+          "woId":[],
           "knitMachineno": [''],
           "yarnLot": [''],
           "dayProductionKgs": [''],
@@ -381,11 +384,11 @@ export class KnitReportComponent {
 save(){
   console.log(this.load.value)
   this.api.updateKnitEntry(this.load.value).subscribe((res)=>{
-  console.log(res.message)
+  alert(res.message)
 })
 }
 Report(){
-  this.router.navigate(['/ReportEntry']);
+  this.router.navigate(['/main/ReportEntry']);
 }
 
 }

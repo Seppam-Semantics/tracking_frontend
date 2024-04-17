@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 
@@ -24,11 +24,12 @@ no:any
   style:any;
   color:any;
   size:any;
+  woId: any[]=[];
   constructor(private fb: FormBuilder , private api : ApiService , private router : Router) {
     this.load = this.fb.group({
       id:new FormControl(0),
       date: new FormControl(''),
-      factory : new FormControl(''),
+      factory : new FormControl('', Validators.required),
       houseKeepingStatus: new FormControl(''),
       gasElecAvailability : new FormControl(''),
       floorLightingStatus : new FormControl(''),
@@ -97,6 +98,16 @@ no:any
         this.sizelist = res.sizes;
       })
     }
+
+    getWoId(size: any, index: number) {
+      this.api.getwodetails(this.buyerName, this.orderNo, this.style, this.color, size ).subscribe((res) => {
+        const woId = res.workorders[0].id;
+        console.log(woId);
+        const formArray = this.load.get('data') as FormArray;
+        const row = formArray.at(index);
+        row.get('woId')?.setValue(woId);
+      });
+    }
   // <!------------------------------------------------------------>
 
 
@@ -118,6 +129,7 @@ no:any
           "style": [''],
           "color": [''],
           "size": [''],
+          "woId":[],
           "knitMachineno": [''],
           "yarnLot": [''],
           "dayProductionKgs": [''],

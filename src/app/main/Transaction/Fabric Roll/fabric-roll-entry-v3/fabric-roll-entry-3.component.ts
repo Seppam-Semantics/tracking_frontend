@@ -317,7 +317,7 @@ export class FabricRollEntry3Component {
           this.total_5 = res.total_5;
           this.total_6 = res.total_6;
           this.total_7 = res.total_7;
-          this.workorderId = this.rollnnumber1[0].workorderId;
+          this.workorderId = this.fabdetails.id;
           this.entrytotals();
         })
       )
@@ -402,6 +402,7 @@ export class FabricRollEntry3Component {
 
     addprocess: this.fb.array([ 
       this.fb.group({
+        id:new FormControl(),
         days: new FormControl(),
         notes: new FormControl(),
         noOfRolls: new FormControl(),
@@ -414,6 +415,7 @@ export class FabricRollEntry3Component {
 
 addEntry1button() {
   this.items.push(this.fb.group({
+    id: new FormControl(),
     days: new FormControl(),
     notes: new FormControl(),
     noOfRolls: new FormControl(),
@@ -426,6 +428,7 @@ add1() {
   this.formArray = new FormArray(
   this.rollnnumber1.map((defaultValues:any)=>
   this.fb.group({
+    id:[defaultValues.entry1_id],
     days: [defaultValues.days],
     notes:[defaultValues.notes],
     noOfRolls: [defaultValues.noOfRolls],
@@ -452,6 +455,7 @@ get items() {
       "entry": "1",
       "entry1": this.form.get('addprocess') as FormArray
     })
+    console.log(this.entry1form.value)
     this.api.Fabricroll1entry(this.entry1form.value).subscribe((res) => {
       alert(res.message);
       this.loading1 = false;
@@ -464,6 +468,7 @@ get items() {
   form2 = this.fb.group({
     addprocess2: this.fb.array([ 
       this.fb.group({
+        id:new FormControl(),
         days: new FormControl(),
         notes: new FormControl(),
         noOfRolls: new FormControl(),
@@ -479,6 +484,7 @@ get items() {
 
   addEntry2button() {
     this.items2.push(this.fb.group({
+      id:new FormControl(),
       days: new FormControl(),
       noOfRolls: new FormControl(),
       notes: new FormControl(),
@@ -491,6 +497,7 @@ get items() {
     this.formArray = new FormArray(
     this.rollnnumber2.map((defaultValues:any)=>
     this.fb.group({
+      id:[defaultValues.entry2_id],
       days: [defaultValues.days],
       notes:[defaultValues.notes],
       noOfRolls: [defaultValues.noOfRolls],
@@ -525,6 +532,7 @@ get items() {
   form3 = this.fb.group({
     addprocess3: this.fb.array([ 
       this.fb.group({
+        id:new FormControl(),
         batchCode: new FormControl(),
         days: new FormControl(),
         notes: new FormControl(),
@@ -541,6 +549,7 @@ get items() {
 
   addEntry3button() {
     this.items3.push(this.fb.group({
+      id:new FormControl(),
       batchCode: new FormControl(),
       days: new FormControl(),
       notes: new FormControl(),
@@ -559,6 +568,7 @@ get items() {
     this.formArray = new FormArray(
     this.rollnnumber3.map((defaultValues:any)=>
     this.fb.group({
+      id:[defaultValues.entry3_id],
       batchCode: [defaultValues.batchCode || this.batchGenerate?.value],
       days: [defaultValues.days],
       notes:[defaultValues.notes],
@@ -590,6 +600,7 @@ get items() {
   form4 = this.fb.group({
     addprocess4: this.fb.array([ 
       this.fb.group({
+        id:new FormControl(),
         batchCode: new FormControl(),
         days: new FormControl(),
         notes: new FormControl(),
@@ -602,6 +613,7 @@ get items() {
 
   addEntry4button() {
     this.items4.push(this.fb.group({
+      id:new FormControl(),
       batchCode: new FormControl(),
       days: new FormControl(),
       notes: new FormControl(),
@@ -624,6 +636,7 @@ get items() {
     this.formArray = new FormArray(
     this.rollnnumber4.map((defaultValues?: any)=>
       this.fb.group({
+      id:[defaultValues.entry4_id],
       batchCode: [defaultValues.batchCode || ''],
       days: [defaultValues.days],
       notes:[defaultValues.notes],
@@ -656,6 +669,7 @@ get items() {
   form5 = this.fb.group({
     addprocess5: this.fb.array([ 
       this.fb.group({
+        id:new FormControl(),
         batchCode: new FormControl(),
         days: new FormControl(),
         notes: new FormControl(),
@@ -672,6 +686,7 @@ get items() {
 
   addEntry5button() {
     this.items5.push(this.fb.group({
+      id:new FormControl(),
       batchCode: new FormControl(),
       days: new FormControl(),
       notes: new FormControl(),
@@ -690,6 +705,7 @@ get items() {
     this.formArray = new FormArray(
     this.rollnnumber5.map((defaultValues?: any)=>
       this.fb.group({
+        id:[defaultValues.entry5_id],
       batchCode: [defaultValues.batchCode],
       days: [defaultValues.days],
       notes:[defaultValues.notes],
@@ -720,6 +736,7 @@ get items() {
   form6 = this.fb.group({
     addprocess6: this.fb.array([ 
       this.fb.group({
+        id:new FormControl(),
         batchCode: new FormControl(),
         days: new FormControl(),
         notes: new FormControl(),
@@ -736,6 +753,7 @@ get items() {
 
   addEntry6button() {
     this.items6.push(this.fb.group({
+      id:new FormControl(),
       batchCode: new FormControl(),
       days: new FormControl(),
       notes: new FormControl(),
@@ -754,6 +772,7 @@ get items() {
     this.formArray = new FormArray(
     this.rollnnumber6.map((defaultValues?: any)=>
     this.fb.group({
+      id:[defaultValues.entry6_id],
       batchCode: [defaultValues.batchCode],
       days: [defaultValues.days],
       notes:[defaultValues.notes],
@@ -784,6 +803,7 @@ get items() {
   form7 = this.fb.group({
     addprocess7: this.fb.array([ 
       this.fb.group({
+        id:new FormControl(),
         batchCode: new FormControl(),
         notes: new FormControl(),
         days: new FormControl(),
@@ -800,6 +820,7 @@ get items() {
 
   addEntry7button() {
     this.items7.push(this.fb.group({
+      id:new FormControl(),
       batchCode: new FormControl(),
       notes: new FormControl(),
       days: new FormControl(),
@@ -817,6 +838,7 @@ get items() {
   add7() {
     this.formArray = new FormArray(
     this.rollnnumber7.map((defaultValues?: any)=>this.fb.group({
+      id:[defaultValues.entry7_id],
       batchCode: [defaultValues.batchCode],
       days: [defaultValues.days],
       notes:[defaultValues.notes],

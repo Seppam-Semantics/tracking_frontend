@@ -64,6 +64,8 @@ import { DropdownModule } from 'primeng/dropdown';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { SplitterModule } from 'primeng/splitter';
+import { TabMenuModule } from 'primeng/tabmenu';
+import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({
   declarations: [
@@ -131,6 +133,9 @@ import { SplitterModule } from 'primeng/splitter';
     DialogModule,
     ButtonModule,
     SplitterModule,
+    TabMenuModule,
+    TabMenuModule,
+    InputTextModule,
   ]
 })
 export class MainModule { }

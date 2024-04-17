@@ -132,9 +132,7 @@ export class DyeBatchReportComponent implements OnInit {
       data: this.fb.array([])
 
     })
-    for (let i = 0; i < 6; i++) {
-      this.add();
-    }
+
   }
 
   ngOnInit(): void {
@@ -159,9 +157,12 @@ export class DyeBatchReportComponent implements OnInit {
 
   add() {
     const newGroup = this.fb.group({
-
+      id:new FormControl(),
       size: new FormControl(''),
+      woId:new FormControl(),
+      griegerolls: new FormControl(''),    
       griege: new FormControl(''),
+      finishrolls: new FormControl(''),
       finish: new FormControl(''),
       diff: new FormControl(''),
       PL: new FormControl(''),
@@ -221,6 +222,9 @@ export class DyeBatchReportComponent implements OnInit {
     this.dye_Entery.get('PLTotal')?.setValue(total4);
   }
   
+  removeSize(index:any){
+    this.items.removeAt(index)
+    }
 
   //=====================================================================================================
   public getbuyers() {
@@ -293,6 +297,8 @@ export class DyeBatchReportComponent implements OnInit {
     this.singledataid = id
     this.api.dye_batch_single_data(this.singledataid).subscribe((res) => {
       this.dye_batch_data = res
+      console.log(this.dye_batch_data)
+      console.log(this.dye_batch_data.headerData[0].orderNo)
     const formattedDate1 = this.datePipe.transform(
       this.dye_batch_data.headerData[0].batch_batchMakeDate,
     'yyyy-MM-dd'
@@ -345,36 +351,28 @@ export class DyeBatchReportComponent implements OnInit {
     this.dye_Entery.patchValue({
       "id":this.dye_batch_data.headerData[0].id,
       "dyeFactory": this.dye_batch_data.headerData[0].dyeFactory,
-
       'buyer': this.dye_batch_data.headerData[0].buyer,
       'orderNo': this.dye_batch_data.headerData[0].orderNo,
       "style": this.dye_batch_data.headerData[0].style,
       "color": this.dye_batch_data.headerData[0].color,
-
       "fabricType": this.dye_batch_data.headerData[0].fabricType,
       "softner": this.dye_batch_data.headerData[0].softner,
       "silicon": this.dye_batch_data.headerData[0].silicon,
       "enzyme": this.dye_batch_data.headerData[0].enzyme,
-
       "batchNo": this.dye_batch_data.headerData[0].batchNo,
-
       "batchRemarks": this.dye_batch_data.headerData[0].batchRemarks,
-
       "batch_batchMakeDate": formattedDate1,
       "batch_batchRollsSLCheck": this.dye_batch_data.headerData[0].batch_batchRollsSLCheck,
-
       "dyeing_loadDatetime": formattedDate2,
       "dyeing_unloadingDateTime": formattedDate3,
       "dyeing_totalRunTime": this.dye_batch_data.headerData[0].dyeing_totalRunTime,
       "dyeing_receipeChart": this.dye_batch_data.headerData[0].dyeing_receipeChart,
-
       "shade_lapDipOriginalQTX": this.dye_batch_data.headerData[0].shade_lapDipOriginalQTX,
       "shade_masterBatchCheck": this.dye_batch_data.headerData[0].shade_masterBatchCheck,
       "shade_dyeUnloadShadeCheck": this.dye_batch_data.headerData[0].shade_dyeUnloadShadeCheck,
       "shade_shadeSubmissionDate": formattedDate4,
       "shade_shadeApprovalDate": formattedDate5,
       "shade_firstBatchNotOkReason": this.dye_batch_data.headerData[0].shade_firstBatchNotOkReason,
-
       "squeezer_squeezerDateTime": formattedDate6,
       "squeezer_rpmValue": this.dye_batch_data.headerData[0].squeezer_rpmValue,
       "squeezer_trolleyPlate": this.dye_batch_data.headerData[0].squeezer_trolleyPlate,
@@ -382,31 +380,25 @@ export class DyeBatchReportComponent implements OnInit {
       "squeezer_padderPressureValue": this.dye_batch_data.headerData[0].squeezer_padderPressureValue,
       "squeezer_shape": this.dye_batch_data.headerData[0].squeezer_shape,
       "squeezer_backAngle": this.dye_batch_data.headerData[0].squeezer_backAngle,
-
       "dryer_dryerDatetime": formattedDate7,
       "dryer_temperatureValue": this.dye_batch_data.headerData[0].dryer_temperatureValue,
       "dryer_rpmValue": this.dye_batch_data.headerData[0].dryer_rpmValue,
       "dryer_overfeedValue": this.dye_batch_data.headerData[0].dryer_overfeedValue,
-
       "calendar_rpmValue": this.dye_batch_data.headerData[0].calendar_rpmValue,
       "calendar_steamHighLow": this.dye_batch_data.headerData[0].calendar_steamHighLow,
-
       "slitting_slittingDatetime": formattedDate8,
       "slitting_DTwister": this.dye_batch_data.headerData[0].slitting_DTwister,
       "slitting_trolleyPlate": this.dye_batch_data.headerData[0].slitting_trolleyPlate,
-
       "stenter_stenterDatetime": formattedDate9,
       "stenter_temperatureValue": this.dye_batch_data.headerData[0].stenter_temperatureValue,
       "stenter_overfeedValue": this.dye_batch_data.headerData[0].stenter_overfeedValue,
       "stenter_diasettingValue": this.dye_batch_data.headerData[0].stenter_diasettingValue,
       "stenter_softnerSiliconUsage": this.dye_batch_data.headerData[0].stenter_softnerSiliconUsage,
-
       "compact_openCompactDatetime": formattedDate10,
       "compact_rpmValue": this.dye_batch_data.headerData[0].compact_rpmValue,
       "compact_overfeedValue": this.dye_batch_data.headerData[0].compact_overfeedValue,
       "compact_diasettingValue": this.dye_batch_data.headerData[0].compact_diasettingValue,
       "compact_steamHighLow": this.dye_batch_data.headerData[0].compact_steamHighLow,
-
       "tubtex_tubtexDatetime": formattedDate11,
       "tubtex_yarnLot": this.dye_batch_data.headerData[0].tubtex_yarnLot,
       "tubtex_overfeedValue": this.dye_batch_data.headerData[0].tubtex_overfeedValue,
@@ -415,7 +407,6 @@ export class DyeBatchReportComponent implements OnInit {
       "tubtex_sideLoosePileCheck": this.dye_batch_data.headerData[0].tubtex_sideLoosePileCheck,
       "tubtex_diaGSMCheck": this.dye_batch_data.headerData[0].tubtex_diaGSMCheck,
       "tubtex_shadeLightBoxDataColor": this.dye_batch_data.headerData[0].tubtex_shadeLightBoxDataColor,
-
       "finalbatch_shrinkageTwistingReport": this.dye_batch_data.headerData[0].finalbatch_shrinkageTwistingReport,
       "finalbatch_GSMReport": this.dye_batch_data.headerData[0].finalbatch_GSMReport,
       "finalbatch_rollRollShadeCheck": this.dye_batch_data.headerData[0].finalbatch_rollRollShadeCheck,
@@ -432,10 +423,14 @@ export class DyeBatchReportComponent implements OnInit {
     const formControls = [];
     formControls.push(
       this.fb.group({
+        id:[],
         size: [''],
+        woId:[],
+        greigerolls:[],
         griege: [''],
+        finishrolls:[],
         finish: [''],
-        difference: [''],
+        diff: [''],
         PL: [''],
       })
     );
@@ -444,10 +439,14 @@ export class DyeBatchReportComponent implements OnInit {
     if (!dataControl.controls.length) { 
       const formControls = this.dye_batch_data.lineData.map((lineItem: any) => {
         return this.fb.group({
+          id:[lineItem.id],
           size: [lineItem.size],
+          woId:[lineItem.woId],
+          griegerolls:[lineItem.greigerolls],
           griege: [lineItem.griege],
+          finishrolls:[lineItem.finishrolls],
           finish: [lineItem.finish],
-          difference: [lineItem.difference],
+          diff: [lineItem.difference],
           PL: [lineItem.PL],
         });
       });
@@ -456,10 +455,14 @@ export class DyeBatchReportComponent implements OnInit {
     } else {
       this.dye_batch_data.lineData.forEach((lineItem: any, i: number) => {
         this.items.at(i).patchValue({
+          id: lineItem.id,
           size: lineItem.size,
+          woId:lineItem.woId,
+          greigerolls:lineItem.greigerolls,
           griege: lineItem.griege,
+          finishrolls:lineItem.finishrolls,
           finish: lineItem.finish,
-          difference: lineItem.difference,
+          diff: lineItem.difference,
           PL: lineItem.PL,
         });
       });
@@ -476,12 +479,13 @@ export class DyeBatchReportComponent implements OnInit {
   }
 
   update(){
+    console.log(this.dye_Entery.value)
     this.api.post_dyereport_entry(this.dye_Entery.value).subscribe((res)=>{
       alert(res.message)
-      window.location.reload()
+      // window.location.reload()
     })
   }
   DyeBatchButton(){
-    this.router.navigate(['/DyeBatchEntry'])
+    this.router.navigate(['/main/DyeBatchEntry'])
   }
 }

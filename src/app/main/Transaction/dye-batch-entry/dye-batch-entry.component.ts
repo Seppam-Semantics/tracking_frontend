@@ -129,10 +129,7 @@ constructor(private fb : FormBuilder , private api : ApiService , private router
     "PLTotal" : new FormControl(''),
     
   })
-  for (let i = 0; i < 6; i++) {
-    this.add();
-  }
-
+  
 }
 
 
@@ -159,7 +156,10 @@ get items() {
 add() {
   const row = this.fb.group({
     size: new FormControl(''),
+    woId:new FormControl(),
+    griegerolls: new FormControl(''),    
     griege: new FormControl(''),
+    finishrolls: new FormControl(''),
     finish: new FormControl(''),
     diff: new FormControl(''),
     PL: new FormControl(''),
@@ -219,13 +219,16 @@ calculateGriegeTotal() {
   this.dye_Entery.get('differenceTotal')?.setValue(total3);
   this.dye_Entery.get('PLTotal')?.setValue(total4);
 }
-
+removeSize(index:any){
+this.items.removeAt(index)
+}
 
 dyesubmit() {
+  console.log(this.dye_Entery.value)
   this.api.post_dyereport_entry(this.dye_Entery.value).subscribe((res)=>{
     alert(res.message)    
     if(res.success== true){
-      this.router.navigate(['/main/Dye-Report'])    
+      // this.router.navigate(['/main/Dye-Report'])    
     }
   })
 }
@@ -269,6 +272,16 @@ loadworkorder(buyer: any, orderNo: string = '', style: string ='', color: string
   this.api.getwodetails(buyer, orderNo, style, color, size).subscribe((res) => {
     this.data = res.workorders;
   });
+}
+
+getwoId(size: any, index: number){
+    this.api.getwodetails(this.buyerName, this.ordernumbers, this.styleslist, this.colorslist, size).subscribe((res) => {
+      const woId = res.workorders[0].id;
+      console.log(woId);
+      const formArray = this.dye_Entery.get('data') as FormArray;
+      const row = formArray.at(index);
+      row.get('woId')?.setValue(woId);
+    });
 }
 
 woByBuyer(){

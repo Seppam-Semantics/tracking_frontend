@@ -556,7 +556,7 @@
                   </tr>
                   <tr>
                     <th>Batch no</th>
-                    <th style="display: none;">No.Of.Days</th>
+                    <th>No.Of.Days</th>
                     <th>Notes</th>
                     <th>Total Rolls</th>
                     <th>Actual cut</th>
@@ -567,7 +567,7 @@
                 <tbody formArrayName="addprocess7">
                   <tr *ngFor="let process of items7.controls; let i=index" [formGroupName]="i">
                     <th><input type="text" class="form-control"  formControlName="batchCode" readonly></th>
-                    <th style="display: none;"><input type="text" class="form-control" type="number"  formControlName="days"></th>
+                    <th><input type="text" class="form-control" type="number"  formControlName="days"></th>
                     <th><input type="text" class="form-control" type="text"  formControlName="notes"></th>
                     <th><input type="text" class="form-control" type="number"  formControlName="noOfRolls"></th>
                     <th><input type="text" class="form-control" type="number"  formControlName="entry_7"></th>

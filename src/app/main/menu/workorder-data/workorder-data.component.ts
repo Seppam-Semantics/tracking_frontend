@@ -31,20 +31,27 @@ export class WorkorderDataComponent {
 
   readexcelfile() {
     let fr = new FileReader();
-
+  
     fr.readAsArrayBuffer(this.file);
-
+  
     fr.onload = () => {
-      let data = fr.result;
-      let workbook = xls.read(data, { type: 'array' });
+        let data = fr.result;  
+        let workbook = xls.read(data, { type: 'array' });
+       
+        const sheetname = workbook.SheetNames[0];
+        const sheet1 = workbook.Sheets[sheetname];
+  
+        this.users = xls.utils.sheet_to_json(sheet1, { raw: true });
 
-      const sheetname = workbook.SheetNames[0];
-      const sheet1 = workbook.Sheets[sheetname];
-      this.users = xls.utils.sheet_to_json(sheet1, { raw: true });
-      this.dataSource = this.users;
-      console.log(this.dataSource)
-      
-    };
+        if (!this.users[0].hasOwnProperty('noDays')) {
+
+            this.users.forEach((user:any)=> {
+                user['noDays'] = 5;
+            });
+        }
+        this.dataSource = this.users;
+        console.log(this.dataSource);
+    };
   }
 
   workordersubmit() {

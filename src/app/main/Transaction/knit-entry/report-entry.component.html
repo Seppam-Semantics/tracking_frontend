@@ -4,7 +4,7 @@
         <div style="display: flex; justify-content: start;gap: 10px;">
            <div> <label>Factory</label> </div>
             <div>
-                <select name="cars" id="cars" class="form-control" style="width: 180px;" formControlName="factory">
+                <select name="cars" id="cars" class="form-control" style="width: 180px;" formControlName="factory" required>
                     <option *ngFor="let ftyname of this.fty_name" value="{{ftyname.knitFty}}" class="form-control">{{ftyname.knitFty}}</option>
                 </select>
             </div>
@@ -148,7 +148,7 @@
                             <option *ngFor="let color of this.colorlist" [value]="color.color">
                         </datalist>
                     </td>
-                    <td><input type="text" class="form-control" formControlName="size" list="5" >
+                    <td><input type="text" class="form-control" formControlName="size" list="5" (input)="getWoId($event.target.value, i)">
                         <datalist id="5">
                             <option *ngFor="let size of this.sizelist" [value]="size.size">
                         </datalist>
@@ -216,7 +216,7 @@
     </div>
 
     <div style="display: flex; justify-content: center;">
-        <div><button class="btn btn-primary" (click)="save()">Save</button></div>
+        <div><button type="submit" class="btn btn-primary" (click)="save()">Save</button></div>
     </div>
 
 </div>

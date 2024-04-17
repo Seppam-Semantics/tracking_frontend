@@ -68,3 +68,14 @@ mat-sidenav{
     height:91vh
   }
 
+  .flex-spacer{
+    flex: 1 1 auto;
+  }
+.menu:hover{
+    font-size:large;
+    color: yellow;
+}
+.exit:hover{
+    font-size:large;
+    color: red;
+}
