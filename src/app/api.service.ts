@@ -313,4 +313,24 @@ export class ApiService {
     return this.http.delete(this.getUrl() + `/yarnapi/yarn/${id}`, this.getHeaders())
   }
 
+
+
+
+  YarnEntryDelete(id:any , lineId:any ):Observable<any>{
+    return this.http.delete(this.getUrl() + `/yarnapi/yarnEntryDelete?id=${id}&line=${lineId}` , this.getHeaders())
+  }
+
+  lotCheckDetailsDelete(id:any , lineId:any , lotCheckid:any ):Observable<any>{
+    return this.http.delete(this.getUrl()+ `/yarnapi/lotCheckDelete?id=${id}&line=${lineId}&lotCheckid=${lotCheckid}` ,this.getHeaders())
+  }
+
+  OrderAllocationDeleteDetails( id:any , lineId:any , orderid:any ):Observable<any>{
+    return this.http.delete(this.getUrl()+ `/yarnapi/orderDelete?id=${id}&line=${lineId}&orderid=${orderid}` ,this.getHeaders())
+  }
+  ReceiptdetailsDelete(id:any,lineId:any,ReceiptId:any):Observable<any>{
+    return this.http.delete(this.getUrl()+ `/yarnapi/ReceiptDelete?id=${id}&line=${lineId}&ReceiptId=${ReceiptId}`,this.getHeaders())
+  }
+  YarnQCDeleteDetails(id:any , lineId:any , ReceipDataId :any):Observable<any>{
+    return this.http.delete(this.getUrl()+`/yarnapi/YarnQCDelete?id=${id}&line=${lineId}&YarnQCid=${ReceipDataId}` , this.getHeaders())
+  }
 }

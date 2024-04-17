@@ -24,7 +24,7 @@ export class YarnTranscationComponent implements OnInit {
   orderNo: any;
   spinfty: any;
   spinLcNo: any;
-  spinStatus:any;
+  spinStatus: any;
   spinftyreceipt: any;
   yarnTypereceipt: any;
   yarnreceipt_Id: any;
@@ -50,7 +50,7 @@ export class YarnTranscationComponent implements OnInit {
   yarnreceiptId: any;
   indexvalue: any;
   QCindexvalue: any;
-  singleId:any;
+  singleId: any;
   yarnlotcheckLotNo: any;
   receiptDetails: any;
   knitFty: any;
@@ -66,9 +66,12 @@ export class YarnTranscationComponent implements OnInit {
   lotYarnType: any;
   Receipttest: any;
   lotCheckModal: boolean = false;
-  orderAllocationModal : boolean = false;
-  receiptModal : boolean = false;
-  yarnQcModal : boolean =false;
+  orderAllocationModal: boolean = false;
+  receiptModal: boolean = false;
+  yarnQcModal: boolean = false;
+  yarnLinedelete: any;
+  ReceivedDataReceipt: any;
+  ReceipReceivedDataId: any;
 
   constructor(private fb: FormBuilder, private api: ApiService, private datePipe: DatePipe) { }
 
@@ -84,11 +87,11 @@ export class YarnTranscationComponent implements OnInit {
       this.yarnSpinnerDropdown = res.spinners
     })
 
-    this.api.knitfty_name().subscribe((res)=>{
+    this.api.knitfty_name().subscribe((res) => {
       this.knitFty = res.factorys
     })
 
-    this.api.yarnType().subscribe((res)=>{
+    this.api.yarnType().subscribe((res) => {
       this.allyarnType = res.types
     })
 
@@ -98,7 +101,7 @@ export class YarnTranscationComponent implements OnInit {
   }
 
 
-  
+
   public getbuyers() {
     this.api.getbuyers().subscribe((res) => {
       this.buyers = res.buyers;
@@ -107,10 +110,10 @@ export class YarnTranscationComponent implements OnInit {
 
 
 
-  EditAllData(id:any){
-    this.api.getSingleYarnData(id).subscribe((res)=>{
+  EditAllData(id: any) {
+    this.api.getSingleYarnData(id).subscribe((res) => {
       this.yarn = res.yarn;
-      this.yarnLcLines  = res.yarn_lc_lines;
+      this.yarnLcLines = res.yarn_lc_lines;
       this.yarnLcTotal = res.yarn_lc_total;
       this.yarnLotCheck = res.yarn_lot_check;
       this.yarnOrderAllocations = res.yarn_order_allocations;
@@ -123,7 +126,7 @@ export class YarnTranscationComponent implements OnInit {
         this.yarn[0].lcDate,
         'yyyy-MM-dd'
       );
-      
+
       const formattedDate2 = this.datePipe.transform(
         this.yarn[0].piDate,
         'yyyy-MM-dd'
@@ -142,25 +145,25 @@ export class YarnTranscationComponent implements OnInit {
 
       })
       const receivedData = this.yarnLcLines
-  
+
       const yarnEntryData = this.Yarn_Entry_1.get('data') as FormArray;
       yarnEntryData.clear();
-    
-      receivedData.forEach((dataItem:any) => {
+
+      receivedData.forEach((dataItem: any) => {
         const row = this.fb.group({
-          id:dataItem.id,
+          id: dataItem.id,
           yarnType: dataItem.yarnType,
           lcYarnKgs: dataItem.lcYarnKgs,
           yarnRate: dataItem.yarnRate,
           yarnValue: dataItem.yarnValue,
-        }); 
+        });
         yarnEntryData.push(row);
       });
     })
   }
 
   yarnHeader = this.fb.group({
-    id : new FormControl(), 
+    id: new FormControl(),
     spinner: new FormControl(),
     lcDate: new FormControl(),
     lcNo: new FormControl(),
@@ -202,7 +205,7 @@ export class YarnTranscationComponent implements OnInit {
 
   add1button() {
     const row = this.fb.group({
-      "id":new FormControl(''),
+      "id": new FormControl(''),
       "yarnType": new FormControl(''),
       "lcYarnKgs": new FormControl(''),
       "yarnRate": new FormControl(''),
@@ -221,14 +224,26 @@ export class YarnTranscationComponent implements OnInit {
   }
 
   Yarn_Entry_Delete(index: number) {
-    this.items.removeAt(index);
+
+    let text = "Press Ok to delete the details";
+    if (confirm(text) == true) {
+      const yarnLinedelete = this.yarnLcLines[0].id;
+      const yarnDataId = this.yarn[0].id
+      console.log(yarnLinedelete, yarnDataId)
+      this.api.YarnEntryDelete(yarnLinedelete, yarnDataId).subscribe((res) => {
+        alert(res.message)
+      })
+    } else {
+      alert("Cancelled");
+    }
   }
+
 
 
 
   Yarn_Entry_save() {
     const yarnHeaderData = this.fb.group({
-      id : this.yarnId,
+      id: this.yarnId,
       spinner: this.yarnHeader.get('spinner')?.value,
       lcDate: this.yarnHeader.get('lcDate')?.value,
       lcNo: this.yarnHeader.get('lcNo')?.value,
@@ -252,47 +267,47 @@ export class YarnTranscationComponent implements OnInit {
     this.LotCheck.controls['yarnId'].setValue(this.yarn[0].id);
     const yarnDataId = this.yarn[0].id
 
-    this.api.yarnLineData(yarnDataId, this.yarnLineId).subscribe((res)=>{
+    this.api.yarnLineData(yarnDataId, this.yarnLineId).subscribe((res) => {
       this.lotYarnType = res.data[0]
     })
 
-    this.api.lcDetailsForlot(yarnDataId, this.yarnLineId).subscribe((res)=>{
+    this.api.lcDetailsForlot(yarnDataId, this.yarnLineId).subscribe((res) => {
       this.lotlineDetails = res.lcData
 
-    const receivedData = this.lotlineDetails;
-  
-    const yarnEntryData = this.LotCheck.get('data') as FormArray;
-    yarnEntryData.clear();
-    
-    receivedData.forEach((dataItem: any) => {
-      const LotCheckDetails = this.fb.group({
-        id: dataItem.id,
-        yarnLineId: this.yarnLineId,
-        yarnType: this.lotYarnType.yarnType,
-        lotNo: dataItem.lotNo,
-        sampleDate: this.datePipe.transform(dataItem.sampleDate,'yyyy-MM-dd'),
-        resultDate: this.datePipe.transform(dataItem.resultDate,'yyyy-MM-dd'),
-        checkResults: dataItem.checkResults,
-        acceptRejectStatus: dataItem.acceptRejectStatus
+      const receivedData = this.lotlineDetails;
+
+      const yarnEntryData = this.LotCheck.get('data') as FormArray;
+      yarnEntryData.clear();
+
+      receivedData.forEach((dataItem: any) => {
+        const LotCheckDetails = this.fb.group({
+          id: dataItem.id,
+          yarnLineId: this.yarnLineId,
+          yarnType: this.lotYarnType.yarnType,
+          lotNo: dataItem.lotNo,
+          sampleDate: this.datePipe.transform(dataItem.sampleDate, 'yyyy-MM-dd'),
+          resultDate: this.datePipe.transform(dataItem.resultDate, 'yyyy-MM-dd'),
+          checkResults: dataItem.checkResults,
+          acceptRejectStatus: dataItem.acceptRejectStatus
+        });
+        yarnEntryData.push(LotCheckDetails);
       });
-      yarnEntryData.push(LotCheckDetails);
-    });
-  })
-  this.lotCheckModal=true;
+    })
+    this.lotCheckModal = true;
   }
-  
+
   LotCheck = this.fb.group({
     yarnId: [],
     data: this.fb.array([])
   });
-  
+
   get LotCheckItems() {
     return this.LotCheck.get("data") as FormArray;
   }
-  
+
   LotCheckAddButton() {
     const LotCheckDetails = this.fb.group({
-      id:new FormControl(),
+      id: new FormControl(),
       yarnLineId: new FormControl(this.yarnLineId),
       yarnType: new FormControl(this.lotYarnType.yarnType),
       lotNo: new FormControl(),
@@ -301,64 +316,82 @@ export class YarnTranscationComponent implements OnInit {
       checkResults: new FormControl(),
       acceptRejectStatus: new FormControl()
     });
-  
+
     this.LotCheckItems.push(LotCheckDetails);
   }
 
-  lotCheckDelete(index:any){
-    this.LotCheckItems.removeAt(index);
+  lotCheckDelete(index: any) {
+    const yarnlotcheckdetails = this.lotlineDetails[index]?.id
+    if(yarnlotcheckdetails){
+    let text = "Press Ok to delete the details";
+    if (confirm(text) == true) {
+      const yarnDataId = this.yarn[0].id
+      const yarnLineId = this.yarnLcLines[0].id;
+      const yarnlotcheckdetails = this.lotlineDetails[index].id
+      console.log(this.yarnLineId, yarnDataId, yarnlotcheckdetails)
+      this.api.lotCheckDetailsDelete(yarnLineId, yarnDataId, yarnlotcheckdetails).subscribe((res) => {
+        alert(res.message)
+
+      })
+
+    } else {
+    alert("cancel!!!")
+    }
+  }else{
+    this.LotCheckItems.removeAt(index)
   }
-  
+}
+
   LotCheck_Button() {
     this.api.addUpdateYarnCheck(this.LotCheck.value).subscribe((res) => {
       alert(res.message);
       window.location.reload()
     });
   }
-  
+
 
   // <!------------------------------------Order Allocation----------------------------------------------------------------->
 
-  orderAllotAddUpdate(index:any){
+  orderAllotAddUpdate(index: any) {
     this.yarnLineId = this.yarnLcLines[index].id;
     this.OrderAllocation.controls['yarnId'].setValue(this.yarn[0].id);
     const yarnDataId = this.yarn[0].id
-    this.api.yarnLineData(yarnDataId, this.yarnLineId).subscribe((res)=>{
+    this.api.yarnLineData(yarnDataId, this.yarnLineId).subscribe((res) => {
       this.yarnKg = res.data[0].lcYarnKgs
       this.lineDetails = res.data
     })
 
-    this.api.lcDetailsForOrder(yarnDataId, this.yarnLineId).subscribe((res)=>{
+    this.api.lcDetailsForOrder(yarnDataId, this.yarnLineId).subscribe((res) => {
       this.orderDetails = res.lcData
 
-    const receivedData = this.orderDetails;
-  
-    const yarnEntryData = this.OrderAllocation.get('data') as FormArray;
-    yarnEntryData.clear();
+      const receivedData = this.orderDetails;
 
-    receivedData.forEach((dataItem: any) => {
-       this.unallocatedYarnKgs = this.lineDetails[0].lcYarnKgs - dataItem.allocatedYarnKgs;
+      const yarnEntryData = this.OrderAllocation.get('data') as FormArray;
+      yarnEntryData.clear();
 
-      const Row2 = this.fb.group({
-        id: dataItem.id,
-        yarnLineId: this.yarnLineId,
-        yarnType: dataItem.yarnType,
-        buyer: dataItem.buyer,
-        utilisationOrderNo: dataItem.utilisationOrderNo,
-        style:dataItem.style,
-        colour: dataItem.colour,
-        lotNo: dataItem.lotNo,
-        allocatedYarnKgs: dataItem.allocatedYarnKgs,
-        unallocatedYarnKgs:dataItem.unallocatedYarnKgs 
+      receivedData.forEach((dataItem: any) => {
+        this.unallocatedYarnKgs = this.lineDetails[0].lcYarnKgs - dataItem.allocatedYarnKgs;
+
+        const Row2 = this.fb.group({
+          id: dataItem.id,
+          yarnLineId: this.yarnLineId,
+          yarnType: dataItem.yarnType,
+          buyer: dataItem.buyer,
+          utilisationOrderNo: dataItem.utilisationOrderNo,
+          style: dataItem.style,
+          colour: dataItem.colour,
+          lotNo: dataItem.lotNo,
+          allocatedYarnKgs: dataItem.allocatedYarnKgs,
+          unallocatedYarnKgs: dataItem.unallocatedYarnKgs
+        });
+        yarnEntryData.push(Row2);
       });
-      yarnEntryData.push(Row2);
-    });
-  })
+    })
     this.getbuyers()
     this.orderAllocationModal = true;
   }
 
-  getorders(buyer:any) {
+  getorders(buyer: any) {
     this.buyerName = buyer
     this.api.getorders(buyer).subscribe((res) => {
       this.orderNo = res.orders
@@ -394,7 +427,7 @@ export class YarnTranscationComponent implements OnInit {
       yarnLineId: new FormControl(this.yarnLineId),
       lcNo: new FormControl(''),
       yarnType: new FormControl(this.lineDetails[0].yarnType),
-      buyer : new FormControl(''),
+      buyer: new FormControl(''),
       utilisationOrderNo: new FormControl(''),
       style: new FormControl(''),
       colour: new FormControl(''),
@@ -405,7 +438,7 @@ export class YarnTranscationComponent implements OnInit {
 
     Row2.get('allocatedYarnKgs')?.valueChanges.subscribe(() => {
       this.calculateDiff2();
-  });
+    });
 
     this.items2.push(Row2);
   }
@@ -418,7 +451,7 @@ export class YarnTranscationComponent implements OnInit {
       const row = control as FormGroup;
       if (row instanceof FormGroup) {
         const controls = Object.keys(row.controls);
-        
+
         const lastControlName = controls[controls.length - 1];
         const AllocatedYarnKgs = controls[controls.length - 2];
 
@@ -449,8 +482,24 @@ export class YarnTranscationComponent implements OnInit {
   }
 
   OrderAllocationDelete(index: number) {
-    this.items2.removeAt(index);
+    const orderid = this.orderDetails[index]?.id
+if(orderid){
+    let text = "Press Ok to delete the details";
+    if (confirm(text) == true) {
+      const yarnDataId = this.yarn[0].id
+      const yarnLineId = this.yarnLcLines[0].id;
+      const orderid = this.orderDetails[index].id
+      this.api.OrderAllocationDeleteDetails(yarnDataId, yarnLineId, orderid).subscribe((res) => {
+        alert(res.message)
+      })
+    } else {
+      alert("Cancelled");
+    }
+  }else{
+    this.items2.removeAt(index)
   }
+}
+
 
   OrderAllocationSave() {
     this.api.addUpdateOrderAllocation(this.OrderAllocation.value).subscribe((res) => {
@@ -462,33 +511,34 @@ export class YarnTranscationComponent implements OnInit {
 
   // <!-------------------------- Receipt --------------------------------------------------------------------------->
 
-  orderId(index:any){
+  orderId(index: any) {
     this.yarnOrderId = this.yarnOrderAllocations[index].id
     this.Receipttest = this.yarnOrderAllocations[index].allocatedYarnKgs
     this.receiptForm.controls['yarnId'].setValue(this.yarn[0].id);
     const yarnDataId = this.yarn[0].id
-    this.api.lcDetailsForReceipt(yarnDataId,this.yarnOrderId).subscribe((res)=>{
-    const receivedData = res.lcData;
-  
-    const yarnEntryData = this.receiptForm.get('data') as FormArray;
-    yarnEntryData.clear();
-  
-    receivedData.forEach((dataItem: any) => {
-      const Row3 = this.fb.group({
-        id: dataItem.id,
-        yarnOrderId: this.yarnOrderId,
-        spinningChallan: dataItem.spinningChallan,
-        scandexChallan:dataItem.scandexChallan,
-        receiptDt: this.datePipe.transform(dataItem.receiptDt,'yyyy-MM-dd'),
-        knitFactory:dataItem.knitFactory,
-        BagsCtnNos: dataItem.BagsCtnNos,
-        receiptYarnKgs: dataItem.receiptYarnKgs,
-        pendingReceiptKgs: dataItem.pendingReceiptKgs? dataItem.pendingReceiptKgs:  this.Receipttest-dataItem.receiptYarnKgs
+    this.api.lcDetailsForReceipt(yarnDataId, this.yarnOrderId).subscribe((res) => {
+      const receivedData = res.lcData;
+      this.ReceivedDataReceipt = res.lcData;
+
+      const yarnEntryData = this.receiptForm.get('data') as FormArray;
+      yarnEntryData.clear();
+
+      receivedData.forEach((dataItem: any) => {
+        const Row3 = this.fb.group({
+          id: dataItem.id,
+          yarnOrderId: this.yarnOrderId,
+          spinningChallan: dataItem.spinningChallan,
+          scandexChallan: dataItem.scandexChallan,
+          receiptDt: this.datePipe.transform(dataItem.receiptDt, 'yyyy-MM-dd'),
+          knitFactory: dataItem.knitFactory,
+          BagsCtnNos: dataItem.BagsCtnNos,
+          receiptYarnKgs: dataItem.receiptYarnKgs,
+          pendingReceiptKgs: dataItem.pendingReceiptKgs ? dataItem.pendingReceiptKgs : this.Receipttest - dataItem.receiptYarnKgs
+        });
+        yarnEntryData.push(Row3);
       });
-      yarnEntryData.push(Row3);
-    });
-  })
-  this.receiptModal=true
+    })
+    this.receiptModal = true
   }
 
   receiptForm = this.fb.group({
@@ -502,7 +552,7 @@ export class YarnTranscationComponent implements OnInit {
 
   ReceiptAddButton() {
     const Row3 = this.fb.group({
-      id:new FormControl(),
+      id: new FormControl(),
       yarnOrderId: new FormControl(this.yarnOrderId),
       spinningChallan: new FormControl(''),
       scandexChallan: new FormControl(''),
@@ -517,7 +567,7 @@ export class YarnTranscationComponent implements OnInit {
 
     Row3.get('receiptYarnKgs')?.valueChanges.subscribe(() => {
       this.calculateDiff3();
-  });
+    });
   }
   calculateDiff3() {
     let lastPendingReceipts: number[] = [this.Receipttest];
@@ -527,7 +577,7 @@ export class YarnTranscationComponent implements OnInit {
       const row = control as FormGroup;
       if (row instanceof FormGroup) {
         const controls = Object.keys(row.controls);
-        
+
         const lastControlName = controls[controls.length - 1];
         const AllocatedYarnKgs = controls[controls.length - 2];
 
@@ -553,7 +603,23 @@ export class YarnTranscationComponent implements OnInit {
   }
 
   ReceiptDelete(index: number) {
-    this.items3.removeAt(index);
+    const ReceiptdetailsId = this.ReceivedDataReceipt[index]?.id
+    if (parseInt(ReceiptdetailsId)) {
+      let text = "Press Ok to delete the details";
+      if (confirm(text) == true) {
+        const yarnDataId = this.yarn[0].id
+        const yarnOrderId = this.yarnOrderAllocations[0].id
+        const ReceiptdetailsId = this.ReceivedDataReceipt[index].id
+        
+        this.api.ReceiptdetailsDelete(yarnDataId, yarnOrderId, ReceiptdetailsId).subscribe((res) => {
+          alert(res.message)
+        })
+      } else {
+        alert("Cancelled");
+      }
+    } else {
+      this.items3.removeAt(index);
+    }
   }
 
   receiptSave() {
@@ -565,36 +631,37 @@ export class YarnTranscationComponent implements OnInit {
 
   // <!----------------------------------------------------------------------------------------------------->
 
-  receiptId(index:any){
+  receiptId(index: any) {
     this.QCindexvalue = index
     this.yarnreceiptId = this.yarnReceiptsLines[index].id
     const yarnId = this.yarn[0].id
-    this.api.receiptDetailsForQc(yarnId, this.yarnreceiptId).subscribe((res)=>{
+    this.api.receiptDetailsForQc(yarnId, this.yarnreceiptId).subscribe((res) => {
       this.receiptDetails = res.receipt
 
-    this.Yarn_QC.controls['yarnId'].setValue(this.yarn[0].id);
+      this.Yarn_QC.controls['yarnId'].setValue(this.yarn[0].id);
 
-    const receivedData = res.yarnQc;
-  
-    const yarnEntryData = this.Yarn_QC.get('data') as FormArray;
-    yarnEntryData.clear();
-  
-    receivedData.forEach((dataItem: any) => {
-      const Row4 = this.fb.group({
-        id: dataItem.id,
-        yarnReceiptId: this.yarnreceiptId,
-        checkDate: this.datePipe.transform(dataItem.checkDate,'yyyy-MM-dd'),
-        checkResults:dataItem.checkResults,
-        yarnAcceptRejectStatus: dataItem.yarnAcceptRejectStatus
+      const receivedData = res.yarnQc;
+      this.ReceipReceivedDataId = res.yarnQc
+
+      const yarnEntryData = this.Yarn_QC.get('data') as FormArray;
+      yarnEntryData.clear();
+
+      receivedData.forEach((dataItem: any) => {
+        const Row4 = this.fb.group({
+          id: dataItem.id,
+          yarnReceiptId: this.yarnreceiptId,
+          checkDate: this.datePipe.transform(dataItem.checkDate, 'yyyy-MM-dd'),
+          checkResults: dataItem.checkResults,
+          yarnAcceptRejectStatus: dataItem.yarnAcceptRejectStatus
+        });
+        yarnEntryData.push(Row4);
       });
-      yarnEntryData.push(Row4);
-    });
-  })
-  this.yarnQcModal = true;
+    })
+    this.yarnQcModal = true;
   }
 
   Yarn_QC = this.fb.group({
-    yarnId:[],
+    yarnId: [],
     data: this.fb.array([]),
 
   })
@@ -603,8 +670,8 @@ export class YarnTranscationComponent implements OnInit {
   }
   YarnQCAddButton() {
     const Row4 = this.fb.group({
-      id:new FormControl(),
-      yarnReceiptId:new FormControl(this.yarnreceiptId),
+      id: new FormControl(),
+      yarnReceiptId: new FormControl(this.yarnreceiptId),
       checkDate: new FormControl(''),
       checkResults: new FormControl(''),
       yarnAcceptRejectStatus: new FormControl(''),
@@ -614,11 +681,27 @@ export class YarnTranscationComponent implements OnInit {
   }
 
   YarnQCDelete(index: number) {
-    this.items4.removeAt(index);
-  }
+    const ReceipDataId = this.ReceipReceivedDataId[index]?.id
 
-  yarnQcSave(){
-    this.api.addUpdateYarnQuality(this.Yarn_QC.value).subscribe((res)=>{
+    if(ReceipDataId){
+    let text = "Press Ok to delete the details";
+    if (confirm(text) == true) {
+      const yarnId = this.yarn[0].id
+      const yarnreceiptId = this.yarnReceiptsLines[0].id
+      const ReceipDataId = this.ReceipReceivedDataId[index].id
+      this.api.YarnQCDeleteDetails(yarnId, yarnreceiptId, ReceipDataId).subscribe((res) => {
+        alert(res.message)
+      })
+    } else {
+      alert("Cancelled");
+    }
+  }else{
+    this.items4.removeAt(index)
+  }
+}
+
+  yarnQcSave() {
+    this.api.addUpdateYarnQuality(this.Yarn_QC.value).subscribe((res) => {
       alert(res.message)
       window.location.reload()
     })
