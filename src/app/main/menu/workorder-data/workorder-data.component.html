@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<!-- <mat-toolbar color="primary">
   <mat-toolbar-row style="display: flex; justify-content: center;">
     <span>WorkOrder Data</span>
   </mat-toolbar-row>
@@ -73,4 +73,85 @@
   
   
 
-  </form>
+  </form> -->
+
+
+  <mat-toolbar style="height: fit-content; padding: 10px;">
+    <div class="Template">
+        <div>
+            <a class="btn btn-primary" style="margin-left: 96%;" href="../assets/WorkOrder template-2.xlsx">Template
+                <i class="material-icons" style="font-size:medium;">file_download</i>
+            </a>
+        </div>
+    </div>
+</mat-toolbar>
+
+<div class="wrapper" style="margin-left: 44%; margin-top: 8%;" *ngIf="loaddata1">
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
+    <form class="form-container" enctype='multipart/form-data'>
+        <div class="upload-files-container">
+            <div class="drag-file-area">
+                <span class="material-icons-outlined upload-icon"> file_upload </span>
+                <label class="label">
+                    <input type="file" class="btn btn-primary"   (change)="readfile($event)"
+                    style="width: 119%; background-color: blueviolet; margin-left: -5%;"/>
+                </label>
+            </div>
+            <button type="button" class="upload-button" 
+            (click)="readexcelfile()" (click)="hideandseek()"> Upload </button>
+        </div>
+    </form>
+</div>
+
+<div *ngIf="loaddata2">
+    <div style="display: flex; justify-content: center;">
+        <button class="btn btn-primary" (click)="workordersubmit()"> Save </button>
+    </div>
+    <div class="fixTableHead">
+      <table style="overflow: scroll;">
+        <thead>
+          <tr>
+            <th>buyer</th>
+            <th>orderNo</th>
+            <th>style</th>
+            <th>color</th>
+            <th>size</th>
+            <th>fabType</th>
+            <th>fabDia</th>
+            <th>fabGsm</th>
+            <th>knitSL</th>
+            <th>Yarn Type</th>
+            <th>yarnKgs</th>
+            <th>greigeKg</th>
+            <th>finishedKg</th>
+            <th>spinFty</th>
+            <th>knitFty</th>
+            <th>dyeingFty</th>
+            <th>noDays</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let wo of this.dataSource">
+            <td>{{wo.buyer}}</td>
+            <td>{{wo.orderNo}}</td>
+            <td>{{wo.style}}</td>
+            <td>{{wo.color}}</td>
+            <td>{{wo.size}}</td>
+            <td>{{wo.fabType}}</td>
+            <td>{{wo.fabDia}}</td>
+            <td>{{wo.fabGsm}}</td>
+            <td>{{wo.knitSL}}</td>
+            <td>{{wo.yarnType}}</td>
+            <td>{{wo.yarnKg}}</td>
+            <td>{{wo.greigeKg}}</td>
+            <td>{{wo.finishKg}}</td>
+            <td>{{wo.spinFty}}</td>         
+            <td>{{wo.knitFty}}</td>
+            <td>{{wo.dyeinFty}}</td>
+            <td>{{wo.noDays}}</td>
+          </tr>
+        </tbody>
+      </table>
+  
+    </div>
+</div>

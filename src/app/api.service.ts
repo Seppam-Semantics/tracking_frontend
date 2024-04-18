@@ -10,8 +10,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  // apiUrl = "https://tracker.seppam.com";
-  apiUrl = "http://localhost:2000";
+  apiUrl = "https://tracker.seppam.com";
+  // apiUrl = "http://localhost:2000";
 
 
   token: any;

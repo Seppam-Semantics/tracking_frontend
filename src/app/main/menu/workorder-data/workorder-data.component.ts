@@ -23,6 +23,17 @@ export class WorkorderDataComponent {
   dataSource:any[]=[]
   users: any;
   file: any;
+  Tabledata:any[]=[]
+  loaddata1:boolean=true;
+  loaddata2:boolean=false;
+
+
+
+
+  hideandseek(){
+    this.loaddata1=!this.loaddata1
+    this.loaddata2=!this.loaddata2
+  }
 
 
   readfile(e: any) {

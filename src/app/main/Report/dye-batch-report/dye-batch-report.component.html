@@ -123,7 +123,7 @@
                                                     </mat-select>
                                                 </mat-form-field> -->
 
-                                                <input type="text" pInputText formControlName="buyer" readonly style="width: 15vh;">
+                                                <p-dropdown formControlName="buyer" placeholder="Buyer" [(ngModel)]="buyerName" (onChange)="woByBuyer()" optionLabel="buyer" optionValue="buyer" [options]="buyers" readonly="true"></p-dropdown>
 
 
                                                 <!-- <mat-form-field appearance="outline" style="margin-top: 4vh; ">
@@ -138,7 +138,8 @@
                 
 
                                                 
-                                                <input type="text" pInputText formControlName="orderNo"  readonly style="width: 15vh;">
+                                                <p-dropdown formControlName="orderNo" placeholder="Order" [(ngModel)]="ordernumbers" (onChange)="wobyOrder()" optionLabel="orderNO" optionValue="orderNO" [options]="order" readonly="true"></p-dropdown>
+
 
                                                 <!-- <mat-form-field appearance="outline" style="margin-top: 4vh; ">
                                                     <mat-label>Style</mat-label>
@@ -151,7 +152,8 @@
                                                 </mat-form-field> -->
                 
                 
-                                                <input type="text" pInputText formControlName="style"  readonly style="width: 15vh;">
+                                                <p-dropdown formControlName="style" placeholder="Style" [(ngModel)]="styleslist" (onChange)="wobystyle()" optionLabel="style" optionValue="style" [options]="stylelist" readonly="true"></p-dropdown>
+
 
                 
                                                 <!-- <mat-form-field appearance="outline" style="margin-top: 4vh; ">
@@ -164,7 +166,7 @@
                                                     </mat-select>
                                                 </mat-form-field> -->
                 
-                                                <input type="text" pInputText formControlName="color"  readonly style="width: 15vh;">
+                                                <p-dropdown formControlName="color" placeholder="color" [(ngModel)]="colorslist" (onChange)="wobycolor()" optionLabel="color" optionValue="color" [options]="colorlist" readonly="true"></p-dropdown> 
                 
                 
                                             </div>

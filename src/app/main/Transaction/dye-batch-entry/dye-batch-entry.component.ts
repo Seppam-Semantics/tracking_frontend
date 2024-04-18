@@ -228,7 +228,7 @@ dyesubmit() {
   this.api.post_dyereport_entry(this.dye_Entery.value).subscribe((res)=>{
     alert(res.message)    
     if(res.success== true){
-      // this.router.navigate(['/main/Dye-Report'])    
+      this.router.navigate(['/main/Dye-Report'])    
     }
   })
 }

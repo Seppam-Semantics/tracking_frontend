@@ -282,4 +282,7 @@ Dye(){
   workorder(){
     this.router.navigate(['/main/WorkorderData'])
   }
+  Upload(){
+    this.router.navigate(['/main/WorkorderData'])
+  }
 }

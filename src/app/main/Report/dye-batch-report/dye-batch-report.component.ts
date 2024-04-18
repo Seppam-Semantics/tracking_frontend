@@ -35,6 +35,10 @@ export class DyeBatchReportComponent implements OnInit {
   dye_batch_data_1: any;
   dye_batch_data_2: any;
   dye_batch_data: any;
+  buyerData: any;
+  orderData: any;
+  styleData: any;
+  colorData: any;
 
 
 
@@ -294,8 +298,10 @@ export class DyeBatchReportComponent implements OnInit {
   //=====================================================================================================
 
   getid(id: any) {
+
     this.singledataid = id
     this.api.dye_batch_single_data(this.singledataid).subscribe((res) => {
+
       this.dye_batch_data = res
       console.log(this.dye_batch_data)
       console.log(this.dye_batch_data.headerData[0].orderNo)
@@ -347,8 +353,31 @@ export class DyeBatchReportComponent implements OnInit {
       this.dye_batch_data.headerData[0].finalbatch_fabricDeliveryDatetime,
       'yyyy-MM-dd'
     );
+this.buyerData = this.dye_batch_data.headerData[0].buyer; 
+this.orderData = this.dye_batch_data.headerData[0].orderNo; 
+this.styleData = this.dye_batch_data.headerData[0].style;
+this.colorData = this.dye_batch_data.headerData[0].color;
 
-    this.dye_Entery.patchValue({
+
+this.getorders(this.buyerData);
+this.loadworkorder(this.buyerData);
+
+this.getstyle(this.buyerData, this.orderData)
+this.loadworkorder(this.buyerData, this.orderData);
+
+this.getcolor(this.buyerData, this.orderData, this.styleData)
+this.loadworkorder(this.buyerData, this.orderData, this.styleData);
+
+this.getsize(this.buyerData, this.orderData, this.styleData, this.colorData)
+this.loadworkorder(this.buyerData, this.orderData, this.styleData, this.colorData);
+
+console.log(this.buyerData)
+console.log(this.orderData)
+console.log(this.styleData)
+
+
+
+this.dye_Entery.patchValue({
       "id":this.dye_batch_data.headerData[0].id,
       "dyeFactory": this.dye_batch_data.headerData[0].dyeFactory,
       'buyer': this.dye_batch_data.headerData[0].buyer,
