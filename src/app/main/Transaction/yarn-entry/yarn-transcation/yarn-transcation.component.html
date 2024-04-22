@@ -339,9 +339,11 @@
                                 <th>Spin Challan</th>
                                 <th>SBDL Challan</th>
                                 <th>Receipt Dt</th>
+
                                 <th>Knit Factory</th>
                                 <th>Bags/Ctn - nos</th>
                                 <th>Receipt Yarn Kgs</th>
+                                
                                 <th>Pending Receipts - Kgs</th>
                                 <th></th>
                             </tr>
@@ -368,7 +370,7 @@
                                     <input type="number" class="form-control" formControlName="BagsCtnNos">
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control" formControlName="receiptYarnKgs">
+                                    <input type="number" class="form-control" formControlName="receiptYarnKgs" (input)="calculateDiff3()">
                                 </td>
                                 <td>
                                     <input type="text" class="form-control" formControlName="pendingReceiptKgs">
