@@ -215,11 +215,13 @@ export class FabricRollData2Component implements OnInit {
   }
 
   edit(id: any) {
+    console.log(id)
     this.visible = true;
     this.woupdateid=id
     this.api.getsinglewodetails(id).subscribe((res) => {
       this.Woupdate = res.workorder
       this.woUpdateFrom.patchValue({
+        id:this.Woupdate.id,
         buyer: this.Woupdate.buyer,
         orderNo: this.Woupdate.orderNo,
         style: this.Woupdate.style,
@@ -239,11 +241,13 @@ export class FabricRollData2Component implements OnInit {
         noDays: this.Woupdate.noRolls,
         status: this.Woupdate.status
       })
+      console.log(res)
     })
      }
 
 
   woUpdateFrom = new FormGroup({
+    id:new FormControl(),
     buyer: new FormControl(''),
     orderNo: new FormControl(''),
     style: new FormControl(''),
@@ -265,7 +269,7 @@ export class FabricRollData2Component implements OnInit {
   })
 
 woupdatesubmit(){
-
+  console.log(this.woupdateid, "...................................", this.woUpdateFrom.value)
   this.api.postsinglewodetails(this.woUpdateFrom.value,this.woupdateid).subscribe((res) => {
     alert(res.message)
     this.woByBuyer()
