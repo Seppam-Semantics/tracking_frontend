@@ -60,9 +60,9 @@
                         <tr *ngFor="let process of items.controls; let i=index" [formGroupName]="i">
                             <td></td>
                             <td><input type="text" class="form-control" formControlName="yarnType" type="text"></td>
-                            <td><input type="text" class="form-control" formControlName="lcYarnKgs" type="number"></td>
+                            <td><input type="text" class="form-control" formControlName="lcYarnKgs" type="number" (input)="calculateDiff()"></td>
                             <td><input type="text" class="form-control" formControlName="yarnRate" type="number"></td>
-                            <td><input type="number" class="form-control" formControlName="yarnValue"></td>
+                            <td><input type="number" class="form-control" formControlName="yarnValue" (input)="calculateDiff()"></td>
                             <td><button class="btn btn-primary" data-toggle="modal" data-target="#lotCheckModal" (click)="lotcheckaddUpdate(i)">Lot Check</button></td>
                             <td><button class="btn btn-primary" data-toggle="modal" data-target="#orderAllocationModal" (click)="orderAllotAddUpdate(i)">Order Allocation</button></td>
                             <td><button class="btn-danger" (click)="Yarn_Entry_Delete(i)">x</button></td>

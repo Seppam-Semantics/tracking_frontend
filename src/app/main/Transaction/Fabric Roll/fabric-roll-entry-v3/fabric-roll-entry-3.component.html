@@ -290,7 +290,7 @@
                     <th></th>
                   </tr>
                   <tr>
-                    <th>Batch no</th>
+                    <th>Batch No.</th>
                     <th style="display: none;">No.Of Days</th>
                     <th>Notes</th>
                     <th>Total Rolls</th>
@@ -361,7 +361,7 @@
                     <th></th>
                   </tr>
                   <tr>
-                    <th>Batchno</th>
+                    <th>Batch No.</th>
                     <th style="display: none;">No.Of Days</th>
                     <th>Notes</th>
                     <th>Total Rolls</th>
@@ -373,7 +373,7 @@
                 </thead>
                 <tbody formArrayName="addprocess4">
                   <tr *ngFor="let process of items4.controls; let i=index" [formGroupName]="i">
-                    <td><input type="text" class="form-control" placeholder="Batchno"
+                    <td><input type="text" class="form-control" placeholder="Batch No."
                       formControlName="batchCode" readonly></td>
                     <td style="display: none;"><input type="text" class="form-control" type="number" formControlName="days"></td>
                     <td><input type="text" class="form-control" type="text" formControlName="notes"></td>
@@ -428,7 +428,7 @@
                     <th></th>
                   </tr>
                   <tr>
-                    <th>Batchno</th>
+                    <th>Batch No.</th>
                     <th style="display: none;">No.of Days</th>
                     <th>Notes</th>
                     <th>No.Of Rolls</th>
@@ -485,15 +485,15 @@
               <thead class="thead-dark">
                 <tr>
                   <th></th>
-                  <th colspan="4">planPcs <input type="text" readonly value="{{entry6total}}"></th>
+                  <th colspan="4">Plan Pcs <input type="text" readonly value="{{entry6total}}"></th>
                   <th></th>
                 </tr>
                 <tr>
-                  <th>Batch no</th>
+                  <th>Batch No.</th>
                   <th style="display: none;">No.Of Days</th>
                   <th>Notes</th>
                   <th>Total Rolls</th>
-                  <th>planPcs</th>
+                  <th>Plan Pcs</th>
                   <th>Production Date</th>
                   <th>Delete</th>
                 </tr>
@@ -534,7 +534,7 @@
                 <thead>
                   <tr>
                     <th>
-                      planPcs
+                      Plan Pcs
                     </th>
                     <th>
                       <input type="text" class="form-control" value="{{rollCount6}}" readonly>
@@ -553,9 +553,10 @@
                       Actual cut <input type="text" value="{{entry7total}}" readonly>
                     </th>
                     <th></th>
+                    <th></th>
                   </tr>
                   <tr>
-                    <th>Batch no</th>
+                    <th>Batch No.</th>
                     <th>No.Of.Days</th>
                     <th>Notes</th>
                     <th>Total Rolls</th>

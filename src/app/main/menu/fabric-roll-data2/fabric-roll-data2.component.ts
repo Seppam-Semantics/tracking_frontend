@@ -75,6 +75,7 @@ export class FabricRollData2Component implements OnInit {
   fabentrydata5: any;
   dataIndex:any;
   newfabEntry:any[] = []
+  visible: boolean = false;
 
   constructor(private api: ApiService,
     private http: HttpClient,
@@ -214,6 +215,7 @@ export class FabricRollData2Component implements OnInit {
   }
 
   edit(id: any) {
+    this.visible = true;
     this.woupdateid=id
     this.api.getsinglewodetails(id).subscribe((res) => {
       this.Woupdate = res.workorder

@@ -57,7 +57,7 @@ export class WorkorderDataComponent {
         if (!this.users[0].hasOwnProperty('noDays')) {
 
             this.users.forEach((user:any)=> {
-                user['noDays'] = 5;
+                user['noDays'] = 0;
             });
         }
         this.dataSource = this.users;
