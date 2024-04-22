@@ -229,13 +229,14 @@ export class FabricRollData2Component implements OnInit {
         fabDia: this.Woupdate.fabDia,
         fabGSM: this.Woupdate.fabGsm,
         knitSL: this.Woupdate.knitSL,
-        yarnLot: this.Woupdate.yarnLot,
+        yarnKg: this.Woupdate.yarnKg,
+        greigeKg: this.Woupdate.greigeKg,
         yarnType: this.Woupdate.yarnType,
-        yarnCount: this.Woupdate.yarnCount,
+        finishKg: this.Woupdate.finishKg,
         spinFty: this.Woupdate.spinFty,
         knitFty: this.Woupdate.knitFty,
         dyeinFty: this.Woupdate.dyeinFty,
-        noRolls: this.Woupdate.noRolls,
+        noDays: this.Woupdate.noRolls,
         status: this.Woupdate.status
       })
     })
@@ -252,13 +253,14 @@ export class FabricRollData2Component implements OnInit {
     fabDia: new FormControl(''),
     fabGSM: new FormControl(''),
     knitSL: new FormControl(''),
-    yarnLot: new FormControl(''),
+    yarnKg: new FormControl(''),
+    greigeKg : new FormControl(''),
     yarnType: new FormControl(''),
-    yarnCount: new FormControl(''),
+    finishKg: new FormControl(''),
     spinFty: new FormControl(''),
     knitFty: new FormControl(''),
     dyeinFty: new FormControl(''),
-    noRolls: new FormControl(''),
+    noDays: new FormControl(''),
     status:new FormControl('')
   })
 

@@ -10,8 +10,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  // apiUrl = "https://tracker.seppam.com";
-  apiUrl = "http://localhost:2000";
+  apiUrl = "https://tracker.seppam.com";
+  // apiUrl = "http://localhost:2000";
 
 
   token: any;
@@ -129,7 +129,7 @@ export class ApiService {
     return this.http.put(this.getUrl() + `/workorderapi/workorder/${id}`, data, this.getHeaders())
   }
   getsinglewodetails(id: any): Observable<any> {
-    return this.http.get(this.getUrl() + `/fabricrollapi/fabric-entrys?id=${id}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/fabricrollapi/transcation-entrys?id=${id}`, this.getHeaders())
   }
 
   Fabricroll1entry(data: any): Observable<any> {

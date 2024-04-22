@@ -390,20 +390,21 @@
                 <label style="display: inline-block; width: 100px;">knitSL : </label>
                 <input type="text" matInput formControlName="knitSL">
               </div>
+
               <div style="display: flex; width : fit-content;">
                 <label style="display: inline-block; width: 100px;">yarn Kg : </label>
-                <input type="text" matInput formControlName="yarnLot">
+                <input type="text" matInput formControlName="yarnKg">
               </div>
             </div>
 
             <div style="display: flex; justify-content: space-around; margin-bottom: 2%;">
               <div style="display: flex; width : fit-content;">
                 <label style="display: inline-block; width: 100px;">Greige Kg : </label>
-                <input type="text" matInput formControlName="yarnType">
+                <input type="text" matInput formControlName="greigeKg">
               </div>
               <div style="display: flex; width : fit-content;">
                 <label style="display: inline-block; width: 100px;">Finished Kg : </label>
-                <input type="text" matInput formControlName="yarnCount">
+                <input type="text" matInput formControlName="finishKg">
               </div>
             </div>
 
@@ -426,16 +427,24 @@
 
               <div style="display: flex; width : fit-content;">
                 <label style="display: inline-block; width: 100px;">No Of Days : </label>
-                <input type="text" matInput formControlName="noRolls" readonly>
+                <input type="text" matInput formControlName="noDays" readonly>
               </div>
             </div>
 
-            <div style="display: flex; justify-content: center; align-items: center;">
+            <div style="display: flex; justify-content: space-around;">
+              
+              <div style="display: flex; width : fit-content;">
+                <label style="display: inline-block; width: 100px;">yarn Type : </label>
+                <input type="text" matInput formControlName="yarnType">
+              </div>
+
+              <div style="display: flex; width : fit-content;">
               <label style="display: inline-block; width: 100px;" for="status">Status : </label>
               <select id="status" class="form-control" formControlName="status">
                 <option value="1">Open</option>
                 <option value="0">Close</option>
               </select>
+            </div>
             </div>
           </div>
         </div>
@@ -443,7 +452,7 @@
         <!-- Modal footer -->
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" style="display: flex; margin-right: 45%;"
-            (click)="woupdatesubmit()" data-dismiss="modal">Update</button>
+            (click)="woupdatesubmit()">Update</button>
           <!-- data-dismiss="modal" -->
         </div>
 
