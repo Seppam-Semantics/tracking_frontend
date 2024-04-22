@@ -176,26 +176,40 @@ export class YarnTranscationComponent implements OnInit {
 
   Yarn_Entry_1 = new FormGroup({
     data: this.fb.array([]),
-    Total10: new FormControl(),
-    Total12: new FormControl(),
+
   })
 
   calculateDiff() {
-    let total10 = 0;
-    let total12 = 0;
+    let LCYarnKgsTotal = 0;
+    let LCValueTotal = 0;
     this.items.controls.forEach((control: AbstractControl) => {
       const row = control as FormGroup;
       if (row instanceof FormGroup) {
-        const Value10 = parseFloat(row.get('lcYarnKgs')?.value) || 0;
-        const Value12 = parseFloat(row.get('yarnValue')?.value) || 0;
-        total10 += Value10;
-        total12 += Value12;
+        const LCYarnKgsValue = parseFloat(row.get('lcYarnKgs')?.value) || 0;
+        const LCValueValue = parseFloat(row.get('yarnValue')?.value) || 0;
+        LCYarnKgsTotal += LCYarnKgsValue;
+        LCValueTotal += LCValueValue;
+        
       }
     });
-    this.yarnHeader.get('lcYarnKgs')?.setValue(total10);
-    this.yarnHeader.get('lcValue')?.setValue(total12);
-    this.Yarn_Entry_1.get('Total10')?.setValue(total10);
-    this.Yarn_Entry_1.get('Total12')?.setValue(total12);
+    this.yarnHeader.get('lcYarnKgs')?.setValue(LCYarnKgsTotal);
+    this.yarnHeader.get('lcValue')?.setValue(LCValueTotal);
+  }
+
+
+  calculateDiff5() {
+    this.items.controls.forEach((control: AbstractControl) => {
+      const row = control as FormGroup;
+      if (row instanceof FormGroup) {
+        const lcYarnKgs = parseFloat(row.get('lcYarnKgs')?.value);
+        const yarnRate = parseFloat(row.get('yarnRate')?.value);
+
+        const yarnValue1 = lcYarnKgs * yarnRate
+        const yarnValue = parseFloat(yarnValue1.toFixed(2));
+  
+        row.patchValue({ yarnValue});
+      }
+    });
   }
 
 
@@ -213,11 +227,12 @@ export class YarnTranscationComponent implements OnInit {
     });
 
     row.get('lcYarnKgs')?.valueChanges.subscribe(() => {
+      this.calculateDiff5();
       this.calculateDiff();
     });
 
-    row.get('yarnValue')?.valueChanges.subscribe(() => {
-      this.calculateDiff();
+    row.get('yarnRate')?.valueChanges.subscribe(() => {
+      this.calculateDiff5();
     });
 
     this.items.push(row);

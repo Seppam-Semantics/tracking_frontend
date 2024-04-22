@@ -511,7 +511,7 @@ this.dye_Entery.patchValue({
     console.log(this.dye_Entery.value)
     this.api.post_dyereport_entry(this.dye_Entery.value).subscribe((res)=>{
       alert(res.message)
-      // window.location.reload()
+      window.location.reload()
     })
   }
   DyeBatchButton(){
