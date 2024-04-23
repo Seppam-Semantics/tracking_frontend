@@ -76,14 +76,16 @@ export class FabricRollData2Component implements OnInit {
   dataIndex:any;
   newfabEntry:any[] = []
   visible: boolean = false;
-
+  status : any;
   constructor(private api: ApiService,
     private http: HttpClient,
     private spinner: NgxSpinnerService, private router : Router) { }
 
   ngOnInit(): void {
     this.getbuyers();
-  }
+    this.status = [{name:"yes"},{name:"No"}];
+}
+  
 
   fileName = "Fabricrolldata.xlsx"
   fileName2="Workorder-data.xlsx"
