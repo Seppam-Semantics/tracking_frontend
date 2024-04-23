@@ -83,7 +83,6 @@ export class FabricRollData2Component implements OnInit {
 
   ngOnInit(): void {
     this.getbuyers();
-    this.status = [{name:"yes"},{name:"No"}];
 }
   
 
@@ -222,6 +221,12 @@ export class FabricRollData2Component implements OnInit {
     this.woupdateid=id
     this.api.getsinglewodetails(id).subscribe((res) => {
       this.Woupdate = res.workorder
+      const value = this.Woupdate.status
+      if(value == 1){
+        this.status = true
+      }else{
+        this.status = false
+      }
       this.woUpdateFrom.patchValue({
         id:this.Woupdate.id,
         buyer: this.Woupdate.buyer,
@@ -231,7 +236,7 @@ export class FabricRollData2Component implements OnInit {
         size: this.Woupdate.size,
         fabType: this.Woupdate.fabType,
         fabDia: this.Woupdate.fabDia,
-        fabGSM: this.Woupdate.fabGsm,
+        fabGsm: this.Woupdate.fabGsm,
         knitSL: this.Woupdate.knitSL,
         yarnKg: this.Woupdate.yarnKg,
         greigeKg: this.Woupdate.greigeKg,
@@ -241,7 +246,7 @@ export class FabricRollData2Component implements OnInit {
         knitFty: this.Woupdate.knitFty,
         dyeinFty: this.Woupdate.dyeinFty,
         noDays: this.Woupdate.noRolls,
-        status: this.Woupdate.status
+        // status: this.Woupdate.status
       })
       console.log(res)
     })
@@ -257,7 +262,7 @@ export class FabricRollData2Component implements OnInit {
     size: new FormControl(''),
     fabType: new FormControl(''),
     fabDia: new FormControl(''),
-    fabGSM: new FormControl(''),
+    fabGsm: new FormControl(''),
     knitSL: new FormControl(''),
     yarnKg: new FormControl(''),
     greigeKg : new FormControl(''),
@@ -274,6 +279,7 @@ woupdatesubmit(){
   console.log(this.woupdateid, "...................................", this.woUpdateFrom.value)
   this.api.postsinglewodetails(this.woUpdateFrom.value,this.woupdateid).subscribe((res) => {
     alert(res.message)
+    this.visible = false;
     this.woByBuyer()
   })
 }
