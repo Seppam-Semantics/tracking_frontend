@@ -567,8 +567,9 @@
 
         <div style="display: flex; width : fit-content;">
 
-          <p-dropdown [options]="[false,true]"  
-          placeholder="Select a Status" formControlName="status" [(ngModel)]="status"></p-dropdown>
+          <p-dropdown [options]="[{ 'name': 'Open', 'id': true }, { 'name': 'Close', 'id': false }]"
+          placeholder="Select a Status" formControlName="status" [(ngModel)]="status"  
+          optionLabel="name" optionValue="id"></p-dropdown>
 
         </div>
 
