@@ -90,14 +90,14 @@
   </table>
 </div>
 <!---===========================================================================================================-->
-<ngx-spinner *ngIf="LoadingTotal">Loading...!</ngx-spinner>
-<!---===========================================================================================================-->
+<!-- <ngx-spinner *ngIf="LoadingTotal">Loading...!</ngx-spinner>
+
 
 <div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-fullscreen" role="document">
     <div class="modal-content">
       <div class="modal-body">
-        <!---------------------------------------------------------------------------------------------------->
+
         <div class="example-accordion-item-header" (click)="accordionItem.toggle()"
           style="display: flex; justify-content: center; gap: 0.5%; margin-top: 2%; flex-wrap: wrap;">
 
@@ -143,9 +143,6 @@
           </mat-form-field>
         </div>
 
-
-
-        <!------------------------------------------------------------------------------>
         <div style="table-layout: fixed;" id="table-data">
 
 
@@ -230,7 +227,8 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
+
 <!---===========================================================================================================-->
 <form>
   <div class="modal fade" id="edit">
@@ -431,3 +429,155 @@
     </div>
   </div>
 </form>
+
+
+<p-dialog [resizable]="true" [modal]="true" [maximizable]="true" appendTo="body" [(visible)]="allDetailsModal"
+  [style]="{width: '90vw'}" [contentStyle]="{height: '90vh'}">
+
+  <div class="example-accordion-item-header" (click)="accordionItem.toggle()"
+    style="display: flex; justify-content: center; gap: 0.5%; margin-top: 2%; flex-wrap: wrap;">
+
+    <!-- <mat-form-field appearance="outline" style="width: 105px;" (click)="clearAll()">
+            <mat-label>Buyer</mat-label>
+            <mat-select [(ngModel)]="buyerName" (selectionChange)="woByBuyer()">
+              <mat-option value=""> </mat-option>
+              <mat-option *ngFor="let buyer of this.knitdetails" value="{{buyer.buyer}}">{{buyer.buyer}}</mat-option>
+            </mat-select>
+          </mat-form-field> -->
+
+    <p-dropdown [options]="this.knitdetails" [(ngModel)]="buyerName" (selectionChange)="woByBuyer()" optionLabel="buyer"
+      optionValue="buyer" placeholder="Buyer"></p-dropdown>
+
+    <!-- <mat-form-field appearance="outline" style="width: 105px;">
+            <mat-label>Order</mat-label>
+            <mat-select [(ngModel)]="ordernumbers" (selectionChange)="wobyOrder()">
+              <mat-option value=""> </mat-option>
+              <mat-option *ngFor="let order of this.knitdetails"
+                value="{{order.orderNo}}">{{order.orderNo}}</mat-option>
+            </mat-select>
+          </mat-form-field> -->
+
+    <p-dropdown [options]="this.knitdetails" [(ngModel)]="ordernumbers" (selectionChange)="wobyOrder()"
+      optionLabel="orderNo" optionValue="orderNo" placeholder="orderNo"></p-dropdown>
+
+    <!-- <mat-form-field appearance="outline" style="width: 105px;">
+            <mat-label>Style</mat-label>
+            <mat-select [(ngModel)]="styleslist" (selectionChange)="wobystyle()">
+              <mat-option value=""> </mat-option>
+              <mat-option *ngFor="let style of this.knitdetails" value="{{style.style}}">{{style.style}}</mat-option>
+            </mat-select>
+          </mat-form-field> -->
+
+    <p-dropdown [options]="this.knitdetails" [(ngModel)]="styleslist" (selectionChange)="wobystyle()"
+      optionLabel="style" optionValue="style" placeholder="style"></p-dropdown>
+
+    <!-- <mat-form-field appearance="outline" style="width: 105px;">
+            <mat-label>color</mat-label>
+            <mat-select [(ngModel)]="colorslist" (selectionChange)="wobycolor()">
+              <mat-option value=""> </mat-option>
+              <mat-option *ngFor="let color of this.knitdetails" value="{{color.color}}">{{color.color}}</mat-option>
+            </mat-select>
+          </mat-form-field> -->
+
+
+    <p-dropdown [options]="this.knitdetails" [(ngModel)]="colorslist" (selectionChange)="wobycolor()"
+      optionLabel="color" optionValue="color" placeholder="color"></p-dropdown>
+
+    <!-- <mat-form-field appearance="outline" style="width: 105px;">
+            <mat-label>Size</mat-label>
+            <mat-select [(ngModel)]="sizeslist" (selectionChange)="wobysize()">
+              <mat-option value=""> </mat-option>
+              <mat-option *ngFor="let size of this.knitdetails" value="{{size.size}}">{{size.size}}</mat-option>
+            </mat-select>
+          </mat-form-field> -->
+
+    <p-dropdown [options]="this.knitdetails" [(ngModel)]="sizeslist" (selectionChange)="wobysize()" optionLabel="size"
+      optionValue="size" placeholder="size"></p-dropdown>
+
+  </div>
+
+
+
+  <!------------------------------------------------------------------------------>
+  <div style="table-layout: fixed;" id="table-data">
+
+
+
+    <table class="table table-hover">
+      <tbody>
+        <tr *ngFor="let data of this.knitdetails2; let i = index;">
+          <td><b>Factory</b> : {{data.factory}}</td>
+          <td><b>HouseKeepingStatus</b> : {{data.houseKeepingStatus == 1 ? "Active":"InActive" }}</td>
+          <td><b>FloorLightingStatus</b> : {{data.floorLightingStatus == 1 ? "Active":"InActive" }}</td>
+          <td><b>GasElecAvailability</b> : {{data.gasElecAvailability == 1 ? "Active":"InActive" }}</td>
+          <td><b>StorageAreaStatus</b> : {{data.storageAreaStatus == 1 ? "Active":"InActive" }}</td>
+          <td><b>AllocatedDay</b> : {{data.allocatedDay}}</td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <div class="fixTableHead">
+
+      <table class="table table-hover">
+        <thead class="thead-dark">
+          <tr>
+            <th>S.no</th>
+            <th>Buyer</th>
+            <th>orderNo</th>
+            <th>style</th>
+            <th>color</th>
+            <th>size</th>
+            <th>KintMachinNo</th>
+            <th>YarnLot</th>
+            <th>DayProductionKgs</th>
+            <th>noOfRollsProduced</th>
+            <th>noOfRollsChecked</th>
+            <th>knittingSL</th>
+            <th>machineRPM</th>
+            <th>oilSystem</th>
+            <th>YarnTension</th>
+            <th>needleQuality</th>
+            <th>sinkerQuality</th>
+            <th>movingFan</th>
+            <th>allStopMotion</th>
+            <th>takeupRollerTension</th>
+            <th>remarks</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let Ftydata of this.knitdetails; let i = index;">
+            <td>{{i+1}}</td>
+            <td>{{Ftydata.buyer}}</td>
+            <td>{{Ftydata.orderNo}}</td>
+            <td>{{Ftydata.style}}</td>
+            <td>{{Ftydata.color}}</td>
+            <td>{{Ftydata.size}}</td>
+            <td>{{Ftydata.knitMachineno}}</td>
+            <td>{{Ftydata.yarnLot}}</td>
+            <td>{{Ftydata.dayProductionKgs}}</td>
+            <td>{{Ftydata.noOfRollsProduced}}</td>
+            <td>{{Ftydata.noOfRollsChecked}}</td>
+            <td>{{Ftydata.knittingSL}}</td>
+            <td>{{Ftydata.machineRPM}}</td>
+            <td>{{Ftydata.oilSystem}}</td>
+            <td>{{Ftydata.yarnTension}}</td>
+            <td>{{Ftydata.needleQuality}}</td>
+            <td>{{Ftydata.sinkerQuality}}</td>
+            <td>{{Ftydata.movingFan}}</td>
+            <td>{{Ftydata.allStopMotion}}</td>
+            <td>{{Ftydata.takeupRollerTension}}</td>
+            <td><textarea class="form-control">{{Ftydata.remarks}}</textarea></td>
+
+          </tr>
+
+        <tbody>
+      </table>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <button type="button" class="btn btn-danger" data-dismiss="modal" style="margin-right: 40%;">Close</button>
+    <button class="btn btn-primary" (click)="exportexcel()" style="display: flex; justify-content: lefts;">
+      Download File
+    </button>
+  </ng-template>
+</p-dialog>

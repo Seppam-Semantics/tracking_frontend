@@ -54,48 +54,49 @@ export class KnitReportComponent {
 
   // ---------------------------
 
-  load:FormGroup;
+  load: FormGroup;
   isChecked: boolean = true;
-  yes:any;
-  no:any
-    fty_name: any;
-    buyer: any;
-    orderNo:any;
-    style:any;
-    color:any;
-    size:any;
+  yes: any;
+  no: any
+  fty_name: any;
+  buyer: any;
+  orderNo: any;
+  style: any;
+  color: any;
+  size: any;
   knitdetails2: any;
+  allDetailsModal : boolean = false;
 
 
-    onCheckboxChange11(event: any) {
-      const ischecked = event.target.checked;
-      this.load.controls['houseKeepingStatus'].setValue(ischecked ? 'active' : 'inactive');
-    }
+  onCheckboxChange11(event: any) {
+    const ischecked = event.target.checked;
+    this.load.controls['houseKeepingStatus'].setValue(ischecked ? 'active' : 'inactive');
+  }
 
-    onCheckboxChange22(event: any) {
-      const ischecked = event.target.checked
-      this.load.controls['gasElecAvailability'].setValue(ischecked ? 'active' : 'inactive');
-    }
+  onCheckboxChange22(event: any) {
+    const ischecked = event.target.checked
+    this.load.controls['gasElecAvailability'].setValue(ischecked ? 'active' : 'inactive');
+  }
 
-    onCheckboxChange33(event: any) {
-      const ischecked = event.target.checked
-      this.load.controls['floorLightingStatus'].setValue(ischecked ? 'active' : 'inactive');
-    }
+  onCheckboxChange33(event: any) {
+    const ischecked = event.target.checked
+    this.load.controls['floorLightingStatus'].setValue(ischecked ? 'active' : 'inactive');
+  }
 
-    onCheckboxChange44(event: any) {
-      const ischecked = event.target.checked
-      this.load.controls['storageAreaStatus'].setValue(ischecked ? 'active' : 'inactive');
-    }
+  onCheckboxChange44(event: any) {
+    const ischecked = event.target.checked
+    this.load.controls['storageAreaStatus'].setValue(ischecked ? 'active' : 'inactive');
+  }
   // ---------------------------
-  constructor(private api: ApiService , private fb: FormBuilder, private datePipe: DatePipe , private router : Router) { 
+  constructor(private api: ApiService, private fb: FormBuilder, private datePipe: DatePipe, private router: Router) {
     this.load = this.fb.group({
-      id:new FormControl(),
+      id: new FormControl(),
       date: new FormControl(''),
-      factory : new FormControl(''),
+      factory: new FormControl(''),
       houseKeepingStatus: new FormControl(''),
-      gasElecAvailability : new FormControl(''),
-      floorLightingStatus : new FormControl(''),
-      storageAreaStatus : new FormControl(''),
+      gasElecAvailability: new FormControl(''),
+      floorLightingStatus: new FormControl(''),
+      storageAreaStatus: new FormControl(''),
       allocatedDay: [''],
       data: this.fb.array([])
     });
@@ -108,14 +109,14 @@ export class KnitReportComponent {
   }
 
 
-  factoryName(){
-  this.api.knitfty_name().subscribe((res)=>{
-    this.ftyName = res.factorys
-  })
+  factoryName() {
+    this.api.knitfty_name().subscribe((res) => {
+      this.ftyName = res.factorys
+    })
   }
 
-  allknitDetails(){
-    this.api.getallfty_details().subscribe((res)=>{
+  allknitDetails() {
+    this.api.getallfty_details().subscribe((res) => {
       this.data = res.workorders
     })
   }
@@ -123,16 +124,16 @@ export class KnitReportComponent {
   factory() {
     this.loadknitdetails(this.factoryvalue, this.knitdate)
   }
-  
 
-  loadknitdetails(factory: string, date : string) {
+
+  loadknitdetails(factory: string, date: string) {
     this.api.ftydetailsFilter(factory, date).subscribe((res) => {
       this.data = res.knit;
     });
   }
 
   factory_date() {
-    this.loadknitdetails(this.factoryvalue , this.knitdate)
+    this.loadknitdetails(this.factoryvalue, this.knitdate)
   }
 
 
@@ -163,8 +164,8 @@ export class KnitReportComponent {
   }
 
 
-  buyername(){
-    this.api.getbuyers().subscribe((res)=>{
+  buyername() {
+    this.api.getbuyers().subscribe((res) => {
       this.buyer = res.buyers
     })
   }
@@ -177,8 +178,8 @@ export class KnitReportComponent {
       this.order = res.orders
     })
   }
-  
-  getOrderValue(event:any){
+
+  getOrderValue(event: any) {
     this.orderNo = event.target.value
   }
 
@@ -188,7 +189,7 @@ export class KnitReportComponent {
     })
   }
 
-  getstylevalue(event:any){
+  getstylevalue(event: any) {
     this.style = event.target.value
   }
 
@@ -198,7 +199,7 @@ export class KnitReportComponent {
     })
   }
 
-  getcolorvalue(event:any){
+  getcolorvalue(event: any) {
     this.color = event.target.value
   }
 
@@ -234,10 +235,11 @@ export class KnitReportComponent {
   }
 
   check(id: any) {
+    this.allDetailsModal = true;
     this.ktyid = id
     this.api.getsingleknit_details(id).subscribe((res) => {
-      this.knitdetails=res.lineData
-      this.knitdetails2=res.headerData
+      this.knitdetails = res.lineData
+      this.knitdetails2 = res.headerData
     })
   }
 
@@ -250,7 +252,7 @@ export class KnitReportComponent {
 
       this.load.patchValue({
         date: this.datePipe.transform(this.ktydata.headerData[0].date, 'yyyy-MM-dd'),
-        id:this.ktyid,
+        id: this.ktyid,
         factory: this.ktydata.headerData[0].factory,
         houseKeepingStatus: this.ktydata.headerData[0].houseKeepingStatus,
         gasElecAvailability: this.ktydata.headerData[0].gasElecAvailability,
@@ -258,21 +260,21 @@ export class KnitReportComponent {
         storageAreaStatus: this.ktydata.headerData[0].storageAreaStatus,
         allocatedDay: this.ktydata.headerData[0].allocatedDay,
       });
-  
+
       const numberOfEntries = this.ktydata.headerData[0].allocatedDay;
-  
+
       const formControls = [];
       for (let i = 0; i < numberOfEntries; i++) {
         formControls.push(
           this.fb.group({
-            id:'',
+            id: '',
             knitId: [i + 1],
             buyer: [''],
             orderNo: [''],
             style: [''],
             color: [''],
             size: [''],
-            woId:[],
+            woId: [],
             knitMachineno: [''],
             yarnLot: [''],
             dayProductionKgs: [''],
@@ -291,17 +293,17 @@ export class KnitReportComponent {
           })
         );
       }
-  
+
       const dataControl = this.load.get('data') as FormArray;
-       this.load.setControl('data', this.fb.array(formControls));
+      this.load.setControl('data', this.fb.array(formControls));
 
       dataControl.clear();
       formControls.forEach((control) => {
         dataControl.push(this.fb.group(control));
       });
-      this.ktydata.lineData.forEach((lineItem:any, i:any) => {
+      this.ktydata.lineData.forEach((lineItem: any, i: any) => {
         this.items.at(i).patchValue({
-          id:lineItem?.id,
+          id: lineItem?.id,
           knitId: lineItem?.knitId,
           buyer: lineItem?.buyer || '',
           orderNo: lineItem?.orderNo || '',
@@ -328,12 +330,12 @@ export class KnitReportComponent {
       });
     });
   }
-  
-  
 
 
-  deleteKnit(id:any){
-    this.api.deleteKnitDetails(id).subscribe((res)=>{
+
+
+  deleteKnit(id: any) {
+    this.api.deleteKnitDetails(id).subscribe((res) => {
       alert(res.message)
       window.location.reload()
     })
@@ -345,21 +347,21 @@ export class KnitReportComponent {
   get items() {
     return this.load.get('data') as FormArray;
   }
-  
+
   add() {
     const numberOfEntries = parseInt(this.load.get('allocatedDay')?.value);
     const formControls = [];
     for (let i = 0; i < numberOfEntries; i++) {
       formControls.push(
         this.fb.group({
-          "id":'',
-          "knitId": [i+1],
+          "id": '',
+          "knitId": [i + 1],
           "buyer": [''],
           "orderNo": [''],
           "style": [''],
           "color": [''],
           "size": [''],
-          "woId":[],
+          "woId": [],
           "knitMachineno": [''],
           "yarnLot": [''],
           "dayProductionKgs": [''],
@@ -373,22 +375,22 @@ export class KnitReportComponent {
           "sinkerQuality": [''],
           "movingFan": [''],
           "allStopMotion": [''],
-          "takeupRollerTension":[''],
-          "remarks":['']
+          "takeupRollerTension": [''],
+          "remarks": ['']
         })
       );
     }
     this.load.setControl('data', this.fb.array(formControls));
   }
 
-save(){
-  console.log(this.load.value)
-  this.api.updateKnitEntry(this.load.value).subscribe((res)=>{
-  alert(res.message)
-})
-}
-Report(){
-  this.router.navigate(['/main/ReportEntry']);
-}
+  save() {
+    console.log(this.load.value)
+    this.api.updateKnitEntry(this.load.value).subscribe((res) => {
+      alert(res.message)
+    })
+  }
+  Report() {
+    this.router.navigate(['/main/ReportEntry']);
+  }
 
 }

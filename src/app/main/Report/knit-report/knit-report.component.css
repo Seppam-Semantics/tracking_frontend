@@ -180,3 +180,11 @@ thead{
     width: 100%;
 }
 
+::ng-deep.p-dropdown-panel .p-dropdown-items {
+  margin-left:-27px
+}
+.fixTableHead{
+  overflow: scroll;
+  height: 69%;
+  scrollbar-width: none;
+}
