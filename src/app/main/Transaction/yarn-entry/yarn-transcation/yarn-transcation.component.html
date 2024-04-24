@@ -16,12 +16,12 @@
         <tbody>
             <tr>
                 <td>
-                    <input type="text" class="form-control" formControlName="spinner" >
+                    <input type="text" class="form-control" formControlName="spinner">
                 </td>
-                <td><input type="date" class="form-control" formControlName="lcDate" ></td>
-                <td><input type="text" class="form-control" formControlName="lcNo" ></td>
-                <td><input type="text" class="form-control" formControlName="pi" ></td>
-                <td><input type="date" class="form-control" formControlName="piDate" ></td>
+                <td><input type="date" class="form-control" formControlName="lcDate"></td>
+                <td><input type="text" class="form-control" formControlName="lcNo"></td>
+                <td><input type="text" class="form-control" formControlName="pi"></td>
+                <td><input type="date" class="form-control" formControlName="piDate"></td>
                 <td><input type="text" class="form-control" readonly formControlName="lcYarnKgs"></td>
                 <td><input type="text" class="form-control" readonly formControlName="lcValue"></td>
                 <td>
@@ -38,12 +38,13 @@
     <!-------------------------------Header[Start]----------------------------------->
     <mat-tab label="Header">
         <div style="margin-top: 1%;" [formGroup]="Yarn_Entry_1">
-            <div class="table2" >
+            <div class="table2">
                 <table class="table table-hover">
                     <thead class="thead-dark">
                         <tr>
                             <th>
-                                <button class="btn btn-danger" (click)="add1button()" style="font-size:inherit">Add lines</button>
+                                <button class="btn btn-danger" (click)="add1button()" style="font-size:inherit">Add
+                                    lines</button>
                             </th>
                             <th>Yarn Type</th>
                             <th>LC Yarn Kgs</th>
@@ -60,18 +61,28 @@
                         <tr *ngFor="let process of items.controls; let i=index" [formGroupName]="i">
                             <td></td>
                             <td><input type="text" class="form-control" formControlName="yarnType" type="text"></td>
-                            <td><input type="number" class="form-control" formControlName="lcYarnKgs" type="number" (input)="calculateDiff()"></td>
-                            <td><input type="number" class="form-control" formControlName="yarnRate" type="number" (input)="calculateDiff()"></td>
-                            <td><input type="number" class="form-control" formControlName="yarnValue" (input)="calculateDiff()" readonly></td>
-                            <td><button class="btn btn-primary" data-toggle="modal" data-target="#lotCheckModal" (click)="lotcheckaddUpdate(i)">Lot Check</button></td>
-                            <td><button class="btn btn-primary" data-toggle="modal" data-target="#orderAllocationModal" (click)="orderAllotAddUpdate(i)">Order Allocation</button></td>
+                            <td><input type="number" class="form-control" formControlName="lcYarnKgs" type="number"
+                                    (input)="calculateDiff()"></td>
+                            <td><input type="number" class="form-control" formControlName="yarnRate" type="number"
+                                    (input)="calculateDiff()"></td>
+                            <td><input type="number" class="form-control" formControlName="yarnValue"
+                                    (input)="calculateDiff()" readonly></td>
+                            <td><button class="btn btn-primary" data-toggle="modal" data-target="#lotCheckModal"
+                                    (click)="lotcheckaddUpdate(i)">Lot Check</button></td>
+                            <td><button class="btn btn-primary" data-toggle="modal" data-target="#orderAllocationModal"
+                                    (click)="orderAllotAddUpdate(i)">Order Allocation</button></td>
                             <td><button class="btn-danger" (click)="Yarn_Entry_Delete(i)">x</button></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <div style="display: flex; justify-content: center; align-items: center; margin-top: 2%;">
+            <div style="display: flex; justify-content: center; align-items: center; margin-top: 2%;" *ngIf="!loading1">
                 <button class="btn btn-primary" (click)="Yarn_Entry_save()">Update</button>
+            </div>
+            <div style="display: flex; justify-content: center;" *ngIf="loading1">
+                <button mat-raised-button color="primary" style="margin-top: 3%;">
+                    <div class="loader"></div>
+                </button>
             </div>
         </div>
 
@@ -93,12 +104,18 @@
         </div> -->
 
 
-        <p-dialog [resizable]="true" [modal]="true" [maximizable]="true" appendTo="body" [(visible)]="lotCheckModal" [style]="{width: '90vw'}" [contentStyle]="{height: '90vh'}">
+        <p-dialog [resizable]="true" [modal]="true" [maximizable]="true" appendTo="body" [(visible)]="lotCheckModal"
+            [style]="{width: '90vw'}" [contentStyle]="{height: '90vh'}">
             <div>
 
                 <mat-toolbar style="display: contents;">
-                    <div style="display: flex; justify-content: center;background-color: darkgray;"> 
+                    <div style="display: flex; justify-content: center;background-color: darkgray;" *ngIf="!loading2">
                         <button class="btn btn-primary" (click)="LotCheck_Button()">Update</button>
+                    </div>
+                    <div style="display: flex; justify-content: center;" *ngIf="loading2">
+                        <button mat-raised-button color="primary" style="margin-top: 3%;">
+                            <div class="loader"></div>
+                        </button>
                     </div>
                 </mat-toolbar>
 
@@ -106,7 +123,9 @@
                     <table class="table table-hover">
                         <thead class="thead-dark">
                             <tr>
-                                <th><div><button class="btn btn-danger" (click)="LotCheckAddButton()">+</button></div></th>
+                                <th>
+                                    <div><button class="btn btn-danger" (click)="LotCheckAddButton()">+</button></div>
+                                </th>
                                 <th>Yarn Type</th>
                                 <th>Lot no</th>
                                 <th>Sample Dt</th>
@@ -121,7 +140,8 @@
                             <tr *ngFor="let process of LotCheckItems.controls; let i = index;" [formGroupName]="i">
                                 <td></td>
                                 <td>
-                                    <input formControlName="yarnType" class="form-control" style="width: 100px;" readonly>
+                                    <input formControlName="yarnType" class="form-control" style="width: 100px;"
+                                        readonly>
                                 </td>
                                 <td><input formControlName="lotNo" class="form-control" style="width: 100px;"></td>
 
@@ -132,7 +152,8 @@
                                     <input type="date" class="form-control" formControlName="resultDate">
                                 </td>
                                 <td>
-                                    <textarea type="text" class="form-control" formControlName="checkResults"></textarea>
+                                    <textarea type="text" class="form-control"
+                                        formControlName="checkResults"></textarea>
                                 </td>
 
                                 <td>
@@ -151,7 +172,7 @@
         </p-dialog>
 
 
-                <!-- <div class="modal fade" id="orderAllocationModal" tabindex="-1" role="dialog" aria-labelledby="orderAllocationModalLabel"
+        <!-- <div class="modal fade" id="orderAllocationModal" tabindex="-1" role="dialog" aria-labelledby="orderAllocationModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-xl" role="document" style="margin-top: 10%;">
                 <div class="modal-content">
@@ -167,11 +188,17 @@
         </div> -->
 
 
-        <p-dialog [resizable]="true" [modal]="true" [maximizable]="true" appendTo="body" [(visible)]="orderAllocationModal" [style]="{width: '90vw'}" [contentStyle]="{height: '90vh'}">
+        <p-dialog [resizable]="true" [modal]="true" [maximizable]="true" appendTo="body"
+            [(visible)]="orderAllocationModal" [style]="{width: '90vw'}" [contentStyle]="{height: '90vh'}">
             <div>
                 <mat-toolbar style="display: contents;">
-                    <div style="display: flex; justify-content: center; background-color: darkgray;">
+                    <div style="display: flex; justify-content: center; background-color: darkgray;" *ngIf="!loading3">
                         <button class="btn btn-primary" (click)="OrderAllocationSave()">Update</button>
+                    </div>
+                    <div style="display: flex; justify-content: center;" *ngIf="loading3">
+                        <button mat-raised-button color="primary" style="margin-top: 3%;">
+                            <div class="loader"></div>
+                        </button>
                     </div>
                 </mat-toolbar>
                 <div class="table1" [formGroup]="OrderAllocation">
@@ -179,7 +206,8 @@
                         <thead class="thead-dark">
                             <tr>
                                 <th>
-                                    <button class="btn btn-danger" (click)="OrderAllocationAddButton()" style="font-size: inherit;">+</button>
+                                    <button class="btn btn-danger" (click)="OrderAllocationAddButton()"
+                                        style="font-size: inherit;">+</button>
                                 </th>
                                 <th>Yarn Type</th>
                                 <th>Buyer</th>
@@ -192,55 +220,65 @@
                                 <th></th>
                             </tr>
                         </thead>
-    
+
                         <tbody formArrayName="data">
-                            <tr *ngFor="let process of items2.controls; let i=index" [formGroupName]="i" style="overflow: scroll;">
+                            <tr *ngFor="let process of items2.controls; let i=index" [formGroupName]="i"
+                                style="overflow: scroll;">
                                 <td></td>
                                 <td>
                                     <input type="text" class="form-control" formControlName="yarnType" readonly>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" formControlName="buyer" list="buyer" (input)="getorders($event.target.value)">
+                                    <input type="text" class="form-control" formControlName="buyer" list="buyer"
+                                        (input)="getorders($event.target.value)">
                                     <datalist id="buyer">
-                                        <option *ngFor="let buyer of this.buyers" value="{{buyer.buyer}}">{{buyer.buyer}}</option>
+                                        <option *ngFor="let buyer of this.buyers" value="{{buyer.buyer}}">
+                                            {{buyer.buyer}}</option>
                                     </datalist>
                                 </td>
-    
+
                                 <td>
-                                    <input type="text" class="form-control" formControlName="utilisationOrderNo" list="order" (input)="getstyle($event.target.value)">
+                                    <input type="text" class="form-control" formControlName="utilisationOrderNo"
+                                        list="order" (input)="getstyle($event.target.value)">
                                     <datalist id="order">
                                         <option *ngFor="let order of this.orderNo" value="{{order.orderNO}}"></option>
                                     </datalist>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" formControlName="style" list="styles" (input)="getcolor($event.target.value)">
+                                    <input type="text" class="form-control" formControlName="style" list="styles"
+                                        (input)="getcolor($event.target.value)">
                                     <datalist id="styles">
-                                        <option *ngFor="let style of this.style" value="{{style.style}}">{{style.style}}</option>
+                                        <option *ngFor="let style of this.style" value="{{style.style}}">{{style.style}}
+                                        </option>
                                     </datalist>
                                 </td>
                                 <td>
                                     <input type="text" class="form-control" formControlName="colour" list="color">
                                     <datalist id="color">
-                                        <option *ngFor="let color of this.colorlist" value="{{color.color}}">{{color.color}}</option>
+                                        <option *ngFor="let color of this.colorlist" value="{{color.color}}">
+                                            {{color.color}}</option>
                                     </datalist>
                                 </td>
                                 <td>
                                     <input type="text" class="form-control" formControlName="lotNo" list="spinLot">
                                     <datalist id="spinLot">
-                                        <option *ngFor="let lot of this.yarnlotcheckLotNo" value="{{lot.lotNo}}"></option>
+                                        <option *ngFor="let lot of this.yarnlotcheckLotNo" value="{{lot.lotNo}}">
+                                        </option>
                                     </datalist>
                                 </td>
-    
+
                                 <td><input type="number" class="form-control" formControlName="allocatedYarnKgs"></td>
-                                <td><input type="text" class="form-control" formControlName="unallocatedYarnKgs" readonly></td>
-                                <td><button class="btn btn-danger" (click)="OrderAllocationDelete(i)">Delete</button></td>
+                                <td><input type="text" class="form-control" formControlName="unallocatedYarnKgs"
+                                        readonly></td>
+                                <td><button class="btn btn-danger" (click)="OrderAllocationDelete(i)">Delete</button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
-            </div>                    
-    
+            </div>
+
             <ng-template pTemplate="footer">
                 <!-- <button type="button" pButton pRipple icon="pi pi-times" (click)="orderAllocationModal=false" label="Dismiss" class="p-button-text"></button> -->
             </ng-template>
@@ -248,12 +286,12 @@
 
     </mat-tab>
 
-<!-------------------------------Header[Ends]----------------------------------->
+    <!-------------------------------Header[Ends]----------------------------------->
 
-<!-- ============================================================================================================================================================================ -->
-    
-<!-------------------------------Lot Check[Start]----------------------------------->
-    <mat-tab label="Lot Check" >
+    <!-- ============================================================================================================================================================================ -->
+
+    <!-------------------------------Lot Check[Start]----------------------------------->
+    <mat-tab label="Lot Check">
         <div style="margin-top: 3%;">
             <div [formGroup]="LotCheck" class="table1">
                 <table class="table table-hover">
@@ -315,7 +353,8 @@
                             <td>{{order.lotNo}}</td>
                             <td>{{order.allocatedYarnKgs}}</td>
                             <td>{{order.unallocatedYarnKgs}}</td>
-                            <td><button class="btn btn-primary" data-toggle="modal" data-target="#receiptModal"  (click)="orderId(i)">Receipt</button></td>
+                            <td><button class="btn btn-primary" data-toggle="modal" data-target="#receiptModal"
+                                    (click)="orderId(i)">Receipt</button></td>
                         </tr>
                     </tbody>
                 </table>
@@ -324,18 +363,24 @@
 
 
 
-        <p-dialog [resizable]="true" [modal]="true" [maximizable]="true" appendTo="body" [(visible)]="receiptModal" [style]="{width: '90vw'}" [contentStyle]="{height: '90vh'}">
+        <p-dialog [resizable]="true" [modal]="true" [maximizable]="true" appendTo="body" [(visible)]="receiptModal"
+            [style]="{width: '90vw'}" [contentStyle]="{height: '90vh'}">
             <div>
                 <mat-toolbar style="display: contents;">
-                    <div style="display: flex; justify-content: center; background-color: darkgray;">
+                    <div style="display: flex; justify-content: center; background-color: darkgray;" *ngIf="!loading4">
                         <button class="btn btn-primary" (click)="receiptSave()">Update</button>
+                    </div>
+                    <div style="display: flex; justify-content: center;" *ngIf="loading4">
+                        <button mat-raised-button color="primary" style="margin-top: 3%;">
+                            <div class="loader"></div>
+                        </button>
                     </div>
                 </mat-toolbar>
                 <div [formGroup]="receiptForm" class="table1">
                     <table class="table table-hover">
                         <thead class="thead-dark">
                             <tr>
-                                <th><button class="btn btn-danger" (click)="ReceiptAddButton()" >+</button></th>
+                                <th><button class="btn btn-danger" (click)="ReceiptAddButton()">+</button></th>
                                 <th>Spin Challan</th>
                                 <th>SBDL Challan</th>
                                 <th>Receipt Dt</th>
@@ -343,13 +388,14 @@
                                 <th>Knit Factory</th>
                                 <th>Bags/Ctn - nos</th>
                                 <th>Receipt Yarn Kgs</th>
-                                
+
                                 <th>Pending Receipts - Kgs</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody formArrayName="data">
-                            <tr *ngFor="let process of items3.controls; let i=index" [formGroupName]="i" style="overflow: scroll;">
+                            <tr *ngFor="let process of items3.controls; let i=index" [formGroupName]="i"
+                                style="overflow: scroll;">
                                 <th></th>
                                 <td>
                                     <input type="text" class="form-control" formControlName="spinningChallan">
@@ -370,7 +416,8 @@
                                     <input type="number" class="form-control" formControlName="BagsCtnNos">
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control" formControlName="receiptYarnKgs" (input)="calculateDiff3()">
+                                    <input type="number" class="form-control" formControlName="receiptYarnKgs"
+                                        (input)="calculateDiff3()">
                                 </td>
                                 <td>
                                     <input type="text" class="form-control" formControlName="pendingReceiptKgs">
@@ -382,9 +429,9 @@
                         </tbody>
                     </table>
                 </div>
-            
-           
-                </div>
+
+
+            </div>
             <ng-template pTemplate="footer">
                 <!-- <button type="button" pButton pRipple icon="pi pi-times" (click)="receiptModal=false" label="Dismiss" class="p-button-text"></button> -->
             </ng-template>
@@ -409,7 +456,7 @@
 
     </mat-tab>
 
-    
+
     <!-------------------------------Order Allocationc[Ends]----------------------------------->
 
 
@@ -417,43 +464,45 @@
     <mat-tab label="Receipt">
         <div style="margin-top: 3%;">
             <div>
-            <div [formGroup]="receiptForm" class="table1">
-                <table class="table table-hover">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>Sl.No</th>
-                            <th>Spin Challan</th>
-                            <th>SBDL Challan</th>
-                            <th>Receipt Dt</th>
-                            <th>Knit Factory</th>
-                            <th>Bags/Ctn - nos</th>
-                            <th>Receipt Yarn Kgs</th>
-                            <th>Pending Receipts - Kgs</th>
-                            <th>Yarn QC</th>
-                        </tr>
-                    </thead>
-                    <tbody >
-                        <tr *ngFor="let rec of this.yarnReceiptsLines; let i = index;">
-                            <td>{{i+1}}</td>
-                            <td>{{rec.spinningChallan}}</td>
-                            <td>{{rec.scandexChallan}}</td>
-                            <td>{{rec.receiptDt}}</td>
-                            <td>{{rec.knitFactory}}</td>
-                            <td>{{rec.BagsCtnNos}}</td>
-                            <td>{{rec.receiptYarnKgs}}</td>
-                            <td>{{rec.pendingReceiptKgs}}</td>
-                            <td><button class="btn btn-primary" data-toggle="modal" data-target="#yarnQcModal" (click)="receiptId(i)">Yarn QC</button></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+                <div [formGroup]="receiptForm" class="table1">
+                    <table class="table table-hover">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Sl.No</th>
+                                <th>Spin Challan</th>
+                                <th>SBDL Challan</th>
+                                <th>Receipt Dt</th>
+                                <th>Knit Factory</th>
+                                <th>Bags/Ctn - nos</th>
+                                <th>Receipt Yarn Kgs</th>
+                                <th>Pending Receipts - Kgs</th>
+                                <th>Yarn QC</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let rec of this.yarnReceiptsLines; let i = index;">
+                                <td>{{i+1}}</td>
+                                <td>{{rec.spinningChallan}}</td>
+                                <td>{{rec.scandexChallan}}</td>
+                                <td>{{rec.receiptDt}}</td>
+                                <td>{{rec.knitFactory}}</td>
+                                <td>{{rec.BagsCtnNos}}</td>
+                                <td>{{rec.receiptYarnKgs}}</td>
+                                <td>{{rec.pendingReceiptKgs}}</td>
+                                <td><button class="btn btn-primary" data-toggle="modal" data-target="#yarnQcModal"
+                                        (click)="receiptId(i)">Yarn QC</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
 
 
 
-        <p-dialog [resizable]="true" [modal]="true" [maximizable]="true" appendTo="body" [(visible)]="yarnQcModal" [style]="{width: '90vw'}" [contentStyle]="{height: '90vh'}">
+        <p-dialog [resizable]="true" [modal]="true" [maximizable]="true" appendTo="body" [(visible)]="yarnQcModal"
+            [style]="{width: '90vw'}" [contentStyle]="{height: '90vh'}">
 
             <div>
                 <div>
@@ -471,21 +520,30 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let receipt of this.receiptDetails">
-                                <td><input type="text" class="form-control" [value]="receipt.spinningChallan" readonly></td>
-                                <td><input type="text" class="form-control" [value]="receipt.scandexChallan" readonly></td>
+                                <td><input type="text" class="form-control" [value]="receipt.spinningChallan" readonly>
+                                </td>
+                                <td><input type="text" class="form-control" [value]="receipt.scandexChallan" readonly>
+                                </td>
                                 <td><input type="text" class="form-control" [value]="receipt.receiptDt" readonly></td>
                                 <td><input type="text" class="form-control" [value]="receipt.knitFactory" readonly></td>
                                 <td><input type="text" class="form-control" [value]="receipt.BagsCtnNos" readonly></td>
-                                <td><input type="text" class="form-control" [value]="receipt.receiptYarnKgs" readonly></td>
-                                <td><input type="text" class="form-control" [value]="receipt.pendingReceiptKgs" readonly></td>
+                                <td><input type="text" class="form-control" [value]="receipt.receiptYarnKgs" readonly>
+                                </td>
+                                <td><input type="text" class="form-control" [value]="receipt.pendingReceiptKgs"
+                                        readonly></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
                 <mat-toolbar style="display: contents;">
-                    <div style="display: flex; justify-content: center; background-color: darkgray;">
+                    <div style="display: flex; justify-content: center; background-color: darkgray;" *ngIf="!loading5">
                         <button class="btn btn-primary" (click)="yarnQcSave()">Update</button>
+                    </div>
+                    <div style="display: flex; justify-content: center;" *ngIf="loading5">
+                        <button mat-raised-button color="primary" style="margin-top: 3%;">
+                            <div class="loader"></div>
+                        </button>
                     </div>
                 </mat-toolbar>
                 <div class="table2">
@@ -507,7 +565,8 @@
                                     <input type="date" class="form-control" formControlName="checkDate">
                                 </td>
                                 <td>
-                                    <textarea type="text" class="form-control" formControlName="checkResults" style="height: 50px; white-space: wrap;"></textarea>
+                                    <textarea type="text" class="form-control" formControlName="checkResults"
+                                        style="height: 50px; white-space: wrap;"></textarea>
                                 </td>
                                 <td>
                                     <mat-checkbox formControlName="yarnAcceptRejectStatus"></mat-checkbox>
@@ -527,7 +586,7 @@
         </p-dialog>
 
 
-    <!-- <div class="modal fade" id="yarnQcModal" tabindex="-1" role="dialog" aria-labelledby="yarnQcModalLabel" aria-hidden="true">
+        <!-- <div class="modal fade" id="yarnQcModal" tabindex="-1" role="dialog" aria-labelledby="yarnQcModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document" style="margin-top: 10%;">
             <div class="modal-content" >
                 <div class="modal-body">
@@ -537,7 +596,7 @@
             </div>
         </div>
     </div> -->
-</mat-tab>
+    </mat-tab>
     <!-------------------------------Receipt[Ends]----------------------------------->
 
 
@@ -567,5 +626,5 @@
         </div>
 
     </mat-tab>
-   
+
 </mat-tab-group>

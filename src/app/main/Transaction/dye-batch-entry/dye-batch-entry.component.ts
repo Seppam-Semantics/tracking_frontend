@@ -34,6 +34,7 @@ size:any;
 inputValue:any;
 data: any;
 fabrictype_dropdown: any;
+loading : boolean = false;
 
 constructor(private fb : FormBuilder , private api : ApiService , private router : Router){
 
@@ -224,9 +225,11 @@ this.items.removeAt(index)
 }
 
 dyesubmit() {
-  console.log(this.dye_Entery.value)
+  // console.log(this.dye_Entery.value)
+  this.loading =true
   this.api.post_dyereport_entry(this.dye_Entery.value).subscribe((res)=>{
-    alert(res.message)    
+    alert(res.message)
+    this.loading =false    
     if(res.success== true){
       this.router.navigate(['/main/Dye-Report'])    
     }

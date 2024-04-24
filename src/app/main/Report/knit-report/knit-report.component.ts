@@ -66,6 +66,7 @@ export class KnitReportComponent {
   size: any;
   knitdetails2: any;
   allDetailsModal : boolean = false;
+  editpopup: boolean = false;
 
 
   onCheckboxChange11(event: any) {
@@ -246,6 +247,7 @@ export class KnitReportComponent {
 
 
   edit(id: any) {
+    this.editpopup = true;
     this.ktyid = id;
     this.api.getsingleknit_details(this.ktyid).subscribe((res) => {
       this.ktydata = res;
@@ -384,9 +386,9 @@ export class KnitReportComponent {
   }
 
   save() {
-    console.log(this.load.value)
     this.api.updateKnitEntry(this.load.value).subscribe((res) => {
       alert(res.message)
+      this.editpopup = false;
     })
   }
   Report() {

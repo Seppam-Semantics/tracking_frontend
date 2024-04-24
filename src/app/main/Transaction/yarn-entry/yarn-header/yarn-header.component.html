@@ -1,7 +1,12 @@
 <div label="Header" [formGroup]="Yarn_Entry_1">
-    <div style="display: flex; justify-content: center; align-items: center; margin-top: 2%;">
+    <div style="display: flex; justify-content: center; align-items: center; margin-top: 2%;" *ngIf="!loading">
         <button class="btn btn-primary" (click)="Yarn_Entry_save()">Save</button>
     </div>
+    <div style="display: flex; justify-content: center;" *ngIf="loading">
+        <button mat-raised-button color="primary" style="margin-top: 3%;">
+          <div class="loader"></div>
+        </button>
+        </div>
     <!-------------------------------->
     <div style="margin-top: 1%;">
         <!-------------------------------->

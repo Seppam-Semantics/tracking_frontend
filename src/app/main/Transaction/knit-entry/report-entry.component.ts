@@ -25,6 +25,7 @@ no:any
   color:any;
   size:any;
   woId: any[]=[];
+  loading : boolean = false;
   constructor(private fb: FormBuilder , private api : ApiService , private router : Router) {
     this.load = this.fb.group({
       id:new FormControl(0),
@@ -151,13 +152,14 @@ no:any
     this.load.setControl('data', this.fb.array(formControls));
   }
 
-save(){
-  console.log(this.load.value)
-  this.api.knit_entry(this.load.value).subscribe((res)=>{
-  alert(res.message)
-  window.location.reload()
-})
-}
+  save(){
+    this.loading = true;
+    this.api.knit_entry(this.load.value).subscribe((res)=>{
+    alert(res.message)
+    this.loading = false;
+    this.router.navigate(['/main/Knit-Report'])
+  })
+  }
 
 
 }

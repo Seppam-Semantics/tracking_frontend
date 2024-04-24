@@ -72,6 +72,11 @@ export class YarnTranscationComponent implements OnInit {
   yarnLinedelete: any;
   ReceivedDataReceipt: any;
   ReceipReceivedDataId: any;
+  loading1 : boolean =false;
+  loading2 : boolean =false;
+  loading3 : boolean =false;
+  loading4 : boolean =false;
+  loading5 : boolean =false;
 
   constructor(private fb: FormBuilder, private api: ApiService, private datePipe: DatePipe) { }
 
@@ -259,6 +264,7 @@ export class YarnTranscationComponent implements OnInit {
 
 
   Yarn_Entry_save() {
+    this.loading1 = true;
     const yarnHeaderData = this.fb.group({
       id: this.yarnId,
       spinner: this.yarnHeader.get('spinner')?.value,
@@ -273,6 +279,7 @@ export class YarnTranscationComponent implements OnInit {
     })
     this.api.addUpdateYarn(yarnHeaderData.value).subscribe((res) => {
       alert(res.message)
+      this.loading1 = false;
       window.location.reload()
     })
   }
@@ -360,8 +367,10 @@ export class YarnTranscationComponent implements OnInit {
 }
 
   LotCheck_Button() {
+    this.loading2=true;
     this.api.addUpdateYarnCheck(this.LotCheck.value).subscribe((res) => {
       alert(res.message);
+      this.loading2 = false;
       window.location.reload()
     });
   }
@@ -519,8 +528,10 @@ if(orderid){
 
 
   OrderAllocationSave() {
+    this.loading3=true;
     this.api.addUpdateOrderAllocation(this.OrderAllocation.value).subscribe((res) => {
       alert(res.message)
+      this.loading3 = false;
       window.location.reload()
     })
   }
@@ -640,8 +651,10 @@ if(orderid){
   }
 
   receiptSave() {
+    this.loading4=true;
     this.api.addUpdateYarnreceipt(this.receiptForm.value).subscribe((res) => {
       alert(res.message)
+      this.loading4=false;
       window.location.reload()
     })
   }
@@ -718,8 +731,10 @@ if(orderid){
 }
 
   yarnQcSave() {
+    this.loading5=true;
     this.api.addUpdateYarnQuality(this.Yarn_QC.value).subscribe((res) => {
       alert(res.message)
+      this.loading5=false;
       window.location.reload()
     })
   }

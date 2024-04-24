@@ -215,8 +215,12 @@
         </table>
     </div>
 
-    <div style="display: flex; justify-content: center;">
-        <div><button type="submit" class="btn btn-primary" (click)="save()">Save</button></div>
-    </div>
+    <div style="display: flex; justify-content: center;" *ngIf="!loading">
+        <button mat-raised-button color="primary" (click)="save()" style="margin-top: 3%;">Save</button>
+      </div>
+      <div style="display: flex; justify-content: center;" *ngIf="loading">
+        <button mat-raised-button color="primary" style="margin-top: 3%;">
+          <div class="loader"></div>
+        </button>
 
 </div>

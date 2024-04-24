@@ -41,6 +41,7 @@ export class YarnHeaderComponent implements OnInit{
   qualityreceiptcellan: any;
   entry:boolean = true;
   yarnStatus:any = 'open'
+  loading : boolean = false;
 
   constructor(private fb:FormBuilder, private api: ApiService, private router:Router){}
 
@@ -166,8 +167,10 @@ add1button(){
 
 
   Yarn_Entry_save(){
+    this.loading = true
     this.api.addUpdateYarn(this.Yarn_Entry_1.value).subscribe((res)=>{
       alert(res.message)
+      this.loading = false
       if(res.success == true){
         this.router.navigate(['/Yarn-Report']);
       }
