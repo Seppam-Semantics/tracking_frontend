@@ -77,9 +77,7 @@ export class FabricRollData2Component implements OnInit {
   newfabEntry:any[] = []
   visible: boolean = false;
   status : any;
-  constructor(private api: ApiService,
-    private http: HttpClient,
-    private spinner: NgxSpinnerService, private router : Router) { }
+  constructor(private api: ApiService, private router : Router) { }
 
   ngOnInit(): void {
     this.getbuyers();
@@ -276,7 +274,6 @@ export class FabricRollData2Component implements OnInit {
   })
 
 woupdatesubmit(){
-  console.log(this.woupdateid, "...................................", this.woUpdateFrom.value)
   this.api.postsinglewodetails(this.woUpdateFrom.value,this.woupdateid).subscribe((res) => {
     alert(res.message)
     this.visible = false;

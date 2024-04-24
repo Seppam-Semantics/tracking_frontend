@@ -194,6 +194,8 @@ export class YarnTranscationComponent implements OnInit {
     });
     this.yarnHeader.get('lcYarnKgs')?.setValue(LCYarnKgsTotal);
     this.yarnHeader.get('lcValue')?.setValue(LCValueTotal);
+
+    this.calculateDiff5();
   }
 
 

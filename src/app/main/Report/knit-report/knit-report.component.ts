@@ -267,7 +267,7 @@ export class KnitReportComponent {
       for (let i = 0; i < numberOfEntries; i++) {
         formControls.push(
           this.fb.group({
-            id: '',
+            id: [],
             knitId: [i + 1],
             buyer: [''],
             orderNo: [''],
@@ -354,7 +354,7 @@ export class KnitReportComponent {
     for (let i = 0; i < numberOfEntries; i++) {
       formControls.push(
         this.fb.group({
-          "id": '',
+          "id": [],
           "knitId": [i + 1],
           "buyer": [''],
           "orderNo": [''],

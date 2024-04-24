@@ -112,6 +112,22 @@ export class YarnHeaderComponent implements OnInit{
   this.Yarn_Entry_1.get('lcValue')?.setValue(total12);
   this.Yarn_Entry_1.get('Total10')?.setValue(total10); 
   this.Yarn_Entry_1.get('Total12')?.setValue(total12);
+
+}
+
+calculateDiff5() {
+  this.items.controls.forEach((control: AbstractControl) => {
+    const row = control as FormGroup;
+    if (row instanceof FormGroup) {
+      const lcYarnKgs = parseFloat(row.get('lcYarnKgs')?.value);
+      const yarnRate = parseFloat(row.get('yarnRate')?.value);
+
+      const yarnValue1 = lcYarnKgs * yarnRate
+      const yarnValue = parseFloat(yarnValue1.toFixed(2));
+
+      row.patchValue({ yarnValue});
+    }
+  });
 }
 
 
@@ -119,24 +135,29 @@ get items() {
   return this.Yarn_Entry_1.get("data") as FormArray;
 }
 
-  add1button(){
-    const row = this.fb.group({
-      "yarnType": new FormControl(''),
-      "lcYarnKgs": new FormControl(''),
-      "yarnRate": new FormControl(''),
-      "yarnValue": new FormControl(''),
-    });
-  
-    row.get('lcYarnKgs')?.valueChanges.subscribe(() => {
-      this.calculateDiff();
-    });
-  
-    row.get('yarnValue')?.valueChanges.subscribe(() => {
-      this.calculateDiff();
-    });
-  
-    this.items.push(row);  
-  }
+add1button(){
+  const row = this.fb.group({
+    "yarnType": new FormControl(''),
+    "lcYarnKgs": new FormControl(''),
+    "yarnRate": new FormControl(''),
+    "yarnValue": new FormControl(''),
+  });
+
+  row.get('lcYarnKgs')?.valueChanges.subscribe(() => {
+    this.calculateDiff();
+    this.calculateDiff5()
+  });
+
+  row.get('yarnRate')?.valueChanges.subscribe(() => {
+    this.calculateDiff();
+    this.calculateDiff5()
+  });
+  row.get('yarnValue')?.valueChanges.subscribe(() => {
+    this.calculateDiff();
+  });
+
+  this.items.push(row);  
+}
   
   Yarn_Entry_Delete(index: number) {
     this.items.removeAt(index);
