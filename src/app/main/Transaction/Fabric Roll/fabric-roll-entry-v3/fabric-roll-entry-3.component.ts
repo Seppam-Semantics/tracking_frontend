@@ -791,6 +791,7 @@ get items() {
       "entry": "1",
       "entry6": this.form6.get('addprocess6') as FormArray
     })
+// console.log(this.entry1form.value)
     this.api.Fabricroll6entry(this.entry1form.value).subscribe((res) => {
       alert(res.message);
       this.loading1 = false;

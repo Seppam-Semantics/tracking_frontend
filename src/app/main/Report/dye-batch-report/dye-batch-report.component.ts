@@ -197,6 +197,7 @@ export class DyeBatchReportComponent implements OnInit {
         row.patchValue({ diff, PL });
       }
     });
+    this.calculateGriegeTotal()
   }
 
   calculateGriegeTotal() {
@@ -371,10 +372,6 @@ this.loadworkorder(this.buyerData, this.orderData, this.styleData);
 this.getsize(this.buyerData, this.orderData, this.styleData, this.colorData)
 this.loadworkorder(this.buyerData, this.orderData, this.styleData, this.colorData);
 
-console.log(this.buyerData)
-console.log(this.orderData)
-console.log(this.styleData)
-
 
 
 this.dye_Entery.patchValue({
@@ -448,7 +445,7 @@ this.dye_Entery.patchValue({
       "finalbatch_processLoss": this.dye_batch_data.headerData[0].finalbatch_processLoss,
       "finalbatch_fabricDeliveryDatetime": formattedDate12,
     })
-
+    this.calculateDiff()
     const formControls = [];
     formControls.push(
       this.fb.group({
@@ -507,6 +504,11 @@ this.dye_Entery.patchValue({
     })
   }
 
+
+
+  DyeBatchButton(){
+    this.router.navigate(['/main/DyeBatchEntry'])
+  }
   update(){
     console.log(this.dye_Entery.value)
     this.api.post_dyereport_entry(this.dye_Entery.value).subscribe((res)=>{
@@ -514,7 +516,10 @@ this.dye_Entery.patchValue({
       window.location.reload()
     })
   }
-  DyeBatchButton(){
-    this.router.navigate(['/main/DyeBatchEntry'])
+
+
+  getwoId(woId:any, index:any){
+    console.log(woId)
   }
+
 }

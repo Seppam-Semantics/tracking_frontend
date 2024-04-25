@@ -227,14 +227,14 @@
                                                         </option>
                                                     </datalist>
                                                 </td>
-                                                <td><input type="number" class="form-control" formControlName="griegerolls" style="width: 10vh; display: inline;"></td>
-                                                <td><input type="number" class="form-control" formControlName="griege" style="width: 10vh; display: inline;">
+                                                <td><input type="number" class="form-control" formControlName="griegerolls" style="width: 10vh; display: inline;" (click)="calculateDiff()"></td>
+                                                <td><input type="number" class="form-control" formControlName="griege" style="width: 10vh; display: inline;" (input)="calculateDiff()" (click)="calculateDiff()">
                                                 </td>
-                                                <td><input type="number" class="form-control" formControlName="finishrolls" style="width: 10vh; display: inline;"></td>
-                                                <td><input type="number" class="form-control" formControlName="finish" style="width: 10vh; display: inline;">
+                                                <td><input type="number" class="form-control" formControlName="finishrolls" style="width: 10vh; display: inline;" (click)="calculateDiff()"></td>
+                                                <td><input type="number" class="form-control" formControlName="finish" style="width: 10vh; display: inline;" (input)="calculateDiff()" (click)="calculateDiff()">
                                                 </td>
-                                                <td><input type="number" class="form-control" formControlName="diff" readonly style="width: 10vh; display: inline;"></td>
-                                                <td><input type="number" class="form-control" formControlName="PL" readonly style="width: 10vh; display: inline;"></td>
+                                                <td><input type="number" class="form-control" formControlName="diff" readonly style="width: 10vh; display: inline;" (click)="calculateDiff()"></td>
+                                                <td><input type="number" class="form-control" formControlName="PL" readonly style="width: 10vh; display: inline;" (click)="calculateDiff()"></td>
                                                 <td><button class="btn btn-danger" (click)="removeSize(i)">x</button></td>
                                                
                                             </tr>
