@@ -445,7 +445,14 @@ get items() {
   }
 
   deleteEntry1(i: number) {
-    this.items.removeAt(i);
+    // this.items.removeAt(i);
+    const id = this.rollnnumber1[i].workorderId;
+    const lineId = this.rollnnumber1[i].entry1_id;
+    this.api.entry1Delete(id, lineId).subscribe((res)=>{
+      alert(res.message)
+      this.loadworkorder()
+    })
+
   }
 
   submit() {
@@ -510,7 +517,13 @@ get items() {
   }
 
   deleteEntry2(i: number) {
-    this.items2.removeAt(i);
+    // this.items2.removeAt(i);
+    const id = this.rollnnumber2[i].workorderId;
+    const lineId = this.rollnnumber2[i].entry2_id;
+    this.api.entry2Delete(id, lineId).subscribe((res)=>{
+      alert(res.message)
+      this.loadworkorder()
+    })
   }
 
   submit2() {
@@ -560,7 +573,14 @@ get items() {
   }
 
   deleteEntry3(i: number) {
-    this.items3.removeAt(i);
+    // this.items3.removeAt(i);
+
+    const id = this.rollnnumber3[i].workorderId;
+    const lineId = this.rollnnumber3[i].entry3_id;
+    this.api.entry3Delete(id, lineId).subscribe((res)=>{
+      alert(res.message)
+      this.loadworkorder()
+    })
   }
 
 
@@ -628,7 +648,13 @@ get items() {
   }
 
   deleteEntry4(i: number) {
-    this.items4.removeAt(i);
+    // this.items4.removeAt(i);
+    const id = this.rollnnumber4[i].workorderId;
+    const lineId = this.rollnnumber4[i].entry4_id;
+    this.api.entry4Delete(id, lineId).subscribe((res)=>{
+      alert(res.message)
+      this.loadworkorder()
+    })
   }
 
 
@@ -697,7 +723,13 @@ get items() {
   }
 
   deleteEntry5(i: number) {
-    this.items5.removeAt(i);
+    // this.items5.removeAt(i);
+    const id = this.rollnnumber5[i].workorderId;
+    const lineId = this.rollnnumber5[i].entry5_id;
+    this.api.entry5Delete(id, lineId).subscribe((res)=>{
+      alert(res.message)
+      this.loadworkorder()
+    })
   }
 
 
@@ -764,7 +796,13 @@ get items() {
   }
 
   deleteEntry6(i: number) {
-    this.items6.removeAt(i);
+    // this.items6.removeAt(i);
+    const id = this.rollnnumber6[i].workorderId;
+    const lineId = this.rollnnumber6[i].entry6_id;
+    this.api.entry6Delete(id, lineId).subscribe((res)=>{
+      alert(res.message)
+      this.loadworkorder()
+    })
   }
 
 
@@ -832,7 +870,13 @@ get items() {
   }
 
   deleteEntry7(i: number) {
-    this.items7.removeAt(i);
+    // this.items7.removeAt(i);
+    const id = this.rollnnumber7[i].workorderId;
+    const lineId = this.rollnnumber7[i].entry7_id;
+    this.api.entry7Delete(id, lineId).subscribe((res)=>{
+      alert(res.message)
+      this.loadworkorder()
+    })
   }
 
 

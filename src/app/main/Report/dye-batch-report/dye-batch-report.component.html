@@ -1,10 +1,70 @@
-<mat-toolbar style="display: flex; justify-content: center; height: auto;"><span>Dye Batch
+<!-- <mat-toolbar style="display: flex; justify-content: center; height: auto;"><span>Dye Batch
         Report</span></mat-toolbar>
 
         <mat-toolbar style="height: fit-content; padding: 10px;">
             <span style="flex: 1 1 auto;"></span>
             <button mat-button color='primary' style="margin-right: 12px;" (click)="DyeBatchButton()">New</button>
-          </mat-toolbar>
+          </mat-toolbar> -->
+
+
+
+
+          <div style="display: flex; justify-content: space-around; gap: 0.5%; margin-top: 2%; margin-bottom: 2%;">
+
+
+            <mat-form-field appearance="outline" (click)="clearAll()">
+                <mat-label>Factory</mat-label>
+                <mat-select [(ngModel)]="FactoryName" (selectionChange)="DyByBuyer()">
+                  <mat-option value=""> </mat-option>
+                  <mat-option *ngFor="let Factory of this.Factory" value="{{Factory.dyeFactory}}">{{Factory.dyeFactory}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+        
+              <mat-form-field appearance="outline">
+                <mat-label>Buyer</mat-label>
+                <mat-select [(ngModel)]="DyeBuyerName" (selectionChange)="DyByOrderNo()">
+                  <mat-option value=""> </mat-option>
+                  <mat-option *ngFor="let buyer of this.buyer" value="{{buyer.buyer}}">{{buyer.buyer}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+        
+        
+            <mat-form-field appearance="outline">
+                <mat-label>Order</mat-label>
+                <mat-select [(ngModel)]="DyeOrderName" (selectionChange)="DyByStyle()">
+                    <mat-option value=""> </mat-option>
+                    <mat-option *ngFor="let orderNo of this.orderNo" value="{{orderNo.orderNo}}">{{orderNo.orderNo}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        
+            <mat-form-field appearance="outline">
+                <mat-label>Style</mat-label>
+                <mat-select [(ngModel)]="DyeStyleName" (selectionChange)="DyByColor()">
+                    <mat-option value=""> </mat-option>
+                    <mat-option *ngFor="let style of this.Dyestyle" value="{{style.style}}">{{style.style}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        
+            <mat-form-field appearance="outline">
+                <mat-label>color</mat-label>
+                <mat-select [(ngModel)]="DyeColorName" (selectionChange)="DyByCode()">
+                    <mat-option value=""> </mat-option>
+                    <mat-option *ngFor="let color of this.DyeColor" value="{{color.color}}">{{color.color}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        
+            <mat-form-field appearance="outline">
+                <mat-label>BatchCode</mat-label>
+                <mat-select [(ngModel)]="DyeCodeName">
+                    <mat-option value=""> </mat-option>
+                    <mat-option *ngFor="let code of this.DyeCode" value="{{code.code}}">{{code.code}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        
+        </div>
+
+
+
 
 <table class="table table-bordered table-hover">
     <thead class="thead-dark">
@@ -893,3 +953,4 @@
             </div>
         </div>
     </div>
+    

@@ -225,7 +225,7 @@ this.items.removeAt(index)
 }
 
 dyesubmit() {
-  // console.log(this.dye_Entery.value)
+  console.log(this.dye_Entery.value)
   this.loading =true
   this.api.post_dyereport_entry(this.dye_Entery.value).subscribe((res)=>{
     alert(res.message)

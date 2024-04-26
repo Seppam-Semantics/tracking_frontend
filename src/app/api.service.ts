@@ -158,6 +158,37 @@ export class ApiService {
     return this.http.get(this.getUrl() + `/fabricrollapi/transcation-entrys?id=${id}`, this.getHeaders())
   }
 
+  entry1Delete(id:any, lineId:any):Observable<any>{
+    return this.http.delete(this.getUrl() + `/fabricrollapi/entry1?id=${id}&line_Id=${lineId}`, this.getHeaders())
+  }
+
+  entry2Delete(id:any, lineId:any):Observable<any>{
+    return this.http.delete(this.getUrl() + `/fabricrollapi/entry2?id=${id}&line_Id=${lineId}`, this.getHeaders())
+  }
+
+  entry3Delete(id:any, lineId:any):Observable<any>{
+    return this.http.delete(this.getUrl() + `/fabricrollapi/entry3?id=${id}&line_Id=${lineId}`, this.getHeaders())
+  }
+
+  entry4Delete(id:any, lineId:any):Observable<any>{
+    return this.http.delete(this.getUrl() + `/fabricrollapi/entry4?id=${id}&line_Id=${lineId}`, this.getHeaders())
+  }
+
+  entry5Delete(id:any, lineId:any):Observable<any>{
+    return this.http.delete(this.getUrl() + `/fabricrollapi/entry5?id=${id}&line_Id=${lineId}`, this.getHeaders())
+  }
+
+  entry6Delete(id:any, lineId:any):Observable<any>{
+    return this.http.delete(this.getUrl() + `/fabricrollapi/entry6?id=${id}&line_Id=${lineId}`, this.getHeaders())
+  }
+
+  entry7Delete(id:any, lineId:any):Observable<any>{
+    return this.http.delete(this.getUrl() + `/fabricrollapi/entry7?id=${id}&line_Id=${lineId}`, this.getHeaders())
+  }
+
+
+// ==================================================================================================================================================
+
   knit_entry(data:any):Observable<any>{
     return this.http.post(this.getUrl()+`/knitapi/knit` , data , this.getHeaders())
   }
@@ -211,6 +242,43 @@ export class ApiService {
   DyeBatchDelect(id:any):Observable<any>{
     return this.http.delete(this.getUrl()+`/dyeapi/dye/${id}` , this.getHeaders())
   }
+
+// <!---------------------------------------->
+DyeFactoryfilter():Observable<any>{
+  return this.http.get(this.getUrl() + `/dyeapi/DyeFactoryFilter` , this.getHeaders())
+}
+
+
+DyeBuyerfilter(dyeFactory:any):Observable<any>{
+  return this.http.get(this.getUrl() + `/dyeapi/DyeBuyerFilter?dyeFactory=${dyeFactory}` , this.getHeaders())
+}
+
+
+DyeOrderNofilter(dyeFactory:any , buyer:any , ):Observable<any>{
+  return this.http.get(this.getUrl() + `/dyeapi/DyeOrderNoFilter?dyeFactory=${dyeFactory}&buyer=${buyer}` , this.getHeaders())
+}
+
+DyeStylefilter(dyeFactory:any , buyer:any , order:any ):Observable<any>{
+  return this.http.get(this.getUrl() + `/dyeapi/DyeStyleFilter?dyeFactory=${dyeFactory}&buyer=${buyer}&orderNo=${order}` , this.getHeaders())
+}
+
+DyeColorfilter(dyeFactory:any , buyer:any , order:any , style:any ):Observable<any>{
+  return this.http.get(this.getUrl() + `/dyeapi/DyeColorFilter?dyeFactory=${dyeFactory}&buyer=${buyer}&orderNo=${order}&style=${style}` , this.getHeaders())
+}
+
+DyeCodefilter(dyeFactory:any , buyer:any , order:any , style:any , color:any):Observable<any>{
+  return this.http.get(this.getUrl() + `/dyeapi/DyecodeFilter?dyeFactory=${dyeFactory}&buyer=${buyer}&orderNo=${order}&style=${style}&color=${color}` , this.getHeaders())
+}
+
+DyeFilter(DyeFactory: any , buyer?:any , orderNo?:any, style?:any , color?:any , batchNo?:any ) : Observable<any>{
+  return this.http.get(this.getUrl()+`/dyeapi/dye-filter?dyeFactory=${DyeFactory}&buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&batchNo=${batchNo}` , this.getHeaders())
+}
+// <!----------------->
+
+
+
+
+
 
   addUpdateYarn(data:any):Observable<any>{
     return this.http.post(this.getUrl() + `/yarnapi/yarn`, data, this.getHeaders())
