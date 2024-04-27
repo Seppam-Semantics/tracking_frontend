@@ -49,6 +49,7 @@ export class DyeBatchReportComponent implements OnInit {
   DyeCode: any;
   DyeColorName: any;
   Factory:any;
+  codelist: any;
 
 
 
@@ -154,9 +155,9 @@ export class DyeBatchReportComponent implements OnInit {
       this.factoryname = res.factorys
     })
 
-    // this.api.dyeBatchAllData().subscribe((res) => {
-    //   this.dyebatch_alldata = res.workorders
-    // })
+    this.api.dyeBatchAllData().subscribe((res) => {
+      this.dyebatch_alldata = res.workorders
+    })
 
 
     this.api.DyeFactoryfilter().subscribe((res) => {
@@ -276,27 +277,53 @@ export class DyeBatchReportComponent implements OnInit {
     })
   }
 
+  getcode(factorys:any,buyer: any, orderNo: any, style: any, color: any) {
+    this.api.getcodeData(factorys,buyer, orderNo, style, color).subscribe((res) => {
+      this.codelist = res.DyeBatchCode;
+      console.log(this.codelist)
+    })
+  }
+
   loadworkorder(buyer: any, orderNo: string = '', style: string = '', color: string = '', size: string = '') {
     this.api.getwodetails(buyer, orderNo, style, color, size).subscribe((res) => {
       this.data = res.workorders[0].id
     });
   }
+  
+  loadAllDyeData(factory: string = '', buyer: string = '', order: string = '', style: string = '', color: string = '',code:string = ''){
+    this.api.DyeFilter(factory,buyer,order,style,color,code).subscribe((res)=>{
+      this.dyebatch_alldata = res.knit
+    })
+  }
+
+  woByFactory(){
+    this.loadAllDyeData(this.FactoryName);
+  }
 
   woByBuyer() {
     this.getorders(this.buyerName);
     this.loadworkorder(this.buyerName);
+    this.loadAllDyeData(this.FactoryName,this.buyerName);
   }
   wobyOrder() {
     this.getstyle(this.buyerName, this.ordernumbers)
     this.loadworkorder(this.buyerName, this.ordernumbers);
+    this.loadAllDyeData(this.FactoryName,this.buyerName ,this.ordernumbers);
   } 
   wobystyle() {
     this.getcolor(this.buyerName, this.ordernumbers, this.styleslist)
     this.loadworkorder(this.buyerName, this.ordernumbers, this.styleslist);
+    this.loadAllDyeData(this.FactoryName,this.buyerName ,this.ordernumbers, this.styleslist);
   }
   wobycolor() {
     this.getsize(this.buyerName, this.ordernumbers, this.styleslist, this.colorslist)
     this.loadworkorder(this.buyerName, this.ordernumbers, this.styleslist, this.colorslist);
+    this.loadAllDyeData(this.FactoryName,this.buyerName , this.ordernumbers, this.styleslist, this.colorslist);
+  }
+  wobycode(){
+    this.getcode(this.FactoryName,this.buyerName, this.ordernumbers, this.styleslist, this.colorslist)
+    this.loadAllDyeData(this.FactoryName,this.buyerName, this.ordernumbers, this.styleslist, this.colorslist,this.DyeCodeName);
+    console.log(this.DyeCodeName)
   }
   getwoId(size: any, index: number){
     this.api.getwodetails(this.buyerName, this.ordernumbers, this.styleslist, this.colorslist, size).subscribe((res) => {
@@ -307,67 +334,7 @@ export class DyeBatchReportComponent implements OnInit {
     });
 }
 
-// <!----------------------------------------------------------------------------------->
 
-getDyeBuyers(factory: any) {
-  this.api.DyeBuyerfilter(this.FactoryName).subscribe((res) => {
-    this.buyer = res.workorders
-  })
-}
-
-getDyeOrder(factory: any, buyer: any) {
-  this.api.DyeOrderNofilter(this.FactoryName, this.DyeBuyerName).subscribe((res) => {
-    this.orderNo = res.workorders
-  })
-}
-
-getDyeStyle(factory: any, buyer: any, order: any) {
-  this.api.DyeStylefilter(this.FactoryName, this.DyeBuyerName, this.DyeOrderName).subscribe((res) => {
-    this.Dyestyle = res.workorders
-  })
-}
-
-getDyeColor(factory: any, buyer: any, order: any, style: any) {
-  this.api.DyeColorfilter(this.FactoryName, this.DyeBuyerName, this.DyeOrderName, this.DyeStyleName,).subscribe((res) => {
-    this.DyeColor = res.workorders
-  })
-}
-
-getDyeCode(factory: any, buyer: any, order: any, style: any, color: any) {
-  this.api.DyeCodefilter(this.FactoryName, this.DyeBuyerName, this.DyeOrderName, this.DyeStyleName, this.DyeColorName).subscribe((res) => {
-    this.DyeCode = res.workorders
-  })
-}
-
-loadAllDyeData(factory: any, buyer: string = '', order: string = '', style: string = '', color: string = '',code:string = ''){
-  this.api.DyeFilter(factory,buyer,order,style,color,code).subscribe((res)=>{
-    this.dyebatch_alldata = res.knit
-    console.log(res)
-  })
-}
-
-DyByBuyer() {
-  this.getDyeBuyers(this.FactoryName);
-  this.loadAllDyeData(this.FactoryName)
-}
-
-DyByOrderNo() {
-  this.getDyeOrder(this.FactoryName, this.DyeBuyerName)
-  this.loadAllDyeData(this.FactoryName, this.DyeBuyerName)
-}
-DyByStyle() {
-  this.getDyeStyle(this.FactoryName, this.DyeBuyerName, this.DyeOrderName)
-  this.loadAllDyeData(this.FactoryName, this.DyeBuyerName, this.DyeOrderName)
-}
-DyByColor() {
-  this.getDyeColor(this.FactoryName, this.DyeBuyerName, this.DyeOrderName, this.DyeStyleName)
-  this.loadAllDyeData(this.FactoryName, this.DyeBuyerName, this.DyeOrderName, this.DyeStyleName)
-}
-DyByCode() {
-  this.getDyeCode(this.FactoryName, this.DyeBuyerName, this.DyeOrderName, this.DyeStyleName, this.DyeColorName)
-  this.loadAllDyeData(this.FactoryName, this.DyeBuyerName, this.DyeOrderName, this.DyeStyleName, this.DyeColorName)
-}
-// <!----------------------------------------------------------------------------------->
 
 
   clearAll() {

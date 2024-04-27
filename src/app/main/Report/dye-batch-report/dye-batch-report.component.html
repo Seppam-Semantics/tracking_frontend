@@ -1,67 +1,84 @@
-<!-- <mat-toolbar style="display: flex; justify-content: center; height: auto;"><span>Dye Batch
+<mat-toolbar style="display: flex; justify-content: center; height: auto;"><span>Dye Batch
         Report</span></mat-toolbar>
 
-        <mat-toolbar style="height: fit-content; padding: 10px;">
-            <span style="flex: 1 1 auto;"></span>
-            <button mat-button color='primary' style="margin-right: 12px;" (click)="DyeBatchButton()">New</button>
-          </mat-toolbar> -->
+<mat-toolbar style="height: fit-content; padding: 10px;">
 
 
+    <div style="display: flex; justify-content: center; gap: 0.5%; width: 100%;">
 
 
-          <div style="display: flex; justify-content: space-around; gap: 0.5%; margin-top: 2%; margin-bottom: 2%;">
+        <!-- <mat-form-field appearance="outline" (click)="clearAll()">
+                    <mat-label>Factory</mat-label>
+                    <mat-select [(ngModel)]="FactoryName" (selectionChange)="DyByBuyer()">
+                      <mat-option value=""> </mat-option>
+                      <mat-option *ngFor="let Factory of this.Factory" value="{{Factory.dyeFactory}}">{{Factory.dyeFactory}}</mat-option>
+                    </mat-select>
+                  </mat-form-field> -->
+
+        <p-dropdown [options]="this.Factory" [(ngModel)]="FactoryName" placeholder="Factory" optionLabel="dyeinFty"
+            optionValue="dyeinFty" (onChange)="woByFactory()"></p-dropdown>
+
+        <!-- <mat-form-field appearance="outline">
+                    <mat-label>Buyer</mat-label>
+                    <mat-select [(ngModel)]="DyeBuyerName" (selectionChange)="DyByOrderNo()">
+                      <mat-option value=""> </mat-option>
+                      <mat-option *ngFor="let buyer of this.buyer" value="{{buyer.buyer}}">{{buyer.buyer}}</mat-option>
+                    </mat-select>
+                  </mat-form-field> -->
+
+        <p-dropdown [options]="this.buyers" [(ngModel)]="buyerName" placeholder="Buyer" optionLabel="buyer"
+            optionValue="buyer" (onChange)="woByBuyer()"></p-dropdown>
+
+        <!-- <mat-form-field appearance="outline">
+                    <mat-label>Order</mat-label>
+                    <mat-select [(ngModel)]="DyeOrderName" (selectionChange)="DyByStyle()">
+                        <mat-option value=""> </mat-option>
+                        <mat-option *ngFor="let orderNo of this.orderNo" value="{{orderNo.orderNo}}">{{orderNo.orderNo}}</mat-option>
+                    </mat-select>
+                </mat-form-field> -->
+
+        <p-dropdown [options]="this.order" [(ngModel)]="ordernumbers" placeholder="OrderNo" optionLabel="orderNO"
+            optionValue="orderNO" (onChange)="wobyOrder()"></p-dropdown>
+
+        <!-- <mat-form-field appearance="outline">
+                    <mat-label>Style</mat-label>
+                    <mat-select [(ngModel)]="DyeStyleName" (selectionChange)="DyByColor()">
+                        <mat-option value=""> </mat-option>
+                        <mat-option *ngFor="let style of this.Dyestyle" value="{{style.style}}">{{style.style}}</mat-option>
+                    </mat-select>
+                </mat-form-field> -->
+
+        <p-dropdown [options]="this.stylelist" [(ngModel)]="styleslist" placeholder="Style" optionLabel="style"
+            optionValue="style" (onChange)="wobystyle()"></p-dropdown>
+
+        <!-- <mat-form-field appearance="outline">
+                    <mat-label>color</mat-label>
+                    <mat-select [(ngModel)]="DyeColorName" (selectionChange)="DyByCode()">
+                        <mat-option value=""> </mat-option>
+                        <mat-option *ngFor="let color of this.DyeColor" value="{{color.color}}">{{color.color}}</mat-option>
+                    </mat-select>
+                </mat-form-field> -->
+
+        <p-dropdown [options]="this.colorlist" [(ngModel)]="colorslist" placeholder="Color" optionLabel="color"
+            optionValue="color" (onChange)="wobycode()"></p-dropdown>
+
+        <!-- <mat-form-field appearance="outline">
+                    <mat-label>BatchCode</mat-label>
+                    <mat-select [(ngModel)]="DyeCodeName">
+                        <mat-option value=""> </mat-option>
+                        <mat-option *ngFor="let code of this.DyeCode" value="{{code.code}}">{{code.code}}</mat-option>
+                    </mat-select>
+                </mat-form-field> -->
+
+        <p-dropdown [options]="this.codelist" [(ngModel)]="DyeCodeName" placeholder="Code" optionLabel="batchNo"
+            optionValue="batchNo" (onChange)="wobycode()"></p-dropdown>
+
+    </div>
 
 
-            <mat-form-field appearance="outline" (click)="clearAll()">
-                <mat-label>Factory</mat-label>
-                <mat-select [(ngModel)]="FactoryName" (selectionChange)="DyByBuyer()">
-                  <mat-option value=""> </mat-option>
-                  <mat-option *ngFor="let Factory of this.Factory" value="{{Factory.dyeFactory}}">{{Factory.dyeFactory}}</mat-option>
-                </mat-select>
-              </mat-form-field>
-        
-              <mat-form-field appearance="outline">
-                <mat-label>Buyer</mat-label>
-                <mat-select [(ngModel)]="DyeBuyerName" (selectionChange)="DyByOrderNo()">
-                  <mat-option value=""> </mat-option>
-                  <mat-option *ngFor="let buyer of this.buyer" value="{{buyer.buyer}}">{{buyer.buyer}}</mat-option>
-                </mat-select>
-              </mat-form-field>
-        
-        
-            <mat-form-field appearance="outline">
-                <mat-label>Order</mat-label>
-                <mat-select [(ngModel)]="DyeOrderName" (selectionChange)="DyByStyle()">
-                    <mat-option value=""> </mat-option>
-                    <mat-option *ngFor="let orderNo of this.orderNo" value="{{orderNo.orderNo}}">{{orderNo.orderNo}}</mat-option>
-                </mat-select>
-            </mat-form-field>
-        
-            <mat-form-field appearance="outline">
-                <mat-label>Style</mat-label>
-                <mat-select [(ngModel)]="DyeStyleName" (selectionChange)="DyByColor()">
-                    <mat-option value=""> </mat-option>
-                    <mat-option *ngFor="let style of this.Dyestyle" value="{{style.style}}">{{style.style}}</mat-option>
-                </mat-select>
-            </mat-form-field>
-        
-            <mat-form-field appearance="outline">
-                <mat-label>color</mat-label>
-                <mat-select [(ngModel)]="DyeColorName" (selectionChange)="DyByCode()">
-                    <mat-option value=""> </mat-option>
-                    <mat-option *ngFor="let color of this.DyeColor" value="{{color.color}}">{{color.color}}</mat-option>
-                </mat-select>
-            </mat-form-field>
-        
-            <mat-form-field appearance="outline">
-                <mat-label>BatchCode</mat-label>
-                <mat-select [(ngModel)]="DyeCodeName">
-                    <mat-option value=""> </mat-option>
-                    <mat-option *ngFor="let code of this.DyeCode" value="{{code.code}}">{{code.code}}</mat-option>
-                </mat-select>
-            </mat-form-field>
-        
-        </div>
+    <span style="flex: 1 1 auto;"></span>
+    <button mat-button color='primary' style="margin-right: 12px;" (click)="DyeBatchButton()">New</button>
+</mat-toolbar>
 
 
 
@@ -86,7 +103,7 @@
         </tr>
     </thead>
     <tbody>
-         <tr *ngFor="let data of this.dyebatch_alldata; let i = index">
+        <tr *ngFor="let data of this.dyebatch_alldata; let i = index">
             <td>{{i+1}}</td>
             <td>{{data.code}}</td>
             <td>{{data.batchNo}}</td>
@@ -99,7 +116,8 @@
             <td>{{data.softner == 1 ? "True":"false"}}</td>
             <td>{{data.silicon == 1 ? "True":"false"}}</td>
             <td>{{data.enzyme == 1 ? "True":"false"}}</td>
-            <td><button class="btn btn-primary" (click)="getid(data.id)" data-toggle="modal" data-target="#edit" ><mat-icon>edit</mat-icon></button></td>
+            <td><button class="btn btn-primary" (click)="getid(data.id)" data-toggle="modal"
+                    data-target="#edit"><mat-icon>edit</mat-icon></button></td>
             <td><button class="btn btn-danger" (click)="delect(data.id)"><mat-icon>delete</mat-icon></button></td>
         </tr>
     </tbody>
@@ -122,7 +140,7 @@
             <div class="modal-body">
 
                 <div [formGroup]="dye_Entery">
-    
+
                     <mat-toolbar>
                         <!-- <div style="display: flex;">
                             Dye Batch Entry
@@ -150,30 +168,32 @@
                         </div>
                         <div style="display: flex; justify-content: flex-end; gap: 10px;  width: 90%">
                             <div>
-                                <p-dropdown placeholder="Dye Factory" formControlName="dyeFactory" [options]="factoryname" optionLabel="dyeinFty" optionValue="dyeinFty" [filter]="true" filterBy="dyeinFty" ></p-dropdown>
+                                <p-dropdown placeholder="Dye Factory" formControlName="dyeFactory"
+                                    [options]="factoryname" optionLabel="dyeinFty" optionValue="dyeinFty"
+                                    [filter]="true" filterBy="dyeinFty"></p-dropdown>
                             </div>
-                
+
                             <div>
                                 <input type="text" pInputText formControlName="batchNo" placeholder="Batch No">
                             </div>
                         </div>
-                
+
                     </mat-toolbar>
-                
+
                     <mat-toolbar style="display: contents;">
                         <div style="display: flex; justify-content: center;background-color: darkgray;">
                             <div><Button class="btn btn-primary" (click)="update()"> Update </Button></div>
                         </div>
                     </mat-toolbar>
                     <div style="overflow: scroll; height:76vh;">
-                
-                    <mat-toolbar style="display: inline-table;">
-                        <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
-                
+
+                        <mat-toolbar style="display: inline-table;">
+                            <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+
                                 <div style="display: flex; flex-direction: column;">
                                     <div style="display: flex;">
-                                            <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 2vh;">
-                                                <!-- <mat-form-field appearance="outline" (click)="clearAll()" style="margin-top: 4vh; ">
+                                        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 2vh;">
+                                            <!-- <mat-form-field appearance="outline" (click)="clearAll()" style="margin-top: 4vh; ">
                                                     <mat-label>Buyer</mat-label>
                                                     <mat-select [(ngModel)]="buyerName" (selectionChange)="woByBuyer()"
                                                         formControlName="buyer">
@@ -183,10 +203,13 @@
                                                     </mat-select>
                                                 </mat-form-field> -->
 
-                                                <p-dropdown formControlName="buyer" placeholder="Buyer" [(ngModel)]="buyerName" (onChange)="woByBuyer()" optionLabel="buyer" optionValue="buyer" [options]="buyers" readonly="true"></p-dropdown>
+                                            <p-dropdown formControlName="buyer" placeholder="Buyer"
+                                                [(ngModel)]="buyerName" (selectionChange)="woByBuyer()"
+                                                optionLabel="buyer" optionValue="buyer" [options]="buyers"
+                                                readonly="true"></p-dropdown>
 
 
-                                                <!-- <mat-form-field appearance="outline" style="margin-top: 4vh; ">
+                                            <!-- <mat-form-field appearance="outline" style="margin-top: 4vh; ">
                                                     <mat-label>Order</mat-label>
                                                     <mat-select [(ngModel)]="ordernumbers" (selectionChange)="wobyOrder()"
                                                         formControlName="orderNo">
@@ -195,13 +218,16 @@
                                                             value="{{order.orderNO}}">{{order.orderNO}}</mat-option>
                                                     </mat-select>
                                                 </mat-form-field> -->
-                
-
-                                                
-                                                <p-dropdown formControlName="orderNo" placeholder="Order" [(ngModel)]="ordernumbers" (onChange)="wobyOrder()" optionLabel="orderNO" optionValue="orderNO" [options]="order" readonly="true"></p-dropdown>
 
 
-                                                <!-- <mat-form-field appearance="outline" style="margin-top: 4vh; ">
+
+                                            <p-dropdown formControlName="orderNo" placeholder="Order"
+                                                [(ngModel)]="ordernumbers" (onChange)="wobyOrder()"
+                                                optionLabel="orderNO" optionValue="orderNO" [options]="order"
+                                                readonly="true"></p-dropdown>
+
+
+                                            <!-- <mat-form-field appearance="outline" style="margin-top: 4vh; ">
                                                     <mat-label>Style</mat-label>
                                                     <mat-select [(ngModel)]="styleslist" (selectionChange)="wobystyle()"
                                                         formControlName="style">
@@ -210,13 +236,15 @@
                                                             value="{{style.style}}">{{style.style}}</mat-option>
                                                     </mat-select>
                                                 </mat-form-field> -->
-                
-                
-                                                <p-dropdown formControlName="style" placeholder="Style" [(ngModel)]="styleslist" (onChange)="wobystyle()" optionLabel="style" optionValue="style" [options]="stylelist" readonly="true"></p-dropdown>
 
 
-                
-                                                <!-- <mat-form-field appearance="outline" style="margin-top: 4vh; ">
+                                            <p-dropdown formControlName="style" placeholder="Style"
+                                                [(ngModel)]="styleslist" (onChange)="wobystyle()" optionLabel="style"
+                                                optionValue="style" [options]="stylelist" readonly="true"></p-dropdown>
+
+
+
+                                            <!-- <mat-form-field appearance="outline" style="margin-top: 4vh; ">
                                                     <mat-label>color</mat-label>
                                                     <mat-select [(ngModel)]="colorslist" (selectionChange)="wobycolor()"
                                                         formControlName="color">
@@ -225,593 +253,417 @@
                                                             value="{{color.color}}">{{color.color}}</mat-option>
                                                     </mat-select>
                                                 </mat-form-field> -->
-                
-                                                <p-dropdown formControlName="color" placeholder="color" [(ngModel)]="colorslist" (onChange)="wobycolor()" optionLabel="color" optionValue="color" [options]="colorlist" readonly="true"></p-dropdown> 
-                
-                
-                                            </div>
+
+                                            <p-dropdown formControlName="color" placeholder="color"
+                                                [(ngModel)]="colorslist" (onChange)="wobycolor()" optionLabel="color"
+                                                optionValue="color" [options]="colorlist" readonly="true"></p-dropdown>
+
+
+                                        </div>
                                     </div>
-                
+
                                     <div>
-                                        <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 3vh;">
-                                                <!-- <mat-form-field appearance="outline" style="margin-top: 4vh; ;">
+                                        <div
+                                            style="display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 3vh;">
+                                            <!-- <mat-form-field appearance="outline" style="margin-top: 4vh; ;">
                                                     <mat-label>Fabric Type</mat-label>
                                                     <input type="text" formControlName="fabricType" matInput>
                                                 </mat-form-field> -->
-                                                <input pInputText type="text" class="p-inputtext-sm"  placeholder="Fabric Type" formControlName="fabricType" />
-                                                <div style="display: flex; gap: 20px; flex-wrap: wrap;  margin-left: 1vh;">
-                                                    <div style="display: flex; gap: 10px;">
-                                                        <span style="font-size:15px; display: inline-block;">Softner (Y/N)</span>
-                                                            <input type="checkbox" style="height: 20px; width: 20px; margin-top: 1vh;" formControlName="softner">
-                                                    </div>
-                
-                                                    <div style="display: flex; gap: 10px;">
-                                                        <span style="font-size:15px; display: inline-block;">Silicon (Y/N)</span>
-                                                            <input type="checkbox" style="height: 20px; width: 20px; margin-top: 1vh;" formControlName="silicon">
-                                                    </div>
-                
-                                                    <div style="display: flex; gap: 10px;">
-                                                        <span style="font-size:15px; display: inline-block;">Enzyme (Y/N)</span>
-                                                            <input type="checkbox" style="height: 20px; width: 20px; margin-top: 1vh;" formControlName="enzyme">
-                                                    </div>
+                                            <input pInputText type="text" class="p-inputtext-sm"
+                                                placeholder="Fabric Type" formControlName="fabricType" />
+                                            <div style="display: flex; gap: 20px; flex-wrap: wrap;  margin-left: 1vh;">
+                                                <div style="display: flex; gap: 10px;">
+                                                    <span style="font-size:15px; display: inline-block;">Softner
+                                                        (Y/N)</span>
+                                                    <input type="checkbox"
+                                                        style="height: 20px; width: 20px; margin-top: 1vh;"
+                                                        formControlName="softner">
                                                 </div>
+
+                                                <div style="display: flex; gap: 10px;">
+                                                    <span style="font-size:15px; display: inline-block;">Silicon
+                                                        (Y/N)</span>
+                                                    <input type="checkbox"
+                                                        style="height: 20px; width: 20px; margin-top: 1vh;"
+                                                        formControlName="silicon">
+                                                </div>
+
+                                                <div style="display: flex; gap: 10px;">
+                                                    <span style="font-size:15px; display: inline-block;">Enzyme
+                                                        (Y/N)</span>
+                                                    <input type="checkbox"
+                                                        style="height: 20px; width: 20px; margin-top: 1vh;"
+                                                        formControlName="enzyme">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            
-                    <!--------------------------------------------->
+
+                                <!--------------------------------------------->
+                                <div>
+
+                                    <div style="display: flex; justify-content: center; margin-top: 5px;">
+                                        <table class="table table-hover" style="width:100%">
+                                            <thead class="thead-dark">
+                                                <tr>
+                                                    <th><button class="btn btn-danger" (click)="add()">+</button></th>
+                                                    <th style="font-size:small; width: 10px;">Size</th>
+                                                    <th style="font-size:small; width: 10px;">Griege Roll</th>
+                                                    <th style="font-size:small; width: 10px;">Griege</th>
+                                                    <th style="font-size:small; width: 10px;">Finish Roll</th>
+                                                    <th style="font-size:small; width: 10px;">Finish</th>
+                                                    <th style="font-size:small; width: 10px;">Diff</th>
+                                                    <th style="font-size:small; width: 10px;">PL</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody formArrayName="data">
+                                                <tr *ngFor="let process of items.controls; let i=index"
+                                                    [formGroupName]="i">
+                                                    <td></td>
+                                                    <td>
+                                                        <input type="text" formControlName="size" list="size"
+                                                            class="form-control" style="width: 15vh; display: inline;"
+                                                            (input)="getwoId($event.target.value, i)">
+                                                        <datalist id="size">
+                                                            <option *ngFor="let size of this.sizelist"
+                                                                value="{{size.size}}">{{size.size}}
+                                                            </option>
+                                                        </datalist>
+                                                    </td>
+                                                    <td><input type="number" class="form-control"
+                                                            formControlName="griegerolls"
+                                                            style="width: 10vh; display: inline;"
+                                                            (click)="calculateDiff()"></td>
+                                                    <td><input type="number" class="form-control"
+                                                            formControlName="griege"
+                                                            style="width: 10vh; display: inline;"
+                                                            (input)="calculateDiff()" (click)="calculateDiff()">
+                                                    </td>
+                                                    <td><input type="number" class="form-control"
+                                                            formControlName="finishrolls"
+                                                            style="width: 10vh; display: inline;"
+                                                            (click)="calculateDiff()"></td>
+                                                    <td><input type="number" class="form-control"
+                                                            formControlName="finish"
+                                                            style="width: 10vh; display: inline;"
+                                                            (input)="calculateDiff()" (click)="calculateDiff()">
+                                                    </td>
+                                                    <td><input type="number" class="form-control" formControlName="diff"
+                                                            readonly style="width: 10vh; display: inline;"
+                                                            (click)="calculateDiff()"></td>
+                                                    <td><input type="number" class="form-control" formControlName="PL"
+                                                            readonly style="width: 10vh; display: inline;"
+                                                            (click)="calculateDiff()"></td>
+                                                    <td><button class="btn btn-danger"
+                                                            (click)="removeSize(i)">x</button></td>
+
+                                                </tr>
+                                            </tbody>
+                                            <thead class="thead-dark">
+                                                <tr>
+                                                    <th><span>Total</span></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th><input type="number" class="form-control" readonly
+                                                            formControlName="GriegeTotal"
+                                                            style="width: 10vh; display: inline;"></th>
+                                                    <th></th>
+                                                    <th><input type="number" class="form-control" readonly
+                                                            formControlName="FinishTotal"
+                                                            style="width: 10vh; display: inline;"></th>
+                                                    <th><input type="number" class="form-control" readonly
+                                                            formControlName="differenceTotal"
+                                                            style="width: 10vh; display: inline;"></th>
+                                                    <th><input type="number" class="form-control" readonly
+                                                            formControlName="PLTotal"
+                                                            style="width: 10vh; display: inline;"></th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </mat-toolbar>
+                        <!--------------------------------------------------------------------------->
+                        <p-panel header="Entry Details">
                             <div>
-                             
-                                <div style="display: flex; justify-content: center; margin-top: 5px;">
-                                    <table class="table table-hover" style="width:100%">
-                                        <thead class="thead-dark">
-                                            <tr>
-                                                <th><button class="btn btn-danger" (click)="add()">+</button></th>
-                                                <th style="font-size:small; width: 10px;">Size</th>
-                                                <th style="font-size:small; width: 10px;">Griege Roll</th>
-                                                <th style="font-size:small; width: 10px;">Griege</th>
-                                                <th style="font-size:small; width: 10px;">Finish Roll</th>
-                                                <th style="font-size:small; width: 10px;">Finish</th>
-                                                <th style="font-size:small; width: 10px;">Diff</th>
-                                                <th style="font-size:small; width: 10px;">PL</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody formArrayName="data">
-                                            <tr *ngFor="let process of items.controls; let i=index" [formGroupName]="i">
-                                                  <td></td>
-                                                <td>
-                                                    <input type="text" formControlName="size" list="size" class="form-control" style="width: 15vh; display: inline;" (input)="getwoId($event.target.value, i)">
-                                                    <datalist id="size">
-                                                        <option *ngFor="let size of this.sizelist" value="{{size.size}}">{{size.size}}
-                                                        </option>
-                                                    </datalist>
-                                                </td>
-                                                <td><input type="number" class="form-control" formControlName="griegerolls" style="width: 10vh; display: inline;" (click)="calculateDiff()"></td>
-                                                <td><input type="number" class="form-control" formControlName="griege" style="width: 10vh; display: inline;" (input)="calculateDiff()" (click)="calculateDiff()">
-                                                </td>
-                                                <td><input type="number" class="form-control" formControlName="finishrolls" style="width: 10vh; display: inline;" (click)="calculateDiff()"></td>
-                                                <td><input type="number" class="form-control" formControlName="finish" style="width: 10vh; display: inline;" (input)="calculateDiff()" (click)="calculateDiff()">
-                                                </td>
-                                                <td><input type="number" class="form-control" formControlName="diff" readonly style="width: 10vh; display: inline;" (click)="calculateDiff()"></td>
-                                                <td><input type="number" class="form-control" formControlName="PL" readonly style="width: 10vh; display: inline;" (click)="calculateDiff()"></td>
-                                                <td><button class="btn btn-danger" (click)="removeSize(i)">x</button></td>
-                                               
-                                            </tr>
-                                        </tbody>
-                                        <thead class="thead-dark">
-                                        <tr >
-                                            <th><span>Total</span></th>
-                                            <th></th>
-                                            <th></th>
-                                            <th><input type="number" class="form-control" readonly formControlName="GriegeTotal" style="width: 10vh; display: inline;"></th>
-                                            <th></th>
-                                            <th><input type="number" class="form-control" readonly formControlName="FinishTotal" style="width: 10vh; display: inline;"></th>
-                                            <th><input type="number" class="form-control" readonly formControlName="differenceTotal" style="width: 10vh; display: inline;"></th>
-                                            <th><input type="number" class="form-control" readonly formControlName="PLTotal" style="width: 10vh; display: inline;"></th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    </table>
+                                <div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+                                    <div>
+                                        <p-panel header="Batch Entry" class="custom-panel">
+                                            <div>
+                                                <div style="display: flex; gap: 10px;">
+                                                    <label class="form-control"
+                                                        style="border: none; display: inline-block;">Batch Make
+                                                        Date</label>
+                                                    <input type="date" class="form-control"
+                                                        formControlName="batch_batchMakeDate">
+                                                </div>
+
+                                                <div style="display: flex; gap: 10px; ">
+                                                    <label class="form-control"
+                                                        style="border: none; display: inline-block;">Batch
+                                                        Rolls/SL Check</label>
+                                                    <textarea class="form-control" style="height: 50px;"
+                                                        formControlName="batch_batchRollsSLCheck"></textarea>
+                                                    <!-- <textarea class="form-control" style="height: 50px;" ></textarea> -->
+                                                </div>
+
+                                            </div>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+                                        </p-panel>
+                                    </div>
+                                    <div>
+                                        <p-panel header="Dyeing Process Entry">
+                                            <div>
+
+                                                <div style="display: flex; gap: 10px;">
+
+                                                    <label class="form-control"
+                                                        style="border: none; display: inline-block;">Load Date
+                                                        time</label>
+                                                    <input type="date" class="form-control"
+                                                        formControlName="dyeing_loadDatetime">
+
+                                                </div>
+
+                                                <div style="display: flex; gap: 10px;">
+
+                                                    <label class="form-control"
+                                                        style="border: none; display: inline-block;">Unloading
+                                                        Date Time</label>
+                                                    <input type="date" class="form-control"
+                                                        formControlName="dyeing_unloadingDateTime">
+
+                                                </div>
+
+                                                <div style="display: flex; gap: 10px; ">
+
+                                                    <label class="form-control"
+                                                        style="border: none; display: inline-block;"> Total Run
+                                                        Time</label>
+                                                    <textarea class="form-control" style="height: 30px;"
+                                                        formControlName="dyeing_totalRunTime"></textarea>
+                                                    <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                </div>
+
+                                                <div style="display: flex; gap: 10px; ">
+
+                                                    <label class="form-control"
+                                                        style="border: none; display: inline-block;">Receipe
+                                                        Chart (Picture)</label>
+                                                    <textarea class="form-control" style="height: 30px;"
+                                                        formControlName="dyeing_receipeChart"></textarea>
+                                                    <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                </div>
+
+                                            </div>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+
+                                        </p-panel>
+                                    </div>
+                                    <div>
+                                        <p-panel header="Shade Check">
+                                            <div>
+
+                                                <div style="display: flex; gap: 10px; height: 60px;">
+                                                    <label class="form-control"
+                                                        style="border: none; display: inline-block;">Lap
+                                                        Dip/Original/QTX</label>
+                                                    <textarea class="form-control" style="height: 50px;"
+                                                        formControlName="shade_lapDipOriginalQTX"></textarea>
+                                                    <!-- <textarea class="form-control" style="height: 50px;"></textarea> -->
+                                                </div>
+
+                                                <div style="display: flex; gap: 10px; height: 60px;">
+                                                    <label class="form-control"
+                                                        style="border: none; display: inline-block;">Master
+                                                        Batch Check</label>
+                                                    <textarea class="form-control" style="height: 50px;"
+                                                        formControlName="shade_masterBatchCheck"></textarea>
+                                                    <!-- <textarea class="form-control" style="height: 50px;"></textarea> -->
+                                                </div>
+
+
+                                                <div style="display: flex; gap: 10px; height: 60px;">
+                                                    <label class="form-control"
+                                                        style="border: none; display: inline-block;">Dye Unload
+                                                        Shade Check</label>
+                                                    <textarea class="form-control" style="height: 50px;"
+                                                        formControlName="shade_dyeUnloadShadeCheck"></textarea>
+                                                    <!-- <textarea class="form-control" style="height: 50px;"></textarea> -->
+                                                </div>
+
+                                                <div style="display: flex; gap: 10px;">
+                                                    <label class="form-control"
+                                                        style="border: none; display: inline-block;">Shade
+                                                        Submission Date</label>
+                                                    <input type="date" class="form-control"
+                                                        formControlName="shade_shadeSubmissionDate">
+                                                    <!-- <input type="time" class="form-control"> -->
+                                                </div>
+
+                                                <div style="display: flex; gap: 10px;">
+                                                    <label class="form-control"
+                                                        style="border: none; display: inline-block;">Shade
+                                                        Approval Date</label>
+                                                    <input type="date" class="form-control"
+                                                        formControlName="shade_shadeApprovalDate">
+                                                    <!-- <input type="time" class="form-control"> -->
+                                                </div>
+
+                                                <div style="display: flex; gap: 10px; height: 60px;">
+                                                    <label class="form-control"
+                                                        style="border: none; display: inline-block;">First Batch
+                                                        Not Ok Reason</label>
+                                                    <textarea class="form-control" style="height: 50px;"
+                                                        formControlName="shade_firstBatchNotOkReason"></textarea>
+                                                    <!-- <textarea class="form-control" style="height: 50px;"></textarea> -->
+                                                </div>
+
+                                            </div>
+                                        </p-panel>
+                                    </div>
                                 </div>
-                
-                            </div>
-                
-                        </div>
-                    </mat-toolbar>
-                     <!--------------------------------------------------------------------------->
-                     <p-panel header="Entry Details">
-                        <div>
-                            <div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
-                                <div>
-                                    <p-panel header="Batch Entry" class="custom-panel">
+
+
+
+
+                                <div
+                                    style="display: flex; flex-wrap: wrap; justify-content: space-around; margin-top: 1%;">
+                                    <p-panel header="Squeezer ">
                                         <div>
+
                                             <div style="display: flex; gap: 10px;">
-                                                <label class="form-control" style="border: none; display: inline-block;">Batch Make
-                                                    Date</label>
-                                                <input type="date" class="form-control" formControlName="batch_batchMakeDate">
-                                            </div>
-            
-                                            <div style="display: flex; gap: 10px; ">
-                                                <label class="form-control" style="border: none; display: inline-block;">Batch
-                                                    Rolls/SL Check</label>
-                                                <textarea class="form-control" style="height: 50px;"
-                                                    formControlName="batch_batchRollsSLCheck"></textarea>
-                                                <!-- <textarea class="form-control" style="height: 50px;" ></textarea> -->
-                                            </div>
-            
-                                        </div>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                    </p-panel>
-                                </div>
-                                <div>
-                                    <p-panel header="Dyeing Process Entry">
-                                        <div>
-            
-                                            <div style="display: flex; gap: 10px;">
-            
-                                                <label class="form-control" style="border: none; display: inline-block;">Load Date
-                                                    time</label>
-                                                <input type="date" class="form-control" formControlName="dyeing_loadDatetime">
-            
-                                            </div>
-            
-                                            <div style="display: flex; gap: 10px;">
-            
-                                                <label class="form-control" style="border: none; display: inline-block;">Unloading
-                                                    Date Time</label>
-                                                <input type="date" class="form-control" formControlName="dyeing_unloadingDateTime">
-            
-                                            </div>
-            
-                                            <div style="display: flex; gap: 10px; ">
-            
-                                                <label class="form-control" style="border: none; display: inline-block;"> Total Run
-                                                    Time</label>
-                                                <textarea class="form-control" style="height: 30px;"
-                                                    formControlName="dyeing_totalRunTime"></textarea>
-                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
-                                            </div>
-            
-                                            <div style="display: flex; gap: 10px; ">
-            
-                                                <label class="form-control" style="border: none; display: inline-block;">Receipe
-                                                    Chart (Picture)</label>
-                                                <textarea class="form-control" style="height: 30px;"
-                                                    formControlName="dyeing_receipeChart"></textarea>
-                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
-                                            </div>
-            
-                                        </div>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        
-                                    </p-panel>
-                                </div>
-                                <div>
-                                    <p-panel header="Shade Check">
-                                        <div>
-            
-                                            <div style="display: flex; gap: 10px; height: 60px;">
-                                                <label class="form-control" style="border: none; display: inline-block;">Lap
-                                                    Dip/Original/QTX</label>
-                                                <textarea class="form-control" style="height: 50px;"
-                                                    formControlName="shade_lapDipOriginalQTX"></textarea>
-                                                <!-- <textarea class="form-control" style="height: 50px;"></textarea> -->
-                                            </div>
-            
-                                            <div style="display: flex; gap: 10px; height: 60px;">
-                                                <label class="form-control" style="border: none; display: inline-block;">Master
-                                                    Batch Check</label>
-                                                <textarea class="form-control" style="height: 50px;"
-                                                    formControlName="shade_masterBatchCheck"></textarea>
-                                                <!-- <textarea class="form-control" style="height: 50px;"></textarea> -->
-                                            </div>
-            
-            
-                                            <div style="display: flex; gap: 10px; height: 60px;">
-                                                <label class="form-control" style="border: none; display: inline-block;">Dye Unload
-                                                    Shade Check</label>
-                                                <textarea class="form-control" style="height: 50px;"
-                                                    formControlName="shade_dyeUnloadShadeCheck"></textarea>
-                                                <!-- <textarea class="form-control" style="height: 50px;"></textarea> -->
-                                            </div>
-            
-                                            <div style="display: flex; gap: 10px;">
-                                                <label class="form-control" style="border: none; display: inline-block;">Shade
-                                                    Submission Date</label>
-                                                <input type="date" class="form-control" formControlName="shade_shadeSubmissionDate">
+
+                                                <label class="form-control"
+                                                    style="border: none; display: inline-block;">Squeezer
+                                                    data time</label>
+                                                <input type="date" class="form-control"
+                                                    formControlName="squeezer_squeezerDateTime">
                                                 <!-- <input type="time" class="form-control"> -->
+
                                             </div>
-            
-                                            <div style="display: flex; gap: 10px;">
-                                                <label class="form-control" style="border: none; display: inline-block;">Shade
-                                                    Approval Date</label>
-                                                <input type="date" class="form-control" formControlName="shade_shadeApprovalDate">
-                                                <!-- <input type="time" class="form-control"> -->
-                                            </div>
-            
-                                            <div style="display: flex; gap: 10px; height: 60px;">
-                                                <label class="form-control" style="border: none; display: inline-block;">First Batch
-                                                    Not Ok Reason</label>
-                                                <textarea class="form-control" style="height: 50px;"
-                                                    formControlName="shade_firstBatchNotOkReason"></textarea>
-                                                <!-- <textarea class="form-control" style="height: 50px;"></textarea> -->
-                                            </div>
-            
-                                        </div>
-                                    </p-panel>
-                                </div>
-                            </div>
-            
-            
-            
-            
-                            <div style="display: flex; flex-wrap: wrap; justify-content: space-around; margin-top: 1%;">
-                                <p-panel header="Squeezer ">
-                                    <div>
-            
-                                        <div style="display: flex; gap: 10px;">
-            
-                                            <label class="form-control" style="border: none; display: inline-block;">Squeezer
-                                                data time</label>
-                                            <input type="date" class="form-control" formControlName="squeezer_squeezerDateTime">
-                                            <!-- <input type="time" class="form-control"> -->
-            
-                                        </div>
-            
-                                        <div style="display: flex; gap: 10px; ">
-                                            <label class="form-control" style="border: none; display: inline-block;">RPM
-                                                Value</label>
-                                            <textarea class="form-control" style="height: 30px;"
-                                                formControlName="squeezer_rpmValue"></textarea>
-                                            <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
-                                        </div>
-            
-                                        <div style="display: flex; gap: 10px; ">
-                                            <label class="form-control" style="border: none; display: inline-block;">Trolley
-                                                Plate (Auto/Manual)</label>
-                                            <textarea class="form-control" style="height: 30px;"
-                                                formControlName="squeezer_trolleyPlate"></textarea>
-                                            <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
-                                        </div>
-            
-                                        <div style="display: flex; gap: 10px; ">
-                                            <label class="form-control" style="border: none; display: inline-block;">Overfeed
-                                                Value</label>
-                                            <textarea class="form-control" style="height: 30px;"
-                                                formControlName="squeezer_overfeedValue"></textarea>
-                                            <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
-                                        </div>
-            
-                                        <div style="display: flex; gap: 10px; ">
-                                            <label class="form-control" style="border: none; display: inline-block;">Padder
-                                                Pressure Value</label>
-                                            <textarea class="form-control" style="height: 30px;"
-                                                formControlName="squeezer_padderPressureValue"></textarea>
-                                            <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
-                                        </div>
-            
-                                        <div style="display: flex; gap: 10px; ">
-                                            <label class="form-control" style="border: none; display: inline-block; 
-                                        width: 65vh;">Shape (Y/N)</label>
-                                            <mat-checkbox formControlName="squeezer_shape"></mat-checkbox>
-                                            <!-- <textarea class="form-control" style="height: 30px;"></textarea>
-                                    <textarea class="form-control" style="height: 30px;"></textarea> -->
-                                        </div>
-            
-                                        <div style="display: flex; gap: 10px; ">
-                                            <label class="form-control" style="border: none; display: inline-block;
-                                        width: 65vh;">Back Angle (Y/N)</label>
-                                            <mat-checkbox formControlName="squeezer_backAngle"></mat-checkbox>
-                                            <!-- <textarea class="form-control" style="height: 30px;"></textarea>
-                                        <textarea class="form-control" style="height: 30px;"></textarea> -->
-                                        </div>
-            
-                                    </div>
-                                </p-panel>
-            
-                                <p-panel header="Dryer">
-            
-                                    <div>
-            
-                                        <div style="display: flex; gap: 10px;">
-            
-                                            <label class="form-control" style="border: none; display: inline-block;">Dryer Date
-                                                time</label>
-                                            <input type="date" class="form-control" formControlName="dryer_dryerDatetime">
-                                            <!-- <input type="time" class="form-control"> -->
-            
-                                        </div>
-            
-                                        <div style="display: flex; gap: 10px; ">
-                                            <label class="form-control" style="border: none; display: inline-block;">Temperature
-                                                Value</label>
-                                            <textarea class="form-control" style="height: 30px;"
-                                                formControlName="dryer_temperatureValue"></textarea>
-                                            <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
-                                        </div>
-            
-                                        <div style="display: flex; gap: 10px; ">
-                                            <label class="form-control" style="border: none; display: inline-block;">RPM
-                                                Value</label>
-                                            <textarea class="form-control" style="height: 30px;"
-                                                formControlName="dryer_rpmValue"></textarea>
-                                            <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
-                                        </div>
-            
-                                        <div style="display: flex; gap: 10px; ">
-                                            <label class="form-control" style="border: none; display: inline-block;">Overfeed
-                                                Value</label>
-                                            <textarea class="form-control" style="height: 30px;"
-                                                formControlName="dryer_overfeedValue"></textarea>
-                                            <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
-                                        </div>
-            
-                                    </div>
-                                    <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                </p-panel>
-            
-            
-                                <p-panel header="Calender">
-                                    <div>
-            
-                                        <div style="display: flex; gap: 10px; height: 75px;">
-                                            <label class="form-control" style="border: none; display: inline-block;">RPM
-                                                Value</label>
-                                            <textarea class="form-control" style="height: 60px;"
-                                                formControlName="calendar_rpmValue"></textarea>
-                                            <!-- <textarea class="form-control" style="height: 60px;"></textarea> -->
-                                        </div>
-            
-                                        <div style="display: flex; gap: 10px; ">
-                                            <label class="form-control" style="border: none; display: inline-block;">Steam High
-                                                / Low</label>
-                                            <textarea class="form-control" style="height: 60px;"
-                                                formControlName="calendar_steamHighLow"></textarea>
-                                            <!-- <textarea class="form-control" style="height: 60px;"></textarea> -->
-                                        </div>
-            
-                                    </div>
-                                    <br>
-                                    <br>
-                                    <br>
-                                    <br>
-                                    <br>
-                                    <br>
-                                    <br>
-                                    <br>
-                                    <br>
-                                </p-panel>
-            
-            
-                            </div>
-            
-            
-                            <div style="display: flex; flex-wrap: wrap; justify-content: space-around; margin-top: 1%">
-                                <p-panel header="Slitting">
-                                    <div>
-            
-                                        <div style="display: flex; gap: 10px;">
-            
-                                            <label class="form-control" style="border: none; display: inline-block;">Slitting
-                                                Date time</label>
-                                            <input type="date" class="form-control" formControlName="slitting_slittingDatetime">
-                                            <!-- <input type="time" class="form-control"> -->
-            
-                                        </div>
-            
-                                        <div style="display: flex; gap: 10px; height: 70px;">
-                                            <label class="form-control" style="border: none; display: inline-block;">D Twister
-                                                (Auto / Manual)</label>
-                                            <textarea class="form-control" style="height: 60px;"
-                                                formControlName="slitting_DTwister"></textarea>
-                                            <!-- <textarea class="form-control" style="height: 60px;"></textarea> -->
-                                        </div>
-            
-                                        <div style="display: flex; gap: 10px; ">
-                                            <label class="form-control" style="border: none; display: inline-block;">Trolley
-                                                Plate (Auto/Manual)</label>
-                                            <textarea class="form-control" style="height: 60px;"
-                                                formControlName="slitting_trolleyPlate"></textarea>
-                                            <!-- <textarea class="form-control" style="height: 60px;"></textarea> -->
-                                        </div>
-            
-                                    </div>
-                                    <br>
-                                    <br>
-                                    <br>
-                                    <br>
-                                    
-            
-                                </p-panel>
-            
-            
-                                <p-panel header="Stenter">
-                                    <div>
-            
-                                        <div style="display: flex; gap: 10px;">
-            
-                                            <label class="form-control" style="border: none; display: inline-block;">Stenter
-                                                Date time</label>
-                                            <input type="date" class="form-control" formControlName="stenter_stenterDatetime">
-                                            <!-- <input type="time" class="form-control"> -->
-            
-                                        </div>
-            
-                                        <div style="display: flex; gap: 10px; height: 70px;">
-                                            <label class="form-control" style="border: none; display: inline-block;">Temperature
-                                                Value</label>
-                                            <textarea class="form-control" style="height: 30px;"
-                                                formControlName="stenter_temperatureValue"></textarea>
-                                            <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
-                                        </div>
-            
-                                        <div style="display: flex; gap: 10px; ">
-                                            <label class="form-control" style="border: none; display: inline-block;">Overfeed
-                                                Value</label>
-                                            <textarea class="form-control" style="height: 30px;"
-                                                formControlName="stenter_overfeedValue"></textarea>
-                                            <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
-                                        </div>
-            
-                                        <div style="display: flex; gap: 10px; ">
-                                            <label class="form-control" style="border: none; display: inline-block;">Dia Setting
-                                                Value</label>
-                                            <textarea class="form-control" style="height: 30px;"
-                                                formControlName="stenter_diasettingValue"></textarea>
-                                            <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
-                                        </div>
-            
-                                        <div style="display: flex; gap: 10px; ">
-                                            <label class="form-control" style="border: none; display: inline-block;">Softner /
-                                                Silicon Usage ?</label>
-                                            <textarea class="form-control" style="height: 30px;"
-                                                formControlName="stenter_softnerSiliconUsage"></textarea>
-                                            <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
-                                        </div>
-            
-                                    </div>
-                                </p-panel>
-            
-                                <p-panel header="Open Compact">
-                                    <div>
-            
-                                        <div style="display: flex; gap: 10px;">
-                                            <label class="form-control" style="border: none; display: inline-block;">Open
-                                                Compact Date time</label>
-                                            <input type="date" class="form-control" formControlName="compact_openCompactDatetime">
-                                            <!-- <input type="time" class="form-control"> -->
-                                        </div>
-            
-                                        <div style="display: flex; gap: 10px; ">
-                                            <label class="form-control" style="border: none; display: inline-block;">RPM
-                                                Value</label>
-                                            <textarea class="form-control" style="height: 30px;"
-                                                formControlName="compact_rpmValue"></textarea>
-                                            <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
-                                        </div>
-            
-                                        <div style="display: flex; gap: 10px; ">
-                                            <label class="form-control" style="border: none; display: inline-block;">Overfeed
-                                                Value</label>
-                                            <textarea class="form-control" style="height: 30px;"
-                                                formControlName="compact_overfeedValue"></textarea>
-                                            <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
-                                        </div>
-            
-                                        <div style="display: flex; gap: 10px; ">
-                                            <label class="form-control" style="border: none; display: inline-block;">Dia Setting
-                                                Value</label>
-                                            <textarea class="form-control" style="height: 30px;"
-                                                formControlName="compact_diasettingValue"></textarea>
-                                            <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
-                                        </div>
-            
-                                        <div style="display: flex; gap: 10px; ">
-                                            <label class="form-control" style="border: none; display: inline-block;">Steam High
-                                                / Low</label>
-                                            <textarea class="form-control" style="height: 30px;"
-                                                formControlName="compact_steamHighLow"></textarea>
-                                            <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
-                                        </div>
-            
-                                    </div>
-                                </p-panel>
-                            </div>
-            
-            
-                            <div style="display: flex; flex-wrap: wrap; justify-content: space-around; margin-top: 1%;">
-                                <div>
-                                    <p-panel header="Tubtex">
-                                        <div>
-            
-                                            <div style="display: flex; gap: 10px;">
-                                                <label class="form-control" style="border: none; display: inline-block;">Tubtex Date
-                                                    time</label>
-                                                <input type="date" class="form-control" formControlName="tubtex_tubtexDatetime">
-                                                <!-- <input type="time" class="form-control"> -->
-                                            </div>
-            
+
                                             <div style="display: flex; gap: 10px; ">
-                                                <label class="form-control" style="border: none; display: inline-block;">Yarn
-                                                    Lot</label>
-                                                <textarea class="form-control" style="height: 30px;"
-                                                    formControlName="tubtex_yarnLot"></textarea>
-                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
-                                            </div>
-            
-                                            <div style="display: flex; gap: 10px; ">
-                                                <label class="form-control" style="border: none; display: inline-block;">Overfeed
+                                                <label class="form-control"
+                                                    style="border: none; display: inline-block;">RPM
                                                     Value</label>
                                                 <textarea class="form-control" style="height: 30px;"
-                                                    formControlName="tubtex_overfeedValue"></textarea>
+                                                    formControlName="squeezer_rpmValue"></textarea>
                                                 <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
                                             </div>
-            
+
                                             <div style="display: flex; gap: 10px; ">
-                                                <label class="form-control" style="border: none; display: inline-block;">Steam High
-                                                    / Low ?</label>
+                                                <label class="form-control"
+                                                    style="border: none; display: inline-block;">Trolley
+                                                    Plate (Auto/Manual)</label>
                                                 <textarea class="form-control" style="height: 30px;"
-                                                    formControlName="tubtex_steamHighLow"></textarea>
+                                                    formControlName="squeezer_trolleyPlate"></textarea>
                                                 <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
                                             </div>
-            
+
                                             <div style="display: flex; gap: 10px; ">
-                                                <label class="form-control" style="border: none; display: inline-block;">Roller
-                                                    Knife Setting ?</label>
+                                                <label class="form-control"
+                                                    style="border: none; display: inline-block;">Overfeed
+                                                    Value</label>
                                                 <textarea class="form-control" style="height: 30px;"
-                                                    formControlName="tubtex_rollerKnifeSetting"></textarea>
+                                                    formControlName="squeezer_overfeedValue"></textarea>
                                                 <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
                                             </div>
-            
+
+                                            <div style="display: flex; gap: 10px; ">
+                                                <label class="form-control"
+                                                    style="border: none; display: inline-block;">Padder
+                                                    Pressure Value</label>
+                                                <textarea class="form-control" style="height: 30px;"
+                                                    formControlName="squeezer_padderPressureValue"></textarea>
+                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                            </div>
+
+                                            <div style="display: flex; gap: 10px; ">
+                                                <label class="form-control" style="border: none; display: inline-block; 
+                                        width: 65vh;">Shape (Y/N)</label>
+                                                <mat-checkbox formControlName="squeezer_shape"></mat-checkbox>
+                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea>
+                                    <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                            </div>
+
                                             <div style="display: flex; gap: 10px; ">
                                                 <label class="form-control" style="border: none; display: inline-block;
-                                            width: 45vh;">SideLoose/PileCheck (Y/N)</label>
-                                                <!-- <textarea class="form-control" style="height: 30px;" formControlName="tubtex_sideLoosePileCheck"></textarea> -->
-                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
-                                                <mat-checkbox formControlName="tubtex_sideLoosePileCheck"></mat-checkbox>
+                                        width: 65vh;">Back Angle (Y/N)</label>
+                                                <mat-checkbox formControlName="squeezer_backAngle"></mat-checkbox>
+                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea>
+                                        <textarea class="form-control" style="height: 30px;"></textarea> -->
                                             </div>
-            
-                                            <div style="display: flex; gap: 10px; ">
-                                                <label class="form-control" style="border: none; display: inline-block;
-                                            width: 45vh;">Dia / GSM Check (Y/N)</label>
-                                                <!-- <textarea class="form-control" style="height: 30px; display: none;"></textarea> -->
-                                                <!-- <textarea class="form-control" style="height: 30px; display: none;"></textarea> -->
-                                                <mat-checkbox formControlName="tubtex_diaGSMCheck"></mat-checkbox>
+
+                                        </div>
+                                    </p-panel>
+
+                                    <p-panel header="Dryer">
+
+                                        <div>
+
+                                            <div style="display: flex; gap: 10px;">
+
+                                                <label class="form-control"
+                                                    style="border: none; display: inline-block;">Dryer Date
+                                                    time</label>
+                                                <input type="date" class="form-control"
+                                                    formControlName="dryer_dryerDatetime">
+                                                <!-- <input type="time" class="form-control"> -->
+
                                             </div>
-            
+
                                             <div style="display: flex; gap: 10px; ">
-                                                <label class="form-control" style="border: none; display: inline-block;">Shade
-                                                    (Light Box/DataColor)</label>
+                                                <label class="form-control"
+                                                    style="border: none; display: inline-block;">Temperature
+                                                    Value</label>
                                                 <textarea class="form-control" style="height: 30px;"
-                                                    formControlName="tubtex_shadeLightBoxDataColor"></textarea>
+                                                    formControlName="dryer_temperatureValue"></textarea>
                                                 <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
                                             </div>
-            
+
+                                            <div style="display: flex; gap: 10px; ">
+                                                <label class="form-control"
+                                                    style="border: none; display: inline-block;">RPM
+                                                    Value</label>
+                                                <textarea class="form-control" style="height: 30px;"
+                                                    formControlName="dryer_rpmValue"></textarea>
+                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                            </div>
+
+                                            <div style="display: flex; gap: 10px; ">
+                                                <label class="form-control"
+                                                    style="border: none; display: inline-block;">Overfeed
+                                                    Value</label>
+                                                <textarea class="form-control" style="height: 30px;"
+                                                    formControlName="dryer_overfeedValue"></textarea>
+                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                            </div>
+
                                         </div>
                                         <br>
                                         <br>
@@ -821,136 +673,421 @@
                                         <br>
                                         <br>
                                     </p-panel>
-                                </div>
-            
-                                <div>
-                                    <p-panel header="Final Batch Report">
+
+
+                                    <p-panel header="Calender">
                                         <div>
-            
-                                            <div style="display: flex; gap: 10px; ">
-                                                <label class="form-control" style="border: none; display: inline-block;">Shrinkage /
-                                                    Twisting Report</label>
-                                                <textarea class="form-control" style="height: 30px;"
-                                                    formControlName="finalbatch_shrinkageTwistingReport"></textarea>
-                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+
+                                            <div style="display: flex; gap: 10px; height: 75px;">
+                                                <label class="form-control"
+                                                    style="border: none; display: inline-block;">RPM
+                                                    Value</label>
+                                                <textarea class="form-control" style="height: 60px;"
+                                                    formControlName="calendar_rpmValue"></textarea>
+                                                <!-- <textarea class="form-control" style="height: 60px;"></textarea> -->
                                             </div>
-            
+
                                             <div style="display: flex; gap: 10px; ">
-                                                <label class="form-control" style="border: none; display: inline-block;">GSM
-                                                    Report</label>
-                                                <textarea class="form-control" style="height: 30px;"
-                                                    formControlName="finalbatch_GSMReport"></textarea>
-                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                <label class="form-control"
+                                                    style="border: none; display: inline-block;">Steam High
+                                                    / Low</label>
+                                                <textarea class="form-control" style="height: 60px;"
+                                                    formControlName="calendar_steamHighLow"></textarea>
+                                                <!-- <textarea class="form-control" style="height: 60px;"></textarea> -->
                                             </div>
-            
-                                            <div style="display: flex; gap: 10px; ">
-                                                <label class="form-control" style="border: none; display: inline-block;">Roll-Roll
-                                                    Shade Check</label>
-                                                <textarea class="form-control" style="height: 30px;"
-                                                    formControlName="finalbatch_rollRollShadeCheck"></textarea>
-                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
-                                            </div>
-            
-                                            <div style="display: flex; gap: 10px; ">
-                                                <label class="form-control" style="border: none; display: inline-block;">Rubbing
-                                                    Report (Wet / Dry)</label>
-                                                <textarea class="form-control" style="height: 30px;"
-                                                    formControlName="finalbatch_rubbingReportWetDry"></textarea>
-                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
-                                            </div>
-            
-                                            <div style="display: flex; gap: 10px; ">
-                                                <label class="form-control" style="border: none; display: inline-block;">PH Report
-                                                    (Inhouse Check)</label>
-                                                <textarea class="form-control" style="height: 30px;"
-                                                    formControlName="finalbatch_phReportInhouseCheck"></textarea>
-                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
-                                            </div>
-            
-                                            <div style="display: flex; gap: 10px; ">
-                                                <label class="form-control" style="border: none; display: inline-block;">Phenolic
-                                                    yellowing Test ?</label>
-                                                <textarea class="form-control" style="height: 30px;"
-                                                    formControlName="finalbatch_phenolicYellowingTest"></textarea>
-                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
-                                            </div>
-            
-                                            <div style="display: flex; gap: 10px; ">
-                                                <label class="form-control" style="border: none; display: inline-block;">QC
-                                                    Inspection Report</label>
-                                                <textarea class="form-control" style="height: 30px;"
-                                                    formControlName="finalbatch_qcInspectionReport"></textarea>
-                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
-                                            </div>
-            
-                                            <div style="display: flex; gap: 10px; ">
-                                                <label class="form-control" style="border: none; display: inline-block;">Batch Rolls
-                                                    / Weight</label>
-                                                <textarea class="form-control" style="height: 30px;"
-                                                    formControlName="finalbatch_batchRollsWeight"></textarea>
-                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
-                                            </div>
-            
-                                            <div style="display: flex; gap: 10px; ">
-                                                <label class="form-control" style="border: none; display: inline-block;">Finish
-                                                    Rolls / Weight</label>
-                                                <textarea class="form-control" style="height: 30px;"
-                                                    formControlName="finalbatch_finishRollsWeight"></textarea>
-                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
-                                            </div>
-            
-                                            <div style="display: flex; gap: 10px; ">
-                                                <label class="form-control" style="border: none; display: inline-block;">Process
-                                                    Loss</label>
-                                                <textarea class="form-control" style="height: 30px;"
-                                                    formControlName="finalbatch_processLoss"></textarea>
-                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
-                                            </div>
-            
+
+                                        </div>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <br>
+                                    </p-panel>
+
+
+                                </div>
+
+
+                                <div
+                                    style="display: flex; flex-wrap: wrap; justify-content: space-around; margin-top: 1%">
+                                    <p-panel header="Slitting">
+                                        <div>
+
                                             <div style="display: flex; gap: 10px;">
-                                                <label class="form-control" style="border: none; display: inline-block;">Fabric
-                                                    Delivery Date time</label>
+
+                                                <label class="form-control"
+                                                    style="border: none; display: inline-block;">Slitting
+                                                    Date time</label>
                                                 <input type="date" class="form-control"
-                                                    formControlName="finalbatch_fabricDeliveryDatetime">
+                                                    formControlName="slitting_slittingDatetime">
+                                                <!-- <input type="time" class="form-control"> -->
+
+                                            </div>
+
+                                            <div style="display: flex; gap: 10px; height: 70px;">
+                                                <label class="form-control"
+                                                    style="border: none; display: inline-block;">D Twister
+                                                    (Auto / Manual)</label>
+                                                <textarea class="form-control" style="height: 60px;"
+                                                    formControlName="slitting_DTwister"></textarea>
+                                                <!-- <textarea class="form-control" style="height: 60px;"></textarea> -->
+                                            </div>
+
+                                            <div style="display: flex; gap: 10px; ">
+                                                <label class="form-control"
+                                                    style="border: none; display: inline-block;">Trolley
+                                                    Plate (Auto/Manual)</label>
+                                                <textarea class="form-control" style="height: 60px;"
+                                                    formControlName="slitting_trolleyPlate"></textarea>
+                                                <!-- <textarea class="form-control" style="height: 60px;"></textarea> -->
+                                            </div>
+
+                                        </div>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <br>
+
+
+                                    </p-panel>
+
+
+                                    <p-panel header="Stenter">
+                                        <div>
+
+                                            <div style="display: flex; gap: 10px;">
+
+                                                <label class="form-control"
+                                                    style="border: none; display: inline-block;">Stenter
+                                                    Date time</label>
+                                                <input type="date" class="form-control"
+                                                    formControlName="stenter_stenterDatetime">
+                                                <!-- <input type="time" class="form-control"> -->
+
+                                            </div>
+
+                                            <div style="display: flex; gap: 10px; height: 70px;">
+                                                <label class="form-control"
+                                                    style="border: none; display: inline-block;">Temperature
+                                                    Value</label>
+                                                <textarea class="form-control" style="height: 30px;"
+                                                    formControlName="stenter_temperatureValue"></textarea>
+                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                            </div>
+
+                                            <div style="display: flex; gap: 10px; ">
+                                                <label class="form-control"
+                                                    style="border: none; display: inline-block;">Overfeed
+                                                    Value</label>
+                                                <textarea class="form-control" style="height: 30px;"
+                                                    formControlName="stenter_overfeedValue"></textarea>
+                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                            </div>
+
+                                            <div style="display: flex; gap: 10px; ">
+                                                <label class="form-control"
+                                                    style="border: none; display: inline-block;">Dia Setting
+                                                    Value</label>
+                                                <textarea class="form-control" style="height: 30px;"
+                                                    formControlName="stenter_diasettingValue"></textarea>
+                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                            </div>
+
+                                            <div style="display: flex; gap: 10px; ">
+                                                <label class="form-control"
+                                                    style="border: none; display: inline-block;">Softner /
+                                                    Silicon Usage ?</label>
+                                                <textarea class="form-control" style="height: 30px;"
+                                                    formControlName="stenter_softnerSiliconUsage"></textarea>
+                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                            </div>
+
+                                        </div>
+                                    </p-panel>
+
+                                    <p-panel header="Open Compact">
+                                        <div>
+
+                                            <div style="display: flex; gap: 10px;">
+                                                <label class="form-control"
+                                                    style="border: none; display: inline-block;">Open
+                                                    Compact Date time</label>
+                                                <input type="date" class="form-control"
+                                                    formControlName="compact_openCompactDatetime">
                                                 <!-- <input type="time" class="form-control"> -->
                                             </div>
-            
+
+                                            <div style="display: flex; gap: 10px; ">
+                                                <label class="form-control"
+                                                    style="border: none; display: inline-block;">RPM
+                                                    Value</label>
+                                                <textarea class="form-control" style="height: 30px;"
+                                                    formControlName="compact_rpmValue"></textarea>
+                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                            </div>
+
+                                            <div style="display: flex; gap: 10px; ">
+                                                <label class="form-control"
+                                                    style="border: none; display: inline-block;">Overfeed
+                                                    Value</label>
+                                                <textarea class="form-control" style="height: 30px;"
+                                                    formControlName="compact_overfeedValue"></textarea>
+                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                            </div>
+
+                                            <div style="display: flex; gap: 10px; ">
+                                                <label class="form-control"
+                                                    style="border: none; display: inline-block;">Dia Setting
+                                                    Value</label>
+                                                <textarea class="form-control" style="height: 30px;"
+                                                    formControlName="compact_diasettingValue"></textarea>
+                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                            </div>
+
+                                            <div style="display: flex; gap: 10px; ">
+                                                <label class="form-control"
+                                                    style="border: none; display: inline-block;">Steam High
+                                                    / Low</label>
+                                                <textarea class="form-control" style="height: 30px;"
+                                                    formControlName="compact_steamHighLow"></textarea>
+                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                            </div>
+
                                         </div>
                                     </p-panel>
                                 </div>
-            
-                                <div>
-                                    <p-panel header=" Batch Remarks">
-                                        <div>
-                                            <textarea class="form-control" style="height: 40vh; width: 60vh;"
-                                                formControlName="batchRemarks"></textarea>
-                                        </div>
-                                    </p-panel>
+
+
+                                <div
+                                    style="display: flex; flex-wrap: wrap; justify-content: space-around; margin-top: 1%;">
+                                    <div>
+                                        <p-panel header="Tubtex">
+                                            <div>
+
+                                                <div style="display: flex; gap: 10px;">
+                                                    <label class="form-control"
+                                                        style="border: none; display: inline-block;">Tubtex Date
+                                                        time</label>
+                                                    <input type="date" class="form-control"
+                                                        formControlName="tubtex_tubtexDatetime">
+                                                    <!-- <input type="time" class="form-control"> -->
+                                                </div>
+
+                                                <div style="display: flex; gap: 10px; ">
+                                                    <label class="form-control"
+                                                        style="border: none; display: inline-block;">Yarn
+                                                        Lot</label>
+                                                    <textarea class="form-control" style="height: 30px;"
+                                                        formControlName="tubtex_yarnLot"></textarea>
+                                                    <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                </div>
+
+                                                <div style="display: flex; gap: 10px; ">
+                                                    <label class="form-control"
+                                                        style="border: none; display: inline-block;">Overfeed
+                                                        Value</label>
+                                                    <textarea class="form-control" style="height: 30px;"
+                                                        formControlName="tubtex_overfeedValue"></textarea>
+                                                    <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                </div>
+
+                                                <div style="display: flex; gap: 10px; ">
+                                                    <label class="form-control"
+                                                        style="border: none; display: inline-block;">Steam High
+                                                        / Low ?</label>
+                                                    <textarea class="form-control" style="height: 30px;"
+                                                        formControlName="tubtex_steamHighLow"></textarea>
+                                                    <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                </div>
+
+                                                <div style="display: flex; gap: 10px; ">
+                                                    <label class="form-control"
+                                                        style="border: none; display: inline-block;">Roller
+                                                        Knife Setting ?</label>
+                                                    <textarea class="form-control" style="height: 30px;"
+                                                        formControlName="tubtex_rollerKnifeSetting"></textarea>
+                                                    <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                </div>
+
+                                                <div style="display: flex; gap: 10px; ">
+                                                    <label class="form-control" style="border: none; display: inline-block;
+                                            width: 45vh;">SideLoose/PileCheck (Y/N)</label>
+                                                    <!-- <textarea class="form-control" style="height: 30px;" formControlName="tubtex_sideLoosePileCheck"></textarea> -->
+                                                    <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                    <mat-checkbox
+                                                        formControlName="tubtex_sideLoosePileCheck"></mat-checkbox>
+                                                </div>
+
+                                                <div style="display: flex; gap: 10px; ">
+                                                    <label class="form-control" style="border: none; display: inline-block;
+                                            width: 45vh;">Dia / GSM Check (Y/N)</label>
+                                                    <!-- <textarea class="form-control" style="height: 30px; display: none;"></textarea> -->
+                                                    <!-- <textarea class="form-control" style="height: 30px; display: none;"></textarea> -->
+                                                    <mat-checkbox formControlName="tubtex_diaGSMCheck"></mat-checkbox>
+                                                </div>
+
+                                                <div style="display: flex; gap: 10px; ">
+                                                    <label class="form-control"
+                                                        style="border: none; display: inline-block;">Shade
+                                                        (Light Box/DataColor)</label>
+                                                    <textarea class="form-control" style="height: 30px;"
+                                                        formControlName="tubtex_shadeLightBoxDataColor"></textarea>
+                                                    <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                </div>
+
+                                            </div>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+                                        </p-panel>
+                                    </div>
+
+                                    <div>
+                                        <p-panel header="Final Batch Report">
+                                            <div>
+
+                                                <div style="display: flex; gap: 10px; ">
+                                                    <label class="form-control"
+                                                        style="border: none; display: inline-block;">Shrinkage /
+                                                        Twisting Report</label>
+                                                    <textarea class="form-control" style="height: 30px;"
+                                                        formControlName="finalbatch_shrinkageTwistingReport"></textarea>
+                                                    <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                </div>
+
+                                                <div style="display: flex; gap: 10px; ">
+                                                    <label class="form-control"
+                                                        style="border: none; display: inline-block;">GSM
+                                                        Report</label>
+                                                    <textarea class="form-control" style="height: 30px;"
+                                                        formControlName="finalbatch_GSMReport"></textarea>
+                                                    <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                </div>
+
+                                                <div style="display: flex; gap: 10px; ">
+                                                    <label class="form-control"
+                                                        style="border: none; display: inline-block;">Roll-Roll
+                                                        Shade Check</label>
+                                                    <textarea class="form-control" style="height: 30px;"
+                                                        formControlName="finalbatch_rollRollShadeCheck"></textarea>
+                                                    <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                </div>
+
+                                                <div style="display: flex; gap: 10px; ">
+                                                    <label class="form-control"
+                                                        style="border: none; display: inline-block;">Rubbing
+                                                        Report (Wet / Dry)</label>
+                                                    <textarea class="form-control" style="height: 30px;"
+                                                        formControlName="finalbatch_rubbingReportWetDry"></textarea>
+                                                    <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                </div>
+
+                                                <div style="display: flex; gap: 10px; ">
+                                                    <label class="form-control"
+                                                        style="border: none; display: inline-block;">PH Report
+                                                        (Inhouse Check)</label>
+                                                    <textarea class="form-control" style="height: 30px;"
+                                                        formControlName="finalbatch_phReportInhouseCheck"></textarea>
+                                                    <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                </div>
+
+                                                <div style="display: flex; gap: 10px; ">
+                                                    <label class="form-control"
+                                                        style="border: none; display: inline-block;">Phenolic
+                                                        yellowing Test ?</label>
+                                                    <textarea class="form-control" style="height: 30px;"
+                                                        formControlName="finalbatch_phenolicYellowingTest"></textarea>
+                                                    <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                </div>
+
+                                                <div style="display: flex; gap: 10px; ">
+                                                    <label class="form-control"
+                                                        style="border: none; display: inline-block;">QC
+                                                        Inspection Report</label>
+                                                    <textarea class="form-control" style="height: 30px;"
+                                                        formControlName="finalbatch_qcInspectionReport"></textarea>
+                                                    <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                </div>
+
+                                                <div style="display: flex; gap: 10px; ">
+                                                    <label class="form-control"
+                                                        style="border: none; display: inline-block;">Batch Rolls
+                                                        / Weight</label>
+                                                    <textarea class="form-control" style="height: 30px;"
+                                                        formControlName="finalbatch_batchRollsWeight"></textarea>
+                                                    <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                </div>
+
+                                                <div style="display: flex; gap: 10px; ">
+                                                    <label class="form-control"
+                                                        style="border: none; display: inline-block;">Finish
+                                                        Rolls / Weight</label>
+                                                    <textarea class="form-control" style="height: 30px;"
+                                                        formControlName="finalbatch_finishRollsWeight"></textarea>
+                                                    <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                </div>
+
+                                                <div style="display: flex; gap: 10px; ">
+                                                    <label class="form-control"
+                                                        style="border: none; display: inline-block;">Process
+                                                        Loss</label>
+                                                    <textarea class="form-control" style="height: 30px;"
+                                                        formControlName="finalbatch_processLoss"></textarea>
+                                                    <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                </div>
+
+                                                <div style="display: flex; gap: 10px;">
+                                                    <label class="form-control"
+                                                        style="border: none; display: inline-block;">Fabric
+                                                        Delivery Date time</label>
+                                                    <input type="date" class="form-control"
+                                                        formControlName="finalbatch_fabricDeliveryDatetime">
+                                                    <!-- <input type="time" class="form-control"> -->
+                                                </div>
+
+                                            </div>
+                                        </p-panel>
+                                    </div>
+
+                                    <div>
+                                        <p-panel header=" Batch Remarks">
+                                            <div>
+                                                <textarea class="form-control" style="height: 40vh; width: 60vh;"
+                                                    formControlName="batchRemarks"></textarea>
+                                            </div>
+                                        </p-panel>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </p-panel>
-            
-                </div>
-            
-                </div>
-    
-    
-    
-    
-    
-    
-                </div>
-    
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <div>
-                        <button class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </p-panel>
+
                     </div>
-                    <span style="flex: 1 1 auto;"></span>
+
                 </div>
-    
+
+
+
+
+
+
             </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <div>
+                    <button class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+                <span style="flex: 1 1 auto;"></span>
+            </div>
+
         </div>
     </div>
-    
+</div>

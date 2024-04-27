@@ -124,6 +124,9 @@ export class ApiService {
     return this.http.get(this.getUrl() + `/filtersapi/colors-sizes_data?buyer=${buyer}&orderNo=${order}&style=${style}&color=${color}`, this.getHeaders())
   }
 
+  getcodeData(factory:any , buyer: any, order: any, style: any, color: any): Observable<any> {
+    return this.http.get(this.getUrl() + `/dyeapi/DyecodeFilter?dyeFactory=${factory}&buyer=${buyer}&orderNo=${order}&style=${style}&color=${color}`, this.getHeaders())
+  }
 
   postsinglewodetails(data: any, id: any): Observable<any> {
     return this.http.put(this.getUrl() + `/workorderapi/workorder/${id}`, data, this.getHeaders())
