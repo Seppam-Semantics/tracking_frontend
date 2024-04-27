@@ -159,12 +159,6 @@ export class DyeBatchReportComponent implements OnInit {
       this.dyebatch_alldata = res.workorders
     })
 
-
-    this.api.DyeFactoryfilter().subscribe((res) => {
-      this.Factory = res.workorders
-    })
-
-
     this.getbuyers()
   }
 
@@ -280,7 +274,6 @@ export class DyeBatchReportComponent implements OnInit {
   getcode(factorys:any,buyer: any, orderNo: any, style: any, color: any) {
     this.api.getcodeData(factorys,buyer, orderNo, style, color).subscribe((res) => {
       this.codelist = res.DyeBatchCode;
-      console.log(this.codelist)
     })
   }
 
@@ -316,14 +309,13 @@ export class DyeBatchReportComponent implements OnInit {
     this.loadAllDyeData(this.FactoryName,this.buyerName ,this.ordernumbers, this.styleslist);
   }
   wobycolor() {
-    this.getsize(this.buyerName, this.ordernumbers, this.styleslist, this.colorslist)
+    this.getcode(this.FactoryName,this.buyerName, this.ordernumbers, this.styleslist, this.colorslist)
     this.loadworkorder(this.buyerName, this.ordernumbers, this.styleslist, this.colorslist);
     this.loadAllDyeData(this.FactoryName,this.buyerName , this.ordernumbers, this.styleslist, this.colorslist);
   }
   wobycode(){
     this.getcode(this.FactoryName,this.buyerName, this.ordernumbers, this.styleslist, this.colorslist)
     this.loadAllDyeData(this.FactoryName,this.buyerName, this.ordernumbers, this.styleslist, this.colorslist,this.DyeCodeName);
-    console.log(this.DyeCodeName)
   }
   getwoId(size: any, index: number){
     this.api.getwodetails(this.buyerName, this.ordernumbers, this.styleslist, this.colorslist, size).subscribe((res) => {
@@ -555,7 +547,7 @@ this.dye_Entery.patchValue({
     this.router.navigate(['/main/DyeBatchEntry'])
   }
   update(){
-    console.log(this.dye_Entery.value)
+
     this.api.post_dyereport_entry(this.dye_Entery.value).subscribe((res)=>{
       alert(res.message)
       window.location.reload()

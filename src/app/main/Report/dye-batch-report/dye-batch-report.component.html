@@ -1,84 +1,37 @@
 <mat-toolbar style="display: flex; justify-content: center; height: auto;"><span>Dye Batch
-        Report</span></mat-toolbar>
+    Report</span></mat-toolbar>
 
 <mat-toolbar style="height: fit-content; padding: 10px;">
 
 
-    <div style="display: flex; justify-content: center; gap: 0.5%; width: 100%;">
+<div style="display: flex; justify-content: center; gap: 0.5%; width: 100%;">
+
+    <p-dropdown [options]="factoryname" [(ngModel)]="FactoryName" placeholder="Factory" optionLabel="dyeinFty"
+        optionValue="dyeinFty" (onChange)="woByFactory()"></p-dropdown>
+
+    <p-dropdown [options]="this.buyers" [(ngModel)]="buyerName" placeholder="Buyer" optionLabel="buyer"
+        optionValue="buyer" (onChange)="woByBuyer()"></p-dropdown>
+
+    <p-dropdown [options]="this.order" [(ngModel)]="ordernumbers" placeholder="OrderNo" optionLabel="orderNO"
+        optionValue="orderNO" (onChange)="wobyOrder()"></p-dropdown>
+
+    <p-dropdown [options]="this.stylelist" [(ngModel)]="styleslist" placeholder="Style" optionLabel="style"
+        optionValue="style" (onChange)="wobystyle()"></p-dropdown>
+
+    <p-dropdown [options]="this.colorlist" [(ngModel)]="colorslist" placeholder="Color" optionLabel="color"
+        optionValue="color" (onChange)="wobycode()"></p-dropdown>
+
+    <p-dropdown [options]="this.codelist" [(ngModel)]="DyeCodeName" placeholder="BatchCode" optionLabel="batchNo"
+        optionValue="batchNo" (onChange)="wobycode()"></p-dropdown>
+
+</div>
 
 
-        <!-- <mat-form-field appearance="outline" (click)="clearAll()">
-                    <mat-label>Factory</mat-label>
-                    <mat-select [(ngModel)]="FactoryName" (selectionChange)="DyByBuyer()">
-                      <mat-option value=""> </mat-option>
-                      <mat-option *ngFor="let Factory of this.Factory" value="{{Factory.dyeFactory}}">{{Factory.dyeFactory}}</mat-option>
-                    </mat-select>
-                  </mat-form-field> -->
-
-        <p-dropdown [options]="this.Factory" [(ngModel)]="FactoryName" placeholder="Factory" optionLabel="dyeinFty"
-            optionValue="dyeinFty" (onChange)="woByFactory()"></p-dropdown>
-
-        <!-- <mat-form-field appearance="outline">
-                    <mat-label>Buyer</mat-label>
-                    <mat-select [(ngModel)]="DyeBuyerName" (selectionChange)="DyByOrderNo()">
-                      <mat-option value=""> </mat-option>
-                      <mat-option *ngFor="let buyer of this.buyer" value="{{buyer.buyer}}">{{buyer.buyer}}</mat-option>
-                    </mat-select>
-                  </mat-form-field> -->
-
-        <p-dropdown [options]="this.buyers" [(ngModel)]="buyerName" placeholder="Buyer" optionLabel="buyer"
-            optionValue="buyer" (onChange)="woByBuyer()"></p-dropdown>
-
-        <!-- <mat-form-field appearance="outline">
-                    <mat-label>Order</mat-label>
-                    <mat-select [(ngModel)]="DyeOrderName" (selectionChange)="DyByStyle()">
-                        <mat-option value=""> </mat-option>
-                        <mat-option *ngFor="let orderNo of this.orderNo" value="{{orderNo.orderNo}}">{{orderNo.orderNo}}</mat-option>
-                    </mat-select>
-                </mat-form-field> -->
-
-        <p-dropdown [options]="this.order" [(ngModel)]="ordernumbers" placeholder="OrderNo" optionLabel="orderNO"
-            optionValue="orderNO" (onChange)="wobyOrder()"></p-dropdown>
-
-        <!-- <mat-form-field appearance="outline">
-                    <mat-label>Style</mat-label>
-                    <mat-select [(ngModel)]="DyeStyleName" (selectionChange)="DyByColor()">
-                        <mat-option value=""> </mat-option>
-                        <mat-option *ngFor="let style of this.Dyestyle" value="{{style.style}}">{{style.style}}</mat-option>
-                    </mat-select>
-                </mat-form-field> -->
-
-        <p-dropdown [options]="this.stylelist" [(ngModel)]="styleslist" placeholder="Style" optionLabel="style"
-            optionValue="style" (onChange)="wobystyle()"></p-dropdown>
-
-        <!-- <mat-form-field appearance="outline">
-                    <mat-label>color</mat-label>
-                    <mat-select [(ngModel)]="DyeColorName" (selectionChange)="DyByCode()">
-                        <mat-option value=""> </mat-option>
-                        <mat-option *ngFor="let color of this.DyeColor" value="{{color.color}}">{{color.color}}</mat-option>
-                    </mat-select>
-                </mat-form-field> -->
-
-        <p-dropdown [options]="this.colorlist" [(ngModel)]="colorslist" placeholder="Color" optionLabel="color"
-            optionValue="color" (onChange)="wobycode()"></p-dropdown>
-
-        <!-- <mat-form-field appearance="outline">
-                    <mat-label>BatchCode</mat-label>
-                    <mat-select [(ngModel)]="DyeCodeName">
-                        <mat-option value=""> </mat-option>
-                        <mat-option *ngFor="let code of this.DyeCode" value="{{code.code}}">{{code.code}}</mat-option>
-                    </mat-select>
-                </mat-form-field> -->
-
-        <p-dropdown [options]="this.codelist" [(ngModel)]="DyeCodeName" placeholder="Code" optionLabel="batchNo"
-            optionValue="batchNo" (onChange)="wobycode()"></p-dropdown>
-
-    </div>
-
-
-    <span style="flex: 1 1 auto;"></span>
-    <button mat-button color='primary' style="margin-right: 12px;" (click)="DyeBatchButton()">New</button>
+<span style="flex: 1 1 auto;"></span>
+<button mat-button color='primary' style="margin-right: 12px;" (click)="DyeBatchButton()">New</button>
 </mat-toolbar>
+
+
 
 
 
@@ -130,39 +83,18 @@
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
 
-            <!-- Modal Header -->
+ 
             <div class="modal-header">
-                <!-- <h4 class="modal-title" style="display: flex; margin-left: 45%;">Update</h4> -->
+                
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 
-            <!-- Modal body -->
+
             <div class="modal-body">
 
                 <div [formGroup]="dye_Entery">
 
                     <mat-toolbar>
-                        <!-- <div style="display: flex;">
-                            Dye Batch Entry
-                        </div>
-                        <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; width: 90%">
-                            <div>
-                                <mat-form-field appearance="outline">
-                                    <mat-select formControlName="dyeFactory">
-                                        <mat-option *ngFor="let data of this.factoryname;"
-                                            [value]="data.dyeinFty">{{data.dyeinFty}}</mat-option>
-                                    </mat-select>
-                                    <mat-label>Dye Factory</mat-label>
-                                </mat-form-field>
-                            </div>
-                
-                            <div>
-                                <mat-form-field appearance="outline">
-                                    <input matInput type="text" formControlName="batchNo">
-                                    <mat-label>Batch No</mat-label>
-                                </mat-form-field>
-                            </div>
-                        </div> -->
                         <div style="display: flex;">
                             Dye Batch Entry
                         </div>
@@ -193,66 +125,20 @@
                                 <div style="display: flex; flex-direction: column;">
                                     <div style="display: flex;">
                                         <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 2vh;">
-                                            <!-- <mat-form-field appearance="outline" (click)="clearAll()" style="margin-top: 4vh; ">
-                                                    <mat-label>Buyer</mat-label>
-                                                    <mat-select [(ngModel)]="buyerName" (selectionChange)="woByBuyer()"
-                                                        formControlName="buyer">
-                                                        <mat-option value=""> </mat-option>
-                                                        <mat-option *ngFor="let buyer of this.buyers"
-                                                            value="{{buyer.buyer}}">{{buyer.buyer}}</mat-option>
-                                                    </mat-select>
-                                                </mat-form-field> -->
-
+                                        
                                             <p-dropdown formControlName="buyer" placeholder="Buyer"
                                                 [(ngModel)]="buyerName" (selectionChange)="woByBuyer()"
                                                 optionLabel="buyer" optionValue="buyer" [options]="buyers"
                                                 readonly="true"></p-dropdown>
-
-
-                                            <!-- <mat-form-field appearance="outline" style="margin-top: 4vh; ">
-                                                    <mat-label>Order</mat-label>
-                                                    <mat-select [(ngModel)]="ordernumbers" (selectionChange)="wobyOrder()"
-                                                        formControlName="orderNo">
-                                                        <mat-option value=""> </mat-option>
-                                                        <mat-option *ngFor="let order of this.order"
-                                                            value="{{order.orderNO}}">{{order.orderNO}}</mat-option>
-                                                    </mat-select>
-                                                </mat-form-field> -->
-
-
 
                                             <p-dropdown formControlName="orderNo" placeholder="Order"
                                                 [(ngModel)]="ordernumbers" (onChange)="wobyOrder()"
                                                 optionLabel="orderNO" optionValue="orderNO" [options]="order"
                                                 readonly="true"></p-dropdown>
 
-
-                                            <!-- <mat-form-field appearance="outline" style="margin-top: 4vh; ">
-                                                    <mat-label>Style</mat-label>
-                                                    <mat-select [(ngModel)]="styleslist" (selectionChange)="wobystyle()"
-                                                        formControlName="style">
-                                                        <mat-option value=""> </mat-option>
-                                                        <mat-option *ngFor="let style of this.stylelist"
-                                                            value="{{style.style}}">{{style.style}}</mat-option>
-                                                    </mat-select>
-                                                </mat-form-field> -->
-
-
                                             <p-dropdown formControlName="style" placeholder="Style"
                                                 [(ngModel)]="styleslist" (onChange)="wobystyle()" optionLabel="style"
                                                 optionValue="style" [options]="stylelist" readonly="true"></p-dropdown>
-
-
-
-                                            <!-- <mat-form-field appearance="outline" style="margin-top: 4vh; ">
-                                                    <mat-label>color</mat-label>
-                                                    <mat-select [(ngModel)]="colorslist" (selectionChange)="wobycolor()"
-                                                        formControlName="color">
-                                                        <mat-option value=""> </mat-option>
-                                                        <mat-option *ngFor="let color of this.colorlist"
-                                                            value="{{color.color}}">{{color.color}}</mat-option>
-                                                    </mat-select>
-                                                </mat-form-field> -->
 
                                             <p-dropdown formControlName="color" placeholder="color"
                                                 [(ngModel)]="colorslist" (onChange)="wobycolor()" optionLabel="color"
@@ -265,10 +151,6 @@
                                     <div>
                                         <div
                                             style="display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 3vh;">
-                                            <!-- <mat-form-field appearance="outline" style="margin-top: 4vh; ;">
-                                                    <mat-label>Fabric Type</mat-label>
-                                                    <input type="text" formControlName="fabricType" matInput>
-                                                </mat-form-field> -->
                                             <input pInputText type="text" class="p-inputtext-sm"
                                                 placeholder="Fabric Type" formControlName="fabricType" />
                                             <div style="display: flex; gap: 20px; flex-wrap: wrap;  margin-left: 1vh;">
@@ -410,7 +292,6 @@
                                                         Rolls/SL Check</label>
                                                     <textarea class="form-control" style="height: 50px;"
                                                         formControlName="batch_batchRollsSLCheck"></textarea>
-                                                    <!-- <textarea class="form-control" style="height: 50px;" ></textarea> -->
                                                 </div>
 
                                             </div>
@@ -459,7 +340,7 @@
                                                         Time</label>
                                                     <textarea class="form-control" style="height: 30px;"
                                                         formControlName="dyeing_totalRunTime"></textarea>
-                                                    <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                   
                                                 </div>
 
                                                 <div style="display: flex; gap: 10px; ">
@@ -469,7 +350,7 @@
                                                         Chart (Picture)</label>
                                                     <textarea class="form-control" style="height: 30px;"
                                                         formControlName="dyeing_receipeChart"></textarea>
-                                                    <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                   
                                                 </div>
 
                                             </div>
@@ -494,7 +375,7 @@
                                                         Dip/Original/QTX</label>
                                                     <textarea class="form-control" style="height: 50px;"
                                                         formControlName="shade_lapDipOriginalQTX"></textarea>
-                                                    <!-- <textarea class="form-control" style="height: 50px;"></textarea> -->
+                                                   
                                                 </div>
 
                                                 <div style="display: flex; gap: 10px; height: 60px;">
@@ -503,7 +384,7 @@
                                                         Batch Check</label>
                                                     <textarea class="form-control" style="height: 50px;"
                                                         formControlName="shade_masterBatchCheck"></textarea>
-                                                    <!-- <textarea class="form-control" style="height: 50px;"></textarea> -->
+                                                    
                                                 </div>
 
 
@@ -513,7 +394,7 @@
                                                         Shade Check</label>
                                                     <textarea class="form-control" style="height: 50px;"
                                                         formControlName="shade_dyeUnloadShadeCheck"></textarea>
-                                                    <!-- <textarea class="form-control" style="height: 50px;"></textarea> -->
+                                                   
                                                 </div>
 
                                                 <div style="display: flex; gap: 10px;">
@@ -522,7 +403,7 @@
                                                         Submission Date</label>
                                                     <input type="date" class="form-control"
                                                         formControlName="shade_shadeSubmissionDate">
-                                                    <!-- <input type="time" class="form-control"> -->
+                                                    
                                                 </div>
 
                                                 <div style="display: flex; gap: 10px;">
@@ -531,7 +412,6 @@
                                                         Approval Date</label>
                                                     <input type="date" class="form-control"
                                                         formControlName="shade_shadeApprovalDate">
-                                                    <!-- <input type="time" class="form-control"> -->
                                                 </div>
 
                                                 <div style="display: flex; gap: 10px; height: 60px;">
@@ -540,7 +420,6 @@
                                                         Not Ok Reason</label>
                                                     <textarea class="form-control" style="height: 50px;"
                                                         formControlName="shade_firstBatchNotOkReason"></textarea>
-                                                    <!-- <textarea class="form-control" style="height: 50px;"></textarea> -->
                                                 </div>
 
                                             </div>
@@ -563,7 +442,6 @@
                                                     data time</label>
                                                 <input type="date" class="form-control"
                                                     formControlName="squeezer_squeezerDateTime">
-                                                <!-- <input type="time" class="form-control"> -->
 
                                             </div>
 
@@ -573,7 +451,6 @@
                                                     Value</label>
                                                 <textarea class="form-control" style="height: 30px;"
                                                     formControlName="squeezer_rpmValue"></textarea>
-                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
                                             </div>
 
                                             <div style="display: flex; gap: 10px; ">
@@ -582,7 +459,6 @@
                                                     Plate (Auto/Manual)</label>
                                                 <textarea class="form-control" style="height: 30px;"
                                                     formControlName="squeezer_trolleyPlate"></textarea>
-                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
                                             </div>
 
                                             <div style="display: flex; gap: 10px; ">
@@ -591,7 +467,6 @@
                                                     Value</label>
                                                 <textarea class="form-control" style="height: 30px;"
                                                     formControlName="squeezer_overfeedValue"></textarea>
-                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
                                             </div>
 
                                             <div style="display: flex; gap: 10px; ">
@@ -600,23 +475,20 @@
                                                     Pressure Value</label>
                                                 <textarea class="form-control" style="height: 30px;"
                                                     formControlName="squeezer_padderPressureValue"></textarea>
-                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
                                             </div>
 
                                             <div style="display: flex; gap: 10px; ">
                                                 <label class="form-control" style="border: none; display: inline-block; 
                                         width: 65vh;">Shape (Y/N)</label>
                                                 <mat-checkbox formControlName="squeezer_shape"></mat-checkbox>
-                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea>
-                                    <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                               
                                             </div>
 
                                             <div style="display: flex; gap: 10px; ">
                                                 <label class="form-control" style="border: none; display: inline-block;
                                         width: 65vh;">Back Angle (Y/N)</label>
                                                 <mat-checkbox formControlName="squeezer_backAngle"></mat-checkbox>
-                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea>
-                                        <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                
                                             </div>
 
                                         </div>
@@ -633,7 +505,7 @@
                                                     time</label>
                                                 <input type="date" class="form-control"
                                                     formControlName="dryer_dryerDatetime">
-                                                <!-- <input type="time" class="form-control"> -->
+                                               
 
                                             </div>
 
@@ -643,7 +515,7 @@
                                                     Value</label>
                                                 <textarea class="form-control" style="height: 30px;"
                                                     formControlName="dryer_temperatureValue"></textarea>
-                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                               
                                             </div>
 
                                             <div style="display: flex; gap: 10px; ">
@@ -652,7 +524,7 @@
                                                     Value</label>
                                                 <textarea class="form-control" style="height: 30px;"
                                                     formControlName="dryer_rpmValue"></textarea>
-                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                               
                                             </div>
 
                                             <div style="display: flex; gap: 10px; ">
@@ -661,7 +533,7 @@
                                                     Value</label>
                                                 <textarea class="form-control" style="height: 30px;"
                                                     formControlName="dryer_overfeedValue"></textarea>
-                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                
                                             </div>
 
                                         </div>
@@ -684,7 +556,7 @@
                                                     Value</label>
                                                 <textarea class="form-control" style="height: 60px;"
                                                     formControlName="calendar_rpmValue"></textarea>
-                                                <!-- <textarea class="form-control" style="height: 60px;"></textarea> -->
+                                               
                                             </div>
 
                                             <div style="display: flex; gap: 10px; ">
@@ -693,7 +565,7 @@
                                                     / Low</label>
                                                 <textarea class="form-control" style="height: 60px;"
                                                     formControlName="calendar_steamHighLow"></textarea>
-                                                <!-- <textarea class="form-control" style="height: 60px;"></textarea> -->
+                                                
                                             </div>
 
                                         </div>
@@ -724,8 +596,7 @@
                                                     Date time</label>
                                                 <input type="date" class="form-control"
                                                     formControlName="slitting_slittingDatetime">
-                                                <!-- <input type="time" class="form-control"> -->
-
+                                               
                                             </div>
 
                                             <div style="display: flex; gap: 10px; height: 70px;">
@@ -734,7 +605,7 @@
                                                     (Auto / Manual)</label>
                                                 <textarea class="form-control" style="height: 60px;"
                                                     formControlName="slitting_DTwister"></textarea>
-                                                <!-- <textarea class="form-control" style="height: 60px;"></textarea> -->
+                                               
                                             </div>
 
                                             <div style="display: flex; gap: 10px; ">
@@ -743,7 +614,7 @@
                                                     Plate (Auto/Manual)</label>
                                                 <textarea class="form-control" style="height: 60px;"
                                                     formControlName="slitting_trolleyPlate"></textarea>
-                                                <!-- <textarea class="form-control" style="height: 60px;"></textarea> -->
+                                                
                                             </div>
 
                                         </div>
@@ -766,7 +637,7 @@
                                                     Date time</label>
                                                 <input type="date" class="form-control"
                                                     formControlName="stenter_stenterDatetime">
-                                                <!-- <input type="time" class="form-control"> -->
+                                                
 
                                             </div>
 
@@ -776,7 +647,7 @@
                                                     Value</label>
                                                 <textarea class="form-control" style="height: 30px;"
                                                     formControlName="stenter_temperatureValue"></textarea>
-                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                
                                             </div>
 
                                             <div style="display: flex; gap: 10px; ">
@@ -785,7 +656,7 @@
                                                     Value</label>
                                                 <textarea class="form-control" style="height: 30px;"
                                                     formControlName="stenter_overfeedValue"></textarea>
-                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                               
                                             </div>
 
                                             <div style="display: flex; gap: 10px; ">
@@ -794,7 +665,7 @@
                                                     Value</label>
                                                 <textarea class="form-control" style="height: 30px;"
                                                     formControlName="stenter_diasettingValue"></textarea>
-                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                
                                             </div>
 
                                             <div style="display: flex; gap: 10px; ">
@@ -803,7 +674,7 @@
                                                     Silicon Usage ?</label>
                                                 <textarea class="form-control" style="height: 30px;"
                                                     formControlName="stenter_softnerSiliconUsage"></textarea>
-                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                
                                             </div>
 
                                         </div>
@@ -818,7 +689,7 @@
                                                     Compact Date time</label>
                                                 <input type="date" class="form-control"
                                                     formControlName="compact_openCompactDatetime">
-                                                <!-- <input type="time" class="form-control"> -->
+                                                
                                             </div>
 
                                             <div style="display: flex; gap: 10px; ">
@@ -827,7 +698,7 @@
                                                     Value</label>
                                                 <textarea class="form-control" style="height: 30px;"
                                                     formControlName="compact_rpmValue"></textarea>
-                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                
                                             </div>
 
                                             <div style="display: flex; gap: 10px; ">
@@ -836,7 +707,7 @@
                                                     Value</label>
                                                 <textarea class="form-control" style="height: 30px;"
                                                     formControlName="compact_overfeedValue"></textarea>
-                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                
                                             </div>
 
                                             <div style="display: flex; gap: 10px; ">
@@ -845,7 +716,7 @@
                                                     Value</label>
                                                 <textarea class="form-control" style="height: 30px;"
                                                     formControlName="compact_diasettingValue"></textarea>
-                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                
                                             </div>
 
                                             <div style="display: flex; gap: 10px; ">
@@ -854,7 +725,7 @@
                                                     / Low</label>
                                                 <textarea class="form-control" style="height: 30px;"
                                                     formControlName="compact_steamHighLow"></textarea>
-                                                <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                               
                                             </div>
 
                                         </div>
@@ -874,7 +745,7 @@
                                                         time</label>
                                                     <input type="date" class="form-control"
                                                         formControlName="tubtex_tubtexDatetime">
-                                                    <!-- <input type="time" class="form-control"> -->
+                                                   
                                                 </div>
 
                                                 <div style="display: flex; gap: 10px; ">
@@ -883,7 +754,7 @@
                                                         Lot</label>
                                                     <textarea class="form-control" style="height: 30px;"
                                                         formControlName="tubtex_yarnLot"></textarea>
-                                                    <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                    
                                                 </div>
 
                                                 <div style="display: flex; gap: 10px; ">
@@ -892,7 +763,7 @@
                                                         Value</label>
                                                     <textarea class="form-control" style="height: 30px;"
                                                         formControlName="tubtex_overfeedValue"></textarea>
-                                                    <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                    
                                                 </div>
 
                                                 <div style="display: flex; gap: 10px; ">
@@ -901,7 +772,7 @@
                                                         / Low ?</label>
                                                     <textarea class="form-control" style="height: 30px;"
                                                         formControlName="tubtex_steamHighLow"></textarea>
-                                                    <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                   
                                                 </div>
 
                                                 <div style="display: flex; gap: 10px; ">
@@ -910,14 +781,13 @@
                                                         Knife Setting ?</label>
                                                     <textarea class="form-control" style="height: 30px;"
                                                         formControlName="tubtex_rollerKnifeSetting"></textarea>
-                                                    <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                   
                                                 </div>
 
                                                 <div style="display: flex; gap: 10px; ">
                                                     <label class="form-control" style="border: none; display: inline-block;
                                             width: 45vh;">SideLoose/PileCheck (Y/N)</label>
-                                                    <!-- <textarea class="form-control" style="height: 30px;" formControlName="tubtex_sideLoosePileCheck"></textarea> -->
-                                                    <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                   
                                                     <mat-checkbox
                                                         formControlName="tubtex_sideLoosePileCheck"></mat-checkbox>
                                                 </div>
@@ -925,8 +795,7 @@
                                                 <div style="display: flex; gap: 10px; ">
                                                     <label class="form-control" style="border: none; display: inline-block;
                                             width: 45vh;">Dia / GSM Check (Y/N)</label>
-                                                    <!-- <textarea class="form-control" style="height: 30px; display: none;"></textarea> -->
-                                                    <!-- <textarea class="form-control" style="height: 30px; display: none;"></textarea> -->
+                                                  
                                                     <mat-checkbox formControlName="tubtex_diaGSMCheck"></mat-checkbox>
                                                 </div>
 
@@ -936,7 +805,7 @@
                                                         (Light Box/DataColor)</label>
                                                     <textarea class="form-control" style="height: 30px;"
                                                         formControlName="tubtex_shadeLightBoxDataColor"></textarea>
-                                                    <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                   
                                                 </div>
 
                                             </div>
@@ -960,7 +829,7 @@
                                                         Twisting Report</label>
                                                     <textarea class="form-control" style="height: 30px;"
                                                         formControlName="finalbatch_shrinkageTwistingReport"></textarea>
-                                                    <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                   
                                                 </div>
 
                                                 <div style="display: flex; gap: 10px; ">
@@ -969,7 +838,7 @@
                                                         Report</label>
                                                     <textarea class="form-control" style="height: 30px;"
                                                         formControlName="finalbatch_GSMReport"></textarea>
-                                                    <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                   
                                                 </div>
 
                                                 <div style="display: flex; gap: 10px; ">
@@ -978,7 +847,7 @@
                                                         Shade Check</label>
                                                     <textarea class="form-control" style="height: 30px;"
                                                         formControlName="finalbatch_rollRollShadeCheck"></textarea>
-                                                    <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                    
                                                 </div>
 
                                                 <div style="display: flex; gap: 10px; ">
@@ -987,7 +856,7 @@
                                                         Report (Wet / Dry)</label>
                                                     <textarea class="form-control" style="height: 30px;"
                                                         formControlName="finalbatch_rubbingReportWetDry"></textarea>
-                                                    <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                    
                                                 </div>
 
                                                 <div style="display: flex; gap: 10px; ">
@@ -996,7 +865,7 @@
                                                         (Inhouse Check)</label>
                                                     <textarea class="form-control" style="height: 30px;"
                                                         formControlName="finalbatch_phReportInhouseCheck"></textarea>
-                                                    <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                    
                                                 </div>
 
                                                 <div style="display: flex; gap: 10px; ">
@@ -1005,7 +874,7 @@
                                                         yellowing Test ?</label>
                                                     <textarea class="form-control" style="height: 30px;"
                                                         formControlName="finalbatch_phenolicYellowingTest"></textarea>
-                                                    <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                    
                                                 </div>
 
                                                 <div style="display: flex; gap: 10px; ">
@@ -1014,7 +883,7 @@
                                                         Inspection Report</label>
                                                     <textarea class="form-control" style="height: 30px;"
                                                         formControlName="finalbatch_qcInspectionReport"></textarea>
-                                                    <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                
                                                 </div>
 
                                                 <div style="display: flex; gap: 10px; ">
@@ -1023,7 +892,7 @@
                                                         / Weight</label>
                                                     <textarea class="form-control" style="height: 30px;"
                                                         formControlName="finalbatch_batchRollsWeight"></textarea>
-                                                    <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                    
                                                 </div>
 
                                                 <div style="display: flex; gap: 10px; ">
@@ -1032,7 +901,7 @@
                                                         Rolls / Weight</label>
                                                     <textarea class="form-control" style="height: 30px;"
                                                         formControlName="finalbatch_finishRollsWeight"></textarea>
-                                                    <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                    
                                                 </div>
 
                                                 <div style="display: flex; gap: 10px; ">
@@ -1041,7 +910,7 @@
                                                         Loss</label>
                                                     <textarea class="form-control" style="height: 30px;"
                                                         formControlName="finalbatch_processLoss"></textarea>
-                                                    <!-- <textarea class="form-control" style="height: 30px;"></textarea> -->
+                                                    
                                                 </div>
 
                                                 <div style="display: flex; gap: 10px;">
@@ -1050,7 +919,7 @@
                                                         Delivery Date time</label>
                                                     <input type="date" class="form-control"
                                                         formControlName="finalbatch_fabricDeliveryDatetime">
-                                                    <!-- <input type="time" class="form-control"> -->
+                                                    
                                                 </div>
 
                                             </div>
@@ -1080,7 +949,6 @@
 
             </div>
 
-            <!-- Modal footer -->
             <div class="modal-footer">
                 <div>
                     <button class="btn btn-danger" data-dismiss="modal">Close</button>

@@ -27,6 +27,9 @@
 <div style="display: flex; justify-content: end;">
 </div>
 <mat-toolbar style="height: fit-content; padding: 10px;">
+  <div style="margin-left: 46%;">
+  <span>Knit Entry Report</span>
+</div>
   <span style="flex: 1 1 auto;"></span>
   <button mat-button color='primary' style="margin-right: 12px;" (click)="Report()">New</button>
   <button mat-button color='primary' style="margin-right: 12px;" (click)="exportexcel2()">Download</button>
@@ -100,59 +103,17 @@
   <div class="example-accordion-item-header" (click)="accordionItem.toggle()"
     style="display: flex; justify-content: center; gap: 0.5%; margin-top: 2%; flex-wrap: wrap;">
 
-    <!-- <mat-form-field appearance="outline" style="width: 105px;" (click)="clearAll()">
-            <mat-label>Buyer</mat-label>
-            <mat-select [(ngModel)]="buyerName" (selectionChange)="woByBuyer()">
-              <mat-option value=""> </mat-option>
-              <mat-option *ngFor="let buyer of this.knitdetails" value="{{buyer.buyer}}">{{buyer.buyer}}</mat-option>
-            </mat-select>
-          </mat-form-field> -->
-
     <p-dropdown [options]="this.knitdetails" [(ngModel)]="buyerName" (selectionChange)="woByBuyer()" optionLabel="buyer"
       optionValue="buyer" placeholder="Buyer"></p-dropdown>
-
-    <!-- <mat-form-field appearance="outline" style="width: 105px;">
-            <mat-label>Order</mat-label>
-            <mat-select [(ngModel)]="ordernumbers" (selectionChange)="wobyOrder()">
-              <mat-option value=""> </mat-option>
-              <mat-option *ngFor="let order of this.knitdetails"
-                value="{{order.orderNo}}">{{order.orderNo}}</mat-option>
-            </mat-select>
-          </mat-form-field> -->
 
     <p-dropdown [options]="this.knitdetails" [(ngModel)]="ordernumbers" (selectionChange)="wobyOrder()"
       optionLabel="orderNo" optionValue="orderNo" placeholder="orderNo"></p-dropdown>
 
-    <!-- <mat-form-field appearance="outline" style="width: 105px;">
-            <mat-label>Style</mat-label>
-            <mat-select [(ngModel)]="styleslist" (selectionChange)="wobystyle()">
-              <mat-option value=""> </mat-option>
-              <mat-option *ngFor="let style of this.knitdetails" value="{{style.style}}">{{style.style}}</mat-option>
-            </mat-select>
-          </mat-form-field> -->
-
     <p-dropdown [options]="this.knitdetails" [(ngModel)]="styleslist" (selectionChange)="wobystyle()"
       optionLabel="style" optionValue="style" placeholder="style"></p-dropdown>
 
-    <!-- <mat-form-field appearance="outline" style="width: 105px;">
-            <mat-label>color</mat-label>
-            <mat-select [(ngModel)]="colorslist" (selectionChange)="wobycolor()">
-              <mat-option value=""> </mat-option>
-              <mat-option *ngFor="let color of this.knitdetails" value="{{color.color}}">{{color.color}}</mat-option>
-            </mat-select>
-          </mat-form-field> -->
-
-
     <p-dropdown [options]="this.knitdetails" [(ngModel)]="colorslist" (selectionChange)="wobycolor()"
       optionLabel="color" optionValue="color" placeholder="color"></p-dropdown>
-
-    <!-- <mat-form-field appearance="outline" style="width: 105px;">
-            <mat-label>Size</mat-label>
-            <mat-select [(ngModel)]="sizeslist" (selectionChange)="wobysize()">
-              <mat-option value=""> </mat-option>
-              <mat-option *ngFor="let size of this.knitdetails" value="{{size.size}}">{{size.size}}</mat-option>
-            </mat-select>
-          </mat-form-field> -->
 
     <p-dropdown [options]="this.knitdetails" [(ngModel)]="sizeslist" (selectionChange)="wobysize()" optionLabel="size"
       optionValue="size" placeholder="size"></p-dropdown>
@@ -268,9 +229,7 @@
         <div>
           <input class="form-control me-2" id="numberOfEntries" type="number" formControlName="allocatedDay" readonly>
         </div>
-        <!-- <div>
-          <button class="btn btn-primary" id="loadcls" (click)="add()">Load</button>
-        </div> -->
+
         <div style="margin-left: 5px;">
           <input type="text" class="form-control date" formControlName="date" readonly>
         </div>
