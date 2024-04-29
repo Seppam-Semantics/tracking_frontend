@@ -81,6 +81,7 @@ export class FabricRollData2Component implements OnInit {
 
   ngOnInit(): void {
     this.getbuyers();
+    this.loadworkorder()
 }
   
 
@@ -117,7 +118,7 @@ export class FabricRollData2Component implements OnInit {
     })
   }
 
-  loadworkorder(buyer: any, orderNo: string = '', style: string ='', color: string = '', size: string ='') {
+  loadworkorder(buyer: string = '', orderNo: string = '', style: string ='', color: string = '', size: string ='') {
     this.api.getwodetails(buyer, orderNo, style, color, size).subscribe((res) => {
       this.data = res.workorders;
     });

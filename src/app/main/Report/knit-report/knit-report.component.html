@@ -1,10 +1,12 @@
-<cdk-accordion class="example-accordion">
-  <cdk-accordion-item #accordionItem="cdkAccordionItem" class="example-accordion-item" role="button" tabindex="0"
-    style="display: flex; flex-direction: column; justify-content: center;">
 
-    <div class="example-accordion-item-header" (click)="accordionItem.toggle()"
-      style="display: flex; justify-content: center; gap: 0.5%; margin-top: 2%; flex-wrap: wrap;">
+<div style="display: flex; justify-content: center; background-color: rgb(61, 57, 57); height: 40px;">
+  <h3 style="color: white; margin-top: 0.5%;"><b>Knit Entry Report</b></h3>
+</div>
 
+<!---===========================================================================================================-->
+
+  <div style="display: flex; margin-top: 1%;">
+    <div style="display: flex; justify-content: center; width: 80%; gap: 2%;">
       <mat-form-field appearance="outline">
         <mat-label>Factory</mat-label>
         <mat-select [(ngModel)]="factoryvalue" (selectionChange)="factory()">
@@ -20,20 +22,11 @@
       </mat-form-field>
 
     </div>
-  </cdk-accordion-item>
-</cdk-accordion>
-
-<!---===========================================================================================================-->
-<div style="display: flex; justify-content: end;">
-</div>
-<mat-toolbar style="height: fit-content; padding: 10px;">
-  <div style="margin-left: 46%;">
-  <span>Knit Entry Report</span>
-</div>
-  <span style="flex: 1 1 auto;"></span>
-  <button mat-button color='primary' style="margin-right: 12px;" (click)="Report()">New</button>
-  <button mat-button color='primary' style="margin-right: 12px;" (click)="exportexcel2()">Download</button>
-</mat-toolbar>
+    <div style="display: flex; justify-content: flex-end; gap: 2%;">
+      <button mat-button color='primary' (click)="Report()">New</button>
+      <button mat-button color='primary' (click)="exportexcel2()">Download</button>
+    </div>
+  </div>
 
 <div class="fixTableHead">
   <table id="table-data2" class="table table-hover">
@@ -100,8 +93,7 @@
 <p-dialog [resizable]="true" [modal]="true" [maximizable]="true" appendTo="body" [(visible)]="allDetailsModal"
   [style]="{width: '90vw'}" [contentStyle]="{height: '90vh'}" header="Knit Report All Entry">
 
-  <div class="example-accordion-item-header" (click)="accordionItem.toggle()"
-    style="display: flex; justify-content: center; gap: 0.5%; margin-top: 2%; flex-wrap: wrap;">
+  <div class="example-accordion-item-header" style="display: flex; justify-content: center; gap: 0.5%; margin-top: 2%; flex-wrap: wrap;">
 
     <p-dropdown [options]="this.knitdetails" [(ngModel)]="buyerName" (selectionChange)="woByBuyer()" optionLabel="buyer"
       optionValue="buyer" placeholder="Buyer"></p-dropdown>
@@ -124,8 +116,6 @@
 
   <!------------------------------------------------------------------------------>
   <div style="table-layout: fixed; margin-top: 2%" id="table-data">
-
-
 
     <table class="table table-hover">
       <tbody>
