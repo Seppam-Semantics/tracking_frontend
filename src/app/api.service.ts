@@ -10,8 +10,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  // apiUrl = "https://tracker.seppam.com";
-  apiUrl = "http://localhost:2000";
+  apiUrl = "https://tracker.seppam.com";
+  // apiUrl = "http://localhost:2000";
 
 
   token: any;
@@ -404,4 +404,24 @@ DyeFilter(DyeFactory: any , buyer?:any , orderNo?:any, style?:any , color?:any ,
   YarnQCDeleteDetails(id:any , lineId:any , ReceipDataId :any):Observable<any>{
     return this.http.delete(this.getUrl()+`/yarnapi/YarnQCDelete?id=${id}&line=${lineId}&YarnQCid=${ReceipDataId}` , this.getHeaders())
   }
+
+// ============================================= Knit Delivery ===================================================================================
+
+
+getKnitDelivery():Observable<any>{
+  return this.http.get(this.getUrl() + `/knittodye/knit-delivery`, this.getHeaders())
+}
+
+getSingleKnitDel(id:any):Observable<any>{
+  return this.http.get(this.getUrl() + `/knittodye/knit-delivery/${id}`, this.getHeaders())
+}
+
+addUpdateKnitDelivery(data:any):Observable<any>{
+  return this.http.post(this.getUrl() + `/knittodye/knit-delivery`,data, this.getHeaders())
+}
+
+deleteKnitDelivery(id:any):Observable<any>{
+  return this.http.delete(this.getUrl() + `/knittodye/knit-delivery/${id}`, this.getHeaders())
+}
+
 }

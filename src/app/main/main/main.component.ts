@@ -50,4 +50,10 @@ logo:boolean = true
     workorder1() {
       this.router.navigate(['/main/WorkorderData'])
     }
+    dyedelivery(){
+      this.router.navigate(['/main/dye-delivery'])
+    }
+    knitdelivery(){
+      this.router.navigate(['/main/knit-delivery'])
+    }
 }

@@ -527,7 +527,7 @@ get items() {
   }
 
   submit2() {
-    this.loading1 = true;
+    this.loading2 = true;
     this.entry1form = this.fb.group({
       "workorderId": this.workorderId,
       "entry": "1",
@@ -535,7 +535,7 @@ get items() {
     })
     this.api.Fabricroll2entry(this.entry1form.value).subscribe((res) => {
       alert(res.message);
-      this.loading1 = false;
+      this.loading2 = false;
       this.greigefabDElEntry()
     })
   }
@@ -601,7 +601,7 @@ get items() {
   }
 
   submit3() {
-    this.loading1 = true;
+    this.loading3 = true;
     this.entry1form = this.fb.group({
       "workorderId": this.workorderId,
       "entry": "1",
@@ -609,7 +609,7 @@ get items() {
     })
     this.api.Fabricroll3entry(this.entry1form.value).subscribe((res) => {
       alert(res.message);
-      this.loading1 = false;
+      this.loading3 = false;
       this.dyeBatchEntry()
     })
   }
@@ -675,7 +675,7 @@ get items() {
   }
 
   submit4() {
-    this.loading1 = true;
+    this.loading4 = true;
     this.entry1form = this.fb.group({
       "workorderId": this.workorderId,
       "entry": "1",
@@ -683,7 +683,7 @@ get items() {
     })
     this.api.Fabricroll4entry(this.entry1form.value).subscribe((res) => {
       alert(res.message);
-      this.loading1 = false;
+      this.loading4 = false;
       this.dyeFinishEntry()
     })
   }
@@ -750,7 +750,7 @@ get items() {
   }
 
   submit5() {
-    this.loading1 = true;
+    this.loading5 = true;
     this.entry1form = this.fb.group({
       "workorderId": this.workorderId,
       "entry": "1",
@@ -758,7 +758,7 @@ get items() {
     })
     this.api.Fabricroll5entry(this.entry1form.value).subscribe((res) => {
       alert(res.message);
-      this.loading1 = false;
+      this.loading5 = false;
       this.dyedFabDelEntry()
     })
   }
@@ -823,7 +823,7 @@ get items() {
   }
 
   submit6() {
-    this.loading1 = true;
+    this.loading6 = true;
     this.entry1form = this.fb.group({
       "workorderId": this.workorderId,
       "entry": "1",
@@ -832,7 +832,7 @@ get items() {
 // console.log(this.entry1form.value)
     this.api.Fabricroll6entry(this.entry1form.value).subscribe((res) => {
       alert(res.message);
-      this.loading1 = false;
+      this.loading6 = false;
       this.warehouseToCut()
     })
   }
@@ -896,7 +896,7 @@ get items() {
   }
 
   submit7() {
-    this.loading1 = true;
+    this.loading7 = true;
     this.entry1form = this.fb.group({
       "workorderId": this.workorderId,
       "entry": "1",
@@ -904,7 +904,7 @@ get items() {
     })
     this.api.Fabricroll7entry(this.entry1form.value).subscribe((res) => {
       alert(res.message);
-      this.loading1 = false;
+      this.loading7 = false;
       this.actualCutPanelEntry()
     })
   }

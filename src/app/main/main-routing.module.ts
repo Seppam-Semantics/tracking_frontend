@@ -24,6 +24,10 @@ import { YarnEntryComponent } from './Transaction/yarn-entry/yarn-entry.componen
 import { YarnReportComponent } from './Report/yarn-report/yarn-report.component';
 import { YarnHeaderComponent } from './Transaction/yarn-entry/yarn-header/yarn-header.component';
 import { YarnTranscationComponent } from './Transaction/yarn-entry/yarn-transcation/yarn-transcation.component';
+import { DyeDeliveryComponent } from './Transaction/dye-delivery/dye-delivery.component';
+import { KnitDeliveryComponent } from './Transaction/knit-delivery/knit-delivery.component';
+import { DyeDelEntryComponent } from './Transaction/dye-delivery/dye-del-entry/dye-del-entry.component';
+import { KnitDelEntryComponent } from './Transaction/knit-delivery/knit-del-entry/knit-del-entry.component';
 
 const routes: Routes = [
   {path:'', component: AppComponent},
@@ -52,7 +56,11 @@ const routes: Routes = [
   {path:"yarn-Entry" , component:YarnEntryComponent},
   {path:"Yarn-Report" , component:YarnReportComponent},
   {path:"yarn-header", component:YarnHeaderComponent},
-  {path:"yarn-transcation", component:YarnTranscationComponent}
+  {path:"yarn-transcation", component:YarnTranscationComponent},
+  {path:"dye-delivery" , component:DyeDeliveryComponent},
+  {path:"knit-delivery" , component:KnitDeliveryComponent},
+  {path:"Dye-DelEntry" , component:DyeDelEntryComponent},
+  {path:"Knit-DelEntry" , component:KnitDelEntryComponent},
 
 ];
 

@@ -1,0 +1,58 @@
+:host ::ng-deep.p-dropdown-panel .p-dropdown-items {
+    margin-left:-27px
+}
+th,tr,td{
+    font-weight: normal;
+    text-align: center;
+}
+/* ::ng-deep .mat-mdc-form-field{
+    width: 100px;
+} */
+
+:host ::ng-deep.p-dropdown-panel .p-dropdown-items {
+    margin-left:-27px
+}
+th,tr,td{
+    font-weight: normal;
+    text-align: center;
+}
+/* ::ng-deep .mat-mdc-form-field{
+    width: 100px;
+} */
+:host ::ng-deep input, button, select, optgroup, textarea{
+    width: 85px;
+}
+:host ::ng-deep .p-dropdown{
+    width: 130px;
+}
+.tablecss{
+    overflow-x: scroll;
+    width: 100%;
+    height: 74vh;
+    scrollbar-width: none;
+}
+:host ::ng-deep .form-control{
+    border: 1px solid black;
+}
+:host ::ng-deep .p-dropdown .p-dropdown-trigger{
+    display: none;
+}
+:host ::ng-deep .p-calendar{
+    max-height: 70%;
+    margin-top: 6%;
+}
+:host ::ng-deep [_nghost-ng-c203490092] .p-dropdown{
+    width: 140px;
+    height: 47px;
+    margin-top: 4%;
+}
+:host ::ng-deep .mat-mdc-text-field-wrapper{
+    width: 100%;
+    margin-top: 10%;
+}
+:host ::ng-deep .mat-mdc-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-mdc-text-field-wrapper{
+    background-color: white;
+}
+:host ::ng-deep .mat-mdc-form-field-has-icon-suffix .mat-mdc-text-field-wrapper{
+    background-color: white;
+}
