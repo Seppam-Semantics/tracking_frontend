@@ -1,15 +1,16 @@
 <div>
     <mat-toolbar class="bg-dark text-white" style="display: flex; justify-content: center; height: auto;">Dye
             Delivery</mat-toolbar>
-        <mat-toolbar>
+        <mat-toolbar style="height: auto;">
             <div style="flex: 1 1 auto;"></div>
             <div style="display: flex;">
+                <button mat-button color="primary" (click)="exportexcel()">Download</button>
                 <button mat-button color="primary" (click)="new()">New</button>
             </div>
         </mat-toolbar>
     
         <div>
-            <table class="table table-hover table-sm">
+            <table class="table table-hover table-sm" id="table-data">
                 <thead class="thead-dark">
                     <tr>
                         <th>S.No</th>
@@ -47,8 +48,8 @@
                         <td>8</td>
                         <td>8</td>
 
-                        <td><button class="btn btn-primary" (click)="edit()"><mat-icon>edit</mat-icon></button></td>
-                        <td><button class="btn btn-danger"><mat-icon>delete</mat-icon></button></td>
+                        <td><button class="btn btn-primary" (click)="edit()" style="width: auto;"><mat-icon>edit</mat-icon></button></td>
+                        <td><button class="btn btn-danger" style="width: auto;"><mat-icon>delete</mat-icon></button></td>
                     </tr>
                 </tbody>
             </table>
@@ -58,21 +59,17 @@
 
 <p-dialog [formGroup]="DyeDelivery" [(visible)]="DelDyeEdit" [modal]="true" [style]="{width: '90vw', height:'90vh'}" [maximizable]="true" header="Dye Delivery">
 
-    <div>
+    <div [formGroup]="DyeDelivery">
         <mat-toolbar class="bg-secondary text-white" style="display: flex; justify-content: center;">
+            <span>DyeDelivery</span>
             <div style="flex: 1 1 auto;"></div>
             <div style="display: flex; gap: 2%;">
-                <mat-form-field appearance="outline" style="height: 2%; margin-top: 1%;">
-                    <mat-label>Factory</mat-label>
-                    <mat-select formControlName="factory">
-                        <mat-option></mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <mat-form-field appearance="outline">
-                    <input matInput [matDatepicker]="picker1" formControlName="date">
-                    <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
-                    <mat-datepicker #picker1></mat-datepicker>
-                </mat-form-field>
+                <input type="text" class="form-control" formControlName="factory" list="9" style="margin-top: 2%;height: 50px; width: 150px;" placeholder="Factory">
+                <datalist id="9">
+                    <option value="">
+                    <option *ngFor="let dyeinFty of this.factoryname" value="{{dyeinFty.dyeinFty}}"></option>
+                </datalist>
+                  <input type="date" class="form-control" formControlName="date" list="9" style="margin-top: 2%;height: 50px; width: 150px;" placeholder="Date">
             </div>
         </mat-toolbar>
         <div class="tablecss">
@@ -103,54 +100,67 @@
                         <td></td>
                         <td>{{i+1}}</td>
                         <td>
-                            <input formControlName="DyeChallan" pInputText>
+                            <input formControlName="dyeChallan" class="form-control">
                         </td>
                         <td>
-                            <input formControlName="BatchNo" pInputText>
+                            <input formControlName="batchNo" class="form-control">
                         </td>
                         <td>
-                            <p-dropdown [options]="[{value:10},{value:11},{value:12}]" optionLabel="value"
-                                [optionvalue]="value" placeholder="Buyer" formControlName="Buyer" #inputField (onChange)="logInput($event.value.value)"></p-dropdown>
+                            <input type="text" class="form-control" formControlName="buyer" list="buyer"
+                                (input)="getBuyerValue($event)" (change)="getorders()">
+                            <datalist id="buyer">
+                                <option *ngFor="let buyer of this.buyer" [value]="buyer.buyer">{{buyer.buyer}}</option>
+                            </datalist>
+                        </td>
+                        <td><input type="text" class="form-control" formControlName="orderNo" list="2"
+                                (input)="getOrderValue($event)" (change)="getstyle()">
+                            <datalist id="2">
+                                <option *ngFor="let number of this.order" [value]="number.orderNO">
+                            </datalist>
+                        </td>
+                        <td><input type="text" class="form-control" formControlName="style" list="3"
+                                (input)="getstylevalue($event)" (change)="getcolor()">
+                            <datalist id="3">
+                                <option *ngFor="let style of this.stylelist" [value]="style.style">
+                            </datalist>
+                        </td>
+                        <td><input type="text" class="form-control" formControlName="color" list="4"
+                                (input)="getcolorvalue($event)" (change)="getsize()">
+                            <datalist id="4">
+                                <option *ngFor="let color of this.colorlist" [value]="color.color">
+                            </datalist>
+                        </td>
+                        <td><input type="text" class="form-control" formControlName="size" list="5" (input)="getWoId($event.target.value, i)">
+                            <datalist id="5">
+                                <option *ngFor="let size of this.sizelist" [value]="size.size">
+                            </datalist>
                         </td>
                         <td>
-                            <p-dropdown [options]="[{value:10},{value:11},{value:12}]" optionLabel="value"
-                                [optionvalue]="value" placeholder="Order" formControlName="Order"></p-dropdown>
+                            <input class="form-control" type="number" formControlName="noRollsGriege" (input)="calculate()">
                         </td>
                         <td>
-                            <p-dropdown [options]="[{value:10},{value:11},{value:12}]" optionLabel="value"
-                                [optionvalue]="value" placeholder="Style" formControlName="Style"></p-dropdown>
-                        </td>
-                        <td>
-                            <p-dropdown [options]="[{value:10},{value:11},{value:12}]" optionLabel="value"
-                                [optionvalue]="value" placeholder="Color" formControlName="Color"></p-dropdown>
-                        </td>
-                        <td>
-                            <p-dropdown [options]="[{value:10},{value:11},{value:12}]" optionLabel="value"
-                                [optionvalue]="value" placeholder="Size" formControlName="Size"></p-dropdown>
-                        </td>
-                        <td>
-                            <input pInputText type="number" formControlName="noRollsGriege" (input)="calculate()">
-                        </td>
-                        <td>
-                            <input formControlName="noRollsFinish" pInputText type="number" (input)="calculate()">
+                            <input class="form-control" type="number" formControlName="deliveryGreigeFab" (input)="calculate()">
                         </td>
     
                         <td>
-                            <input pInputText type="number" formControlName="DeliveryGreigeFab" (input)="calculate()">
+                            <input formControlName="noRollsFinish" class="form-control" type="number" (input)="calculate()">
+                        </td>
+    
+    
+                        <td>
+                            <input class="form-control" type="number" formControlName="deliveryFinishFab" (input)="calculate()">
                         </td>
     
                         <td>
-                            <input pInputText type="number" formControlName="DeliveryFinishFab" (input)="calculate()">
-                        </td>
-    
-                        <td>
-                            <p-dropdown [options]="[{value:10},{value:11},{value:12}]" optionLabel="value"
-                                optionValue="value" placeholder="Knit Rate" formControlName="DyeRate" (selectionChange)="calculate()"></p-dropdown>
+                                <input type="text" class="form-control" formControlName="dyeRate" list="0" (input)="calculate()">
+                            <datalist id="0">
+                                <option [value]="1">
+                            </datalist>
                         </td>
                         <td>
-                            <input formControlName="DyeValue" pInputText type="number" (input)="calculate()">
+                            <input formControlName="dyeValue" class="form-control" type="number" (input)="calculate()">
                         </td>
-                        <td><button class="btn btn-danger" (click)="DyeDeliveryRemoveButton(i)">x</button></td>
+                        <td><button class="btn btn-danger" (click)="DyeDeliveryRemoveButton(i)" style="width: auto;">x</button></td>
                     </tr>
                 </tbody>
     
@@ -166,19 +176,20 @@
                     <th></th>
                     <th></th>
                     <th></th>
-                    <th><input type="text" formControlName="RollsGriegeTotal" pInputText></th>
-                    <th><input type="text" formControlName="RollsFinishTotal" pInputText></th>
-                    <th><input type="text" formControlName="DeliveryGriegeTotal" pInputText></th>
-                    <th><input type="text" formControlName="DeliveryFinishTotal" pInputText></th>
+                    <th><input type="text" formControlName="RollsGriegeTotal" class="form-control"></th>
+                    <th><input type="text" formControlName="RollsFinishTotal" class="form-control"></th>
+                    <th><input type="text" formControlName="DeliveryGriegeTotal" class="form-control"></th>
+                    <th><input type="text" formControlName="DeliveryFinishTotal" class="form-control"></th>
                     <th></th>
-                    <th><input type="text" formControlName="DyeTotal" pInputText></th>
+                    <th><input type="text" formControlName="DyeTotal" class="form-control"></th>
                     <th></th>
                 </thead>
             </table>
         </div>
     </div>
+    
 <ng-template pTemplate="footer">
     <mat-toolbar style="display: flex; justify-content: center; height: auto;"><button
-        class="btn btn-primary">Save</button></mat-toolbar>
+        class="btn btn-primary">Update</button></mat-toolbar>
 </ng-template>
 </p-dialog>

@@ -28,6 +28,7 @@
 
 
 <span style="flex: 1 1 auto;"></span>
+<button mat-button color='primary' style="margin-right: 12px;" (click)="exportexcel()">Download</button>
 <button mat-button color='primary' style="margin-right: 12px;" (click)="DyeBatchButton()">New</button>
 </mat-toolbar>
 
@@ -36,7 +37,7 @@
 
 
 
-<table class="table table-bordered table-hover">
+<table class="table table-bordered table-hover" id="table-data">
     <thead class="thead-dark">
         <tr>
             <th>Sl.no</th>
