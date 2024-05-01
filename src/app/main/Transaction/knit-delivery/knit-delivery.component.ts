@@ -56,6 +56,7 @@ export class KnitDeliveryComponent {
     this.api.getKnitDelivery().subscribe((res)=>{
       this.knitDelAllData = res.knitDelivery
     })
+
   }
 
 
@@ -129,6 +130,7 @@ export class KnitDeliveryComponent {
 buyername() {
   this.api.getbuyers().subscribe((res) => {
     this.buyer = res.buyers
+     console.log(this.buyer)
   })
 }
 getBuyerValue(event: any) {
@@ -175,8 +177,12 @@ getsize() {
     console.log(this.KnitDelivery.value)
   }
 
-  edit() {
+  edit(id:any) {
     this.KnitDeliveryNewPop = true;
+
+    this.api.getSingleKnitDel(id).subscribe((res)=>{
+      
+    })
   }
 
 

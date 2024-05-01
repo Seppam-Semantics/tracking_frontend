@@ -38,13 +38,14 @@ ngOnInit(): void {
   this.api.knitfty_name().subscribe((res) => {
     this.fty_name = res.factorys
   })
+
 }
 constructor(private fb : FormBuilder , private api : ApiService){
 
   this.KnitDelivery = new FormGroup({
     "date" : new FormControl(''),
     "factory" : new FormControl(''),
-    DyeDeliveryData: this.fb.array([]),
+    data: this.fb.array([]),
     "RollsTotal" : new FormControl(),
     "DeliveryTotal" : new FormControl(),
     "KnitTotal" : new FormControl(),
@@ -53,29 +54,31 @@ constructor(private fb : FormBuilder , private api : ApiService){
 
 
 get items() {
-  return this.KnitDelivery.get("DyeDeliveryData") as FormArray;
+  return this.KnitDelivery.get("data") as FormArray;
 }
 
 KnitDeliveryAddButton(){
   
   const row = this.fb.group({
-    "Sno": new FormControl(),
-    "ToDyeFty": new FormControl(),
-    "KnitChallan": new FormControl(),
-    "ScandexChallan": new FormControl(),
+    "id": new FormControl(),
+    "knitId" : new FormControl(),
+    "woId": new FormControl(1),
+    "dyeFactory": new FormControl(),
+    "knitChallan": new FormControl(),
+    "scandexChallan": new FormControl(),
     "buyer": new FormControl(),
     "orderNo": new FormControl(),
     "style": new FormControl(),
     "color": new FormControl(),
     "size": new FormControl(),
-    "noRolls": new FormControl(''),
-    "DeliveryGreigeFab": new FormControl(''),
-    "KnitRate": new FormControl(''),
-    "KnitValue": new FormControl(''),
+    "noOfRolls": new FormControl(''),
+    "deliveryKgs": new FormControl(''),
+    "knitRate": new FormControl(''),
+    "knitValue": new FormControl(''),
 
   });
   
-  row.get('KnitRate')?.valueChanges.subscribe(() => {
+  row.get('knitRate')?.valueChanges.subscribe(() => {
     this.calculate();
   });
   
@@ -93,10 +96,10 @@ calculate(){
   this.items.controls.forEach((control: AbstractControl) => {
       const row = control as FormGroup;
       if (row instanceof FormGroup) {
-        const noRolls = parseFloat(row.get('noRolls')?.value)|| 0;
-        const KnitRate = parseFloat(row.get('KnitRate')?.value)|| 0;
-        const DeliveryGreigeFab = parseFloat(row.get('DeliveryGreigeFab')?.value)|| 0;
-        const knitdata = parseFloat(row.get('KnitValue')?.value)|| 0;
+        const noRolls = parseFloat(row.get('noOfRolls')?.value)|| 0;
+        const KnitRate = parseFloat(row.get('knitRate')?.value)|| 0;
+        const DeliveryGreigeFab = parseFloat(row.get('deliveryKgs')?.value)|| 0;
+        const knitdata = parseFloat(row.get('knitValue')?.value)|| 0;
         
         const KnitTotal = KnitRate * DeliveryGreigeFab
       
@@ -106,9 +109,9 @@ calculate(){
         
         KnitValueTotal2 += knitdata
 
-        const KnitValue = parseFloat(KnitTotal.toFixed(2));
+        const knitValue = parseFloat(KnitTotal.toFixed(2));
         
-        row.patchValue({ KnitValue});
+        row.patchValue({ knitValue});
       }
       this.KnitDelivery.get('DeliveryTotal')?.setValue(DeliveryGreigeFabTotal); 
       this.KnitDelivery.get('RollsTotal')?.setValue(noRollsTotal); 
@@ -163,6 +166,8 @@ getsize() {
 //-------------------------------------------------------------------------//
 
 saveButton(){
-  console.log(this.KnitDelivery.value)
+  this.api.addUpdateKnitDelivery(this.KnitDelivery.value).subscribe((res)=>{
+    alert(res.message)
+  })
 }
 }
