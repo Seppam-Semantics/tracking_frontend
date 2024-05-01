@@ -76,16 +76,17 @@ export class KnitDeliveryComponent {
   KnitDeliveryAddButton() {
 
     const row = this.fb.group({
-      "id": new FormControl(0),
-      "woId": new FormControl(),
-      "dyeFactory": new FormControl(),
-      "knitChallan": new FormControl(),
-      "scandexChallan": new FormControl(),
-      "buyer": new FormControl(),
-      "orderNo": new FormControl(),
-      "style": new FormControl(),
-      "color": new FormControl(),
-      "size": new FormControl(),
+      "id": new FormControl(''),
+      "knitDelId":new FormControl(this.kintid),
+      "woId": new FormControl(''),
+      "dyeFactory": new FormControl(''),
+      "knitChallan": new FormControl(''),
+      "scandexChallan": new FormControl(''),
+      "buyer": new FormControl(''),
+      "orderNo": new FormControl(''),
+      "style": new FormControl(''),
+      "color": new FormControl(''),
+      "size": new FormControl(''),
       "noOfRolls": new FormControl(''),
       "deliveryKgs": new FormControl(''),
       "knitRate": new FormControl(''),
@@ -243,7 +244,6 @@ export class KnitDeliveryComponent {
       alert(res.message)
       window.location.reload()
     })
-    console.log(this.KnitDelivery.value)
   }
 
   new() {
