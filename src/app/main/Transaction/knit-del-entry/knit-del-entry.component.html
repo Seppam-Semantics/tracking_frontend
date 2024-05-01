@@ -40,7 +40,7 @@
                     <td>
                         <input type="text" class="form-control" formControlName="dyeFactory" list="1">
                         <datalist id="1">
-                            <option *ngFor="let knitFty of this.fty_name" [value]="knitFty.knitFty">{{knitFty.knitFty}}
+                            <option *ngFor="let dyeinFty of this.factoryname" [value]="dyeinFty.dyeinFty">
                             </option>
                         </datalist>
                     </td>
@@ -75,7 +75,7 @@
                             <option *ngFor="let color of this.colorlist" [value]="color.color">
                         </datalist>
                     </td>
-                    <td><input type="text" class="form-control" formControlName="size" list="5">
+                    <td><input type="text" class="form-control" formControlName="size" list="5" (input)="getWoId($event.target.value, i)">
                         <datalist id="5">
                             <option *ngFor="let size of this.sizelist" [value]="size.size">
                         </datalist>

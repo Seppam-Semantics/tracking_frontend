@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Dropdown } from 'primeng/dropdown';
 import { ApiService } from 'src/app/api.service';
 @Component({
@@ -30,6 +31,7 @@ export class KnitDelEntryComponent {
   style: any;
   color: any;
   size: any;
+  factoryname: any;
 
 ngOnInit(): void {
 
@@ -39,8 +41,12 @@ ngOnInit(): void {
     this.fty_name = res.factorys
   })
 
+  this.api.dye_factory_name().subscribe((res)=>{
+    this.factoryname=res.factorys
+  })
+
 }
-constructor(private fb : FormBuilder , private api : ApiService){
+constructor(private fb : FormBuilder , private api : ApiService , private router : Router){
 
   this.KnitDelivery = new FormGroup({
     "date" : new FormControl(''),
@@ -163,11 +169,22 @@ getsize() {
     this.sizelist = res.sizes;
   })
 }
+
+getWoId(size: any, index: number) {
+  this.api.getwodetails(this.buyerName, this.orderNo, this.style, this.color, size ).subscribe((res) => {
+    const woId = res.workorders[index].id;
+    console.log(woId);
+    const formArray = this.KnitDelivery.get('data') as FormArray;
+    const row = formArray.at(index);
+    row.get('woId')?.setValue(woId);
+  });
+}
 //-------------------------------------------------------------------------//
 
 saveButton(){
   this.api.addUpdateKnitDelivery(this.KnitDelivery.value).subscribe((res)=>{
     alert(res.message)
+    this.router.navigate(['/main/knit-delivery'])
   })
 }
 }

@@ -299,10 +299,10 @@ export class KnitReportComponent {
       const dataControl = this.load.get('data') as FormArray;
       this.load.setControl('data', this.fb.array(formControls));
 
-      dataControl.clear();
-      formControls.forEach((control) => {
+       dataControl.clear();
+       formControls.forEach((control) => {
         dataControl.push(this.fb.group(control));
-      });
+       });
       this.ktydata.lineData.forEach((lineItem: any, i: any) => {
         this.items.at(i).patchValue({
           id: lineItem?.id,

@@ -25,8 +25,8 @@ import {MatNativeDateModule} from '@angular/material/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { DyeDelEntryComponent } from './Transaction/dye-delivery/dye-del-entry/dye-del-entry.component';
-import { KnitDelEntryComponent } from './Transaction/knit-delivery/knit-del-entry/knit-del-entry.component';
+import { DyeDelEntryComponent } from './Transaction/dye-del-entry/dye-del-entry.component';
+import { KnitDelEntryComponent } from './Transaction/knit-del-entry/knit-del-entry.component';
 
 
 import { RolesProfileRootComponent } from './masters/Roles and profiles/roles/roles-profile-root/roles-profile-root.component';
@@ -60,8 +60,8 @@ import { YarnReportComponent } from './Report/yarn-report/yarn-report.component'
 import { YarnHeaderComponent } from './Transaction/yarn-entry/yarn-header/yarn-header.component';
 import { YarnTranscationComponent } from './Transaction/yarn-entry/yarn-transcation/yarn-transcation.component';
 import { PanelModule } from 'primeng/panel';
-import { KnitDeliveryComponent } from './Transaction/knit-delivery/knit-delivery.component';
-import { DyeDeliveryComponent } from './Transaction/dye-delivery/dye-delivery.component';
+import { KnitDeliveryComponent } from './Report/knit-delivery/knit-delivery.component';
+import { DyeDeliveryComponent } from './Report/dye-delivery/dye-delivery.component';
 
 import { TableModule } from 'primeng/table';
 import { DropdownModule } from 'primeng/dropdown';

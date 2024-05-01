@@ -1,7 +1,7 @@
     <div>
         <mat-toolbar class="bg-dark text-white" style="display: flex; justify-content: center; height: auto;">Knit
                 Delivery</mat-toolbar>
-            <mat-toolbar>
+            <mat-toolbar style="height: auto;">
                  <div style="flex: 1 1 auto;"></div>
                 <div style="display: flex;">
                     <button mat-button color="primary" (click)="new()">New</button>
@@ -22,23 +22,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- <tr *ngFor="let data of this.knitDelAllData; let i = index;" >
+                        <tr *ngFor="let data of this.knitDelAllData; let i = index;" >
                             <td>{{i+1}}</td>
                             <td>{{data.factory}}</td>
                             <td>{{data.date}}</td>
                             <td>{{data.totalrolls}}</td>
                             <td>{{data.totalKg}}</td>
-                            <td><button class="btn btn-primary" (click)="edit(data.id)"><mat-icon>edit</mat-icon></button></td>
-                            <td><button class="btn btn-danger"><mat-icon>delete</mat-icon></button></td>
-                        </tr> -->
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
-                            <!-- <td><button class="btn btn-primary" (click)="edit()"><mat-icon>edit</mat-icon></button></td> -->
-                            <td><button class="btn btn-danger"><mat-icon>delete</mat-icon></button></td>
+                            <td><button class="btn btn-primary" (click)="edit(data.id)" style="width:auto"><mat-icon>edit</mat-icon></button></td>
+                            <td><button class="btn btn-danger" style="width:auto" (click)="delete(data.id)"><mat-icon>delete</mat-icon></button></td>
                         </tr>
                     </tbody>
                 </table>
@@ -53,12 +44,12 @@
         <mat-toolbar class="bg-secondary text-white" style="display: flex; justify-content: center;">
             <div style="flex: 1 1 auto;"></div>
             <div style="display: flex; gap: 2%;">
-            <input type="text" class="form-control" formControlName="factory" list="9" style="margin-top: 5%;" placeholder="Factory">
+            <input type="text" class="form-control" formControlName="factory" list="9" style=" margin-top: 3%; height: 50px; width: 40%;" placeholder="Factory">
             <datalist id="9">
                 <option value="">
                 <option *ngFor="let ftyname of this.fty_name" value="{{ftyname.knitFty}}"></option>
             </datalist>
-              <input type="date" class="form-control" formControlName="data" list="9" style="margin-top: 5%;" placeholder="Factory">
+              <input type="date" class="form-control" formControlName="date" list="9" style=" margin-top: 3%; height: 50px; width: 40%;" placeholder="Factory">
         </div>
         </mat-toolbar>
         <div class="tablecss">
@@ -89,9 +80,9 @@
                     <td>{{i+1}}</td>
                     <td>
 
-                        <input type="text" class="form-control" formControlName="buyer" list="dyeFactory">
+                        <input type="text" class="form-control" formControlName="dyeFactory" list="dyeFactory">
                         <datalist id="dyeFactory">
-                            <option *ngFor="let knitFty of this.fty_name" [value]="knitFty.knitFty">{{knitFty.knitFty}}</option>
+                            <option *ngFor="let dyeinFty of this.factoryname" [value]="dyeinFty.dyeinFty">
                         </datalist>
                     </td>
                     <td>
@@ -121,7 +112,7 @@
                             <option *ngFor="let color of this.colorlist" [value]="color.color">
                         </datalist>
                     </td>
-                    <td><input type="text" class="form-control" formControlName="size" list="5">
+                    <td><input type="text" class="form-control" formControlName="size" list="5" (input)="getWoId($event.target.value, i)">
                         <datalist id="5">
                             <option *ngFor="let size of this.sizelist" [value]="size.size">
                         </datalist>
@@ -133,7 +124,7 @@
                         <input formControlName="deliveryKgs" class="form-control" type="number" (input)="calculate()">
                     </td>
                     <td>
-                        <input type="text" class="form-control" formControlName="size" list="8">
+                        <input type="text" class="form-control" formControlName="knitRate" list="8">
                         <datalist id="8">
                             <option  [value]="1">
                         </datalist>
@@ -141,7 +132,7 @@
                     <td>
                         <input formControlName="knitValue" class="form-control" type="number" readonly>
                     </td>
-                    <td><button class="btn btn-danger" (click)="KnitDeliveryRemoveButton(i)">x</button></td>
+                    <td><button class="btn btn-danger" (click)="KnitDeliveryRemoveButton(i)" style="width: auto;">x</button></td>
                 </tr>
             </tbody>
     
@@ -167,6 +158,6 @@
     </div>
     </div>
     <ng-template pTemplate="footer">
-        <mat-toolbar  style="display: flex; justify-content: center; height: auto;"><button class="btn btn-primary" (click)="saveButton()">Save</button></mat-toolbar>
+        <mat-toolbar  style="display: flex; justify-content: center; height: auto;"><button class="btn btn-primary" (click)="UpdateButton()">Update</button></mat-toolbar>
     </ng-template>
 </p-dialog>

@@ -24,10 +24,10 @@ import { YarnEntryComponent } from './Transaction/yarn-entry/yarn-entry.componen
 import { YarnReportComponent } from './Report/yarn-report/yarn-report.component';
 import { YarnHeaderComponent } from './Transaction/yarn-entry/yarn-header/yarn-header.component';
 import { YarnTranscationComponent } from './Transaction/yarn-entry/yarn-transcation/yarn-transcation.component';
-import { DyeDeliveryComponent } from './Transaction/dye-delivery/dye-delivery.component';
-import { KnitDeliveryComponent } from './Transaction/knit-delivery/knit-delivery.component';
-import { DyeDelEntryComponent } from './Transaction/dye-delivery/dye-del-entry/dye-del-entry.component';
-import { KnitDelEntryComponent } from './Transaction/knit-delivery/knit-del-entry/knit-del-entry.component';
+import { DyeDeliveryComponent } from './Report/dye-delivery/dye-delivery.component';
+import { KnitDeliveryComponent } from './Report/knit-delivery/knit-delivery.component';
+import { DyeDelEntryComponent } from './Transaction/dye-del-entry/dye-del-entry.component';
+import { KnitDelEntryComponent } from './Transaction/knit-del-entry/knit-del-entry.component';
 
 const routes: Routes = [
   {path:'', component: AppComponent},
