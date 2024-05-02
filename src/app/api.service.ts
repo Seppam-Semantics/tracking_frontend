@@ -192,6 +192,10 @@ export class ApiService {
 
 // ==================================================================================================================================================
 
+  knitDate():Observable<any>{
+    return this.http.get(this.getUrl() + `/knitapi/knit-date`, this.getHeaders())
+  }
+
   knit_entry(data:any):Observable<any>{
     return this.http.post(this.getUrl()+`/knitapi/knit` , data , this.getHeaders())
   }

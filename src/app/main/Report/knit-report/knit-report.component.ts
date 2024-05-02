@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
@@ -13,7 +13,7 @@ import * as XLSX from 'xlsx'
 })
 
 
-export class KnitReportComponent {
+export class KnitReportComponent implements OnInit {
   dataSource: any[] = []
   data: any = [];
   fabricdetails: any
@@ -41,7 +41,7 @@ export class KnitReportComponent {
   totalvalues: any;
   woupdateid: any;
   factorydata: any;
-  factoryvalue: any;
+  factoryvalue: any =''
   ftyName: any;
   knitdate: string = '';
   ftydate: any = ''
@@ -67,6 +67,7 @@ export class KnitReportComponent {
   knitdetails2: any;
   allDetailsModal : boolean = false;
   editpopup: boolean = false;
+  date: any;
 
 
   onCheckboxChange11(event: any) {
@@ -107,8 +108,15 @@ export class KnitReportComponent {
     this.factoryName();
     this.allknitDetails();
     this.buyername()
+    this.knitDate()
   }
 
+  knitDate(){
+    this.api.knitDate().subscribe((res)=>{
+      this.date=res.date
+      console.log(res)
+    })
+  }
 
   factoryName() {
     this.api.knitfty_name().subscribe((res) => {
@@ -123,11 +131,21 @@ export class KnitReportComponent {
   }
 
   factory() {
-    this.loadknitdetails(this.factoryvalue, this.knitdate)
+    console.log(this.knitdate)
+    if(this.factoryvalue != '' && this.knitdate == ''){
+      this.loadknitdetails(this.factoryvalue)
+    }
+    if(this.factoryvalue == '' && this.knitdate != ''){
+      this.loadknitdetails('',this.knitdate)
+    }
+    if(this.factoryvalue && this.knitdate){
+      this.loadknitdetails(this.factoryvalue,this.knitdate)
+    }
   }
 
 
-  loadknitdetails(factory: string, date: string) {
+  loadknitdetails(factory: string= '', date: string='') {
+    console.log(date)
     this.api.ftydetailsFilter(factory, date).subscribe((res) => {
       this.data = res.knit;
     });

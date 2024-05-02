@@ -17,7 +17,7 @@
       <mat-form-field appearance="outline">
         <mat-label>Date</mat-label>
         <mat-select [(ngModel)]="knitdate" (selectionChange)="factory()">
-          <mat-option *ngFor="let date of this.data" [value]="date.date">{{date.date}}</mat-option>
+          <mat-option *ngFor="let date of this.date" [value]="date.date">{{date.date}}</mat-option>
         </mat-select>
       </mat-form-field>
 
