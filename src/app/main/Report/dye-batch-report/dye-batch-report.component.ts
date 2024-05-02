@@ -521,7 +521,7 @@ this.dye_Entery.patchValue({
           finishrolls:[lineItem.finishrolls],
           finish: [lineItem.finish],
           diff: [lineItem.difference],
-          PL: [lineItem.PL],
+          PL: [lineItem.processloss],
         });
       });
     
