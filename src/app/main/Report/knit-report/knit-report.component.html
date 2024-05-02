@@ -35,27 +35,11 @@
         <th> Sl.no </th>
         <th>Code</th>
         <th>Factory</th>
-        <th>HouseKeepingStatus</th>
-        <th>FloorLightingStatus</th>
-        <th>GasElecAvailability</th>
-        <th>StorageAreaStatus</th>
-        <th>Allocated Day</th>
         <th>Date</th>
+        <th>TotalDayProductionKgs</th>
+        <th>TotalNoOfRollsProduced</th>
         <th>Edit </th>
         <th>Delete</th>
-      </tr>
-      <tr>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th style="color: darkgrey;">[ Active/InActive ]</th>
-        <th style="color: darkgrey;">[ Active/InActive ]</th>
-        <th style="color: darkgrey;">[ Active/InActive ]</th>
-        <th style="color: darkgrey;">[ Active/InActive ]</th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -63,11 +47,9 @@
         <td data-toggle="modal" data-target="#myModal" (click)="check(detail.id)">{{i+1}}</td>
         <td data-toggle="modal" data-target="#myModal" (click)="check(detail.id)">{{detail.code}}</td>
         <td data-toggle="modal" data-target="#myModal" (click)="check(detail.id)">{{detail.factory}}</td>
-        <td data-toggle="modal" data-target="#myModal" (click)="check(detail.id)">{{detail.houseKeepingStatus == 1 ? "Active":"InActive" }}</td>
-        <td data-toggle="modal" data-target="#myModal" (click)="check(detail.id)">{{detail.floorLightingStatus == 1 ? "Active":"InActive"}}</td>
-        <td data-toggle="modal" data-target="#myModal" (click)="check(detail.id)">{{detail.gasElecAvailability == 1 ? "Active":"InActive"}}</td>
-        <td data-toggle="modal" data-target="#myModal" (click)="check(detail.id)">{{detail.storageAreaStatus == 1 ? "Active":"InActive"}}</td>
-        <td data-toggle="modal" data-target="#myModal" (click)="check(detail.id)">{{detail.allocatedDay}}</td>
+        <td data-toggle="modal" data-target="#myModal" (click)="check(detail.id)">{{detail.totalDayProductionKgs}}</td>
+        <td data-toggle="modal" data-target="#myModal" (click)="check(detail.id)">{{detail.totalNoOfRollsProduced}}</td>
+        
         <td data-toggle="modal" data-target="#myModal" (click)="check(detail.id)">{{detail.date}}</td>
         <td>
           <button class="btn btn-primary" data-toggle="modal" data-target="#edit" (click)="edit(detail.id)">

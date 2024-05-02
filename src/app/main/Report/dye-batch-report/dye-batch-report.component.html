@@ -28,6 +28,7 @@
 
 
 <span style="flex: 1 1 auto;"></span>
+<button mat-button color='primary' style="margin-right: 12px;" (click)="exportexcel()">Download</button>
 <button mat-button color='primary' style="margin-right: 12px;" (click)="DyeBatchButton()">New</button>
 </mat-toolbar>
 
@@ -36,21 +37,23 @@
 
 
 
-<table class="table table-bordered table-hover">
+<table class="table table-bordered table-hover" id="table-data">
     <thead class="thead-dark">
         <tr>
             <th>Sl.no</th>
             <th>Code</th>
-            <th>Bath No</th>
+            
             <th>Dye Factory</th>
             <th>Buyer</th>
             <th>OrderNo</th>
             <th>Style</th>
             <th>Color</th>
-            <th>Fabric Type</th>
-            <th>Softher</th>
-            <th>Silicon</th>
-            <th>Enzyme</th>
+            <th>Total Finish</th>
+            <th>Total Finish Rolls</th>
+
+            <th>Total Greige</th>
+            <th>Total Greige Rolls</th>
+
             <th>Edit</th>
             <th>Delete</th>
         </tr>
@@ -59,16 +62,17 @@
         <tr *ngFor="let data of this.dyebatch_alldata; let i = index">
             <td>{{i+1}}</td>
             <td>{{data.code}}</td>
-            <td>{{data.batchNo}}</td>
+            
             <td>{{data.dyeFactory}}</td>
             <td>{{data.buyer}}</td>
             <td>{{data.orderNo}}</td>
             <td>{{data.style}}</td>
             <td>{{data.color}}</td>
-            <td>{{data.fabricType}}</td>
-            <td>{{data.softner == 1 ? "True":"false"}}</td>
-            <td>{{data.silicon == 1 ? "True":"false"}}</td>
-            <td>{{data.enzyme == 1 ? "True":"false"}}</td>
+            <td>{{data.total_finish}}</td>
+            <td>{{data.total_finish_rolls}}</td>
+            <td>{{data.total_greige}}</td>
+            <td>{{data.total_greige_rolls}}</td>
+            
             <td><button class="btn btn-primary" (click)="getid(data.id)" data-toggle="modal"
                     data-target="#edit"><mat-icon>edit</mat-icon></button></td>
             <td><button class="btn btn-danger" (click)="delect(data.id)"><mat-icon>delete</mat-icon></button></td>

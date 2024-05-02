@@ -28,12 +28,13 @@
             </mat-select>
           </mat-form-field>
     </div>
-    <div>
+    <div style="display: flex; gap : 10px">
         <button class="btn btn-primary" (click)="yarnHead()">New Header</button>
+        <button class="btn btn-primary" (click)="exportexcel()">Download</button>
     </div>
     </div>
     <div class="YarnReportScrol" style="margin-top: 1%;">
-        <table class="table table-hover">
+        <table class="table table-hover" id="table-data">
             <thead class="thead-dark">
                 <tr>
                     <th>Sl.No</th>
