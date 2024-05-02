@@ -48,11 +48,16 @@
             <th>OrderNo</th>
             <th>Style</th>
             <th>Color</th>
-            <th>Total Finish</th>
             <th>Total Finish Rolls</th>
+            <th>Total Finish</th>
 
-            <th>Total Greige</th>
             <th>Total Greige Rolls</th>
+            <th>Total Greige</th>
+            
+            <th>Difference</th>
+            <th>ProcessLoss</th>
+
+            <th>Batch Date</th>
 
             <th>Edit</th>
             <th>Delete</th>
@@ -68,10 +73,16 @@
             <td>{{data.orderNo}}</td>
             <td>{{data.style}}</td>
             <td>{{data.color}}</td>
-            <td>{{data.total_finish}}</td>
             <td>{{data.total_finish_rolls}}</td>
-            <td>{{data.total_greige}}</td>
+            <td>{{data.finish_rolls}}</td>
             <td>{{data.total_greige_rolls}}</td>
+            <td>{{data.total_greige}}</td>
+
+
+            <td>{{data.difference}}</td>
+            <td>{{data.processloss}}</td>
+
+            <td>{{data.date}}</td>
             
             <td><button class="btn btn-primary" (click)="getid(data.id)" data-toggle="modal"
                     data-target="#edit"><mat-icon>edit</mat-icon></button></td>
