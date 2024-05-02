@@ -127,7 +127,6 @@ export class KnitReportComponent implements OnInit {
   allknitDetails() {
     this.api.getallfty_details().subscribe((res) => {
       this.data = res.workorders
-      console.log(this.data)
     })
   }
 

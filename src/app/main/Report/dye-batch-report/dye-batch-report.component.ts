@@ -557,7 +557,6 @@ this.dye_Entery.patchValue({
     this.router.navigate(['/main/DyeBatchEntry'])
   }
   update(){
-
     this.api.post_dyereport_entry(this.dye_Entery.value).subscribe((res)=>{
       alert(res.message)
       window.location.reload()
