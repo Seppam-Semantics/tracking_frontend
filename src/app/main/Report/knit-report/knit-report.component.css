@@ -129,9 +129,13 @@ tr{
 .wide-column {
   width: 200px;
 }
+.toolbar1{
+  height: fit-content; padding: 10px; display: flex; justify-content: space-between;
+  background-color: gray; 
+}
 
 .toolbar2{
-  height: fit-content; padding: 10px; display: flex; justify-content: space-between;
+  height: fit-content; padding: 10px; display: flex; gap: 20px;
   background-color: gray; 
 }
 #numberOfEntries{
@@ -186,5 +190,36 @@ thead{
 .fixTableHead{
   overflow: scroll;
   height: 69%;
+  scrollbar-width: none;
+}
+
+.newlist1{
+  display: flex; justify-content: flex-end; gap: 2%;
+}
+.newlist2{
+  display: none;
+}
+
+.editpopup2{
+  display: none;
+}
+@media screen  and (max-width: 600px) {
+  .newlist1{
+    display: none;
+  }
+  .newlist2{
+    display: contents;
+  } 
+  .editpopup1{
+    display: none;
+  }
+  .editpopup2{
+    display: contents;
+  }
+}
+
+.KnitScroll{
+  display: block;
+  overflow-y: auto;
   scrollbar-width: none;
 }

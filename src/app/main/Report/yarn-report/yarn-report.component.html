@@ -1,71 +1,77 @@
 <div>
-    <div>
-        <mat-toolbar style="display: flex; justify-content: center; height: auto;">
-            <span>Yarn Report</span>
-        </mat-toolbar>
+  <div>
+    <mat-toolbar style="display: flex; justify-content: center; height: auto;">
+      <span>Yarn Report</span>
+    </mat-toolbar>
+  </div>
+  <div style="display: flex; align-items: center; justify-content: space-between;  margin-top: 2%;">
+    <div style="display: flex; align-items: center; justify-content: center; width: 70%; gap: 20px;">
+      <mat-form-field appearance="outline">
+        <mat-label>Spin Fty</mat-label>
+        <mat-select [(ngModel)]="spinfactory" (selectionChange)="yarnlcNo()">
+          <mat-option></mat-option>
+          <mat-option *ngFor="let spin of this.spinfty" value="{{spin.spinner}}">{{spin.spinner}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Lc No.</mat-label>
+        <mat-select [(ngModel)]="spinLcNo" (selectionChange)="yarnStatus()">
+          <mat-option></mat-option>
+          <mat-option *ngFor="let spin of this.spinDDLcNo" value="{{spin.lcNo}}">{{spin.lcNo}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Status</mat-label>
+        <mat-select [(ngModel)]="spinStatus" (selectionChange)="yarnDatawithStatus()">
+          <mat-option></mat-option>
+          <mat-option *ngFor="let spin of this.someStatus" value="{{spin.yarnStatus}}">{{spin.yarnStatus}}</mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
-    <div style="display: flex; align-items: center; justify-content: space-between;  margin-top: 2%;" >
-    <div style="display: flex; align-items: center; justify-content: center; width: 80%; gap: 20px;">
-        <mat-form-field appearance="outline">
-            <mat-label>Spin Fty</mat-label>
-            <mat-select [(ngModel)]="spinfactory"  (selectionChange)="yarnlcNo()">
-              <mat-option></mat-option>
-              <mat-option *ngFor="let spin of this.spinfty" value="{{spin.spinner}}">{{spin.spinner}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field appearance="outline">
-            <mat-label>Lc No.</mat-label>
-            <mat-select [(ngModel)]="spinLcNo" (selectionChange)="yarnStatus()">
-              <mat-option></mat-option>
-              <mat-option *ngFor="let spin of this.spinDDLcNo" value="{{spin.lcNo}}">{{spin.lcNo}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field appearance="outline">
-            <mat-label>Status</mat-label>
-            <mat-select [(ngModel)]="spinStatus" (selectionChange)="yarnDatawithStatus()">
-              <mat-option></mat-option>
-              <mat-option *ngFor="let spin of this.someStatus" value="{{spin.yarnStatus}}">{{spin.yarnStatus}}</mat-option>
-            </mat-select>
-          </mat-form-field>
+    <div class="option1">
+      <button class="btn btn-primary" (click)="yarnHead()">New Header</button>
+      <button class="btn btn-primary" (click)="exportexcel()">Download</button>
     </div>
-    <div style="display: flex; gap : 10px">
-        <button class="btn btn-primary" (click)="yarnHead()">New Header</button>
-        <button class="btn btn-primary" (click)="exportexcel()">Download</button>
-    </div>
-    </div>
-    <div class="YarnReportScrol" style="margin-top: 1%;">
-        <table class="table table-hover" id="table-data">
-            <thead class="thead-dark">
-                <tr>
-                    <th>Sl.No</th>
-                    <th>Spin Fty</th>
-                    <th>LC Date</th>
-                    <th>LC no</th>
-                    <th>PI</th>
-                    <th>PI Date</th>
-                    <th>LC Yarn Kgs</th>
-                    <th>LC Value</th>
-                    <th>Status</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let data of this.AllData;let i = index">
-                <td>{{i+1}}</td>
-                <td>{{data.spinner}}</td>
-                <td>{{data.lcDate}}</td>
-                <td>{{data.lcNo}}</td>
-                <td>{{data.pi}}</td>
-                <td>{{data.piDate}}</td>
-                <td>{{data.lcYarnTotal}}</td>
-                <td>{{data.lcValue}}</td>
-                <td>{{data.yarnStatus}}</td>
-                <td><button class="btn btn-primary" (click)="EditAllData(data.id)"><mat-icon>edit</mat-icon></button></td>
-                <td><button class="btn btn-danger" (click)="delete(data.id)"><mat-icon>delete</mat-icon></button></td>
-            </tr>
 
-            </tbody>
-        </table>
+    <div class="option2">
+      <button mat-button color="primary" (click)="yarnHead()">New Header</button>
+      <button mat-button color="primary" (click)="exportexcel()">Download</button>
     </div>
+
+  </div>
+  <div class="YarnReportScrol" style="margin-top: 1%;">
+    <table class="table table-hover" id="table-data">
+      <thead class="thead-dark">
+        <tr>
+          <th>Sl.No</th>
+          <th>Spin Fty</th>
+          <th>LC Date</th>
+          <th>LC no</th>
+          <th>PI</th>
+          <th>PI Date</th>
+          <th>LC Yarn Kgs</th>
+          <th>LC Value</th>
+          <th>Status</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of this.AllData;let i = index">
+          <td>{{i+1}}</td>
+          <td>{{data.spinner}}</td>
+          <td>{{data.lcDate}}</td>
+          <td>{{data.lcNo}}</td>
+          <td>{{data.pi}}</td>
+          <td>{{data.piDate}}</td>
+          <td>{{data.lcYarnTotal}}</td>
+          <td>{{data.lcValue}}</td>
+          <td>{{data.yarnStatus}}</td>
+          <td><button class="btn btn-primary" (click)="EditAllData(data.id)"><mat-icon>edit</mat-icon></button></td>
+          <td><button class="btn btn-danger" (click)="delete(data.id)"><mat-icon>delete</mat-icon></button></td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
 </div>

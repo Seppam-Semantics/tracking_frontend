@@ -9,47 +9,34 @@
             </div>
         </mat-toolbar>
     
-        <div>
+        <div class="TableScroll">
             <table class="table table-hover table-sm" id="table-data">
                 <thead class="thead-dark">
                     <tr>
                         <th>S.No</th>
-                        <th>Dye Challan</th>
-                        <th>Buyer</th>
-                        <th>Order</th>
-                        <th>Style</th>
-                        <th>Color</th>
-                        <th>Size</th>
-                        <th>Batch no.</th>
-                        <th>No. of Rolls (Griege)</th>
-                        <th>Delivery Greige Fabrics - Kgs</th>
-                        <th>No. of Rolls (Finish)</th>
-                        <th>Delivery Finish Fabrics - Kgs</th>
-                        <th>Dye Rate</th>
-                        <th>Dye Value</th>
+                        <th>Factory</th>
+                        <th>Date</th>
+                        <th>RollGriegeTotal</th>
+                        <th>DeliveryGriegeTotal</th>
+                        <th>TotalFinishRolls</th>
+                        <th>TotalFinishKg</th>
+                        <th>DyeValueTotal</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>3</td>
-                        <td>4</td>
-                        <td>5</td>
-                        <td>6</td>
-                        <td>7</td>
-                        <td>8</td>
-                        <td>9</td>
-                        <td>0</td>
-                        <td>9</td>
-                        <td>8</td>
-                        <td>8</td>
-                        <td>8</td>
-
-                        <td><button class="btn btn-primary" (click)="edit()" style="width: auto;"><mat-icon>edit</mat-icon></button></td>
-                        <td><button class="btn btn-danger" style="width: auto;"><mat-icon>delete</mat-icon></button></td>
+                    <tr *ngFor="let data of this.DyeAllData ; let i = index;">
+                        <td>{{i+1}}</td>
+                        <td>{{data.factory}}</td>
+                        <td>{{data.date}}</td>
+                        <td>{{data.rollgriegeTotal}}</td>
+                        <td>{{data.deliveryGriegeTotal}}</td>
+                        <td>{{data.totalfinishrolls}}</td>
+                        <td>{{data.totalfinishKg}}</td>
+                        <td>{{data.dyeValueTotal}}</td>
+                        <td><button class="btn btn-primary" (click)="edit(data.id)" style="width: auto;"><mat-icon>edit</mat-icon></button></td>
+                        <td><button class="btn btn-danger" style="width: auto;" (click)="DeleteButton(data.id)"><mat-icon>delete</mat-icon></button></td>
                     </tr>
                 </tbody>
             </table>
@@ -136,29 +123,29 @@
                             </datalist>
                         </td>
                         <td>
-                            <input class="form-control" type="number" formControlName="noRollsGriege" (input)="calculate()">
+                            <input class="form-control" type="number" formControlName="griegeRolls" (click)="calculate()"(input)="calculate()" >
                         </td>
                         <td>
-                            <input class="form-control" type="number" formControlName="deliveryGreigeFab" (input)="calculate()">
-                        </td>
-    
-                        <td>
-                            <input formControlName="noRollsFinish" class="form-control" type="number" (input)="calculate()">
-                        </td>
-    
-    
-                        <td>
-                            <input class="form-control" type="number" formControlName="deliveryFinishFab" (input)="calculate()">
+                            <input class="form-control" type="number" formControlName="griegeDeliveryKgs" (input)="calculate()" (click)="calculate()">
                         </td>
     
                         <td>
-                                <input type="text" class="form-control" formControlName="dyeRate" list="0" (input)="calculate()">
+                            <input formControlName="finishRolls" class="form-control" type="number" (input)="calculate()" (click)="calculate()">
+                        </td>
+    
+    
+                        <td>
+                            <input class="form-control" type="number" formControlName="finishDeliveryKgs" (input)="calculate()" (click)="calculate()">
+                        </td>
+    
+                        <td>
+                                <input type="text" class="form-control" formControlName="dyeRate" list="0" (input)="calculate()" (click)="calculate()">
                             <datalist id="0">
                                 <option [value]="1">
                             </datalist>
                         </td>
                         <td>
-                            <input formControlName="dyeValue" class="form-control" type="number" (input)="calculate()">
+                            <input formControlName="dyeValue" class="form-control" type="number" (input)="calculate()" (click)="calculate()">
                         </td>
                         <td><button class="btn btn-danger" (click)="DyeDeliveryRemoveButton(i)" style="width: auto;">x</button></td>
                     </tr>
@@ -190,6 +177,6 @@
     
 <ng-template pTemplate="footer">
     <mat-toolbar style="display: flex; justify-content: center; height: auto;"><button
-        class="btn btn-primary">Update</button></mat-toolbar>
+        class="btn btn-primary" (click)="saveButton()">Update</button></mat-toolbar>
 </ng-template>
 </p-dialog>

@@ -62,6 +62,7 @@ import { YarnTranscationComponent } from './Transaction/yarn-entry/yarn-transcat
 import { PanelModule } from 'primeng/panel';
 import { KnitDeliveryComponent } from './Report/knit-delivery/knit-delivery.component';
 import { DyeDeliveryComponent } from './Report/dye-delivery/dye-delivery.component';
+import {MatMenuModule} from '@angular/material/menu';
 
 import { TableModule } from 'primeng/table';
 import { DropdownModule } from 'primeng/dropdown';
@@ -70,6 +71,7 @@ import { ButtonModule } from 'primeng/button';
 import { SplitterModule } from 'primeng/splitter';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { InputTextModule } from 'primeng/inputtext';
+
 
 @NgModule({
   declarations: [
@@ -145,6 +147,7 @@ import { InputTextModule } from 'primeng/inputtext';
     TabMenuModule,
     TabMenuModule,
     InputTextModule,
+    MatMenuModule,
   ]
 })
 export class MainModule { }

@@ -79,3 +79,20 @@ mat-sidenav{
     font-size:large;
     color: red;
 }
+
+.menu1{
+    display: flex; 
+    gap: 20px;
+}
+.menu2{
+    display: none;
+}
+@media screen and (max-width: 600px) {
+    .menu1{
+        display: none;
+    }
+    .menu2{
+        display: contents;
+    }
+
+}

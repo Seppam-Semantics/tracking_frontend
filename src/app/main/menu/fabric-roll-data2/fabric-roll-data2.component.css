@@ -115,3 +115,33 @@ table {
   background-color: darkorchid;
   color: white;
 }
+
+.popupwoUpdate2{
+  display: none;
+}
+@media screen and (max-width: 600px) {
+  .popupwoUpdate1{
+    display: none;
+  }
+  .popupwoUpdate2{
+    display: contents;
+  }
+}
+
+.filterList1{
+  display: flex; flex-direction: column; justify-content: center;
+}
+.filterList2{
+  display: none;
+}
+
+
+@media screen and (max-width: 600px) {
+  .filterList1{
+    display: none;
+  }
+  .filterList2{
+    display: contents;
+  }
+}
+
