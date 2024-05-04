@@ -75,19 +75,19 @@
                         </datalist>
                     </td>
                     <td>
-                        <input class="form-control" type="number" formControlName="noRollsGriege" (input)="calculate()">
+                        <input class="form-control" type="number" formControlName="griegeRolls" (input)="calculate()">
                     </td>
                     <td>
-                        <input class="form-control" type="number" formControlName="deliveryGreigeFab" (input)="calculate()">
+                        <input class="form-control" type="number" formControlName="griegeDeliveryKgs" (input)="calculate()">
                     </td>
 
                     <td>
-                        <input formControlName="noRollsFinish" class="form-control" type="number" (input)="calculate()">
+                        <input formControlName="finishRolls" class="form-control" type="number" (input)="calculate()">
                     </td>
 
 
                     <td>
-                        <input class="form-control" type="number" formControlName="deliveryFinishFab" (input)="calculate()">
+                        <input class="form-control" type="number" formControlName="finishDeliveryKgs" (input)="calculate()">
                     </td>
 
                     <td>
@@ -126,5 +126,5 @@
         </table>
     </div>
     <mat-toolbar style="display: flex; justify-content: center; height: auto;"><button
-            class="btn btn-primary">Save</button></mat-toolbar>
+            class="btn btn-primary" (click)="saveButton()">Save</button></mat-toolbar>
 </div>

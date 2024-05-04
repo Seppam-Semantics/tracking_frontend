@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Dropdown } from 'primeng/dropdown';
 import { ApiService } from 'src/app/api.service';
 @Component({
@@ -32,6 +33,7 @@ export class DyeDelEntryComponent {
   size: any;
 
   factoryname: any;
+  DyeAllData: any;
 
 
 ngOnInit(): void {
@@ -41,12 +43,14 @@ ngOnInit(): void {
   this.api.dye_factory_name().subscribe((res)=>{
     this.factoryname=res.factorys
   })
+
 }
-constructor(private fb : FormBuilder , private api : ApiService){
+constructor(private fb : FormBuilder , private api : ApiService , private router : Router){
 
   this.DyeDelivery = new FormGroup({
     "date" : new FormControl(''),
     "factory" : new FormControl(''),
+    "id" : new FormControl(''),
     data: this.fb.array([]),
     "RollsGriegeTotal" : new FormControl(),
     "RollsFinishTotal" : new FormControl(),
@@ -64,6 +68,7 @@ DyeDeliveryAddButton(){
   
   const row = this.fb.group({
     "id": new FormControl(),
+    "woId": new FormControl(),
     "dyeChallan": new FormControl(),
     "batchNo": new FormControl(),
     "buyer": new FormControl(),
@@ -71,10 +76,10 @@ DyeDeliveryAddButton(){
     "style": new FormControl(),
     "color": new FormControl(),
     "size": new FormControl(),
-    "noRollsGriege": new FormControl(''),
-    "noRollsFinish": new FormControl(''),
-    "deliveryGreigeFab": new FormControl(''),
-    "deliveryFinishFab": new FormControl(''),
+    "griegeRolls": new FormControl(''),
+    "finishRolls": new FormControl(''),
+    "griegeDeliveryKgs": new FormControl(''),
+    "finishDeliveryKgs": new FormControl(''),
     "dyeRate": new FormControl(''),
     "dyeValue": new FormControl(''),
 
@@ -101,10 +106,10 @@ calculate(){
   this.items.controls.forEach((control: AbstractControl) => {
     const row = control as FormGroup;
     if (row instanceof FormGroup) {
-      const noRollsGriege = parseFloat(row.get('noRollsGriege')?.value) || 0;
-      const noRollsFinish = parseFloat(row.get('noRollsFinish')?.value) || 0;
-      const DelGreigeFab = parseFloat(row.get('deliveryGreigeFab')?.value) || 0;
-      const DelFinishFab = parseFloat(row.get('deliveryFinishFab')?.value) || 0;
+      const noRollsGriege = parseFloat(row.get('griegeRolls')?.value) || 0;
+      const noRollsFinish = parseFloat(row.get('finishRolls')?.value) || 0;
+      const DelGreigeFab = parseFloat(row.get('griegeDeliveryKgs')?.value) || 0;
+      const DelFinishFab = parseFloat(row.get('finishDeliveryKgs')?.value) || 0;
       const DyeRate = parseFloat(row.get('dyeRate')?.value) || 0;
 
       noRollsGriegeSum += noRollsGriege;
@@ -185,12 +190,12 @@ getWoId(size: any, index: number) {
 }
 //-------------------------------------------------------------------------//
 
-
-new(){
-  this.DyeDeliveryNewPop = true
-}
 saveButton(){
-  console.log(this.DyeDelivery.value)
+  // console.log(this.DyeDelivery.value)
+  this.api.addUpdateDyeDelivery(this.DyeDelivery.value).subscribe((res)=>{
+    alert(res.message)
+    this.router.navigate(['/main/dye-delivery'])
+  })
 }
 
 }

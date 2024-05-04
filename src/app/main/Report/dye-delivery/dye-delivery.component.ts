@@ -34,6 +34,9 @@ export class DyeDeliveryComponent implements OnInit{
   size: any;
 
   factoryname: any;
+  DyeAllData: any;
+  SingleLineId: any;
+  DyeSingleData: any;
 
 
 ngOnInit(): void {
@@ -43,12 +46,17 @@ ngOnInit(): void {
   this.api.dye_factory_name().subscribe((res)=>{
     this.factoryname=res.factorys
   })
+
+  this.api.getDyeDelivery().subscribe((res)=>{
+    this.DyeAllData = res.dyeDelivery
+  })
 }
 constructor(private fb : FormBuilder , private api : ApiService , private router : Router){
 
   this.DyeDelivery = new FormGroup({
     "date" : new FormControl(''),
     "factory" : new FormControl(''),
+    "id" : new FormControl(''),
     data: this.fb.array([]),
     "RollsGriegeTotal" : new FormControl(),
     "RollsFinishTotal" : new FormControl(),
@@ -77,6 +85,7 @@ DyeDeliveryAddButton(){
   
   const row = this.fb.group({
     "id": new FormControl(),
+    "woId": new FormControl(),
     "dyeChallan": new FormControl(),
     "batchNo": new FormControl(),
     "buyer": new FormControl(),
@@ -84,10 +93,10 @@ DyeDeliveryAddButton(){
     "style": new FormControl(),
     "color": new FormControl(),
     "size": new FormControl(),
-    "noRollsGriege": new FormControl(''),
-    "noRollsFinish": new FormControl(''),
-    "deliveryGreigeFab": new FormControl(''),
-    "deliveryFinishFab": new FormControl(''),
+    "griegeRolls": new FormControl(''),
+    "finishRolls": new FormControl(''),
+    "griegeDeliveryKgs": new FormControl(''),
+    "finishDeliveryKgs": new FormControl(''),
     "dyeRate": new FormControl(''),
     "dyeValue": new FormControl(''),
 
@@ -114,10 +123,10 @@ calculate(){
   this.items.controls.forEach((control: AbstractControl) => {
     const row = control as FormGroup;
     if (row instanceof FormGroup) {
-      const noRollsGriege = parseFloat(row.get('noRollsGriege')?.value) || 0;
-      const noRollsFinish = parseFloat(row.get('noRollsFinish')?.value) || 0;
-      const DelGreigeFab = parseFloat(row.get('deliveryGreigeFab')?.value) || 0;
-      const DelFinishFab = parseFloat(row.get('deliveryFinishFab')?.value) || 0;
+      const noRollsGriege = parseFloat(row.get('griegeRolls')?.value) || 0;
+      const noRollsFinish = parseFloat(row.get('finishRolls')?.value) || 0;
+      const DelGreigeFab = parseFloat(row.get('griegeDeliveryKgs')?.value) || 0;
+      const DelFinishFab = parseFloat(row.get('finishDeliveryKgs')?.value) || 0;
       const DyeRate = parseFloat(row.get('dyeRate')?.value) || 0;
 
       noRollsGriegeSum += noRollsGriege;
@@ -201,11 +210,58 @@ getWoId(size: any, index: number) {
 
 
 saveButton(){
-  console.log(this.DyeDelivery.value)
+  this.api.addUpdateDyeDelivery(this.DyeDelivery.value).subscribe((res)=>{
+    alert(res.message)
+  })
 }
 
-edit(){
-  this.DelDyeEdit=true;
+edit(id:any){
+  this.SingleLineId = id
+  console.log(this.SingleLineId)
+  this.DelDyeEdit = true;
+  this.api.getSingleDyeDel(id).subscribe((res) => {
+    this.DyeSingleData = res;
+    this.DyeDelivery.patchValue({
+      "id": this.SingleLineId,
+      "date": this.DyeSingleData.headerData[0].date,
+      "factory": this.DyeSingleData.headerData[0].factory,
+    });
+
+    const DyeEntryData = this.DyeDelivery.get('data') as FormArray;
+    DyeEntryData.clear();
+
+    const formControls: FormGroup[] = [];
+    this.DyeSingleData.lineData.forEach((dataItem: any) => {
+      formControls.push(
+        this.fb.group({
+          "id": dataItem.id,
+          "woId": dataItem.woId,
+          "dyeChallan": dataItem.dyeChallan,
+          "batchNo": dataItem.batchNo,
+          "buyer": dataItem.buyer,
+          "orderNo": dataItem.orderNo,
+          "style": dataItem.style,
+          "color": dataItem.color,
+          "size": dataItem.size,
+          "griegeRolls": dataItem.griegeRolls,
+          "finishRolls": dataItem.finishRolls,
+          "griegeDeliveryKgs": dataItem.griegeDeliveryKgs,
+          "finishDeliveryKgs":dataItem.finishDeliveryKgs ,
+          "dyeRate": dataItem.dyeRate,
+          "dyeValue": dataItem.knitRate,
+        })
+      );
+    });
+
+    this.DyeDelivery.setControl('data', this.fb.array(formControls));
+  });
+}
+DeleteButton(id:any){
+  // console.log(id)
+this.api.deleteDyeDelivery(id).subscribe((res)=>{
+  alert(res.message)
+  window.location.reload()
+})
 }
 
 new(){

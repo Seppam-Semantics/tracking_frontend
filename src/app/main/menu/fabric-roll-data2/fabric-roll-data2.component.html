@@ -329,10 +329,14 @@
 
 <!---===========================================================================================================-->
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> c970a4d637a3abf8228614e01c3eb2ee893f2cec
 <p-dialog [resizable]="true" [modal]="true" [maximizable]="true" [(visible)]="visible" [style]="{width: '90vw'}"
   [contentStyle]="{height: '90vh'}" [formGroup]="woUpdateFrom">
 
-  <p-panel header="Fabric Roll Update " class="custom-panel">
+  <p-panel header="Fabric Roll Update " class="custom-panel popupwoUpdate1">
     <div>
       <div style="display: flex; justify-content: space-around; margin-bottom: 2%;">
         <div style="display: flex; width : fit-content;">
@@ -441,6 +445,110 @@
 
     </div>
   </p-panel>
+
+
+  <p-panel header="Fabric Roll Update " class="custom-panel popupwoUpdate2">
+    <div>
+
+        <div style="display: flex; width : fit-content;">
+          <label style="display: inline-block; width: 100px;">Buyer : </label>
+          <input type="text" matInput formControlName="buyer">
+        </div>
+        <div style="display: flex; width : fit-content;">
+          <label style="display: inline-block; width: 100px;">Order No : </label>
+          <input type="text" matInput formControlName="orderNo">
+        </div>
+
+
+
+
+        <div style="display: flex; width : fit-content;">
+          <label style="display: inline-block; width: 100px;">style : </label>
+          <input type="text" matInput formControlName="style">
+        </div>
+        <div style="display: flex; width : fit-content;">
+          <label style="display: inline-block; width: 100px;">color : </label>
+          <input type="text" matInput formControlName="color">
+        </div>
+
+
+
+        <div style="display: flex; width : fit-content;">
+          <label style="display: inline-block; width: 100px;">size : </label>
+          <input type="text" matInput formControlName="size">
+        </div>
+        <div style="display: flex; width : fit-content;">
+          <label style="display: inline-block; width: 100px;">fabType : </label>
+          <input type="text" matInput formControlName="fabType">
+        </div>
+
+
+
+        <div style="display: flex; width : fit-content;">
+          <label style="display: inline-block; width: 100px;">fabDia : </label>
+          <input type="text" matInput formControlName="fabDia">
+        </div>
+        <div style="display: flex; width : fit-content;">
+          <label style="display: inline-block; width: 100px;">fabGsm : </label>
+          <input type="text" matInput formControlName="fabGsm">
+        </div>
+
+
+
+        <div style="display: flex; width : fit-content;">
+          <label style="display: inline-block; width: 100px;">knitSL : </label>
+          <input type="text" matInput formControlName="knitSL">
+        </div>
+
+        <div style="display: flex; width : fit-content;">
+          <label style="display: inline-block; width: 100px;">yarn Kg : </label>
+          <input type="text" matInput formControlName="yarnKg">
+        </div>
+
+        <div style="display: flex; width : fit-content;">
+          <label style="display: inline-block; width: 100px;">Greige Kg : </label>
+          <input type="text" matInput formControlName="greigeKg">
+        </div>
+        <div style="display: flex; width : fit-content;">
+          <label style="display: inline-block; width: 100px;">Finished Kg : </label>
+          <input type="text" matInput formControlName="finishKg">
+        </div>
+
+
+
+        <div style="display: flex; width : fit-content;">
+          <label style="display: inline-block; width: 100px;">spinFty : </label>
+          <input type="text" matInput formControlName="spinFty">
+        </div>
+        <div style="display: flex; width : fit-content;">
+          <label style="display: inline-block; width: 100px;">knitFty : </label>
+          <input type="text" matInput formControlName="knitFty">
+        </div>
+
+        <div style="display: flex; width : fit-content;">
+          <label style="display: inline-block; width: 100px;">dyeingFty : </label>
+          <input type="text" matInput formControlName="dyeinFty">
+        </div>
+
+        <div style="display: flex; width : fit-content;">
+          <label style="display: inline-block; width: 100px;">yarn Type : </label>
+          <input type="text" matInput formControlName="yarnType">
+        </div>
+
+
+
+
+        <div style="display: flex; width : fit-content;">
+
+          <p-dropdown [options]="[{ 'name': 'Open', 'id': true }, { 'name': 'Close', 'id': false }]"
+          placeholder="Select a Status" formControlName="status" [(ngModel)]="status"  
+          optionLabel="name" optionValue="id"></p-dropdown>
+
+        </div>
+
+    </div>
+  </p-panel>
+
   <ng-template pTemplate="footer">
     <div style="display: flex; justify-content: center;">
       <button class="btn btn-primary" (click)="woupdatesubmit()">Update</button>

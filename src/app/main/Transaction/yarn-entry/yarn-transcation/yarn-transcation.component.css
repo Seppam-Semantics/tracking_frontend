@@ -100,3 +100,9 @@ thead{
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
       }
+
+      .YarnScroll{
+        display: block;
+        overflow-y: auto;
+        scrollbar-width: none;
+      }

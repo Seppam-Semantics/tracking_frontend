@@ -25,3 +25,21 @@ thead {
     position: sticky;
     top: 0;
   }
+
+.option1{
+    display: flex; gap : 10px
+}
+
+.option2{
+    display: none;
+}
+
+@media screen and (max-width: 600px) {
+    .option1{
+     display: none;
+    }
+    
+    .option2{
+        display: contents;
+    }   
+}

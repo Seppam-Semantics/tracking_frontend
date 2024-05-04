@@ -10,8 +10,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  // apiUrl = "https://tracker.seppam.com";
-  apiUrl = "http://localhost:2000";
+  apiUrl = "https://tracker.seppam.com";
+  // apiUrl = "http://localhost:2000";
 
 
   token: any;
@@ -427,5 +427,19 @@ addUpdateKnitDelivery(data:any):Observable<any>{
 deleteKnitDelivery(id:any):Observable<any>{
   return this.http.delete(this.getUrl() + `/knittodye/knit-delivery/${id}`, this.getHeaders())
 }
+// ============================================= Dye Delivery ===================================================================================
 
+addUpdateDyeDelivery(data:any):Observable<any>{
+  return this.http.post(this.getUrl()+ `/dyedeliveryapi/dye-delivery` ,data , this.getHeaders())
+}
+
+getDyeDelivery():Observable<any>{
+  return this.http.get(this.getUrl() + `/dyedeliveryapi/dye-delivery`, this.getHeaders())
+}
+getSingleDyeDel(id:any):Observable<any>{
+  return this.http.get(this.getUrl() + `/dyedeliveryapi/dye-delivery/${id}`, this.getHeaders())
+}
+deleteDyeDelivery(id:any):Observable<any>{
+  return this.http.delete(this.getUrl() + `/dyedeliveryapi/dye-delivery/${id}`, this.getHeaders())
+}
 }

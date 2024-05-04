@@ -125,3 +125,12 @@ th,tr,td{
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
       }
+
+      .fillterOption{
+        display: flex; justify-content: center; gap: 0.5%; width: 100%;
+      }
+      .TableScroll{
+        display: block;
+        overflow-y: auto;
+        scrollbar-width: none;
+      }

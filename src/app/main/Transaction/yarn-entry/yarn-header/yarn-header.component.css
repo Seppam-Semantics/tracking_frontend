@@ -49,6 +49,12 @@ thead{
   -webkit-animation: spin 1s linear infinite;
   animation: spin 1s linear infinite;
   }
+
+  .YarnScroll{
+    display: block;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
      
   @-webkit-keyframes spin {
     0% { -webkit-transform: rotate(0deg); }
