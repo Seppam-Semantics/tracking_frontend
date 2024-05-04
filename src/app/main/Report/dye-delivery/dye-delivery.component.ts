@@ -149,11 +149,10 @@ calculate(){
 
   }
 
-  //-------------------------------------------------------------------------//
-buyername() {
-  this.api.getbuyers().subscribe((res) => {
+// <!------------------------------------------------------------>
+buyername(){
+  this.api.getbuyers().subscribe((res)=>{
     this.buyer = res.buyers
-    console.log(this.buyer)
   })
 }
 getBuyerValue(event: any) {
@@ -166,7 +165,7 @@ getorders() {
   })
 }
 
-getOrderValue(event: any) {
+getOrderValue(event:any){
   this.orderNo = event.target.value
 }
 
@@ -176,7 +175,7 @@ getstyle() {
   })
 }
 
-getstylevalue(event: any) {
+getstylevalue(event:any){
   this.style = event.target.value
 }
 
@@ -186,7 +185,7 @@ getcolor() {
   })
 }
 
-getcolorvalue(event: any) {
+getcolorvalue(event:any){
   this.color = event.target.value
 }
 
@@ -198,20 +197,21 @@ getsize() {
 
 getWoId(size: any, index: number) {
   this.api.getwodetails(this.buyerName, this.orderNo, this.style, this.color, size ).subscribe((res) => {
-    const woId = res.workorders[index].id;
-    console.log(woId);
+    const woId = res.workorders[0].id;
+    console.log(woId)
     const formArray = this.DyeDelivery.get('data') as FormArray;
     const row = formArray.at(index);
     row.get('woId')?.setValue(woId);
   });
 }
-//-------------------------------------------------------------------------//
+// <!------------------------------------------------------------>
 
 
 
 saveButton(){
   this.api.addUpdateDyeDelivery(this.DyeDelivery.value).subscribe((res)=>{
     alert(res.message)
+    window.location.reload()
   })
 }
 
