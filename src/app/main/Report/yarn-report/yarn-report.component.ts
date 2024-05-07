@@ -55,9 +55,21 @@ export class YarnReportComponent implements OnInit {
   QCindexvalue: any;
   spinDDLcNo: any;
   someStatus: any;
+  ViewAllYarnData : boolean = false;
+  LcClosure: any;
+  YarnData: any;
+  LcClosureData: any[] = [];
+  yarnLcClosure: any;
+  yarn_lc_linesLcClosure: any;
+  yarn_lot_checkLcClosure: any;
 
-  constructor(private router : Router, private api:ApiService) { }
 
+  constructor(private router : Router, private api:ApiService , private fb : FormBuilder) { }
+
+  
+
+
+  
 
   ngOnInit(): void {
     this.api.getAllYarn().subscribe((res) => {
@@ -119,10 +131,23 @@ exportexcel() {
     this.router.navigate(['/main/yarn-header'])
   }
 
+  outstanding(){
+    this.router.navigate(['/main/lc-outstanding'])
+  }
 
   EditAllData(id:any){
     sessionStorage.setItem('singleData', id)
     this.router.navigate(['/main/yarn-transcation'])
+  }
+
+  view(id:any){
+    this.ViewAllYarnData = true
+    this.LcClosure = id
+    this.api.getSingleLcClosure(id).subscribe((res)=>{
+      this.yarnLcClosure = res.yarn
+      this.yarn_lc_linesLcClosure = res.yarn_lc_lines
+      console.log(res)
+    })
   }
 
   delete(id: any) {
