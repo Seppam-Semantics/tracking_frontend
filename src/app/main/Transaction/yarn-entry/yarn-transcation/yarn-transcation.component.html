@@ -302,6 +302,7 @@
                         <tr>
                             <th>Sl.No</th>
                             <th>Yarn Type</th>
+                            <th>Buyer</th>
                             <th>Order No</th>
                             <th>Style</th>
                             <th>Color</th>
@@ -316,8 +317,9 @@
                         <tr *ngFor="let order of this.yarnOrderAllocations; let i = index;">
                             <td>{{i+1}}</td>
                             <td>{{order.yarnType}}</td>
+                            <td>{{order.buyer}}</td>
                             <td>{{order.utilisationOrderNo}}</td>
-                            <td></td>
+                            <td>{{order.style}}</td>
                             <td>{{order.colour}}</td>
                             <td>{{order.lotNo}}</td>
                             <td>{{order.allocatedYarnKgs}}</td>

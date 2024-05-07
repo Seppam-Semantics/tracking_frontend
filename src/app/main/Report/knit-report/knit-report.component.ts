@@ -262,7 +262,9 @@ export class KnitReportComponent implements OnInit {
     })
   }
 
-
+  KnitFactoryInventory(){
+    this.router.navigate(['/main/knit-factory-inventory'])
+  }
 
   edit(id: any) {
     this.editpopup = true;

@@ -144,61 +144,62 @@ exportexcel() {
       this.KnitDelivery.get('KnitTotal')?.setValue(KnitValueTotal2);
     });
   }
-  //-------------------------------------------------------------------------//
-  buyername() {
-    this.api.getbuyers().subscribe((res) => {
-      this.buyer = res.buyers
-    })
-  }
-  getBuyerValue(event: any) {
-    this.buyerName = event.target.value;
-  }
+// <!------------------------------------------------------------>
+buyername(){
+  this.api.getbuyers().subscribe((res)=>{
+    this.buyer = res.buyers
+  })
+}
+getBuyerValue(event: any) {
+  this.buyerName = event.target.value;
+}
 
-  getorders() {
-    this.api.getorders(this.buyerName).subscribe((res) => {
-      this.order = res.orders
-    })
-  }
+getorders() {
+  this.api.getorders(this.buyerName).subscribe((res) => {
+    this.order = res.orders
+  })
+}
 
-  getOrderValue(event: any) {
-    this.orderNo = event.target.value
-  }
+getOrderValue(event:any){
+  this.orderNo = event.target.value
+}
 
-  getstyle() {
-    this.api.getstyle(this.buyerName, this.orderNo).subscribe((res) => {
-      this.stylelist = res.styles;
-    })
-  }
+getstyle() {
+  this.api.getstyle(this.buyerName, this.orderNo).subscribe((res) => {
+    this.stylelist = res.styles;
+  })
+}
 
-  getstylevalue(event: any) {
-    this.style = event.target.value
-  }
+getstylevalue(event:any){
+  this.style = event.target.value
+}
 
-  getcolor() {
-    this.api.getcolor(this.buyerName, this.orderNo, this.style).subscribe((res) => {
-      this.colorlist = res.colors;
-    })
-  }
+getcolor() {
+  this.api.getcolor(this.buyerName, this.orderNo, this.style).subscribe((res) => {
+    this.colorlist = res.colors;
+  })
+}
 
-  getcolorvalue(event: any) {
-    this.color = event.target.value
-  }
+getcolorvalue(event:any){
+  this.color = event.target.value
+}
 
-  getsize() {
-    this.api.getsize(this.buyerName, this.orderNo, this.style, this.color).subscribe((res) => {
-      this.sizelist = res.sizes;
-    })
-  }
-  getWoId(size: any, index: number) {
-    this.api.getwodetails(this.buyerName, this.orderNo, this.style, this.color, size ).subscribe((res) => {
-      const woId = res.workorders[index].id;
-      console.log(woId);
-      const formArray = this.KnitDelivery.get('data') as FormArray;
-      const row = formArray.at(index);
-      row.get('woId')?.setValue(woId);
-    });
-  }
-  //-------------------------------------------------------------------------//
+getsize() {
+  this.api.getsize(this.buyerName, this.orderNo, this.style, this.color).subscribe((res) => {
+    this.sizelist = res.sizes;
+  })
+}
+
+getWoId(size: any, index: number) {
+  this.api.getwodetails(this.buyerName, this.orderNo, this.style, this.color, size ).subscribe((res) => {
+    const woId = res.workorders[0].id;
+    console.log(woId)
+    const formArray = this.KnitDelivery.get('data') as FormArray;
+    const row = formArray.at(index);
+    row.get('woId')?.setValue(woId);
+  });
+}
+// <!------------------------------------------------------------>
   delete(id: any) {
     this.api.deleteKnitDelivery(id).subscribe((res) => {
       alert(res.message)

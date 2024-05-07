@@ -362,6 +362,13 @@ DyeFilter(DyeFactory: any , buyer?:any , orderNo?:any, style?:any , color?:any ,
   getSingleYarnData(id:any):Observable<any>{
     return this.http.get(this.getUrl() + `/yarnapi/yarn/${id}`, this.getHeaders())
   }
+  //-------------------------------------------------------------------
+
+  getSingleLcClosure(id:any):Observable<any>{
+    return this.http.get(this.getUrl() + `/yarnapi/LcClosure/${id}`, this.getHeaders())
+  }
+
+  //-------------------------------------------------------------------
 
   gettingYarnType(spinner:any, lcNo:string = ''):Observable<any>{
     return this.http.get(this.getUrl()+`/yarnapi/yarn-filter?id=&spinner=${spinner}&lcNo=${lcNo}&lcValue=&yarnStatus=&pi=`, this.getHeaders())

@@ -5,8 +5,8 @@
 
 <!---===========================================================================================================-->
 
-  <div style="display: flex; margin-top: 1%;">
-    <div style="display: flex; justify-content: center; width: 80%; gap: 2%;">
+  <mat-toolbar>
+    <div style="display: flex; justify-content: center; width: 80%; gap: 2%;margin-top: 1.5%;">
       <mat-form-field appearance="outline">
         <mat-label>Factory</mat-label>
         <mat-select [(ngModel)]="factoryvalue" (selectionChange)="factory()">
@@ -22,16 +22,18 @@
       </mat-form-field>
 
     </div>
+    <div style="flex: 1 1 auto;"></div>
     <div class="newlist1">
       <button mat-button color='primary' (click)="Report()">New</button>
-      <button mat-button color='primary' (click)="exportexcel2()">Download</button>
+      <button mat-button color='primary' (click)="exportexcel2()"><mat-icon>download</mat-icon>Download</button>
+      <button mat-button color='primary' (click)="KnitFactoryInventory()">Knit Factory Inventory</button>
     </div>
-  </div>
+
   <div class="newlist2">
     <button mat-button color='primary' (click)="Report()">New</button>
     <button mat-button color='primary' (click)="exportexcel2()">Download</button>
   </div>
-
+</mat-toolbar>
 <div class="fixTableHead">
   <table id="table-data2" class="table table-hover">
     <thead class="thead-dark">

@@ -4,8 +4,8 @@
       <span>Yarn Report</span>
     </mat-toolbar>
   </div>
-  <div style="display: flex; align-items: center; justify-content: space-between;  margin-top: 2%;">
-    <div style="display: flex; align-items: center; justify-content: center; width: 70%; gap: 20px;">
+  <div style="display: flex; align-items: center; justify-content: space-between;">
+    <div style="display: flex; align-items: center; justify-content: center; width: 70%; gap: 20px; margin-top: 1%;">
       <mat-form-field appearance="outline">
         <mat-label>Spin Fty</mat-label>
         <mat-select [(ngModel)]="spinfactory" (selectionChange)="yarnlcNo()">
@@ -29,8 +29,9 @@
       </mat-form-field>
     </div>
     <div class="option1">
-      <button class="btn btn-primary" (click)="yarnHead()">New Header</button>
-      <button class="btn btn-primary" (click)="exportexcel()">Download</button>
+      <button mat-button color="primary" (click)="yarnHead()">New Header</button>
+      <button mat-button color="primary" (click)="exportexcel()"><mat-icon>download</mat-icon>Download</button>
+      <button mat-button color="primary" (click)="outstanding()">LC Outstanding</button>
     </div>
 
     <div class="option2">
@@ -59,14 +60,14 @@
       <tbody>
         <tr *ngFor="let data of this.AllData;let i = index">
           <td>{{i+1}}</td>
-          <td>{{data.spinner}}</td>
-          <td>{{data.lcDate}}</td>
-          <td>{{data.lcNo}}</td>
-          <td>{{data.pi}}</td>
-          <td>{{data.piDate}}</td>
-          <td>{{data.lcYarnTotal}}</td>
-          <td>{{data.lcValue}}</td>
-          <td>{{data.yarnStatus}}</td>
+          <td (click)="view(data.id)">{{data.spinner}}</td>
+          <td (click)="view(data.id)">{{data.lcDate}}</td>
+          <td (click)="view(data.id)">{{data.lcNo}}</td>
+          <td (click)="view(data.id)">{{data.pi}}</td>
+          <td (click)="view(data.id)">{{data.piDate}}</td>
+          <td (click)="view(data.id)">{{data.lcYarnTotal}}</td>
+          <td (click)="view(data.id)">{{data.lcValue}}</td>
+          <td (click)="view(data.id)">{{data.yarnStatus}}</td>
           <td><button class="btn btn-primary" (click)="EditAllData(data.id)"><mat-icon>edit</mat-icon></button></td>
           <td><button class="btn btn-danger" (click)="delete(data.id)"><mat-icon>delete</mat-icon></button></td>
         </tr>
@@ -75,3 +76,120 @@
     </table>
   </div>
 </div>
+
+
+
+<p-dialog [(visible)]="ViewAllYarnData" [modal]="true" [style]="{ width: '100%', height : '100%' }"
+  header="LC Closure Report" [maximizable]="true" [resizable]="true">
+
+
+  <div *ngFor="let data of this.yarnLcClosure; let i = index;">
+    <table class="table table-hover table-bordered">
+      <tbody>
+        <tr>
+          <td><b>LC no :</b> {{data.lcNo}} </td>
+          <td><b>PI :</b> {{data.pi}} </td>
+          <td><b>LC Qty :</b> {{data.lcValue}} </td>
+          <td><b>LC Date :</b> {{data.lcDate}} </td>
+          <td><b>PI date :</b> {{data.piDate}} </td>
+          <td><b>LC Value :</b> {{data.lcYarnTotal}} </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <div *ngFor="let data of this.yarn_lc_linesLcClosure;  let i = index;">
+    <div *ngFor="let data2 of this.yarn_lot_checkLcClosure;  let i = index;">
+      <p-panel header="LineEntey">
+        <div>
+          <table class="table table-hover table-bordered" style="margin-top: -15px;">
+            <tbody>
+              <tr>
+                <td>Yarn Type : {{data.yarnType}} </td>
+                <td>Yarn Kgs : {{data.lcYarnKgs}}</td>
+                <td>Yarn Rate : {{data.yarnRate}} </td>
+                <td>LC Value : {{data.yarnValue}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <table class="table table-hover table-bordered" style="margin-top: -15px;">
+            <thead>
+              <th colspan="5" style="text-align: center;"><b>Lot Check</b></th>
+            </thead>
+            <thead class="thead-dark">
+              <tr>
+                <th>Lot No</th>
+                <th>Sample Dt</th>
+                <th>Result Dt</th>
+                <th>Remarks</th>
+                <th>Acc/Rej</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{data2.lotNo}}</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <div style="display: flex; justify-content: space-evenly;">
+            <div style="display: flex; ">
+              <label style="display: inline-block;">Buyer : </label>
+            </div>
+
+            <div style="display: flex; ">
+              <label style="display: inline-block;">OrderNo : </label>
+            </div>
+
+            <div style="display: flex; ">
+              <label style="display: inline-block;">Style : </label>
+            </div>
+
+            <div style="display: flex; ">
+              <label style="display: inline-block;">Color : </label>
+            </div>
+
+            <div style="display: flex; ">
+              <label style="display: inline-block;">Allocated : </label>
+            </div>
+
+          </div>
+          <div>
+            <table class="table table-hover table-bordered">
+              <thead class="thead-dark">
+                <tr>
+                  <th>Receipt Dt</th>
+                  <th>Receipt Qty</th>
+                  <th>Check Date</th>
+                  <th>Remarks</th>
+                  <th>Acc/Rej</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </p-panel>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <button mat-button color="danger"><mat-icon>close</mat-icon>close</button>
+    <button mat-button color="primary"><mat-icon>download</mat-icon>Download</button>
+  </ng-template>
+</p-dialog>

@@ -71,6 +71,8 @@ import { ButtonModule } from 'primeng/button';
 import { SplitterModule } from 'primeng/splitter';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { InputTextModule } from 'primeng/inputtext';
+import { LCOutstandingComponent } from './Report/lc-outstanding/lc-outstanding.component';
+import { KnitFactoryInventoryComponent } from './Report/knit-factory-inventory/knit-factory-inventory.component';
 
 
 @NgModule({
@@ -109,6 +111,8 @@ import { InputTextModule } from 'primeng/inputtext';
     KnitDelEntryComponent,
     KnitDeliveryComponent,
     DyeDeliveryComponent,
+    LCOutstandingComponent,
+    KnitFactoryInventoryComponent,
 
   ],
   imports: [
