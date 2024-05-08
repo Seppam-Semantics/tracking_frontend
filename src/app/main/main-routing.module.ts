@@ -30,6 +30,7 @@ import { DyeDelEntryComponent } from './Transaction/dye-del-entry/dye-del-entry.
 import { KnitDelEntryComponent } from './Transaction/knit-del-entry/knit-del-entry.component';
 import { LCOutstandingComponent } from './Report/lc-outstanding/lc-outstanding.component';
 import { KnitFactoryInventoryComponent } from './Report/knit-factory-inventory/knit-factory-inventory.component';
+import { DyeFactoryInventoryComponent } from './Report/dye-factory-inventory/dye-factory-inventory.component';
 
 const routes: Routes = [
   {path:'', component: AppComponent},
@@ -64,7 +65,8 @@ const routes: Routes = [
   {path:"Dye-DelEntry" , component:DyeDelEntryComponent},
   {path:"Knit-DelEntry" , component:KnitDelEntryComponent},
   {path:"lc-outstanding" , component:LCOutstandingComponent},
-  {path:"knit-factory-inventory" ,component:KnitFactoryInventoryComponent}
+  {path:"knit-factory-inventory" ,component:KnitFactoryInventoryComponent},
+  {path:"dye-factory-inventory" , component:DyeFactoryInventoryComponent},
 
 ];
 

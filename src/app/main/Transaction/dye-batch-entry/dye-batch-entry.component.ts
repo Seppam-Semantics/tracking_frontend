@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
@@ -56,7 +56,7 @@ constructor(private fb : FormBuilder , private api : ApiService , private router
     
     "batchRemarks": new FormControl(''),
   
-    "batch_batchMakeDate": new FormControl(null),
+    "batch_batchMakeDate": new FormControl(null,Validators.required),
     "batch_batchRollsSLCheck": new FormControl(''),
     
     "dyeing_loadDatetime": new FormControl(),
@@ -225,15 +225,20 @@ this.items.removeAt(index)
 }
 
 dyesubmit() {
-  console.log(this.dye_Entery.value)
-  this.loading =true
-  this.api.post_dyereport_entry(this.dye_Entery.value).subscribe((res)=>{
-    alert(res.message)
-    this.loading =false    
-    if(res.success== true){
-      this.router.navigate(['/main/Dye-Report'])    
-    }
-  })
+  if (this.dye_Entery.valid) {
+    console.log(this.dye_Entery.value)
+    this.loading =true
+    this.api.post_dyereport_entry(this.dye_Entery.value).subscribe((res)=>{
+      alert(res.message)
+      this.loading =false    
+      if(res.success== true){
+        this.router.navigate(['/main/Dye-Report'])    
+      }
+    })
+  
+  } else {
+    alert('Please fill Batch Make Date');
+  }
 }
 
 //==============================================================================

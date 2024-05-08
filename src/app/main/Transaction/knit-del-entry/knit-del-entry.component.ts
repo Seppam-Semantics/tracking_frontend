@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Dropdown } from 'primeng/dropdown';
 import { ApiService } from 'src/app/api.service';
@@ -77,9 +77,9 @@ KnitDeliveryAddButton(){
     "style": new FormControl(),
     "color": new FormControl(),
     "size": new FormControl(),
-    "noOfRolls": new FormControl(''),
+    "noOfRolls": new FormControl('',Validators.required),
     "deliveryKgs": new FormControl(''),
-    "knitRate": new FormControl(''),
+    "knitRate": new FormControl('',Validators.required),
     "knitValue": new FormControl(''),
 
   });
@@ -182,9 +182,15 @@ getWoId(size: any, index: number) {
 // <!------------------------------------------------------------>
 
 saveButton(){
-  this.api.addUpdateKnitDelivery(this.KnitDelivery.value).subscribe((res)=>{
-    alert(res.message)
-    this.router.navigate(['/main/knit-delivery'])
-  })
+  if (this.KnitDelivery.valid) {
+    this.api.addUpdateKnitDelivery(this.KnitDelivery.value).subscribe((res)=>{
+      alert(res.message)
+      this.router.navigate(['/main/knit-delivery'])
+    })
+  } else {
+    alert('Please fill NoRolls , DyeRate fields // Entry should more then 0.');
+  }
+
 }
+
 }

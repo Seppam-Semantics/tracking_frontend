@@ -8,133 +8,133 @@ import { ApiService } from 'src/app/api.service';
   templateUrl: './report-entry.component.html',
   styleUrls: ['./report-entry.component.css']
 })
-export class ReportEntryComponent implements OnInit  {
-load:FormGroup;
-isChecked: boolean = true;
-yes:any;
-no:any
+export class ReportEntryComponent implements OnInit {
+  load: FormGroup;
+  isChecked: boolean = true;
+  yes: any;
+  no: any
   fty_name: any;
   buyer: any;
   order: any;
   stylelist: any;
   colorlist: any;
   sizelist: any;
-  buyerName : any;
-  orderNo:any;
-  style:any;
-  color:any;
-  size:any;
-  woId: any[]=[];
-  loading : boolean = false;
-  constructor(private fb: FormBuilder , private api : ApiService , private router : Router) {
+  buyerName: any;
+  orderNo: any;
+  style: any;
+  color: any;
+  size: any;
+  woId: any[] = [];
+  loading: boolean = false;
+  constructor(private fb: FormBuilder, private api: ApiService, private router: Router) {
     this.load = this.fb.group({
-      id:new FormControl(0),
+      id: new FormControl(0),
       date: new FormControl(''),
-      factory : new FormControl('', Validators.required),
+      factory: new FormControl('', Validators.required),
       houseKeepingStatus: new FormControl(''),
-      gasElecAvailability : new FormControl(''),
-      floorLightingStatus : new FormControl(''),
-      storageAreaStatus : new FormControl(''),
+      gasElecAvailability: new FormControl(''),
+      floorLightingStatus: new FormControl(''),
+      storageAreaStatus: new FormControl(''),
       allocatedDay: [''],
       data: this.fb.array([])
     });
 
-    }
+  }
 
 
-  ngOnInit() {  
+  ngOnInit() {
     this.factoryname()
     this.buyername()
   }
 
-    factoryname(){
-      this.api.knitfty_name().subscribe((res)=>{
-        this.fty_name=res.factorys
-      })
-    }
+  factoryname() {
+    this.api.knitfty_name().subscribe((res) => {
+      this.fty_name = res.factorys
+    })
+  }
 
 
-// <!------------------------------------------------------------>
-    buyername(){
-      this.api.getbuyers().subscribe((res)=>{
-        this.buyer = res.buyers
-      })
-    }
-    getBuyerValue(event: any) {
-      this.buyerName = event.target.value;
-    }
+  // <!------------------------------------------------------------>
+  buyername() {
+    this.api.getbuyers().subscribe((res) => {
+      this.buyer = res.buyers
+    })
+  }
+  getBuyerValue(event: any) {
+    this.buyerName = event.target.value;
+  }
 
-    getorders() {
-      this.api.getorders(this.buyerName).subscribe((res) => {
-        this.order = res.orders
-      })
-    }
-    
-    getOrderValue(event:any){
-      this.orderNo = event.target.value
-    }
+  getorders() {
+    this.api.getorders(this.buyerName).subscribe((res) => {
+      this.order = res.orders
+    })
+  }
 
-    getstyle() {
-      this.api.getstyle(this.buyerName, this.orderNo).subscribe((res) => {
-        this.stylelist = res.styles;
-      })
-    }
-  
-    getstylevalue(event:any){
-      this.style = event.target.value
-    }
+  getOrderValue(event: any) {
+    this.orderNo = event.target.value
+  }
 
-    getcolor() {
-      this.api.getcolor(this.buyerName, this.orderNo, this.style).subscribe((res) => {
-        this.colorlist = res.colors;
-      })
-    }
+  getstyle() {
+    this.api.getstyle(this.buyerName, this.orderNo).subscribe((res) => {
+      this.stylelist = res.styles;
+    })
+  }
 
-    getcolorvalue(event:any){
-      this.color = event.target.value
-    }
-  
-    getsize() {
-      this.api.getsize(this.buyerName, this.orderNo, this.style, this.color).subscribe((res) => {
-        this.sizelist = res.sizes;
-      })
-    }
+  getstylevalue(event: any) {
+    this.style = event.target.value
+  }
 
-    getWoId(size: any, index: number) {
-      this.api.getwodetails(this.buyerName, this.orderNo, this.style, this.color, size ).subscribe((res) => {
-        const woId = res.workorders[0].id;
-        console.log(woId)
-        const formArray = this.load.get('data') as FormArray;
-        const row = formArray.at(index);
-        row.get('woId')?.setValue(woId);
-      });
-    }
+  getcolor() {
+    this.api.getcolor(this.buyerName, this.orderNo, this.style).subscribe((res) => {
+      this.colorlist = res.colors;
+    })
+  }
+
+  getcolorvalue(event: any) {
+    this.color = event.target.value
+  }
+
+  getsize() {
+    this.api.getsize(this.buyerName, this.orderNo, this.style, this.color).subscribe((res) => {
+      this.sizelist = res.sizes;
+    })
+  }
+
+  getWoId(size: any, index: number) {
+    this.api.getwodetails(this.buyerName, this.orderNo, this.style, this.color, size).subscribe((res) => {
+      const woId = res.workorders[0].id;
+      console.log(woId)
+      const formArray = this.load.get('data') as FormArray;
+      const row = formArray.at(index);
+      row.get('woId')?.setValue(woId);
+    });
+  }
   // <!------------------------------------------------------------>
 
 
-  
+
 
   get items() {
     return this.load.get('data') as FormArray;
   }
-  
+
   add() {
     const numberOfEntries = parseInt(this.load.get('allocatedDay')?.value);
     const formControls = [];
     for (let i = 0; i < numberOfEntries; i++) {
       formControls.push(
         this.fb.group({
-          "id": [i+1],
+          "id": [i + 1],
           "buyer": [''],
           "orderNo": [''],
           "style": [''],
           "color": [''],
           "size": [''],
-          "woId":[],
+          "woId": [],
           "knitMachineno": [''],
           "yarnLot": [''],
           "dayProductionKgs": [''],
-          "noOfRollsProduced": [''],
+          "noOfRollsProduced": ['', Validators.required],
           "noOfRollsChecked": [''],
           "knittingSL": [''],
           "machineRPM": [''],
@@ -144,21 +144,25 @@ no:any
           "sinkerQuality": [''],
           "movingFan": [''],
           "allStopMotion": [''],
-          "takeupRollerTension":[''],
-          "remarks":['']
+          "takeupRollerTension": [''],
+          "remarks": ['']
         })
       );
     }
     this.load.setControl('data', this.fb.array(formControls));
   }
 
-  save(){
-    this.loading = true;
-    this.api.knit_entry(this.load.value).subscribe((res)=>{
-    alert(res.message)
-    this.loading = false;
-    this.router.navigate(['/main/Knit-Report'])
-  })
+  save() {
+    if (this.load.valid) {
+      this.loading = true;
+      this.api.knit_entry(this.load.value).subscribe((res) => {
+        alert(res.message)
+        this.loading = false;
+        this.router.navigate(['/main/Knit-Report'])
+      })
+    } else {
+      alert('Please fill No.Rolls Produced fields // Entry should more then 0.');
+    }
   }
 
 
