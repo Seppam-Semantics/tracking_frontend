@@ -1,26 +1,30 @@
 <mat-toolbar style="height: auto;">
 
-    <div style="width: 100%; display: flex; justify-content: center;">Dye Factory Inventory</div>
+    <div style="width: 100%; display: flex; justify-content: center;">Yarn Reconciliation</div>
     <div style="flex: 1 1 auto;"></div>
     <div style="display: flex; gap: 25px;">
         <div style="display: flex; gap: 10px;">
-            <label style="font-weight: normal; font-family: serif;">As on Date</label>
+            <label style="font-weight: normal; font-family: serif;">From</label>
+            <input type="date" class="form-control" style="margin-top: 2px;">
+        </div>
+        <div style="display: flex; gap: 10px;">
+            <label style="font-weight: normal; font-family: serif;">To</label>
             <input type="date" class="form-control" style="margin-top: 2px;">
         </div>
         <div>
-            <button mat-button color="primary"><mat-icon>download</mat-icon>Download</button>
+            <button mat-button color="primary" (click)="downloadAsPDF()"><mat-icon>download</mat-icon>Download</button>
         </div>
 
     </div>
 </mat-toolbar>
 
 <div>
-    <table class="table table-hover table-bordered">
+    <table class="table table-hover table-bordered" id="tableToConvert">
         <thead class="thead-dark">
             <tr>
                 <th>Sl.no</th>
 
-                <th>Dye Factory</th>
+                <th>Knit Factory</th>
                 <th>Buyer</th>
                 <th>Order no</th>
 
@@ -28,25 +32,25 @@
                 <th>Color</th>
                 <th>Knit Griege Booking Kgs</th>
 
-                <th>Dye Finish Booking Kgs</th>
-                <th>Knit Greige Delivery Kgs</th>
-                <th>Dye Finish Delivery Kgs</th>
+                <th>Yarn Order Allocated Kgs</th>
+                <th>Yarn Receipt Kgs</th>
+                <th>Greige Delivery Kgs</th>
 
                 <th>
                     <div style="display: flex; flex-direction: column;">
-                        <div>Inventory Dye Greige Kgs</div>
+                        <div>Excess Allocation Kgs</div>
                         <div><input type="text"></div>
                     </div>
                 </th>
                 <th>
                     <div style="display: flex; flex-direction: column;">
-                        <div>Pending Dye Finish Kgs</div>
+                        <div>Excess Yarn reciept</div>
                         <div><input type="text"></div>
                     </div>
                 </th>
                 <th>
                     <div style="display: flex; flex-direction: column;">
-                        <div>Balance Greige Kgs</div>
+                        <div>Excess Griege Utilisation</div>
                         <div><input type="text"></div>
                     </div>
                 </th>

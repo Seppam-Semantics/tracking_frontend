@@ -74,6 +74,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { LCOutstandingComponent } from './Report/lc-outstanding/lc-outstanding.component';
 import { KnitFactoryInventoryComponent } from './Report/knit-factory-inventory/knit-factory-inventory.component';
 import { DyeFactoryInventoryComponent } from './Report/dye-factory-inventory/dye-factory-inventory.component';
+import { YarnReconciliationComponent } from './Report/yarn-reconciliation/yarn-reconciliation.component';
 
 
 @NgModule({
@@ -115,6 +116,7 @@ import { DyeFactoryInventoryComponent } from './Report/dye-factory-inventory/dye
     LCOutstandingComponent,
     KnitFactoryInventoryComponent,
     DyeFactoryInventoryComponent,
+    YarnReconciliationComponent,
 
   ],
   imports: [

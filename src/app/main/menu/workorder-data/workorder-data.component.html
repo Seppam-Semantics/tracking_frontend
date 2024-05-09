@@ -79,7 +79,7 @@
   <mat-toolbar style="height: fit-content; padding: 10px;">
     <div class="Template">
         <div>
-            <a class="btn btn-primary" style="margin-left: 96%;" href="../assets/WorkOrder template-2.xlsx">Template
+            <a class="btn btn-primary" style="margin-left: 96%;" href="../assets/WorkOrder template 2.xlsx">Template
                 <i class="material-icons" style="font-size:medium;">file_download</i>
             </a>
         </div>
@@ -111,44 +111,53 @@
       <table style="overflow: scroll;">
         <thead>
           <tr>
-            <th>buyer</th>
-            <th>orderNo</th>
-            <th>style</th>
-            <th>color</th>
-            <th>size</th>
-            <th>fabType</th>
-            <th>fabDia</th>
-            <th>fabGsm</th>
-            <th>knitSL</th>
-            <th>Yarn Type</th>
-            <th>yarnKgs</th>
-            <th>greigeKg</th>
-            <th>finishedKg</th>
-            <th>spinFty</th>
-            <th>knitFty</th>
-            <th>dyeingFty</th>
+            <th>Buyer</th>
+            <th>OrderNo</th>
+            <th>Style</th>
+            <th>Color</th>
+            <th>Size</th>
+            <th>FabType</th>
+            <th>FabDia</th>
+            <th>FabGsm</th>
+            <th>KnitSL</th>
+            <th>YarnType</th>
+            <th>YarnKg</th>
+            <th>GreigeKg</th>
+            <th>FinishKg</th>
+            <th>SpinFty</th>
+            <th>KnitFty</th>
+            <th>DyeinFty</th>
             <th>noDays</th>
+            <th>OrderPcs</th>
+            <th>OrderFOBRate</th>
+            <th>KnitRate</th>
+            <th>DyeRate</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let wo of this.dataSource">
-            <td>{{wo.buyer}}</td>
-            <td>{{wo.orderNo}}</td>
-            <td>{{wo.style}}</td>
-            <td>{{wo.color}}</td>
-            <td>{{wo.size}}</td>
-            <td>{{wo.fabType}}</td>
-            <td>{{wo.fabDia}}</td>
-            <td>{{wo.fabGsm}}</td>
-            <td>{{wo.knitSL}}</td>
-            <td>{{wo.yarnType}}</td>
-            <td>{{wo.yarnKg}}</td>
-            <td>{{wo.greigeKg}}</td>
-            <td>{{wo.finishKg}}</td>
-            <td>{{wo.spinFty}}</td>         
-            <td>{{wo.knitFty}}</td>
-            <td>{{wo.dyeinFty}}</td>
+            <td>{{wo.Buyer}}</td>
+            <td>{{wo.OrderNo}}</td>
+            <td>{{wo.Style}}</td>
+            <td>{{wo.Color}}</td>
+            <td>{{wo.Size}}</td>
+            <td>{{wo.FabType}}</td>
+            <td>{{wo.FabDia}}</td>
+            <td>{{wo.FabGsm}}</td>
+            <td>{{wo.KnitSL}}</td>
+            <td>{{wo.YarnType}}</td>
+            <td>{{wo.YarnKg}}</td>
+            <td>{{wo.GreigeKg}}</td>
+            <td>{{wo.FinishKg}}</td>
+            <td>{{wo.SpinFty}}</td>         
+            <td>{{wo.KnitFty}}</td>
+            <td>{{wo.DyeinFty}}</td>
             <td>{{wo.noDays}}</td>
+
+            <td>{{wo.OrderPcs}}</td>
+            <td>{{wo.OrderFOBRate}}</td>
+            <td>{{wo.KnitRate}}</td>
+            <td>{{wo.DyeRate}}</td>
           </tr>
         </tbody>
       </table>

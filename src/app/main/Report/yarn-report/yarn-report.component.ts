@@ -135,6 +135,10 @@ exportexcel() {
     this.router.navigate(['/main/lc-outstanding'])
   }
 
+  reconciliation(){
+    this.router.navigate(['/main/yarn-reconciliation'])
+  }
+
   EditAllData(id:any){
     sessionStorage.setItem('singleData', id)
     this.router.navigate(['/main/yarn-transcation'])

@@ -31,6 +31,7 @@ import { KnitDelEntryComponent } from './Transaction/knit-del-entry/knit-del-ent
 import { LCOutstandingComponent } from './Report/lc-outstanding/lc-outstanding.component';
 import { KnitFactoryInventoryComponent } from './Report/knit-factory-inventory/knit-factory-inventory.component';
 import { DyeFactoryInventoryComponent } from './Report/dye-factory-inventory/dye-factory-inventory.component';
+import { YarnReconciliationComponent } from './Report/yarn-reconciliation/yarn-reconciliation.component';
 
 const routes: Routes = [
   {path:'', component: AppComponent},
@@ -67,6 +68,7 @@ const routes: Routes = [
   {path:"lc-outstanding" , component:LCOutstandingComponent},
   {path:"knit-factory-inventory" ,component:KnitFactoryInventoryComponent},
   {path:"dye-factory-inventory" , component:DyeFactoryInventoryComponent},
+  {path:"yarn-reconciliation" , component:YarnReconciliationComponent}
 
 ];
 

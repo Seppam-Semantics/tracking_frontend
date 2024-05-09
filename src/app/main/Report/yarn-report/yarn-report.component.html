@@ -32,6 +32,8 @@
       <button mat-button color="primary" (click)="yarnHead()">New Header</button>
       <button mat-button color="primary" (click)="exportexcel()"><mat-icon>download</mat-icon>Download</button>
       <button mat-button color="primary" (click)="outstanding()">LC Outstanding</button>
+      <button mat-button color="primary" (click)="reconciliation()">Reconciliation</button>
+      
     </div>
 
     <div class="option2">
@@ -83,16 +85,16 @@
   header="LC Closure Report" [maximizable]="true" [resizable]="true">
 
 
-  <div *ngFor="let data of this.yarnLcClosure; let i = index;">
+  <div>
     <table class="table table-hover table-bordered">
       <tbody>
         <tr>
-          <td><b>LC no :</b> {{data.lcNo}} </td>
-          <td><b>PI :</b> {{data.pi}} </td>
-          <td><b>LC Qty :</b> {{data.lcValue}} </td>
-          <td><b>LC Date :</b> {{data.lcDate}} </td>
-          <td><b>PI date :</b> {{data.piDate}} </td>
-          <td><b>LC Value :</b> {{data.lcYarnTotal}} </td>
+          <td><b>LC no :</b>  </td>
+          <td><b>PI :</b>  </td>
+          <td><b>LC Qty :</b>  </td>
+          <td><b>LC Date :</b>  </td>
+          <td><b>PI date :</b>  </td>
+          <td><b>LC Value :</b>  </td>
         </tr>
       </tbody>
     </table>
