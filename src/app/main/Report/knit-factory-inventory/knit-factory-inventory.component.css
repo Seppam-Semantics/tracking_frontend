@@ -3,3 +3,12 @@ tr,td,th{
     justify-content: center;
     text-align: center;
 }
+.fixTableHead{
+    overflow: scroll;
+    height: 85%;
+    scrollbar-width: none;
+  }
+  thead {
+    position: sticky;
+    top: 0;
+  }

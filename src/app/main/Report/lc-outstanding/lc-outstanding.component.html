@@ -3,10 +3,10 @@
         LC Outstanding
     </div>
     <div style="flex: 1 1 auto;"></div>
-    <button mat-button color="primary"><mat-icon>download</mat-icon>Download</button>
+    <button mat-button color="primary" (click)="exportexcel()"><mat-icon>download</mat-icon>Download</button>
 </mat-toolbar>
-<div>
-    <table class="table table-hover table-bordered">
+<div class="fixTableHead">
+    <table class="table table-hover table-bordered" id="table-data">
         <thead class="thead-dark">
             <tr>
                 <th>Sl.no</th>
@@ -22,57 +22,37 @@
                 <th>Yarn Value</th>
                 
                 <th>Allocated Kgs</th>
-                <th>
-                    <div style="display: flex; flex-direction: column;">
-                        <div> Pending allocated Kgs</div>
-                        <div> <input type="text" style="width:60%"></div>
-                    </div>
-                </th>
+                <th>Pending allocated Kgs</th>
                 <th>Receipt Kgs</th>
                 
 
-                <th>
-                    <div style="display: flex; flex-direction: column;">
-                        <div> Pending Receipt Kgs</div>
-                        <div> <input type="text" style="width:60%"></div>
-                    </div>
-                </th>
-                <th>
-                    <div style="display: flex; flex-direction: column;">
-                        <div> Reciept value</div>
-                        <div> <input type="text" style="width:60%"></div>
-                    </div>
-                </th>
-                <th>
-                    <div style="display: flex; flex-direction: column;">
-                        <div> Pending LC Value</div>
-                        <div> <input type="text" style="width:60%"></div>
-                    </div>
-                </th>
+                <th>Pending Receipt Kgs</th>
+                <th> Reciept value</th>
+                <th>Pending LC Value</th>
 
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
+            <tr *ngFor="let data of this.LCOutstandingData; let i=index;">
+                <td>{{i+1}}</td>
+                <td>{{data.lcNo}}</td>
+                <td>{{data.lcDate}}</td>
 
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{data.pi}}</td>
+                <td>{{data.piDate}}</td>
+                <td>{{data.yarnType}}</td>
 
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{data.lcYarnKgs}}</td>
+                <td>{{data.yarnRate}}</td>
+                <td>{{data.yarnValue}}</td>
 
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{data.allocatedYarnKgs}}</td>
+                <td>{{data.lcYarnKgs - data.allocatedYarnKgs}}</td>
+                <td>{{data.receiptYarnKgs}}</td>
 
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{data.lcYarnKgs - data.receiptYarnKgs}}</td>
+                <td>{{data.yarnRate * data.receiptYarnKgs}}</td>
+                <td>{{data.yarnValue - (data.yarnRate * data.receiptYarnKgs)}}</td>
             </tr>
         </tbody>
     </table>

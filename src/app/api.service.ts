@@ -10,8 +10,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  apiUrl = "https://tracker.seppam.com";
-  // apiUrl = "http://localhost:2000";
+  // apiUrl = "https://tracker.seppam.com";
+  apiUrl = "http://localhost:2000";
 
 
   token: any;
@@ -415,6 +415,7 @@ DyeFilter(DyeFactory: any , buyer?:any , orderNo?:any, style?:any , color?:any ,
   YarnQCDeleteDetails(id:any , lineId:any , ReceipDataId :any):Observable<any>{
     return this.http.delete(this.getUrl()+`/yarnapi/YarnQCDelete?id=${id}&line=${lineId}&YarnQCid=${ReceipDataId}` , this.getHeaders())
   }
+  
 
 // ============================================= Knit Delivery ===================================================================================
 
@@ -449,4 +450,15 @@ getSingleDyeDel(id:any):Observable<any>{
 deleteDyeDelivery(id:any):Observable<any>{
   return this.http.delete(this.getUrl() + `/dyedeliveryapi/dye-delivery/${id}`, this.getHeaders())
 }
+
+
+
+LCOutstandingData():Observable<any>{
+  return this.http.get(this.getUrl() + `/yarnapi/LC-Outstanding`, this.getHeaders())
+}
+
+KFInventoryData():Observable<any>{
+  return this.http.get(this.getUrl() + `/knitapi/KF-Inventory`, this.getHeaders())
+}
+
 }
