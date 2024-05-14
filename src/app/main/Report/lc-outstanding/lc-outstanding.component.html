@@ -47,12 +47,12 @@
                 <td>{{data.yarnValue}}</td>
 
                 <td>{{data.allocatedYarnKgs}}</td>
-                <td>{{data.lcYarnKgs - data.allocatedYarnKgs}}</td>
+                <td>{{(data.lcYarnKgs - data.allocatedYarnKgs).toFixed(2)}}</td>
                 <td>{{data.receiptYarnKgs}}</td>
 
-                <td>{{data.lcYarnKgs - data.receiptYarnKgs}}</td>
-                <td>{{data.yarnRate * data.receiptYarnKgs}}</td>
-                <td>{{data.yarnValue - (data.yarnRate * data.receiptYarnKgs)}}</td>
+                <td>{{(data.lcYarnKgs - data.receiptYarnKgs).toFixed(2)}}</td>
+                <td>{{(data.yarnRate * data.receiptYarnKgs).toFixed(2)}}</td>
+                <td>{{(data.yarnValue - (data.yarnRate * data.receiptYarnKgs)).toFixed(2)}}</td>
             </tr>
         </tbody>
     </table>

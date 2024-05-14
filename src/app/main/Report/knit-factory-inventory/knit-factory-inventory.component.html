@@ -5,7 +5,7 @@
     <div style="display: flex; gap: 25px;">
         <div style="display: flex; gap: 10px;">
             <label style="font-weight: normal; font-family: serif;">As on Date</label>
-            <input type="date" class="form-control" style="margin-top: 2px;">
+            <input type="date" class="form-control" style="margin-top: 2px;" [(ngModel)]="filterDate" (change)="date()">
         </div>
         <div>
             <button mat-button color="primary" (click)="exportexcel()"><mat-icon>download</mat-icon>Download</button>
@@ -36,6 +36,8 @@
                 <th>Greige Delivery Kgs</th>
                 <th>Inventory Knit Greige Kgs</th>
 
+
+
             </tr>
         </thead>
         <tbody>
@@ -55,8 +57,9 @@
                 <td>{{data.receiptYarnKgs}}</td>
 
                 <td>{{data.pendingReceiptKgs}}</td>
-                <td>{{data.entry_2}}</td>
-                <td>{{data.receiptYarnKgs - data.entry_2}}</td>
+                <td>{{data.Entry2}}</td>
+                <td>{{data.receiptYarnKgs - data.Entry2}}</td>
+        
             </tr>
         </tbody>
     </table>

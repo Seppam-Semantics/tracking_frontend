@@ -10,8 +10,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  // apiUrl = "https://tracker.seppam.com";
-  apiUrl = "http://localhost:2000";
+  apiUrl = "https://tracker.seppam.com";
+  // apiUrl = "http://localhost:2000";
 
 
   token: any;
@@ -457,8 +457,16 @@ LCOutstandingData():Observable<any>{
   return this.http.get(this.getUrl() + `/yarnapi/LC-Outstanding`, this.getHeaders())
 }
 
-KFInventoryData():Observable<any>{
-  return this.http.get(this.getUrl() + `/knitapi/KF-Inventory`, this.getHeaders())
+KFInventoryData(date:any):Observable<any>{
+  return this.http.get(this.getUrl()+ `/knitapi/KF-Inventory?date=${date}`, this.getHeaders())
+}
+
+DFInventoryData(date:any):Observable<any>{
+  return this.http.get(this.getUrl()+ `/dyeapi/DF-Inventory?date=${date}`, this.getHeaders())
+}
+
+YarnReconciliation(date1:any,date2:any):Observable<any>{
+  return this.http.get(this.getUrl()+ `/yarnapi/yarn_reconciliation?date1=${date1}&date2=${date2}`, this.getHeaders())
 }
 
 }

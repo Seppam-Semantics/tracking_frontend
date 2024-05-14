@@ -9,19 +9,21 @@ import * as XLSX from 'xlsx'
 })
 export class KnitFactoryInventoryComponent implements OnInit{
   KnitFactoryInventoryData: any;
- 
+  filterDate!:string;
   ngOnInit(): void { 
 
-    this.api.KFInventoryData().subscribe((res)=>{
-      this.KnitFactoryInventoryData = res.KnitFactoryInventory
-    })
   }
 
   constructor(private api : ApiService){}
 
+  date(){
+    this.api.KFInventoryData(this.filterDate).subscribe((res)=>{
+      this.KnitFactoryInventoryData = res.KnitFactoryInventory
+      console.log(this.KnitFactoryInventoryData)
+    })
+  }
 
-
-  fileName = "KnitFactoryReport.xlsx"
+  fileName = "KnitFactoryInventoryReport.xlsx"
   exportexcel() {
     let data = document.getElementById("table-data");
     const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(data);

@@ -5,14 +5,14 @@
     <div style="display: flex; gap: 25px;">
         <div style="display: flex; gap: 10px;">
             <label style="font-weight: normal; font-family: serif;">From</label>
-            <input type="date" class="form-control" style="margin-top: 2px;">
+            <input type="date" class="form-control" style="margin-top: 2px;" [(ngModel)]="filterDate1" (change)="date()">
         </div>
         <div style="display: flex; gap: 10px;">
             <label style="font-weight: normal; font-family: serif;">To</label>
-            <input type="date" class="form-control" style="margin-top: 2px;">
+            <input type="date" class="form-control" style="margin-top: 2px;" [(ngModel)]="filterDate2" (change)="date()">
         </div>
         <div>
-            <button mat-button color="primary"><mat-icon>download</mat-icon>Download</button>
+            <button mat-button color="primary" (click)="exportexcel()"><mat-icon>download</mat-icon>Download</button>
         </div>
 
     </div>
@@ -36,46 +36,31 @@
                 <th>Yarn Receipt Kgs</th>
                 <th>Greige Delivery Kgs</th>
 
-                <th>
-                    <div style="display: flex; flex-direction: column;">
-                        <div>Excess Allocation Kgs</div>
-                        <div><input type="text"></div>
-                    </div>
-                </th>
-                <th>
-                    <div style="display: flex; flex-direction: column;">
-                        <div>Excess Yarn reciept</div>
-                        <div><input type="text"></div>
-                    </div>
-                </th>
-                <th>
-                    <div style="display: flex; flex-direction: column;">
-                        <div>Excess Griege Utilisation</div>
-                        <div><input type="text"></div>
-                    </div>
-                </th>
+                <th>Excess Allocation Kgs</th>
+                <th>Excess Yarn reciept</th>
+                <th>Excess Griege Utilisation</th>
 
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
+            <tr *ngFor="let data of this.YarnReconciliationData; let i = index;">
+                <td>{{i+1}}</td>
+                <td>{{data.knitFty}}</td>
+                <td>{{data.buyer}}</td>
 
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{data.orderNo}}</td>
+                <td>{{data.style}}</td>
+                <td>{{data.color}}</td>
 
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{data.greigeKg}}</td>
+                <td>{{data.allocatedYarnKgs}}</td>
+                <td>{{data.receiptYarnKgs}}</td>
 
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{data.Entry2}}</td>
+                <td>{{(data.allocatedYarnKgs - data.greigeKg).toFixed(2) }}</td>
+                <td>{{(data.receiptYarnKgs - data.greigeKg).toFixed(2)}}</td>
 
-                <td></td>
+                <td>{{(data.Entry2 - data.greigeKg).toFixed(2)}}</td>
             </tr>
         </tbody>
     </table>
