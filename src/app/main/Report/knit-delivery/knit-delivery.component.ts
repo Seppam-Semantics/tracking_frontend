@@ -218,6 +218,9 @@ getWoId(size: any, index: number) {
         "id": this.kintid,
         "date": this.knitAllData.headerData[0].date,
         "factory": this.knitAllData.headerData[0].factory,
+        "RollsTotal": this.knitAllData.headerData[0].totalrolls,
+        "DeliveryTotal": this.knitAllData.headerData[0].totalKg,
+        "KnitTotal": this.knitAllData.headerData[0].knit_total,
       });
 
       const KnitEntryData = this.KnitDelivery.get('data') as FormArray;

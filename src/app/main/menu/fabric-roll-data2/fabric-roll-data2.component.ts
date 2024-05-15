@@ -121,6 +121,8 @@ export class FabricRollData2Component implements OnInit {
   loadworkorder(buyer: string = '', orderNo: string = '', style: string ='', color: string = '', size: string ='') {
     this.api.getwodetails(buyer, orderNo, style, color, size).subscribe((res) => {
       this.data = res.workorders;
+      console.log(this.data)
+    
     });
   }
   
@@ -245,9 +247,12 @@ export class FabricRollData2Component implements OnInit {
         knitFty: this.Woupdate.knitFty,
         dyeinFty: this.Woupdate.dyeinFty,
         noDays: this.Woupdate.noRolls,
-        // status: this.Woupdate.status
+
+        orderPcs: this.Woupdate.orderPcs,
+        orderFOBRate: this.Woupdate.orderFOBRate,
+        dyeRate: this.Woupdate.dyeRate,
+        knitRate: this.Woupdate.knitRate,
       })
-      console.log(res)
     })
      }
 
@@ -271,6 +276,12 @@ export class FabricRollData2Component implements OnInit {
     knitFty: new FormControl(''),
     dyeinFty: new FormControl(''),
     noDays: new FormControl(''),
+
+    orderPcs: new FormControl(''),
+    orderFOBRate: new FormControl(''),
+    knitRate: new FormControl(''),
+    dyeRate: new FormControl(''),
+
     status:new FormControl('')
   })
 
@@ -299,4 +310,5 @@ Dye(){
   Upload(){
     this.router.navigate(['/main/WorkorderData'])
   }
+  
 }

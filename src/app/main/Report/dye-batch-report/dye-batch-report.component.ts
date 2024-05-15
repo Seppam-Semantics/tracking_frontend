@@ -203,6 +203,10 @@ export class DyeBatchReportComponent implements OnInit {
     });
   }
 
+  DyeFactoryInventory(){
+    this.router.navigate(['/main/dye-factory-inventory'])
+  }
+
   calculateDiff() {
     this.items.controls.forEach((control: AbstractControl) => {
       const row = control as FormGroup;
@@ -354,6 +358,7 @@ export class DyeBatchReportComponent implements OnInit {
     this.singledataid = id
     this.api.dye_batch_single_data(this.singledataid).subscribe((res) => {
       this.dye_batch_data = res
+
     const formattedDate1 = this.datePipe.transform(
       this.dye_batch_data.headerData[0].batch_batchMakeDate,
     'yyyy-MM-dd'
@@ -492,8 +497,13 @@ this.dye_Entery.patchValue({
       "finalbatch_finishRollsWeight": this.dye_batch_data.headerData[0].finalbatch_finishRollsWeight,
       "finalbatch_processLoss": this.dye_batch_data.headerData[0].finalbatch_processLoss,
       "finalbatch_fabricDeliveryDatetime": formattedDate12,
+      "GriegeTotal":this.dye_batch_data.headerData[0].griegeTotal,
+      "FinishTotal":this.dye_batch_data.headerData[0].finishTotal,
+      "differenceTotal":this.dye_batch_data.headerData[0].DifferenceTotal,
+      "PLTotal":this.dye_batch_data.headerData[0].ProcesslossTotal
     })
-    this.calculateDiff()
+
+
     const formControls = [];
     formControls.push(
       this.fb.group({

@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Dropdown } from 'primeng/dropdown';
 import { ApiService } from 'src/app/api.service';
@@ -76,11 +76,11 @@ DyeDeliveryAddButton(){
     "style": new FormControl(),
     "color": new FormControl(),
     "size": new FormControl(),
-    "griegeRolls": new FormControl(''),
+    "griegeRolls": new FormControl('',Validators.required),
     "finishRolls": new FormControl(''),
-    "griegeDeliveryKgs": new FormControl(''),
-    "finishDeliveryKgs": new FormControl(''),
-    "dyeRate": new FormControl(''),
+    "griegeDeliveryKgs": new FormControl('',Validators.required),
+    "finishDeliveryKgs": new FormControl('',Validators.required),
+    "dyeRate": new FormControl('',Validators.required),
     "dyeValue": new FormControl(''),
 
   });
@@ -190,11 +190,13 @@ getWoId(size: any, index: number) {
 // <!------------------------------------------------------------>
 
 saveButton(){
-  // console.log(this.DyeDelivery.value)
-  this.api.addUpdateDyeDelivery(this.DyeDelivery.value).subscribe((res)=>{
-    alert(res.message)
-    this.router.navigate(['/main/dye-delivery'])
-  })
+  if (this.DyeDelivery.valid) {
+    this.api.addUpdateDyeDelivery(this.DyeDelivery.value).subscribe((res)=>{
+      alert(res.message)
+      this.router.navigate(['/main/dye-delivery'])
+    })
+  } else {
+    alert('Please fill NoRolls(Griege or Finish) , DyeRate fields // Entry should more then 0.');
+  }
 }
-
 }

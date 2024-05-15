@@ -7,7 +7,7 @@ thead{
     position: sticky;
     top: 0;
   }
-
+  
   .Scroll{
     display: block;
     overflow-y: auto;

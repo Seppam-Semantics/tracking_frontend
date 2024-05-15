@@ -30,6 +30,7 @@
 <span style="flex: 1 1 auto;"></span>
 <button mat-button color='primary' style="margin-right: 12px;" (click)="exportexcel()">Download</button>
 <button mat-button color='primary' style="margin-right: 12px;" (click)="DyeBatchButton()">New</button>
+<button mat-button color='primary' style="margin-right: 12px;" (click)="DyeFactoryInventory()">Dye Factory Inventory</button>
 </mat-toolbar>
 
 
@@ -263,17 +264,16 @@
                                                     <th><span>Total</span></th>
                                                     <th></th>
                                                     <th></th>
-                                                    <th><input type="number" class="form-control" readonly
-                                                            formControlName="GriegeTotal"
+                                                    <th><input type="text" class="form-control" formControlName="GriegeTotal"
                                                             style="width: 10vh; display: inline;"></th>
                                                     <th></th>
-                                                    <th><input type="number" class="form-control" readonly
+                                                    <th><input type="text" class="form-control" readonly
                                                             formControlName="FinishTotal"
                                                             style="width: 10vh; display: inline;"></th>
-                                                    <th><input type="number" class="form-control" readonly
+                                                    <th><input type="text" class="form-control" readonly
                                                             formControlName="differenceTotal"
                                                             style="width: 10vh; display: inline;"></th>
-                                                    <th><input type="number" class="form-control" readonly
+                                                    <th><input type="text" class="form-control" readonly
                                                             formControlName="PLTotal"
                                                             style="width: 10vh; display: inline;"></th>
                                                     <th></th>

@@ -56,3 +56,15 @@ th,tr,td{
 :host ::ng-deep .mat-mdc-form-field-has-icon-suffix .mat-mdc-text-field-wrapper{
     background-color: white;
 }
+
+thead{
+    position: sticky;
+    top: 0;
+  }
+
+  .Scroll{
+    display: block;
+    overflow-y: auto;
+    scrollbar-width: none;
+    height:90%
+  }

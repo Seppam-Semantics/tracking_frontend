@@ -415,6 +415,7 @@ DyeFilter(DyeFactory: any , buyer?:any , orderNo?:any, style?:any , color?:any ,
   YarnQCDeleteDetails(id:any , lineId:any , ReceipDataId :any):Observable<any>{
     return this.http.delete(this.getUrl()+`/yarnapi/YarnQCDelete?id=${id}&line=${lineId}&YarnQCid=${ReceipDataId}` , this.getHeaders())
   }
+  
 
 // ============================================= Knit Delivery ===================================================================================
 
@@ -449,4 +450,23 @@ getSingleDyeDel(id:any):Observable<any>{
 deleteDyeDelivery(id:any):Observable<any>{
   return this.http.delete(this.getUrl() + `/dyedeliveryapi/dye-delivery/${id}`, this.getHeaders())
 }
+
+
+
+LCOutstandingData():Observable<any>{
+  return this.http.get(this.getUrl() + `/yarnapi/LC-Outstanding`, this.getHeaders())
+}
+
+KFInventoryData(date:any):Observable<any>{
+  return this.http.get(this.getUrl()+ `/knitapi/KF-Inventory?date=${date}`, this.getHeaders())
+}
+
+DFInventoryData(date:any):Observable<any>{
+  return this.http.get(this.getUrl()+ `/dyeapi/DF-Inventory?date=${date}`, this.getHeaders())
+}
+
+YarnReconciliation(date1:any,date2:any):Observable<any>{
+  return this.http.get(this.getUrl()+ `/yarnapi/yarn_reconciliation?date1=${date1}&date2=${date2}`, this.getHeaders())
+}
+
 }

@@ -1,0 +1,65 @@
+<mat-toolbar style="height: auto;">
+
+    <div style="width: 100%; display: flex; justify-content: center;">Dye Factory Inventory</div>
+    <div style="flex: 1 1 auto;"></div>
+    <div style="display: flex; gap: 25px;">
+        <div style="display: flex; gap: 10px;">
+            <label style="font-weight: normal; font-family: serif;">As on Date</label>
+            <input type="date" class="form-control" style="margin-top: 2px;" [(ngModel)]="filterDate" (change)="date()">
+        </div>
+        <div>
+            <button mat-button color="primary"><mat-icon>download</mat-icon>Download</button>
+        </div>
+
+    </div>
+</mat-toolbar>
+
+<div class="Scroll">
+    <table class="table table-hover table-bordered" id="table-data">
+        <thead class="thead-dark">
+            <tr>
+                <th>Sl.no</th>
+
+                <th>Dye Factory</th>
+                <th>Buyer</th>
+                <th>Order no</th>
+
+                <th>Style</th>
+                <th>Color</th>
+                <th>Knit Griege Booking Kgs</th>
+                <th>Dye Finish Booking Kgs</th>
+
+                <th>Knit Greige Delivery Kgs</th>
+                <th>Dye Griege Delivery Kgs</th>
+                <th>Dye Finish Delivery Kgs</th>
+
+                <th>Inventory Dye Greige Kgs</th>
+                <th>Pending Dye Finish Kgs</th>
+                <th>Balance Greige Kgs</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of this.DyeFactoryInventoryData; let i = index;">
+                <td>{{i+1}}</td>
+                <td>{{data.dyeinFty}}</td>
+                <td>{{data.buyer}}</td>
+
+                <td>{{data.orderNo}}</td>
+                <td>{{data.style}}</td>
+                <td>{{data.color}}</td>
+
+                <td>{{data.yarnKg}}</td>
+                <td>{{data.finishKg}}</td>
+
+                <td>{{data.KnitGreigeDeliveryKgs}}</td>
+                <td>{{data.DyeGriegeDeliveryKgs}}</td>
+                <td>{{data.DyeFinishDeliveryKgs}}</td>
+
+                <td>{{data.KnitGreigeDeliveryKgs - data.DyeGriegeDeliveryKgs}}</td>
+                <td>{{data.finishKg - data.DyeFinishDeliveryKgs}}</td>
+                <td>{{data.yarnKg - data.DyeGriegeDeliveryKgs}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

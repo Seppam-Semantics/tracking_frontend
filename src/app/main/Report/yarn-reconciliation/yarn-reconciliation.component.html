@@ -1,11 +1,15 @@
 <mat-toolbar style="height: auto;">
 
-    <div style="width: 100%; display: flex; justify-content: center;">Knit Factory Inventory</div>
+    <div style="width: 100%; display: flex; justify-content: center;">Yarn Reconciliation</div>
     <div style="flex: 1 1 auto;"></div>
     <div style="display: flex; gap: 25px;">
         <div style="display: flex; gap: 10px;">
-            <label style="font-weight: normal; font-family: serif;">As on Date</label>
-            <input type="date" class="form-control" style="margin-top: 2px;" [(ngModel)]="filterDate" (change)="date()">
+            <label style="font-weight: normal; font-family: serif;">From</label>
+            <input type="date" class="form-control" style="margin-top: 2px;" [(ngModel)]="filterDate1" (change)="date()">
+        </div>
+        <div style="display: flex; gap: 10px;">
+            <label style="font-weight: normal; font-family: serif;">To</label>
+            <input type="date" class="form-control" style="margin-top: 2px;" [(ngModel)]="filterDate2" (change)="date()">
         </div>
         <div>
             <button mat-button color="primary" (click)="exportexcel()"><mat-icon>download</mat-icon>Download</button>
@@ -15,7 +19,7 @@
 </mat-toolbar>
 
 <div class="Scroll">
-    <table class="table table-hover table-bordered"  id="table-data">
+    <table class="table table-hover table-bordered" id="tableToConvert">
         <thead class="thead-dark">
             <tr>
                 <th>Sl.no</th>
@@ -28,38 +32,35 @@
                 <th>Color</th>
                 <th>Knit Griege Booking Kgs</th>
 
-                <th>Allocated Kgs</th>
-                <th>Pending allocated Kgs</th>
+                <th>Yarn Order Allocated Kgs</th>
                 <th>Yarn Receipt Kgs</th>
-
-                <th>Pending Receipt Kgs</th>
                 <th>Greige Delivery Kgs</th>
-                <th>Inventory Knit Greige Kgs</th>
 
-
+                <th>Excess Allocation Kgs</th>
+                <th>Excess Yarn reciept</th>
+                <th>Excess Griege Utilisation</th>
 
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let data of this.KnitFactoryInventoryData; let i=index;">
+            <tr *ngFor="let data of this.YarnReconciliationData; let i = index;">
                 <td>{{i+1}}</td>
-
                 <td>{{data.knitFty}}</td>
                 <td>{{data.buyer}}</td>
+
                 <td>{{data.orderNo}}</td>
-                
                 <td>{{data.style}}</td>
                 <td>{{data.color}}</td>
-                <td>{{data.greigeKg}}</td>
 
+                <td>{{data.greigeKg}}</td>
                 <td>{{data.allocatedYarnKgs}}</td>
-                <td>{{data.unallocatedYarnKgs}}</td>
                 <td>{{data.receiptYarnKgs}}</td>
 
-                <td>{{data.pendingReceiptKgs}}</td>
                 <td>{{data.Entry2}}</td>
-                <td>{{data.receiptYarnKgs - data.Entry2}}</td>
-        
+                <td>{{(data.allocatedYarnKgs - data.greigeKg).toFixed(2) }}</td>
+                <td>{{(data.receiptYarnKgs - data.greigeKg).toFixed(2)}}</td>
+
+                <td>{{(data.Entry2 - data.greigeKg).toFixed(2)}}</td>
             </tr>
         </tbody>
     </table>

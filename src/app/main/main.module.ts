@@ -73,6 +73,8 @@ import { TabMenuModule } from 'primeng/tabmenu';
 import { InputTextModule } from 'primeng/inputtext';
 import { LCOutstandingComponent } from './Report/lc-outstanding/lc-outstanding.component';
 import { KnitFactoryInventoryComponent } from './Report/knit-factory-inventory/knit-factory-inventory.component';
+import { DyeFactoryInventoryComponent } from './Report/dye-factory-inventory/dye-factory-inventory.component';
+import { YarnReconciliationComponent } from './Report/yarn-reconciliation/yarn-reconciliation.component';
 
 
 @NgModule({
@@ -113,6 +115,8 @@ import { KnitFactoryInventoryComponent } from './Report/knit-factory-inventory/k
     DyeDeliveryComponent,
     LCOutstandingComponent,
     KnitFactoryInventoryComponent,
+    DyeFactoryInventoryComponent,
+    YarnReconciliationComponent,
 
   ],
   imports: [

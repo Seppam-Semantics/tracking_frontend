@@ -67,6 +67,7 @@ export class WorkorderDataComponent {
 
   workordersubmit() {
     this.spinner.show();
+    console.log(this.dataSource)
     this.api.postworkorder(this.dataSource).subscribe((res)=>{
       if(res.success){
         alert("Your work order details have been saved....!!!!")

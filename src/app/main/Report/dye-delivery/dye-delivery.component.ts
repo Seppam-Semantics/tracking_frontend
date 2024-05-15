@@ -221,10 +221,17 @@ edit(id:any){
   this.DelDyeEdit = true;
   this.api.getSingleDyeDel(id).subscribe((res) => {
     this.DyeSingleData = res;
+    console.log(this.DyeSingleData)
     this.DyeDelivery.patchValue({
       "id": this.SingleLineId,
       "date": this.DyeSingleData.headerData[0].date,
       "factory": this.DyeSingleData.headerData[0].factory,
+      "RollsGriegeTotal": this.DyeSingleData.headerData[0].rollgriegeTotal,
+      "RollsFinishTotal": this.DyeSingleData.headerData[0].totalfinishrolls,
+      "DeliveryGriegeTotal": this.DyeSingleData.headerData[0].deliveryGriegeTotal,
+      "DeliveryFinishTotal": this.DyeSingleData.headerData[0].totalfinishKg,
+      "DyeTotal": this.DyeSingleData.headerData[0].dyeValueTotal,
+
     });
 
     const DyeEntryData = this.DyeDelivery.get('data') as FormArray;
@@ -248,7 +255,7 @@ edit(id:any){
           "griegeDeliveryKgs": dataItem.griegeDeliveryKgs,
           "finishDeliveryKgs":dataItem.finishDeliveryKgs ,
           "dyeRate": dataItem.dyeRate,
-          "dyeValue": dataItem.knitRate,
+          "dyeValue": dataItem.dyeValue,
         })
       );
     });
