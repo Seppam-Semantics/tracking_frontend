@@ -176,10 +176,11 @@
     </div>
   </div>
   <ng-template pTemplate="footer">
-    <button type="button" class="btn btn-danger" data-dismiss="modal" style="margin-right: 40%;">Close</button>
-    <button class="btn btn-primary" (click)="exportexcel()" style="display: flex; justify-content: lefts;">
-      Download File
+    <div style="width: 100%; display: flex; justify-content: center;">
+    <button mat-button color="primary" (click)="exportexcel()" style="display: flex; justify-content: lefts;">
+     <mat-icon>download</mat-icon> Download File
     </button>
+  </div>
   </ng-template>
 </p-dialog>
 <!-- <!============================================================================================> -->

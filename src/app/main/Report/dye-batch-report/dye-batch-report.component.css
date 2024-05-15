@@ -132,5 +132,12 @@ th,tr,td{
       .TableScroll{
         display: block;
         overflow-y: auto;
+        height: 80%;
         scrollbar-width: none;
       }
+
+      thead{
+        position: sticky;
+        top: 0;
+      }
+      
