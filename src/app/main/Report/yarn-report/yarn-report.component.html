@@ -83,33 +83,33 @@
   header="LC Closure Report" [maximizable]="true" [resizable]="true">
 
 
-  <div *ngFor="let data of this.yarnLcClosure; let i = index;">
+  <div>
     <table class="table table-hover table-bordered">
       <tbody>
         <tr>
-          <td><b>LC no :</b> {{data.lcNo}} </td>
-          <td><b>PI :</b> {{data.pi}} </td>
-          <td><b>LC Qty :</b> {{data.lcValue}} </td>
-          <td><b>LC Date :</b> {{data.lcDate}} </td>
-          <td><b>PI date :</b> {{data.piDate}} </td>
-          <td><b>LC Value :</b> {{data.lcYarnTotal}} </td>
+          <td><b>LC no :</b>  </td>
+          <td><b>PI :</b>  </td>
+          <td><b>LC Qty :</b>  </td>
+          <td><b>LC Date :</b>  </td>
+          <td><b>PI date :</b>  </td>
+          <td><b>LC Value :</b>  </td>
         </tr>
       </tbody>
     </table>
   </div>
 
 
-  <div *ngFor="let data of this.yarn_lc_linesLcClosure;  let i = index;">
-    <div *ngFor="let data2 of this.yarn_lot_checkLcClosure;  let i = index;">
+
+    <div>
       <p-panel header="LineEntey">
         <div>
           <table class="table table-hover table-bordered" style="margin-top: -15px;">
             <tbody>
               <tr>
-                <td>Yarn Type : {{data.yarnType}} </td>
-                <td>Yarn Kgs : {{data.lcYarnKgs}}</td>
-                <td>Yarn Rate : {{data.yarnRate}} </td>
-                <td>LC Value : {{data.yarnValue}}</td>
+                <td>Yarn Type :  </td>
+                <td>Yarn Kgs : </td>
+                <td>Yarn Rate : </td>
+                <td>LC Value : </td>
               </tr>
             </tbody>
           </table>
@@ -130,7 +130,7 @@
             </thead>
             <tbody>
               <tr>
-                <td>{{data2.lotNo}}</td>
+                <td>1</td>
                 <td>2</td>
                 <td>3</td>
                 <td>4</td>
@@ -187,7 +187,6 @@
         </div>
       </p-panel>
     </div>
-  </div>
   <ng-template pTemplate="footer">
     <button mat-button color="danger"><mat-icon>close</mat-icon>close</button>
     <button mat-button color="primary"><mat-icon>download</mat-icon>Download</button>
