@@ -364,9 +364,9 @@ DyeFilter(DyeFactory: any , buyer?:any , orderNo?:any, style?:any , color?:any ,
   }
   //-------------------------------------------------------------------
 
-  getSingleLcClosure(id:any):Observable<any>{
-    return this.http.get(this.getUrl() + `/yarnapi/LcClosure/${id}`, this.getHeaders())
-  }
+  // getSingleLcClosure(id:any):Observable<any>{
+  //   return this.http.get(this.getUrl() + `/yarnapi/LcClosure/${id}`, this.getHeaders())
+  // }
 
   //-------------------------------------------------------------------
 

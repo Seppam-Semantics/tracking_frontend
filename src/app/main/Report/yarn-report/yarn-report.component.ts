@@ -146,7 +146,11 @@ exportexcel() {
 
   view(id:any){
     this.ViewAllYarnData = true
+<<<<<<< HEAD
+    // this.LcClosure = id
+=======
     this.LcClosure = id
+>>>>>>> 48803eefa317d6cb4e8b1ada9c01cc3a4cab7ea7
     // this.api.getSingleLcClosure(id).subscribe((res)=>{
     //   this.yarnLcClosure = res.yarn
     //   this.yarn_lc_linesLcClosure = res.yarn_lc_lines
