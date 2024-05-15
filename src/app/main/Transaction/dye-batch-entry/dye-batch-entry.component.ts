@@ -226,7 +226,7 @@ this.items.removeAt(index)
 
 dyesubmit() {
   if (this.dye_Entery.valid) {
-    console.log(this.dye_Entery.value)
+
     this.loading =true
     this.api.post_dyereport_entry(this.dye_Entery.value).subscribe((res)=>{
       alert(res.message)
@@ -285,7 +285,6 @@ loadworkorder(buyer: any, orderNo: string = '', style: string ='', color: string
 getwoId(size: any, index: number){
     this.api.getwodetails(this.buyerName, this.ordernumbers, this.styleslist, this.colorslist, size).subscribe((res) => {
       const woId = res.workorders[0].id;
-      console.log(woId);
       const formArray = this.dye_Entery.get('data') as FormArray;
       const row = formArray.at(index);
       row.get('woId')?.setValue(woId);

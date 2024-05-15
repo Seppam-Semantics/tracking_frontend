@@ -25,7 +25,6 @@ fileName = "DyeFactoryInventoryReport.xlsx"
   date(){
     this.api.DFInventoryData(this.filterDate).subscribe((res)=>{
       this.DyeFactoryInventoryData = res.DyeFactoryInventory
-      console.log(this.DyeFactoryInventoryData)
     })
   }
 

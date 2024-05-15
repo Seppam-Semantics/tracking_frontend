@@ -92,7 +92,7 @@ table {
   th{
     text-align: center;
   }
-  ::ng-deep .modal-backdrop.show {
+  :host ::ng-deep .modal-backdrop.show {
     display: contents;
   }
   .fixTableHead{
@@ -184,7 +184,7 @@ thead{
     width: 100%;
 }
 
-::ng-deep.p-dropdown-panel .p-dropdown-items {
+:host ::ng-deep.p-dropdown-panel .p-dropdown-items {
   margin-left:-27px
 }
 .fixTableHead{

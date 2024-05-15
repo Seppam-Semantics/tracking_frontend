@@ -150,7 +150,7 @@ exportexcel() {
     // this.api.getSingleLcClosure(id).subscribe((res)=>{
     //   this.yarnLcClosure = res.yarn
     //   this.yarn_lc_linesLcClosure = res.yarn_lc_lines
-    //   console.log(res)
+    //   
     // })
   }
 

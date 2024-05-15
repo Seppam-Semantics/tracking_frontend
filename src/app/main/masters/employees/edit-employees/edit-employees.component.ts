@@ -35,7 +35,6 @@ export class EditEmployeesComponent implements OnInit {
   }
 
    addemployeesSUBMIT(){
-  // console.log(this.addemployees.value)
    }
 
 

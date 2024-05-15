@@ -251,7 +251,7 @@ export class YarnTranscationComponent implements OnInit {
     if (confirm(text) == true) {
       const yarnLinedelete = this.yarnLcLines[0].id;
       const yarnDataId = this.yarn[0].id
-      console.log(yarnLinedelete, yarnDataId)
+
       this.api.YarnEntryDelete(yarnLinedelete, yarnDataId).subscribe((res) => {
         alert(res.message)
       })
@@ -352,7 +352,6 @@ export class YarnTranscationComponent implements OnInit {
       const yarnDataId = this.yarn[0].id
       const yarnLineId = this.yarnLcLines[0].id;
       const yarnlotcheckdetails = this.lotlineDetails[index].id
-      console.log(this.yarnLineId, yarnDataId, yarnlotcheckdetails)
       this.api.lotCheckDetailsDelete(yarnLineId, yarnDataId, yarnlotcheckdetails).subscribe((res) => {
         alert(res.message)
 

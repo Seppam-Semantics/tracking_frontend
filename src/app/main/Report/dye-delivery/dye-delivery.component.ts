@@ -198,7 +198,6 @@ getsize() {
 getWoId(size: any, index: number) {
   this.api.getwodetails(this.buyerName, this.orderNo, this.style, this.color, size ).subscribe((res) => {
     const woId = res.workorders[0].id;
-    console.log(woId)
     const formArray = this.DyeDelivery.get('data') as FormArray;
     const row = formArray.at(index);
     row.get('woId')?.setValue(woId);
@@ -217,11 +216,9 @@ saveButton(){
 
 edit(id:any){
   this.SingleLineId = id
-  console.log(this.SingleLineId)
   this.DelDyeEdit = true;
   this.api.getSingleDyeDel(id).subscribe((res) => {
     this.DyeSingleData = res;
-    console.log(this.DyeSingleData)
     this.DyeDelivery.patchValue({
       "id": this.SingleLineId,
       "date": this.DyeSingleData.headerData[0].date,
@@ -264,7 +261,6 @@ edit(id:any){
   });
 }
 DeleteButton(id:any){
-  // console.log(id)
 this.api.deleteDyeDelivery(id).subscribe((res)=>{
   alert(res.message)
   window.location.reload()

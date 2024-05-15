@@ -171,7 +171,6 @@ export class FabricRollDataComponent implements OnInit {
     this.woupdateid=id
     this.api.getsinglewodetails(id).subscribe((res) => {
       this.Woupdate = res.workorder
-      console.log(this.Woupdate)
       this.woUpdateFrom.patchValue({
         buyer: this.Woupdate.buyer,
         orderNo: this.Woupdate.orderNo,
@@ -215,7 +214,6 @@ export class FabricRollDataComponent implements OnInit {
 
 woupdatesubmit(){
   const entry = 1
-  console.log(this.woUpdateFrom.value)
   this.api.postsinglewodetails(this.woUpdateFrom.value,this.woupdateid).subscribe((res) => {
     alert(res.message)
     this.woByBuyer()

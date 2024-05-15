@@ -90,7 +90,7 @@ thead {
 th{
   text-align: center;
 }
-::ng-deep .modal-backdrop.show {
+:host::ng-deep .modal-backdrop.show {
   display: contents;
 }
 .fixTableHead{

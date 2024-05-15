@@ -24,7 +24,7 @@ date(){
 
 fileName = "YarnReconciliationReport.xlsx"
 exportexcel() {
-  let data = document.getElementById("table-data");
+  let data = document.getElementById("tableToConvert");
   const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(data);
   const wb: XLSX.WorkBook = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');

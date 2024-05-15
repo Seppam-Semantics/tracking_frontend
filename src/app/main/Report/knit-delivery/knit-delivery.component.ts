@@ -193,7 +193,6 @@ getsize() {
 getWoId(size: any, index: number) {
   this.api.getwodetails(this.buyerName, this.orderNo, this.style, this.color, size ).subscribe((res) => {
     const woId = res.workorders[0].id;
-    console.log(woId)
     const formArray = this.KnitDelivery.get('data') as FormArray;
     const row = formArray.at(index);
     row.get('woId')?.setValue(woId);
@@ -213,7 +212,6 @@ getWoId(size: any, index: number) {
     this.kintid = id
     this.api.getSingleKnitDel(id).subscribe((res) => {
       this.knitAllData = res;
-      console.log(res)
       this.KnitDelivery.patchValue({
         "id": this.kintid,
         "date": this.knitAllData.headerData[0].date,

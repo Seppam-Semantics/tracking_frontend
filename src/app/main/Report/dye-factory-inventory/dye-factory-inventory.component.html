@@ -8,7 +8,7 @@
             <input type="date" class="form-control" style="margin-top: 2px;" [(ngModel)]="filterDate" (change)="date()">
         </div>
         <div>
-            <button mat-button color="primary"><mat-icon>download</mat-icon>Download</button>
+            <button mat-button color="primary" (click)="exportexcel()"><mat-icon>download</mat-icon>Download</button>
         </div>
 
     </div>
@@ -18,7 +18,7 @@
     <table class="table table-hover table-bordered" id="table-data">
         <thead class="thead-dark">
             <tr>
-                <th>Sl.no</th>
+                <th>S.No</th>
 
                 <th>Dye Factory</th>
                 <th>Buyer</th>
@@ -26,11 +26,11 @@
 
                 <th>Style</th>
                 <th>Color</th>
-                <th>Knit Griege Booking Kgs</th>
+                <th>Knit Greige Booking Kgs</th>
                 <th>Dye Finish Booking Kgs</th>
 
                 <th>Knit Greige Delivery Kgs</th>
-                <th>Dye Griege Delivery Kgs</th>
+                <th>Dye Greige Delivery Kgs</th>
                 <th>Dye Finish Delivery Kgs</th>
 
                 <th>Inventory Dye Greige Kgs</th>

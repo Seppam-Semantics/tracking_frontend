@@ -61,13 +61,11 @@ export class WorkorderDataComponent {
             });
         }
         this.dataSource = this.users;
-        console.log(this.dataSource);
     };
   }
 
   workordersubmit() {
     this.spinner.show();
-    console.log(this.dataSource)
     this.api.postworkorder(this.dataSource).subscribe((res)=>{
       if(res.success){
         alert("Your work order details have been saved....!!!!")

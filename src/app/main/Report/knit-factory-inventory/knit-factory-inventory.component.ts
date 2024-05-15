@@ -19,7 +19,6 @@ export class KnitFactoryInventoryComponent implements OnInit{
   date(){
     this.api.KFInventoryData(this.filterDate).subscribe((res)=>{
       this.KnitFactoryInventoryData = res.KnitFactoryInventory
-      console.log(this.KnitFactoryInventoryData)
     })
   }
 

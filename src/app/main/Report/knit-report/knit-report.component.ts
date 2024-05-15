@@ -114,7 +114,7 @@ export class KnitReportComponent implements OnInit {
   knitDate(){
     this.api.knitDate().subscribe((res)=>{
       this.date=res.date
-      console.log(res)
+
     })
   }
 
@@ -131,7 +131,6 @@ export class KnitReportComponent implements OnInit {
   }
 
   factory() {
-    console.log(this.knitdate)
     if(this.factoryvalue != '' && this.knitdate == ''){
       this.loadknitdetails(this.factoryvalue)
     }
@@ -145,7 +144,6 @@ export class KnitReportComponent implements OnInit {
 
 
   loadknitdetails(factory: string= '', date: string='') {
-    console.log(date)
     this.api.ftydetailsFilter(factory, date).subscribe((res) => {
       this.data = res.knit;
     });

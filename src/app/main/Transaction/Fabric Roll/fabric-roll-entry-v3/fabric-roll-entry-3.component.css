@@ -247,7 +247,7 @@
 
     }
     
-    :host ::ng-deep ::ng-deep.mat-mdc-tab-header {
+    :host ::ng-deep.mat-mdc-tab-header {
       --mdc-tab-indicator-active-indicator-height: 48px;
       display: flex;
       overflow: hidden;
@@ -258,6 +258,6 @@
       background-color: #662d91;
   }
   
-  :host ::ng-deep ::ng-deep.mat-mdc-tab-header .mdc-tab-indicator {
+  :host ::ng-deep.mat-mdc-tab-header .mdc-tab-indicator {
       clip-path: polygon(0 0, 85% 0, 100% 100%, 0 100%);
   }

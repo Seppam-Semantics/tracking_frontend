@@ -159,7 +159,6 @@ export class DyeBatchReportComponent implements OnInit {
 
     this.api.dyeBatchAllData().subscribe((res) => {
       this.dyebatch_alldata = res.workorders
-      console.log(this.dyebatch_alldata)
     })
 
     this.getbuyers()

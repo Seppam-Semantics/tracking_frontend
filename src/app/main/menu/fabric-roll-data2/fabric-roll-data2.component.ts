@@ -76,6 +76,7 @@ export class FabricRollData2Component implements OnInit {
   dataIndex:any;
   newfabEntry:any[] = []
   visible: boolean = false;
+  visibleEntry : boolean = false;
   status : any;
   constructor(private api: ApiService, private router : Router) { }
 
@@ -85,8 +86,8 @@ export class FabricRollData2Component implements OnInit {
 }
   
 
-  fileName = "Fabricrolldata.xlsx"
-  fileName2="Workorder-data.xlsx"
+
+
 
   public getbuyers() {
     this.api.getbuyersData().subscribe((res) => {
@@ -121,7 +122,6 @@ export class FabricRollData2Component implements OnInit {
   loadworkorder(buyer: string = '', orderNo: string = '', style: string ='', color: string = '', size: string ='') {
     this.api.getwodetails(buyer, orderNo, style, color, size).subscribe((res) => {
       this.data = res.workorders;
-      console.log(this.data)
     
     });
   }
@@ -153,21 +153,21 @@ export class FabricRollData2Component implements OnInit {
     this.colorslist = ''
     this.sizeslist = ''
   }
-
+  fileName2="Workorder-data.xlsx"
   exportexcel2() {
-    let data = document.getElementById("table-data2");
-    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(data);
+    let data2 = document.getElementById("table-data2");
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(data2);
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet2');
     XLSX.writeFile(wb, this.fileName2);
   }
-  
+  fileName1 = "Fabricrolldata.xlsx"
   exportexcel() {
     let data = document.getElementById("table-data");
     const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(data);
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-    XLSX.writeFile(wb, this.fileName);
+    XLSX.writeFile(wb, this.fileName1);
   }
 
   check(id: any) {
@@ -193,7 +193,6 @@ export class FabricRollData2Component implements OnInit {
   
       // Setting the index of the longest entry array
       this.dataIndex = maxIndex;
-      console.log(this.dataIndex);
   
       // Creating an array from 1 to the length of the longest entry array
       this.newfabEntry = Array.from({length: fabEntryArray[this.dataIndex].length}, (_, i) => i + 1);
@@ -217,7 +216,6 @@ export class FabricRollData2Component implements OnInit {
   }
 
   edit(id: any) {
-    console.log(id)
     this.visible = true;
     this.woupdateid=id
     this.api.getsinglewodetails(id).subscribe((res) => {

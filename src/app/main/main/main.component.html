@@ -1,80 +1,71 @@
-<!-- <mat-toolbar class="header" color="primary" style="display: flex;">
-  <button type="button" mat-icon-button (click)="snav.toggle()">
-    <mat-icon class="header-icon">menu</mat-icon>
-  </button>
-  <span>
-    <img src="https://acco.ca.seppam.com/assets/icons/product-logo.svg" style="height: 1.8rem;">
-  </span>
-  <span class="flex-spacer"></span>
-  <div style="display: flex; justify-content: flex-end; width: -webkit-fill-available;">
-    <div>
-      <a mat-icon-button target="_blank">
-        <mat-icon class="header-icon">help</mat-icon>
-      </a>
-    </div>
-    <div>
-      <button mat-button style="margin-right: 10%;" (click)="logout()">Exit</button>
-    </div>
-  </div>
-</mat-toolbar> -->
-
 <mat-toolbar class="header" color="primary" style="display: flex;">
-  <button type="button" mat-icon-button (click)="snav.toggle()">
-    <mat-icon class="header-icon">menu</mat-icon>
-  </button>
-  <span>
-    <img src="https://acco.ca.seppam.com/assets/icons/product-logo.svg" style="height: 1.8rem;">
-  </span>
-  <span class="flex-spacer"></span>
 
-  <div class="menu1">
-    <button mat-button class="menu" (click)="home()">
-      Home
-    </button>
+      <button type="button" mat-icon-button (click)="snav.toggle()">
+        <mat-icon class="header-icon">menu</mat-icon>
+      </button>
+      <span>
+        <div style="display: flex; flex-direction: column;">
+        <img src="assets\img\TeeTracklogo.png" style="height: 1.8rem;">
+        <!-- <span class="text2">Scandex BD</span> -->
+      </div>
+      </span>
+      <span class="flex-spacer"></span>
 
-    <button mat-button class="menu" (click)="workorder1()">
-      WorkOrder
-    </button>
+      <button mat-button class="menu" (click)="home()">
+        Home
+      </button>
 
-    <button mat-button class="menu" (click)="yarn()">
-      YarnEntry
-    </button>
+      <button mat-button class="menu" (click)="workorder1()">
+        WorkOrder
+      </button>
 
-    <button mat-button class="menu" (click)="knite()">
-      KnitEntry
-    </button>
-    <button mat-button class="menu" (click)="knitdelivery()">
-      KnitDel
-    </button>
+      <button mat-button class="menu" (click)="yarn()">
+        YarnEntry
+      </button>
 
-    <button mat-button class="menu" (click)="Dye()">
-      DyeEntry
-    </button>
-    <button mat-button class="menu" (click)="dyedelivery()">
-      DyeDel
-    </button>
-  </div>
+      <button mat-button class="menu" (click)="knite()">
+        KnitEntry
+      </button>
+      <button mat-button class="menu" (click)="knitdelivery()">
+        KnitDel
+      </button>
 
-  <div class="menu2">
-    <button mat-button [matMenuTriggerFor]="menu">Menu</button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="home()">Home</button>
-      <button mat-menu-item (click)="workorder1()">WorkOrder</button>
-      <button mat-menu-item (click)="yarn()">YarnEntry</button>
-      <button mat-menu-item (click)="knite()">KnitEntry</button>
-      <button mat-menu-item (click)="knitdelivery()">KnitDel</button>
-      <button mat-menu-item (click)="Dye()">DyeEntry</button>
-      <button mat-menu-item (click)="dyedelivery()">DyeDel</button>
-    </mat-menu>
-  </div>
+      <button mat-button class="menu" (click)="Dye()">
+        DyeEntry
+      </button>
+      <button mat-button class="menu" (click)="dyedelivery()">
+        DyeDel
+      </button>
 
-  <div>
-    <button mat-button style="margin-right: 10%;" (click)="logout()" class="exit">
-      Exit
-    </button>
-  </div>
+      <div class="profile-container" [matMenuTriggerFor]="profile" matTooltip="profie"
+        matTooltipClass="example-tooltip-red">
+      </div>
+
+      <mat-menu #profile="matMenu">
+        <div class="row">
+          <div class="col-4">
+
+          </div>
+          <div class="col">
+            
+              
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+      
+        <div>
+          <button mat-menu-item >
+            <mat-icon>person</mat-icon>
+            Profile </button>
+          <button mat-menu-item  (click)="logout()">
+            <mat-icon >logout</mat-icon>
+            Logout</button>
+        </div>
+      </mat-menu>
 
 </mat-toolbar>
+<mat-toolbar style="height: auto; background-color: white;"><p class="text2">CompanyName : Scandex BD</p></mat-toolbar>
+
 
 <mat-sidenav-container>
   <mat-sidenav #snav mode='side' class=" primary-bg">

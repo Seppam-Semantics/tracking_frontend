@@ -10,7 +10,7 @@ import { MainRoutingModule } from '../main-routing.module';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
-  
+  isActive = false;
 logo:boolean = true
   constructor(private api:ApiService, private router:Router , private route : MainRoutingModule){
     

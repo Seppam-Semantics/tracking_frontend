@@ -1,10 +1,10 @@
 th,td,tr{
     text-align: center;
 }
-::ng-deep .modal-backdrop.show{
+:host ::ng-deep .modal-backdrop.show{
     display: none;
 }
-::ng-deep .mat-mdc-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-mdc-text-field-wrapper{
+:host ::ng-deep .mat-mdc-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-mdc-text-field-wrapper{
     cursor: pointer;
     width: 29vh;
 }
@@ -82,18 +82,18 @@ th,td,tr{
     height: 45vh;
 }
 
-::ng-deep .form-control{
+:host ::ng-deep .form-control{
     border: revert-layer;
 }
 
 th,tr,td{
     font-weight: normal;
 }
-::ng-deep .modal-fullscreen .modal-body{
+:host ::ng-deep .modal-fullscreen .modal-body{
     overflow-y: auto;
     scrollbar-width: none;
 }
-::ng-deep.p-panel .p-panel-header{
+:host ::ng-deep.p-panel .p-panel-header{
     border: 1px solid #e5e7eb;
     padding: 1.25rem;
     background: #f9fafb;
@@ -103,7 +103,7 @@ th,tr,td{
     background-color: darkorchid;
     color: white;
 }
-::ng-deep.p-dropdown-panel .p-dropdown-items {
+:host ::ng-deep.p-dropdown-panel .p-dropdown-items {
     margin-left:-27px
 }
 .loader {

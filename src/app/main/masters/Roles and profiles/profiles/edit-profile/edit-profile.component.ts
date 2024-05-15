@@ -818,8 +818,6 @@ export class EditProfileComponent implements OnInit {
     else (
       alert('profile name is empty')
     )
-
-    console.log(this.profileform.value)
   }
 
 }

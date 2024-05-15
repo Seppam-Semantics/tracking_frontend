@@ -14,7 +14,6 @@ export class LCOutstandingComponent implements OnInit{
   
     this.api.LCOutstandingData().subscribe((res)=>{
     this.LCOutstandingData = res.LCOutstanding
-    console.log(this.LCOutstandingData)
   })  
 
 }

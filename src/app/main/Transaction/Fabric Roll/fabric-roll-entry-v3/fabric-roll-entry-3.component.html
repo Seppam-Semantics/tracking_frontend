@@ -27,7 +27,7 @@
         </mat-form-field>
   
         <mat-form-field appearance="outline" >
-          <mat-label>color</mat-label>
+          <mat-label>Color</mat-label>
           <mat-select [(ngModel)]="colorslist" (selectionChange)="onSelectionChange()" (click)="resetform()">
             <mat-option value=""> </mat-option>
             <mat-option *ngFor="let color of this.colorlist" value="{{color.color}}">{{color.color}}</mat-option>
@@ -69,7 +69,7 @@
             </mat-form-field>
   
             <mat-form-field appearance="outline" >
-              <mat-label>Yarn Cunt</mat-label>
+              <mat-label>Yarn Count</mat-label>
               <input matInput value="{{fabdetails?.yarnCount}}" readonly>
             </mat-form-field>
   
@@ -121,7 +121,7 @@
           <div style="overflow: hidden;">
   
             <div style="display: flex; justify-content: center;" *ngIf="!loading1">
-              <button mat-raised-button color="primary" (click)="submit()" style="margin-top: 3%;">Save</button>
+              <button  mat-raised-button color="primary" (click)="submit()" style="margin-top: 3%;"><mat-icon>save</mat-icon> Save</button>
             </div>
             <div style="display: flex; justify-content: center;" *ngIf="loading1">
               <button mat-raised-button color="primary" style="margin-top: 3%;">
@@ -178,7 +178,7 @@
           <div style="display: flex; flex-direction: column;">
   
             <div style="display: flex; justify-content: center;" *ngIf="!loading2">
-              <button mat-raised-button color="primary" (click)="submit2()" style="margin-top: 3%;">Save</button>
+              <button mat-raised-button color="primary" (click)="submit2()" style="margin-top: 3%;"><mat-icon>save</mat-icon>Save</button>
             </div>
             <div style="display: flex; justify-content: center;" *ngIf="loading2">
               <button mat-raised-button color="primary" style="margin-top: 3%;">
@@ -254,7 +254,7 @@
                 <button class="btn btn-primary" style="width: 50%;" (click)="dyeBatchEntry()">Generate</button> -->
               </div>
               <div style="display: flex; justify-content: center;" *ngIf="!loading3">
-                <button mat-raised-button color="primary" (click)="submit3()" style="margin-top: 3%;" class="entry3savebutton">Save</button>
+                <button mat-raised-button color="primary" (click)="submit3()" style="margin-top: 3%;" class="entry3savebutton"><mat-icon>save</mat-icon>Save</button>
               </div>
               <div style="display: flex; justify-content: center;" *ngIf="loading3">
                 <button mat-raised-button color="primary" style="margin-top: 3%;">
@@ -330,7 +330,7 @@
           <div style="overflow: hidden;">
   
             <div style="display: flex; justify-content: center;" *ngIf="!loading4">
-              <button mat-raised-button color="primary" (click)="submit4()" style="margin-top: 3%;">Save</button>
+              <button mat-raised-button color="primary" (click)="submit4()" style="margin-top: 3%;"><mat-icon>save</mat-icon>Save</button>
             </div>
             <div style="display: flex; justify-content: center;" *ngIf="loading4">
               <button mat-raised-button color="primary" style="margin-top: 3%;">
@@ -400,7 +400,7 @@
           <div style="overflow: hidden;">
   
             <div style="display: flex; justify-content: center;" *ngIf="!loading5">
-              <button mat-raised-button color="primary" (click)="submit5()" style="margin-top: 3%;">Save</button>
+              <button mat-raised-button color="primary" (click)="submit5()" style="margin-top: 3%;"><mat-icon>save</mat-icon>Save</button>
             </div>
             <div style="display: flex; justify-content: center;" *ngIf="loading5">
               <button mat-raised-button color="primary" style="margin-top: 3%;">
@@ -431,12 +431,12 @@
                   </tr>
                   <tr>
                     <th>Batch No.</th>
-                    <th style="display: none;">No.of Days</th>
+                    <th style="display: none;">No.Of Days</th>
                     <th>Notes</th>
-                    <th>Griege Rolls</th>
-                    <th>Grieg Kgs</th>
+                    <th>Greige Rolls</th>
+                    <th>Greige Kgs</th>
                     <th>No.Of Rolls</th>
-                    <th>delivery.Qty</th>
+                    <th>Delivery.Qty</th>
                     <th>Delivered Date</th>
                     <th>Delete</th>
                   </tr>
@@ -470,7 +470,7 @@
           <div [formGroup]="form6" style="overflow: hidden;">
   
             <div style="display: flex; justify-content: center;" *ngIf="!loading6">
-              <button mat-raised-button color="primary" (click)="submit6()" style=" margin-top: 3%;">Save</button>
+              <button mat-raised-button color="primary" (click)="submit6()" style=" margin-top: 3%;"><mat-icon>save</mat-icon>Save</button>
             </div>
             <div style="display: flex; justify-content: center;" *ngIf="loading6">
               <button mat-raised-button color="primary" style="margin-top: 3%;">
@@ -527,7 +527,7 @@
         <mat-tab label="Actual Cut panels Entry">
           <div [formGroup]="form7" style="overflow: hidden;">
             <div style="display: flex; justify-content: center;" *ngIf="!loading7">
-              <button mat-raised-button color="primary" (click)="submit7()" style="margin-top: 3%;">Save</button>
+              <button mat-raised-button color="primary" (click)="submit7()" style="margin-top: 3%;"><mat-icon>save</mat-icon>Save</button>
             </div>
             <div style="display: flex; justify-content: center;" *ngIf="loading7">
               <button mat-raised-button color="primary" style="margin-top: 3%;">
@@ -556,7 +556,7 @@
                   <tr>
                     <th></th>
                     <th colspan="4">
-                      Actual cut <input type="text" value="{{entry7total}}" readonly>
+                      Actual Cut <input type="text" value="{{entry7total}}" readonly>
                     </th>
                     <th></th>
                     <th></th>
@@ -566,7 +566,7 @@
                     <th>No.Of.Days</th>
                     <th>Notes</th>
                     <th>Total Rolls</th>
-                    <th>Actual cut</th>
+                    <th>Actual Cut</th>
                     <th>Production Date</th>
                     <th>Delete</th>
                   </tr>
