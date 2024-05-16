@@ -1,16 +1,16 @@
 <div>
-    <mat-toolbar style="height: fit-content; padding: 10px;">
-      <div class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+  <mat-toolbar style="height: fit-content; padding: 10px;">
+    <div class="d-flex">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
         (keyup)="applyFilter($event)" #input>
-      </div>
-      <span class="flex-spacer"></span>
-      <button mat-button color='primary' style="margin-right: 12px;" (click)="addemployees()" >New</button>
-    </mat-toolbar>
-    
-    <div >
-    
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    </div>
+    <span class="flex-spacer"></span>
+    <button mat-button color='primary' style="margin-right: 12px;" (click)="addemployees()">New</button>
+  </mat-toolbar>
+
+  <div>
+
+    <!-- <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
             <ng-container matColumnDef="code">
               <th mat-header-cell *matHeaderCellDef> Emp Id </th>
@@ -80,12 +80,251 @@
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
+          </table> -->
+
+    <table class="table table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Emp Id</th>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Phone</th>
+          <th scope="col">Address</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of this.data">
+          <td>{{data.employeeCode}}</td>
+          <td>{{data.name}}</td>
+          <td>{{data.email}}</td>
+          <td>{{data.phone}}</td>
+          <td>{{data.address}}</td>
+          <td>
+            <button mat-icon-button color="primary" (click)="editemployees(data.id)">
+              <mat-icon>edit</mat-icon>
+            </button>
+
+            <button mat-icon-button color="primary" (click)="deleteItem(data.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+
+            <button mat-icon-button color="primary" (click)="viewData(data.id)">
+              <mat-icon>visibility</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
 
 
-    </div>
-  </div> 
-  
-    
-    
-  
+
+<!-------------------------------------------------------------------->
+<p-dialog header="Edit Employee" [modal]="true" [(visible)]="edit" [style]="{ width: '30%' }"
+  [formGroup]="addemployeesForm1">
+  <div style="display: flex; gap: 10px;">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Employee Code</mat-label>
+      <input matInput type="text" formControlName="employeeCode">
+      <mat-error>
+        Please enter valid employee code
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Name</mat-label>
+      <input matInput required textOnly formControlName="name">
+      <mat-error>
+        Please enter your name
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div style="display: flex; gap: 10px;">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput required type="email" formControlName="email">
+      <mat-error>
+        Invalid email
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Phone</mat-label>
+      <input matInput type="phone" formControlName="phone">
+      <mat-error>
+        Please enter valid phone number
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="outline" class="full-width" style="width: 98%;">
+      <mat-label>Address</mat-label>
+      <textarea matInput style="min-height: 70px; max-height: 100px;" formControlName="address"></textarea>
+      <mat-error>
+        Please Enter Permenent Address
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div style="display: flex; gap: 10px;">
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Role</mat-label>
+      <mat-select formControlName="role">
+        <mat-option *ngFor="let roles of rolesnames" [value]="roles.id">{{roles.name}}</mat-option>
+      </mat-select>
+      <mat-error>
+        This Filed can't be Empty!
+      </mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Default Password</mat-label>
+      <input type="text" matInput formControlName="password">
+    </mat-form-field>
+  </div>
+  <ng-template pTemplate="footer">
+    <button mat-flat-button color='primary' (click)="viewsave()">Save</button>
+    <button mat-button (click)="edit = flase "><mat-icon>close</mat-icon>Close</button>
+  </ng-template>
+</p-dialog>
+
+<!-------------------------------------------------------------------->
+
+<!-------------------------------------------------------------------->
+<p-dialog header="View Employee" [modal]="true" [(visible)]="viewpopup" [style]="{ width: '30%' }"
+  [formGroup]="addemployeesForm2">
+  <div style="display: flex; gap: 10px;">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Employee Code</mat-label>
+      <input matInput type="text" formControlName="employeeCode">
+      <mat-error>
+        Please enter valid employee code
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Name</mat-label>
+      <input matInput required textOnly formControlName="name">
+      <mat-error>
+        Please enter your name
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div style="display: flex; gap: 10px;">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput required type="email" formControlName="email">
+      <mat-error>
+        Invalid email
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Phone</mat-label>
+      <input matInput type="phone" formControlName="phone">
+      <mat-error>
+        Please enter valid phone number
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="outline" class="full-width" style="width: 98%;">
+      <mat-label>Address</mat-label>
+      <textarea matInput style="min-height: 70px; max-height: 100px;" formControlName="address"></textarea>
+      <mat-error>
+        Please Enter Permenent Address
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div style="display: flex; gap: 10px;">
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Role</mat-label>
+      <mat-select formControlName="role">
+        <mat-option *ngFor="let roles of rolesnames" [value]="roles.id">{{roles.name}}</mat-option>
+      </mat-select>
+      <mat-error>
+        This Filed can't be Empty!
+      </mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Default Password</mat-label>
+      <input type="text" matInput formControlName="password">
+    </mat-form-field>
+  </div>
+
+</p-dialog>
+<!-------------------------------------------------------------------->
+<!-------------------------------------------------------------------->
+<p-dialog header="Basic Info" [modal]="true" [(visible)]="newEmployee" [style]="{ width: '30%' }"
+  [formGroup]="addemployeesForm3">
+  <div style="display: flex; gap: 10px;">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Employee Code</mat-label>
+      <input matInput type="text" formControlName="employeeCode">
+      <mat-error>
+        Please enter valid employee code
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Name</mat-label>
+      <input matInput required textOnly formControlName="name">
+      <mat-error>
+        Please enter your name
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div style="display: flex; gap: 10px;">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput required type="email" formControlName="email">
+      <mat-error>
+        Invalid email
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Phone</mat-label>
+      <input matInput type="phone" formControlName="phone">
+      <mat-error>
+        Please enter valid phone number
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="outline" class="full-width" style="width: 98%;">
+      <mat-label>Address</mat-label>
+      <textarea matInput style="min-height: 70px; max-height: 100px;" formControlName="address"></textarea>
+      <mat-error>
+        Please Enter Permenent Address
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div style="display: flex; gap: 10px;">
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Role</mat-label>
+      <mat-select formControlName="role">
+        <mat-option *ngFor="let roles of rolesnames2" [value]="roles.id">{{roles.name}}</mat-option>
+      </mat-select>
+      <mat-error>
+        This Filed can't be Empty!
+      </mat-error>
+    </mat-form-field>
+
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Default Password</mat-label>
+      <input type="text" matInput formControlName="password">
+    </mat-form-field>
+  </div>
+  <ng-template pTemplate="footer">
+    <button mat-flat-button color='primary' (click)="addsave()">Save</button>
+    <button mat-button (click)="newEmployee = flase "><mat-icon>close</mat-icon>Close</button>
+  </ng-template>
+</p-dialog>
+<!----------------------------------------------------------------->

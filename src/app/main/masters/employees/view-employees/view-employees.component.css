@@ -71,3 +71,8 @@ table {
    overflow-y: scroll;
   }
   
+
+  thead , th ,td {
+    font-weight: normal;
+    text-align: center;
+  }

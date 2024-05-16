@@ -34,8 +34,9 @@ loginform = new FormGroup ({
 token:any;
   login(){
     this.api.login(this.loginform.value).subscribe((res)=>{
-  if (res.success == true){
+      if (res.success == true){
     const token = res.token;
+    sessionStorage.setItem('name', res.userContext.name);
     sessionStorage.setItem('token', token)
     this.router.navigate(['/main/FabricRollData']);
     alert(res.message)

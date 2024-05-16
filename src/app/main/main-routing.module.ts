@@ -32,6 +32,7 @@ import { LCOutstandingComponent } from './Report/lc-outstanding/lc-outstanding.c
 import { KnitFactoryInventoryComponent } from './Report/knit-factory-inventory/knit-factory-inventory.component';
 import { DyeFactoryInventoryComponent } from './Report/dye-factory-inventory/dye-factory-inventory.component';
 import { YarnReconciliationComponent } from './Report/yarn-reconciliation/yarn-reconciliation.component';
+import { OrganizationSetupComponent } from './masters/organization-setup/organization-setup.component';
 
 const routes: Routes = [
   {path:'', component: AppComponent},
@@ -68,7 +69,8 @@ const routes: Routes = [
   {path:"lc-outstanding" , component:LCOutstandingComponent},
   {path:"knit-factory-inventory" ,component:KnitFactoryInventoryComponent},
   {path:"dye-factory-inventory" , component:DyeFactoryInventoryComponent},
-  {path:"yarn-reconciliation" , component:YarnReconciliationComponent}
+  {path:"yarn-reconciliation" , component:YarnReconciliationComponent},
+  {path:"Organization-Setup" , component:OrganizationSetupComponent},
 
 ];
 

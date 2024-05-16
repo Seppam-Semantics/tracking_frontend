@@ -75,6 +75,7 @@ import { LCOutstandingComponent } from './Report/lc-outstanding/lc-outstanding.c
 import { KnitFactoryInventoryComponent } from './Report/knit-factory-inventory/knit-factory-inventory.component';
 import { DyeFactoryInventoryComponent } from './Report/dye-factory-inventory/dye-factory-inventory.component';
 import { YarnReconciliationComponent } from './Report/yarn-reconciliation/yarn-reconciliation.component';
+import { OrganizationSetupComponent } from './masters/organization-setup/organization-setup.component';
 
 
 @NgModule({
@@ -117,6 +118,7 @@ import { YarnReconciliationComponent } from './Report/yarn-reconciliation/yarn-r
     KnitFactoryInventoryComponent,
     DyeFactoryInventoryComponent,
     YarnReconciliationComponent,
+    OrganizationSetupComponent,
 
   ],
   imports: [

@@ -1,70 +1,83 @@
 <mat-toolbar class="header" color="primary" style="display: flex;">
 
-      <button type="button" mat-icon-button (click)="snav.toggle()">
-        <mat-icon class="header-icon">menu</mat-icon>
-      </button>
-      <span>
-        <div style="display: flex; flex-direction: column;">
-        <img src="assets\img\TeeTracklogo.png" style="height: 1.8rem;">
-        <!-- <span class="text2">Scandex BD</span> -->
+  <button type="button" mat-icon-button (click)="snav.toggle()">
+    <mat-icon class="header-icon">menu</mat-icon>
+  </button>
+  <span>
+    <div style="display: flex; flex-direction: column;">
+      <img src="assets\img\TeeTracklogo.png" style="height: 1.8rem;">
+      <!-- <span class="text2">Scandex BD</span> -->
+    </div>
+  </span>
+  <span class="flex-spacer"></span>
+
+  <button mat-button class="menu" (click)="home()">
+    Home
+  </button>
+
+  <button mat-button class="menu" (click)="workorder1()">
+    WorkOrder
+  </button>
+
+  <button mat-button class="menu" (click)="yarn()">
+    YarnEntry
+  </button>
+
+
+  <button mat-button class="menu" [matMenuTriggerFor]="menu2">
+    KnitEnty
+  </button>
+  <mat-menu #menu2="matMenu">
+    <button mat-menu-item>Knit WO</button>
+    <button mat-menu-item (click)="knite()">Knit Entry</button>
+    <button mat-menu-item (click)="knitdelivery()">Knit Delivery</button>
+  </mat-menu>
+
+
+  <button mat-button class="menu" [matMenuTriggerFor]="menu">
+    DyeEntry
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>Dye WO</button>
+    <button mat-menu-item (click)="Dye()">Dye Entry</button>
+    <button mat-menu-item (click)="dyedelivery()">Dye Delivery</button>
+    <button mat-menu-item>Fab Transfer</button>
+  </mat-menu>
+
+
+  <div class="profile-container" [matMenuTriggerFor]="profile" matTooltip="profie"
+    matTooltipClass="example-tooltip-red">
+    {{userName?.charAt(0)|uppercase}}
+  </div>
+
+  <mat-menu #profile="matMenu">
+    <div style="display: flex; margin-left: 1%">
+      <div class="profile-view">
+        {{userName?.charAt(0)|uppercase}}
       </div>
-      </span>
-      <span class="flex-spacer"></span>
-
-      <button mat-button class="menu" (click)="home()">
-        Home
-      </button>
-
-      <button mat-button class="menu" (click)="workorder1()">
-        WorkOrder
-      </button>
-
-      <button mat-button class="menu" (click)="yarn()">
-        YarnEntry
-      </button>
-
-      <button mat-button class="menu" (click)="knite()">
-        KnitEntry
-      </button>
-      <button mat-button class="menu" (click)="knitdelivery()">
-        KnitDel
-      </button>
-
-      <button mat-button class="menu" (click)="Dye()">
-        DyeEntry
-      </button>
-      <button mat-button class="menu" (click)="dyedelivery()">
-        DyeDel
-      </button>
-
-      <div class="profile-container" [matMenuTriggerFor]="profile" matTooltip="profie"
-        matTooltipClass="example-tooltip-red">
+      <br>
+      <div class="col" style="margin-top: 3%;">
+        <span style="font-weight: bold; text-transform: capitalize;">
+          {{userName}}
+        </span> <br>
       </div>
+    </div>
+    <br>
+    <mat-divider></mat-divider>
 
-      <mat-menu #profile="matMenu">
-        <div class="row">
-          <div class="col-4">
+    <button mat-menu-item>
+      <mat-icon>person</mat-icon>
+      Profile </button>
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      Logout</button>
 
-          </div>
-          <div class="col">
-            
-              
-          </div>
-        </div>
-        <mat-divider></mat-divider>
-      
-        <div>
-          <button mat-menu-item >
-            <mat-icon>person</mat-icon>
-            Profile </button>
-          <button mat-menu-item  (click)="logout()">
-            <mat-icon >logout</mat-icon>
-            Logout</button>
-        </div>
-      </mat-menu>
+  </mat-menu>
 
 </mat-toolbar>
-<mat-toolbar style="height: auto; background-color: white;"><p class="text2">CompanyName : Scandex BD</p></mat-toolbar>
+<mat-toolbar style="height: auto; background-color: white;">
+  <p class="text2">CompanyName : Scandex BD</p>
+</mat-toolbar>
 
 
 <mat-sidenav-container>
@@ -87,6 +100,12 @@
           <a mat-list-item [routerLink]="'viewemployees'">
             <div class="text">
               Employees
+            </div>
+          </a>
+
+          <a mat-list-item [routerLink]="'Organization-Setup'">
+            <div class="text">
+              Organization-Setup
             </div>
           </a>
         </mat-nav-list>

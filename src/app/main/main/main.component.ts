@@ -11,7 +11,10 @@ import { MainRoutingModule } from '../main-routing.module';
 })
 export class MainComponent implements OnInit {
   isActive = false;
-logo:boolean = true
+  logo:boolean = true
+  userName: string | null = sessionStorage.getItem('name');
+
+
   constructor(private api:ApiService, private router:Router , private route : MainRoutingModule){
     
   }
