@@ -76,7 +76,9 @@ import { KnitFactoryInventoryComponent } from './Report/knit-factory-inventory/k
 import { DyeFactoryInventoryComponent } from './Report/dye-factory-inventory/dye-factory-inventory.component';
 import { YarnReconciliationComponent } from './Report/yarn-reconciliation/yarn-reconciliation.component';
 import { OrganizationSetupComponent } from './masters/organization-setup/organization-setup.component';
-
+import {CardModule} from 'primeng/card';
+import { FabricsTransferCutListReportComponent } from './Report/fabrics-transfer-cut-list-report/fabrics-transfer-cut-list-report.component';
+import { FabricsTransferCuttingEntryComponent } from './Transaction/fabrics-transfer-cutting-entry/fabrics-transfer-cutting-entry.component';
 
 @NgModule({
   declarations: [
@@ -119,6 +121,8 @@ import { OrganizationSetupComponent } from './masters/organization-setup/organiz
     DyeFactoryInventoryComponent,
     YarnReconciliationComponent,
     OrganizationSetupComponent,
+    FabricsTransferCutListReportComponent,
+    FabricsTransferCuttingEntryComponent,
 
   ],
   imports: [
@@ -158,6 +162,7 @@ import { OrganizationSetupComponent } from './masters/organization-setup/organiz
     TabMenuModule,
     InputTextModule,
     MatMenuModule,
+    CardModule,
   ]
 })
 export class MainModule { }

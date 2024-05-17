@@ -68,7 +68,7 @@ KnitDeliveryAddButton(){
   const row = this.fb.group({
     "id": new FormControl(),
     "knitId" : new FormControl(),
-    "woId": new FormControl(1),
+    "woId": new FormControl(),
     "dyeFactory": new FormControl(),
     "knitChallan": new FormControl(),
     "scandexChallan": new FormControl(),

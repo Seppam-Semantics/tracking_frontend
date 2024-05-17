@@ -33,6 +33,9 @@ import { KnitFactoryInventoryComponent } from './Report/knit-factory-inventory/k
 import { DyeFactoryInventoryComponent } from './Report/dye-factory-inventory/dye-factory-inventory.component';
 import { YarnReconciliationComponent } from './Report/yarn-reconciliation/yarn-reconciliation.component';
 import { OrganizationSetupComponent } from './masters/organization-setup/organization-setup.component';
+import { FabricsTransferCutListReportComponent } from './Report/fabrics-transfer-cut-list-report/fabrics-transfer-cut-list-report.component';
+import { FabricsTransferCuttingEntryComponent } from './Transaction/fabrics-transfer-cutting-entry/fabrics-transfer-cutting-entry.component';
+
 
 const routes: Routes = [
   {path:'', component: AppComponent},
@@ -71,7 +74,8 @@ const routes: Routes = [
   {path:"dye-factory-inventory" , component:DyeFactoryInventoryComponent},
   {path:"yarn-reconciliation" , component:YarnReconciliationComponent},
   {path:"Organization-Setup" , component:OrganizationSetupComponent},
-
+  {path:"FabricsTransferCutListReport" , component:FabricsTransferCutListReportComponent},
+  {path:"FabricsTransferCuttingEntry" , component:FabricsTransferCuttingEntryComponent}
 ];
 
 @NgModule({

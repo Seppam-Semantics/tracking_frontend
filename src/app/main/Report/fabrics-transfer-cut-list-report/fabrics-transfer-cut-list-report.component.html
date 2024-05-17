@@ -1,0 +1,74 @@
+<mat-toolbar class="bg-dark text-white" style="display: flex; justify-content: center; height: auto;">
+    Fabrics Transfer - Cutting Listing
+</mat-toolbar>
+
+<mat-toolbar style="height: auto;">
+    <div style="display: flex; gap: 15px;">
+        <p-dropdown [options]="Buyer"  [(ngModel)]="Buyerlist" optionLabel="name" optionValue="name" placeholder="Buyer" />
+
+        <p-dropdown [options]="Order"  [(ngModel)]="Buyerlist" optionLabel="order" optionValue="order" placeholder="Order" />
+
+    </div>
+    <div style="flex: 1 1 auto;"></div>
+    <div style="display: flex;">
+
+        <div style="display: flex; gap: 25px;">
+            <div style="display: flex; gap: 10px;">
+                <label style="font-weight: normal; font-family: serif;">From</label>
+                <input type="date" class="form-control" style="margin-top: 2px;" [(ngModel)]="filterDate1"
+                    (change)="date()">
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <label style="font-weight: normal; font-family: serif;">To</label>
+                <input type="date" class="form-control" style="margin-top: 2px;" [(ngModel)]="filterDate2"
+                    (change)="date()">
+            </div>
+        </div>
+
+        <button mat-button color="primary" (click)="exportexcel()"><mat-icon>download</mat-icon>Download</button>
+        <button mat-button color="primary" (click)="new()">New</button>
+
+    </div>
+</mat-toolbar>
+<div>
+    <table class="table table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>S.No</th>
+                <th>Transfer no</th>
+                <th>Trans Date</th>
+
+                <th>Buyer</th>
+                <th>Order no</th>
+                <th>Style</th>
+                
+                <th>Color</th>
+                <th>Size</th>
+                <th>Rolls - nos</th>
+                
+                <th>Finish Fabrics - Kgs</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+
+                <td></td>
+                <td></td>
+                <td></td>
+
+                <td></td>
+                <td></td>
+                <td></td>
+
+                <td></td>
+                <td><button class="btn btn-primary" style="width: auto;"><mat-icon>edit</mat-icon></button></td>
+                <td><button class="btn btn-danger" style="width: auto;"><mat-icon>delete</mat-icon></button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

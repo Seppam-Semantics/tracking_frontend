@@ -1,0 +1,23 @@
+th,tr,td { 
+    text-align: center;
+    font-weight: normal;
+}
+:host ::ng-deep.p-dropdown-panel .p-dropdown-items {
+    margin-left:-27px
+}
+:host ::ng-deep .p-dropdown .p-dropdown-label.p-placeholder{
+    color: #6b7280;
+    margin-top: -5px;
+}
+:host ::ng-deep .p-dropdown{
+    display: inline-flex;
+    cursor: pointer;
+    position: relative;
+     user-select: none;
+    height: 47px;
+}
+:host ::ng-deep .p-dropdown .p-dropdown-label{
+    background: transparent;
+    border: 0 none;
+    margin-top: -5px;
+}

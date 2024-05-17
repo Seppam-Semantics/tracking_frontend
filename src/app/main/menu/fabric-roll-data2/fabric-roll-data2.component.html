@@ -89,11 +89,11 @@
         <th>Dye Rate</th>
 
         <th>Status</th>
-        <th colspan="2">Roll Total</th>
-        <th colspan="2">Greige Total</th>
-        <th colspan="2">Dye Total</th>
-        <th colspan="2">Finished Total</th>
-        <th colspan="2">Delivery Total</th>
+        <th colspan="2">Knit Prod</th>
+        <th colspan="2">Greige Delivery</th>
+        <th colspan="2">Dye Prod</th>
+        <th colspan="2">Dye fin Prod</th>
+        <th colspan="2">Dye delivery</th>
         <th colspan="2">Plan Cut</th>
         <th colspan="2">Actual Cut</th>
         <th>Print Status</th>
@@ -489,6 +489,11 @@
 
     </div>
   </p-panel>
+  <ng-template pTemplate="footer">
+<div style="display: flex; width: 100%; justify-content: center;">
+    <button (click)="woupdatesubmit()" mat-button color="primary"><mat-icon>save</mat-icon>Save</button>
+  </div>
+  </ng-template>
   </p-dialog>
 
 

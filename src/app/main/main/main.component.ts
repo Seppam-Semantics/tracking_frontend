@@ -59,4 +59,7 @@ export class MainComponent implements OnInit {
     knitdelivery(){
       this.router.navigate(['/main/knit-delivery'])
     }
+    FabricsTransferCutListReportComponent(){
+      this.router.navigate(['/main/FabricsTransferCutListReport'])
+    }
 }
