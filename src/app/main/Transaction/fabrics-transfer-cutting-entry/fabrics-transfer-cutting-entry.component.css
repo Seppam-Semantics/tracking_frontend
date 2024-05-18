@@ -2,3 +2,6 @@ th,tr,td {
     text-align: center;
     font-weight: normal;
 }
+:host ::ng-deep .form-control{
+    border: 1px solid black;
+  }

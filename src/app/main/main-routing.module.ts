@@ -35,6 +35,7 @@ import { YarnReconciliationComponent } from './Report/yarn-reconciliation/yarn-r
 import { OrganizationSetupComponent } from './masters/organization-setup/organization-setup.component';
 import { FabricsTransferCutListReportComponent } from './Report/fabrics-transfer-cut-list-report/fabrics-transfer-cut-list-report.component';
 import { FabricsTransferCuttingEntryComponent } from './Transaction/fabrics-transfer-cutting-entry/fabrics-transfer-cutting-entry.component';
+import { KnitWorkOrderListingComponent } from './Report/knit-work-order-listing/knit-work-order-listing.component';
 
 
 const routes: Routes = [
@@ -75,7 +76,9 @@ const routes: Routes = [
   {path:"yarn-reconciliation" , component:YarnReconciliationComponent},
   {path:"Organization-Setup" , component:OrganizationSetupComponent},
   {path:"FabricsTransferCutListReport" , component:FabricsTransferCutListReportComponent},
-  {path:"FabricsTransferCuttingEntry" , component:FabricsTransferCuttingEntryComponent}
+  {path:"FabricsTransferCuttingEntry" , component:FabricsTransferCuttingEntryComponent},
+  {path:"KnitWorkOrderListing" , component : KnitWorkOrderListingComponent}
+
 ];
 
 @NgModule({

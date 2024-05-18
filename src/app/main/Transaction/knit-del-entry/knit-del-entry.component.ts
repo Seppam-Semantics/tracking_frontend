@@ -8,7 +8,7 @@ import { ApiService } from 'src/app/api.service';
   templateUrl: './knit-del-entry.component.html',
   styleUrls: ['./knit-del-entry.component.css']
 })
-export class KnitDelEntryComponent {
+export class KnitDelEntryComponent  implements OnInit{
   DateData:any
   KnitFactoryData:any
   ToDyeFtyData:any
@@ -37,6 +37,8 @@ ngOnInit(): void {
 
   this.buyername();
 
+  
+
   this.api.knitfty_name().subscribe((res) => {
     this.fty_name = res.factorys
   })
@@ -45,6 +47,9 @@ ngOnInit(): void {
     this.factoryname=res.factorys
   })
 
+}
+preventManualInput(event: KeyboardEvent): void {
+  event.preventDefault();
 }
 constructor(private fb : FormBuilder , private api : ApiService , private router : Router){
 
@@ -128,6 +133,7 @@ calculate(){
 buyername(){
   this.api.getbuyers().subscribe((res)=>{
     this.buyer = res.buyers
+    console.log(this.buyer)
   })
 }
 getBuyerValue(event: any) {
@@ -173,12 +179,14 @@ getsize() {
 getWoId(size: any, index: number) {
   this.api.getwodetails(this.buyerName, this.orderNo, this.style, this.color, size ).subscribe((res) => {
     const woId = res.workorders[0].id;
+    console.log(woId)
     const formArray = this.KnitDelivery.get('data') as FormArray;
     const row = formArray.at(index);
     row.get('woId')?.setValue(woId);
   });
 }
 // <!------------------------------------------------------------>
+
 
 saveButton(){
   if (this.KnitDelivery.valid) {

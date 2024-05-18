@@ -62,4 +62,8 @@ export class MainComponent implements OnInit {
     FabricsTransferCutListReportComponent(){
       this.router.navigate(['/main/FabricsTransferCutListReport'])
     }
-}
+
+    knitwo(){
+      this.router.navigate(['/main/KnitWorkOrderListing'])
+    }
+  }

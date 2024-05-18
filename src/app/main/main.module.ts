@@ -79,6 +79,7 @@ import { OrganizationSetupComponent } from './masters/organization-setup/organiz
 import {CardModule} from 'primeng/card';
 import { FabricsTransferCutListReportComponent } from './Report/fabrics-transfer-cut-list-report/fabrics-transfer-cut-list-report.component';
 import { FabricsTransferCuttingEntryComponent } from './Transaction/fabrics-transfer-cutting-entry/fabrics-transfer-cutting-entry.component';
+import { KnitWorkOrderListingComponent } from './Report/knit-work-order-listing/knit-work-order-listing.component';
 
 @NgModule({
   declarations: [
@@ -123,6 +124,7 @@ import { FabricsTransferCuttingEntryComponent } from './Transaction/fabrics-tran
     OrganizationSetupComponent,
     FabricsTransferCutListReportComponent,
     FabricsTransferCuttingEntryComponent,
+    KnitWorkOrderListingComponent,
 
   ],
   imports: [

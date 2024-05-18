@@ -66,9 +66,96 @@
                 <td></td>
 
                 <td></td>
-                <td><button class="btn btn-primary" style="width: auto;"><mat-icon>edit</mat-icon></button></td>
+                <td><button class="btn btn-primary" style="width: auto;" (click)="edit()"><mat-icon>edit</mat-icon></button></td>
                 <td><button class="btn btn-danger" style="width: auto;"><mat-icon>delete</mat-icon></button></td>
             </tr>
         </tbody>
     </table>
 </div>
+
+
+
+
+<!--------------------------------------------------------------------------------------------------->
+
+<p-dialog [(visible)]="editscreen" [modal]="true" header="Edit Fabrics Transfer - Cutting Listing"  [maximizable]="true" [style]="{width: '90vw', height:'90vh'}" >
+    <div [formGroup]="FabricsTransferForm">
+        <mat-toolbar style="height: auto;">
+            <div style="flex: 1 1 auto;"></div>
+            <div style="display: flex; gap: 25px;">
+    
+                <div style="display: flex; gap: 10px;">
+                    <label style="font-weight: normal; font-family: auto; margin-top: 2px;">Transferno</label>
+                    <input type="text" class="form-control" style="margin-top: 2px;" [(ngModel)]="Transferno"
+                        formControlName="1">
+                </div>
+    
+                <div style="display: flex; gap: 10px;">
+                    <label style="font-weight: normal; font-family: auto; margin-top: 2px;">Date</label>
+                    <input type="date" class="form-control" style="margin-top: 2px;" [(ngModel)]="Date"
+                        formControlName="2">
+                </div>
+    
+            </div>
+        </mat-toolbar>
+        <div>
+            <table class="table table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th><button class="btn btn-primary" (click)="FabricsTransferAddButton()">+</button></th>
+    
+                        <th>S.No</th>
+                        <th>Transferno</th>
+                        <th>Buyer</th>
+    
+                        <th>Order no</th>
+                        <th>Style</th>
+                        <th>Color</th>
+    
+                        <th>Size</th>
+                        <th>Rolls - nos</th>
+                        <th>Finish Fabrics - Kgs</th>
+    
+                    </tr>
+                </thead>
+                <tbody formArrayName="data">
+                    <tr *ngFor="let list of items.controls; let i=index" [formGroupName]="i">
+                        <td></td>
+    
+                        <td>{{i+1}}</td>
+                        <td><input type="text" class="form-control" formControlName="3"></td>
+                        <td>
+                            <input type="text" class="form-control" formControlName="4" list="11">
+                            <datalist id="11">
+                                <option>1</option>
+                            </datalist>
+                        </td>
+                        <td><input type="text" class="form-control" formControlName="5" list="2">
+                            <datalist id="2">
+                                <option>2</option>
+                            </datalist>
+                        </td>
+                        <td><input type="text" class="form-control" formControlName="6" list="3">
+                            <datalist id="3">
+                                <option>3</option>
+                            </datalist>
+                        </td>
+                        <td><input type="text" class="form-control" formControlName="7" list="4">
+                            <datalist id="4">
+                                <option>4</option>
+                            </datalist>
+                        </td>
+                        <td><input type="text" class="form-control" formControlName="8" list="5">
+                            <datalist id="5">
+                                <option>5</option>
+                            </datalist>
+                        </td>
+                        <td><input type="text" class="form-control" formControlName="9"></td>
+                        <td><input type="text" class="form-control" formControlName="10"></td>
+    
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</p-dialog>

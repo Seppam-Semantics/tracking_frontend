@@ -51,11 +51,12 @@
                         <input formControlName="scandexChallan" class="form-control">
                     </td>
                     <td>
+                        <!-- (keydown)="preventManual($event)" -->
                         <input type="text" class="form-control" formControlName="buyer" list="11"
-                            (input)="getBuyerValue($event)" (change)="getorders()">
-                        <datalist id="11">
-                            <option *ngFor="let buyer of this.buyer" [value]="buyer.buyer">{{buyer.buyer}}</option>
-                        </datalist>
+                        (input)="getBuyerValue($event)" (change)="getorders()" >
+                 <datalist id="11">
+                     <option *ngFor="let buyer of buyer" [value]="buyer.buyer">{{buyer.buyer}}</option>
+                 </datalist>
                     </td>
                     <td><input type="text" class="form-control" formControlName="orderNo" list="2"
                             (input)="getOrderValue($event)" (change)="getstyle()">
@@ -70,12 +71,13 @@
                         </datalist>
                     </td>
                     <td><input type="text" class="form-control" formControlName="color" list="4"
-                            (input)="getcolorvalue($event)" (change)="getsize()">
+                            (input)="getcolorvalue($event)" (change)="getsize()" >
                         <datalist id="4">
                             <option *ngFor="let color of this.colorlist" [value]="color.color">
                         </datalist>
                     </td>
-                    <td><input type="text" class="form-control" formControlName="size" list="5" (input)="getWoId($event.target.value, i)">
+                    <td><input type="text" class="form-control" formControlName="size" list="5" 
+                        (input)="getWoId($event.target.value, i)">
                         <datalist id="5">
                             <option *ngFor="let size of this.sizelist" [value]="size.size">
                         </datalist>

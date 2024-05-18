@@ -9,11 +9,16 @@ import * as XLSX from 'xlsx'
 })
 export class LCOutstandingComponent implements OnInit{
   LCOutstandingData: any;
+  filterDate: string = '';
   constructor(private api : ApiService){}
-  ngOnInit(): void {
-  
-    this.api.LCOutstandingData().subscribe((res)=>{
+  ngOnInit(): void { 
+    this.dateFilter()
+  }
+
+dateFilter(){
+  this.api.LCOutstandingData(this.filterDate).subscribe((res)=>{
     this.LCOutstandingData = res.LCOutstanding
+    console.log(this.LCOutstandingData)
   })  
 
 }

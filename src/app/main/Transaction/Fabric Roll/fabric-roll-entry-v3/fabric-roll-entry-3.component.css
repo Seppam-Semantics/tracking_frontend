@@ -261,3 +261,7 @@
   :host ::ng-deep.mat-mdc-tab-header .mdc-tab-indicator {
       clip-path: polygon(0 0, 85% 0, 100% 100%, 0 100%);
   }
+
+  :host ::ng-deep .form-control{
+    border: 1px solid black;
+  }

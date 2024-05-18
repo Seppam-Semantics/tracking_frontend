@@ -2,6 +2,10 @@
     <div style="width: 90%; display: flex; justify-content: center;">
         LC Outstanding
     </div>
+    <div style="display: flex; gap: 10px;">
+        <label style="font-weight: normal; font-family: serif; margin-top: 5px;">PI Date</label>
+        <input type="date" class="form-control" style="margin-top: 2px;" [(ngModel)]="filterDate" (change)="dateFilter()">
+    </div>
     <div style="flex: 1 1 auto;"></div>
     <button mat-button color="primary" (click)="exportexcel()"><mat-icon>download</mat-icon>Download</button>
 </mat-toolbar>

@@ -1,0 +1,71 @@
+<mat-toolbar style="display: flex; justify-content: center; height: auto;">
+    <div style="width: 90%; display: flex; justify-content: center;">
+        Knit Work Order Listing
+    </div>
+
+
+    <div style="flex: 1 1 auto;"></div>
+    <div style="display: flex; gap: 10px;">
+    <div style="display: flex; gap: 10px;">
+        <label style="font-weight: normal; font-family: serif; margin-top: 5px;">Knit Fty</label>
+        <input type="text" class="form-control" style="margin-top: 2px;" [(ngModel)]="KnitFtyFillter" list="knitfty">
+        <datalist id="knitfty">
+            <option>In process</option>
+        </datalist>
+    </div>
+    <div style="display: flex; gap: 10px;">
+        <label style="font-weight: normal; font-family: serif; margin-top: 5px;">Buyer</label>
+        <input type="text" class="form-control" style="margin-top: 2px;" [(ngModel)]="BuyerFillter" list="Buyer">
+        <datalist id="Buyer">
+            <option>In process</option>
+        </datalist>
+    </div>
+    <div style="display: flex; gap: 10px;">
+        <label style="font-weight: normal; font-family: serif; margin-top: 5px;">Order</label>
+        <input type="text" class="form-control" style="margin-top: 2px;" [(ngModel)]="OrderFillter" list="Order">
+        <datalist id="Order">
+            <option>In process</option>
+        </datalist>
+    </div>
+</div>
+
+    <button mat-button color="primary" (click)="new()">New</button>
+    <button mat-button color="primary" (click)="exportexcel()"><mat-icon>download</mat-icon>Download</button>
+</mat-toolbar>
+<div>
+    <table class="table table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>S.No</th>
+                <th>WO No</th>
+                <th>WO Date</th>
+                <th>Knit Fty</th>
+
+                <th>Buyer</th>
+                <th>Order</th>
+                <th>Knit Kgs</th>
+                <th>Knit Value</th>
+
+                <th>Edit</th>
+                <th>Delete</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+
+                <td><button class="btn btn-primary"><mat-icon>edit</mat-icon></button></td>
+                <td><button class="btn btn-danger"><mat-icon>delete</mat-icon></button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

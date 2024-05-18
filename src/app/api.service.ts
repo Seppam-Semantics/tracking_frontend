@@ -453,8 +453,8 @@ deleteDyeDelivery(id:any):Observable<any>{
 
 
 
-LCOutstandingData():Observable<any>{
-  return this.http.get(this.getUrl() + `/yarnapi/LC-Outstanding`, this.getHeaders())
+LCOutstandingData(date:any):Observable<any>{
+  return this.http.get(this.getUrl() + `/yarnapi/LC-Outstanding?date=${date}`, this.getHeaders())
 }
 
 KFInventoryData(date:any):Observable<any>{
