@@ -80,7 +80,11 @@ import {CardModule} from 'primeng/card';
 import { FabricsTransferCutListReportComponent } from './Report/fabrics-transfer-cut-list-report/fabrics-transfer-cut-list-report.component';
 import { FabricsTransferCuttingEntryComponent } from './Transaction/fabrics-transfer-cutting-entry/fabrics-transfer-cutting-entry.component';
 import { KnitWorkOrderListingComponent } from './Report/knit-work-order-listing/knit-work-order-listing.component';
-
+import { KnitWorkOrderCreationComponent } from './Transaction/knit-work-order-creation/knit-work-order-creation.component';
+import { FloatLabelModule } from 'primeng/floatlabel';
+import { CalendarModule } from 'primeng/calendar';
+import { DyeWorkOrderListingComponent } from './Report/dye-work-order-listing/dye-work-order-listing.component';
+import { DyeWorkOrderCreationComponent } from './Transaction/dye-work-order-creation/dye-work-order-creation.component';
 @NgModule({
   declarations: [
     MainComponent,
@@ -125,6 +129,9 @@ import { KnitWorkOrderListingComponent } from './Report/knit-work-order-listing/
     FabricsTransferCutListReportComponent,
     FabricsTransferCuttingEntryComponent,
     KnitWorkOrderListingComponent,
+    KnitWorkOrderCreationComponent,
+    DyeWorkOrderListingComponent,
+    DyeWorkOrderCreationComponent,
 
   ],
   imports: [
@@ -165,6 +172,8 @@ import { KnitWorkOrderListingComponent } from './Report/knit-work-order-listing/
     InputTextModule,
     MatMenuModule,
     CardModule,
+    FloatLabelModule,
+    CalendarModule,
   ]
 })
 export class MainModule { }

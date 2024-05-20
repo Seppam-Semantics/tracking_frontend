@@ -3,21 +3,20 @@ import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-knit-work-order-listing',
-  templateUrl: './knit-work-order-listing.component.html',
-  styleUrls: ['./knit-work-order-listing.component.css']
+  selector: 'app-dye-work-order-listing',
+  templateUrl: './dye-work-order-listing.component.html',
+  styleUrls: ['./dye-work-order-listing.component.css']
 })
-export class KnitWorkOrderListingComponent implements OnInit{
-
-  KnitFtyFillter:any
+export class DyeWorkOrderListingComponent {
+  DyeFtyFillter:any
   BuyerFillter:any
   OrderFillter:any
   BuyerDate : any;
   OrderDate : any;
-  KnitWorkOrderFrom!:FormGroup
+  DyeWorkOrderFrom!:FormGroup
   editview : boolean = false;
   constructor(private fb : FormBuilder , private router : Router){
-    this.KnitWorkOrderFrom = new FormGroup({
+    this.DyeWorkOrderFrom = new FormGroup({
       "buyer" : new FormControl(''),
       "order" : new FormControl(''),
       "1" : new FormControl(''),
@@ -36,10 +35,10 @@ export class KnitWorkOrderListingComponent implements OnInit{
   }
 
 get items(){
-  return this.KnitWorkOrderFrom.get("data") as FormArray
+  return this.DyeWorkOrderFrom.get("data") as FormArray
 }
 
-KnitWorkOrderAddButton(){
+DyeWorkOrderAddButton(){
   
   const row = this.fb.group({
     "id": new FormControl(),
@@ -61,13 +60,11 @@ KnitWorkOrderAddButton(){
   this.items.push(row); 
 }
 
-exportexcel(){
-
-}
+exportexcel(){ }
 edit(){
   this.editview = true;
 }
 new(){
-this.router.navigate(['/main/KnitWorkOrderCreation'])
+this.router.navigate(['/main/DyeWorkOrderCreation'])
 }
 }

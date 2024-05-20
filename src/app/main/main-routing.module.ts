@@ -36,6 +36,9 @@ import { OrganizationSetupComponent } from './masters/organization-setup/organiz
 import { FabricsTransferCutListReportComponent } from './Report/fabrics-transfer-cut-list-report/fabrics-transfer-cut-list-report.component';
 import { FabricsTransferCuttingEntryComponent } from './Transaction/fabrics-transfer-cutting-entry/fabrics-transfer-cutting-entry.component';
 import { KnitWorkOrderListingComponent } from './Report/knit-work-order-listing/knit-work-order-listing.component';
+import { KnitWorkOrderCreationComponent } from './Transaction/knit-work-order-creation/knit-work-order-creation.component';
+import { DyeWorkOrderListingComponent } from './Report/dye-work-order-listing/dye-work-order-listing.component';
+import { DyeWorkOrderCreationComponent } from './Transaction/dye-work-order-creation/dye-work-order-creation.component';
 
 
 const routes: Routes = [
@@ -77,7 +80,10 @@ const routes: Routes = [
   {path:"Organization-Setup" , component:OrganizationSetupComponent},
   {path:"FabricsTransferCutListReport" , component:FabricsTransferCutListReportComponent},
   {path:"FabricsTransferCuttingEntry" , component:FabricsTransferCuttingEntryComponent},
-  {path:"KnitWorkOrderListing" , component : KnitWorkOrderListingComponent}
+  {path:"KnitWorkOrderListing" , component : KnitWorkOrderListingComponent} , 
+  {path:"KnitWorkOrderCreation" , component : KnitWorkOrderCreationComponent} , 
+  {path:"DyeWorkOrderListing" , component : DyeWorkOrderListingComponent} , 
+  {path:"DyeWorkOrderCreation" , component : DyeWorkOrderCreationComponent} , 
 
 ];
 

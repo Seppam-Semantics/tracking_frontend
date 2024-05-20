@@ -66,4 +66,7 @@ export class MainComponent implements OnInit {
     knitwo(){
       this.router.navigate(['/main/KnitWorkOrderListing'])
     }
+    dyeWO(){
+      this.router.navigate(['/main/DyeWorkOrderListing'])
+    }
   }

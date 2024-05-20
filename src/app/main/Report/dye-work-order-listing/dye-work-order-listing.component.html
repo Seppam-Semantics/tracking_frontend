@@ -1,14 +1,14 @@
 <mat-toolbar style="display: flex; justify-content: center; height: auto;">
     <div style="width: 90%; display: flex; justify-content: center;">
-        Knit Work Order Listing
+        Dye Work Order Listing
     </div>
 
 
     <div style="flex: 1 1 auto;"></div>
     <div style="display: flex; gap: 10px;">
         <div style="display: flex; gap: 10px;">
-            <label style="font-weight: normal; font-family: serif; margin-top: 5px;">Knit Fty</label>
-            <input type="text" class="form-control" style="margin-top: 2px;" [(ngModel)]="KnitFtyFillter"
+            <label style="font-weight: normal; font-family: serif; margin-top: 5px;">Dye Fty</label>
+            <input type="text" class="form-control" style="margin-top: 2px;" [(ngModel)]="DyeFtyFillter"
                 list="knitfty">
             <datalist id="knitfty">
                 <option>In process</option>
@@ -40,12 +40,12 @@
                 <th>S.No</th>
                 <th>WO No</th>
                 <th>WO Date</th>
-                <th>Knit Fty</th>
+                <th>Dye Fty</th>
 
                 <th>Buyer</th>
                 <th>Order</th>
-                <th>Knit Kgs</th>
-                <th>Knit Value</th>
+                <th>Dye Kgs</th>
+                <th>Dye Value</th>
 
                 <th>Edit</th>
                 <th>Delete</th>
@@ -72,9 +72,9 @@
 </div>
 
 
-<p-dialog [(visible)]="editview" [modal]="true" header="Edit Knit Work Order Creation" [maximizable]="true"
+<p-dialog [(visible)]="editview" [modal]="true" header="Edit Dye Work Order Creation" [maximizable]="true"
     [style]="{width: '100vw', height:'100vh'}">
-    <div [formGroup]="KnitWorkOrderFrom">
+    <div [formGroup]="DyeWorkOrderFrom">
         <mat-toolbar style="height: auto;">
             <div style="flex: 1 1 auto;"></div>
         </mat-toolbar>
@@ -86,13 +86,13 @@
                 <p-dropdown [options]="" optionLabel="name" placeholder="Order" />
                 <p-floatLabel>
                     <input pInputText id="Knit Factory" formControlName="1" />
-                    <label for="Knit Factory">Knit Factory</label>
+                    <label for="Knit Factory">Dye Factory</label>
                 </p-floatLabel>
 
 
                 <p-floatLabel>
                     <input pInputText id="Knit Fty Details" formControlName="2" />
-                    <label for="Knit Fty Details">Knit Fty Details</label>
+                    <label for="Knit Fty Details">Dye Fty Details</label>
                 </p-floatLabel>
 
 
@@ -124,7 +124,7 @@
             <table class="table table-hover">
                 <thead class="thead-dark">
                     <tr>
-                        <th><button class="btn btn-primary" (click)="KnitWorkOrderAddButton()">+</button></th>
+                        <th><button class="btn btn-primary" (click)="DyeWorkOrderAddButton()">+</button></th>
                         <th>S.No</th>
                         <th>Mach Dia</th>
                         <th>Fab Dia</th>
@@ -135,11 +135,11 @@
 
 
                         <th>Color</th>
-                        <th>Knit SL</th>
-                        <th>Knit Kgs</th>
+                        <th>PL%</th>
+                        <th>Griege Kgs</th>
 
-                        <th>Knit Rate</th>
-                        <th>Knit Value</th>
+                        <th>Dye Rate</th>
+                        <th>Dye Value</th>
                         <th>Remarks</th>
                     </tr>
                 </thead>
@@ -171,7 +171,7 @@
                     <tr>
                         <th></th>
                         <th></th>
-                        <th><span> Notes for Knitting Process </span></th>
+                        <th><span> Notes for Dyeing Process </span></th>
                         <th colspan="4"><textarea class="form-control" style="height: 1px;"
                                 formControlName="123"></textarea></th>
 

@@ -25,3 +25,4 @@ th,tr,td {
 :host ::ng-deep .form-control{
     border: 1px solid black;
 }
+
