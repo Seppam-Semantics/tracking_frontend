@@ -33,7 +33,7 @@
       <button mat-button color="primary" (click)="exportexcel()"><mat-icon>download</mat-icon>Download</button>
       <button mat-button color="primary" (click)="outstanding()">LC Outstanding</button>
       <button mat-button color="primary" (click)="reconciliation()">Reconciliation</button>
-      
+
     </div>
 
     <div class="option2">
@@ -88,120 +88,102 @@
   <div>
     <table class="table table-hover table-bordered">
       <tbody>
-        <tr>
-          <td><b>LC no :</b>  </td>
-          <td><b>PI :</b>  </td>
-          <td><b>LC Qty :</b>  </td>
-          <td><b>LC Date :</b>  </td>
-          <td><b>PI date :</b>  </td>
-          <td><b>LC Value :</b>  </td>
+        <tr *ngFor="let YarnData of this.yarndetails ; let i = index;">
+          <td><b>LC no :</b> {{YarnData.lcNo}} </td>
+          <td><b>PI :</b> {{YarnData.pi}} </td>
+          <td><b>LC Qty :</b> {{YarnData.lcYarnTotal}} </td>
+          <td><b>LC Date :</b> {{YarnData.lcDate}} </td>
+          <td><b>PI date :</b> {{YarnData.piDate}} </td>
+          <td><b>LC Value :</b> {{YarnData.lcValue}} </td>
         </tr>
       </tbody>
     </table>
   </div>
 
 
-<<<<<<< HEAD
+  <div *ngFor="let data of this.yarn_lc_lines_Details; let i = index;">
+    <p-panel header="LineEntey {{i+1}}">
+      <div>
+        <table class="table table-hover table-bordered" style="margin-top: -15px;">
+          <tbody>
+            <tr>
+              <td>Yarn Type : {{data.yarnType}} </td>
+              <td>Yarn Kgs : {{data.yarnValue}} </td>
+              <td>Yarn Rate : {{data.yarnRate}} </td>
+              <td>LC Value : {{data.lcYarnKgs}} </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <table class="table table-hover table-bordered" style="margin-top: -15px;">
+          <thead>
+            <th colspan="5" style="text-align: center;"><b>Lot Check</b></th>
+          </thead>
+          <thead class="thead-dark">
+            <tr>
+              <th>Lot No</th>
+              <th>Sample Dt</th>
+              <th>Result Dt</th>
+              <th>Remarks</th>
+              <th>Acc/Rej</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let lotcheckData of parseLotcheck(data); let j = index">
+              <td>{{lotcheckData.lotNo}}</td>
+              <td>{{lotcheckData.sampleDate}}</td>
+              <td>{{lotcheckData.resultDate}}</td>
+              <td>{{lotcheckData.checkResults}}</td>
+              <td>{{lotcheckData.acceptRejectStatus}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div *ngFor="let OrderAllData of parseOrderall(data); let k = index">
+        <div style="display: flex; justify-content: space-evenly;">
+          <div style="display: flex; ">
+            <label style="display: inline-block;">Buyer : {{OrderAllData.buyer}} </label>
+          </div>
 
-=======
->>>>>>> 48803eefa317d6cb4e8b1ada9c01cc3a4cab7ea7
-    <div>
-      <p-panel header="LineEntey">
-        <div>
-          <table class="table table-hover table-bordered" style="margin-top: -15px;">
-            <tbody>
-              <tr>
-<<<<<<< HEAD
-                <td>Yarn Type :  </td>
-=======
-                <td>Yarn Type : </td>
->>>>>>> 48803eefa317d6cb4e8b1ada9c01cc3a4cab7ea7
-                <td>Yarn Kgs : </td>
-                <td>Yarn Rate : </td>
-                <td>LC Value : </td>
-              </tr>
-            </tbody>
-          </table>
+          <div style="display: flex; ">
+            <label style="display: inline-block;">OrderNo : {{OrderAllData.utilisationOrderNo}} </label>
+          </div>
+
+          <div style="display: flex; ">
+            <label style="display: inline-block;">Style : {{OrderAllData.style}} </label>
+          </div>
+
+          <div style="display: flex; ">
+            <label style="display: inline-block;">Color : {{OrderAllData.colour}} </label>
+          </div>
+
+          <div style="display: flex; ">
+            <label style="display: inline-block;">Allocated : {{OrderAllData.allocatedYarnKgs}} </label>
+          </div>
+
         </div>
         <div>
-          <table class="table table-hover table-bordered" style="margin-top: -15px;">
-            <thead>
-              <th colspan="5" style="text-align: center;"><b>Lot Check</b></th>
-            </thead>
+          <table class="table table-hover table-bordered">
             <thead class="thead-dark">
               <tr>
-                <th>Lot No</th>
-                <th>Sample Dt</th>
-                <th>Result Dt</th>
-                <th>Remarks</th>
-                <th>Acc/Rej</th>
+                <th>Receipt Dt</th>
+                <th>Receipt Qty</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-<<<<<<< HEAD
-                <td>1</td>
-=======
-                <td></td>
->>>>>>> 48803eefa317d6cb4e8b1ada9c01cc3a4cab7ea7
-                <td>2</td>
-                <td>3</td>
-                <td>4</td>
-                <td>5</td>
-              </tr>
+            <tbody >
+                <tr *ngFor="let receipt of parseRec(OrderAllData)">
+                  <td>{{receipt.receiptDt == 'null' ? '' : receipt.receiptDt }}</td>
+                  <td>{{receipt.receiptYarnKgs == 'null' ? '' : receipt.receiptYarnKgs }}</td>
+                </tr>
             </tbody>
           </table>
         </div>
-        <div>
-          <div style="display: flex; justify-content: space-evenly;">
-            <div style="display: flex; ">
-              <label style="display: inline-block;">Buyer : </label>
-            </div>
-
-            <div style="display: flex; ">
-              <label style="display: inline-block;">OrderNo : </label>
-            </div>
-
-            <div style="display: flex; ">
-              <label style="display: inline-block;">Style : </label>
-            </div>
-
-            <div style="display: flex; ">
-              <label style="display: inline-block;">Color : </label>
-            </div>
-
-            <div style="display: flex; ">
-              <label style="display: inline-block;">Allocated : </label>
-            </div>
-
-          </div>
-          <div>
-            <table class="table table-hover table-bordered">
-              <thead class="thead-dark">
-                <tr>
-                  <th>Receipt Dt</th>
-                  <th>Receipt Qty</th>
-                  <th>Check Date</th>
-                  <th>Remarks</th>
-                  <th>Acc/Rej</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </p-panel>
-    </div>
+      </div>
+    </p-panel>
+  </div>
   <ng-template pTemplate="footer">
-    <button mat-button color="danger"  (click)="ViewAllYarnData = false"><mat-icon>close</mat-icon>close</button>
+    <button mat-button color="danger" (click)="ViewAllYarnData = false"><mat-icon>close</mat-icon>close</button>
     <button mat-button color="primary"><mat-icon>download</mat-icon>Download</button>
   </ng-template>
 </p-dialog>

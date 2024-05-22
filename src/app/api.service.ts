@@ -364,9 +364,9 @@ DyeFilter(DyeFactory: any , buyer?:any , orderNo?:any, style?:any , color?:any ,
   }
   //-------------------------------------------------------------------
 
-  // getSingleLcClosure(id:any):Observable<any>{
-  //   return this.http.get(this.getUrl() + `/yarnapi/LcClosure/${id}`, this.getHeaders())
-  // }
+  getSingleLcClosure(id:any):Observable<any>{
+    return this.http.get(this.getUrl() + `/yarnapi/yarnreport/${id}`, this.getHeaders())
+  }
 
   //-------------------------------------------------------------------
 
@@ -469,4 +469,17 @@ YarnReconciliation(date1:any,date2:any):Observable<any>{
   return this.http.get(this.getUrl()+ `/yarnapi/yarn_reconciliation?date1=${date1}&date2=${date2}`, this.getHeaders())
 }
 
+
+FabricsTransferData(data:any):Observable<any>{
+  return this.http.post(this.getUrl()+ `/fabricrollapi/fabrictransfer` ,data , this.getHeaders())
+}
+
+FabricsTransferAllData():Observable<any>{
+  return this.http.get(this.getUrl()+ `/fabricrollapi/allFabEntrys`, this.getHeaders())
+}
+
+
+FabricsTransfersingleData(id:any):Observable<any>{
+  return this.http.get(this.getUrl() + `/fabricrollapi/singleFabEntrys/${id}` , this.getHeaders())
+}
 }

@@ -77,7 +77,7 @@
         <table class="table table-bordered  table-hover" style="width: 100%;">
             <thead class="thead-dark">
                 <tr>
-                    <th style="min-width: 60px;">S.No</th>
+                    <th style="min-width: 40px;">S.No</th>
                     <th style="min-width: 80px;">Buyer</th>
                     <th style="min-width: 80px;">Work Order</th>
                     <th style="min-width: 80px;">Style</th>
@@ -85,18 +85,18 @@
                     <th style="min-width: 80px;">Size</th>
                     <th style="min-width: 60px;">Knit mach. no</th>
                     <th style="min-width: 60px;">Yarn Lot</th>
-                    <th style="min-width: 60px;">Day Production</th>
-                    <th style="min-width: 60px;">No.Rolls Produced</th>
+                    <th style="min-width: 60px;">Day Prod</th>
+                    <th style="min-width: 60px;">No.Rolls Prod</th>
                     <th style="min-width: 60px;">No.Rolls Checked</th>
                     <th style="min-width: 60px;">Knitting SL</th>
                     <th style="min-width: 60px;">Machine RPM</th>
-                    <th style="min-width: 40px;">Oil System</th>
+                    <th style="min-width: 40px;">Oil Sys</th>
                     <th style="min-width: 40px;">Yarn Tension</th>
                     <th style="min-width: 40px;">Needle Qty</th>
                     <th style="min-width: 40px;">Sinker Qty</th>
                     <th style="min-width: 40px;">Moving Fan</th>
                     <th style="min-width: 40px;">All Stop Motion</th>
-                    <th style="min-width: 40px;">TakeupRoller Tension</th>
+                    <th style="min-width: 40px;">Takeup Roller Tension</th>
                     <th style="min-width: 40px;">Remarks</th>
                 </tr>
                 <tr>
@@ -128,7 +128,8 @@
             <tbody formArrayName="data">
                 <tr *ngFor="let list of items.controls; let i=index" [formGroupName]="i">
                     <td>
-                        <input type="text" class="form-control" formControlName="id" [value]="i+1">
+                        <!-- <input type="text" class="form-control" formControlName="id" [value]="i+1"> -->
+                        <p>{{i+1}}</p>
                     </td>
                     <td>
                         <input type="text" class="form-control" formControlName="buyer" list="1" (input)="getBuyerValue($event)" (change)="getorders()">

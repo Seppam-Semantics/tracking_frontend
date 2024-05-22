@@ -124,7 +124,6 @@ export class ReportEntryComponent implements OnInit {
     for (let i = 0; i < numberOfEntries; i++) {
       formControls.push(
         this.fb.group({
-          "id": [i + 1],
           "buyer": [''],
           "orderNo": [''],
           "style": [''],

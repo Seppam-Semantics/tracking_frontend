@@ -52,6 +52,7 @@ export class DyeBatchReportComponent implements OnInit {
   DyeColorName: any;
   Factory:any;
   codelist: any;
+  EditPopup : boolean = false
 
 
 
@@ -353,6 +354,7 @@ export class DyeBatchReportComponent implements OnInit {
   //=====================================================================================================
 
   getid(id: any) {
+    this.EditPopup = true;
     this.items.clear();
     this.singledataid = id
     this.api.dye_batch_single_data(this.singledataid).subscribe((res) => {

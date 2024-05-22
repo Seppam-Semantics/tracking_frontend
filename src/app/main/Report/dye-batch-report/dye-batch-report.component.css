@@ -1,7 +1,7 @@
 th,td,tr{
     text-align: center;
 }
-:host ::ng-deep .modal-backdrop.show{
+:host ::ng-deep .modal-backdrop{
     display: none;
 }
 :host ::ng-deep .mat-mdc-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-mdc-text-field-wrapper{
@@ -93,6 +93,7 @@ th,tr,td{
     overflow-y: auto;
     scrollbar-width: none;
 }
+
 :host ::ng-deep.p-panel .p-panel-header{
     border: 1px solid #e5e7eb;
     padding: 1.25rem;
@@ -140,4 +141,5 @@ th,tr,td{
         position: sticky;
         top: 0;
       }
-      
+
+    

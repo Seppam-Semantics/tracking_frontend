@@ -5,3 +5,10 @@ th,tr,td {
 :host ::ng-deep .form-control{
     border: 1px solid black;
   }
+
+  .tablecss{
+    overflow-x: scroll;
+    width: 100%;
+    height: 70vh;
+    scrollbar-width: none;
+}

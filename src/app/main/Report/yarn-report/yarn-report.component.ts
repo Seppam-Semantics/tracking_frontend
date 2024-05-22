@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
@@ -62,6 +62,15 @@ export class YarnReportComponent implements OnInit {
   yarnLcClosure: any;
   yarn_lc_linesLcClosure: any;
   yarn_lot_checkLcClosure: any;
+  yarndetails: any;
+  yarn_lc_lines_Details: any;
+  lot_check_Details: any;
+  lot_check_Details_1: any;
+  lot_check_Details_2: any;
+  Receipt_Details: any;
+  @Input() data: any;
+  parsedData: any;
+  parsedData1: any;
 
 
   constructor(private router : Router, private api:ApiService , private fb : FormBuilder) { }
@@ -72,6 +81,7 @@ export class YarnReportComponent implements OnInit {
   
 
   ngOnInit(): void {
+
     this.api.getAllYarn().subscribe((res) => {
       this.AllData = res.yarn
     })
@@ -145,15 +155,63 @@ exportexcel() {
   }
 
   view(id:any){
-    this.ViewAllYarnData = true
+    this.ViewAllYarnData = true;
 
-    this.LcClosure = id
-    // this.api.getSingleLcClosure(id).subscribe((res)=>{
-    //   this.yarnLcClosure = res.yarn
-    //   this.yarn_lc_linesLcClosure = res.yarn_lc_lines
-    //   
-    // })
+    this.api.getSingleLcClosure(id).subscribe((res) => {
+      this.yarndetails = res.yarn;
+      this.yarn_lc_lines_Details = res.yarn_lc_lines;
+      
+      });
   }
+
+  parseLotcheck(data: any): any {
+    if (data && data.lotcheck) {
+      let fixedlotcheckData = data.lotcheck.replace(/([{,]\s*)(\w+)\s*:/g, '$1"$2":')
+                                                          .replace(/:\s*([^,\}\[]+)\s*(?=[,\}])/g, ': "$1"');
+        try {
+        const parsedData = JSON.parse(fixedlotcheckData);
+        return parsedData;
+      } catch (error) {
+        console.error('Error parsing order_allocation data:', error);
+        return ;
+      }
+    }
+    return ;
+  }
+
+  parseOrderall(data: any): any {
+    if (data && data.order_allocation) {
+      const fixedOrderAllocationData = data.order_allocation.replace(/([{,]\s*)(\w+)\s*:/g, '$1"$2":').replace(
+        /:\s*([^,\}\[]+)\s*(?=[,\}])/g,
+        ': "$1"'
+      );
+      try {
+        this.parsedData = JSON.parse(fixedOrderAllocationData);
+        
+        return this.parsedData;
+      } catch (error) {
+        console.error('Error parsing order_allocation data:', error);
+        return ;
+      }
+    }
+    return ;
+  }
+  parseRec(OrderAllData: any): any {
+          const fixedOrderAllocationData = OrderAllData.receipt
+      
+      try {
+        this.parsedData1 = fixedOrderAllocationData;
+        console.log(this.parsedData1)
+        return this.parsedData1;
+      } catch (error) {
+        console.error('Error parsing order_allocation data:', error);
+      }
+  }
+
+
+  
+
+  
 
   delete(id: any) {
     let text = "Press Ok to delete the details";

@@ -2,7 +2,7 @@
     Fabrics Transfer - Cutting Entry
 </mat-toolbar>
 <div [formGroup]="FabricsTransferForm">
-    <mat-toolbar style="height: auto;">
+    <!-- <mat-toolbar style="height: auto;">
         <div style="flex: 1 1 auto;"></div>
         <div style="display: flex; gap: 25px;">
 
@@ -19,8 +19,8 @@
             </div>
 
         </div>
-    </mat-toolbar>
-    <div>
+    </mat-toolbar> -->
+    <div class="tablecss">
         <table class="table table-hover">
             <thead class="thead-dark">
                 <tr>
@@ -28,6 +28,7 @@
 
                     <th>S.No</th>
                     <th>Transferno</th>
+                    <th>Date</th>
                     <th>Buyer</th>
 
                     <th>Order no</th>
@@ -40,43 +41,55 @@
 
                 </tr>
             </thead>
-            <tbody formArrayName="data">
+            <tbody formArrayName="fabentry">
                 <tr *ngFor="let list of items.controls; let i=index" [formGroupName]="i">
                     <td></td>
 
                     <td>{{i+1}}</td>
-                    <td><input type="text" class="form-control" formControlName="3"></td>
+                    <td><input type="text" class="form-control" formControlName="transferNo"></td>
+                    <td><input type="date" class="form-control" formControlName="transferDate"></td>
                     <td>
-                        <input type="text" class="form-control" formControlName="4" list="11">
-                        <datalist id="11">
-                            <option>1</option>
-                        </datalist>
+                        <!-- (keydown)="preventManual($event)" -->
+                        <input type="text" class="form-control" formControlName="buyer" list="11"
+                        (input)="getBuyerValue($event)" (change)="getorders()" >
+                 <datalist id="11">
+                     <option *ngFor="let buyer of buyer" [value]="buyer.buyer">{{buyer.buyer}}</option>
+                 </datalist>
                     </td>
-                    <td><input type="text" class="form-control" formControlName="5" list="2">
+                    <td><input type="text" class="form-control" formControlName="orderNo" list="2"
+                            (input)="getOrderValue($event)" (change)="getstyle()">
                         <datalist id="2">
-                            <option>2</option>
+                            <option *ngFor="let number of this.order" [value]="number.orderNO">
                         </datalist>
                     </td>
-                    <td><input type="text" class="form-control" formControlName="6" list="3">
+                    <td><input type="text" class="form-control" formControlName="style" list="3"
+                            (input)="getstylevalue($event)" (change)="getcolor()">
                         <datalist id="3">
-                            <option>3</option>
+                            <option *ngFor="let style of this.stylelist" [value]="style.style">
                         </datalist>
                     </td>
-                    <td><input type="text" class="form-control" formControlName="7" list="4">
+                    <td><input type="text" class="form-control" formControlName="color" list="4"
+                            (input)="getcolorvalue($event)" (change)="getsize()" >
                         <datalist id="4">
-                            <option>4</option>
+                            <option *ngFor="let color of this.colorlist" [value]="color.color">
                         </datalist>
                     </td>
-                    <td><input type="text" class="form-control" formControlName="8" list="5">
+                    <td><input type="text" class="form-control" formControlName="size" list="5" 
+                        (input)="getWoId($event.target.value, i)">
                         <datalist id="5">
-                            <option>5</option>
+                            <option *ngFor="let size of this.sizelist" [value]="size.size">
                         </datalist>
                     </td>
-                    <td><input type="text" class="form-control" formControlName="9"></td>
-                    <td><input type="text" class="form-control" formControlName="10"></td>
+                    <td><input type="text" class="form-control" formControlName="fabRolls"></td>
+                    <td><input type="text" class="form-control" formControlName="finishFabKg"></td>
 
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
+<mat-toolbar style="height: auto;">
+    <div style="display: flex; width: 100%; justify-content: center;">
+        <button class="btn btn-primary" olor="primart" (click)="save()">Save</button>
+    </div>
+</mat-toolbar>
