@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 
 @Component({
@@ -26,7 +27,7 @@ buyer: any;
    this.buyername()
   }
   
-constructor(private fb : FormBuilder , private api : ApiService){
+constructor(private fb : FormBuilder , private api : ApiService , private router : Router){
 
   this.FabricsTransferForm = new FormGroup({
     fabentry: this.fb.array([]),
@@ -39,16 +40,16 @@ get items() {
 FabricsTransferAddButton(){
   
   const row = this.fb.group({
-    "woId": new FormControl(),
-    "transferDate" : new FormControl(),
-    "finishFabKg": new FormControl(),
-    "fabRolls": new FormControl(),
-    "transferNo": new FormControl(),
-    "size": new FormControl(),
-    "color": new FormControl(),
-    "style": new FormControl(),
-    "orderNo": new FormControl(),
-    "buyer": new FormControl()
+    "woId": new FormControl('', Validators.required),
+    "transferDate" : new FormControl('', Validators.required),
+    "finishFabKg": new FormControl('', Validators.required),
+    "fabRolls": new FormControl('', Validators.required),
+    "transferNo": new FormControl('', Validators.required),
+    "size": new FormControl('', Validators.required),
+    "color": new FormControl('', Validators.required),
+    "style": new FormControl('', Validators.required),
+    "orderNo": new FormControl('', Validators.required),
+    "buyer": new FormControl('', Validators.required)
 
   });  
   this.items.push(row); 
@@ -111,11 +112,14 @@ getWoId(size: any, index: number) {
 }
 
 save(){
-  console.log(this.FabricsTransferForm.value)
-
+  if (this.FabricsTransferForm.valid) {
   this.api.FabricsTransferData(this.FabricsTransferForm.value).subscribe((res)=>{
     alert(res.message)
+    this.router.navigate(['/main/FabricsTransferCutListReport'])
   })
+}else{
+  alert("Fill all the details")
+}
 }
 
 date(){   }

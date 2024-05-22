@@ -474,12 +474,15 @@ FabricsTransferData(data:any):Observable<any>{
   return this.http.post(this.getUrl()+ `/fabricrollapi/fabrictransfer` ,data , this.getHeaders())
 }
 
-FabricsTransferAllData():Observable<any>{
-  return this.http.get(this.getUrl()+ `/fabricrollapi/allFabEntrys`, this.getHeaders())
+FabricsTransferAllData(buyer:string='', order:string = '' , fromDate : string = '' , toDate : string = ''):Observable<any>{
+  return this.http.get(this.getUrl()+ `/fabricrollapi/allFabEntrys?Buyer=${buyer}&Order=${order}&fromDate=${fromDate}&toDate=${toDate}`, this.getHeaders())
 }
 
 
 FabricsTransfersingleData(id:any):Observable<any>{
   return this.http.get(this.getUrl() + `/fabricrollapi/singleFabEntrys/${id}` , this.getHeaders())
+}
+deleteFabricsTransfer(id:any):Observable<any>{
+  return this.http.delete(this.getUrl() + `/fabricrollapi/FabEntrysDelete/${id}`, this.getHeaders())
 }
 }

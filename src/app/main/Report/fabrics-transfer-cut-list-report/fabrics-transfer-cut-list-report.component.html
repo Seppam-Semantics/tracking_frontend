@@ -2,11 +2,11 @@
     Fabrics Transfer - Cutting Listing
 </mat-toolbar>
 
-<mat-toolbar style="height: auto;">
+<mat-toolbar style="height: 9vh;">
     <div style="display: flex; gap: 15px;">
-        <p-dropdown [options]="Buyer"  [(ngModel)]="Buyerlist" optionLabel="name" optionValue="name" placeholder="Buyer" />
+        <p-dropdown [options]="buyer2"  [(ngModel)]="BuyerFillter" optionLabel="buyer" optionValue="buyer" placeholder="Buyer" (onChange)="getorders2()" (onChange)="date()" />
 
-        <p-dropdown [options]="Order"  [(ngModel)]="Buyerlist" optionLabel="order" optionValue="order" placeholder="Order" />
+        <p-dropdown [options]="order2"  [(ngModel)]="OrderFillter" optionLabel="orderNO" optionValue="orderNO" placeholder="Order" (onChange)="date()" />
 
     </div>
     <div style="flex: 1 1 auto;"></div>
@@ -67,7 +67,7 @@
 
                 <td>{{data.finishKg}}</td>
                 <td><button class="btn btn-primary" style="width: auto;" (click)="edit(data.id)"><mat-icon>edit</mat-icon></button></td>
-                <td><button class="btn btn-danger" style="width: auto;"><mat-icon>delete</mat-icon></button></td>
+                <td><button class="btn btn-danger" style="width: auto;" (click)="delete(data.id)"><mat-icon>delete</mat-icon></button></td>
             </tr>
         </tbody>
     </table>

@@ -35,13 +35,13 @@ export class FabricsTransferCutListReportComponent implements OnInit {
   factoryname: any;
   fabdetailsAlldata: any;
   fabDetailspatch: any;
-
+  BuyerFillter: any;
+  OrderFillter:any;
+  buyer2: any;
+  order2: any;
   ngOnInit(): void {
     this.buyername()
-
-    this.api.FabricsTransferAllData().subscribe((res) => {
-      this.fabdetailsAlldata = res.fabDetails[0]
-    })
+    this.date()
   }
   constructor(private fb: FormBuilder, private router: Router, private api: ApiService , private datePipe: DatePipe) {
 
@@ -74,7 +74,7 @@ export class FabricsTransferCutListReportComponent implements OnInit {
 
   buyername() {
     this.api.getbuyers().subscribe((res) => {
-      this.buyer = res.buyers
+      this.buyer2 = res.buyers
     })
   }
   getBuyerValue(event: any) {
@@ -84,6 +84,11 @@ export class FabricsTransferCutListReportComponent implements OnInit {
   getorders() {
     this.api.getorders(this.buyerName).subscribe((res) => {
       this.order = res.orders
+    })
+  }
+  getorders2() {
+    this.api.getorders(this.BuyerFillter).subscribe((res) => {
+      this.order2 = res.orders
     })
   }
 
@@ -143,7 +148,7 @@ export class FabricsTransferCutListReportComponent implements OnInit {
 
 
       this.fabDetailspatch = res.fabDetails[0]
-
+      console.log(this.fabDetailspatch)
       const KnitEntryData = this.FabricsTransferForm.get('fabentry') as FormArray;
       KnitEntryData.clear();
 
@@ -166,7 +171,7 @@ export class FabricsTransferCutListReportComponent implements OnInit {
             "woId": dataItem.woId,
             "color": dataItem.color,
             "transferNo": dataItem.transferno,
-            "transferDate": formattedDate1,
+            "transferDate": dataItem.transfer_date,
             "fabRolls": dataItem.rollNo,
             "finishFabKg": dataItem.finishKg,
           })
@@ -177,10 +182,21 @@ export class FabricsTransferCutListReportComponent implements OnInit {
     })
   };
 
-  date() { }
+  date() { 
+    this.api.FabricsTransferAllData(this.BuyerFillter , this.OrderFillter , this.filterDate1 , this.filterDate2 ).subscribe((res) => {
+      this.fabdetailsAlldata = res.fabDetails[0]
+    })
+   }
 
   new() {
     this.router.navigate(['/main/FabricsTransferCuttingEntry'])
+  }
+
+  delete(id:any){
+    this.api.deleteFabricsTransfer(id).subscribe((res)=>{
+      alert(res.message)
+      window.location.reload()
+    })
   }
   fileName = "Fabrics-TransferReport.xlsx"
   exportexcel() {
