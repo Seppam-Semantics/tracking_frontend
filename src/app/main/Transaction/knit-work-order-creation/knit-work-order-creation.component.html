@@ -4,46 +4,58 @@
             <span>Knit Work Order Creation</span>
         </div>
         <div style="flex: 1 1 auto;"></div>
+        <div style="display: flex; gap: 10px; margin-top: 1vh;">
+        
+        <div style="display: flex; gap: 10px;">
+            <label style="font-weight: normal; font-family: serif; margin-top: 5px;">woDate</label>
+            <input type="date" class="form-control" style="margin-top: 2px;" formControlName="woDate">
+        </div>
+
+        <div style="display: flex; gap: 10px;">
+            <label style="font-weight: normal; font-family: serif; margin-top: 5px;">completedDate</label>
+            <input type="date" class="form-control" style="margin-top: 2px;" formControlName="completedDate">
+        </div>
+
+    </div>
+
 
     </mat-toolbar>
     <mat-toolbar style="display: inline-table; width: 100%; height: 12vh;">
-        <div style="display: flex; justify-content:center; gap: 3vh; margin-top: 3vh; flex-wrap: wrap; margin-bottom: 1vh;">
+        <div
+            style="display: flex; justify-content:center; gap: 3vh; margin-top: 3vh; flex-wrap: wrap; margin-bottom: 1vh;">
 
-        <p-dropdown    [options]="" optionLabel="name" placeholder="Buyer" />
-
-        <p-dropdown    [options]="" optionLabel="name" placeholder="Order" />
-            <p-floatLabel>
-                <input pInputText id="Knit Factory"  formControlName="1"/>
-                <label for="Knit Factory">Knit Factory</label>
-            </p-floatLabel>
+            <p-dropdown placeholder="Buyer" [(ngModel)]="buyerName" (onChange)="getorders()" [options]="buyer"
+                optionLabel="buyer" optionValue="buyer" formControlName="buyer"></p-dropdown>
 
 
-            <p-floatLabel>
-                <input pInputText id="Knit Fty Details"  formControlName="2"/>
-                <label for="Knit Fty Details">Knit Fty Details</label>
-            </p-floatLabel>
+            <p-dropdown placeholder="Order" [(ngModel)]="orderNo" (onChange)="getstyle()" [options]="order"
+                optionLabel="orderNO" optionValue="orderNO" formControlName="orderNo"></p-dropdown>
+
+
+            <p-dropdown placeholder="Knit Factory" [(ngModel)]="ftyname" [options]="ftyName" optionLabel="knitFty"
+                optionValue="knitFty" formControlName="knitfty"></p-dropdown>
 
 
 
             <p-floatLabel>
-                <input pInputText id="WO no"  formControlName="3"/>
+                <input pInputText id="WO no" formControlName="woNo" />
                 <label for="WO no">WO no</label>
             </p-floatLabel>
 
             <p-floatLabel>
-                <input pInputText id="WO Ref"  formControlName="4"/>
+                <input pInputText id="WO Ref" formControlName="woRefNo" />
                 <label for="WO Ref">WO Ref</label>
             </p-floatLabel>
-            
-            <p-floatLabel>
-                <p-calendar inputId="WO Date" formControlName="5" />
+
+            <!-- <p-floatLabel>
+                <p-calendar inputId="WO Date" formControlName="woDate" dateFormat="dd.mm.yy" />
                 <label for="WO Date">WO Date</label>
             </p-floatLabel>
 
             <p-floatLabel>
-                <p-calendar inputId="Complete Date" formControlName="6" />
+                <p-calendar inputId="Complete Date" formControlName="completedDate" dateFormat="dd.mm.yy"/>
                 <label for="Complete Date">Complete Date</label>
-            </p-floatLabel>
+            </p-floatLabel> -->
 
 
         </div>
@@ -75,42 +87,56 @@
                 <tr *ngFor="let list of items.controls; let i=index" [formGroupName]="i">
                     <td></td>
                     <td>{{i+1}}</td>
-                    <td><input class="form-control" type="text" formControlName="13"></td>
+                    <td><input class="form-control" type="text" formControlName="machDia"></td>
 
-                    <td><input class="form-control" type="text" formControlName="14"></td>
-                    <td><input class="form-control" type="text" formControlName="15"></td>
-                    <td><input class="form-control" type="text" formControlName="16"></td>
+                    <td><input class="form-control" type="text" formControlName="fabDia"></td>
+                    <td><input class="form-control" type="text" formControlName="fabType"></td>
+                    <td>
+                        <input type="text" class="form-control" formControlName="style" list="3"
+                            (input)="getstylevalue($event)" (change)="getcolor()">
+                        <datalist id="3">
+                            <option *ngFor="let style of this.stylelist" [value]="style.style">
+                        </datalist>
+                    </td>
 
-                    <td><input class="form-control" type="text" formControlName="17"></td>
-                    <td><input class="form-control" type="text" formControlName="18"></td>
-                    <td><input class="form-control" type="text" formControlName="19"></td>
+                    <td><input class="form-control" type="text" formControlName="fabGSM"></td>
+                    <td>
+                        <input type="text" class="form-control" formControlName="color" list="4"
+                            (input)="getcolorvalue($event)" (change)="getsize()" >
+                        <datalist id="4">
+                            <option *ngFor="let color of this.colorlist" [value]="color.color">
+                        </datalist>
+                    </td>
+                    <td><input class="form-control" type="text" formControlName="KnitSl"></td>
 
-                    <td><input class="form-control" type="text" formControlName="110"></td>
-                    <td><input class="form-control" type="text" formControlName="111"></td>
-                    <td><input class="form-control" type="text" formControlName="112"></td>
-                    <td><input class="form-control" type="text" formControlName="113"></td>
+                    <td><input class="form-control" type="text" formControlName="knitKgs"></td>
+                    <td><input class="form-control" type="text" formControlName="knitRate"></td>
+                    <td><input class="form-control" type="text" formControlName="knitValue"></td>
+                    <td><input class="form-control" type="text" formControlName="remarks"></td>
                 </tr>
             </tbody>
         </table>
     </div>
-        <div style="margin-top: -1%;">
-            <table class="table table-hover">
-                <thead class="thead-dark">
-                    <tr>
-                        <th></th>
-                        <th></th>
-                        <th><span> Notes for Knitting Process </span></th>
-                        <th colspan="4"><textarea class="form-control" style="height: 1px;" formControlName="123"></textarea></th>
+    <div style="margin-top: -1%;">
+        <table class="table table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th><span> Notes for Knitting Process </span></th>
+                    <th colspan="4"><textarea class="form-control" style="height: 1px;"
+                            formControlName="notes"></textarea></th>
 
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-            </table>
-        </div>
-<mat-toolbar style="height: auto; display: flex; width: 100%; justify-content: center;"><button class="btn btn-primary">Save</button></mat-toolbar>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <mat-toolbar style="height: auto; display: flex; width: 100%; justify-content: center;"><button
+            class="btn btn-primary" (click)="save()">Save</button></mat-toolbar>
 </div>

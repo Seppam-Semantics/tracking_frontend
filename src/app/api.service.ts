@@ -485,4 +485,22 @@ FabricsTransfersingleData(id:any):Observable<any>{
 deleteFabricsTransfer(id:any):Observable<any>{
   return this.http.delete(this.getUrl() + `/fabricrollapi/FabEntrysDelete/${id}`, this.getHeaders())
 }
+
+
+KnitWorkOrderData(data:any):Observable<any>{
+  return this.http.post(this.getUrl()+ `/knitapi/knitworkorder` ,data , this.getHeaders())
+}
+
+KnitWorkOrderAllData():Observable<any>{
+  return this.http.get(this.getUrl()+ `/knitapi/knitworkorder` ,this.getHeaders())
+}
+
+KnitWorkOrderSingleData(id:any):Observable<any>{
+  return this.http.get(this.getUrl()+ `/knitapi/knitworkorder/${id}` ,this.getHeaders())
+}
+
+deleteKnitWorkOrder(id:any):Observable<any>{
+  return this.http.delete(this.getUrl() + `/knitapi/knitworkorder/${id}`, this.getHeaders())
+}
+
 }
