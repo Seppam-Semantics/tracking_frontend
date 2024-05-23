@@ -85,6 +85,7 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 import { CalendarModule } from 'primeng/calendar';
 import { DyeWorkOrderListingComponent } from './Report/dye-work-order-listing/dye-work-order-listing.component';
 import { DyeWorkOrderCreationComponent } from './Transaction/dye-work-order-creation/dye-work-order-creation.component';
+import { OCRComponent } from './Report/ocr/ocr.component';
 @NgModule({
   declarations: [
     MainComponent,
@@ -132,6 +133,7 @@ import { DyeWorkOrderCreationComponent } from './Transaction/dye-work-order-crea
     KnitWorkOrderCreationComponent,
     DyeWorkOrderListingComponent,
     DyeWorkOrderCreationComponent,
+    OCRComponent,
 
   ],
   imports: [

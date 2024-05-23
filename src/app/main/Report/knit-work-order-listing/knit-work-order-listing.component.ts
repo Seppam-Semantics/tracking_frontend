@@ -31,6 +31,10 @@ export class KnitWorkOrderListingComponent implements OnInit {
   KnitWorkOrderhederdata: any;
   KnitWorkOrderlineData: any;
   KnitWorkOrderlineData1: any[]=[];
+  KnitFtyFillter : any ;
+  BuyerFillter : any ;
+  OrderFillter : any ;
+
   ngOnInit(): void { 
     this.buyername(), this.factoryName() 
     this.alldata()

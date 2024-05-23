@@ -69,4 +69,7 @@ export class MainComponent implements OnInit {
     dyeWO(){
       this.router.navigate(['/main/DyeWorkOrderListing'])
     }
+    OCR(){
+      this.router.navigate(['/main/OCR'])
+    }
   }

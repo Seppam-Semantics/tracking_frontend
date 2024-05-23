@@ -39,6 +39,7 @@ import { KnitWorkOrderListingComponent } from './Report/knit-work-order-listing/
 import { KnitWorkOrderCreationComponent } from './Transaction/knit-work-order-creation/knit-work-order-creation.component';
 import { DyeWorkOrderListingComponent } from './Report/dye-work-order-listing/dye-work-order-listing.component';
 import { DyeWorkOrderCreationComponent } from './Transaction/dye-work-order-creation/dye-work-order-creation.component';
+import { OCRComponent } from './Report/ocr/ocr.component';
 
 
 const routes: Routes = [
@@ -83,7 +84,9 @@ const routes: Routes = [
   {path:"KnitWorkOrderListing" , component : KnitWorkOrderListingComponent} , 
   {path:"KnitWorkOrderCreation" , component : KnitWorkOrderCreationComponent} , 
   {path:"DyeWorkOrderListing" , component : DyeWorkOrderListingComponent} , 
-  {path:"DyeWorkOrderCreation" , component : DyeWorkOrderCreationComponent} , 
+  {path:"DyeWorkOrderCreation" , component : DyeWorkOrderCreationComponent},
+  {path:"OCR" , component : OCRComponent},
+
 
 ];
 
