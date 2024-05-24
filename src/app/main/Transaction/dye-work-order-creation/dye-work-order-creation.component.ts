@@ -37,8 +37,8 @@ export class DyeWorkOrderCreationComponent {
      
       "buyer": new FormControl(''),
       "orderNo": new FormControl(''),
-      "knitfty": new FormControl(''),
-      "knitfty_details": new FormControl(''),
+      "dyefty": new FormControl(''),
+      "dyefty_details": new FormControl(''),
       "woNo": new FormControl(''),
       "woRefNo": new FormControl(''),
       "woDate": new FormControl(''),
@@ -56,8 +56,8 @@ export class DyeWorkOrderCreationComponent {
   }
 
   factoryName() {
-    this.api.knitfty_name().subscribe((res) => {
-      this.ftyName = res.factorys
+    this.api.dye_factory_name().subscribe((res)=>{
+      this.factoryname=res.factorys
     })
   }
   getBuyerValue(event: any) {
@@ -103,10 +103,9 @@ export class DyeWorkOrderCreationComponent {
   getWoId(size: any, index: number) {
     this.api.getwodetails(this.buyerName, this.orderNo, this.style, this.color, size).subscribe((res) => {
       const woId = res.workorders[0].id;
-      console.log(woId)
       const formArray = this.DyeWorkOrderFrom.get('data') as FormArray;
       const row = formArray.at(index);
-      row.get('knitWoId')?.setValue(woId);
+      row.get('dyeWoId')?.setValue(woId);
     });
   }
 
@@ -114,7 +113,6 @@ export class DyeWorkOrderCreationComponent {
   AllData(){
     this.api.DyeWorkOrderAllData().subscribe((res)=>{
       this.DyeWorkOrderAllData = res.workorders
-      console.log(this.DyeWorkOrderAllData)
     })
   }
 
@@ -129,7 +127,7 @@ export class DyeWorkOrderCreationComponent {
 
     const row = this.fb.group({
       "id": new FormControl(''),
-      "knitWoId": new FormControl(''),
+      "dyeWoId": new FormControl(''),
       "machDia": new FormControl(''),
       "fabDia": new FormControl(''),
       "fabType": new FormControl(''),
@@ -147,7 +145,7 @@ export class DyeWorkOrderCreationComponent {
 
 
   save() {
-    this.api.KnitWorkOrderData(this.DyeWorkOrderFrom.value).subscribe((res) => {
+    this.api.DyeWorkOrderData(this.DyeWorkOrderFrom.value).subscribe((res) => {
       alert(res.message)
       this.router.navigate(['/main/DyeWorkOrderListing'])
     })

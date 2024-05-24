@@ -98,7 +98,6 @@ export class KnitWorkOrderCreationComponent implements OnInit {
   getWoId(size: any, index: number) {
     this.api.getwodetails(this.buyerName, this.orderNo, this.style, this.color, size).subscribe((res) => {
       const woId = res.workorders[0].id;
-      console.log(woId)
       const formArray = this.KnitWorkOrderFrom.get('data') as FormArray;
       const row = formArray.at(index);
       row.get('knitWoId')?.setValue(woId);
@@ -130,7 +129,6 @@ export class KnitWorkOrderCreationComponent implements OnInit {
     this.items.push(row);
   }
   save() {
-    console.log(this.KnitWorkOrderFrom.value)
     this.api.KnitWorkOrderData(this.KnitWorkOrderFrom.value).subscribe((res) => {
       alert(res.message)
       this.router.navigate(['/main/KnitWorkOrderListing'])

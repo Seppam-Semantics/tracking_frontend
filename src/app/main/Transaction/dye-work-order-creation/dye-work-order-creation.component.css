@@ -14,7 +14,7 @@ th,tr,td {
     cursor: pointer;
     position: relative;
      user-select: none;
-     height: 7vh;
+     height: 6vh;
      width: 24vh;
 }
 :host ::ng-deep .p-dropdown .p-dropdown-label{
@@ -50,11 +50,11 @@ thead{
 }
 
 :host ::ng-deep .p-inputtext.p-inputtext-sm{ 
-    height: 8vh;
+    height: 6vh;
     width: 25vh;
 }
 :host ::ng-deep .p-inputtext{
-    height: 7vh;
+    height: 6vh;
     width: 25vh;
 
 }

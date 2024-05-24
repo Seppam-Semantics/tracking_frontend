@@ -111,7 +111,6 @@ export class KnitWorkOrderListingComponent implements OnInit {
   getWoId(size: any, index: number) {
     this.api.getwodetails(this.buyerName, this.orderNo, this.style, this.color, size).subscribe((res) => {
       const woId = res.workorders[0].id;
-      console.log(woId)
       const formArray = this.KnitWorkOrderFrom.get('data') as FormArray;
       const row = formArray.at(index);
       row.get('knitWoId')?.setValue(woId);
@@ -121,7 +120,6 @@ export class KnitWorkOrderListingComponent implements OnInit {
   alldata(){
     this.api.KnitWorkOrderAllData().subscribe((res)=>{
     this.  KnitWorkOrderAllData   = res.workorders
-    console.log(this.  KnitWorkOrderAllData)
     })
   }
 
@@ -160,10 +158,8 @@ exportexcel() {
   edit(id:any) {
     this.editview = true;
     this.api.KnitWorkOrderSingleData(id).subscribe((res)=>{
-      console.log(res)
       this.KnitWorkOrderhederdata = res.headerData[0]
       this.KnitWorkOrderlineData1 = res.lineData
-      console.log(this.KnitWorkOrderlineData1)
       this.KnitWorkOrderFrom.patchValue({
         "id": this.KnitWorkOrderhederdata.id,
         "buyer": this.KnitWorkOrderhederdata.buyer,
@@ -224,7 +220,6 @@ exportexcel() {
   }
 
   update(){
-    console.log(this.KnitWorkOrderFrom.value)
     this.api.KnitWorkOrderData(this.KnitWorkOrderFrom.value).subscribe((res) => {
       alert(res.message)
       window.location.reload()

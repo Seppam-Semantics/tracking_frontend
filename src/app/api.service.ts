@@ -510,4 +510,9 @@ DyeWorkOrderData(data:any):Observable<any>{
 DyeWorkOrderAllData():Observable<any>{
   return this.http.get(this.getUrl()+ `/dyeapi/dyeworkorder` ,this.getHeaders())
 }
+
+DyeWorkOrderSingleData(id:any):Observable<any>{
+  return this.http.get(this.getUrl()+ `/dyeapi/dyeworkorder/${id}` ,this.getHeaders())
+}
+
 }

@@ -31,12 +31,12 @@
             optionLabel="orderNO" optionValue="orderNO" formControlName="orderNo"></p-dropdown>
 
 
-        <p-dropdown placeholder="Knit Factory" [(ngModel)]="ftyname" [options]="ftyName" optionLabel="knitFty"
-            optionValue="knitFty" formControlName="knitfty"></p-dropdown>
+        <p-dropdown placeholder="Knit Factory"  [options]="factoryname" optionLabel="dyeinFty"
+            optionValue="dyeinFty" formControlName="dyefty" ></p-dropdown>
 
 
             <p-floatLabel>
-                <input pInputText id="Knit Fty Details"  formControlName="knitfty_details"/>
+                <input pInputText id="Knit Fty Details"  formControlName="dyefty_details"/>
                 <label for="Knit Fty Details">Dye Fty Details</label>
             </p-floatLabel>
 

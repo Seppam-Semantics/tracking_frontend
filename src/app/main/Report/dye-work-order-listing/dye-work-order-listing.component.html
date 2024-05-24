@@ -53,18 +53,18 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+            <tr *ngFor="let data of this.DyeWorkOrderAllData; let i=index;">
+                <td>{{i+1}}</td>
+                <td>{{data.woNo}}</td>
+                <td>{{data.woDate}}</td>
+                <td>{{data.dyefty}}</td>
 
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{data.buyer}}</td>
+                <td>{{data.orderNo}}</td>
+                <td>{{data.dyeKgs}}</td>
+                <td>{{data.dyeValue}}</td>
 
-                <td><button class="btn btn-primary" (click)="edit()"><mat-icon>edit</mat-icon></button></td>
+                <td><button class="btn btn-primary" (click)="edit(data.id)"><mat-icon>edit</mat-icon></button></td>
                 <td><button class="btn btn-danger"><mat-icon>delete</mat-icon></button></td>
             </tr>
         </tbody>
@@ -101,21 +101,21 @@
             <div style="display: flex; justify-content:center; gap: 3vh; margin-top: 3vh; flex-wrap: wrap; margin-bottom: 1vh;">
     
                 <p-dropdown placeholder="Buyer" [(ngModel)]="buyerName" (onChange)="getorders()" [options]="buyer"
-                optionLabel="buyer" optionValue="buyer" formControlName="buyer"></p-dropdown>
-    
-    
-            <p-dropdown placeholder="Order" [(ngModel)]="orderNo" (onChange)="getstyle()" [options]="order"
-                optionLabel="orderNO" optionValue="orderNO" formControlName="orderNo"></p-dropdown>
-    
-    
-            <p-dropdown placeholder="Knit Factory" [(ngModel)]="ftyname" [options]="ftyName" optionLabel="knitFty"
-                optionValue="knitFty" formControlName="knitfty"></p-dropdown>
-    
-    
-                <p-floatLabel>
-                    <input pInputText id="Knit Fty Details"  formControlName="knitfty_details"/>
-                    <label for="Knit Fty Details">Dye Fty Details</label>
-                </p-floatLabel>
+            optionLabel="buyer" optionValue="buyer" formControlName="buyer"></p-dropdown>
+
+
+        <p-dropdown placeholder="Order" [(ngModel)]="orderNo" (onChange)="getstyle()" [options]="order"
+            optionLabel="orderNO" optionValue="orderNO" formControlName="orderNo"></p-dropdown>
+
+
+        <p-dropdown placeholder="Dye Factory"  [options]="factoryname" optionLabel="dyeinFty"
+            optionValue="dyeinFty" formControlName="dyefty" ></p-dropdown>
+
+
+            <p-floatLabel>
+                <input pInputText id="Knit Fty Details"  formControlName="dyefty_details"/>
+                <label for="Knit Fty Details">Dye Fty Details</label>
+            </p-floatLabel>
     
     
     
@@ -222,7 +222,7 @@
 
     <ng-template pTemplate="footer">
         <div style="width: 100%; display: flex; justify-content: center;">
-            <button class="btn btn-primary" (click)="save()">Update</button>
+            <button class="btn btn-primary" (click)="update()">Update</button>
         </div>
     </ng-template>
 </p-dialog>

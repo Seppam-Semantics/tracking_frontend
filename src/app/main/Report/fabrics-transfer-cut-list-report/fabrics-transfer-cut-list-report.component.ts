@@ -125,7 +125,6 @@ export class FabricsTransferCutListReportComponent implements OnInit {
   getWoId(size: any, index: number) {
     this.api.getwodetails(this.buyerName, this.orderNo, this.style, this.color, size).subscribe((res) => {
       const woId = res.workorders[0].id;
-      console.log(woId)
       const formArray = this.FabricsTransferForm.get('fabentry') as FormArray;
       const row = formArray.at(index);
       row.get('woId')?.setValue(woId);
@@ -148,7 +147,6 @@ export class FabricsTransferCutListReportComponent implements OnInit {
 
 
       this.fabDetailspatch = res.fabDetails[0]
-      console.log(this.fabDetailspatch)
       const KnitEntryData = this.FabricsTransferForm.get('fabentry') as FormArray;
       KnitEntryData.clear();
 

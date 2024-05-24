@@ -18,7 +18,6 @@ export class LCOutstandingComponent implements OnInit{
 dateFilter(){
   this.api.LCOutstandingData(this.filterDate).subscribe((res)=>{
     this.LCOutstandingData = res.LCOutstanding
-    console.log(this.LCOutstandingData)
   })  
 
 }
