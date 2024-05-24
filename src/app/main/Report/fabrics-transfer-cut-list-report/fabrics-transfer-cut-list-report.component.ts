@@ -148,7 +148,7 @@ export class FabricsTransferCutListReportComponent implements OnInit {
 
 
       this.fabDetailspatch = res.fabDetails[0]
-      console.log(this.fabDetailspatch)
+
       const KnitEntryData = this.FabricsTransferForm.get('fabentry') as FormArray;
       KnitEntryData.clear();
 

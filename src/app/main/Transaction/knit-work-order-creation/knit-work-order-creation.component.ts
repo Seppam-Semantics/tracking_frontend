@@ -130,7 +130,7 @@ export class KnitWorkOrderCreationComponent implements OnInit {
     this.items.push(row);
   }
   save() {
-    console.log(this.KnitWorkOrderFrom.value)
+
     this.api.KnitWorkOrderData(this.KnitWorkOrderFrom.value).subscribe((res) => {
       alert(res.message)
       this.router.navigate(['/main/KnitWorkOrderListing'])

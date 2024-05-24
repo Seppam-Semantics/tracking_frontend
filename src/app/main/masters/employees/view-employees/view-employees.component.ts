@@ -90,7 +90,6 @@ export class ViewEmployeesComponent implements OnInit {
     const storedtoken = 'Bearer ' + sessionStorage.getItem('token')
     this.local.getsingleemployee(id, storedtoken).subscribe((res) => {
       this.employeedetails = res.employee
-      console.log(this.employeedetails)
       this.addemployeesForm2.patchValue({
         employeeCode: res.employee.employeeCode,
         name: res.employee.name,
@@ -110,7 +109,6 @@ export class ViewEmployeesComponent implements OnInit {
     const storedtoken = 'Bearer ' + sessionStorage.getItem('token')
     this.local.getsingleemployee(id, storedtoken).subscribe((res) => {
       this.employeedetails = res.employee
-      console.log(this.employeedetails)
       this.addemployeesForm1.patchValue({
         employeeCode: res.employee.employeeCode,
         name: res.employee.name,

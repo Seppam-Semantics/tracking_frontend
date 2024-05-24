@@ -115,7 +115,6 @@ export class DyeWorkOrderListingComponent {
   AllData(){
     this.api.DyeWorkOrderAllData().subscribe((res)=>{
       this.DyeWorkOrderAllData = res
-      console.log(this.DyeWorkOrderAllData)
     })
   }
 

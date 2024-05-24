@@ -133,7 +133,7 @@ calculate(){
 buyername(){
   this.api.getbuyers().subscribe((res)=>{
     this.buyer = res.buyers
-    console.log(this.buyer)
+
   })
 }
 getBuyerValue(event: any) {

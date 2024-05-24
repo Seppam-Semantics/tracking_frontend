@@ -122,7 +122,6 @@ export class FabricRollData2Component implements OnInit {
   loadworkorder(buyer: string = '', orderNo: string = '', style: string ='', color: string = '', size: string ='') {
     this.api.getwodetails(buyer, orderNo, style, color, size).subscribe((res) => {
       this.data = res.workorders;
-      console.log(this.data)
     
     });
   }

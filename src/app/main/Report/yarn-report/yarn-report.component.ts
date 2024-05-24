@@ -201,7 +201,6 @@ exportexcel() {
       
       try {
         this.parsedData1 = fixedOrderAllocationData;
-        console.log(this.parsedData1)
         return this.parsedData1;
       } catch (error) {
         console.error('Error parsing order_allocation data:', error);
