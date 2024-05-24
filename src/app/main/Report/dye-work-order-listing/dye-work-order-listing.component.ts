@@ -115,6 +115,7 @@ export class DyeWorkOrderListingComponent {
   AllData(){
     this.api.DyeWorkOrderAllData().subscribe((res)=>{
       this.DyeWorkOrderAllData = res
+      console.log(res)
     })
   }
 
@@ -148,7 +149,7 @@ export class DyeWorkOrderListingComponent {
 
 
   save() {
-    this.api.KnitWorkOrderData(this.DyeWorkOrderFrom.value).subscribe((res) => {
+    this.api.DyeWorkOrderData(this.DyeWorkOrderFrom.value).subscribe((res) => {
       alert(res.message)
       this.router.navigate(['/main/DyeWorkOrderListing'])
     })
