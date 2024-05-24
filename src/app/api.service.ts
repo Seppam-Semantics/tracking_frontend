@@ -10,8 +10,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  apiUrl = "https://tracker.seppam.com";
-  // apiUrl = "http://localhost:2000";
+  // apiUrl = "https://tracker.seppam.com";
+  apiUrl = "http://localhost:2000";
 
 
   token: any;
@@ -503,4 +503,11 @@ deleteKnitWorkOrder(id:any):Observable<any>{
   return this.http.delete(this.getUrl() + `/knitapi/knitworkorder/${id}`, this.getHeaders())
 }
 
+DyeWorkOrderData(data:any):Observable<any>{
+  return this.http.post(this.getUrl()+ `/dyeapi/dyeworkorder` ,data , this.getHeaders())
+}
+
+DyeWorkOrderAllData():Observable<any>{
+  return this.http.get(this.getUrl()+ `/dyeapi/dyeworkorder` ,this.getHeaders())
+}
 }

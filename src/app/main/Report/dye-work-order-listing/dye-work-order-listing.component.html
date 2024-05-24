@@ -5,7 +5,7 @@
 
 
     <div style="flex: 1 1 auto;"></div>
-    <div style="display: flex; gap: 10px;">
+    <!-- <div style="display: flex; gap: 10px;">
         <div style="display: flex; gap: 10px;">
             <label style="font-weight: normal; font-family: serif; margin-top: 5px;">Dye Fty</label>
             <input type="text" class="form-control" style="margin-top: 2px;" [(ngModel)]="DyeFtyFillter"
@@ -28,7 +28,7 @@
                 <option>In process</option>
             </datalist>
         </div>
-    </div>
+    </div> -->
 
     <button mat-button color="primary" (click)="new()">New</button>
     <button mat-button color="primary" (click)="exportexcel()"><mat-icon>download</mat-icon>Download</button>
@@ -74,50 +74,72 @@
 
 <p-dialog [(visible)]="editview" [modal]="true" header="Edit Dye Work Order Creation" [maximizable]="true"
     [style]="{width: '100vw', height:'100vh'}">
+    
     <div [formGroup]="DyeWorkOrderFrom">
         <mat-toolbar style="height: auto;">
+            <div style="display: flex; gap: 15px; width: 100%; justify-content: center;">
+                <span>Dye Work Order Creation</span>
+            </div>
             <div style="flex: 1 1 auto;"></div>
+    
+            <div style="display: flex; gap: 10px; margin-top: 1vh;">
+            
+                <div style="display: flex; gap: 10px;">
+                    <label style="font-weight: normal; font-family: serif; margin-top: 5px;">woDate</label>
+                    <input type="date" class="form-control" style="margin-top: 2px;" formControlName="woDate">
+                </div>
+        
+                <div style="display: flex; gap: 10px;">
+                    <label style="font-weight: normal; font-family: serif; margin-top: 5px;">completedDate</label>
+                    <input type="date" class="form-control" style="margin-top: 2px;" formControlName="completedDate">
+                </div>
+        
+            </div>
+    
         </mat-toolbar>
-        <mat-toolbar style="display: inline-table; width: 100%;">
+        <mat-toolbar style="display: inline-table; width: 100%; height: 12vh;">
             <div style="display: flex; justify-content:center; gap: 3vh; margin-top: 3vh; flex-wrap: wrap; margin-bottom: 1vh;">
-
-                <p-dropdown [options]="" optionLabel="name" placeholder="Buyer" />
-
-                <p-dropdown [options]="" optionLabel="name" placeholder="Order" />
+    
+                <p-dropdown placeholder="Buyer" [(ngModel)]="buyerName" (onChange)="getorders()" [options]="buyer"
+                optionLabel="buyer" optionValue="buyer" formControlName="buyer"></p-dropdown>
+    
+    
+            <p-dropdown placeholder="Order" [(ngModel)]="orderNo" (onChange)="getstyle()" [options]="order"
+                optionLabel="orderNO" optionValue="orderNO" formControlName="orderNo"></p-dropdown>
+    
+    
+            <p-dropdown placeholder="Knit Factory" [(ngModel)]="ftyname" [options]="ftyName" optionLabel="knitFty"
+                optionValue="knitFty" formControlName="knitfty"></p-dropdown>
+    
+    
                 <p-floatLabel>
-                    <input pInputText id="Knit Factory" formControlName="1" />
-                    <label for="Knit Factory">Dye Factory</label>
-                </p-floatLabel>
-
-
-                <p-floatLabel>
-                    <input pInputText id="Knit Fty Details" formControlName="2" />
+                    <input pInputText id="Knit Fty Details"  formControlName="knitfty_details"/>
                     <label for="Knit Fty Details">Dye Fty Details</label>
                 </p-floatLabel>
-
-
-
+    
+    
+    
                 <p-floatLabel>
-                    <input pInputText id="WO no" formControlName="3" />
+                    <input pInputText id="WO no"  formControlName="woNo"/>
                     <label for="WO no">WO no</label>
                 </p-floatLabel>
-
+    
                 <p-floatLabel>
-                    <input pInputText id="WO Ref" formControlName="4" />
+                    <input pInputText id="WO Ref"  formControlName="woRefNo"/>
                     <label for="WO Ref">WO Ref</label>
                 </p-floatLabel>
-
-                <p-floatLabel>
+                
+                <!-- <p-floatLabel>
                     <p-calendar inputId="WO Date" formControlName="5" />
                     <label for="WO Date">WO Date</label>
                 </p-floatLabel>
-
+    
                 <p-floatLabel>
                     <p-calendar inputId="Complete Date" formControlName="6" />
                     <label for="Complete Date">Complete Date</label>
-                </p-floatLabel>
-
-
+                </p-floatLabel> -->
+    
+    
             </div>
         </mat-toolbar>
         <div class="tablecss">
@@ -128,16 +150,16 @@
                         <th>S.No</th>
                         <th>Mach Dia</th>
                         <th>Fab Dia</th>
-
+    
                         <th>Fab Type</th>
                         <th>Style</th>
                         <th>Fab GSM</th>
-
-
+    
+    
                         <th>Color</th>
-                        <th>PL%</th>
+                        <th>PL %</th>
                         <th>Griege Kgs</th>
-
+    
                         <th>Dye Rate</th>
                         <th>Dye Value</th>
                         <th>Remarks</th>
@@ -147,49 +169,60 @@
                     <tr *ngFor="let list of items.controls; let i=index" [formGroupName]="i">
                         <td></td>
                         <td>{{i+1}}</td>
-                        <td><input class="form-control" type="text" formControlName="13"></td>
-
-                        <td><input class="form-control" type="text" formControlName="14"></td>
-                        <td><input class="form-control" type="text" formControlName="15"></td>
-                        <td><input class="form-control" type="text" formControlName="16"></td>
-
-                        <td><input class="form-control" type="text" formControlName="17"></td>
-                        <td><input class="form-control" type="text" formControlName="18"></td>
-                        <td><input class="form-control" type="text" formControlName="19"></td>
-
-                        <td><input class="form-control" type="text" formControlName="110"></td>
-                        <td><input class="form-control" type="text" formControlName="111"></td>
-                        <td><input class="form-control" type="text" formControlName="112"></td>
-                        <td><input class="form-control" type="text" formControlName="113"></td>
+                        <td><input class="form-control" type="text" formControlName="machDia"></td>
+    
+                        <td><input class="form-control" type="text" formControlName="fabDia"></td>
+                        <td><input class="form-control" type="text" formControlName="fabType"></td>
+                        <td>
+                                <input type="text" class="form-control" formControlName="style" list="3"
+                                    (input)="getstylevalue($event)" (change)="getcolor()">
+                                <datalist id="3">
+                                    <option *ngFor="let style of this.stylelist" [value]="style.style">
+                                </datalist>
+                        </td>
+    
+                        <td><input class="form-control" type="text" formControlName="fabGSM"></td>
+                        <td>
+                            <input type="text" class="form-control" formControlName="color" list="4"
+                            (input)="getcolorvalue($event)" (change)="getsize()" >
+                        <datalist id="4">
+                            <option *ngFor="let color of this.colorlist" [value]="color.color">
+                        </datalist>
+                        </td>
+                        <td><input class="form-control" type="text" formControlName="pl"></td>
+    
+                        <td><input class="form-control" type="text" formControlName="dyeKg"></td>
+                        <td><input class="form-control" type="text" formControlName="dyeRate"></td>
+                        <td><input class="form-control" type="text" formControlName="dyeValue"></td>
+                        <td><input class="form-control" type="text" formControlName="remarks"></td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <div style="margin-top: -1%;">
-            <table class="table table-hover">
-                <thead class="thead-dark">
-                    <tr>
-                        <th></th>
-                        <th></th>
-                        <th><span> Notes for Dyeing Process </span></th>
-                        <th colspan="4"><textarea class="form-control" style="height: 1px;"
-                                formControlName="123"></textarea></th>
-
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-            </table>
-        </div>
-
+            <div style="margin-top: -1%;">
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th><span> Notes for Dyeing Process </span></th>
+                            <th colspan="4"><textarea class="form-control" style="height: 1px;" formControlName="notes"></textarea></th>
+    
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
     </div>
+
     <ng-template pTemplate="footer">
         <div style="width: 100%; display: flex; justify-content: center;">
-            <button class="btn btn-primary">Update</button>
+            <button class="btn btn-primary" (click)="save()">Update</button>
         </div>
     </ng-template>
 </p-dialog>
