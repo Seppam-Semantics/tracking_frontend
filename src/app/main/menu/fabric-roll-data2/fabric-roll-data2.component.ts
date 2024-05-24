@@ -250,6 +250,8 @@ export class FabricRollData2Component implements OnInit {
         orderFOBRate: this.Woupdate.orderFOBRate,
         dyeRate: this.Woupdate.dyeRate,
         knitRate: this.Woupdate.knitRate,
+
+        gSize: this.Woupdate.gSize,
       })
     })
      }
@@ -279,6 +281,8 @@ export class FabricRollData2Component implements OnInit {
     orderFOBRate: new FormControl(''),
     knitRate: new FormControl(''),
     dyeRate: new FormControl(''),
+
+    gSize : new FormControl(''),
 
     status:new FormControl('')
   })

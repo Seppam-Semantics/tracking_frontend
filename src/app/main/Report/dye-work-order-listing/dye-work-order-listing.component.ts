@@ -115,8 +115,8 @@ export class DyeWorkOrderListingComponent {
 
   AllData(){
     this.api.DyeWorkOrderAllData().subscribe((res)=>{
-      this.DyeWorkOrderAllData = res.workorders
-      console.log(res)
+      this.DyeWorkOrderAllData = res
+      console.log(this.DyeWorkOrderAllData)
     })
   }
 
@@ -149,8 +149,8 @@ export class DyeWorkOrderListingComponent {
   }
 
 
-  update() {
-    this.api.DyeWorkOrderData(this.DyeWorkOrderFrom.value).subscribe((res) => {
+  save() {
+    this.api.KnitWorkOrderData(this.DyeWorkOrderFrom.value).subscribe((res) => {
       alert(res.message)
       window.location.reload()
     })
