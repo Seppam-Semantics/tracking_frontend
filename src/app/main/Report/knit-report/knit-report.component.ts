@@ -263,6 +263,9 @@ export class KnitReportComponent implements OnInit {
   KnitFactoryInventory(){
     this.router.navigate(['/main/knit-factory-inventory'])
   }
+  Dayknit(){
+    this.router.navigate(['/main/Day-Knit'])
+  }
 
   edit(id: any) {
     this.editpopup = true;

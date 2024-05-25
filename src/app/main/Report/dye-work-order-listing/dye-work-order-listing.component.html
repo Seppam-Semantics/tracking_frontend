@@ -65,7 +65,7 @@
                 <td>{{data.dyeValue}}</td>
 
                 <td><button class="btn btn-primary" (click)="edit(data.id)"><mat-icon>edit</mat-icon></button></td>
-                <td><button class="btn btn-danger"><mat-icon>delete</mat-icon></button></td>
+                <td><button class="btn btn-danger" (click)="delete(data.id)"><mat-icon>delete</mat-icon></button></td>
             </tr>
         </tbody>
     </table>

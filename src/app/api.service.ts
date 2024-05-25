@@ -10,8 +10,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  // apiUrl = "https://tracker.seppam.com";
-  apiUrl = "http://localhost:2000";
+  apiUrl = "https://tracker.seppam.com";
+  // apiUrl = "http://localhost:2000";
 
 
   token: any;
@@ -513,6 +513,24 @@ DyeWorkOrderAllData():Observable<any>{
 
 DyeWorkOrderSingleData(id:any):Observable<any>{
   return this.http.get(this.getUrl()+ `/dyeapi/dyeworkorder/${id}` ,this.getHeaders())
+}
+deleteDyeWorkOrder(id:any):Observable<any>{
+  return this.http.delete(this.getUrl() + `/dyeapi/dyeworkorder/${id}`, this.getHeaders())
+}
+
+
+
+DayKnit(date:any):Observable<any>{
+  return this.http.get(this.getUrl()+ `/knitapi/Day-Knit?date=${date}` ,this.getHeaders())
+}
+
+
+DayDye(date:any):Observable<any>{
+  return this.http.get(this.getUrl()+ `/dyeapi/Day-Dye?date=${date}` ,this.getHeaders())
+}
+
+DyeBatch(date1:any,date2:any):Observable<any>{
+  return this.http.get(this.getUrl()+ `/dyeapi/DyeBatch?date1=${date1}&date2=${date2}`, this.getHeaders())
 }
 
 }

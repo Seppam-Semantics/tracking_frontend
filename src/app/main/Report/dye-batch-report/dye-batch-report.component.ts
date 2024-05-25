@@ -567,6 +567,12 @@ this.dye_Entery.patchValue({
   DyeBatchButton(){
     this.router.navigate(['/main/DyeBatchEntry'])
   }
+  Daydye(){
+    this.router.navigate(['/main/Day-Dye'])
+  }
+  DyeBatch(){
+    this.router.navigate(['/main/DyeBatch'])
+  }
   update(){
     this.api.post_dyereport_entry(this.dye_Entery.value).subscribe((res)=>{
       alert(res.message)

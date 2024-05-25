@@ -1,0 +1,59 @@
+<mat-toolbar style="display: flex; justify-content: center; height: 7vh;">
+    <div style="display: flex; width: 100%; justify-content: center;">
+<span>Day Knit</span>
+</div>
+<div style="flex: 1 1 auto;"></div>
+<div style="display: flex; gap: 25px;">
+    <div style="display: flex; gap: 10px;">
+        <label style="font-weight: normal; font-family: serif; margin-top: 3px;">As on Date</label>
+        <input type="date" class="form-control" style="margin-top: 2px;" [(ngModel)]="filterDate" (change)="date()">
+    </div>
+    <div>
+        <button mat-button color="primary" (click)="exportexcel()" style="margin-top: 3px;"><mat-icon>download</mat-icon>Download</button>
+    </div>
+
+</div>
+</mat-toolbar>
+<div>
+    <table id="table-data" class="table table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>S.no</th>
+                <th>Knit Factory</th>
+                <th>Buyer</th>
+                <th>Order</th>
+
+                <th>Style</th>
+                <th>Color</th>
+                <th>Size</th>
+                
+                <th>Knit Griege Booking</th>
+                <th>Knit till yesterday</th>
+                <th>Today Knit</th>
+                
+                <th>Knit till today</th>
+                <th>Knit Pending</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of this.DayDyeData ; let i = index ;">
+                
+                <td>{{i+1}}</td>
+                <td>{{data.dyeFactory}}</td>
+                <td>{{data.buyer}}</td>
+                <td>{{data.orderNo}}</td>
+
+                <td>{{data.style}}</td>
+                <td>{{data.color}}</td>
+                <td>{{data.size}}</td>
+
+                <td>{{data.finishKg}}</td>
+                <td>{{data.AlldayProductionKgs - data.OnedayProductionKgs}}</td>
+                <td>{{data.OnedayProductionKgs}}</td>
+
+                <td>{{data.AlldayProductionKgs}}</td>
+                <td>{{data.finishKg - data.AlldayProductionKgs}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

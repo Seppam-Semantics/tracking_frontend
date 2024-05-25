@@ -40,6 +40,9 @@ import { KnitWorkOrderCreationComponent } from './Transaction/knit-work-order-cr
 import { DyeWorkOrderListingComponent } from './Report/dye-work-order-listing/dye-work-order-listing.component';
 import { DyeWorkOrderCreationComponent } from './Transaction/dye-work-order-creation/dye-work-order-creation.component';
 import { OCRComponent } from './Report/ocr/ocr.component';
+import { DayKnitComponent } from './Report/day-knit/day-knit.component';
+import { DayDyeComponent } from './Report/day-dye/day-dye.component';
+import { DyeBatchComponent } from './Report/dye-batch/dye-batch.component';
 
 
 const routes: Routes = [
@@ -86,6 +89,9 @@ const routes: Routes = [
   {path:"DyeWorkOrderListing" , component : DyeWorkOrderListingComponent} , 
   {path:"DyeWorkOrderCreation" , component : DyeWorkOrderCreationComponent},
   {path:"OCR" , component : OCRComponent},
+  {path:"Day-Knit" , component : DayKnitComponent} ,
+  {path:"Day-Dye" , component : DayDyeComponent} ,
+  {path:"DyeBatch" , component : DyeBatchComponent}
 
 
 ];

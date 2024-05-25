@@ -27,8 +27,9 @@ export class DyeWorkOrderListingComponent {
   ftyname: any
   editview : boolean = false;
   DyeWorkOrderAllData: any;
-  dyeWorkOrderhederdata: any;
-  dyeWorkOrderlineData: any;
+  DyeWorkOrderHeader: any;
+  DyeWorkOrderheaderData: any;
+  DyeWorkOrderlineData: any;
   ngOnInit(): void { 
     this.buyername(), 
     this.factoryName() 
@@ -37,7 +38,7 @@ export class DyeWorkOrderListingComponent {
   constructor(private fb: FormBuilder, private api: ApiService , private router : Router) {
 
     this.DyeWorkOrderFrom = new FormGroup({
-     
+     "id" : new FormControl(''),
       "buyer": new FormControl(''),
       "orderNo": new FormControl(''),
       "dyefty": new FormControl(''),
@@ -106,6 +107,7 @@ export class DyeWorkOrderListingComponent {
   getWoId(size: any, index: number) {
     this.api.getwodetails(this.buyerName, this.orderNo, this.style, this.color, size).subscribe((res) => {
       const woId = res.workorders[0].id;
+      console.log(woId)
       const formArray = this.DyeWorkOrderFrom.get('data') as FormArray;
       const row = formArray.at(index);
       row.get('knitWoId')?.setValue(woId);
@@ -115,8 +117,7 @@ export class DyeWorkOrderListingComponent {
 
   AllData(){
     this.api.DyeWorkOrderAllData().subscribe((res)=>{
-      this.DyeWorkOrderAllData = res
-      console.log(this.DyeWorkOrderAllData)
+      this.DyeWorkOrderAllData = res.workorders
     })
   }
 
@@ -149,43 +150,43 @@ export class DyeWorkOrderListingComponent {
   }
 
 
-  save() {
-    this.api.KnitWorkOrderData(this.DyeWorkOrderFrom.value).subscribe((res) => {
+  update() {
+    console.log(this.DyeWorkOrderFrom.value)
+    this.api.DyeWorkOrderData(this.DyeWorkOrderFrom.value).subscribe((res) => {
       alert(res.message)
       window.location.reload()
     })
   }
-
 exportexcel(){ }
 edit(id:any){
   this.editview = true;
-  console.log(id)
- 
   this.api.DyeWorkOrderSingleData(id).subscribe((res)=>{
-    this.dyeWorkOrderhederdata = res.headerData[0]
     console.log(res)
-    this.dyeWorkOrderlineData = res.lineData
+    this.DyeWorkOrderheaderData = res.headerData[0]
+    this.DyeWorkOrderlineData   = res.lineData
+
     this.DyeWorkOrderFrom.patchValue({
-      "id": this.dyeWorkOrderhederdata.id,
-      "buyer": this.dyeWorkOrderhederdata.buyer,
-      "orderNo": this.dyeWorkOrderhederdata.orderNo,
-      "dyefty": this.dyeWorkOrderhederdata.dyefty,
-      "dyefty_details": this.dyeWorkOrderhederdata.knitfty_details,
-      "woNo": this.dyeWorkOrderhederdata.woNo,
-      "woRefNo": this.dyeWorkOrderhederdata.woRefNo,
-      "woDate": this.dyeWorkOrderhederdata.woDate,
-      "completedDate": this.dyeWorkOrderhederdata.completedDate,
-      "notes": this.dyeWorkOrderhederdata.notes,
+      "id": this.DyeWorkOrderheaderData.id,
+      "buyer": this.DyeWorkOrderheaderData.buyer,
+      "orderNo": this.DyeWorkOrderheaderData.orderNo,
+      "dyefty": this.DyeWorkOrderheaderData.dyefty,
+      "dyefty_details": this.DyeWorkOrderheaderData.dyefty_details,
+      "woNo": this.DyeWorkOrderheaderData.woNo,
+      "woRefNo": this.DyeWorkOrderheaderData.woRefNo,
+      "woDate": this.DyeWorkOrderheaderData.woDate,
+      "completedDate": this.DyeWorkOrderheaderData.completedDate,
+      "notes": this.DyeWorkOrderheaderData.notes,
     })
+
     const KnitEntryData = this.DyeWorkOrderFrom.get('data') as FormArray;
     KnitEntryData.clear();
 
     const formControls: FormGroup[] = [];
-    this.dyeWorkOrderlineData.forEach((dataItem: any) => {
+    this.DyeWorkOrderlineData.forEach((dataItem: any) => {
       formControls.push(
         this.fb.group({
           "id": dataItem.id,
-          "dyeWoId": dataItem.dyeWoId,
+          "dyeWoId" : dataItem.id,
           "machDia": dataItem.machDia,
           "fabDia": dataItem.fabDia,
           "fabType": dataItem.fabType,
@@ -193,7 +194,7 @@ edit(id:any){
           "color": dataItem.color,
           "fabGSM": dataItem.fabGSM,
           "pl": dataItem.pl,
-          "dyeKg": dataItem.dyeKg,
+          "dyeKg": dataItem.greigeKg,
           "dyeRate": dataItem.dyeRate,
           "dyeValue": dataItem.dyeValue,
           "remarks": dataItem.remarks
@@ -205,20 +206,26 @@ edit(id:any){
 
     this.DyeWorkOrderFrom.setControl('data', this.fb.array(formControls));
 
-  })
-  
-  this.api.getorders(this.buyerName).subscribe((res) => {
-    this.order = res.orders
-  })
+    this.api.getorders(this.buyerName).subscribe((res) => {
+      this.order = res.orders
+    })
 
-  this.api.getstyle(this.buyerName, this.orderNo).subscribe((res) => {
-    this.stylelist = res.styles;
-  })
+    this.api.getstyle(this.buyerName, this.orderNo).subscribe((res) => {
+      this.stylelist = res.styles;
+    })
 
-  this.api.getcolor(this.buyerName, this.orderNo, this.style).subscribe((res) => {
-    this.colorlist = res.colors;
-  })
+    this.api.getcolor(this.buyerName, this.orderNo, this.style).subscribe((res) => {
+      this.colorlist = res.colors;
+    })
 
+  })
+}
+
+delete(id:any){
+this.api.deleteDyeWorkOrder(id).subscribe((res)=>{
+  alert(res.message)
+  window.location.reload()
+})
 }
 new(){
 this.router.navigate(['/main/DyeWorkOrderCreation'])

@@ -28,18 +28,26 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <div class="option1">
-      <button mat-button color="primary" (click)="yarnHead()">New Header</button>
+    <div style="flex: 1 1 auto;"></div>
+    <div>
       <button mat-button color="primary" (click)="exportexcel()"><mat-icon>download</mat-icon>Download</button>
-      <button mat-button color="primary" (click)="outstanding()">LC Outstanding</button>
-      <button mat-button color="primary" (click)="reconciliation()">Reconciliation</button>
-
     </div>
 
-    <div class="option2">
-      <button mat-button color="primary" (click)="yarnHead()">New Header</button>
-      <button mat-button color="primary" (click)="exportexcel()">Download</button>
-    </div>
+
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="yarnHead()">
+        <span>New Header</span>
+      </button>
+      <button mat-menu-item (click)="outstanding()">
+        <span>LC Outstanding</span>
+      </button>
+      <button mat-menu-item (click)="reconciliation()">
+        <span>Reconciliation</span>
+      </button>
+    </mat-menu>
 
   </div>
   <div class="YarnReportScrol" style="margin-top: 1%;">
@@ -140,7 +148,7 @@
           </tbody>
         </table>
       </div>
-      <div *ngFor="let OrderAllData of parseOrderall(data); let k = index">
+      <!-- <div *ngFor="let OrderAllData of parseOrderall(data); let k = index">
         <div style="display: flex; justify-content: space-evenly;">
           <div style="display: flex; ">
             <label style="display: inline-block;">Buyer : {{OrderAllData.buyer}} </label>
@@ -179,7 +187,7 @@
             </tbody>
           </table>
         </div>
-      </div>
+      </div> -->
     </p-panel>
   </div>
   <ng-template pTemplate="footer">

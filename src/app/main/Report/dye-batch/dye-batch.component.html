@@ -1,0 +1,61 @@
+<mat-toolbar style="height: auto;">
+
+    <div style="width: 100%; display: flex; justify-content: center;">Dye Batch</div>
+    <div style="flex: 1 1 auto;"></div>
+    <div style="display: flex; gap: 25px;">
+        <div style="display: flex; gap: 10px;">
+            <label style="font-weight: normal; font-family: serif;">From</label>
+            <input type="date" class="form-control" style="margin-top: 2px;" [(ngModel)]="filterDate1" (change)="date()">
+        </div>
+        <div style="display: flex; gap: 10px;">
+            <label style="font-weight: normal; font-family: serif;">To</label>
+            <input type="date" class="form-control" style="margin-top: 2px;" [(ngModel)]="filterDate2" (change)="date()">
+        </div>
+        <div>
+            <button mat-button color="primary" (click)="exportexcel()"><mat-icon>download</mat-icon>Download</button>
+        </div>
+
+    </div>
+</mat-toolbar>
+
+<div class="Scroll">
+    <table class="table table-hover table-bordered" id="tableToConvert">
+        <thead class="thead-dark">
+            <tr>
+                <th>S.no</th>
+                <th>Knit Factory</th>
+                <th>Buyer</th>
+                <th>Order</th>
+
+                <th>Style</th>
+                <th>Color</th>
+                <th>Size</th>
+                <th>Batch no</th>
+
+                <th>Dye Griege Kgs</th>
+                <th>Dye Finish Kgs</th>
+                <th>Batch Date</th>
+                <th>Approval Date</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of this.DyeBatchData ; let i = index ;">
+                <td>{{i+1}}</td>
+                <td>{{data.dyeFactory}}</td>
+                <td>{{data.buyer}}</td>
+                <td>{{data.orderNo}}</td>
+                <td>{{data.style}}</td>
+
+                <td>{{data.color}}</td>
+                <td>{{data.size}}</td>
+                <td>{{data.batchNo}}</td>
+                <td>{{data.griege}}</td>
+
+                <td>{{data.finish}}</td>
+                <td>{{data.batchDate}}</td>
+                <td>{{data.ApprovalDate? data.ApprovalDate : "No Entry" }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
