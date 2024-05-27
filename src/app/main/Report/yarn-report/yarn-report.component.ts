@@ -71,6 +71,7 @@ export class YarnReportComponent implements OnInit {
   @Input() data: any;
   parsedData: any;
   parsedData1: any;
+  parsedData2: any;
 
 
   constructor(private router : Router, private api:ApiService , private fb : FormBuilder) { }
@@ -137,6 +138,7 @@ exportexcel() {
   XLSX.writeFile(wb, this.fileName);
 }
 
+
   yarnHead(){
     this.router.navigate(['/main/yarn-header'])
   }
@@ -187,7 +189,6 @@ exportexcel() {
       );
       try {
         this.parsedData = JSON.parse(fixedOrderAllocationData);
-        
         return this.parsedData;
       } catch (error) {
         console.error('Error parsing order_allocation data:', error);
@@ -198,7 +199,6 @@ exportexcel() {
   }
   parseRec(OrderAllData: any): any {
           const fixedOrderAllocationData = OrderAllData.receipt
-      
       try {
         this.parsedData1 = fixedOrderAllocationData;
         return this.parsedData1;
@@ -207,6 +207,16 @@ exportexcel() {
       }
   }
 
+
+  parseQty(OrderAllData: any): any {
+    const fixedQTYData = OrderAllData.receipt.quality
+try {
+  this.parsedData2 = fixedQTYData;
+   return this.parsedData2;
+} catch (error) {
+  console.error('Error parsing order_allocation data:', error);
+}
+}
 
   
 

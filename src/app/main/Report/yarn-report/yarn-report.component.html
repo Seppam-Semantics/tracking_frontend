@@ -94,7 +94,7 @@
 
 
   <div>
-    <table class="table table-hover table-bordered">
+    <table class="table table-hover table-bordered" id="table-data1">
       <tbody>
         <tr *ngFor="let YarnData of this.yarndetails ; let i = index;">
           <td><b>LC no :</b> {{YarnData.lcNo}} </td>
@@ -112,7 +112,7 @@
   <div *ngFor="let data of this.yarn_lc_lines_Details; let i = index;">
     <p-panel header="LineEntey {{i+1}}">
       <div>
-        <table class="table table-hover table-bordered" style="margin-top: -15px;">
+        <table class="table table-hover table-bordered" style="margin-top: -15px;" id="table-data2">
           <tbody>
             <tr>
               <td>Yarn Type : {{data.yarnType}} </td>
@@ -123,75 +123,70 @@
           </tbody>
         </table>
       </div>
-      <div>
-        <table class="table table-hover table-bordered" style="margin-top: -15px;">
-          <thead>
-            <th colspan="5" style="text-align: center;"><b>Lot Check</b></th>
-          </thead>
-          <thead class="thead-dark">
-            <tr>
-              <th>Lot No</th>
-              <th>Sample Dt</th>
-              <th>Result Dt</th>
-              <th>Remarks</th>
-              <th>Acc/Rej</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let lotcheckData of parseLotcheck(data); let j = index">
-              <td>{{lotcheckData.lotNo}}</td>
-              <td>{{lotcheckData.sampleDate}}</td>
-              <td>{{lotcheckData.resultDate}}</td>
-              <td>{{lotcheckData.checkResults}}</td>
-              <td>{{lotcheckData.acceptRejectStatus}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <!-- <div *ngFor="let OrderAllData of parseOrderall(data); let k = index">
-        <div style="display: flex; justify-content: space-evenly;">
-          <div style="display: flex; ">
-            <label style="display: inline-block;">Buyer : {{OrderAllData.buyer}} </label>
-          </div>
-
-          <div style="display: flex; ">
-            <label style="display: inline-block;">OrderNo : {{OrderAllData.utilisationOrderNo}} </label>
-          </div>
-
-          <div style="display: flex; ">
-            <label style="display: inline-block;">Style : {{OrderAllData.style}} </label>
-          </div>
-
-          <div style="display: flex; ">
-            <label style="display: inline-block;">Color : {{OrderAllData.colour}} </label>
-          </div>
-
-          <div style="display: flex; ">
-            <label style="display: inline-block;">Allocated : {{OrderAllData.allocatedYarnKgs}} </label>
-          </div>
-
-        </div>
+      <p-panel header="Lot Check">
         <div>
-          <table class="table table-hover table-bordered">
+          <table class="table table-hover table-bordered" style="margin-top: -15px;" id="table-data3">
             <thead class="thead-dark">
               <tr>
-                <th>Receipt Dt</th>
-                <th>Receipt Qty</th>
+                <th>Lot No</th>
+                <th>Sample Dt</th>
+                <th>Result Dt</th>
+                <th>Remarks</th>
+                <th>Acc/Rej</th>
               </tr>
             </thead>
-            <tbody >
-                <tr *ngFor="let receipt of parseRec(OrderAllData)">
-                  <td>{{receipt.receiptDt == 'null' ? '' : receipt.receiptDt }}</td>
-                  <td>{{receipt.receiptYarnKgs == 'null' ? '' : receipt.receiptYarnKgs }}</td>
-                </tr>
+            <tbody>
+              <tr *ngFor="let lotcheckData of parseLotcheck(data); let j = index">
+                <td>{{lotcheckData.lotNo}}</td>
+                <td>{{lotcheckData.sampleDate}}</td>
+                <td>{{lotcheckData.resultDate}}</td>
+                <td>{{lotcheckData.checkResults}}</td>
+                <td>{{lotcheckData.acceptRejectStatus}}</td>
+              </tr>
             </tbody>
           </table>
         </div>
-      </div> -->
-    </p-panel>
+      </p-panel>
+
+        <div *ngFor="let OrderAllData of parseOrderall(data); let k = index" style="margin-top: -16px;">
+
+          <table class="table table-hover table-bordered" id="table-data4">
+            <tbody>
+            <tr>
+              <td><b>Buyer :</b> {{OrderAllData.buyer}}</td>
+              <td><b>OrderNo :</b> {{OrderAllData.utilisationOrderNo}}</td>
+              <td><b>Style :</b> {{OrderAllData.style}}</td>
+              <td><b>Color :</b> {{OrderAllData.colour}}</td>
+              <td><b>Allocated :</b> {{OrderAllData.allocatedYarnKgs}}</td>
+            </tr>
+          </tbody>
+          </table>
+
+          <table class="table table-hover table-bordered" id="table-data5">
+            <thead class="thead-dark">
+              <tr>
+                <th style="width: 40vh;">Receipt Dt</th>
+                <th style="width: 40vh;">Receipt Qty</th>
+
+              </tr>
+            </thead>
+            <tbody *ngFor="let receipt of parseRec(OrderAllData); let i = index">
+              <tr>
+                <td>{{receipt.receiptDt === 'null' ? '' : receipt.receiptDt}}</td>
+                <td>{{receipt.receiptYarnKgs === 'null' ? '' : receipt.receiptYarnKgs}}</td>
+                <div *ngFor="let quality of receipt.quality">
+                  <td> checkDate : {{quality.checkDate === 'null' ? '' : quality.checkDate}}</td>
+                  <td> checkResults : {{quality.checkResults === 'null' ? '' : quality.checkResults}}</td>
+                  <td> AcceptRejectStatus : {{quality.yarnAcceptRejectStatus === '1' ? 'Accept' : 'Reject'}}</td>
+                </div>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </p-panel>
   </div>
   <ng-template pTemplate="footer">
     <button mat-button color="danger" (click)="ViewAllYarnData = false"><mat-icon>close</mat-icon>close</button>
-    <button mat-button color="primary"><mat-icon>download</mat-icon>Download</button>
+    <button mat-button color="primary" (click)="exportToExcel2()"><mat-icon>download</mat-icon>Download</button>
   </ng-template>
 </p-dialog>
