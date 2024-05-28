@@ -25,9 +25,9 @@ export class YarnReportComponent implements OnInit {
   spinftyReceipt: any
   orderNo: any;
   spinfty: any;
-  spinfactory:any
+  spinfactory: any
   spinLcNo: any;
-  spinStatus:any
+  spinStatus: any
   spinftyreceipt: any;
   yarnTypereceipt: any;
   yarnreceipt_Id: any;
@@ -55,7 +55,7 @@ export class YarnReportComponent implements OnInit {
   QCindexvalue: any;
   spinDDLcNo: any;
   someStatus: any;
-  ViewAllYarnData : boolean = false;
+  ViewAllYarnData: boolean = false;
   LcClosure: any;
   YarnData: any;
   LcClosureData: any[] = [];
@@ -74,12 +74,12 @@ export class YarnReportComponent implements OnInit {
   parsedData2: any;
 
 
-  constructor(private router : Router, private api:ApiService , private fb : FormBuilder) { }
-
-  
+  constructor(private router: Router, private api: ApiService, private fb: FormBuilder) { }
 
 
-  
+
+
+
 
   ngOnInit(): void {
 
@@ -90,95 +90,97 @@ export class YarnReportComponent implements OnInit {
     this.api.yarnSpinner().subscribe((res) => {
       this.spinfty = res.spinners
     })
-    
-    this.api.yarnStatus().subscribe((res)=>{
+
+    this.api.yarnStatus().subscribe((res) => {
       this.someStatus = res.status
     })
   }
-  
-  yarnlcNo(){
-    this.api.yarnLcNo(this.spinfactory).subscribe((res:any)=>{
+
+  yarnlcNo() {
+    this.api.yarnLcNo(this.spinfactory).subscribe((res: any) => {
       this.spinDDLcNo = res.lcNo
     })
-    this.api.yarnFilter(this.spinfactory).subscribe((res)=>{
+    this.api.yarnFilter(this.spinfactory).subscribe((res) => {
       this.AllData = res.knit
     })
   }
 
-  yarnStatus(){
-    if(this.spinfactory && this.spinLcNo){
-      this.api.yarnSomeStatus(this.spinfactory, this.spinLcNo).subscribe((res)=>{
+  yarnStatus() {
+    if (this.spinfactory && this.spinLcNo) {
+      this.api.yarnSomeStatus(this.spinfactory, this.spinLcNo).subscribe((res) => {
         this.someStatus = res.status
       })
     }
-    this.api.yarnFilter(this.spinfactory, this.spinLcNo).subscribe((res)=>{
+    this.api.yarnFilter(this.spinfactory, this.spinLcNo).subscribe((res) => {
       this.AllData = res.knit
     })
   }
 
-  yarnDatawithStatus(){
-    if(this.spinfactory && this.spinLcNo){
-      this.api.yarnFilter(this.spinfactory, this.spinLcNo, '', this.spinStatus).subscribe((res)=>{
+  yarnDatawithStatus() {
+    if (this.spinfactory && this.spinLcNo) {
+      this.api.yarnFilter(this.spinfactory, this.spinLcNo, '', this.spinStatus).subscribe((res) => {
         this.AllData = res.knit
       })
     }
-    else{
-      this.api.yarnFilter('','','',this.spinStatus).subscribe((res)=>{
+    else {
+      this.api.yarnFilter('', '', '', this.spinStatus).subscribe((res) => {
         this.AllData = res.knit
       })
     }
   }
 
   fileName = "YarnReport.xlsx"
-exportexcel() {
-  let data = document.getElementById("table-data");
-  const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(data);
-  const wb: XLSX.WorkBook = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-  XLSX.writeFile(wb, this.fileName);
-}
+  exportexcel() {
+    let data = document.getElementById("table-data");
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(data);
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+    XLSX.writeFile(wb, this.fileName);
+  }
 
 
-  yarnHead(){
+
+
+  yarnHead() {
     this.router.navigate(['/main/yarn-header'])
   }
 
-  outstanding(){
+  outstanding() {
     this.router.navigate(['/main/lc-outstanding'])
   }
 
-  reconciliation(){
+  reconciliation() {
     this.router.navigate(['/main/yarn-reconciliation'])
   }
 
-  EditAllData(id:any){
+  EditAllData(id: any) {
     sessionStorage.setItem('singleData', id)
     this.router.navigate(['/main/yarn-transcation'])
   }
 
-  view(id:any){
+  view(id: any) {
     this.ViewAllYarnData = true;
 
     this.api.getSingleLcClosure(id).subscribe((res) => {
       this.yarndetails = res.yarn;
       this.yarn_lc_lines_Details = res.yarn_lc_lines;
-      
-      });
+
+    });
   }
 
   parseLotcheck(data: any): any {
     if (data && data.lotcheck) {
       let fixedlotcheckData = data.lotcheck.replace(/([{,]\s*)(\w+)\s*:/g, '$1"$2":')
-                                                          .replace(/:\s*([^,\}\[]+)\s*(?=[,\}])/g, ': "$1"');
-        try {
+        .replace(/:\s*([^,\}\[]+)\s*(?=[,\}])/g, ': "$1"');
+      try {
         const parsedData = JSON.parse(fixedlotcheckData);
         return parsedData;
       } catch (error) {
         console.error('Error parsing order_allocation data:', error);
-        return ;
+        return;
       }
     }
-    return ;
+    return;
   }
 
   parseOrderall(data: any): any {
@@ -192,35 +194,107 @@ exportexcel() {
         return this.parsedData;
       } catch (error) {
         console.error('Error parsing order_allocation data:', error);
-        return ;
+        return;
       }
     }
-    return ;
+    return;
   }
   parseRec(OrderAllData: any): any {
-          const fixedOrderAllocationData = OrderAllData.receipt
-      try {
-        this.parsedData1 = fixedOrderAllocationData;
-        return this.parsedData1;
-      } catch (error) {
-        console.error('Error parsing order_allocation data:', error);
-      }
+    const fixedOrderAllocationData = OrderAllData.receipt
+    try {
+      this.parsedData1 = fixedOrderAllocationData;
+      return this.parsedData1;
+    } catch (error) {
+      console.error('Error parsing order_allocation data:', error);
+    }
   }
 
 
   parseQty(OrderAllData: any): any {
     const fixedQTYData = OrderAllData.receipt.quality
-try {
-  this.parsedData2 = fixedQTYData;
-   return this.parsedData2;
-} catch (error) {
-  console.error('Error parsing order_allocation data:', error);
-}
-}
+    try {
+      this.parsedData2 = fixedQTYData;
+      return this.parsedData2;
+    } catch (error) {
+      console.error('Error parsing order_allocation data:', error);
+    }
+  }
 
-  
 
-  
+
+  exportToExcel2() {
+    // Prepare data for the first table (yarndetails)
+    const ws1_data = this.yarndetails.map((yarn: any) => ({
+      'LC no': yarn.lcNo,
+      'PI': yarn.pi,
+      'LC Qty': yarn.lcYarnTotal,
+      'LC Date': yarn.lcDate,
+      'PI date': yarn.piDate,
+      'LC Value': yarn.lcValue
+    }));
+
+    const ws1 = XLSX.utils.json_to_sheet(ws1_data);
+
+    // Prepare data for the second table (yarn_lc_lines_Details)
+    const ws2_data: any[] = [];
+    this.yarn_lc_lines_Details.forEach((data: any) => {
+      ws2_data.push({
+        'Yarn Type': data.yarnType,
+        'Yarn Kgs': data.yarnValue,
+        'Yarn Rate': data.yarnRate,
+        'LC Value': data.lcYarnKgs
+      });
+
+      const lotChecks = this.parseLotcheck(data);
+      if (lotChecks) {
+        lotChecks.forEach((lot: any) => {
+          ws2_data.push({
+            'Lot No': lot.lotNo,
+            'Sample Dt': lot.sampleDate,
+            'Result Dt': lot.resultDate,
+            'Remarks': lot.checkResults,
+            'Acc/Rej': lot.acceptRejectStatus
+          });
+        });
+      }
+
+      const orderDetails = this.parseOrderall(data);
+      if (orderDetails) {
+        orderDetails.forEach((order: any) => {
+          ws2_data.push({
+            'Buyer': order.buyer,
+            'OrderNo': order.utilisationOrderNo,
+            'Style': order.style,
+            'Color': order.colour,
+            'Allocated': order.allocatedYarnKgs
+          });
+
+          const receipts = this.parseRec(order);
+          console.log(receipts)
+          if (receipts) {
+            receipts.forEach((receipt: any) => {
+
+              ws2_data.push({
+                'Receipt Dt': receipt.receiptDt,
+                'Receipt Qty': receipt.receiptYarnKgs,
+              });
+            });
+          }
+        });
+      }
+    });
+
+    const ws2 = XLSX.utils.json_to_sheet(ws2_data);
+
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws1, 'Yarn Details');
+    XLSX.utils.book_append_sheet(wb, ws2, 'LC Lines Details');
+
+    XLSX.writeFile(wb, 'YarnData.xlsx');
+  }
+
+
+
 
   delete(id: any) {
     let text = "Press Ok to delete the details";
