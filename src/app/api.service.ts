@@ -13,7 +13,6 @@ export class ApiService {
   apiUrl = "https://tracker.seppam.com";
   // apiUrl = "http://localhost:2000";
 
-
   token: any;
   profilenames: any;
   rolenames: any;

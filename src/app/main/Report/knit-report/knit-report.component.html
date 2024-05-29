@@ -26,14 +26,17 @@
     <div class="newlist1">
       <button mat-button color='primary' (click)="exportexcel2()"><mat-icon>download</mat-icon>Download</button>
     </div>
+    <div class="newlist1">
+      <button mat-button color='primary' (click)="Report()">New</button>
+    </div>
 
-    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-      <mat-icon>more_vert</mat-icon>
+    <button mat-button color="primary" [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      Report
     </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="Report()">
+      <!-- <button mat-menu-item (click)="Report()">
         <span>New</span>
-      </button>
+      </button> -->
       <button mat-menu-item (click)="KnitFactoryInventory()">
         <span>Knit Factory Inventory</span>
       </button>

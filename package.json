@@ -27,6 +27,7 @@
     "html2canvas": "^1.4.1",
     "json-server": "^0.17.4",
     "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.8.2",
     "mat-file-upload": "^11.1.2",
     "ngx-spinner": "^16.0.2",
     "primeng": "^17.12.0",
