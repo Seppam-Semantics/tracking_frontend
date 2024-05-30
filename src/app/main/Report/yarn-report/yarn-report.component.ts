@@ -4,6 +4,8 @@ import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from 
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 import * as XLSX from 'xlsx'
+import { jsPDF } from 'jspdf';
+import 'jspdf-autotable';
 
 @Component({
   selector: 'app-yarn-report',
@@ -159,12 +161,10 @@ export class YarnReportComponent implements OnInit {
   }
 
   view(id: any) {
-    this.ViewAllYarnData = true;
-
     this.api.getSingleLcClosure(id).subscribe((res) => {
       this.yarndetails = res.yarn;
       this.yarn_lc_lines_Details = res.yarn_lc_lines;
-
+      this.exportToPDF()
     });
   }
 
@@ -203,6 +203,7 @@ export class YarnReportComponent implements OnInit {
     const fixedOrderAllocationData = OrderAllData.receipt
     try {
       this.parsedData1 = fixedOrderAllocationData;
+ 
       return this.parsedData1;
     } catch (error) {
       console.error('Error parsing order_allocation data:', error);
@@ -222,75 +223,138 @@ export class YarnReportComponent implements OnInit {
 
 
 
-  exportToExcel2() {
-    // Prepare data for the first table (yarndetails)
-    const ws1_data = this.yarndetails.map((yarn: any) => ({
-      'LC no': yarn.lcNo,
-      'PI': yarn.pi,
-      'LC Qty': yarn.lcYarnTotal,
-      'LC Date': yarn.lcDate,
-      'PI date': yarn.piDate,
-      'LC Value': yarn.lcValue
-    }));
-
-    const ws1 = XLSX.utils.json_to_sheet(ws1_data);
-
-    // Prepare data for the second table (yarn_lc_lines_Details)
-    const ws2_data: any[] = [];
-    this.yarn_lc_lines_Details.forEach((data: any) => {
-      ws2_data.push({
-        'Yarn Type': data.yarnType,
-        'Yarn Kgs': data.yarnValue,
-        'Yarn Rate': data.yarnRate,
-        'LC Value': data.lcYarnKgs
+  exportToPDF() {
+    const doc = new jsPDF();
+    const ws1_data =  this.yarndetails.map((yarn: any) => [
+      yarn.lcNo || '',
+      yarn.pi || '',
+      yarn.lcYarnTotal || '',
+      yarn.lcDate || '',
+      yarn.piDate || '',
+      yarn.lcValue || ''
+    ]) ;
+  
+    if (ws1_data.length > 0) {
+      doc.text('Yarn Details', 10, 10);
+      (doc as any).autoTable({
+        head: [['LC no', 'PI', 'LC Qty', 'LC Date', 'PI date', 'LC Value']],
+        body: ws1_data,
+        startY: 20
       });
-
-      const lotChecks = this.parseLotcheck(data);
-      if (lotChecks) {
-        lotChecks.forEach((lot: any) => {
-          ws2_data.push({
-            'Lot No': lot.lotNo,
-            'Sample Dt': lot.sampleDate,
-            'Result Dt': lot.resultDate,
-            'Remarks': lot.checkResults,
-            'Acc/Rej': lot.acceptRejectStatus
+    }
+  
+    let currentY = (doc as any).lastAutoTable ? (doc as any).lastAutoTable.finalY + 10 : 30;
+  
+    const ws2_data = this.yarn_lc_lines_Details.map((data: any) => [
+      data.yarnType || '',
+      data.yarnValue || '',
+      data.yarnRate || '',
+      data.lcYarnKgs || ''
+    ]) ;
+  
+    if (ws2_data.length > 0) {
+      doc.text('Yarn LC Lines Details', 10, currentY);
+      (doc as any).autoTable({
+        head: [['Yarn Type', 'Yarn Kgs', 'Yarn Rate', 'LC Value']],
+        body: ws2_data,
+        startY: currentY + 10
+      });
+  
+      currentY = (doc as any).lastAutoTable.finalY + 10;
+    }
+  
+    const lotChecksData: any[] = [];
+    if (this.yarn_lc_lines_Details) {
+      this.yarn_lc_lines_Details.forEach((data: any) => {
+        const lotChecks = this.parseLotcheck(data);
+        if (lotChecks) {
+          lotChecks.forEach((lot: any) => {
+            lotChecksData.push([
+              lot.lotNo || '',
+              lot.sampleDate || '',
+              lot.resultDate || '',
+              lot.checkResults || '',
+              lot.acceptRejectStatus || ''
+            ]);
           });
-        });
-      }
+        }
+      });
+    }
+  
+    if (lotChecksData.length > 0) {
+      doc.text('Lot Checks', 10, currentY);
+      (doc as any).autoTable({
+        head: [['Lot No', 'Sample Dt', 'Result Dt', 'Remarks', 'Acc/Rej']],
+        body: lotChecksData,
+        startY: currentY + 10
+      });
+  
+      currentY = (doc as any).lastAutoTable.finalY + 10;
+    }
 
-      const orderDetails = this.parseOrderall(data);
-      if (orderDetails) {
-        orderDetails.forEach((order: any) => {
-          ws2_data.push({
-            'Buyer': order.buyer,
-            'OrderNo': order.utilisationOrderNo,
-            'Style': order.style,
-            'Color': order.colour,
-            'Allocated': order.allocatedYarnKgs
-          });
-
-          const receipts = this.parseRec(order);
-          console.log(receipts)
-          if (receipts) {
-            receipts.forEach((receipt: any) => {
-
-              ws2_data.push({
-                'Receipt Dt': receipt.receiptDt,
-                'Receipt Qty': receipt.receiptYarnKgs,
+    const receiptData: any[] = [];
+    if (this.yarn_lc_lines_Details) {
+      this.yarn_lc_lines_Details.forEach((data: any) => {
+        const orderDetails = this.parseOrderall(data);
+        if (orderDetails) {
+          orderDetails.forEach((order: any) => {
+            const receipts = this.parseRec(order);
+            if (receipts) {
+              receipts.forEach((receipt: any) => {
+                receiptData.push([
+                  receipt.spinningChallan === 'null' ? '' : receipt.spinningChallan,
+                  receipt.scandexChallan === 'null' ? '' : receipt.scandexChallan,
+                  receipt.knitFactory === 'null' ? '' : receipt.knitFactory,
+                  receipt.receiptYarnKgs === 'null' ? '' : receipt.receiptYarnKgs,
+                  receipt.receiptDt === 'null' ? '' : receipt.receiptDt,
+                  receipt.quality ? receipt.quality.map((quality: any) => [
+                    quality.checkDate === 'null' ? '' : quality.checkDate,
+                    quality.checkResults === 'null' ? '' : quality.checkResults,
+                    quality.yarnAcceptRejectStatus === '1' ? 'Accept' : 'Reject'
+                  ]) : []
+                ]);
               });
-            });
-          }
+            }
+          });
+        }
+      });
+    }
+
+    const flattenedReceiptData: any[] = [];
+    receiptData.forEach((receipt: any) => {
+      const [spinningChallan, scandexChallan, knitFactory, receiptYarnKgs, receiptDt , qualities] = receipt;
+      if (qualities && qualities.length > 0) {
+        qualities.forEach((quality: any) => {
+          flattenedReceiptData.push([
+            spinningChallan,
+            scandexChallan,
+            knitFactory,
+            receiptYarnKgs,
+            receiptDt,
+            ...quality
+          ]);
         });
+      } else {
+        flattenedReceiptData.push([
+          spinningChallan,
+          scandexChallan,
+          knitFactory,
+          receiptYarnKgs,
+          receiptDt,
+        ]);
       }
     });
-
-    const ws2 = XLSX.utils.json_to_sheet(ws2_data);
-
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws1, 'Yarn Details');
-    XLSX.utils.book_append_sheet(wb, ws2, 'LC Lines Details');
-
-    XLSX.writeFile(wb, 'YarnData.xlsx');
+  
+    if (flattenedReceiptData.length > 0) {
+      doc.text('Order Details', 10, currentY);
+      (doc as any).autoTable({
+        head: [['Spinning Challan', 'SBDL Challan', 'Knit Factory', 'Receipt Yarn Kgs','receiptDt' ,'Check Date', 'Check Results', 'Acc/Rej']],
+        body: flattenedReceiptData,
+        startY: currentY + 10
+      });
+      currentY = (doc as any).lastAutoTable.finalY + 10;
+    }
+    doc.save('LC-CLOSURE-REPORT.pdf');
   }
 
 

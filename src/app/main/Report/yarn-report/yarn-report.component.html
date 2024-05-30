@@ -29,18 +29,23 @@
       </mat-form-field>
     </div>
     <div style="flex: 1 1 auto;"></div>
+
+    <div>
+      <button mat-button color="primary" (click)="yarnHead()">New Header</button>
+    </div>
+
     <div>
       <button mat-button color="primary" (click)="exportexcel()"><mat-icon>download</mat-icon>Download</button>
     </div>
 
 
-    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-      <mat-icon>more_vert</mat-icon>
+    <button mat-button color="primary" [matMenuTriggerFor]="menu">
+      Report
     </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="yarnHead()">
+      <!-- <button mat-menu-item (click)="yarnHead()">
         <span>New Header</span>
-      </button>
+      </button> -->
       <button mat-menu-item (click)="outstanding()">
         <span>LC Outstanding</span>
       </button>
@@ -65,21 +70,23 @@
           <th>Status</th>
           <th>Edit</th>
           <th>Delete</th>
+          <th>Report</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let data of this.AllData;let i = index">
           <td>{{i+1}}</td>
-          <td (click)="view(data.id)">{{data.spinner}}</td>
-          <td (click)="view(data.id)">{{data.lcDate}}</td>
-          <td (click)="view(data.id)">{{data.lcNo}}</td>
-          <td (click)="view(data.id)">{{data.pi}}</td>
-          <td (click)="view(data.id)">{{data.piDate}}</td>
-          <td (click)="view(data.id)">{{data.lcYarnTotal}}</td>
-          <td (click)="view(data.id)">{{data.lcValue}}</td>
-          <td (click)="view(data.id)">{{data.yarnStatus}}</td>
+          <td >{{data.spinner}}</td>
+          <td >{{data.lcDate}}</td>
+          <td >{{data.lcNo}}</td>
+          <td >{{data.pi}}</td>
+          <td >{{data.piDate}}</td>
+          <td >{{data.lcYarnTotal}}</td>
+          <td >{{data.lcValue}}</td>
+          <td >{{data.yarnStatus}}</td>
           <td><button class="btn btn-primary" (click)="EditAllData(data.id)"><mat-icon>edit</mat-icon></button></td>
           <td><button class="btn btn-danger" (click)="delete(data.id)"><mat-icon>delete</mat-icon></button></td>
+          <td><button class="btn btn-success" (click)="view(data.id)"><mat-icon>insert_drive_file</mat-icon></button></td>
         </tr>
 
       </tbody>

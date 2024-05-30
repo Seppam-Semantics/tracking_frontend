@@ -31,13 +31,15 @@
 
         <button mat-button color='primary' style="margin-right: 12px;" (click)="exportexcel()">Download</button>
 
-        <button mat-icon-button [matMenuTriggerFor]="menu">
-        <mat-icon>more_vert</mat-icon>
+        <button mat-button color='primary' style="margin-right: 12px;" (click)="DyeBatchButton()">New</button>
+
+        <button mat-button color="primary" [matMenuTriggerFor]="menu">
+        Report
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item  (click)="DyeBatchButton()">
+        <!-- <button mat-menu-item  (click)="DyeBatchButton()">
           <span>New</span>
-        </button>
+        </button> -->
         <button mat-menu-item (click)="DyeFactoryInventory()">
           <span>Dye Factory</span>
         </button>
