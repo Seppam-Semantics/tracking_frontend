@@ -162,7 +162,6 @@ export class YarnReportComponent implements OnInit {
     this.ViewAllYarnData = true
     this.api.getSingleLcClosure(id).subscribe((res) => {
       this.yarndetails = res.yarn;
-      console.log(this.yarndetails)
       this.yarn_lc_lines_Details = res.yarn_lc_lines;
     });
   }

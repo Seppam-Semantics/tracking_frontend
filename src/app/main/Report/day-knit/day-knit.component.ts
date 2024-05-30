@@ -31,7 +31,6 @@ export class DayKnitComponent  implements OnInit{
   date(){
     this.api.DayKnit(this.filterDate).subscribe((res)=>{
       this.DayKnitData = res.data
-      console.log(this.DayKnitData)
     })
   }
 }

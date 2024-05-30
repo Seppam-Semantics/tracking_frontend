@@ -52,7 +52,7 @@ export class ReportEntryComponent implements OnInit {
   }
 
   factoryname() {
-    this.api.woknitfty_name().subscribe((res) => {
+    this.api.knitfty_name().subscribe((res) => {
       this.fty_name = res.factorys
     })
   }
@@ -122,7 +122,6 @@ export class ReportEntryComponent implements OnInit {
   getknitWoDetails(factory:any , buyer:any, orderNo:any, style:any, color:any, size:any){
     this.api.knitauth(factory,buyer,orderNo,style,color,size).subscribe((res)=>{
       this.knitDetails = res.knitWoDetails
-      console.log(this.knitDetails)
     })
   }
 

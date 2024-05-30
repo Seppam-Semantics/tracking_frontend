@@ -31,7 +31,7 @@ export class DayDyeComponent {
   date(){
     this.api.DayDye(this.filterDate).subscribe((res)=>{
       this.DayDyeData = res.data
-      console.log(res.data)
+
     })
   }
 }

@@ -107,7 +107,6 @@ export class DyeWorkOrderListingComponent {
   getWoId(size: any, index: number) {
     this.api.getwodetails(this.buyerName, this.orderNo, this.style, this.color, size).subscribe((res) => {
       const woId = res.workorders[0].id;
-      console.log(woId)
       const formArray = this.DyeWorkOrderFrom.get('data') as FormArray;
       const row = formArray.at(index);
       row.get('knitWoId')?.setValue(woId);
@@ -151,7 +150,6 @@ export class DyeWorkOrderListingComponent {
 
 
   update() {
-    console.log(this.DyeWorkOrderFrom.value)
     this.api.DyeWorkOrderData(this.DyeWorkOrderFrom.value).subscribe((res) => {
       alert(res.message)
       window.location.reload()
@@ -161,7 +159,6 @@ exportexcel(){ }
 edit(id:any){
   this.editview = true;
   this.api.DyeWorkOrderSingleData(id).subscribe((res)=>{
-    console.log(res)
     this.DyeWorkOrderheaderData = res.headerData[0]
     this.DyeWorkOrderlineData   = res.lineData
 

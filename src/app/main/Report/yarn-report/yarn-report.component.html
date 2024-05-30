@@ -127,11 +127,11 @@
       <div style="display: flex; flex-direction: column;">
         <div style="display: flex;">
           <label style="display: inline-block; width: 24vh; border: transparent;" class="form-control">LC Qty</label>
-          <input type="text" class="form-control" readonly value="{{YarnData.lcValue}}">
+          <input type="text" class="form-control" readonly value="{{YarnData. lcYarnTotal}}">
         </div>
         <div style="display: flex;">
           <label style="display: inline-block; width: 24vh; border: transparent;" class="form-control">LC Value</label>
-          <input type="text" class="form-control" readonly value="{{YarnData.lcYarnTotal}}">
+          <input type="text" class="form-control" readonly value="{{YarnData.lcValue}}">
         </div>
       </div>
 
@@ -142,19 +142,19 @@
         </div>
         <div style="display: flex;">
           <label style="display: inline-block; width: 24vh; border: transparent;" class="form-control">Rec Value</label>
-          <input type="text" class="form-control" readonly>
+          <input type="text" class="form-control" readonly value="">
         </div>
       </div>
 
       <div style="display: flex; flex-direction: column;">
         <div style="display: flex;">
           <label style="display: inline-block; width: 24vh; border: transparent;" class="form-control">Diff Qty</label>
-          <input type="text" class="form-control" readonly value="{{YarnData.lcValue - YarnData.recQty}}">
+          <input type="text" class="form-control" readonly value="{{YarnData.lcYarnTotal - YarnData.recQty}}">
         </div>
         <div style="display: flex;">
           <label style="display: inline-block; width: 24vh; border: transparent;" class="form-control">Diff
             Value</label>
-          <input type="text" class="form-control" readonly>
+          <input type="text" class="form-control" readonly value="">
         </div>
       </div>
 
@@ -242,9 +242,13 @@
                     <td>{{receipt.scandexChallan}}</td>
                     <td>{{receipt.receiptYarnKgs}}</td>
                     <td>{{receipt.knitFactory}}</td>
-                    <td>{{receipt.quality[0].checkDate}}</td>
-                    <td>{{receipt.quality[0].checkResults}}</td>
-                    <td>{{receipt.quality[0].yarnAcceptRejectStatus == 1 ? "Accept" : "Reject"}}</td>
+                    <ng-container *ngFor="let quality of receipt.quality; let m = index">
+                      <ng-container *ngIf="m === 0">
+                        <td>{{quality.checkDate}}</td>
+                        <td>{{quality.checkResults}}</td>
+                        <td>{{quality.yarnAcceptRejectStatus == 1 ? 'Accept' : 'Reject'}}</td>
+                      </ng-container>
+                    </ng-container>
                   </tr>
                 </tbody>
               </table>
