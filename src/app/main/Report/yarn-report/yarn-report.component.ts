@@ -4,8 +4,6 @@ import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from 
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 import * as XLSX from 'xlsx'
-import { jsPDF } from 'jspdf';
-import 'jspdf-autotable';
 
 @Component({
   selector: 'app-yarn-report',
