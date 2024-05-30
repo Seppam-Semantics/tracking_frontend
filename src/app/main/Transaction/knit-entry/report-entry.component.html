@@ -5,7 +5,7 @@
         <div style="display: flex; justify-content: start;gap: 10px;">
            <div> <label>Factory</label> </div>
             <div>
-                <select name="cars" id="cars" class="form-control" style="width: 180px;" formControlName="factory" required>
+                <select name="cars" id="cars" class="form-control" style="width: 180px;" formControlName="factory" required (change)="getFactoryName($event)">
                     <option *ngFor="let ftyname of this.fty_name" value="{{ftyname.knitFty}}" class="form-control">{{ftyname.knitFty}}</option>
                 </select>
             </div>
@@ -167,21 +167,9 @@
                             <option value="">
                         </datalist>
                     </td>
-                    <td><input type="text" class="form-control" formControlName="dayProductionKgs" list="8">
-                        <datalist id="8">
-                            <option value="">
-                        </datalist>
-                    </td>
-                    <td><input type="text" class="form-control" formControlName="noOfRollsProduced" list="9">
-                        <datalist id="9">
-                            <option value="">
-                        </datalist>
-                    </td>
-                    <td><input type="text" class="form-control" formControlName="noOfRollsChecked" list="10">
-                        <datalist id="10">
-                            <option value="">
-                        </datalist>
-                    </td>
+                    <td><input type="text" class="form-control" formControlName="dayProductionKgs" (input)="valid($event.target.value)" ></td>
+                    <td><input type="text" class="form-control" formControlName="noOfRollsProduced"></td>
+                    <td><input type="text" class="form-control" formControlName="noOfRollsChecked"></td>
                     <td><input type="text" class="form-control" formControlName="knittingSL">
                     </td>
                     <td><input type="text" class="form-control" formControlName="machineRPM">
@@ -219,10 +207,10 @@
         </table>
     </div>
 
-    <div style="display: flex; justify-content: center;" *ngIf="!loading">
+    <div style="display: flex; justify-content: center;" *ngIf="!this.valueExceeded">
         <button mat-raised-button color="primary" (click)="save()" style="margin-top: 3%;">Save</button>
       </div>
-      <div style="display: flex; justify-content: center;" *ngIf="loading">
+      <div style="display: flex; justify-content: center;" *ngIf="this.valueExceeded">
         <button mat-raised-button color="primary" style="margin-top: 3%;">
           <div class="loader"></div>
         </button>

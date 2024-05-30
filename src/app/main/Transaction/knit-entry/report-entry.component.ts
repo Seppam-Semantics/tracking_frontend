@@ -26,6 +26,9 @@ export class ReportEntryComponent implements OnInit {
   size: any;
   woId: any[] = [];
   loading: boolean = false;
+  factory: any;
+  knitDetails: any;
+  valueExceeded : boolean = false;
   constructor(private fb: FormBuilder, private api: ApiService, private router: Router) {
     this.load = this.fb.group({
       id: new FormControl(0),
@@ -100,6 +103,10 @@ export class ReportEntryComponent implements OnInit {
     })
   }
 
+  getFactoryName(event:any){
+    this.factory = event.target.value;
+  }
+
   getWoId(size: any, index: number) {
     this.api.getwodetails(this.buyerName, this.orderNo, this.style, this.color, size).subscribe((res) => {
       const woId = res.workorders[0].id;
@@ -108,7 +115,27 @@ export class ReportEntryComponent implements OnInit {
       const row = formArray.at(index);
       row.get('woId')?.setValue(woId);
     });
+    this.getknitWoDetails(this.factory,this.buyerName, this.orderNo, this.style, this.color, size)
   }
+
+  getknitWoDetails(factory:any , buyer:any, orderNo:any, style:any, color:any, size:any){
+    this.api.knitauth(factory,buyer,orderNo,style,color,size).subscribe((res)=>{
+      this.knitDetails = res.knitWoDetails
+      console.log(this.knitDetails)
+    })
+  }
+
+  valid(value:any){
+    const inputValue = value;
+    if(inputValue > this.knitDetails[0].knitKg){
+      this.valueExceeded = true;
+      alert("Value exceeded");
+    }
+    else{
+      this.valueExceeded = false;
+    }
+  }
+
   // <!------------------------------------------------------------>
 
 
