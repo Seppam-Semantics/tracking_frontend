@@ -63,6 +63,8 @@ import { PanelModule } from 'primeng/panel';
 import { KnitDeliveryComponent } from './Report/knit-delivery/knit-delivery.component';
 import { DyeDeliveryComponent } from './Report/dye-delivery/dye-delivery.component';
 import {MatMenuModule} from '@angular/material/menu';
+import { FieldsetModule } from 'primeng/fieldset';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 import { TableModule } from 'primeng/table';
 import { DropdownModule } from 'primeng/dropdown';
@@ -182,6 +184,8 @@ import { DyeBatchComponent } from './Report/dye-batch/dye-batch.component';
     CardModule,
     FloatLabelModule,
     CalendarModule,
+    FieldsetModule,
+    InputNumberModule,
   ]
 })
 export class MainModule { }

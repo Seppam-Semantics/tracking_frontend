@@ -161,10 +161,11 @@ export class YarnReportComponent implements OnInit {
   }
 
   view(id: any) {
+    this.ViewAllYarnData = true
     this.api.getSingleLcClosure(id).subscribe((res) => {
       this.yarndetails = res.yarn;
+      console.log(this.yarndetails)
       this.yarn_lc_lines_Details = res.yarn_lc_lines;
-      this.exportToPDF()
     });
   }
 
@@ -203,7 +204,6 @@ export class YarnReportComponent implements OnInit {
     const fixedOrderAllocationData = OrderAllData.receipt
     try {
       this.parsedData1 = fixedOrderAllocationData;
- 
       return this.parsedData1;
     } catch (error) {
       console.error('Error parsing order_allocation data:', error);
@@ -223,138 +223,8 @@ export class YarnReportComponent implements OnInit {
 
 
 
-  exportToPDF() {
-    const doc = new jsPDF();
-    const ws1_data =  this.yarndetails.map((yarn: any) => [
-      yarn.lcNo || '',
-      yarn.pi || '',
-      yarn.lcYarnTotal || '',
-      yarn.lcDate || '',
-      yarn.piDate || '',
-      yarn.lcValue || ''
-    ]) ;
-  
-    if (ws1_data.length > 0) {
-      doc.text('Yarn Details', 10, 10);
-      (doc as any).autoTable({
-        head: [['LC no', 'PI', 'LC Qty', 'LC Date', 'PI date', 'LC Value']],
-        body: ws1_data,
-        startY: 20
-      });
-    }
-  
-    let currentY = (doc as any).lastAutoTable ? (doc as any).lastAutoTable.finalY + 10 : 30;
-  
-    const ws2_data = this.yarn_lc_lines_Details.map((data: any) => [
-      data.yarnType || '',
-      data.yarnValue || '',
-      data.yarnRate || '',
-      data.lcYarnKgs || ''
-    ]) ;
-  
-    if (ws2_data.length > 0) {
-      doc.text('Yarn LC Lines Details', 10, currentY);
-      (doc as any).autoTable({
-        head: [['Yarn Type', 'Yarn Kgs', 'Yarn Rate', 'LC Value']],
-        body: ws2_data,
-        startY: currentY + 10
-      });
-  
-      currentY = (doc as any).lastAutoTable.finalY + 10;
-    }
-  
-    const lotChecksData: any[] = [];
-    if (this.yarn_lc_lines_Details) {
-      this.yarn_lc_lines_Details.forEach((data: any) => {
-        const lotChecks = this.parseLotcheck(data);
-        if (lotChecks) {
-          lotChecks.forEach((lot: any) => {
-            lotChecksData.push([
-              lot.lotNo || '',
-              lot.sampleDate || '',
-              lot.resultDate || '',
-              lot.checkResults || '',
-              lot.acceptRejectStatus || ''
-            ]);
-          });
-        }
-      });
-    }
-  
-    if (lotChecksData.length > 0) {
-      doc.text('Lot Checks', 10, currentY);
-      (doc as any).autoTable({
-        head: [['Lot No', 'Sample Dt', 'Result Dt', 'Remarks', 'Acc/Rej']],
-        body: lotChecksData,
-        startY: currentY + 10
-      });
-  
-      currentY = (doc as any).lastAutoTable.finalY + 10;
-    }
+  exportToPDF() { 
 
-    const receiptData: any[] = [];
-    if (this.yarn_lc_lines_Details) {
-      this.yarn_lc_lines_Details.forEach((data: any) => {
-        const orderDetails = this.parseOrderall(data);
-        if (orderDetails) {
-          orderDetails.forEach((order: any) => {
-            const receipts = this.parseRec(order);
-            if (receipts) {
-              receipts.forEach((receipt: any) => {
-                receiptData.push([
-                  receipt.spinningChallan === 'null' ? '' : receipt.spinningChallan,
-                  receipt.scandexChallan === 'null' ? '' : receipt.scandexChallan,
-                  receipt.knitFactory === 'null' ? '' : receipt.knitFactory,
-                  receipt.receiptYarnKgs === 'null' ? '' : receipt.receiptYarnKgs,
-                  receipt.receiptDt === 'null' ? '' : receipt.receiptDt,
-                  receipt.quality ? receipt.quality.map((quality: any) => [
-                    quality.checkDate === 'null' ? '' : quality.checkDate,
-                    quality.checkResults === 'null' ? '' : quality.checkResults,
-                    quality.yarnAcceptRejectStatus === '1' ? 'Accept' : 'Reject'
-                  ]) : []
-                ]);
-              });
-            }
-          });
-        }
-      });
-    }
-
-    const flattenedReceiptData: any[] = [];
-    receiptData.forEach((receipt: any) => {
-      const [spinningChallan, scandexChallan, knitFactory, receiptYarnKgs, receiptDt , qualities] = receipt;
-      if (qualities && qualities.length > 0) {
-        qualities.forEach((quality: any) => {
-          flattenedReceiptData.push([
-            spinningChallan,
-            scandexChallan,
-            knitFactory,
-            receiptYarnKgs,
-            receiptDt,
-            ...quality
-          ]);
-        });
-      } else {
-        flattenedReceiptData.push([
-          spinningChallan,
-          scandexChallan,
-          knitFactory,
-          receiptYarnKgs,
-          receiptDt,
-        ]);
-      }
-    });
-  
-    if (flattenedReceiptData.length > 0) {
-      doc.text('Order Details', 10, currentY);
-      (doc as any).autoTable({
-        head: [['Spinning Challan', 'SBDL Challan', 'Knit Factory', 'Receipt Yarn Kgs','receiptDt' ,'Check Date', 'Check Results', 'Acc/Rej']],
-        body: flattenedReceiptData,
-        startY: currentY + 10
-      });
-      currentY = (doc as any).lastAutoTable.finalY + 10;
-    }
-    doc.save('LC-CLOSURE-REPORT.pdf');
   }
 
 

@@ -10,8 +10,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  apiUrl = "https://tracker.seppam.com";
-  // apiUrl = "http://localhost:2000";
+  // apiUrl = "https://tracker.seppam.com";
+  apiUrl = "http://localhost:2000";
 
   token: any;
   profilenames: any;
@@ -99,6 +99,9 @@ export class ApiService {
   }
 
   getwodetails(buyer: any, orderNo?: any, style?: any, color?: any, size?:any): Observable<any> {
+    return this.http.get(this.getUrl() + `/workorderapi/workorders-filter?buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&size=${size}`, this.getHeaders())
+  }
+  getknitwodetails(buyer: any, orderNo?: any, style?: any, color?: any, size?:any): Observable<any> {
     return this.http.get(this.getUrl() + `/workorderapi/workorders-filter?buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&size=${size}`, this.getHeaders())
   }
 
@@ -200,6 +203,9 @@ export class ApiService {
   }
   knitfty_name():Observable<any>{
     return this.http.get(this.getUrl()+`/knitapi/knit-factory`, this.getHeaders())
+  }
+  woknitfty_name():Observable<any>{
+    return this.http.get(this.getUrl()+`/knitapi/Woknit-factory`, this.getHeaders())
   }
 
 
@@ -531,5 +537,7 @@ DayDye(date:any):Observable<any>{
 DyeBatch(date1:any,date2:any):Observable<any>{
   return this.http.get(this.getUrl()+ `/dyeapi/DyeBatch?date1=${date1}&date2=${date2}`, this.getHeaders())
 }
+
+
 
 }

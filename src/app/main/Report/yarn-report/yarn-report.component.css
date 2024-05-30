@@ -64,3 +64,22 @@ thead {
     top: 0;
     background-color: #f2f2f2;
   }
+
+
+  fieldset {
+    margin-bottom: 1em !important;
+    border: 1px solid #666 !important;
+    padding:1px !important;
+    margin-top: 2vh;
+    width: 100%;
+}
+
+legend {
+    padding: 1px 10px !important;
+    float:none;
+    width:auto;
+    font-size: large;
+}
+th{
+    background-color: gainsboro;
+}

@@ -76,17 +76,18 @@
       <tbody>
         <tr *ngFor="let data of this.AllData;let i = index">
           <td>{{i+1}}</td>
-          <td >{{data.spinner}}</td>
-          <td >{{data.lcDate}}</td>
-          <td >{{data.lcNo}}</td>
-          <td >{{data.pi}}</td>
-          <td >{{data.piDate}}</td>
-          <td >{{data.lcYarnTotal}}</td>
-          <td >{{data.lcValue}}</td>
-          <td >{{data.yarnStatus}}</td>
+          <td>{{data.spinner}}</td>
+          <td>{{data.lcDate}}</td>
+          <td>{{data.lcNo}}</td>
+          <td>{{data.pi}}</td>
+          <td>{{data.piDate}}</td>
+          <td>{{data.lcYarnTotal}}</td>
+          <td>{{data.lcValue}}</td>
+          <td>{{data.yarnStatus}}</td>
           <td><button class="btn btn-primary" (click)="EditAllData(data.id)"><mat-icon>edit</mat-icon></button></td>
           <td><button class="btn btn-danger" (click)="delete(data.id)"><mat-icon>delete</mat-icon></button></td>
-          <td><button class="btn btn-success" (click)="view(data.id)"><mat-icon>insert_drive_file</mat-icon></button></td>
+          <td><button class="btn btn-success" (click)="view(data.id)"><mat-icon>insert_drive_file</mat-icon></button>
+          </td>
         </tr>
 
       </tbody>
@@ -99,101 +100,166 @@
 <p-dialog [(visible)]="ViewAllYarnData" [modal]="true" [style]="{ width: '100%', height : '100%' }"
   header="LC Closure Report" [maximizable]="true" [resizable]="true">
 
-
   <div>
-    <table class="table table-hover table-bordered" id="table-data1">
-      <tbody>
-        <tr *ngFor="let YarnData of this.yarndetails ; let i = index;">
-          <td><b>LC no :</b> {{YarnData.lcNo}} </td>
-          <td><b>PI :</b> {{YarnData.pi}} </td>
-          <td><b>LC Qty :</b> {{YarnData.lcYarnTotal}} </td>
-          <td><b>LC Date :</b> {{YarnData.lcDate}} </td>
-          <td><b>PI date :</b> {{YarnData.piDate}} </td>
-          <td><b>LC Value :</b> {{YarnData.lcValue}} </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-
-  <div *ngFor="let data of this.yarn_lc_lines_Details; let i = index;">
-    <p-panel header="LineEntey {{i+1}}">
-      <div>
-        <table class="table table-hover table-bordered" style="margin-top: -15px;" id="table-data2">
-          <tbody>
-            <tr>
-              <td>Yarn Type : {{data.yarnType}} </td>
-              <td>Yarn Kgs : {{data.yarnValue}} </td>
-              <td>Yarn Rate : {{data.yarnRate}} </td>
-              <td>LC Value : {{data.lcYarnKgs}} </td>
-            </tr>
-          </tbody>
-        </table>
+    <div style="display: flex;" *ngFor="let YarnData of this.yarndetails ; let i = index;">
+      <div style="display: flex; flex-direction: column;">
+        <div style="display: flex;">
+          <label style="display: inline-block; width: 20vh; border: transparent;" class="form-control">LC no </label>
+          <input type="text" class="form-control" readonly value="{{YarnData.lcNo}}">
+        </div>
+        <div style="display: flex;">
+          <label style="display: inline-block; width: 20vh; border: transparent;" class="form-control">LC Date</label>
+          <input type="text" class="form-control" readonly value="{{YarnData.lcDate}}">
+        </div>
       </div>
-      <p-panel header="Lot Check">
-        <div>
-          <table class="table table-hover table-bordered" style="margin-top: -15px;" id="table-data3">
-            <thead class="thead-dark">
-              <tr>
-                <th>Lot No</th>
-                <th>Sample Dt</th>
-                <th>Result Dt</th>
-                <th>Remarks</th>
-                <th>Acc/Rej</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let lotcheckData of parseLotcheck(data); let j = index">
-                <td>{{lotcheckData.lotNo}}</td>
-                <td>{{lotcheckData.sampleDate}}</td>
-                <td>{{lotcheckData.resultDate}}</td>
-                <td>{{lotcheckData.checkResults}}</td>
-                <td>{{lotcheckData.acceptRejectStatus}}</td>
-              </tr>
-            </tbody>
-          </table>
+
+      <div style="display: flex; flex-direction: column;">
+        <div style="display: flex;">
+          <label style="display: inline-block; width: 20vh; border: transparent;" class="form-control">PI</label>
+          <input type="text" class="form-control" readonly value="{{YarnData. pi}}">
         </div>
-      </p-panel>
-
-        <div *ngFor="let OrderAllData of parseOrderall(data); let k = index" style="margin-top: -16px;">
-
-          <table class="table table-hover table-bordered" id="table-data4">
-            <tbody>
-            <tr>
-              <td><b>Buyer :</b> {{OrderAllData.buyer}}</td>
-              <td><b>OrderNo :</b> {{OrderAllData.utilisationOrderNo}}</td>
-              <td><b>Style :</b> {{OrderAllData.style}}</td>
-              <td><b>Color :</b> {{OrderAllData.colour}}</td>
-              <td><b>Allocated :</b> {{OrderAllData.allocatedYarnKgs}}</td>
-            </tr>
-          </tbody>
-          </table>
-
-          <table class="table table-hover table-bordered" id="table-data5">
-            <thead class="thead-dark">
-              <tr>
-                <th style="width: 40vh;">Receipt Dt</th>
-                <th style="width: 40vh;">Receipt Qty</th>
-
-              </tr>
-            </thead>
-            <tbody *ngFor="let receipt of parseRec(OrderAllData); let i = index">
-              <tr>
-                <td>{{receipt.receiptDt === 'null' ? '' : receipt.receiptDt}}</td>
-                <td>{{receipt.receiptYarnKgs === 'null' ? '' : receipt.receiptYarnKgs}}</td>
-                <div *ngFor="let quality of receipt.quality">
-                  <td> checkDate : {{quality.checkDate === 'null' ? '' : quality.checkDate}}</td>
-                  <td> checkResults : {{quality.checkResults === 'null' ? '' : quality.checkResults}}</td>
-                  <td> AcceptRejectStatus : {{quality.yarnAcceptRejectStatus === '1' ? 'Accept' : 'Reject'}}</td>
-                </div>
-              </tr>
-            </tbody>
-          </table>
+        <div style="display: flex;">
+          <label style="display: inline-block; width: 20vh; border: transparent;" class="form-control">PI date</label>
+          <input type="text" class="form-control" readonly value="{{YarnData.piDate}}">
         </div>
-      </p-panel>
+      </div>
+
+      <div style="display: flex; flex-direction: column;">
+        <div style="display: flex;">
+          <label style="display: inline-block; width: 24vh; border: transparent;" class="form-control">LC Qty</label>
+          <input type="text" class="form-control" readonly value="{{YarnData.lcValue}}">
+        </div>
+        <div style="display: flex;">
+          <label style="display: inline-block; width: 24vh; border: transparent;" class="form-control">LC Value</label>
+          <input type="text" class="form-control" readonly value="{{YarnData.lcYarnTotal}}">
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column;">
+        <div style="display: flex;">
+          <label style="display: inline-block; width: 24vh; border: transparent;" class="form-control">Rec Qty</label>
+          <input type="text" class="form-control" readonly value="{{YarnData.recQty}}">
+        </div>
+        <div style="display: flex;">
+          <label style="display: inline-block; width: 24vh; border: transparent;" class="form-control">Rec Value</label>
+          <input type="text" class="form-control" readonly>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column;">
+        <div style="display: flex;">
+          <label style="display: inline-block; width: 24vh; border: transparent;" class="form-control">Diff Qty</label>
+          <input type="text" class="form-control" readonly value="{{YarnData.lcValue - YarnData.recQty}}">
+        </div>
+        <div style="display: flex;">
+          <label style="display: inline-block; width: 24vh; border: transparent;" class="form-control">Diff
+            Value</label>
+          <input type="text" class="form-control" readonly>
+        </div>
+      </div>
+
+    </div>
+
+    <div *ngFor="let data of this.yarn_lc_lines_Details; let i = index;">
+      <fieldset>
+        <legend>{{i+1}}. Yarn Type : {{data.yarnType}} </legend>
+        <div style="display: flex; justify-content:space-around;">
+          <div style="display: flex; flex-direction: column;">
+            <div style="display: flex;">
+              <label style="display: inline-block; width: 24vh; border: transparent;" class="form-control">Yarn
+                Kgs</label>
+              <input type="text" class="form-control" readonly value="{{data.yarnValue}}">
+            </div>
+
+            <div style="display: flex;">
+              <label style="display: inline-block; width: 24vh; border: transparent;" class="form-control">Yarn
+                Rate</label>
+              <input type="text" class="form-control" readonly value="{{data.yarnRate}}">
+            </div>
+
+            <div style="display: flex;">
+              <label style="display: inline-block; width: 24vh; border: transparent;" class="form-control">LC
+                Value</label>
+              <input type="text" class="form-control" readonly value="{{data.lcYarnKgs}}">
+            </div>
+          </div>
+
+          <div>
+            <table class="table table-bordered" style="width: 120vh;">
+              <thead>
+                <tr>
+                  <th>Lot No</th>
+                  <th>Sample Dt</th>
+                  <th>Result Dt</th>
+                  <th>Remarks</th>
+                  <th>Acc/Rej</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let lotcheckData of parseLotcheck(data); let j = index">
+                  <td>{{lotcheckData.lotNo}}</td>
+                  <td>{{lotcheckData.sampleDate}}</td>
+                  <td>{{lotcheckData.resultDate}}</td>
+                  <td>{{lotcheckData.checkResults}}</td>
+                  <td>{{lotcheckData.acceptRejectStatus == 1 ? "Accept" : "Reject"}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+        <div *ngFor="let OrderAllData of parseOrderall(data); let k = index">
+          <fieldset *ngIf="parseRec(OrderAllData).length > 0">
+            <legend>Allocate {{k+1}}</legend>
+            <div>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Order no</th>
+                    <th>Style</th>
+                    <th>Color</th>
+                    <th>Allocated</th>
+
+                    <th>Receipt Dt</th>
+                    <th>SBDL Challan</th>
+                    <th>Fty Challan</th>
+                    <th>Receipt Qty</th>
+                    <th>Knit Fty</th>
+                    <th>Check Date</th>
+                    <th>Remarks</th>
+                    <th>Acc/Rej</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let receipt of parseRec(OrderAllData); let i = index">
+                    <td *ngIf="i === 0" [attr.rowspan]="parseRec(OrderAllData).length">{{OrderAllData.utilisationOrderNo}}</td>
+                    <td *ngIf="i === 0" [attr.rowspan]="parseRec(OrderAllData).length">{{OrderAllData.style}}</td>
+                    <td *ngIf="i === 0" [attr.rowspan]="parseRec(OrderAllData).length">{{OrderAllData.colour}}</td>
+                    <td *ngIf="i === 0" [attr.rowspan]="parseRec(OrderAllData).length">{{OrderAllData.allocatedYarnKgs}}</td>
+              
+                    <td>{{receipt.receiptDt}}</td>
+                    <td>{{receipt.spinningChallan}}</td>
+                    <td>{{receipt.scandexChallan}}</td>
+                    <td>{{receipt.receiptYarnKgs}}</td>
+                    <td>{{receipt.knitFactory}}</td>
+                    <td>{{receipt.quality[0].checkDate}}</td>
+                    <td>{{receipt.quality[0].checkResults}}</td>
+                    <td>{{receipt.quality[0].yarnAcceptRejectStatus == 1 ? "Accept" : "Reject"}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </fieldset>
+        </div>
+        
+      </fieldset>
+
+    </div>
+
   </div>
+
   <ng-template pTemplate="footer">
     <button mat-button color="danger" (click)="ViewAllYarnData = false"><mat-icon>close</mat-icon>close</button>
-    <button mat-button color="primary" (click)="exportToExcel2()"><mat-icon>download</mat-icon>Download</button>
+    <!-- <button mat-button color="primary" (click)="exportToExcel2()"><mat-icon>download</mat-icon>Download</button> -->
   </ng-template>
 </p-dialog>

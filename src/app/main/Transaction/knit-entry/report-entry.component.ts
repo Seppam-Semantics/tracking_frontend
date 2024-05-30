@@ -23,6 +23,7 @@ export class ReportEntryComponent implements OnInit {
   orderNo: any;
   style: any;
   color: any;
+  ftyname:any
   size: any;
   woId: any[] = [];
   loading: boolean = false;
@@ -48,7 +49,7 @@ export class ReportEntryComponent implements OnInit {
   }
 
   factoryname() {
-    this.api.knitfty_name().subscribe((res) => {
+    this.api.woknitfty_name().subscribe((res) => {
       this.fty_name = res.factorys
     })
   }
@@ -100,15 +101,6 @@ export class ReportEntryComponent implements OnInit {
     })
   }
 
-  getWoId(size: any, index: number) {
-    this.api.getwodetails(this.buyerName, this.orderNo, this.style, this.color, size).subscribe((res) => {
-      const woId = res.workorders[0].id;
- 
-      const formArray = this.load.get('data') as FormArray;
-      const row = formArray.at(index);
-      row.get('woId')?.setValue(woId);
-    });
-  }
   // <!------------------------------------------------------------>
 
 
