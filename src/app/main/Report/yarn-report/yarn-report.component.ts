@@ -4,6 +4,8 @@ import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from 
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 import * as XLSX from 'xlsx'
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-yarn-report',
@@ -72,7 +74,7 @@ export class YarnReportComponent implements OnInit {
   parsedData: any;
   parsedData1: any;
   parsedData2: any;
-
+  download:boolean = true;
 
   constructor(private router: Router, private api: ApiService, private fb: FormBuilder) { }
 
@@ -221,8 +223,24 @@ export class YarnReportComponent implements OnInit {
 
 
   exportToPDF() { 
+    this.download = false ;
+    const element = document.getElementById('print');
 
+    html2canvas(element!).then(canvas => {
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('p', 'mm', 'a5');
+
+      // For full page capture, set proper width and height
+      const imgProps = pdf.getImageProperties(imgData);
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      pdf.save('LC-Closure-Report.pdf');
+  
+    });
   }
+  
 
 
 

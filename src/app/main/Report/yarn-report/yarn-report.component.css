@@ -71,7 +71,7 @@ thead {
     border: 1px solid #666 !important;
     padding:1px !important;
     margin-top: 2vh;
-    width: 100%;
+    /* width: 100%; */
 }
 
 legend {
@@ -83,3 +83,8 @@ legend {
 th{
     background-color: gainsboro;
 }
+/* #print {
+    background: white;
+    padding: 10px;
+  } */
+  

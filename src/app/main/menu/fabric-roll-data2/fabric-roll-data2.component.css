@@ -141,5 +141,17 @@ table {
   .filterList2{
     display: contents;
   }
+
+
 }
 
+
+.sticky {
+  /* position: -webkit-sticky; For Safari */
+  position: sticky;
+  z-index: 1;
+  overflow: hidden;
+}
+.sticky {
+  right: 0; /* Stick to the right */
+}

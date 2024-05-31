@@ -100,7 +100,7 @@
 <p-dialog [(visible)]="ViewAllYarnData" [modal]="true" [style]="{ width: '100%', height : '100%' }"
   header="LC Closure Report" [maximizable]="true" [resizable]="true">
 
-  <div>
+  <div id="print">
     <div style="display: flex;" *ngFor="let YarnData of this.yarndetails ; let i = index;">
       <div style="display: flex; flex-direction: column;">
         <div style="display: flex;">
@@ -209,61 +209,62 @@
 
         </div>
         <div *ngFor="let OrderAllData of parseOrderall(data); let k = index">
-  <fieldset>
-    <legend>Allocate {{k+1}}</legend>
-    <div style="display: flex;">
-      <table class="table">
-        <thead style="height: 57px;">
-          <tr>
-            <th>Order no</th>
-            <th>Style</th>
-            <th>Color</th>
-            <th>Allocated</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td >{{OrderAllData.utilisationOrderNo}}</td>
-            <td >{{OrderAllData.style}}</td>
-            <td >{{OrderAllData.colour}}</td>
-            <td >{{OrderAllData.allocatedYarnKgs}}</td>
-          </tr>
-        </tbody>
-      </table>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Receipt Dt</th>
-            <th>SBDL Challan</th>
-            <th>Fty Challan</th>
-            <th>Receipt Qty</th>
-            <th>Knit Fty</th>
-            <th>Check Date</th>
-            <th>Remarks</th>
-            <th>Acc/Rej</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let receipt of parseRec(OrderAllData); let i = index">
-            <td>{{receipt.receiptDt}}</td>
-            <td>{{receipt.spinningChallan}}</td>
-            <td>{{receipt.scandexChallan}}</td>
-            <td>{{receipt.receiptYarnKgs}}</td>
-            <td>{{receipt.knitFactory}}</td>
-            <ng-container *ngFor="let quality of receipt.quality; let m = index">
-              <ng-container *ngIf="m === 0">
-                <td>{{quality.checkDate}}</td>
-                <td>{{quality.checkResults}}</td>
-                <td>{{quality.yarnAcceptRejectStatus == 1 ? 'Accept' : 'Reject'}}</td>
-              </ng-container>
-            </ng-container>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </fieldset>
-</div>
-        
+          <fieldset style="    width: 200vh;
+          margin-left: 7vh;">
+            <legend>Allocate {{k+1}}</legend>
+            <div style="display: flex;">
+              <table class="table">
+                <thead style="height: 57px;">
+                  <tr>
+                    <th>Order no</th>
+                    <th>Style</th>
+                    <th>Color</th>
+                    <th>Allocated</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{OrderAllData.utilisationOrderNo}}</td>
+                    <td>{{OrderAllData.style}}</td>
+                    <td>{{OrderAllData.colour}}</td>
+                    <td>{{OrderAllData.allocatedYarnKgs}}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Receipt Dt</th>
+                    <th>SBDL Challan</th>
+                    <th>Fty Challan</th>
+                    <th>Receipt Qty</th>
+                    <th>Knit Fty</th>
+                    <th>Check Date</th>
+                    <th>Remarks</th>
+                    <th>Acc/Rej</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let receipt of parseRec(OrderAllData); let i = index">
+                    <td>{{receipt.receiptDt}}</td>
+                    <td>{{receipt.spinningChallan}}</td>
+                    <td>{{receipt.scandexChallan}}</td>
+                    <td>{{receipt.receiptYarnKgs}}</td>
+                    <td>{{receipt.knitFactory}}</td>
+                    <ng-container *ngFor="let quality of receipt.quality; let m = index">
+                      <ng-container *ngIf="m === 0">
+                        <td>{{quality.checkDate}}</td>
+                        <td>{{quality.checkResults}}</td>
+                        <td>{{quality.yarnAcceptRejectStatus == 1 ? 'Accept' : 'Reject'}}</td>
+                      </ng-container>
+                    </ng-container>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </fieldset>
+        </div>
+
       </fieldset>
 
     </div>
@@ -271,7 +272,9 @@
   </div>
 
   <ng-template pTemplate="footer">
-    <button mat-button color="danger" (click)="ViewAllYarnData = false"><mat-icon>close</mat-icon>close</button>
-    <!-- <button mat-button color="primary" (click)="exportToExcel2()"><mat-icon>download</mat-icon>Download</button> -->
+    <!-- <button mat-button color="danger" (click)="ViewAllYarnData = false"><mat-icon>close</mat-icon>close</button> -->
+    <button mat-button color="primary" (click)="exportToPDF()" *ngIf="download"><mat-icon>download</mat-icon>Download</button>
+    <!-- <button mat-button color="primary"  *ngIf="download"><mat-icon>download</mat-icon>Download</button> -->
+    
   </ng-template>
 </p-dialog>
