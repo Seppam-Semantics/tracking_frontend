@@ -121,7 +121,7 @@ export class KnitWorkOrderCreationComponent implements OnInit {
       "color": new FormControl(''),
       "fabGSM": new FormControl(''),
       "KnitSl": new FormControl(''),
-      "knitKgs": new FormControl(''),
+      "knitKg": new FormControl(''),
       "knitRate": new FormControl(''),
       "knitValue": new FormControl(''),
       "remarks": new FormControl('')

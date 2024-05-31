@@ -119,8 +119,9 @@ export class KnitWorkOrderListingComponent implements OnInit {
 
   alldata(){
     this.api.KnitWorkOrderAllData().subscribe((res)=>{
-    this.  KnitWorkOrderAllData   = res.workorders
+    this. KnitWorkOrderAllData   = res.workorders
 
+    console.log(res)
     })
   }
 
@@ -159,7 +160,6 @@ exportexcel() {
   edit(id:any) {
     this.editview = true;
     this.api.KnitWorkOrderSingleData(id).subscribe((res)=>{
-
       this.KnitWorkOrderhederdata = res.headerData[0]
       this.KnitWorkOrderlineData1 = res.lineData
 

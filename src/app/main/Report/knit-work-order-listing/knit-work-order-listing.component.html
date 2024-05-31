@@ -61,7 +61,7 @@
 
                 <td>{{data.buyer}}</td>
                 <td>{{data.orderNo}}</td>
-                <td>{{data.knitKgs}}</td>
+                <td>{{data.knitKg}}</td>
                 <td>{{data.knitValue}}</td>
 
                 <td><button class="btn btn-primary" (click)="edit(data.id)"><mat-icon>edit</mat-icon></button></td>
@@ -140,7 +140,7 @@
             <table class="table table-hover">
                 <thead class="thead-dark">
                     <tr>
-                        <th><button class="btn btn-primary" (click)="KnitWorkOrderAddButton()">+</button></th>
+                        <!-- <th><button class="btn btn-primary" (click)="KnitWorkOrderAddButton()">+</button></th> -->
                         <th>S.No</th>
                         <th>Mach Dia</th>
                         <th>Fab Dia</th>
@@ -161,7 +161,7 @@
                 </thead>
                 <tbody formArrayName="data">
                     <tr *ngFor="let list of items.controls; let i=index" [formGroupName]="i">
-                        <td></td>
+                        <!-- <td></td> -->
                         <td>{{i+1}}</td>
                         <td><input class="form-control" type="text" formControlName="machDia"></td>
     

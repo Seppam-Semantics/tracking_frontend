@@ -1,18 +1,19 @@
-
 <div [formGroup]="load">
 
     <mat-toolbar class="toolbar2" color="primary">
         <div style="display: flex; justify-content: start;gap: 10px;">
-           <div> <label>Factory</label> </div>
+            <div> <label>Factory</label> </div>
             <div>
-                <select name="cars" id="cars" class="form-control" style="width: 180px;" formControlName="factory" required (change)="getFactoryName($event)">
-                    <option *ngFor="let ftyname of this.fty_name" value="{{ftyname.knitFty}}" class="form-control">{{ftyname.knitFty}}</option>
+                <select name="cars" id="cars" class="form-control" style="width: 180px;" formControlName="factory"
+                    required (change)="getFactoryName($event)" [(ngModel)]="factorynamevalue" (change)="buyername()">
+                    <option *ngFor="let ftyname of this.fty_name" value="{{ftyname.knitfty}}" class="form-control">
+                        {{ftyname.knitfty}}</option>
                 </select>
             </div>
         </div>
         <div>
             <span>Knit Entry</span>
-    </div>
+        </div>
         <div style="display: flex; gap: 10px;">
             <div style="display: inline-block;">
                 <label class="day-label">Machine allocated for the day</label>
@@ -28,7 +29,7 @@
                 <div style="margin-left: 5px;">
                     <input type="date" class="form-control date" formControlName="date">
                 </div>
-                
+
             </div>
         </div>
 
@@ -42,7 +43,7 @@
                 <div>
                     <label style="display: inline-block;">House Keeping Status</label>
                 </div>
-                <div>    
+                <div>
                     <input type="checkbox" formControlName="houseKeepingStatus" style="    width: 17px; height: 36px;">
                 </div>
             </div>
@@ -50,21 +51,24 @@
         <div class="d-flex">
             <div style="display: flex; gap: 10px">
                 <div><label style="display: inline-block;">Gas/Elec Availability</label></div>
-                <div><input type="checkbox" formControlName="gasElecAvailability" style="    width: 17px; height: 36px;"></div>
+                <div><input type="checkbox" formControlName="gasElecAvailability"
+                        style="    width: 17px; height: 36px;"></div>
             </div>
         </div>
 
         <div class="d-flex">
             <div style="display: flex; gap: 10px">
                 <div><label style="display: inline-block;">Floor Lighting Status</label></div>
-                <div><input type="checkbox" formControlName="floorLightingStatus" style="    width: 17px; height: 36px;"></div>
+                <div><input type="checkbox" formControlName="floorLightingStatus"
+                        style="    width: 17px; height: 36px;"></div>
             </div>
         </div>
 
         <div class="d-flex">
             <div style="display: flex; gap: 10px">
                 <div><label style="display: inline-block;">Storage Area Status</label></div>
-                <div><input type="checkbox" formControlName="storageAreaStatus" style="    width: 17px; height: 36px;"></div>
+                <div><input type="checkbox" formControlName="storageAreaStatus" style="    width: 17px; height: 36px;">
+                </div>
             </div>
         </div>
 
@@ -132,29 +136,34 @@
                         <p>{{i+1}}</p>
                     </td>
                     <td>
-                        <input type="text" class="form-control" formControlName="buyer" list="1" (input)="getBuyerValue($event)" (change)="getorders()">
+                        <input type="text" class="form-control" formControlName="buyer" list="1"
+                            (input)="getBuyerValue($event)" (change)="getorders()">
                         <datalist id="1">
                             <option *ngFor="let name of this.buyer" [value]="name.buyer">{{name.buyer}}</option>
                         </datalist>
                     </td>
-                    <td><input type="text" class="form-control" formControlName="orderNo" list="2" (input)="getOrderValue($event)" (change)="getstyle()">
+                    <td><input type="text" class="form-control" formControlName="orderNo" list="2"
+                            (input)="getOrderValue($event)" (change)="getstyle()">
                         <datalist id="2">
-                            <option *ngFor="let number of this.order" [value]="number.orderNO" >
+                            <option *ngFor="let number of this.order" [value]="number.orderNo">
                         </datalist>
                     </td>
-                    <td><input type="text" class="form-control" formControlName="style" list="3"  (input)="getstylevalue($event)" (change)="getcolor()">
+                    <td><input type="text" class="form-control" formControlName="style" list="3"
+                            (input)="getstylevalue($event)" (change)="getcolor()">
                         <datalist id="3">
                             <option *ngFor="let style of this.stylelist" [value]="style.style">
                         </datalist>
                     </td>
-                    <td><input type="text" class="form-control" formControlName="color" list="4"  (input)="getcolorvalue($event)" (change)="getsize()">
+                    <td><input type="text" class="form-control" formControlName="color" list="4"
+                            (input)="getcolorvalue($event)" (change)="getsize()">
                         <datalist id="4">
                             <option *ngFor="let color of this.colorlist" [value]="color.color">
                         </datalist>
                     </td>
-                    <td><input type="text" class="form-control" formControlName="size" list="5" (input)="getWoId($event.target.value, i)">
+                    <td><input type="text" class="form-control" formControlName="size" list="5"
+                            (input)="getWoId($event.target.value, i)">
                         <datalist id="5">
-                            <option *ngFor="let size of this.sizelist" [value]="size.size">
+                            <option *ngFor="let size of this.sizelist" [value]="size.machDia">
                         </datalist>
                     </td>
                     <td><input type="text" class="form-control" formControlName="knitMachineno" list="6">
@@ -167,7 +176,8 @@
                             <option value="">
                         </datalist>
                     </td>
-                    <td><input type="text" class="form-control" formControlName="dayProductionKgs" (input)="valid($event.target.value)" ></td>
+                    <td><input type="text" class="form-control" formControlName="dayProductionKgs"
+                            (input)="valid($event.target.value)"></td>
                     <td><input type="text" class="form-control" formControlName="noOfRollsProduced"></td>
                     <td><input type="text" class="form-control" formControlName="noOfRollsChecked"></td>
                     <td><input type="text" class="form-control" formControlName="knittingSL">
@@ -194,12 +204,12 @@
                     </td>
                     <td>
                         <input type="checkbox" style="width: 20px; height: 20px;" formControlName="allStopMotion">
-                     </td>
+                    </td>
                     <td>
                         <input type="checkbox" style="width: 20px; height: 20px;" formControlName="takeupRollerTension">
-                     </td>
+                    </td>
                     <td>
-                        
+
                         <textarea formControlName="remarks" class="form-control"></textarea>
                     </td>
                 </tr>
@@ -209,10 +219,10 @@
 
     <div style="display: flex; justify-content: center;" *ngIf="!this.valueExceeded">
         <button mat-raised-button color="primary" (click)="save()" style="margin-top: 3%;">Save</button>
-      </div>
-      <div style="display: flex; justify-content: center;" *ngIf="this.valueExceeded">
+    </div>
+    <div style="display: flex; justify-content: center;" *ngIf="this.valueExceeded">
         <button mat-raised-button color="primary" style="margin-top: 3%;">
-          <div class="loader"></div>
+            <div class="loader"></div>
         </button>
 
-</div>
+    </div>

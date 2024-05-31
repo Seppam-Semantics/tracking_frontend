@@ -545,4 +545,30 @@ DyeBatch(date1:any,date2:any):Observable<any>{
 
 
 
+getknitwofty(): Observable<any> {
+  return this.http.get(this.getUrl() + `/filtersapi/wofty`, this.getHeaders())
+}
+
+
+getknitwobuyers(knitfty:any): Observable<any> {
+  return this.http.get(this.getUrl() + `/filtersapi/wobuyer?knitfty=${knitfty}`, this.getHeaders())
+}
+
+
+getknitwoorders(knitfty:any, buyer: any): Observable<any> {
+  return this.http.get(this.getUrl() + `/filtersapi/woorderNo?knitfty=${knitfty}&buyer=${buyer}`, this.getHeaders())
+}
+
+getknitwostyle(knitfty:any, buyer: any, order: any): Observable<any> {
+  return this.http.get(this.getUrl() + `/filtersapi/wostyle?knitfty=${knitfty}&buyer=${buyer}&orderNo=${order}`, this.getHeaders())
+}
+
+getknitwocolor(knitfty:any, buyer: any, order: any, style: any): Observable<any> {
+  return this.http.get(this.getUrl() + `/filtersapi/wocolor?knitfty=${knitfty}&buyer=${buyer}&orderNo=${order}&style=${style}`, this.getHeaders())
+}
+
+getknitwosize(knitfty:any, buyer: any, order: any, style: any, color: any): Observable<any> {
+  return this.http.get(this.getUrl() + `/filtersapi/wosize?knitfty=${knitfty}&buyer=${buyer}&orderNo=${order}&style=${style}&color=${color}`, this.getHeaders())
+}
+
 }

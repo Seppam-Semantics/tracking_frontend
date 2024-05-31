@@ -66,15 +66,17 @@
                 <tr>
                     <th><button class="btn btn-primary" (click)="KnitWorkOrderAddButton()">+</button></th>
                     <th>S.No</th>
+                    <th>Style</th>
+                    <th>Color</th>
                     <th>Mach Dia</th>
                     <th>Fab Dia</th>
 
                     <th>Fab Type</th>
-                    <th>Style</th>
+
                     <th>Fab GSM</th>
 
 
-                    <th>Color</th>
+
                     <th>Knit SL</th>
                     <th>Knit Kgs</th>
 
@@ -87,10 +89,6 @@
                 <tr *ngFor="let list of items.controls; let i=index" [formGroupName]="i">
                     <td></td>
                     <td>{{i+1}}</td>
-                    <td><input class="form-control" type="text" formControlName="machDia"></td>
-
-                    <td><input class="form-control" type="text" formControlName="fabDia"></td>
-                    <td><input class="form-control" type="text" formControlName="fabType"></td>
                     <td>
                         <input type="text" class="form-control" formControlName="style" list="3"
                             (input)="getstylevalue($event)" (change)="getcolor()">
@@ -98,8 +96,7 @@
                             <option *ngFor="let style of this.stylelist" [value]="style.style">
                         </datalist>
                     </td>
-
-                    <td><input class="form-control" type="text" formControlName="fabGSM"></td>
+                    
                     <td>
                         <input type="text" class="form-control" formControlName="color" list="4"
                             (input)="getcolorvalue($event)" (change)="getsize()" >
@@ -107,9 +104,24 @@
                             <option *ngFor="let color of this.colorlist" [value]="color.color">
                         </datalist>
                     </td>
+                    
+                    <td>
+                        <input type="text" class="form-control" formControlName="machDia" list="5"
+                            (input)="getWoId($event.target.value, i)">
+                        <datalist id="5">
+                            <option *ngFor="let size of this.sizelist" [value]="size.size">
+                        </datalist>
+                    </td>
+
+                    <td><input class="form-control" type="text" formControlName="fabDia"></td>
+                    <td><input class="form-control" type="text" formControlName="fabType"></td>
+               
+
+                    <td><input class="form-control" type="text" formControlName="fabGSM"></td>
+                    
                     <td><input class="form-control" type="text" formControlName="KnitSl"></td>
 
-                    <td><input class="form-control" type="text" formControlName="knitKgs"></td>
+                    <td><input class="form-control" type="text" formControlName="knitKg"></td>
                     <td><input class="form-control" type="text" formControlName="knitRate"></td>
                     <td><input class="form-control" type="text" formControlName="knitValue"></td>
                     <td><input class="form-control" type="text" formControlName="remarks"></td>

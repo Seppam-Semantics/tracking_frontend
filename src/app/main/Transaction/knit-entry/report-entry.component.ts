@@ -27,6 +27,7 @@ export class ReportEntryComponent implements OnInit {
   size: any;
   woId: any[] = [];
   loading: boolean = false;
+  factorynamevalue : any;
   factory: any;
   knitDetails: any;
   valueExceeded : boolean = false;
@@ -48,19 +49,18 @@ export class ReportEntryComponent implements OnInit {
 
   ngOnInit() {
     this.factoryname()
-    this.buyername()
   }
 
   factoryname() {
-    this.api.knitfty_name().subscribe((res) => {
-      this.fty_name = res.factorys
+    this.api.getknitwofty().subscribe((res) => {
+      this.fty_name = res.knitfty
     })
   }
 
 
   // <!------------------------------------------------------------>
   buyername() {
-    this.api.getbuyers().subscribe((res) => {
+    this.api.getknitwobuyers(this.factorynamevalue).subscribe((res) => {
       this.buyer = res.buyers
     })
   }
@@ -69,7 +69,7 @@ export class ReportEntryComponent implements OnInit {
   }
 
   getorders() {
-    this.api.getorders(this.buyerName).subscribe((res) => {
+    this.api.getknitwoorders(this.factorynamevalue,this.buyerName).subscribe((res) => {
       this.order = res.orders
     })
   }
@@ -79,7 +79,7 @@ export class ReportEntryComponent implements OnInit {
   }
 
   getstyle() {
-    this.api.getstyle(this.buyerName, this.orderNo).subscribe((res) => {
+    this.api.getknitwostyle(this.factorynamevalue,this.buyerName, this.orderNo).subscribe((res) => {
       this.stylelist = res.styles;
     })
   }
@@ -89,7 +89,7 @@ export class ReportEntryComponent implements OnInit {
   }
 
   getcolor() {
-    this.api.getcolor(this.buyerName, this.orderNo, this.style).subscribe((res) => {
+    this.api.getknitwocolor(this.factorynamevalue,this.buyerName, this.orderNo, this.style).subscribe((res) => {
       this.colorlist = res.colors;
     })
   }
@@ -99,8 +99,9 @@ export class ReportEntryComponent implements OnInit {
   }
 
   getsize() {
-    this.api.getsize(this.buyerName, this.orderNo, this.style, this.color).subscribe((res) => {
+    this.api.getknitwosize(this.factorynamevalue,this.buyerName, this.orderNo, this.style, this.color).subscribe((res) => {
       this.sizelist = res.sizes;
+      
     })
   }
 
@@ -111,7 +112,6 @@ export class ReportEntryComponent implements OnInit {
   getWoId(size: any, index: number) {
     this.api.getwodetails(this.buyerName, this.orderNo, this.style, this.color, size).subscribe((res) => {
       const woId = res.workorders[0].id;
- 
       const formArray = this.load.get('data') as FormArray;
       const row = formArray.at(index);
       row.get('woId')?.setValue(woId);
