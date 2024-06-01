@@ -571,4 +571,29 @@ getknitwosize(knitfty:any, buyer: any, order: any, style: any, color: any): Obse
   return this.http.get(this.getUrl() + `/filtersapi/wosize?knitfty=${knitfty}&buyer=${buyer}&orderNo=${order}&style=${style}&color=${color}`, this.getHeaders())
 }
 
+
+
+getdyewofty(): Observable<any> {
+  return this.http.get(this.getUrl() + `/filtersapi/dyewofty`, this.getHeaders())
+}
+
+getdyewobuyers(dyefty:any): Observable<any> {
+  return this.http.get(this.getUrl() + `/filtersapi/dyewobuyer?dyefty=${dyefty}`, this.getHeaders())
+}
+
+getdyewoorders(dyefty:any, buyer: any): Observable<any> {
+  return this.http.get(this.getUrl() + `/filtersapi/dyewoorderNo?dyefty=${dyefty}&buyer=${buyer}`, this.getHeaders())
+}
+
+getdyewostyle(dyefty:any, buyer: any, order: any): Observable<any> {
+  return this.http.get(this.getUrl() + `/filtersapi/dyewostyle?dyefty=${dyefty}&buyer=${buyer}&orderNo=${order}`, this.getHeaders())
+}
+
+getdyewocolor(dyefty:any, buyer: any, order: any, style: any): Observable<any> {
+  return this.http.get(this.getUrl() + `/filtersapi/dyewocolor?dyefty=${dyefty}&buyer=${buyer}&orderNo=${order}&style=${style}`, this.getHeaders())
+}
+
+getdyewosize(dyefty:any, buyer: any, order: any, style: any, color: any): Observable<any> {
+  return this.http.get(this.getUrl() + `/filtersapi/dyewosize?dyefty=${dyefty}&buyer=${buyer}&orderNo=${order}&style=${style}&color=${color}`, this.getHeaders())
+}
 }

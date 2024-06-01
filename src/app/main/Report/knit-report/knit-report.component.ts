@@ -107,7 +107,6 @@ export class KnitReportComponent implements OnInit {
   ngOnInit(): void {
     this.factoryName();
     this.allknitDetails();
-    this.buyername()
     this.knitDate()
   }
 
@@ -181,50 +180,6 @@ export class KnitReportComponent implements OnInit {
   }
 
 
-  buyername() {
-    this.api.getbuyers().subscribe((res) => {
-      this.buyer = res.buyers
-    })
-  }
-  getBuyerValue(event: any) {
-    this.buyerName = event.target.value;
-  }
-
-  getorders() {
-    this.api.getorders(this.buyerName).subscribe((res) => {
-      this.order = res.orders
-    })
-  }
-
-  getOrderValue(event: any) {
-    this.orderNo = event.target.value
-  }
-
-  getstyle() {
-    this.api.getstyle(this.buyerName, this.orderNo).subscribe((res) => {
-      this.stylelist = res.styles;
-    })
-  }
-
-  getstylevalue(event: any) {
-    this.style = event.target.value
-  }
-
-  getcolor() {
-    this.api.getcolor(this.buyerName, this.orderNo, this.style).subscribe((res) => {
-      this.colorlist = res.colors;
-    })
-  }
-
-  getcolorvalue(event: any) {
-    this.color = event.target.value
-  }
-
-  getsize() {
-    this.api.getsize(this.buyerName, this.orderNo, this.style, this.color).subscribe((res) => {
-      this.sizelist = res.sizes;
-    })
-  }
 
 
   clearAll() {

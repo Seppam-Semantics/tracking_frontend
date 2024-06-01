@@ -24,28 +24,57 @@
         <div
             style="display: flex; justify-content:center; gap: 3vh; margin-top: 3vh; flex-wrap: wrap; margin-bottom: 1vh;">
 
-            <p-dropdown placeholder="Buyer" [(ngModel)]="buyerName" (onChange)="getorders()" [options]="buyer"
-                optionLabel="buyer" optionValue="buyer" formControlName="buyer"></p-dropdown>
+            <!-- <p-dropdown placeholder="Buyer" [(ngModel)]="buyerName" (onChange)="getorders()" [options]="buyer"
+                optionLabel="buyer" optionValue="buyer" formControlName="buyer"></p-dropdown> -->
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Buyer</mat-label>
+                    <mat-select [(ngModel)]="buyerName" formControlName="buyer" (selectionChange)="getorders()">
+                        <mat-option  *ngFor="let buyer of this.buyer" value="{{buyer.buyer}}">{{buyer.buyer}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+            <!-- <p-dropdown placeholder="Order" [(ngModel)]="orderNo" (onChange)="getstyle()" [options]="order"
+                optionLabel="orderNO" optionValue="orderNO" formControlName="orderNo"></p-dropdown> -->
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Order</mat-label>
+                    <mat-select [(ngModel)]="orderNo" formControlName="orderNo" (selectionChange)="getstyle()">
+                        <mat-option  *ngFor="let order of this.order" value="{{order.orderNO}}">{{order.orderNO}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
 
 
-            <p-dropdown placeholder="Order" [(ngModel)]="orderNo" (onChange)="getstyle()" [options]="order"
-                optionLabel="orderNO" optionValue="orderNO" formControlName="orderNo"></p-dropdown>
+            <!-- <p-dropdown placeholder="Knit Factory" [(ngModel)]="ftyname" [options]="ftyName" optionLabel="knitFty"
+                optionValue="knitFty" formControlName="knitfty"></p-dropdown> -->
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Knit Factory</mat-label>
+                    <mat-select [(ngModel)]="ftyname" formControlName="knitfty">
+                        <mat-option  *ngFor="let ftyName of this.ftyName" value="{{ftyName.knitFty}}">{{ftyName.knitFty}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
 
 
-            <p-dropdown placeholder="Knit Factory" [(ngModel)]="ftyname" [options]="ftyName" optionLabel="knitFty"
-                optionValue="knitFty" formControlName="knitfty"></p-dropdown>
-
-
-
-            <p-floatLabel>
+            <!-- <p-floatLabel>
                 <input pInputText id="WO no" formControlName="woNo" />
                 <label for="WO no">WO no</label>
-            </p-floatLabel>
+            </p-floatLabel> -->
 
-            <p-floatLabel>
+            <mat-form-field appearance="outline">
+                <mat-label>woNo</mat-label>
+                <input matInput  formControlName="woNo">
+            </mat-form-field>
+
+            <!-- <p-floatLabel>
                 <input pInputText id="WO Ref" formControlName="woRefNo" />
                 <label for="WO Ref">WO Ref</label>
-            </p-floatLabel>
+            </p-floatLabel> -->
+
+            <mat-form-field appearance="outline">
+                <mat-label>woRefNo</mat-label>
+                <input matInput  formControlName="woRefNo">
+            </mat-form-field>
 
             <!-- <p-floatLabel>
                 <p-calendar inputId="WO Date" formControlName="woDate" dateFormat="dd.mm.yy" />
