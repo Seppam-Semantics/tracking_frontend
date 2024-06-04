@@ -91,6 +91,15 @@ import { OCRComponent } from './Report/ocr/ocr.component';
 import { DayKnitComponent } from './Report/day-knit/day-knit.component';
 import { DayDyeComponent } from './Report/day-dye/day-dye.component';
 import { DyeBatchComponent } from './Report/dye-batch/dye-batch.component';
+import { TransactionMasteRootComponent } from './masters/Transaction Master/transaction-maste-root/transaction-maste-root.component';
+
+import { BuyerCreationComponent } from './masters/Transaction Master/buyer-creation/buyer-creation.component';
+import { StyleCreationComponent } from './masters/Transaction Master/style-creation/style-creation.component';
+import { ColorCreationComponent } from './masters/Transaction Master/color-creation/color-creation.component';
+import { SizeCreationComponent } from './masters/Transaction Master/size-creation/size-creation.component';
+import { FabricsdiaCreationComponent } from './masters/Transaction Master/fabricsdia-creation/fabricsdia-creation.component';
+import { YarnTypeCreationComponent } from './masters/Transaction Master/yarn-type-creation/yarn-type-creation.component';
+import { FabricsTypeCreationComponent } from './masters/Transaction Master/fabrics-type-creation/fabrics-type-creation.component';
 @NgModule({
   declarations: [
     MainComponent,
@@ -142,6 +151,14 @@ import { DyeBatchComponent } from './Report/dye-batch/dye-batch.component';
     DayKnitComponent,
     DayDyeComponent,
     DyeBatchComponent,
+    TransactionMasteRootComponent,
+    BuyerCreationComponent,
+    StyleCreationComponent,
+    ColorCreationComponent,
+    SizeCreationComponent,
+    FabricsdiaCreationComponent,
+    YarnTypeCreationComponent,
+    FabricsTypeCreationComponent,
 
   ],
   imports: [

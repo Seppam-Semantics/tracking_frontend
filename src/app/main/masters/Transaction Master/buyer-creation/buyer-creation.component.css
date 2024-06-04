@@ -1,0 +1,30 @@
+.form-control{
+    width: 25vw;
+  }
+  .form-control:focus {
+    box-shadow: 0 0 0 0.1rem rgba(74, 40, 167, 0.25);
+    width: 28vw;
+  } 
+
+  .table-container
+{
+height: 62vh;
+ overflow-y: scroll;
+}
+
+tr,td,th{
+  font-weight: normal;
+  justify-content: center;
+  text-align: center;
+}
+thead{
+  position: sticky;
+  top: 0;
+}
+
+.Scroll{
+  display: block;
+  overflow-y: auto;
+  scrollbar-width: none;
+  height:90%
+}
