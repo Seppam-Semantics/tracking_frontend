@@ -93,6 +93,9 @@ import { DayDyeComponent } from './Report/day-dye/day-dye.component';
 import { DyeBatchComponent } from './Report/dye-batch/dye-batch.component';
 import { TransactionMasteRootComponent } from './masters/Transaction Master/transaction-maste-root/transaction-maste-root.component';
 
+
+// import { DxDataGridModule } from "devextreme-angular";
+
 import { BuyerCreationComponent } from './masters/Transaction Master/buyer-creation/buyer-creation.component';
 import { StyleCreationComponent } from './masters/Transaction Master/style-creation/style-creation.component';
 import { ColorCreationComponent } from './masters/Transaction Master/color-creation/color-creation.component';
@@ -102,6 +105,8 @@ import { YarnTypeCreationComponent } from './masters/Transaction Master/yarn-typ
 import { FabricsTypeCreationComponent } from './masters/Transaction Master/fabrics-type-creation/fabrics-type-creation.component';
 import { DyeTypeCreationComponent } from './masters/Transaction Master/dye-type-creation/dye-type-creation.component';
 import { RejTypeCreationComponent } from './masters/Transaction Master/rej-type-creation/rej-type-creation.component';
+import { SpinFtyCreationComponent } from './masters/Transaction Master/spin-fty-creation/spin-fty-creation.component';
+import { DyeFtyCreationComponent } from './masters/Transaction Master/dye-fty-creation/dye-fty-creation.component';
 @NgModule({
   declarations: [
     MainComponent,
@@ -163,6 +168,8 @@ import { RejTypeCreationComponent } from './masters/Transaction Master/rej-type-
     FabricsTypeCreationComponent,
     DyeTypeCreationComponent,
     RejTypeCreationComponent,
+    SpinFtyCreationComponent,
+    DyeFtyCreationComponent,
 
   ],
   imports: [
@@ -207,6 +214,8 @@ import { RejTypeCreationComponent } from './masters/Transaction Master/rej-type-
     CalendarModule,
     FieldsetModule,
     InputNumberModule,
+
+    // DxDataGridModule
   ]
 })
 export class MainModule { }

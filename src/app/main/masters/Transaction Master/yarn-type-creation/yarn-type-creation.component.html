@@ -25,8 +25,10 @@
                 <td></td>
 
                 <td>
-                    <button mat-button color="primary" (click)="yarnTypeediting = true"><mat-icon>edit</mat-icon></button>
-                    <button mat-button color="primary"><mat-icon>delete</mat-icon></button>
+                    <div style="display: flex; gap: 10px; width: 100%; justify-content: center;">
+                        <button class="btn btn-primary" (click)="yarnTypeediting = true"><mat-icon>edit</mat-icon></button>
+                        <button class="btn btn-danger"><mat-icon>delete</mat-icon></button>
+                      </div>
                 </td>
             </tr>
         </tbody>

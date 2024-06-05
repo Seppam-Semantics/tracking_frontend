@@ -5,7 +5,7 @@
         </div>
         <div style="flex: 1 1 auto;"></div>
         <span class="flex-spacer"></span>
-        <button mat-button color="primary" (click)="rejTypecreation = true">New Dye Type</button>
+        <button mat-button color="primary" (click)="rejTypecreation = true">New Rej Type</button>
     </mat-toolbar>
 </div>
 <div>
@@ -13,10 +13,10 @@
         <thead class="thead-dark">
             <tr>
                 <th>S.No</th>
-                <th>Dye Type</th>
-                <th>Dyeing Process</th>
-                <th>Fabrics Type Description</th>
-                <th>Dye Process Loss</th>
+                <th>Rej Type</th>
+                <th>Reject Name</th>
+                <th>Colors</th>
+                <th>Loss %</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -28,9 +28,11 @@
                 <td></td>
                 <td></td>
                 <td>
-                    <button mat-button color="primary"
+                    <div style="display: flex; gap: 10px; width: 100%; justify-content: center;">
+                    <button class="btn btn-primary"
                         (click)="rejTypeediting = true"><mat-icon>edit</mat-icon></button>
-                    <button mat-button color="primary"><mat-icon>delete</mat-icon></button>
+                    <button class="btn btn-danger"><mat-icon>delete</mat-icon></button>
+                </div>
                 </td>
             </tr>
         </tbody>
@@ -39,44 +41,41 @@
 
 <!----------------------------------------rejType Creation [Start]--------------------------------------------->
 
-<p-dialog [(visible)]="rejTypecreation" [modal]="true" header="dye Type Creation" [formGroup]="rejTypecreate">
+<p-dialog [(visible)]="rejTypecreation" [modal]="true" header="Rej Type Creation" [formGroup]="rejTypecreate">
 
     <div style="display: flex; flex-direction: column; gap: 0vh; flex-wrap: wrap;">
         <div style="display: flex; gap: 10vh;">
             <div>
                 <mat-form-field appearance="outline" style="width: 40vh;">
-                    <mat-label>Dye Type</mat-label>
-                    <input matInput formControlName="dyeType">
+                    <mat-label>Rej Type</mat-label>
+                    <input matInput formControlName="rejType">
                 </mat-form-field>
             </div>
+        
+            <div>
+                <mat-form-field appearance="outline" style="width: 40vh;">
+                    <mat-label>Reject Name</mat-label>
+                    <input matInput formControlName="rejectName">
+                </mat-form-field>
+            </div>
+        
         </div>
 
         <div style="display: flex; gap: 10vh;">
             <div>
                 <mat-form-field appearance="outline" style="width: 40vh;">
-                    <mat-label>Dyeing Process</mat-label>
-                    <textarea matInput formControlName="dyeingProcess"> </textarea>
+                    <mat-label>Colors</mat-label>
+                    <input matInput formControlName="colors">
                 </mat-form-field>
             </div>
 
-        </div>
-
-        <div style="display: flex; gap: 10vh;">
             <div>
                 <mat-form-field appearance="outline" style="width: 40vh;">
-                    <mat-label>Fabrics Type Description</mat-label>
-                    <textarea matInput formControlName="fabricsTypeDescription"></textarea>
+                    <mat-label>Loss %</mat-label>
+                    <input matInput formControlName="loss">
                 </mat-form-field>
             </div>
-        </div>
 
-        <div style="display: flex; gap: 10vh;">
-            <div>
-                <mat-form-field appearance="outline" style="width: 40vh;">
-                    <mat-label>Dye Process Loss</mat-label>
-                    <input matInput formControlName="dyeProcessLoss">
-                </mat-form-field>
-            </div>
         </div>
 
     </div>
@@ -99,38 +98,35 @@
         <div style="display: flex; gap: 10vh;">
             <div>
                 <mat-form-field appearance="outline" style="width: 40vh;">
-                    <mat-label>Dye Type</mat-label>
-                    <input matInput formControlName="dyeType">
+                    <mat-label>Rej Type</mat-label>
+                    <input matInput formControlName="rejType">
                 </mat-form-field>
             </div>
+
+            <div>
+                <mat-form-field appearance="outline" style="width: 40vh;">
+                    <mat-label>Reject Name</mat-label>
+                    <input matInput formControlName="rejectName">
+                </mat-form-field>
+            </div>
+
         </div>
 
         <div style="display: flex; gap: 10vh;">
             <div>
                 <mat-form-field appearance="outline" style="width: 40vh;">
-                    <mat-label>Dyeing Process</mat-label>
-                    <textarea matInput formControlName="dyeingProcess"> </textarea>
+                    <mat-label>Colors</mat-label>
+                    <input matInput formControlName="colors">
                 </mat-form-field>
             </div>
 
-        </div>
-
-        <div style="display: flex; gap: 10vh;">
             <div>
                 <mat-form-field appearance="outline" style="width: 40vh;">
-                    <mat-label>Fabrics Type Description</mat-label>
-                    <textarea matInput formControlName="fabricsTypeDescription"></textarea>
+                    <mat-label>Loss %</mat-label>
+                    <input matInput formControlName="loss">
                 </mat-form-field>
             </div>
-        </div>
 
-        <div style="display: flex; gap: 10vh;">
-            <div>
-                <mat-form-field appearance="outline" style="width: 40vh;">
-                    <mat-label>Dye Process Loss</mat-label>
-                    <input matInput formControlName="dyeProcessLoss">
-                </mat-form-field>
-            </div>
         </div>
 
     </div>

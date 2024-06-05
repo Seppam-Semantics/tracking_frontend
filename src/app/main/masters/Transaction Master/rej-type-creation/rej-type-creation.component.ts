@@ -22,19 +22,19 @@ export class RejTypeCreationComponent {
   
     this.rejTypecreate = this.fb.group({
       id : new FormControl('') , 
-      dyeType : new FormControl('') ,  
-      dyeingProcess : new FormControl('') ,  
-      fabricsTypeDescription : new FormControl('') ,   
-      dyeProcessLoss : new FormControl('')
+      rejType : new FormControl('') ,  
+      rejectName : new FormControl('') ,  
+      colors : new FormControl('') ,   
+      loss : new FormControl('') 
     })
   
   
     this.rejTypeedit = this.fb.group({
       id : new FormControl('') , 
-      dyeType : new FormControl('') ,  
-      dyeingProcess : new FormControl('') ,  
-      fabricsTypeDescription : new FormControl('') ,   
-      dyeProcessLoss : new FormControl('') 
+      rejType : new FormControl('') ,  
+      rejectName : new FormControl('') ,  
+      colors : new FormControl('') ,   
+      loss : new FormControl('') 
     })
   }
   
