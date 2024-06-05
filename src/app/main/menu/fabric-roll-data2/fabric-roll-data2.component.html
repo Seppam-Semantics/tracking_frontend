@@ -99,6 +99,7 @@
         <th colspan="2">Actual Cut</th>
         <th>Print Status</th>
         <th>Edit</th>
+        <th>Delet</th>
       </tr>
       <tr>
         <th></th>
@@ -138,6 +139,7 @@
         <th>Roll</th>
         <th>Total</th>
         <th>Roll</th>
+        <th></th>
         <th></th>
         <th></th>
       </tr>
@@ -197,6 +199,8 @@
 
         <td><button class="btn btn-primary" data-toggle="modal" data-target="#edit"
             (click)="edit(work.id)">Edit</button></td>
+        <td><button class="btn btn-danger" 
+              (click)="delete(work.id)"><mat-icon>delete</mat-icon></button></td>
       </tr>
 
     <tbody>

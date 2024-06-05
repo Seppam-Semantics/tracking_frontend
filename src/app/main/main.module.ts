@@ -100,6 +100,8 @@ import { SizeCreationComponent } from './masters/Transaction Master/size-creatio
 import { FabricsdiaCreationComponent } from './masters/Transaction Master/fabricsdia-creation/fabricsdia-creation.component';
 import { YarnTypeCreationComponent } from './masters/Transaction Master/yarn-type-creation/yarn-type-creation.component';
 import { FabricsTypeCreationComponent } from './masters/Transaction Master/fabrics-type-creation/fabrics-type-creation.component';
+import { DyeTypeCreationComponent } from './masters/Transaction Master/dye-type-creation/dye-type-creation.component';
+import { RejTypeCreationComponent } from './masters/Transaction Master/rej-type-creation/rej-type-creation.component';
 @NgModule({
   declarations: [
     MainComponent,
@@ -159,6 +161,8 @@ import { FabricsTypeCreationComponent } from './masters/Transaction Master/fabri
     FabricsdiaCreationComponent,
     YarnTypeCreationComponent,
     FabricsTypeCreationComponent,
+    DyeTypeCreationComponent,
+    RejTypeCreationComponent,
 
   ],
   imports: [

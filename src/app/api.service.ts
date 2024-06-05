@@ -10,8 +10,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  apiUrl = "https://tracker.seppam.com";
-  // apiUrl = "http://localhost:2000";
+  // apiUrl = "https://tracker.seppam.com";
+  apiUrl = "http://localhost:2000";
 
   token: any;
   profilenames: any;
@@ -61,6 +61,10 @@ export class ApiService {
 
 // =============================  WorkOrder and Fabric roll data and Transcation =========================================================================================================
 
+
+Workorderdelect(id:any):Observable<any>{
+  return this.http.delete(this.getUrl() + `/workorderapi/workorder/${id}`, this.getHeaders())
+}
 
   getworkorderdetails(): Observable<any> {
     return this.http.get(this.getUrl() + `/workorderapi/workorders-filter`, this.getHeaders())
