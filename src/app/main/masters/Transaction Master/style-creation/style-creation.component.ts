@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { MatTabGroup } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-style-creation',
@@ -41,7 +42,8 @@ export class StyleCreationComponent implements OnInit{
       brand : new FormControl('') 
     })
   }
-  
+ 
+  @ViewChild('tabGroup') tabGroup!: MatTabGroup;
   saveButton(){
     console.log(this.Stylecreate.value)
   }

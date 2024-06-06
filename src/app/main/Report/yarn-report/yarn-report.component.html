@@ -149,7 +149,7 @@
       <div style="display: flex; flex-direction: column;">
         <div style="display: flex;">
           <label style="display: inline-block; width: 24vh; border: transparent;" class="form-control">Diff Qty</label>
-          <input type="text" class="form-control" readonly value="{{YarnData.lcYarnTotal - YarnData.recQty}}">
+          <input type="text" class="form-control" readonly value="{{ (YarnData.lcYarnTotal - YarnData.recQty).toFixed(2)}} ">
         </div>
         <div style="display: flex;">
           <label style="display: inline-block; width: 24vh; border: transparent;" class="form-control">Diff
@@ -166,8 +166,7 @@
         <div style="display: flex; justify-content:space-around;">
           <div style="display: flex; flex-direction: column;">
             <div style="display: flex;">
-              <label style="display: inline-block; width: 24vh; border: transparent;" class="form-control">Yarn
-                Kgs</label>
+              <label style="display: inline-block; width: 24vh; border: transparent;" class="form-control">LC Value</label>
               <input type="text" class="form-control" readonly value="{{data.yarnValue}}">
             </div>
 
@@ -178,8 +177,7 @@
             </div>
 
             <div style="display: flex;">
-              <label style="display: inline-block; width: 24vh; border: transparent;" class="form-control">LC
-                Value</label>
+              <label style="display: inline-block; width: 24vh; border: transparent;" class="form-control">Yarn Kgs</label>
               <input type="text" class="form-control" readonly value="{{data.lcYarnKgs}}">
             </div>
           </div>
