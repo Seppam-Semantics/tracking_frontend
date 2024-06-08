@@ -685,7 +685,13 @@ delete_style_master(id:any):Observable<any>{
 }
 
 // ========================== Color master =====================================================================================
+Drop_Color_master():Observable<any>{
+  return this.http.get(this.getUrl()+ `/mastersapi/drop-color-Master` ,this.getHeaders())
+}
 
+ColorId(color:any):Observable<any>{
+  return this.http.get(this.getUrl()+ `/mastersapi/drop-colorId-Master?color='${color}'` ,this.getHeaders())
+}
 Color_master(data:any):Observable<any>{
   return this.http.post(this.getUrl()+ `/mastersapi/color-master` ,data , this.getHeaders())
 }
@@ -843,5 +849,33 @@ delete_spinFty_master(id:any):Observable<any>{
   return this.http.delete(this.getUrl() + `/mastersapi/spinFty-master/${id}`, this.getHeaders())
 }
 
+// =================================== PO Master=============================================================================
+PO_Master(data:any):Observable<any>{
+  return this.http.post(this.getUrl()+ `/mastersapi/po-master` ,data , this.getHeaders())
+}
+
+PO_Master_line(data:any):Observable<any>{
+  return this.http.post(this.getUrl()+ `/mastersapi/po-master_line` ,data , this.getHeaders())
+}
+
+PO_Master_AllData():Observable<any>{
+  return this.http.get(this.getUrl()+ `/mastersapi/po-master` ,this.getHeaders())
+}
+
+PO_Master_SingleData(id:any):Observable<any>{
+  return this.http.get(this.getUrl()+ `/mastersapi/po-master/${id}` ,this.getHeaders())
+}
+
+ get_PO_Master_line(id:any):Observable<any>{
+  return this.http.get(this.getUrl()+ `/mastersapi/po-master-line/${id}` ,this.getHeaders())
+}
+
+delete_PO_master(id:any):Observable<any>{
+  return this.http.delete(this.getUrl() + `/mastersapi/po-master/${id}`, this.getHeaders())
+}
+
+delete_line_PO_master(id:any):Observable<any>{
+  return this.http.delete(this.getUrl() + `/mastersapi/po-master-line/${id}`, this.getHeaders())
+}
 
 }
