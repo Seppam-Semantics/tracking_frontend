@@ -44,6 +44,7 @@ import { DayKnitComponent } from './Report/day-knit/day-knit.component';
 import { DayDyeComponent } from './Report/day-dye/day-dye.component';
 import { DyeBatchComponent } from './Report/dye-batch/dye-batch.component';
 import { TransactionMasteRootComponent } from './masters/Transaction Master/transaction-maste-root/transaction-maste-root.component';
+import { POMasterCreationComponent } from './masters/po-master-creation/po-master-creation.component';
 
 
 const routes: Routes = [
@@ -94,6 +95,7 @@ const routes: Routes = [
   {path:"Day-Dye" , component : DayDyeComponent} ,
   {path:"DyeBatch" , component : DyeBatchComponent} , 
   {path:"TransactionMaster" , component : TransactionMasteRootComponent} ,
+  {path:"POMaster" , component : POMasterCreationComponent} ,
 
 
 ];

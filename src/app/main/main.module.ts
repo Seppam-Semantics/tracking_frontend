@@ -108,6 +108,7 @@ import { RejTypeCreationComponent } from './masters/Transaction Master/rej-type-
 import { SpinFtyCreationComponent } from './masters/Transaction Master/spin-fty-creation/spin-fty-creation.component';
 import { DyeFtyCreationComponent } from './masters/Transaction Master/dye-fty-creation/dye-fty-creation.component';
 import { KnitFtyCreationComponent } from './masters/Transaction Master/knit-fty-creation/knit-fty-creation.component';
+import { POMasterCreationComponent } from './masters/po-master-creation/po-master-creation.component';
 @NgModule({
   declarations: [
     MainComponent,
@@ -172,6 +173,7 @@ import { KnitFtyCreationComponent } from './masters/Transaction Master/knit-fty-
     SpinFtyCreationComponent,
     DyeFtyCreationComponent,
     KnitFtyCreationComponent,
+    POMasterCreationComponent,
 
   ],
   imports: [

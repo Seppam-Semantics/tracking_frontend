@@ -639,8 +639,8 @@ getdyewosize(dyefty:any, buyer: any, order: any, style: any, color: any): Observ
 Drop_Buyer_master():Observable<any>{
   return this.http.get(this.getUrl()+ `/mastersapi/drop-buyer-Master` ,this.getHeaders())
 }
-BuyerId(buyer:any):Observable<any>{
-  return this.http.get(this.getUrl()+ `/mastersapi/drop-buyerId-Master?buyer=${buyer}` ,this.getHeaders())
+BuyerId(buyer:string=''):Observable<any>{
+  return this.http.get(this.getUrl()+ `/mastersapi/drop-buyerId-Master?buyer='${buyer}'` ,this.getHeaders())
 }
 
 Buyer_master(data:any):Observable<any>{
@@ -666,7 +666,7 @@ Drop_Style_master():Observable<any>{
 }
 
 StyleId(style:any):Observable<any>{
-  return this.http.get(this.getUrl()+ `/mastersapi/drop-styleId-Master?style=${style}` ,this.getHeaders())
+  return this.http.get(this.getUrl()+ `/mastersapi/drop-styleId-Master?style='${style}'` ,this.getHeaders())
 }
 
 style_master(data:any):Observable<any>{
@@ -708,7 +708,7 @@ Drop_Size_master():Observable<any>{
 }
 
 SizeId(size:any):Observable<any>{
-  return this.http.get(this.getUrl()+ `/mastersapi/drop-sizeId-Master?size=${size}` ,this.getHeaders())
+  return this.http.get(this.getUrl()+ `/mastersapi/drop-sizeId-Master?size='${size}'` ,this.getHeaders())
 }
 size_master(data:any):Observable<any>{
   return this.http.post(this.getUrl()+ `/mastersapi/size-master` ,data , this.getHeaders())

@@ -6,7 +6,6 @@
   <span>
     <div style="display: flex; flex-direction: column;">
       <img src="assets\img\TeeTracklogo.png" style="height: 1.8rem;">
-      <!-- <span class="text2">Scandex BD</span> -->
     </div>
   </span>
   <span class="flex-spacer"></span>
@@ -202,6 +201,16 @@
             </div>
           </a>
         </mat-nav-list>
+
+
+        <mat-nav-list>
+          <a mat-list-item [routerLink]="'main/POMaster'" (click)="snav.toggle()">
+            <div class="text">
+              PO Master Creation
+            </div>
+          </a>
+        </mat-nav-list>
+        
         <!-- 
         <mat-nav-list>
           <a mat-list-item [routerLink]="'Yarn-Report'" (click)="snav.toggle()">

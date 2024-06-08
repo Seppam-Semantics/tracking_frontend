@@ -1,0 +1,162 @@
+<div>
+    <mat-toolbar style="height: fit-content; padding: 10px;">
+        <div class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" #input>
+        </div>
+        <div style="flex: 1 1 auto;"></div>
+        <span class="flex-spacer"></span>
+        <button mat-button color="primary" (click)="pocreation = true">New PO Master</button>
+    </mat-toolbar>
+</div>
+<div>
+    <table class="table table-striped table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>S.No</th>
+                <th>Buyer Name</th>
+                <th>Buyer PO Number</th>
+                <th>Buyer PO Date</th>
+                <th>Buyer PO Quantity</th>
+                <th>Buyer PO Value</th>
+                <th>Buyer PO Ship Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of this.allData ; let i = index">
+                <td>{{i+1}}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+
+
+                <td></td>
+                <td></td>
+                <td></td>
+
+                <td>
+                    <div style="display: flex; gap: 10px; width: 100%; justify-content: center;">
+                        <button class="btn btn-primary" (click)="Buyerediting = true"
+                            (click)="view(data.id)"><mat-icon>edit</mat-icon></button>
+                        <button class="btn btn-danger" (click)="delect(data.id)"><mat-icon>delete</mat-icon></button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!----------------------------------------Buyer Creation [Start]--------------------------------------------->
+
+<p-dialog [(visible)]="pocreation" [modal]="true" header="Buyer Creation" [formGroup]="pocreate">
+
+    <div>
+        <div style="display: flex; gap: 10vh;">
+            <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Buyer Name</mat-label>
+                    <input matInput formControlName="pobuyer">
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Buyer PO Number</mat-label>
+                    <input matInput formControlName="poorder">
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Buyer PO Date</mat-label>
+                    <input matInput type="date" formControlName="podate">
+                </mat-form-field>
+            </div>
+        </div>
+        <div style="display: flex; gap: 10vh; ">
+            <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Buyer PO Quantity</mat-label>
+                    <input type="number" matInput formControlName="poquantity">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Buyer PO Value</mat-label>
+                    <input type="number" matInput formControlName="povalue">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Buyer PO Ship Date</mat-label>
+                    <input matInput type="date" formControlName="podate">
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+    <ng-template pTemplate="footer">
+        <div style="width: 100%; display: flex; justify-content: center;">
+            <button class="btn btn-primary" (click)="saveButton()">Save</button>
+        </div>
+    </ng-template>
+</p-dialog>
+
+<!----------------------------------------Buyer Creation [End]--------------------------------------------->
+
+
+<!----------------------------------------Buyer Editing [Start]--------------------------------------------->
+
+<p-dialog [(visible)]="poediting" [modal]="true" header="Buyer Editing" [formGroup]="poedit">
+
+    <div>
+        <div style="display: flex; gap: 10vh;">
+            <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Buyer Name</mat-label>
+                    <input matInput formControlName="pobuyer">
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Buyer PO Number</mat-label>
+                    <input matInput formControlName="poorder">
+                </mat-form-field>
+            </div>
+
+            <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Buyer PO Date</mat-label>
+                    <input matInput type="date" formControlName="podate">
+                </mat-form-field>
+            </div>
+        </div>
+        <div style="display: flex; justify-content: center;">
+            <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Buyer PO Quantity</mat-label>
+                    <input type="number" matInput formControlName="poquantity">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Buyer PO Value</mat-label>
+                    <input type="number" matInput formControlName="povalue">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Buyer PO Ship Date</mat-label>
+                    <input matInput type="date" formControlName="poshipdate">
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+    <ng-template pTemplate="footer">
+        <div style="width: 100%; display: flex; justify-content: center;">
+            <button class="btn btn-primary" (click)="update()">Save</button>
+        </div>
+    </ng-template>
+</p-dialog>
+
+<!----------------------------------------Buyer Editing [End]--------------------------------------------->
