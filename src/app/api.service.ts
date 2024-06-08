@@ -83,23 +83,23 @@ export class ApiService {
   }
 
   getorders(buyer: any): Observable<any> {
-    return this.http.get(this.getUrl() + `/filtersapi/buyers-orders?buyer=${buyer}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/filtersapi/buyers-orders?buyer=${buyer}&`, this.getHeaders())
   }
 
   getstyle(buyer: any, order: any): Observable<any> {
-    return this.http.get(this.getUrl() + `/filtersapi/orders-styles?buyer=${buyer}&orderNo=${order}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/filtersapi/orders-styles?buyer=${buyer}&orderNo=${order}&`, this.getHeaders())
   }
 
   getcolor(buyer: any, order: any, style: any): Observable<any> {
-    return this.http.get(this.getUrl() + `/filtersapi/styles-colors?buyer=${buyer}&orderNo=${order}&style=${style}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/filtersapi/styles-colors?buyer=${buyer}&orderNo=${order}&style=${style}&`, this.getHeaders())
   }
 
   getsize(buyer: any, order: any, style: any, color: any): Observable<any> {
-    return this.http.get(this.getUrl() + `/filtersapi/colors-sizes?buyer=${buyer}&orderNo=${order}&style=${style}&color=${color}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/filtersapi/colors-sizes?buyer=${buyer}&orderNo=${order}&style=${style}&color=${color}&`, this.getHeaders())
   }
 
   getwodetails(buyer: any, orderNo?: any, style?: any, color?: any, size?:any): Observable<any> {
-    return this.http.get(this.getUrl() + `/workorderapi/workorders-filter?buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&size=${size}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/workorderapi/workorders-filter?buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&size=${size}&`, this.getHeaders())
   }
 
 
@@ -108,19 +108,19 @@ export class ApiService {
   }
 
   getordersData(buyer: any): Observable<any> {
-    return this.http.get(this.getUrl() + `/filtersapi/buyers-orders_data?buyer=${buyer}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/filtersapi/buyers-orders_data?buyer=${buyer}&`, this.getHeaders())
   }
 
-  getstyleData(buyer: any, order: any): Observable<any> {
-    return this.http.get(this.getUrl() + `/filtersapi/orders-styles_data?buyer=${buyer}&orderNo=${order}`, this.getHeaders())
+  getstyleData(buyer: string, order: string): Observable<any> {
+    return this.http.get(this.getUrl() + `/filtersapi/orders-styles_data?buyer=${buyer}&orderNo=${order}&`, this.getHeaders())
   }
 
-  getcolorData(buyer: any, order: any, style: any): Observable<any> {
-    return this.http.get(this.getUrl() + `/filtersapi/styles-colors_data?buyer=${buyer}&orderNo=${order}&style=${style}`, this.getHeaders())
+  getcolorData(buyer: string, order: string, style: string): Observable<any> {
+    return this.http.get(this.getUrl() + `/filtersapi/styles-colors_data?buyer=${buyer}&orderNo=${order}&style=${style}&`, this.getHeaders())
   }
 
-  getsizeData(buyer: any, order: any, style: any, color: any): Observable<any> {
-    return this.http.get(this.getUrl() + `/filtersapi/colors-sizes_data?buyer=${buyer}&orderNo=${order}&style=${style}&color=${color}`, this.getHeaders())
+  getsizeData(buyer: string, order: string, style: string, color: string): Observable<any> {
+    return this.http.get(this.getUrl() + `/filtersapi/colors-sizes_data?buyer=${buyer}&orderNo=${order}&style=${style}&color=${color}&`, this.getHeaders())
   }
 
   getcodeData(factory:any , buyer: any, order: any, style: any, color: any): Observable<any> {
