@@ -25,20 +25,20 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>01</td>
-        <td>Solo</td>
-        <td></td>
+      <tr *ngFor="let data of this.allData2 ; let i = index">
+        <td>{{i+1}}</td>
+        <td>{{data.style}}</td>
+        <td>{{data.style_code}}</td>
 
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>{{data.style_type}}</td>
+        <td>{{data.utility}}</td>
+        <td>{{data.buyer}}</td>
 
-        <td></td>
+        <td>{{data.brand}}</td>
         <td>
           <div style="display: flex; gap: 10px; width: 100%; justify-content: center;">
-            <button class="btn btn-primary" (click)="Styleediting = true"><mat-icon>edit</mat-icon></button>
-            <button class="btn btn-danger"><mat-icon>delete</mat-icon></button>
+            <button class="btn btn-primary" (click)="Styleediting = true" (click)="edit(data.id)"><mat-icon>edit</mat-icon></button>
+            <button class="btn btn-danger" (click)="delete(data.id)"><mat-icon>delete</mat-icon></button>
           </div>
         </td>
       </tr>
@@ -55,21 +55,21 @@
       <div>
         <mat-form-field appearance="outline">
           <mat-label>Style Name</mat-label>
-          <input matInput formControlName="styleName">
+          <input matInput formControlName="style">
         </mat-form-field>
       </div>
 
       <div>
         <mat-form-field appearance="outline">
           <mat-label>Style Code</mat-label>
-          <input matInput formControlName="styleCode">
+          <input matInput formControlName="stylecode">
         </mat-form-field>
       </div>
 
       <div>
         <mat-form-field appearance="outline">
           <mat-label>Style Type</mat-label>
-          <input matInput formControlName="styleType">
+          <input matInput formControlName="styletype">
         </mat-form-field>
       </div>
     </div>
@@ -85,8 +85,8 @@
       <div>
         <mat-form-field appearance="outline">
           <mat-label>Buyer Name</mat-label>
-          <mat-select formControlName="buyerName">
-            <mat-option></mat-option>
+          <mat-select formControlName="buyer" [(ngModel)]="Buyernamevalue" (selectionChange)="getbuyerId()">
+            <mat-option *ngFor="let buyer of this.buyerDrop" value="{{buyer.buyer}}">{{buyer.buyer}}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -119,21 +119,21 @@
       <div>
         <mat-form-field appearance="outline">
           <mat-label>Style Name</mat-label>
-          <input matInput formControlName="styleName">
+          <input matInput formControlName="style">
         </mat-form-field>
       </div>
 
       <div>
         <mat-form-field appearance="outline">
           <mat-label>Style Code</mat-label>
-          <input matInput formControlName="styleCode">
+          <input matInput formControlName="stylecode">
         </mat-form-field>
       </div>
 
       <div>
         <mat-form-field appearance="outline">
           <mat-label>Style Type</mat-label>
-          <input matInput formControlName="styleType">
+          <input matInput formControlName="styletype">
         </mat-form-field>
       </div>
     </div>
@@ -149,8 +149,8 @@
       <div>
         <mat-form-field appearance="outline">
           <mat-label>Buyer Name</mat-label>
-          <mat-select formControlName="buyerName">
-            <mat-option></mat-option>
+          <mat-select formControlName="buyer">
+            <mat-option *ngFor="let buyer of this.buyerDrop" value="{{buyer.buyer}}">{{buyer.buyer}}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -166,7 +166,7 @@
   </div>
   <ng-template pTemplate="footer">
     <div style="width: 100%; display: flex; justify-content: center;">
-      <button class="btn btn-primary">Update</button>
+      <button class="btn btn-primary" (click)="update()">Update</button>
     </div>
   </ng-template>
 </p-dialog>

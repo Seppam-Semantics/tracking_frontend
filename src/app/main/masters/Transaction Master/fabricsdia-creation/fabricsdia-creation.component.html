@@ -28,7 +28,7 @@
 
                 <th>NeckTape</th>
                 <th>NeckRIB</th>
-                <th>Others</th>
+                <!-- <th>Others</th> -->
 
                 <th>FinishFabrics Consumption/Dozn</th>
                 <th>Machine Dia</th>
@@ -38,34 +38,34 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>01</td>
+            <tr *ngFor="let data of this.fsizedata; let i = index ;">
+                <td>{{i+1}}</td>
                 
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{data.style}}</td>
+                <td>{{data.size}}</td>
+                <td>{{data.chestSize}}</td>
 
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{data.chestSize}}</td>
+                <td>{{data.sleeve}}</td>
+                <td>{{data.allow}}</td>
 
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{data.pattern}}</td>
+                <td>{{data.gsm}}</td>
+                <td>{{data.bodyCon}}</td>
 
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{data.neckType}}</td>
+                <td>{{data.neckRIB}}</td>
+                <!-- <td>{{data.Others}}</td> -->
 
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{data.finishfabConsumption}}</td>
+                <td>{{data.machineDia}}</td>
+                <td>{{data.finishDia}}</td>
 
                 <td>
                     <div style="display: flex; gap: 10px; width: 100%; justify-content: center;">
                         <button class="btn btn-primary"
-                            (click)="Fabricsdiaediting = true"><mat-icon>edit</mat-icon></button>
-                        <button class="btn btn-danger"><mat-icon>delete</mat-icon></button>
+                            (click)="Fabricsdiaediting = true" (click)="edit(data.id)"><mat-icon>edit</mat-icon></button>
+                        <button class="btn btn-danger" (click)="delete(data.id)"><mat-icon>delete</mat-icon></button>
                     </div>
                 </td>
             </tr>
@@ -83,8 +83,8 @@
             <div>
                 <mat-form-field appearance="outline">
                     <mat-label> Style Name</mat-label>
-                    <mat-select formControlName="styleName">
-                        <mat-option></mat-option>
+                    <mat-select formControlName="styleName" [(ngModel)]="Stylenamevalue" (selectionChange)="getstyleId()">
+                        <mat-option *ngFor="let style of this.styleDropdata" value="{{style.style}}">{{style.style}}</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>  
@@ -92,8 +92,8 @@
             <div>
                 <mat-form-field appearance="outline">
                     <mat-label> Size Name</mat-label>
-                    <mat-select formControlName="sizeName">
-                        <mat-option></mat-option>
+                    <mat-select formControlName="sizeName" [(ngModel)]="Sizenamevalue" (selectionChange)="getsizeId()">
+                        <mat-option *ngFor="let size of this.sizeDropdata" value="{{size.size}}">{{size.size}}</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>  
@@ -221,8 +221,8 @@
             <div>
                 <mat-form-field appearance="outline">
                     <mat-label> Style Name</mat-label>
-                    <mat-select formControlName="styleName">
-                        <mat-option></mat-option>
+                    <mat-select formControlName="styleName" [(ngModel)]="Stylenamevalue" (selectionChange)="getstyleId()">
+                        <mat-option *ngFor="let style of this.styleDropdata" value="{{style.style}}">{{style.style}}</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>  
@@ -230,8 +230,8 @@
             <div>
                 <mat-form-field appearance="outline">
                     <mat-label> Size Name</mat-label>
-                    <mat-select formControlName="sizeName">
-                        <mat-option></mat-option>
+                    <mat-select formControlName="sizeName" [(ngModel)]="Sizenamevalue" (selectionChange)="getsizeId()">
+                        <mat-option *ngFor="let size of this.sizeDropdata" value="{{size.size}}">{{size.size}}</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>  
@@ -341,7 +341,7 @@
     </div>
     <ng-template pTemplate="footer">
         <div style="width: 100%; display: flex; justify-content: center;">
-            <button class="btn btn-primary" >Update</button>
+            <button class="btn btn-primary" (click)="update()">Update</button>
         </div>
     </ng-template>
 </p-dialog>

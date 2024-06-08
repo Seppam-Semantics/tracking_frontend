@@ -299,7 +299,7 @@ export class YarnTranscationComponent implements OnInit {
       this.lotlineDetails = res.lcData
 
       const receivedData = this.lotlineDetails;
-      // console.log(receivedData)
+
 
       const yarnEntryData = this.LotCheck.get('data') as FormArray;
       yarnEntryData.clear();

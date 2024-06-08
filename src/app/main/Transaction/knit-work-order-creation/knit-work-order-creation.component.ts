@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 
@@ -25,6 +25,17 @@ export class KnitWorkOrderCreationComponent implements OnInit {
   factoryname: any;
   ftyName: any;
   ftyname: any
+  sizevalue: any;
+  fabDiaData: any;
+  fabtype: any;
+  FabTypeData: any;
+  FabGSM: any;
+  fabGsmData: any;
+  fabTypeData: any;
+  knitSLData: any;
+  knitValue: any;
+  yarnKg: any;
+  valueExceeded : boolean = false;
   ngOnInit(): void { this.buyername(), this.factoryName() }
   constructor(private fb: FormBuilder, private api: ApiService , private router : Router) {
 
@@ -96,14 +107,40 @@ export class KnitWorkOrderCreationComponent implements OnInit {
   }
 
   getWoId(size: any, index: number) {
+
+    this.sizevalue = size
+
     this.api.getwodetails(this.buyerName, this.orderNo, this.style, this.color, size).subscribe((res) => {
       const woId = res.workorders[0].id;
+      const knitRate = res.workorders[0].knitRate ? res.workorders[0].knitRate : "0" ;
+      this. yarnKg = res.workorders[0].yarnKg ? res.workorders[0].yarnKg : "0" ;
+      const fabDiaData = res.workorders[0].fabDia ? res.workorders[0].fabDia : "0" ;
+      const fabGsmData = res.workorders[0].fabGsm ? res.workorders[0].fabGsm : "0" ;
+      const fabTypeData = res.workorders[0].fabType ? res.workorders[0].fabType : "0" ;
+      const knitSLData = res.workorders[0].knitSL ? res.workorders[0].knitSL : "0" ;
+
       const formArray = this.KnitWorkOrderFrom.get('data') as FormArray;
       const row = formArray.at(index);
       row.get('knitWoId')?.setValue(woId);
+      row.get('knitRate')?.setValue(knitRate);
+      row.get('knitKg')?.setValue(this. yarnKg);
+      row.get('fabDia')?.setValue(fabDiaData);
+      row.get('fabGSM')?.setValue(fabGsmData);
+      row.get('fabType')?.setValue(fabTypeData);
+      row.get('KnitSl')?.setValue(knitSLData);
     });
   }
 
+  valid(value:any){
+    const inputValue = value;
+    if(inputValue > this. yarnKg){
+      this.valueExceeded = true;
+      alert("Value exceeded");
+    }
+    else{
+      this.valueExceeded = false;
+    }
+  }
 
   get items() {
     return this.KnitWorkOrderFrom.get("data") as FormArray
@@ -127,7 +164,33 @@ export class KnitWorkOrderCreationComponent implements OnInit {
       "remarks": new FormControl('')
     });
     this.items.push(row);
+
+    row.get('knitKg')?.valueChanges.subscribe(() => {
+      this.calculateDiff5()
+    });
+    row.get('knitRate')?.valueChanges.subscribe(() => {
+      this.calculateDiff5()
+    });
   }
+
+  calculateDiff5() {
+    this.items.controls.forEach((control: AbstractControl) => {
+      const row = control as FormGroup;
+      if (row instanceof FormGroup) {
+        const knitRate = parseFloat(row.get('knitRate')?.value);
+        const knitKg = parseFloat(row.get('knitKg')?.value);
+  
+        const a = knitRate * knitKg
+        const knitValue = parseFloat(a.toFixed(2));
+  
+        row.patchValue({ knitValue});
+      }
+    });
+  }
+  
+
+
+
   save() {
     this.api.KnitWorkOrderData(this.KnitWorkOrderFrom.value).subscribe((res) => {
       alert(res.message)

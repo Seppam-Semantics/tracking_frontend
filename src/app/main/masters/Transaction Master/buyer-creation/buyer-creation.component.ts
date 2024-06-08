@@ -1,44 +1,82 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ApiService } from 'src/app/api.service';
 
 @Component({
   selector: 'app-buyer-creation',
   templateUrl: './buyer-creation.component.html',
   styleUrls: ['./buyer-creation.component.css']
 })
-export class BuyerCreationComponent implements OnInit{
+export class BuyerCreationComponent implements OnInit {
 
-Buyercreation : boolean = false;
+  Buyercreation: boolean = false;
 
-Buyerediting : boolean = false;
+  Buyerediting: boolean = false;
 
-Buyercreate! : FormGroup
+  Buyercreate!: FormGroup
 
-Buyeredit! : FormGroup
+  Buyeredit!: FormGroup
+  allData: any;
+  datalist: any;
 
-ngOnInit(): void {
-  
-}
-constructor(private fb : FormBuilder){
+  ngOnInit(): void {
+    this.api.Buyer_master_AllData().subscribe((res) => {
+      this.allData = res.buyers
+    })
+  }
+  constructor(private fb: FormBuilder, private api: ApiService) {
 
-  this.Buyercreate = this.fb.group({
-    id : new FormControl('') , 
-    buyer : new FormControl('') ,
-    country : new FormControl(''),
-    contactdetails : new FormControl('')
+    this.Buyercreate = this.fb.group({
+      id: new FormControl(''),
+      buyer: new FormControl(''),
+      country: new FormControl(''),
+      contact: new FormControl('')
+    })
+
+
+    this.Buyeredit = this.fb.group({
+      id: new FormControl(''),
+      buyer: new FormControl(''),
+      country: new FormControl(''),
+      contact: new FormControl('')
+    })
+
+
+  }
+
+
+  delect(id:any){
+    this.api.delete_Buyer_master(id).subscribe((res)=>{
+      alert(res.message)
+      window.location.reload()
+    })
+  }
+
+
+view(id:any){
+  this.api.Buyer_master_SingleData(id).subscribe((res)=>{
+    this.datalist = res.buyers
+    this.Buyeredit.patchValue({
+      id: this.datalist[0].id,
+      buyer: this.datalist[0].buyer,
+      country: this.datalist[0].country,
+      contact: this.datalist[0].contactDetails
+    })
   })
+}
 
-
-  this.Buyeredit = this.fb.group({
-    id : new FormControl('') , 
-    buyer : new FormControl('') ,
-    country : new FormControl(''),
-    contactdetails : new FormControl('')
+update(){
+  this.api.Buyer_master(this.Buyeredit.value).subscribe((res) => {
+    alert(res.message)
+    window.location.reload()
   })
 }
 
-saveButton(){
-  console.log(this.Buyercreate.value)
-}
+  saveButton() {
+    this.api.Buyer_master(this.Buyercreate.value).subscribe((res) => {
+      alert(res.message)
+      window.location.reload()
+    })
+  }
 
 }

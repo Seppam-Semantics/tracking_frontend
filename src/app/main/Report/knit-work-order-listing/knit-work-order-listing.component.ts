@@ -120,8 +120,6 @@ export class KnitWorkOrderListingComponent implements OnInit {
   alldata(){
     this.api.KnitWorkOrderAllData().subscribe((res)=>{
     this. KnitWorkOrderAllData   = res.workorders
-
-    console.log(res)
     })
   }
 

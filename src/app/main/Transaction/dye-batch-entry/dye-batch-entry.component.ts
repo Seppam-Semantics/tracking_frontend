@@ -255,7 +255,6 @@ public getbuyers(factory:any) {
 getorders( factory :any , buyer: any) {
   this.api.getdyewoorders(factory,buyer).subscribe((res) => {
     this.order = res.orders
-    console.log(this.order)
   })
 }
 
@@ -281,7 +280,7 @@ getsize(factory :any , buyer: any, orderNo: any, style: any, color: any) {
 getwoId(size: any, index: number){
     this.api.getwodetails(this.buyerName, this.ordernumbers, this.styleslist, this.colorslist, size).subscribe((res) => {
       const woId = res.workorders[0].id;
-      console.log(woId)
+
       const formArray = this.dye_Entery.get('data') as FormArray;
       const row = formArray.at(index);
       row.get('woId')?.setValue(woId);

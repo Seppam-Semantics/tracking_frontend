@@ -32,19 +32,15 @@ export class KnitDelEntryComponent  implements OnInit{
   color: any;
   size: any;
   factoryname: any;
+  factory: any;
+  factoryv: any;
 
 ngOnInit(): void {
 
   this.buyername();
 
-  
-
-  this.api.knitfty_name().subscribe((res) => {
-    this.fty_name = res.factorys
-  })
-
-  this.api.dye_factory_name().subscribe((res)=>{
-    this.factoryname=res.factorys
+  this.api.getknit_Ety_wofty().subscribe((res)=>{
+    this.factory=res.knitfty
   })
 
 }
@@ -130,8 +126,10 @@ calculate(){
     });
 }
 // <!------------------------------------------------------------>
+
+
 buyername(){
-  this.api.getbuyers().subscribe((res)=>{
+  this.api.getknit_Ety_wobuyers(this.factoryv).subscribe((res)=>{
     this.buyer = res.buyers
   })
 }
@@ -140,8 +138,9 @@ getBuyerValue(event: any) {
 }
 
 getorders() {
-  this.api.getorders(this.buyerName).subscribe((res) => {
+  this.api.getknit_Ety_woorders(this.factoryv ,this.buyerName).subscribe((res) => {
     this.order = res.orders
+
   })
 }
 
@@ -150,7 +149,7 @@ getOrderValue(event:any){
 }
 
 getstyle() {
-  this.api.getstyle(this.buyerName, this.orderNo).subscribe((res) => {
+  this.api.getknit_Ety_wostyle(this.factoryv ,this.buyerName, this.orderNo).subscribe((res) => {
     this.stylelist = res.styles;
   })
 }
@@ -160,7 +159,7 @@ getstylevalue(event:any){
 }
 
 getcolor() {
-  this.api.getcolor(this.buyerName, this.orderNo, this.style).subscribe((res) => {
+  this.api.getknit_Ety_wocolor(this.factoryv , this.buyerName, this.orderNo, this.style).subscribe((res) => {
     this.colorlist = res.colors;
   })
 }
@@ -170,7 +169,7 @@ getcolorvalue(event:any){
 }
 
 getsize() {
-  this.api.getsize(this.buyerName, this.orderNo, this.style, this.color).subscribe((res) => {
+  this.api.getknit_Ety_wosize(this.factoryv , this.buyerName, this.orderNo, this.style, this.color).subscribe((res) => {
     this.sizelist = res.sizes;
   })
 }

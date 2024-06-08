@@ -24,19 +24,19 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>01</td>
-                <td></td>
-                <td></td>
+            <tr *ngFor="let data of this.ColorData ; let i = index">
+                <td>{{i+1}}</td>
+                <td>{{data.color}}</td>
+                <td>{{data.color_code}}</td>
 
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{data.buyer}}</td>
+                <td>{{data.dia_correction}}</td>
+                <td>{{data.dye_process_loss}}</td>
 
                 <td>
                     <div style="display: flex; gap: 10px; width: 100%; justify-content: center;">
-                        <button class="btn btn-primary" (click)="Colorediting = true"><mat-icon>edit</mat-icon></button>
-                        <button class="btn btn-danger"><mat-icon>delete</mat-icon></button>
+                        <button class="btn btn-primary" (click)="Colorediting = true" (click)="edit(data.id)"><mat-icon>edit</mat-icon></button>
+                        <button class="btn btn-danger" (click)="delete(data.id)"><mat-icon>delete</mat-icon></button>
                       </div>
                 </td>
             </tr>
@@ -53,14 +53,14 @@
             <div>
                 <mat-form-field appearance="outline">
                     <mat-label>Color Name</mat-label>
-                    <input matInput formControlName="colorName">
+                    <input matInput formControlName="color">
                 </mat-form-field>
             </div>
 
             <div>
                 <mat-form-field appearance="outline">
                     <mat-label>Color Code</mat-label>
-                    <input matInput formControlName="colorCode">
+                    <input matInput formControlName="colorcode">
                 </mat-form-field>
             </div>
 
@@ -68,8 +68,8 @@
                 
                 <mat-form-field appearance="outline">
                     <mat-label> Buyer Name</mat-label>
-                    <mat-select formControlName="dyeProcessLoss">
-                        <mat-option></mat-option>
+                    <mat-select formControlName="buyer" [(ngModel)]="Buyernamevalue" (selectionChange)="getbuyerId()">
+                        <mat-option *ngFor="let buyer of this.buyerDrop" value="{{buyer.buyer}}">{{buyer.buyer}}</mat-option>
                     </mat-select>
                 </mat-form-field>
                 
@@ -80,7 +80,7 @@
             <div>
                 <mat-form-field appearance="outline">
                     <mat-label>Dia Correction</mat-label>
-                    <input matInput formControlName="diaCorrection">
+                    <input matInput formControlName="diacorrection">
                 </mat-form-field>
             </div>
 
@@ -89,7 +89,7 @@
                                 
                 <mat-form-field appearance="outline">
                     <mat-label>Dye Process Loss</mat-label>
-                    <input matInput formControlName="buyerName">
+                    <input matInput formControlName="dyeprocessloss">
                 </mat-form-field>
 
 
@@ -116,14 +116,14 @@
             <div>
                 <mat-form-field appearance="outline">
                     <mat-label>Color Name</mat-label>
-                    <input matInput formControlName="colorName">
+                    <input matInput formControlName="color">
                 </mat-form-field>
             </div>
 
             <div>
                 <mat-form-field appearance="outline">
                     <mat-label>Color Code</mat-label>
-                    <input matInput formControlName="colorCode">
+                    <input matInput formControlName="colorcode">
                 </mat-form-field>
             </div>
 
@@ -131,8 +131,8 @@
                 
                 <mat-form-field appearance="outline">
                     <mat-label> Buyer Name</mat-label>
-                    <mat-select formControlName="dyeProcessLoss">
-                        <mat-option></mat-option>
+                    <mat-select formControlName="buyer">
+                        <mat-option *ngFor="let buyer of this.buyerDrop" value="{{buyer.buyer}}">{{buyer.buyer}}</mat-option>
                     </mat-select>
                 </mat-form-field>
                 
@@ -143,7 +143,7 @@
             <div>
                 <mat-form-field appearance="outline">
                     <mat-label>Dia Correction</mat-label>
-                    <input matInput formControlName="diaCorrection">
+                    <input matInput formControlName="diacorrection">
                 </mat-form-field>
             </div>
 
@@ -152,7 +152,7 @@
                                 
                 <mat-form-field appearance="outline">
                     <mat-label>Dye Process Loss</mat-label>
-                    <input matInput formControlName="buyerName">
+                    <input matInput formControlName="dyeprocessloss">
                 </mat-form-field>
 
 
@@ -162,7 +162,7 @@
     </div>
     <ng-template pTemplate="footer">
         <div style="width: 100%; display: flex; justify-content: center;">
-            <button class="btn btn-primary">Update</button>
+            <button class="btn btn-primary" (click)="update()">Update</button>
         </div>
     </ng-template>
 </p-dialog>

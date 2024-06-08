@@ -5,7 +5,7 @@
         </div>
         <div style="flex: 1 1 auto;"></div>
         <span class="flex-spacer"></span>
-        <button mat-button color="primary" (click)="dyeTypecreation = true">New Dye Type</button>
+        <button mat-button color="primary" (click)="knitFtycreation = true">New Knit Factory Master</button>
     </mat-toolbar>
 </div>
 <div>
@@ -13,24 +13,22 @@
         <thead class="thead-dark">
             <tr>
                 <th>S.No</th>
-                <th>Dye Type</th>
-                <th>Dyeing Process</th>
-                <th>Fabrics Type Description</th>
-                <th>Dye Process Loss</th>
+                <th>Knit Factory Name</th>
+                <th>Contact Details</th>
+                <th>Legal name</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let data of this.dyeingdata; let i = index;">
+            <tr *ngFor="let data of this.KnitFtydata; let i= index">
                 <td>{{i+1}}</td>
-                <td>{{data.dyeType}}</td>
-                <td>{{data.dyeProcess}}</td>
-                <td>{{data.description}}</td>
-                <td>{{data.dyepl}}</td>
+                <td>{{data.knitFty}}</td>
+                <td>{{data.contact}}</td>
+                <td>{{data.legalFtyName}}</td>
                 <td>
                     <div style="display: flex; gap: 10px; width: 100%; justify-content: center;">
                         <button class="btn btn-primary"
-                            (click)="dyeTypeediting = true" (click)="edit(data.id)"><mat-icon>edit</mat-icon></button>
+                            (click)="knitFtyediting = true" (click)="edit(data.id)"><mat-icon>edit</mat-icon></button>
                         <button class="btn btn-danger" (click)="delete(data.id)"><mat-icon>delete</mat-icon></button>
                     </div>
                 </td>
@@ -39,46 +37,44 @@
     </table>
 </div>
 
-<!----------------------------------------Dye Type Creation [Start]--------------------------------------------->
+<!----------------------------------------Knitting Factory Master Creation [Start]--------------------------------------------->
 
-<p-dialog [(visible)]="dyeTypecreation" [modal]="true" header="Dye Type Creation" [formGroup]="dyeTypecreate">
+<p-dialog [(visible)]="knitFtycreation" [modal]="true" header="Knit Factory Creation" [formGroup]="knitFtycreate">
 
     <div style="display: flex; flex-direction: column; gap: 0vh; flex-wrap: wrap;">
         <div style="display: flex; gap: 10vh;">
             <div>
                 <mat-form-field appearance="outline" style="width: 40vh;">
-                    <mat-label>Dye Type</mat-label>
-                    <input matInput formControlName="dyeType">
+                    <mat-label>Knit Factory Name</mat-label>
+                    <input matInput formControlName="knitFty">
                 </mat-form-field>
             </div>
+
+            <div>
+                <mat-form-field appearance="outline" style="width: 40vh;">
+                    <mat-label>Factory Location</mat-label>
+                    <input matInput formControlName="location">
+                </mat-form-field>
+            </div>
+
         </div>
 
         <div style="display: flex; gap: 10vh;">
+
             <div>
                 <mat-form-field appearance="outline" style="width: 40vh;">
-                    <mat-label>Dyeing Process</mat-label>
-                    <textarea matInput formControlName="dyeingProcess"> </textarea>
+                    <mat-label>Contact Details</mat-label>
+                    <input matInput formControlName="contact">
                 </mat-form-field>
             </div>
 
-        </div>
-
-        <div style="display: flex; gap: 10vh;">
             <div>
                 <mat-form-field appearance="outline" style="width: 40vh;">
-                    <mat-label>Fabrics Type Description</mat-label>
-                    <textarea matInput formControlName="description"></textarea>
+                    <mat-label>Legal Factory Name</mat-label>
+                    <input matInput formControlName="legalFtyName">
                 </mat-form-field>
             </div>
-        </div>
 
-        <div style="display: flex; gap: 10vh;">
-            <div>
-                <mat-form-field appearance="outline" style="width: 40vh;">
-                    <mat-label>Dye Process Loss</mat-label>
-                    <input matInput formControlName="Dyepl">
-                </mat-form-field>
-            </div>
         </div>
 
     </div>
@@ -90,49 +86,47 @@
     </ng-template>
 </p-dialog>
 
-<!----------------------------------------Dye Type Creation [End]--------------------------------------------->
+<!----------------------------------------Knitting Factory Master Creation [End]--------------------------------------------->
 
 
-<!----------------------------------------Dye Type Editing [Start]--------------------------------------------->
+<!----------------------------------------Knitting Factory Master Editing [Start]--------------------------------------------->
 
-<p-dialog [(visible)]="dyeTypeediting" [modal]="true" header="Dye Type Editing" [formGroup]="dyeTypeedit">
+<p-dialog [(visible)]="knitFtyediting" [modal]="true" header="Knit Factory Editing" [formGroup]="knitFtyedit">
 
     <div style="display: flex; flex-direction: column; gap: 0vh; flex-wrap: wrap;">
         <div style="display: flex; gap: 10vh;">
             <div>
                 <mat-form-field appearance="outline" style="width: 40vh;">
-                    <mat-label>Dye Type</mat-label>
-                    <input matInput formControlName="dyeType">
+                    <mat-label>Knit Factory Name</mat-label>
+                    <input matInput formControlName="knitFty">
                 </mat-form-field>
             </div>
+
+            <div>
+                <mat-form-field appearance="outline" style="width: 40vh;">
+                    <mat-label>Factory Location</mat-label>
+                    <input matInput formControlName="location">
+                </mat-form-field>
+            </div>
+
         </div>
 
         <div style="display: flex; gap: 10vh;">
+
             <div>
                 <mat-form-field appearance="outline" style="width: 40vh;">
-                    <mat-label>Dyeing Process</mat-label>
-                    <textarea matInput formControlName="dyeingProcess"> </textarea>
+                    <mat-label>Contact Details</mat-label>
+                    <input matInput formControlName="contact">
                 </mat-form-field>
             </div>
 
-        </div>
-
-        <div style="display: flex; gap: 10vh;">
             <div>
                 <mat-form-field appearance="outline" style="width: 40vh;">
-                    <mat-label>Fabrics Type Description</mat-label>
-                    <textarea matInput formControlName="description"></textarea>
+                    <mat-label>Legal Factory Name</mat-label>
+                    <input matInput formControlName="legalFtyName">
                 </mat-form-field>
             </div>
-        </div>
 
-        <div style="display: flex; gap: 10vh;">
-            <div>
-                <mat-form-field appearance="outline" style="width: 40vh;">
-                    <mat-label>Dye Process Loss</mat-label>
-                    <input matInput formControlName="Dyepl">
-                </mat-form-field>
-            </div>
         </div>
 
     </div>
@@ -143,4 +137,4 @@
     </ng-template>
 </p-dialog>
 
-<!---------------------------------------Dye Type Editing [End]--------------------------------------------->
+<!---------------------------------------Knitting Factory Master Editing [End]--------------------------------------------->

@@ -5,18 +5,18 @@
         </div>
         <div style="flex: 1 1 auto;"></div>
         <div style="display: flex; gap: 10px; margin-top: 1vh;">
-        
-        <div style="display: flex; gap: 10px;">
-            <label style="font-weight: normal; font-family: serif; margin-top: 5px;">woDate</label>
-            <input type="date" class="form-control" style="margin-top: 2px;" formControlName="woDate">
-        </div>
 
-        <div style="display: flex; gap: 10px;">
-            <label style="font-weight: normal; font-family: serif; margin-top: 5px;">completedDate</label>
-            <input type="date" class="form-control" style="margin-top: 2px;" formControlName="completedDate">
-        </div>
+            <div style="display: flex; gap: 10px;">
+                <label style="font-weight: normal; font-family: serif; margin-top: 5px;">woDate</label>
+                <input type="date" class="form-control" style="margin-top: 2px;" formControlName="woDate">
+            </div>
 
-    </div>
+            <div style="display: flex; gap: 10px;">
+                <label style="font-weight: normal; font-family: serif; margin-top: 5px;">completedDate</label>
+                <input type="date" class="form-control" style="margin-top: 2px;" formControlName="completedDate">
+            </div>
+
+        </div>
 
 
     </mat-toolbar>
@@ -27,33 +27,35 @@
             <!-- <p-dropdown placeholder="Buyer" [(ngModel)]="buyerName" (onChange)="getorders()" [options]="buyer"
                 optionLabel="buyer" optionValue="buyer" formControlName="buyer"></p-dropdown> -->
 
-                <mat-form-field appearance="outline">
-                    <mat-label>Buyer</mat-label>
-                    <mat-select [(ngModel)]="buyerName" formControlName="buyer" (selectionChange)="getorders()">
-                        <mat-option  *ngFor="let buyer of this.buyer" value="{{buyer.buyer}}">{{buyer.buyer}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Buyer</mat-label>
+                <mat-select [(ngModel)]="buyerName" formControlName="buyer" (selectionChange)="getorders()">
+                    <mat-option *ngFor="let buyer of this.buyer" value="{{buyer.buyer}}">{{buyer.buyer}}</mat-option>
+                </mat-select>
+            </mat-form-field>
 
             <!-- <p-dropdown placeholder="Order" [(ngModel)]="orderNo" (onChange)="getstyle()" [options]="order"
                 optionLabel="orderNO" optionValue="orderNO" formControlName="orderNo"></p-dropdown> -->
 
-                <mat-form-field appearance="outline">
-                    <mat-label>Order</mat-label>
-                    <mat-select [(ngModel)]="orderNo" formControlName="orderNo" (selectionChange)="getstyle()">
-                        <mat-option  *ngFor="let order of this.order" value="{{order.orderNO}}">{{order.orderNO}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Order</mat-label>
+                <mat-select [(ngModel)]="orderNo" formControlName="orderNo" (selectionChange)="getstyle()">
+                    <mat-option *ngFor="let order of this.order"
+                        value="{{order.orderNO}}">{{order.orderNO}}</mat-option>
+                </mat-select>
+            </mat-form-field>
 
 
             <!-- <p-dropdown placeholder="Knit Factory" [(ngModel)]="ftyname" [options]="ftyName" optionLabel="knitFty"
                 optionValue="knitFty" formControlName="knitfty"></p-dropdown> -->
 
-                <mat-form-field appearance="outline">
-                    <mat-label>Knit Factory</mat-label>
-                    <mat-select [(ngModel)]="ftyname" formControlName="knitfty">
-                        <mat-option  *ngFor="let ftyName of this.ftyName" value="{{ftyName.knitFty}}">{{ftyName.knitFty}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Knit Factory</mat-label>
+                <mat-select [(ngModel)]="ftyname" formControlName="knitfty">
+                    <mat-option *ngFor="let ftyName of this.ftyName"
+                        value="{{ftyName.knitFty}}">{{ftyName.knitFty}}</mat-option>
+                </mat-select>
+            </mat-form-field>
 
 
             <!-- <p-floatLabel>
@@ -63,7 +65,7 @@
 
             <mat-form-field appearance="outline">
                 <mat-label>woNo</mat-label>
-                <input matInput  formControlName="woNo">
+                <input matInput formControlName="woNo">
             </mat-form-field>
 
             <!-- <p-floatLabel>
@@ -73,7 +75,7 @@
 
             <mat-form-field appearance="outline">
                 <mat-label>woRefNo</mat-label>
-                <input matInput  formControlName="woRefNo">
+                <input matInput formControlName="woRefNo">
             </mat-form-field>
 
             <!-- <p-floatLabel>
@@ -125,15 +127,15 @@
                             <option *ngFor="let style of this.stylelist" [value]="style.style">
                         </datalist>
                     </td>
-                    
+
                     <td>
                         <input type="text" class="form-control" formControlName="color" list="4"
-                            (input)="getcolorvalue($event)" (change)="getsize()" >
+                            (input)="getcolorvalue($event)" (change)="getsize()">
                         <datalist id="4">
                             <option *ngFor="let color of this.colorlist" [value]="color.color">
                         </datalist>
                     </td>
-                    
+
                     <td>
                         <input type="text" class="form-control" formControlName="machDia" list="5"
                             (input)="getWoId($event.target.value, i)">
@@ -142,15 +144,25 @@
                         </datalist>
                     </td>
 
-                    <td><input class="form-control" type="text" formControlName="fabDia"></td>
-                    <td><input class="form-control" type="text" formControlName="fabType"></td>
-               
+                    <td>
+                        <input class="form-control" type="text" formControlName="fabDia" [value]="this.fabDiaData"
+                            readonly>
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" formControlName="fabType" readonly
+                            [value]="this.fabTypeData">
 
-                    <td><input class="form-control" type="text" formControlName="fabGSM"></td>
-                    
-                    <td><input class="form-control" type="text" formControlName="KnitSl"></td>
+                    </td>
 
-                    <td><input class="form-control" type="text" formControlName="knitKg"></td>
+
+                    <td><input class="form-control" type="text" formControlName="fabGSM" [value]="this.fabGsmData"
+                            readonly></td>
+
+                    <td><input class="form-control" type="text" formControlName="KnitSl" [value]="this.knitSLData"
+                            readonly></td>
+
+                    <td><input class="form-control" type="text" formControlName="knitKg" [value]="this.knitValue"
+                            (input)="valid($event.target.value)"></td>
                     <td><input class="form-control" type="text" formControlName="knitRate"></td>
                     <td><input class="form-control" type="text" formControlName="knitValue"></td>
                     <td><input class="form-control" type="text" formControlName="remarks"></td>
@@ -178,6 +190,11 @@
             </thead>
         </table>
     </div>
-    <mat-toolbar style="height: auto; display: flex; width: 100%; justify-content: center;"><button
-            class="btn btn-primary" (click)="save()">Save</button></mat-toolbar>
+    <mat-toolbar style="height: auto; display: flex; width: 100%; justify-content: center;">
+        <button class="btn btn-primary" (click)="save()" *ngIf="!valueExceeded">Save</button>
+
+        <button class="btn btn-primary" *ngIf="valueExceeded">Save</button>
+
+    </mat-toolbar>
+
 </div>

@@ -3,52 +3,54 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ApiService } from 'src/app/api.service';
 
 @Component({
-  selector: 'app-dye-fty-creation',
-  templateUrl: './dye-fty-creation.component.html',
-  styleUrls: ['./dye-fty-creation.component.css']
+  selector: 'app-knit-fty-creation',
+  templateUrl: './knit-fty-creation.component.html',
+  styleUrls: ['./knit-fty-creation.component.css']
 })
-export class DyeFtyCreationComponent {
-  dyeFtycreation : boolean = false;
+export class KnitFtyCreationComponent {
 
-  dyeFtyediting : boolean = false;
+  knitFtycreation : boolean = false;
+
+  knitFtyediting : boolean = false;
   
-  dyeFtycreate! : FormGroup
+  knitFtycreate! : FormGroup
   
-  dyeFtyedit! : FormGroup
-  dyeFtydata: any;
+  knitFtyedit! : FormGroup
+  KnitFtydata: any;
   datalist: any;
   
   ngOnInit(): void {
-    this.api.dyeFty_Master_AllData().subscribe((res)=>{
-      this.dyeFtydata = res.dyeFty
+    this.api.KnitFty_Master_AllData().subscribe((res)=>{
+      this.KnitFtydata = res.knitFty
     })
   }
   constructor(private fb : FormBuilder, private api : ApiService){
   
-    this.dyeFtycreate = this.fb.group({
+    this.knitFtycreate = this.fb.group({
       id : new FormControl('') , 
-      dyeFty : new FormControl('') ,  
+      knitFty : new FormControl('') ,  
       location : new FormControl('') ,  
       contact : new FormControl('') ,   
       legalFtyName : new FormControl('') 
     })
   
   
-    this.dyeFtyedit = this.fb.group({
+    this.knitFtyedit = this.fb.group({
       id : new FormControl('') , 
-      dyeFty : new FormControl('') ,  
+      knitFty : new FormControl('') ,  
       location : new FormControl('') ,  
       contact : new FormControl('') ,   
       legalFtyName : new FormControl('') 
     })
   }
-  
+
+
   edit(id:any){
-    this.api.dyeFty_Master_SingleData(id).subscribe((res)=>{
+    this.api.KnitFty_Master_SingleData(id).subscribe((res)=>{
       this.datalist = res.knitFty
-      this.dyeFtyedit .patchValue({
+      this.knitFtyedit .patchValue({
         id :this.datalist[0].id, 
-        dyeFty : this.datalist[0].dyeFty,
+        knitFty : this.datalist[0].knitFty,
         location : this.datalist[0].location,
         contact : this.datalist[0].contact,
         legalFtyName : this.datalist[0].legalFtyName
@@ -58,7 +60,7 @@ export class DyeFtyCreationComponent {
 }
 
 delete(id:any){
-  this.api.delete_dyeFty_master(id).subscribe((res)=>{
+  this.api.delete_KnitFty_master(id).subscribe((res)=>{
     alert(res.message)
     window.location.reload()
   })
@@ -66,16 +68,17 @@ delete(id:any){
 
 update(){
 
-  this.api.dyeFty_Master(this.dyeFtyedit.value).subscribe((res)=>{
+  this.api.KnitFty_Master(this.knitFtyedit.value).subscribe((res)=>{
     alert(res.message)
     window.location.reload()
   })
 }
 
 saveButton(){
-  this.api.dyeFty_Master(this.dyeFtycreate.value).subscribe((res)=>{
+  this.api.KnitFty_Master(this.knitFtycreate.value).subscribe((res)=>{
     alert(res.message)
     window.location.reload()
   })
 }
+  
 }

@@ -10,8 +10,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  // apiUrl = "https://tracker.seppam.com";
-  apiUrl = "http://localhost:2000";
+  apiUrl = "https://tracker.seppam.com";
+  // apiUrl = "http://localhost:2000";
 
   token: any;
   profilenames: any;
@@ -577,6 +577,39 @@ getknitwosize(knitfty:any, buyer: any, order: any, style: any, color: any): Obse
 
 
 
+
+getknit_Ety_wofty(): Observable<any> {
+  return this.http.get(this.getUrl() + `/filtersapi/knitentry_wofty`, this.getHeaders())
+}
+
+
+getknit_Ety_wobuyers(knitfty:any): Observable<any> {
+  return this.http.get(this.getUrl() + `/filtersapi/knitentry_wobuyer?knitfty=${knitfty}`, this.getHeaders())
+}
+
+
+getknit_Ety_woorders(knitfty:any, buyer: any): Observable<any> {
+  return this.http.get(this.getUrl() + `/filtersapi/knitentry_woorderNo?knitfty=${knitfty}&buyer=${buyer}`, this.getHeaders())
+}
+
+getknit_Ety_wostyle(knitfty:any, buyer: any, order: any): Observable<any> {
+  return this.http.get(this.getUrl() + `/filtersapi/knitentry_wostyle?knitfty=${knitfty}&buyer=${buyer}&orderNo=${order}`, this.getHeaders())
+}
+
+getknit_Ety_wocolor(knitfty:any, buyer: any, order: any, style: any): Observable<any> {
+  return this.http.get(this.getUrl() + `/filtersapi/knitentry_wocolor?knitfty=${knitfty}&buyer=${buyer}&orderNo=${order}&style=${style}`, this.getHeaders())
+}
+
+getknit_Ety_wosize(knitfty:any, buyer: any, order: any, style: any, color: any): Observable<any> {
+  return this.http.get(this.getUrl() + `/filtersapi/knitentry_wosize?knitfty=${knitfty}&buyer=${buyer}&orderNo=${order}&style=${style}&color=${color}`, this.getHeaders())
+}
+
+
+
+
+
+
+
 getdyewofty(): Observable<any> {
   return this.http.get(this.getUrl() + `/filtersapi/dyewofty`, this.getHeaders())
 }
@@ -600,4 +633,215 @@ getdyewocolor(dyefty:any, buyer: any, order: any, style: any): Observable<any> {
 getdyewosize(dyefty:any, buyer: any, order: any, style: any, color: any): Observable<any> {
   return this.http.get(this.getUrl() + `/filtersapi/dyewosize?dyefty=${dyefty}&buyer=${buyer}&orderNo=${order}&style=${style}&color=${color}`, this.getHeaders())
 }
+
+// ========================================================== buyer Master ======================================================
+
+Drop_Buyer_master():Observable<any>{
+  return this.http.get(this.getUrl()+ `/mastersapi/drop-buyer-Master` ,this.getHeaders())
+}
+BuyerId(buyer:any):Observable<any>{
+  return this.http.get(this.getUrl()+ `/mastersapi/drop-buyerId-Master?buyer=${buyer}` ,this.getHeaders())
+}
+
+Buyer_master(data:any):Observable<any>{
+  return this.http.post(this.getUrl()+ `/mastersapi/buyer-master` ,data , this.getHeaders())
+}
+
+Buyer_master_AllData():Observable<any>{
+  return this.http.get(this.getUrl()+ `/mastersapi/buyer-master` ,this.getHeaders())
+}
+
+Buyer_master_SingleData(id:any):Observable<any>{
+  return this.http.get(this.getUrl()+ `/mastersapi/buyer-master/${id}` ,this.getHeaders())
+}
+delete_Buyer_master(id:any):Observable<any>{
+  return this.http.delete(this.getUrl() + `/mastersapi/buyer-master/${id}`, this.getHeaders())
+}
+
+// ================================ product Master (Style) ======================================================================
+
+
+Drop_Style_master():Observable<any>{
+  return this.http.get(this.getUrl()+ `/mastersapi/drop-style-Master` ,this.getHeaders())
+}
+
+StyleId(style:any):Observable<any>{
+  return this.http.get(this.getUrl()+ `/mastersapi/drop-styleId-Master?style=${style}` ,this.getHeaders())
+}
+
+style_master(data:any):Observable<any>{
+  return this.http.post(this.getUrl()+ `/mastersapi/style-master` ,data , this.getHeaders())
+}
+
+style_master_AllData():Observable<any>{
+  return this.http.get(this.getUrl()+ `/mastersapi/style-master` ,this.getHeaders())
+}
+
+style_master_SingleData(id:any):Observable<any>{
+  return this.http.get(this.getUrl()+ `/mastersapi/style-master/${id}` ,this.getHeaders())
+}
+delete_style_master(id:any):Observable<any>{
+  return this.http.delete(this.getUrl() + `/mastersapi/style-master/${id}`, this.getHeaders())
+}
+
+// ========================== Color master =====================================================================================
+
+Color_master(data:any):Observable<any>{
+  return this.http.post(this.getUrl()+ `/mastersapi/color-master` ,data , this.getHeaders())
+}
+
+Color_master_AllData():Observable<any>{
+  return this.http.get(this.getUrl()+ `/mastersapi/color-master` ,this.getHeaders())
+}
+
+Color_master_SingleData(id:any):Observable<any>{
+  return this.http.get(this.getUrl()+ `/mastersapi/color-master/${id}` ,this.getHeaders())
+}
+delete_Color_master(id:any):Observable<any>{
+  return this.http.delete(this.getUrl() + `/mastersapi/color-master/${id}`, this.getHeaders())
+}
+
+// =========================== Size Master =====================================================================================
+
+Drop_Size_master():Observable<any>{
+  return this.http.get(this.getUrl()+ `/mastersapi/drop-size-Master` ,this.getHeaders())
+}
+
+SizeId(size:any):Observable<any>{
+  return this.http.get(this.getUrl()+ `/mastersapi/drop-sizeId-Master?size=${size}` ,this.getHeaders())
+}
+size_master(data:any):Observable<any>{
+  return this.http.post(this.getUrl()+ `/mastersapi/size-master` ,data , this.getHeaders())
+}
+
+size_master_AllData():Observable<any>{
+  return this.http.get(this.getUrl()+ `/mastersapi/size-master` ,this.getHeaders())
+}
+
+size_master_SingleData(id:any):Observable<any>{
+  return this.http.get(this.getUrl()+ `/mastersapi/size-master/${id}` ,this.getHeaders())
+}
+delete_size_master(id:any):Observable<any>{
+  return this.http.delete(this.getUrl() + `/mastersapi/size-master/${id}`, this.getHeaders())
+}
+
+// ========================== Yarn Type ========================================================================================
+
+yarnType_master(data:any):Observable<any>{
+  return this.http.post(this.getUrl()+ `/mastersapi/yarn-type-master` ,data , this.getHeaders())
+}
+
+yarnType_master_AllData():Observable<any>{
+  return this.http.get(this.getUrl()+ `/mastersapi/yarn-type-master` ,this.getHeaders())
+}
+
+yarnType_master_SingleData(id:any):Observable<any>{
+  return this.http.get(this.getUrl()+ `/mastersapi/yarn-type/${id}` ,this.getHeaders())
+}
+delete_yarnType_master(id:any):Observable<any>{
+  return this.http.delete(this.getUrl() + `/mastersapi/yarn-type-master/${id}`, this.getHeaders())
+}
+
+// =================================== Fabric Type =============================================================================
+
+fabrictype_master(data:any):Observable<any>{
+  return this.http.post(this.getUrl()+ `/mastersapi/fabric-type-master` ,data , this.getHeaders())
+}
+
+fabrictype_master_AllData():Observable<any>{
+  return this.http.get(this.getUrl()+ `/mastersapi/fabric-type-master` ,this.getHeaders())
+}
+
+fabrictype_master_SingleData(id:any):Observable<any>{
+  return this.http.get(this.getUrl()+ `/mastersapi/fabric-type/${id}` ,this.getHeaders())
+}
+delete_fabrictype_master(id:any):Observable<any>{
+  return this.http.delete(this.getUrl() + `/mastersapi/fabric-type-master/${id}`, this.getHeaders())
+}
+// =================================== dye Type =============================================================================
+fsize_master(data:any):Observable<any>{
+  return this.http.post(this.getUrl()+ `/mastersapi/fsize-master` ,data , this.getHeaders())
+}
+
+fsize_master_AllData():Observable<any>{
+  return this.http.get(this.getUrl()+ `/mastersapi/fsize-master` ,this.getHeaders())
+}
+
+fsize_master_SingleData(id:any):Observable<any>{
+  return this.http.get(this.getUrl()+ `/mastersapi/fsize/${id}` ,this.getHeaders())
+}
+delete_fsize_master(id:any):Observable<any>{
+  return this.http.delete(this.getUrl() + `/mastersapi/fsize-master/${id}`, this.getHeaders())
+}
+
+// =================================== dyetype=============================================================================
+
+dyetype_master(data:any):Observable<any>{
+  return this.http.post(this.getUrl()+ `/mastersapi/dye-type-master` ,data , this.getHeaders())
+}
+
+dyetype_master_AllData():Observable<any>{
+  return this.http.get(this.getUrl()+ `/mastersapi/dye-type-master` ,this.getHeaders())
+}
+
+dyetype_master_SingleData(id:any):Observable<any>{
+  return this.http.get(this.getUrl()+ `/mastersapi/dye-type/${id}` ,this.getHeaders())
+}
+delete_dyetype_master(id:any):Observable<any>{
+  return this.http.delete(this.getUrl() + `/mastersapi/dye-type-master/${id}`, this.getHeaders())
+}
+
+// =================================== KnitFty=============================================================================
+
+
+KnitFty_Master(data:any):Observable<any>{
+  return this.http.post(this.getUrl()+ `/mastersapi/knitFty-master` ,data , this.getHeaders())
+}
+
+KnitFty_Master_AllData():Observable<any>{
+  return this.http.get(this.getUrl()+ `/mastersapi/knitFty-master` ,this.getHeaders())
+}
+
+KnitFty_Master_SingleData(id:any):Observable<any>{
+  return this.http.get(this.getUrl()+ `/mastersapi/knitFty-master/${id}` ,this.getHeaders())
+}
+delete_KnitFty_master(id:any):Observable<any>{
+  return this.http.delete(this.getUrl() + `/mastersapi/knitFty-master/${id}`, this.getHeaders())
+}
+
+// =================================== dyeFty=============================================================================
+
+
+dyeFty_Master(data:any):Observable<any>{
+  return this.http.post(this.getUrl()+ `/mastersapi/dyeFty-master` ,data , this.getHeaders())
+}
+
+dyeFty_Master_AllData():Observable<any>{
+  return this.http.get(this.getUrl()+ `/mastersapi/dyeFty-master` ,this.getHeaders())
+}
+
+dyeFty_Master_SingleData(id:any):Observable<any>{
+  return this.http.get(this.getUrl()+ `/mastersapi/dyeFty-master/${id}` ,this.getHeaders())
+}
+delete_dyeFty_master(id:any):Observable<any>{
+  return this.http.delete(this.getUrl() + `/mastersapi/dyeFty-master/${id}`, this.getHeaders())
+}
+
+// =================================== spinerFty=============================================================================
+spinFty_Master(data:any):Observable<any>{
+  return this.http.post(this.getUrl()+ `/mastersapi/spinFty-master` ,data , this.getHeaders())
+}
+
+spinFty_Master_AllData():Observable<any>{
+  return this.http.get(this.getUrl()+ `/mastersapi/spinFty-master` ,this.getHeaders())
+}
+
+spinFty_Master_SingleData(id:any):Observable<any>{
+  return this.http.get(this.getUrl()+ `/mastersapi/spinFty-master/${id}` ,this.getHeaders())
+}
+delete_spinFty_master(id:any):Observable<any>{
+  return this.http.delete(this.getUrl() + `/mastersapi/spinFty-master/${id}`, this.getHeaders())
+}
+
+
 }
