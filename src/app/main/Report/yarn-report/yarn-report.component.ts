@@ -4,6 +4,8 @@ import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from 
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 import * as XLSX from 'xlsx'
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-yarn-report',
@@ -72,7 +74,7 @@ export class YarnReportComponent implements OnInit {
   parsedData: any;
   parsedData1: any;
   parsedData2: any;
-
+  download:boolean = true;
 
   constructor(private router: Router, private api: ApiService, private fb: FormBuilder) { }
 
@@ -159,6 +161,7 @@ export class YarnReportComponent implements OnInit {
   }
 
   view(id: any) {
+    this.ViewAllYarnData = true
     this.api.getSingleLcClosure(id).subscribe((res) => {
       this.yarndetails = res.yarn;
       this.yarn_lc_lines_Details = res.yarn_lc_lines;
@@ -200,7 +203,6 @@ export class YarnReportComponent implements OnInit {
     const fixedOrderAllocationData = OrderAllData.receipt
     try {
       this.parsedData1 = fixedOrderAllocationData;
- 
       return this.parsedData1;
     } catch (error) {
       console.error('Error parsing order_allocation data:', error);
@@ -217,6 +219,31 @@ export class YarnReportComponent implements OnInit {
       console.error('Error parsing order_allocation data:', error);
     }
   }
+
+
+
+  exportToPDF() { 
+    this.download = false ;
+    const element = document.getElementById('print');
+
+    html2canvas(element!).then(canvas => {
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('p', 'mm', 'a5');
+
+      // For full page capture, set proper width and height
+      const imgProps = pdf.getImageProperties(imgData);
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      pdf.save('LC-Closure-Report.pdf');
+  
+    });
+  }
+  
+
+
+
 
   delete(id: any) {
     let text = "Press Ok to delete the details";

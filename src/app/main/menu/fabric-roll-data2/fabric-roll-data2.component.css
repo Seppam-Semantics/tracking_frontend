@@ -141,5 +141,15 @@ table {
   .filterList2{
     display: contents;
   }
+
+
 }
 
+
+.delete{
+  position: sticky;
+  top: 0;
+}
+.sticky {
+  right: 0; /* Stick to the right */
+}

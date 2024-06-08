@@ -7,7 +7,8 @@
         <div style="display: flex; justify-content: flex-end; gap: 10px;  width: 90%">
             <div>
                 <p-dropdown placeholder="Dye Factory" formControlName="dyeFactory" [options]="factoryname"
-                    optionLabel="dyeinFty" optionValue="dyeinFty" ></p-dropdown>
+                    [(ngModel)]="factoryvalue" optionLabel="dyefty" optionValue="dyefty"
+                    (onChange)="woByFty()"></p-dropdown>
             </div>
 
             <div>
@@ -62,7 +63,7 @@
 
 
                             <p-dropdown placeholder="Order" [(ngModel)]="ordernumbers" (onChange)="wobyOrder()"
-                                [options]="order" optionLabel="orderNO" optionValue="orderNO"
+                                [options]="order" optionLabel="orderNo" optionValue="orderNo"
                                 formControlName="orderNo"></p-dropdown>
 
 
@@ -160,8 +161,8 @@
                                             style="width: 15vh; display: inline;"
                                             (input)="getwoId($event.target.value, i)">
                                         <datalist id="size">
-                                            <option *ngFor="let size of this.sizelist" value="{{size.size}}">
-                                                {{size.size}}
+                                            <option *ngFor="let size of this.sizelist" value="{{size.machDia}}">
+                                                {{size.machDia}}
                                             </option>
                                         </datalist>
                                     </td>

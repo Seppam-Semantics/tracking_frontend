@@ -35,6 +35,7 @@ inputValue:any;
 data: any;
 fabrictype_dropdown: any;
 loading : boolean = false;
+factoryvalue : any;
 
 constructor(private fb : FormBuilder , private api : ApiService , private router : Router){
 
@@ -136,8 +137,7 @@ constructor(private fb : FormBuilder , private api : ApiService , private router
 
 //============================================================================================
 ngOnInit(): void {
-  this.getbuyers()
-  this.api.dye_factory_name().subscribe((res)=>{
+  this.api.getdyewofty().subscribe((res)=>{
     this.factoryname=res.factorys
   })
 
@@ -246,70 +246,64 @@ dyesubmit() {
 
 
 //=====================================================================================================
-public getbuyers() {
-  this.api.getbuyersData().subscribe((res) => {
+public getbuyers(factory:any) {
+  this.api.getdyewobuyers(factory).subscribe((res) => {
     this.buyers = res.buyers;
   })
 }
 
-getorders(buyer: any) {
-  this.api.getordersData(buyer).subscribe((res) => {
+getorders( factory :any , buyer: any) {
+  this.api.getdyewoorders(factory,buyer).subscribe((res) => {
     this.order = res.orders
   })
 }
 
-getstyle(buyer: any, orderNo: any) {
-  this.api.getstyleData(buyer, orderNo).subscribe((res) => {
+getstyle( factory :any , buyer: any, orderNo: any) {
+  this.api.getdyewostyle(factory,buyer,orderNo).subscribe((res) => {
     this.stylelist = res.styles;
   })
 }
 
-getcolor(buyer: any, orderNo: any, style: any) {
-  this.api.getcolorData(buyer, orderNo, style).subscribe((res) => {
+getcolor(factory :any, buyer: any, orderNo: any, style: any) {
+  this.api.getdyewocolor(factory,buyer, orderNo, style).subscribe((res) => {
     this.colorlist = res.colors;
   })
 }
 
-getsize(buyer: any, orderNo: any, style: any, color: any) {
-  this.api.getsizeData(buyer, orderNo, style, color).subscribe((res) => {
+getsize(factory :any , buyer: any, orderNo: any, style: any, color: any) {
+  this.api.getdyewosize(factory,buyer, orderNo, style, color).subscribe((res) => {
     this.sizelist = res.sizes;
-  })
-}
 
-loadworkorder(buyer: any, orderNo: string = '', style: string ='', color: string = '', size: string ='') {
-  this.api.getwodetails(buyer, orderNo, style, color, size).subscribe((res) => {
-    this.data = res.workorders;
-  });
+  })
 }
 
 getwoId(size: any, index: number){
     this.api.getwodetails(this.buyerName, this.ordernumbers, this.styleslist, this.colorslist, size).subscribe((res) => {
       const woId = res.workorders[0].id;
+
       const formArray = this.dye_Entery.get('data') as FormArray;
       const row = formArray.at(index);
       row.get('woId')?.setValue(woId);
     });
 }
 
+woByFty(){
+  this.getbuyers(this.factoryvalue);
+}
+
 woByBuyer(){
-  this.getorders(this.buyerName);
-  this.loadworkorder(this.buyerName);
+  this.getorders(this.factoryvalue , this.buyerName);
 }
 wobyOrder(){
-  this.getstyle(this.buyerName, this.ordernumbers)
-    this.loadworkorder(this.buyerName, this.ordernumbers);
+  this.getstyle(this.factoryvalue , this.buyerName, this.ordernumbers)
 }
 wobystyle(){
-  this.getcolor(this.buyerName, this.ordernumbers, this.styleslist)
-    this.loadworkorder(this.buyerName, this.ordernumbers, this.styleslist);
+  this.getcolor(this.factoryvalue , this.buyerName, this.ordernumbers, this.styleslist)
 }
 wobycolor(){
-  this.getsize(this.buyerName, this.ordernumbers, this.styleslist, this.colorslist)
-  this.loadworkorder(this.buyerName, this.ordernumbers, this.styleslist, this.colorslist);
+  this.getsize(this.factoryvalue , this.buyerName, this.ordernumbers, this.styleslist, this.colorslist)
 }
-wobysize(){
-  this.loadworkorder(this.buyerName, this.ordernumbers, this.styleslist, this.colorslist, this.sizeslist);
-}
+
 
 clearAll(){
   this.buyerName = ''

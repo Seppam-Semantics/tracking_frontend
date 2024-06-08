@@ -7,26 +7,29 @@
     <div style="flex: 1 1 auto;"></div>
     <div style="display: flex; gap: 10px;">
         <div style="display: flex; gap: 10px;">
-            <label style="font-weight: normal; font-family: serif; margin-top: 5px;">Knit Fty</label>
-            <input type="text" class="form-control" style="margin-top: 2px;" [(ngModel)]="KnitFtyFillter"
-                list="knitfty">
-            <datalist id="knitfty">
-                <option>In process</option>
-            </datalist>
+            <!-- <mat-form-field appearance="outline">
+                <mat-label>knit fty</mat-label>
+                <mat-select [(ngModel)]="KnitFtyFillter">
+                    <mat-option> </mat-option>
+                </mat-select>
+            </mat-form-field> -->
+
         </div>
         <div style="display: flex; gap: 10px;">
-            <label style="font-weight: normal; font-family: serif; margin-top: 5px;">Buyer</label>
-            <input type="text" class="form-control" style="margin-top: 2px;" [(ngModel)]="BuyerFillter" list="Buyer">
-            <datalist id="Buyer">
-                <option>In process</option>
-            </datalist>
+            <!-- <mat-form-field appearance="outline">
+                <mat-label>Buyer</mat-label>
+                <mat-select [(ngModel)]="BuyerFillter">
+                    <mat-option> </mat-option>
+                </mat-select>
+            </mat-form-field> -->
         </div>
         <div style="display: flex; gap: 10px;">
-            <label style="font-weight: normal; font-family: serif; margin-top: 5px;">Order</label>
-            <input type="text" class="form-control" style="margin-top: 2px;" [(ngModel)]="OrderFillter" list="Order">
-            <datalist id="Order">
-                <option>In process</option>
-            </datalist>
+            <!-- <mat-form-field appearance="outline">
+                <mat-label>Order</mat-label>
+                <mat-select [(ngModel)]="OrderFillter">
+                    <mat-option> </mat-option>
+                </mat-select>
+            </mat-form-field> -->
         </div>
     </div>
 
@@ -61,7 +64,7 @@
 
                 <td>{{data.buyer}}</td>
                 <td>{{data.orderNo}}</td>
-                <td>{{data.knitKgs}}</td>
+                <td>{{data.knitKg}}</td>
                 <td>{{data.knitValue}}</td>
 
                 <td><button class="btn btn-primary" (click)="edit(data.id)"><mat-icon>edit</mat-icon></button></td>
@@ -100,39 +103,67 @@
             <div
                 style="display: flex; justify-content:center; gap: 3vh; margin-top: 3vh; flex-wrap: wrap; margin-bottom: 1vh;">
     
-                <p-dropdown placeholder="Buyer" [(ngModel)]="buyerName" (onChange)="getorders()" [options]="buyer"
-                    optionLabel="buyer" optionValue="buyer" formControlName="buyer"></p-dropdown>
-    
-    
-                <p-dropdown placeholder="Order" [(ngModel)]="orderNo" (onChange)="getstyle()" [options]="order"
-                    optionLabel="orderNO" optionValue="orderNO" formControlName="orderNo"></p-dropdown>
-    
-    
-                <p-dropdown placeholder="Knit Factory" [(ngModel)]="ftyname" [options]="ftyName" optionLabel="knitFty"
-                    optionValue="knitFty" formControlName="knitfty"></p-dropdown>
-    
-    
-    
-                <p-floatLabel>
-                    <input pInputText id="WO no" formControlName="woNo" />
-                    <label for="WO no">WO no</label>
-                </p-floatLabel>
-    
-                <p-floatLabel>
-                    <input pInputText id="WO Ref" formControlName="woRefNo" />
-                    <label for="WO Ref">WO Ref</label>
-                </p-floatLabel>
-    
-                <!-- <p-floatLabel>
-                    <p-calendar inputId="WO Date" formControlName="woDate" dateFormat="dd.mm.yy" />
-                    <label for="WO Date">WO Date</label>
-                </p-floatLabel>
-    
-                <p-floatLabel>
-                    <p-calendar inputId="Complete Date" formControlName="completedDate" dateFormat="dd.mm.yy"/>
-                    <label for="Complete Date">Complete Date</label>
-                </p-floatLabel> -->
-    
+  <!-- <p-dropdown placeholder="Buyer" [(ngModel)]="buyerName" (onChange)="getorders()" [options]="buyer"
+                optionLabel="buyer" optionValue="buyer" formControlName="buyer"></p-dropdown> -->
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Buyer</mat-label>
+                    <mat-select [(ngModel)]="buyerName" formControlName="buyer" (selectionChange)="getorders()">
+                        <mat-option  *ngFor="let buyer of this.buyer" value="{{buyer.buyer}}">{{buyer.buyer}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+            <!-- <p-dropdown placeholder="Order" [(ngModel)]="orderNo" (onChange)="getstyle()" [options]="order"
+                optionLabel="orderNO" optionValue="orderNO" formControlName="orderNo"></p-dropdown> -->
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Order</mat-label>
+                    <mat-select [(ngModel)]="orderNo" formControlName="orderNo" (selectionChange)="getstyle()">
+                        <mat-option  *ngFor="let order of this.order" value="{{order.orderNO}}">{{order.orderNO}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+
+            <!-- <p-dropdown placeholder="Knit Factory" [(ngModel)]="ftyname" [options]="ftyName" optionLabel="knitFty"
+                optionValue="knitFty" formControlName="knitfty"></p-dropdown> -->
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Knit Factory</mat-label>
+                    <mat-select [(ngModel)]="ftyname" formControlName="knitfty">
+                        <mat-option  *ngFor="let ftyName of this.ftyName" value="{{ftyName.knitFty}}">{{ftyName.knitFty}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+
+            <!-- <p-floatLabel>
+                <input pInputText id="WO no" formControlName="woNo" />
+                <label for="WO no">WO no</label>
+            </p-floatLabel> -->
+
+            <mat-form-field appearance="outline">
+                <mat-label>woNo</mat-label>
+                <input matInput  formControlName="woNo">
+            </mat-form-field>
+
+            <!-- <p-floatLabel>
+                <input pInputText id="WO Ref" formControlName="woRefNo" />
+                <label for="WO Ref">WO Ref</label>
+            </p-floatLabel> -->
+
+            <mat-form-field appearance="outline">
+                <mat-label>woRefNo</mat-label>
+                <input matInput  formControlName="woRefNo">
+            </mat-form-field>
+
+            <!-- <p-floatLabel>
+                <p-calendar inputId="WO Date" formControlName="woDate" dateFormat="dd.mm.yy" />
+                <label for="WO Date">WO Date</label>
+            </p-floatLabel>
+
+            <p-floatLabel>
+                <p-calendar inputId="Complete Date" formControlName="completedDate" dateFormat="dd.mm.yy"/>
+                <label for="Complete Date">Complete Date</label>
+            </p-floatLabel> -->
     
             </div>
         </mat-toolbar>
@@ -140,7 +171,7 @@
             <table class="table table-hover">
                 <thead class="thead-dark">
                     <tr>
-                        <th><button class="btn btn-primary" (click)="KnitWorkOrderAddButton()">+</button></th>
+                        <!-- <th><button class="btn btn-primary" (click)="KnitWorkOrderAddButton()">+</button></th> -->
                         <th>S.No</th>
                         <th>Mach Dia</th>
                         <th>Fab Dia</th>
@@ -161,7 +192,7 @@
                 </thead>
                 <tbody formArrayName="data">
                     <tr *ngFor="let list of items.controls; let i=index" [formGroupName]="i">
-                        <td></td>
+                        <!-- <td></td> -->
                         <td>{{i+1}}</td>
                         <td><input class="form-control" type="text" formControlName="machDia"></td>
     

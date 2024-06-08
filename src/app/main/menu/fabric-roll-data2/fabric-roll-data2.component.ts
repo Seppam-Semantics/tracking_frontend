@@ -294,6 +294,13 @@ woupdatesubmit(){
     this.woByBuyer()
   })
 }
+
+delete(id:any){
+  this.api.Workorderdelect(id).subscribe((res)=>{
+    alert(res.message)
+    window.location.reload()
+  })
+}
 knite(){
 this.router.navigate(['/main/Knit-Report'])
 }

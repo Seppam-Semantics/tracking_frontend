@@ -100,45 +100,75 @@
         <mat-toolbar style="display: inline-table; width: 100%; height: 12vh;">
             <div style="display: flex; justify-content:center; gap: 3vh; margin-top: 3vh; flex-wrap: wrap; margin-bottom: 1vh;">
     
-                <p-dropdown placeholder="Buyer" [(ngModel)]="buyerName" (onChange)="getorders()" [options]="buyer"
-            optionLabel="buyer" optionValue="buyer" formControlName="buyer"></p-dropdown>
+             <!-- <p-dropdown placeholder="Buyer" [(ngModel)]="buyerName" (onChange)="getorders()" [options]="buyer"
+            optionLabel="buyer" optionValue="buyer" formControlName="buyer"></p-dropdown> -->
 
+            <mat-form-field appearance="outline">
+                <mat-label>Buyer</mat-label>
+                <mat-select [(ngModel)]="buyerName" formControlName="buyer" (selectionChange)="getorders()">
+                    <mat-option  *ngFor="let buyer of this.buyer" value="{{buyer.buyer}}">{{buyer.buyer}}</mat-option>
+                </mat-select>
+            </mat-form-field>
 
-        <p-dropdown placeholder="Order" [(ngModel)]="orderNo" (onChange)="getstyle()" [options]="order"
-            optionLabel="orderNO" optionValue="orderNO" formControlName="orderNo"></p-dropdown>
+        <!-- <p-dropdown placeholder="Order" [(ngModel)]="orderNo" (onChange)="getstyle()" [options]="order"
+            optionLabel="orderNO" optionValue="orderNO" formControlName="orderNo"></p-dropdown> -->
 
+            <mat-form-field appearance="outline">
+                <mat-label>Order</mat-label>
+                <mat-select [(ngModel)]="orderNo" formControlName="orderNo" (selectionChange)="getstyle()">
+                    <mat-option  *ngFor="let order of this.order" value="{{order.orderNO}}">{{order.orderNO}}</mat-option>
+                </mat-select>
+            </mat-form-field>
 
-        <p-dropdown placeholder="Dye Factory"  [options]="factoryname" optionLabel="dyeinFty"
-            optionValue="dyeinFty" formControlName="dyefty" ></p-dropdown>
+        <!-- <p-dropdown placeholder="Knit Factory"  [options]="factoryname" optionLabel="dyeinFty"
+            optionValue="dyeinFty" formControlName="dyefty" ></p-dropdown> -->
 
+            <mat-form-field appearance="outline">
+                <mat-label>Dye Factory</mat-label>
+                <mat-select [(ngModel)]="ftyname" formControlName="dyefty">
+                    <mat-option  *ngFor="let ftyName of this.factoryname" value="{{ftyName.dyeinFty}}">{{ftyName.dyeinFty}}</mat-option>
+                </mat-select>
+            </mat-form-field>
 
-            <p-floatLabel>
+            <!-- <p-floatLabel>
                 <input pInputText id="Knit Fty Details"  formControlName="dyefty_details"/>
                 <label for="Knit Fty Details">Dye Fty Details</label>
+            </p-floatLabel> -->
+
+            <mat-form-field appearance="outline">
+                <mat-label>Dye Fty Details</mat-label>
+                <input matInput  formControlName="dyefty_details">
+            </mat-form-field>
+
+            <!-- <p-floatLabel>
+                <input pInputText id="WO no"  formControlName="woNo"/>
+                <label for="WO no">WO no</label>
+            </p-floatLabel> -->
+
+            <mat-form-field appearance="outline">
+                <mat-label>WO no</mat-label>
+                <input matInput  formControlName="woNo">
+            </mat-form-field>
+
+            <!-- <p-floatLabel>
+                <input pInputText id="WO Ref"  formControlName="woRefNo"/>
+                <label for="WO Ref">WO Ref</label>
+            </p-floatLabel> -->
+            
+            <mat-form-field appearance="outline">
+                <mat-label>WO Ref</mat-label>
+                <input matInput  formControlName="woRefNo">
+            </mat-form-field>
+
+            <!-- <p-floatLabel>
+                <p-calendar inputId="WO Date" formControlName="5" />
+                <label for="WO Date">WO Date</label>
             </p-floatLabel>
-    
-    
-    
-                <p-floatLabel>
-                    <input pInputText id="WO no"  formControlName="woNo"/>
-                    <label for="WO no">WO no</label>
-                </p-floatLabel>
-    
-                <p-floatLabel>
-                    <input pInputText id="WO Ref"  formControlName="woRefNo"/>
-                    <label for="WO Ref">WO Ref</label>
-                </p-floatLabel>
-                
-                <!-- <p-floatLabel>
-                    <p-calendar inputId="WO Date" formControlName="5" />
-                    <label for="WO Date">WO Date</label>
-                </p-floatLabel>
-    
-                <p-floatLabel>
-                    <p-calendar inputId="Complete Date" formControlName="6" />
-                    <label for="Complete Date">Complete Date</label>
-                </p-floatLabel> -->
-    
+
+            <p-floatLabel>
+                <p-calendar inputId="Complete Date" formControlName="6" />
+                <label for="Complete Date">Complete Date</label>
+            </p-floatLabel> -->
     
             </div>
         </mat-toolbar>

@@ -300,6 +300,7 @@ export class YarnTranscationComponent implements OnInit {
 
       const receivedData = this.lotlineDetails;
 
+
       const yarnEntryData = this.LotCheck.get('data') as FormArray;
       yarnEntryData.clear();
 
@@ -307,7 +308,7 @@ export class YarnTranscationComponent implements OnInit {
         const LotCheckDetails = this.fb.group({
           id: dataItem.id,
           yarnLineId: this.yarnLineId,
-          yarnType: this.lotYarnType.yarnType,
+          yarnType: dataItem.yarnType,
           lotNo: dataItem.lotNo,
           sampleDate: this.datePipe.transform(dataItem.sampleDate, 'yyyy-MM-dd'),
           resultDate: this.datePipe.transform(dataItem.resultDate, 'yyyy-MM-dd'),

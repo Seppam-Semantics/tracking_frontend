@@ -63,6 +63,8 @@ import { PanelModule } from 'primeng/panel';
 import { KnitDeliveryComponent } from './Report/knit-delivery/knit-delivery.component';
 import { DyeDeliveryComponent } from './Report/dye-delivery/dye-delivery.component';
 import {MatMenuModule} from '@angular/material/menu';
+import { FieldsetModule } from 'primeng/fieldset';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 import { TableModule } from 'primeng/table';
 import { DropdownModule } from 'primeng/dropdown';
@@ -89,6 +91,25 @@ import { OCRComponent } from './Report/ocr/ocr.component';
 import { DayKnitComponent } from './Report/day-knit/day-knit.component';
 import { DayDyeComponent } from './Report/day-dye/day-dye.component';
 import { DyeBatchComponent } from './Report/dye-batch/dye-batch.component';
+import { TransactionMasteRootComponent } from './masters/Transaction Master/transaction-maste-root/transaction-maste-root.component';
+
+
+// import { DxDataGridModule } from "devextreme-angular";
+
+import { BuyerCreationComponent } from './masters/Transaction Master/buyer-creation/buyer-creation.component';
+import { StyleCreationComponent } from './masters/Transaction Master/style-creation/style-creation.component';
+import { ColorCreationComponent } from './masters/Transaction Master/color-creation/color-creation.component';
+import { SizeCreationComponent } from './masters/Transaction Master/size-creation/size-creation.component';
+import { FabricsdiaCreationComponent } from './masters/Transaction Master/fabricsdia-creation/fabricsdia-creation.component';
+import { YarnTypeCreationComponent } from './masters/Transaction Master/yarn-type-creation/yarn-type-creation.component';
+import { FabricsTypeCreationComponent } from './masters/Transaction Master/fabrics-type-creation/fabrics-type-creation.component';
+import { DyeTypeCreationComponent } from './masters/Transaction Master/dye-type-creation/dye-type-creation.component';
+import { RejTypeCreationComponent } from './masters/Transaction Master/rej-type-creation/rej-type-creation.component';
+import { SpinFtyCreationComponent } from './masters/Transaction Master/spin-fty-creation/spin-fty-creation.component';
+import { DyeFtyCreationComponent } from './masters/Transaction Master/dye-fty-creation/dye-fty-creation.component';
+import { KnitFtyCreationComponent } from './masters/Transaction Master/knit-fty-creation/knit-fty-creation.component';
+import { POMasterCreationComponent } from './masters/po-master-creation/po-master-creation.component';
+import { MultiSelectModule } from 'primeng/multiselect';
 @NgModule({
   declarations: [
     MainComponent,
@@ -140,6 +161,20 @@ import { DyeBatchComponent } from './Report/dye-batch/dye-batch.component';
     DayKnitComponent,
     DayDyeComponent,
     DyeBatchComponent,
+    TransactionMasteRootComponent,
+    BuyerCreationComponent,
+    StyleCreationComponent,
+    ColorCreationComponent,
+    SizeCreationComponent,
+    FabricsdiaCreationComponent,
+    YarnTypeCreationComponent,
+    FabricsTypeCreationComponent,
+    DyeTypeCreationComponent,
+    RejTypeCreationComponent,
+    SpinFtyCreationComponent,
+    DyeFtyCreationComponent,
+    KnitFtyCreationComponent,
+    POMasterCreationComponent,
 
   ],
   imports: [
@@ -182,6 +217,11 @@ import { DyeBatchComponent } from './Report/dye-batch/dye-batch.component';
     CardModule,
     FloatLabelModule,
     CalendarModule,
+    FieldsetModule,
+    InputNumberModule,
+    MultiSelectModule,
+
+    // DxDataGridModule
   ]
 })
 export class MainModule { }
