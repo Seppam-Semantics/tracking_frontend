@@ -36,6 +36,7 @@ export class POMasterCreationComponent {
   editdata: any;
   line_OrderNo: any;
   line_id: any;
+  order_id: any;
 
   ngOnInit(): void {
     this.api.Buyer_master_AllData().subscribe((res) => {
@@ -87,6 +88,7 @@ export class POMasterCreationComponent {
 
 
     this.poDetailscreate = this.fb.group({
+      id :  new FormControl(this.order_id), 
       data: this.fb.array([]),
     })
   }
@@ -99,7 +101,7 @@ export class POMasterCreationComponent {
     const row = this.fb.group({
       "id": new FormControl(''),
       "orderNo": new FormControl(this.line_OrderNo),
-      "orderNoId": new FormControl(''),
+      "orderId": new FormControl(this.order_id),
       "style": new FormControl(''),
       "styleId": new FormControl(''),
       "color": new FormControl(''),
@@ -117,6 +119,7 @@ export class POMasterCreationComponent {
 
   Delete(index: number) {
     this.items.removeAt(index);
+    
   }
 
 
@@ -172,20 +175,6 @@ export class POMasterCreationComponent {
     })
   }
 
-  delectheder(id: any) {
-    this.api.delete_PO_master(id).subscribe((res) => {
-      alert(res.message)
-      window.location.reload()
-    })
-  }
-
-  delectheder_line(id: any) {
-    this.api.delete_line_PO_master(id).subscribe((res) => {
-      alert(res.message)
-      window.location.reload()
-    })
-  }
-
   update() {
     this.api.PO_Master(this.poedit.value).subscribe((res) => {
       alert(res.message)
@@ -211,13 +200,47 @@ export class POMasterCreationComponent {
 
   linedata(id: any) {
     console.log(id)
+    this.order_id = id
     this.pofile = true
     this.api.get_PO_Master_line(id).subscribe((res) => {
       this.editdata = res.po
-      this.line_OrderNo = res.pomaster
-      console.log(res)
-    })
+      console.log(this.editdata)
+      this.line_OrderNo = res.pomaster[0].orderNo
+      console.log(this.line_OrderNo)
 
+
+
+
+
+      const EntryData = this.poDetailscreate.get('data') as FormArray;
+      EntryData.clear();
+
+      this.editdata.forEach((dataItem: any) => {
+        const Details = this.fb.group({
+          id: dataItem.id,
+          orderNo: dataItem.orderNo,
+          orderId: dataItem.orderId,
+          style: dataItem.style,
+          styleId: dataItem.styleId,
+          color: dataItem.color,
+          colorId: dataItem.colorId,
+          size: dataItem.size,
+          sizeId: dataItem.sizeId,
+          quantity: dataItem.quantity,
+          poValue: dataItem.poValue,
+          poRate: dataItem.poRate,
+          popl: dataItem.popl,
+        });
+        EntryData.push(Details);
+      });
+
+
+
+
+    })
+    this.poDetailscreate.patchValue({
+      id : this.order_id
+    })
   }
 
   saveButton() {
@@ -229,7 +252,23 @@ export class POMasterCreationComponent {
   }
 
   PoDetailssave() {
+    console.log(this.poDetailscreate.value)
     this.api.PO_Master_line(this.poDetailscreate.value).subscribe((res) => {
+      alert(res.message)
+      window.location.reload()
+    })
+  }
+
+
+  delectheder(id: any) {
+    this.api.delete_PO_master(id).subscribe((res) => {
+      alert(res.message)
+      window.location.reload()
+    })
+  }
+
+  delectheder_line(id: any) {
+    this.api.delete_line_PO_master(id).subscribe((res) => {
       alert(res.message)
       window.location.reload()
     })

@@ -103,7 +103,7 @@ Workorderdelect(id:any):Observable<any>{
   }
 
   getwodetails(buyer: any, orderNo?: any, style?: any, color?: any, size?:any): Observable<any> {
-    return this.http.get(this.getUrl() + `/workorderapi/workorders-filter?buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&size=${size}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/workorderapi/workorders-filter?buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&size=${size}&`, this.getHeaders())
   }
   getknitwodetails(buyer: any, orderNo?: any, style?: any, color?: any, size?:any): Observable<any> {
     return this.http.get(this.getUrl() + `/workorderapi/workorders-filter?buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&size=${size}`, this.getHeaders())
