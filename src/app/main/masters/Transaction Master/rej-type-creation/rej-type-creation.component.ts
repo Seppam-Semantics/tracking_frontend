@@ -16,12 +16,18 @@ export class RejTypeCreationComponent {
   
   rejTypeedit! : FormGroup
   colorDropdata: any;
+  selectedColors: any;
+  rejtypeAllData: any;
   
   ngOnInit(): void {
 
     this.api.Drop_Color_master().subscribe((res)=>{
       this.colorDropdata = res.color
-      console.log(this.colorDropdata)
+    })
+
+    this.api.rejtype_Master_AllData().subscribe((res)=>{
+      this.rejtypeAllData = res.rejtype
+      console.log(this.rejtypeAllData)
     })
     
     
@@ -32,8 +38,8 @@ export class RejTypeCreationComponent {
       id : new FormControl('') , 
       rejType: new FormControl('') ,  
       rejName : new FormControl('') ,
-      colors : new FormControl('') ,     
-      data: this.fb.array([]),
+      colors : new FormControl() ,
+      data: new FormControl(''),
       losses : new FormControl('') 
     })
   
@@ -46,23 +52,30 @@ export class RejTypeCreationComponent {
       loss : new FormControl('') 
     })
   }
- 
-  get items() {
-    return this.rejTypecreate.get("data") as FormArray;
-  }
 
-  add1button() {
-    const row = this.fb.group({
-      "id": new FormControl(''),
-      "colorId": new FormControl(''),
-      "color": new FormControl('')
-    });
 
-    this.items.push(row);
-  }
+  getSelectedColors() {
+    const selectedColorIds = this.rejTypecreate.get('colors')?.value || [];
 
   
+    this.selectedColors = this.colorDropdata
+      .filter((color: { id: number; color: string }) => selectedColorIds.includes(color.id));
+  
+    this.selectedColors = this.selectedColors.map((color: any) => {
+      return { ...color, lineid: 0 };
+    });
+  
+    this.rejTypecreate.patchValue({
+      data: this.selectedColors
+    });
+  }
+ 
+ 
   saveButton(){
+    this.api.rejtype_Master(this.rejTypecreate.value).subscribe((res)=>{
+      alert(res.message)
+      window.location.reload()
+    })
     console.log(this.rejTypecreate.value)
   }
 }

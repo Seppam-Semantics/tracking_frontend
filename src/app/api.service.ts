@@ -10,8 +10,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  apiUrl = "https://tracker.seppam.com";
-  // apiUrl = "http://localhost:2000";
+  // apiUrl = "https://tracker.seppam.com";
+  apiUrl = "http://localhost:2000";
 
   token: any;
   profilenames: any;
@@ -41,6 +41,9 @@ export class ApiService {
   }
 // ========================================================================================================================================================
 
+getorg(){
+  return this.http.get(this.getUrl() + `/auth/organization`, this.getHeaders())
+}
 
   login(data: any): Observable<any> {
     return this.http.post(this.getUrl() + `/auth/authentication`, data)
@@ -584,7 +587,7 @@ getknit_Ety_wofty(): Observable<any> {
 
 
 getknit_Ety_wobuyers(knitfty:any): Observable<any> {
-  return this.http.get(this.getUrl() + `/filtersapi/knitentry_wobuyer?knitfty=${knitfty}&`, this.getHeaders())
+  return this.http.get(this.getUrl() + `/filtersapi/knitentry_wobuyer?knitfty=${knitfty}`, this.getHeaders())
 }
 
 
@@ -876,6 +879,23 @@ delete_PO_master(id:any):Observable<any>{
 
 delete_line_PO_master(id:any):Observable<any>{
   return this.http.delete(this.getUrl() + `/mastersapi/po-master-line/${id}`, this.getHeaders())
+}
+
+// =================================== Rej Type Master=============================================================================
+
+rejtype_Master(data:any):Observable<any>{
+  return this.http.post(this.getUrl()+ `/mastersapi/rejType-master` ,data , this.getHeaders())
+}
+
+rejtype_Master_AllData():Observable<any>{
+  return this.http.get(this.getUrl()+ `/mastersapi/rejType-master` ,this.getHeaders())
+}
+
+rejtype_Master_SingleData(id:any):Observable<any>{
+  return this.http.get(this.getUrl()+ `/mastersapi/spinFty-master/${id}` ,this.getHeaders())
+}
+delete_rejtype_master(id:any):Observable<any>{
+  return this.http.delete(this.getUrl() + `/mastersapi/spinFty-master/${id}`, this.getHeaders())
 }
 
 }
