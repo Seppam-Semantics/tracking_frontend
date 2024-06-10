@@ -6,7 +6,7 @@
 </mat-toolbar> -->
 
 
-    <div class="example-accordion-item-header" style="display: flex; justify-content: center; margin-bottom: 1%; gap: 15px; margin-top: 1%;">
+    <div style="display: flex; justify-content: center; gap: 15px;">
 
       <mat-form-field appearance="outline" (click)="clearAll()">
         <mat-label>Buyer</mat-label>
@@ -47,17 +47,20 @@
           <mat-option *ngFor="let size of this.sizelist" value="{{size.size}}">{{size.size}}</mat-option>
         </mat-select>
       </mat-form-field>
+      <div style="display: flex; justify-content: flex-end; gap: 10px;">
+        <button mat-button color='primary' style="margin-right: 12px; margin-top: 2%;" (click)="exportexcel2()"><mat-icon>download</mat-icon>
+          Download</button>
+        <button mat-button color='primary' style="margin-right: 12px; margin-top: 2%;" (click)="fabricEntry()">New</button>
+      </div>
     </div>
 
 <!---===========================================================================================================-->
 
 
-<mat-toolbar style="height: fit-content; padding: 10px;">
+<!-- <mat-toolbar style="height: fit-content; padding: 10px;">
   <span style="flex: 1 1 auto;"></span>
-  <button mat-button color='primary' style="margin-right: 12px;" (click)="exportexcel2()"><mat-icon>download</mat-icon>
-    Download</button>
-  <button mat-button color='primary' style="margin-right: 12px;" (click)="fabricEntry()">New</button>
-</mat-toolbar>
+
+</mat-toolbar> -->
 
 
 <div class="fixTableHead">
@@ -98,6 +101,7 @@
         <th colspan="2">Plan Cut</th>
         <th colspan="2">Actual Cut</th>
         <th>Print Status</th>
+        <th>Entry</th>
         <th>Edit</th>
         <th>Delet</th>
       </tr>
@@ -142,63 +146,66 @@
         <th></th>
         <th></th>
         <th></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let work of this.data; let i=index" (click)="check(work.id)">
 
-        <td (click)=" visibleEntry = true">{{i+1}}</td>
-        <td (click)=" visibleEntry = true">{{work.buyer}}</td>
-        <td (click)=" visibleEntry = true">{{work.orderNo}}</td>
-        <td (click)=" visibleEntry = true">{{work.style}}</td>
-        <td (click)=" visibleEntry = true">{{work.color}}</td>
-        <td (click)=" visibleEntry = true">{{work.size}}</td>
-        <td (click)=" visibleEntry = true">{{work.gSize}}</td>
-        <td (click)=" visibleEntry = true">{{work.fabType}}</td>
-        <td (click)=" visibleEntry = true">{{work.fabDia}}</td>
-        <td (click)=" visibleEntry = true">{{work.fabGsm}}</td>
-        <td (click)=" visibleEntry = true">{{work.knitSL}}</td>
-        <td (click)=" visibleEntry = true">{{work.yarnType}}</td>
-        <td (click)=" visibleEntry = true">{{work.yarnKg}}</td>
-        <td (click)=" visibleEntry = true">{{work.greigeKg}}</td>
-        <td (click)=" visibleEntry = true">{{work.finishKg}}</td>
-        <td (click)=" visibleEntry = true">{{work.spinFty}}</td>
-        <td (click)=" visibleEntry = true">{{work.knitFty}}</td>
-        <td (click)=" visibleEntry = true">{{work.dyeinFty}}</td>
+        <td>{{i+1}}</td>
+        <td >{{work.buyer}}</td>
+        <td >{{work.orderNo}}</td>
+        <td >{{work.style}}</td>
+        <td >{{work.color}}</td>
+        <td >{{work.size}}</td>
+        <td >{{work.gSize}}</td>
+        <td >{{work.fabType}}</td>
+        <td >{{work.fabDia}}</td>
+        <td >{{work.fabGsm}}</td>
+        <td >{{work.knitSL}}</td>
+        <td >{{work.yarnType}}</td>
+        <td >{{work.yarnKg}}</td>
+        <td >{{work.greigeKg}}</td>
+        <td >{{work.finishKg}}</td>
+        <td >{{work.spinFty}}</td>
+        <td >{{work.knitFty}}</td>
+        <td >{{work.dyeinFty}}</td>
         <!-- <td data-toggle="modal" data-target="#myModal">{{work.noDays}}</td> -->
 
-        <td (click)=" visibleEntry = true">{{work.orderPcs}}</td>
-        <td (click)=" visibleEntry = true">{{work.orderFOBRate}}</td>
-        <td (click)=" visibleEntry = true">{{work.knitRate}}</td>
-        <td (click)=" visibleEntry = true">{{work.dyeRate}}</td>
+        <td >{{work.orderPcs}}</td>
+        <td >{{work.orderFOBRate}}</td>
+        <td >{{work.knitRate}}</td>
+        <td >{{work.dyeRate}}</td>
 
-        <td (click)=" visibleEntry = true">{{work.status === 1 ? 'Open' : 'Close'}}</td>
+        <td >{{work.status === 1 ? 'Open' : 'Close'}}</td>
 
-        <td (click)=" visibleEntry = true">{{work.totalRolls_1 || 0}}</td>
-        <td (click)=" visibleEntry = true">{{work.total_1}}</td>
+        <td >{{work.totalRolls_1 || 0}}</td>
+        <td >{{work.total_1}}</td>
 
-        <td (click)=" visibleEntry = true">{{work.totalRolls_2 || 0}}</td>
-        <th (click)=" visibleEntry = true">{{work.total_2}}</th>
+        <td >{{work.totalRolls_2 || 0}}</td>
+        <th >{{work.total_2}}</th>
 
-        <td (click)=" visibleEntry = true">{{work.totalRolls_3 || 0}}</td>
-        <th (click)=" visibleEntry = true">{{work.total_3}}</th>
+        <td >{{work.totalRolls_3 || 0}}</td>
+        <th >{{work.total_3}}</th>
 
-        <td (click)=" visibleEntry = true">{{work.totalRolls_4 || 0}}</td>
-        <th (click)=" visibleEntry = true">{{work.total_4}}</th>
+        <td >{{work.totalRolls_4 || 0}}</td>
+        <th >{{work.total_4}}</th>
 
-        <td (click)=" visibleEntry = true">{{work.totalRolls_5 || 0}}</td>
-        <th (click)=" visibleEntry = true">{{work.total_5}}</th>
+        <td >{{work.totalRolls_5 || 0}}</td>
+        <th >{{work.total_5}}</th>
 
-        <td (click)=" visibleEntry = true">{{work.totalRolls_6 || 0}}</td>
-        <th (click)=" visibleEntry = true">{{work.total_6}}</th>
+        <td >{{work.totalRolls_6 || 0}}</td>
+        <th >{{work.total_6}}</th>
 
-        <td (click)=" visibleEntry = true">{{work.totalRolls_7 || 0}}</td>
-        <th (click)=" visibleEntry = true">{{work.total_7}}</th>
+        <td >{{work.totalRolls_7 || 0}}</td>
+        <th >{{work.total_7}}</th>
 
-        <td (click)=" visibleEntry = true">{{work.isPrint}}</td>
+        <td >{{work.isPrint}}</td>
+
+        <td><button class="btn btn-success" (click)=" visibleEntry = true"><mat-icon>insert_drive_file</mat-icon> </button></td>
 
         <td><button class="btn btn-primary" data-toggle="modal" data-target="#edit"
-            (click)="edit(work.id)">Edit</button></td>
+            (click)="edit(work.id)"><mat-icon>edit</mat-icon></button></td>
         <td><button class="btn btn-danger" 
               (click)="delete(work.id)"><mat-icon>delete</mat-icon></button></td>
       </tr>

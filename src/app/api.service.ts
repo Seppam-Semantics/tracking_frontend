@@ -584,7 +584,7 @@ getknit_Ety_wofty(): Observable<any> {
 
 
 getknit_Ety_wobuyers(knitfty:any): Observable<any> {
-  return this.http.get(this.getUrl() + `/filtersapi/knitentry_wobuyer?knitfty=${knitfty}`, this.getHeaders())
+  return this.http.get(this.getUrl() + `/filtersapi/knitentry_wobuyer?knitfty=${knitfty}&`, this.getHeaders())
 }
 
 
