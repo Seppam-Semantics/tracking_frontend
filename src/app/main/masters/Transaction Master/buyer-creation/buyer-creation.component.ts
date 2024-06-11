@@ -18,12 +18,24 @@ export class BuyerCreationComponent implements OnInit {
   Buyeredit!: FormGroup
   allData: any;
   datalist: any;
+  buyerNameFillter: any;
+  all: any;
 
   ngOnInit(): void {
     this.api.Buyer_master_AllData().subscribe((res) => {
+      this.all = res.buyers
+    })
+
+    this.buyerFilter()
+  }
+
+  buyerFilter(){
+    this.api.Buyer_master_Fillter_Data(this.buyerNameFillter).subscribe((res)=>{
       this.allData = res.buyers
     })
   }
+
+
   constructor(private fb: FormBuilder, private api: ApiService) {
 
     this.Buyercreate = this.fb.group({

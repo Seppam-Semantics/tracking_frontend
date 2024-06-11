@@ -23,6 +23,8 @@ export class ColorCreationComponent {
   ColorData: any;
   Buyernamevalue: any;
   buyerid: any;
+  colorfilterdata: any;
+  AllColor: any;
   
   ngOnInit(): void {
 
@@ -32,8 +34,10 @@ export class ColorCreationComponent {
 
 
     this.api.Color_master_AllData().subscribe((res)=>{
-      this.ColorData = res.colors
+      this.AllColor = res.colors
     })
+
+    this.colorfilter()
   }
   constructor(private fb : FormBuilder , private api : ApiService){
   
@@ -58,7 +62,14 @@ export class ColorCreationComponent {
       buyerId : new FormControl('') 
     })
   }
+
+  colorfilter(){
+    this.api.Color_master_Fillter_Data(this.colorfilterdata).subscribe((res)=>{
+      this.ColorData = res.colors
+    })
+  }
   
+
   edit(id:any){
     this.api.Color_master_SingleData(id).subscribe((res)=>{
       this.datalist = res.colors

@@ -29,6 +29,8 @@ export class StyleCreationComponent implements OnInit{
   factorynamevalue: any;
   Buyernamevalue: any;
   buyerid: any;
+  styleFillterData: any;
+  all: any;
   
   ngOnInit(): void {
 
@@ -37,9 +39,16 @@ this.api.Drop_Buyer_master().subscribe((res)=>{
 })
 
 this.api.style_master_AllData().subscribe((res)=>{
-  this.allData2 = res.style
+  this.all = res.style
 })
+this.stylefilter()
+  }
 
+  stylefilter(){
+    this.api.style_master_Fillter_Data(this.styleFillterData).subscribe((res)=>{
+      this.allData2 = res.styles
+
+    })
   }
   constructor(private fb : FormBuilder , private api : ApiService){
   

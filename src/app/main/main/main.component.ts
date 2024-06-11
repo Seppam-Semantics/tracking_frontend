@@ -13,6 +13,7 @@ export class MainComponent implements OnInit {
   isActive = false;
   logo:boolean = true
   userName: string | null = sessionStorage.getItem('name');
+  OrgName: any;
 
 
   constructor(private api:ApiService, private router:Router , private route : MainRoutingModule){
@@ -22,7 +23,7 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
 
-
+    this.OrgName = sessionStorage.getItem('OrgName');
   }
 
   

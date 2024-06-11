@@ -1,43 +1,44 @@
 <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
   <mat-tab label="Organization-Setup">
     <div class="info" style="height: 75vh;">
-      <ng-container>
+      <ng-container *ngFor="let data of this.orgData; let i = index;">
 
         <div class="row" style="height: 10vh;">
 
           <div class="col" style="margin: 15px; display: flex; justify-content: center;">
-            Company Name :&nbsp; &nbsp; <span class="cName"> Scandex (BD) Limited </span>
+            Company Name :&nbsp; &nbsp; <span class="cName"> {{data.companyName}} </span>
           </div>
           <div class="col" style="margin: 15px; display: flex; justify-content: center;">
-            Legal Entity Reference &nbsp; :&nbsp; &nbsp; 000000001
+            Address &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : &nbsp; &nbsp; {{data.address}} 
           </div>
         </div>
-        <div class="row" style="height: 10vh;">
-          <div class="col" style="margin: 15px; display: flex; justify-content: center;">
-            Business Nature : Textile &nbsp; &nbsp;
-          </div>
-          <div class="col" style="margin: 15px; display: flex; justify-content: center;">
+        
+        <div class="row" style="height: 10vh; display: flex; ">
+          <!-- <div class="col" style="margin: 15px; display: flex; justify-content: center;">
+            currency : {{data.currency}} &nbsp; &nbsp;
+          </div> -->
+          <!-- <div class="col" style="margin: 15px; display: flex; justify-content: center;">
             Reporting Currency &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : &nbsp; &nbsp; Indian Rupee - INR
-          </div>
+          </div> -->
         </div>
 
-        <div class="row" style="height: 10vh;">
+        <!-- <div class="row" style="height: 10vh;">
           <div class="col" style="margin: 15px; display: flex; justify-content: center;">
             GSTIN :  &nbsp; &nbsp;
           </div>
           <div class="col" style="margin: 15px; display: flex; justify-content: center;">
             Address &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : &nbsp; &nbsp; 
           </div>
-        </div>
+        </div> -->
 
-        <div class="row" style="height: 10vh;">
+        <!-- <div class="row" style="height: 10vh;">
           <div class="col" style="margin: 15px; display: flex; justify-content: center;">
             Unit Code :  &nbsp; &nbsp;
           </div>
           <div class="col" style="margin: 15px; display: flex; justify-content: center;">
             Unit Name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : &nbsp; &nbsp; 
           </div>
-        </div>
+        </div> -->
       </ng-container>
     </div>
   </mat-tab>

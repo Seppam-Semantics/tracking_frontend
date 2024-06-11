@@ -13,14 +13,22 @@ export class SizeCreationComponent {
   Sizeediting : boolean = false;
   
   Sizecreate! : FormGroup
-  
+  sizefilterdata : any;
   Sizeedit! : FormGroup
   SizeData: any;
   datalist: any;
+  allData: any;
   
   ngOnInit(): void {
     this.api.size_master_AllData().subscribe((res)=>{
       this.SizeData = res.sizes
+    })
+    this.sizefilter()
+  }
+  sizefilter(){
+    this.api.size_master_Fillter_Data(this.sizefilterdata).subscribe((res)=>{
+      this.allData = res.sizes
+      
     })
   }
   constructor(private fb : FormBuilder , private api : ApiService){
