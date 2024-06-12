@@ -10,8 +10,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  apiUrl = "https://tracker.seppam.com";
-  // apiUrl = "http://localhost:2000";
+  // apiUrl = "https://tracker.seppam.com";
+  apiUrl = "http://localhost:2000";
 
   token: any;
   profilenames: any;
@@ -751,13 +751,17 @@ export class ApiService {
   }
 
   // ========================== Yarn Type ========================================================================================
-
+  
   yarnType_master(data: any): Observable<any> {
     return this.http.post(this.getUrl() + `/mastersapi/yarn-type-master`, data, this.getHeaders())
   }
 
   yarnType_master_AllData(): Observable<any> {
     return this.http.get(this.getUrl() + `/mastersapi/yarn-type-master`, this.getHeaders())
+  }
+
+  yarnType_master_Fillter_Data(yarnType: string = ''): Observable<any> {
+    return this.http.get(this.getUrl() + `/mastersapi/yarn-type-master-filter?yarnType=${yarnType}`, this.getHeaders())
   }
 
   yarnType_master_SingleData(id: any): Observable<any> {
@@ -780,6 +784,11 @@ export class ApiService {
   fabrictype_master_SingleData(id: any): Observable<any> {
     return this.http.get(this.getUrl() + `/mastersapi/fabric-type/${id}`, this.getHeaders())
   }
+
+  fabrictype_master_Fillter_Data(fabrictype: string = ''): Observable<any> {
+    return this.http.get(this.getUrl() + `/mastersapi/fabric-type-master-filter?fabType=${fabrictype}`, this.getHeaders())
+  }
+
   delete_fabrictype_master(id: any): Observable<any> {
     return this.http.delete(this.getUrl() + `/mastersapi/fabric-type-master/${id}`, this.getHeaders())
   }

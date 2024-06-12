@@ -31,11 +31,8 @@ export class RejTypeCreationComponent {
 
   }
 
-  parseLotcheck(data: any): any {
-    if (data.color) {
-      const parsedData = JSON.parse(data.color);
-      return parsedData;
-    }
+  color(data: any): any {
+      return JSON.parse(data);
   }
 
 

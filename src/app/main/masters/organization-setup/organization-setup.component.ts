@@ -15,8 +15,7 @@ export class OrganizationSetupComponent implements OnInit{
     ngOnInit(): void {
         this.api.getorg().subscribe((res:any)=>{
             this.orgData = res.org;
-            console.log(this.orgData)
-
+            // console.log(this.orgData)
             sessionStorage.setItem("OrgName" , this.orgData[0].companyName)
         })
 }

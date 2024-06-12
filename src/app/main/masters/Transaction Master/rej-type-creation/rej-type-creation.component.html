@@ -26,7 +26,7 @@
                 <td>{{data.rejType}}</td>
                 <td>{{data.rejName}}</td>
                 <td style="text-align: center;"> 
-                    <ul *ngFor="let color of parseLotcheck(data)" style="text-align: justify;">
+                    <ul *ngFor="let color of data.color" style="text-align: justify;">
                         <li>{{color.color}}</li>
                       </ul>
                 </td>
