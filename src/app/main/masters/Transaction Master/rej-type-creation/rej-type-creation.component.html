@@ -26,7 +26,7 @@
                 <td>{{data.rejType}}</td>
                 <td>{{data.rejName}}</td>
                 <td> 
-                    <ul *ngFor="let color of data.color">
+                    <ul *ngFor="let color of color(data.color)">
                         <li>{{color.color}}</li>
                       </ul>
                 </td>
