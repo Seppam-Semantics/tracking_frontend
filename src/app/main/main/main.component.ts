@@ -13,6 +13,8 @@ export class MainComponent implements OnInit {
   isActive = false;
   logo:boolean = true
   userName: string | null = sessionStorage.getItem('name');
+  OrgName: any;
+  orgData: any;
 
 
   constructor(private api:ApiService, private router:Router , private route : MainRoutingModule){
@@ -22,9 +24,15 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
 
-
+    this.OrgName = sessionStorage.getItem('OrgName');
   }
 
+  CompanyName(){
+    this.api.getorg().subscribe((res:any)=>{
+      this.orgData = res.org;
+      sessionStorage.setItem("OrgName" , this.orgData[0].companyName)
+  })
+  }
   
   workorder() {
     this.logo = false;

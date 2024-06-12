@@ -18,12 +18,16 @@ export class YarnTypeCreationComponent {
   yarnTypeedit! : FormGroup
   datalist: any;
   yarntypedata: any;
+  yarntypefillterdata: any;
+  all: any;
   
   ngOnInit(): void {
     
     this.api.yarnType_master_AllData().subscribe((res)=>{
-      this.yarntypedata = res.yarnType
+      this.all = res.yarnType
     })
+  
+  this.yarntypefillter()
   }
   constructor(private fb : FormBuilder , private api : ApiService){
   
@@ -40,6 +44,14 @@ export class YarnTypeCreationComponent {
       description : new FormControl('') 
     })
   }
+
+  yarntypefillter(){
+    this.api.yarnType_master_Fillter_Data(this.yarntypefillterdata).subscribe((res)=>{
+      this.yarntypedata= res.yarnType
+    })
+  }
+
+
 
     edit(id:any){
       this.api.yarnType_master_SingleData(id).subscribe((res)=>{

@@ -17,14 +17,16 @@ export class FabricsTypeCreationComponent {
   
   fabricsTypeedit! : FormGroup
   fabricstypedata: any;
+  fabricstypefillterdata : any;
   datalist: any;
+  all: any;
   
   ngOnInit(): void {
     
     this.api.fabrictype_master_AllData().subscribe((res)=>{
-      this.fabricstypedata = res.fabricType
+      this.all = res.fabricType
     })
-
+this.fabricstypefillter()
   }
   constructor(private fb : FormBuilder , private api : ApiService){
   
@@ -41,6 +43,12 @@ export class FabricsTypeCreationComponent {
       fabtype : new FormControl('') ,  
       description : new FormControl('') ,  
       dyepl : new FormControl('') 
+    })
+  }
+
+  fabricstypefillter(){
+    this.api.fabrictype_master_Fillter_Data(this.fabricstypefillterdata).subscribe((res)=>{
+      this.fabricstypedata= res.fabricType
     })
   }
 
