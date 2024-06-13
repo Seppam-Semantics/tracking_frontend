@@ -62,6 +62,9 @@ export class RejTypeCreationComponent {
     })
   }
 
+  color(value:any){
+    return JSON.parse(value)
+  }
 
   getSelectedColors() {
     const selectedColorIds = this.rejTypecreate.get('colors')?.value || [];
