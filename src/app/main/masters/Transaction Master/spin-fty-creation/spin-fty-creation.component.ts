@@ -17,11 +17,14 @@ export class SpinFtyCreationComponent {
   spinFtyedit! : FormGroup
   spinFtydata: any;
   datalist: any;
+  all: any;
+  FillterData:any;
   
   ngOnInit(): void {
     this.api.spinFty_Master_AllData().subscribe((res)=>{
-      this.spinFtydata = res.spinFty
+      this.all = res.spinFty
     })
+    this.SpinFtyFillterData()
   }
   constructor(private fb : FormBuilder, private api : ApiService){
   
@@ -40,6 +43,12 @@ export class SpinFtyCreationComponent {
       location : new FormControl('') ,  
       contact : new FormControl('') ,   
       legalFtyName : new FormControl('') 
+    })
+  }
+
+  SpinFtyFillterData(){
+    this.api.spinFty_master_Fillter_Data(this.FillterData).subscribe((res)=>{
+      this.spinFtydata = res.spinFty
     })
   }
 
@@ -67,7 +76,7 @@ delete(id:any){
 
 update(){
 
-  this.api.KnitFty_Master(this.spinFtyedit.value).subscribe((res)=>{
+  this.api.spinFty_Master(this.spinFtyedit.value).subscribe((res)=>{
     alert(res.message)
     window.location.reload()
   })

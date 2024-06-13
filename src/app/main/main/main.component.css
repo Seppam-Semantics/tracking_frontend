@@ -88,7 +88,12 @@ mat-sidenav{
 .menu2{
     display: none;
 }
-
+.menulist1{
+    display: none;
+}
+.menulist2{
+    display: contents;
+}
 @media screen and (max-width: 600px) {
     .menu1{
         display: none;
@@ -96,7 +101,12 @@ mat-sidenav{
     .menu2{
         display: contents;
     }
-
+    .menulist1{
+        display: contents;
+    }
+    .menulist2{
+        display: none;
+    }
 
 }
 

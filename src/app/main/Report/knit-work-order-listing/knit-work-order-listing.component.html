@@ -1,4 +1,4 @@
-<mat-toolbar style="display: flex; justify-content: center; height: auto;">
+<mat-toolbar style="display: flex; justify-content: center; height: 7vh;">
     <div style="width: 90%; display: flex; justify-content: center;">
         Knit Work Order Listing
     </div>
@@ -7,29 +7,43 @@
     <div style="flex: 1 1 auto;"></div>
     <div style="display: flex; gap: 10px;">
         <div style="display: flex; gap: 10px;">
-            <!-- <mat-form-field appearance="outline">
-                <mat-label>knit fty</mat-label>
-                <mat-select [(ngModel)]="KnitFtyFillter">
-                    <mat-option> </mat-option>
-                </mat-select>
-            </mat-form-field> -->
+
+            <!-- <p-dropdown [options]="ftyName" [(ngModel)]="KnitFtyFillter" placeholder="Factory" optionLabel="knitFty"
+            optionValue="knitFty" (onChange)="KnitWorkOrderFactoryFilter()"></p-dropdown> -->
+
+            <input class="form-control me-2" type="search" placeholder="Factory Search" aria-label="Search"
+            [(ngModel)]="KnitFtyFillter" (change)="KnitWorkOrderFactoryFilter()" list="ftyList">
+    
+          <datalist id="ftyList">
+            <option *ngFor="let data of ftyName;" [value]="data.knitFty">{{data.knitFty}}</option>
+          </datalist>
 
         </div>
         <div style="display: flex; gap: 10px;">
-            <!-- <mat-form-field appearance="outline">
-                <mat-label>Buyer</mat-label>
-                <mat-select [(ngModel)]="BuyerFillter">
-                    <mat-option> </mat-option>
-                </mat-select>
-            </mat-form-field> -->
+
+            <!-- <p-dropdown [options]="BuyerAllData" [(ngModel)]="BuyerFillter" placeholder="Buyer" optionLabel="buyer"
+            optionValue="buyer" (onChange)="KnitWorkOrderBuyerFilter()"></p-dropdown> -->
+
+            <input class="form-control me-2" type="search" placeholder="Buyer Search" aria-label="Search"
+            [(ngModel)]="BuyerFillter" (input)="KnitWorkOrderBuyerFilter()" list="buyerList">
+    
+          <datalist id="buyerList">
+            <option *ngFor="let data of BuyerAllData;" [value]="data.buyer">{{data.buyer}}</option>
+          </datalist>
+
         </div>
         <div style="display: flex; gap: 10px;">
-            <!-- <mat-form-field appearance="outline">
-                <mat-label>Order</mat-label>
-                <mat-select [(ngModel)]="OrderFillter">
-                    <mat-option> </mat-option>
-                </mat-select>
-            </mat-form-field> -->
+           
+            <!-- <p-dropdown [options]="OrderAllData" [(ngModel)]="OrderFillter" placeholder="OrderNo" optionLabel="orderNo"
+            optionValue="orderNo" (onChange)="KnitWorkOrderOrderFilter()"></p-dropdown> -->
+
+            <input class="form-control me-2" type="search" placeholder="order Search" aria-label="Search"
+            [(ngModel)]="OrderFillter" (input)="KnitWorkOrderOrderFilter()" list="orderList">
+    
+          <datalist id="orderList">
+            <option *ngFor="let data of OrderAllData;" [value]="data.orderNo">{{data.orderNo}}</option>
+          </datalist>
+
         </div>
     </div>
 

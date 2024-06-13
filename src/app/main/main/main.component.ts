@@ -24,13 +24,12 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.OrgName = sessionStorage.getItem('OrgName');
+    this.CompanyName()
   }
 
   CompanyName(){
     this.api.getorg().subscribe((res:any)=>{
       this.orgData = res.org;
-      sessionStorage.setItem("OrgName" , this.orgData[0].companyName)
   })
   }
   

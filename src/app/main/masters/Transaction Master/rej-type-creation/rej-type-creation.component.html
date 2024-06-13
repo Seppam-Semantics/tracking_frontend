@@ -1,7 +1,12 @@
 <div>
     <mat-toolbar style="height: fit-content; padding: 10px;">
         <div class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" #input>
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+            [(ngModel)]="FillterData" (input)="RejTypeFillterData()" list="buyerList">
+    
+          <datalist id="buyerList">
+            <option *ngFor="let data of all;" [value]="data.rejName">{{data.rejName}}</option>
+          </datalist>
         </div>
         <div style="flex: 1 1 auto;"></div>
         <span class="flex-spacer"></span>
@@ -21,20 +26,21 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let data of this.rejtypeAllData; let i = index;">
+            <tr *ngFor="let data of this.rejtypeData; let i = index;">
                 <td>{{i+1}}</td>
                 <td>{{data.rejType}}</td>
                 <td>{{data.rejName}}</td>
-                <td style="text-align: center;"> 
-                    <ul *ngFor="let color of data.color" style="text-align: justify;">
+                <td style="text-align: center;">
+                    <ul *ngFor="let color of color(data.color)" style="text-align: justify;">
+                    <!-- <ul *ngFor="let color of data.color" style="text-align: justify;"> -->
                         <li>{{color.color}}</li>
-                      </ul>
+                    </ul>
                 </td>
                 <td>{{data.losses}}</td>
                 <td>
                     <div style="display: flex; gap: 10px; width: 100%; justify-content: center;">
-                        <button class="btn btn-primary"
-                            (click)="rejTypeediting = true" (click)="edit(data.id)"><mat-icon>edit</mat-icon></button>
+                        <button class="btn btn-primary" (click)="rejTypeediting = true"
+                            (click)="edit(data.id)"><mat-icon>edit</mat-icon></button>
                         <button class="btn btn-danger"><mat-icon>delete</mat-icon></button>
                     </div>
                 </td>

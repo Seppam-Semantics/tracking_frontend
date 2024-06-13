@@ -16,12 +16,16 @@ export class DyeFtyCreationComponent {
   
   dyeFtyedit! : FormGroup
   dyeFtydata: any;
-  datalist: any;
+  datalist: any; 
+  dyeftyfillterdata : any
+  
+  all: any;
   
   ngOnInit(): void {
     this.api.dyeFty_Master_AllData().subscribe((res)=>{
-      this.dyeFtydata = res.dyeFty
+      this.all = res.dyeFty
     })
+    this.dyeftyfillter()
   }
   constructor(private fb : FormBuilder, private api : ApiService){
   
@@ -43,6 +47,12 @@ export class DyeFtyCreationComponent {
     })
   }
   
+  dyeftyfillter(){
+    this.api.dyeFty_master_Fillter_Data(this.dyeftyfillterdata).subscribe((res)=>{
+      this.dyeFtydata= res.dyeFty
+    })
+  }
+
   edit(id:any){
     this.api.dyeFty_Master_SingleData(id).subscribe((res)=>{
       this.datalist = res.knitFty

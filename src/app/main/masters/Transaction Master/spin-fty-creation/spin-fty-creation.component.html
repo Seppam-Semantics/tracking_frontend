@@ -1,7 +1,12 @@
 <div>
     <mat-toolbar style="height: fit-content; padding: 10px;">
         <div class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" #input>
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+            [(ngModel)]="FillterData" (input)="SpinFtyFillterData()" list="buyerList">
+    
+          <datalist id="buyerList">
+            <option *ngFor="let data of all;" [value]="data.SpinFtyName">{{data.SpinFtyName}}</option>
+          </datalist>
         </div>
         <div style="flex: 1 1 auto;"></div>
         <span class="flex-spacer"></span>

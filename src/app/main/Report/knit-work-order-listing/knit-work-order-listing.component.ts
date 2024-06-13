@@ -31,13 +31,17 @@ export class KnitWorkOrderListingComponent implements OnInit {
   KnitWorkOrderhederdata: any;
   KnitWorkOrderlineData: any;
   KnitWorkOrderlineData1: any[]=[];
-  KnitFtyFillter : any ;
+  KnitFtyFillter : string  = '' ;
   BuyerFillter : any ;
   OrderFillter : any ;
+  BuyerAllData: any[]=[];
+  OrderAllData: any;
 
   ngOnInit(): void { 
     this.buyername(), this.factoryName() 
     this.alldata()
+    this.BuyerAllData = [{buyer:"Nodata"}]
+    this.OrderAllData = [{orderNo:"Nodata"}]
   }
   constructor(private fb: FormBuilder, private api: ApiService, private router: Router) {
 
@@ -115,6 +119,29 @@ export class KnitWorkOrderListingComponent implements OnInit {
       const row = formArray.at(index);
       row.get('knitWoId')?.setValue(woId);
     });
+  }
+
+  KnitWorkOrderFactoryFilter(){
+    this.api.knitworkorder_fty_Fillter(this.KnitFtyFillter).subscribe((res)=>{
+      this.KnitWorkOrderAllData   = res.workorders
+      this.BuyerAllData = res.buyer
+      console.log(res)
+
+    })
+  }
+
+  KnitWorkOrderBuyerFilter(){
+    this.api.knitworkorder_buyer_Fillter(this.KnitFtyFillter,this.BuyerFillter).subscribe((res)=>{
+      this.KnitWorkOrderAllData = res.workorders
+      this.OrderAllData = res.orderNo
+
+    })
+  }
+
+  KnitWorkOrderOrderFilter(){
+    this.api.knitworkorder_order_Fillter(this.KnitFtyFillter,this.BuyerFillter,this.OrderFillter).subscribe((res)=>{
+      this.KnitWorkOrderAllData = res.workorders      
+    })
   }
 
   alldata(){

@@ -1,34 +1,48 @@
-<mat-toolbar style="display: flex; justify-content: center; height: auto;">
+<mat-toolbar style="display: flex; justify-content: center; height: 7vh;">
     <div style="width: 90%; display: flex; justify-content: center;">
         Dye Work Order Listing
     </div>
+    <input class="form-control me-2" type="search" placeholder="Factory Search" aria-label="Search"
+    [(ngModel)]="DyeFtyFillter" (change)="dyeWorkOrderFactoryFilter()" list="ftyList" style="width: 24vh;">
 
+  <datalist id="ftyList">
+    <option *ngFor="let data of factoryname;" [value]="data.dyeinFty">{{data.dyeinFty}}</option>
+  </datalist>
+
+
+
+  <input class="form-control me-2" type="search" placeholder="Factory Search" aria-label="Search"
+  [(ngModel)]="BuyerFillter" (change)="dyeWorkOrderBuyerFilter()" list="ftyList1" style="width: 24vh;">
+
+<datalist id="ftyList1">
+  <option *ngFor="let data of BuyerAllData;" [value]="data.buyer">{{data.buyer}}</option>
+</datalist>
 
     <div style="flex: 1 1 auto;"></div>
-    <!-- <div style="display: flex; gap: 10px;">
-        <div style="display: flex; gap: 10px;">
+    <div style="display: flex; gap: 10px;">
+        <!-- <div style="display: flex; gap: 10px;">
             <label style="font-weight: normal; font-family: serif; margin-top: 5px;">Dye Fty</label>
             <input type="text" class="form-control" style="margin-top: 2px;" [(ngModel)]="DyeFtyFillter"
                 list="knitfty">
             <datalist id="knitfty">
                 <option>In process</option>
             </datalist>
-        </div>
-        <div style="display: flex; gap: 10px;">
+        </div> -->
+        <!-- <div style="display: flex; gap: 10px;">
             <label style="font-weight: normal; font-family: serif; margin-top: 5px;">Buyer</label>
             <input type="text" class="form-control" style="margin-top: 2px;" [(ngModel)]="BuyerFillter" list="Buyer">
             <datalist id="Buyer">
                 <option>In process</option>
             </datalist>
-        </div>
-        <div style="display: flex; gap: 10px;">
+        </div> -->
+        <!-- <div style="display: flex; gap: 10px;">
             <label style="font-weight: normal; font-family: serif; margin-top: 5px;">Order</label>
             <input type="text" class="form-control" style="margin-top: 2px;" [(ngModel)]="OrderFillter" list="Order">
             <datalist id="Order">
                 <option>In process</option>
             </datalist>
-        </div>
-    </div> -->
+        </div> -->
+    </div>
 
     <button mat-button color="primary" (click)="new()">New</button>
     <button mat-button color="primary" (click)="exportexcel()"><mat-icon>download</mat-icon>Download</button>

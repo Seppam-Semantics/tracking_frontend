@@ -1,7 +1,7 @@
 <div>
   <mat-toolbar style="height: fit-content; padding: 10px;">
     <div class="d-flex">
-      <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search"
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
         [(ngModel)]="buyerNameFillter" (input)="buyerFilter()" list="buyerList">
 
       <datalist id="buyerList">
@@ -13,8 +13,8 @@
     <button mat-button color="primary" (click)="Buyercreation = true">New Buyer</button>
   </mat-toolbar>
 </div>
-<div>
-  <table class="table table-striped table-hover">
+<div >
+  <table class="table table-striped table-hover" >
     <thead class="thead-dark">
       <tr>
         <th>S.No</th>

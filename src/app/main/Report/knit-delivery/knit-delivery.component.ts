@@ -38,9 +38,10 @@ export class KnitDeliveryComponent {
   knitAllData: any;
   kintid: any;
   factoryname: any;
-
+  knitdelFillter:any
   ngOnInit(): void {
     this.buyername()
+    this.knitdelFilter()
   }
   constructor(private fb: FormBuilder, private router: Router, private api: ApiService) {
 
@@ -73,7 +74,13 @@ export class KnitDeliveryComponent {
   get items() {
     return this.KnitDelivery.get("data") as FormArray;
   }
-
+  knitdelFilter(){
+    this.api.knitdelivery_fty_Fillter(this.knitdelFillter).subscribe((res)=>{
+      this.knitDelAllData = res.knitDelivery
+      this.knitAllData = res.knitDelivery
+    })
+  }
+  
   fileName = "knitDeliveryReport.xlsx"
 exportexcel() {
   let data = document.getElementById("table-data");

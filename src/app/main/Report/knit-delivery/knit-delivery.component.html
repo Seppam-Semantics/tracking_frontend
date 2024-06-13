@@ -1,7 +1,13 @@
     <div>
         <mat-toolbar class="bg-dark text-white" style="display: flex; justify-content: center; height: auto;">Knit
                 Delivery</mat-toolbar>
-            <mat-toolbar style="height: auto;">
+            <mat-toolbar style="height: 7vh;">
+                <input class="form-control me-2" type="search" placeholder="knitFty Search" aria-label="Search"
+                [(ngModel)]="knitdelFillter" (input)="knitdelFilter()" list="orderList" >
+        
+              <datalist id="orderList">
+                <option *ngFor="let data of knitAllData;" [value]="data.factory">{{data.factory}}</option>
+              </datalist>
                  <div style="flex: 1 1 auto;"></div>
                 <div style="display: flex;">
                     <button mat-button color="primary" (click)="exportexcel()">Download</button>

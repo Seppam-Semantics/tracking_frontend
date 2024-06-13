@@ -30,10 +30,16 @@ export class DyeWorkOrderListingComponent {
   DyeWorkOrderHeader: any;
   DyeWorkOrderheaderData: any;
   DyeWorkOrderlineData: any;
+  DyeFtyFillter:any;
+  BuyerAllData: any;
+  DyeBuyerFillter :any
+  BuyerFillter: string | undefined;
+  orderNoAllData: any;
   ngOnInit(): void { 
     this.buyername(), 
     this.factoryName() 
-    this.AllData()
+    this.AllData(),
+    this.BuyerAllData = [{buyer:'No'}]
   }
   constructor(private fb: FormBuilder, private api: ApiService , private router : Router) {
 
@@ -113,6 +119,20 @@ export class DyeWorkOrderListingComponent {
     });
   }
 
+
+  dyeWorkOrderFactoryFilter(){
+    this.api.dyeworkorder_fty_Fillter(this.DyeFtyFillter).subscribe((res)=>{
+      this.DyeWorkOrderAllData = res.workorders
+      this.BuyerAllData = res.buyer
+    })
+  }
+
+  dyeWorkOrderBuyerFilter(){
+    this.api.dyeworkorder_buyer_Fillter(this.DyeFtyFillter, this.BuyerFillter).subscribe((res)=>{
+      this.DyeWorkOrderAllData = res.workorders
+      this.orderNoAllData = res.orderNo
+    })
+  }
 
   AllData(){
     this.api.DyeWorkOrderAllData().subscribe((res)=>{

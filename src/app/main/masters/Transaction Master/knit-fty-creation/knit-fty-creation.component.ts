@@ -18,11 +18,14 @@ export class KnitFtyCreationComponent {
   knitFtyedit! : FormGroup
   KnitFtydata: any;
   datalist: any;
+  knitFillterData: any;
+  all: any;
   
   ngOnInit(): void {
     this.api.KnitFty_Master_AllData().subscribe((res)=>{
-      this.KnitFtydata = res.knitFty
+      this.all = res.knitFty
     })
+  this.FillterData()
   }
   constructor(private fb : FormBuilder, private api : ApiService){
   
@@ -44,6 +47,11 @@ export class KnitFtyCreationComponent {
     })
   }
 
+  FillterData(){ 
+    this.api.KnitFty_master_Fillter_Data(this.knitFillterData).subscribe((res)=>{
+      this.KnitFtydata = res.knitFty
+    })
+  }
 
   edit(id:any){
     this.api.KnitFty_Master_SingleData(id).subscribe((res)=>{

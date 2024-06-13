@@ -10,8 +10,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  // apiUrl = "https://tracker.seppam.com";
-  apiUrl = "http://localhost:2000";
+  apiUrl = "https://tracker.seppam.com";
+  // apiUrl = "http://localhost:2000";
 
   token: any;
   profilenames: any;
@@ -581,6 +581,7 @@ export class ApiService {
 
 
 
+
   getknit_Ety_wofty(): Observable<any> {
     return this.http.get(this.getUrl() + `/filtersapi/knitentry_wofty`, this.getHeaders())
   }
@@ -792,7 +793,7 @@ export class ApiService {
   delete_fabrictype_master(id: any): Observable<any> {
     return this.http.delete(this.getUrl() + `/mastersapi/fabric-type-master/${id}`, this.getHeaders())
   }
-  // =================================== dye Type =============================================================================
+  // =================================== fsize =============================================================================
   fsize_master(data: any): Observable<any> {
     return this.http.post(this.getUrl() + `/mastersapi/fsize-master`, data, this.getHeaders())
   }
@@ -821,6 +822,11 @@ export class ApiService {
   dyetype_master_SingleData(id: any): Observable<any> {
     return this.http.get(this.getUrl() + `/mastersapi/dye-type/${id}`, this.getHeaders())
   }
+
+  dyetype_master_Fillter_Data(dyetype: string = ''): Observable<any> {
+    return this.http.get(this.getUrl() + `/mastersapi/dye-type-master-filter?dyeType=${dyetype}`, this.getHeaders())
+  }
+
   delete_dyetype_master(id: any): Observable<any> {
     return this.http.delete(this.getUrl() + `/mastersapi/dye-type-master/${id}`, this.getHeaders())
   }
@@ -839,6 +845,11 @@ export class ApiService {
   KnitFty_Master_SingleData(id: any): Observable<any> {
     return this.http.get(this.getUrl() + `/mastersapi/knitFty-master/${id}`, this.getHeaders())
   }
+
+  KnitFty_master_Fillter_Data(KnitFty: string = ''): Observable<any> {
+    return this.http.get(this.getUrl() + `/mastersapi/knitFty-master-filter?knitFty=${KnitFty}`, this.getHeaders())
+  }
+
   delete_KnitFty_master(id: any): Observable<any> {
     return this.http.delete(this.getUrl() + `/mastersapi/knitFty-master/${id}`, this.getHeaders())
   }
@@ -852,6 +863,10 @@ export class ApiService {
 
   dyeFty_Master_AllData(): Observable<any> {
     return this.http.get(this.getUrl() + `/mastersapi/dyeFty-master`, this.getHeaders())
+  }
+
+  dyeFty_master_Fillter_Data(dyeFty: string = ''): Observable<any> {
+    return this.http.get(this.getUrl() + `/mastersapi/dyeFty-master-filter?dyeFty=${dyeFty}`, this.getHeaders())
   }
 
   dyeFty_Master_SingleData(id: any): Observable<any> {
@@ -873,6 +888,11 @@ export class ApiService {
   spinFty_Master_SingleData(id: any): Observable<any> {
     return this.http.get(this.getUrl() + `/mastersapi/spinFty-master/${id}`, this.getHeaders())
   }
+
+  spinFty_master_Fillter_Data(spinFty: string = ''): Observable<any> {
+    return this.http.get(this.getUrl() + `/mastersapi/spinFty-master-filter?spinFty=${spinFty}`, this.getHeaders())
+  }
+
   delete_spinFty_master(id: any): Observable<any> {
     return this.http.delete(this.getUrl() + `/mastersapi/spinFty-master/${id}`, this.getHeaders())
   }
@@ -919,8 +939,49 @@ export class ApiService {
   rejtype_Master_SingleData(id: any): Observable<any> {
     return this.http.get(this.getUrl() + `/mastersapi/rejType-master/${id}`, this.getHeaders())
   }
+
+  rejtype_master_Fillter_Data(rejtype: string = ''): Observable<any> {
+    return this.http.get(this.getUrl() + `/mastersapi/rejType-master-filter?rejName=${rejtype}`, this.getHeaders())
+  }
+
   delete_rejtype_master(id: any): Observable<any> {
     return this.http.delete(this.getUrl() + `/mastersapi/spinFty-master/${id}`, this.getHeaders())
   }
 
+
+
+
+  knitworkorder_fty_Fillter(knitfty:string=''):Observable<any>{
+    return this.http.get(this.getUrl() + `/knitapi/knitworkorder_Fty_Fillter?knitfty=${knitfty}`, this.getHeaders())
+  }
+
+  knitworkorder_buyer_Fillter(knitfty:string='',buyer:string=''):Observable<any>{
+    return this.http.get(this.getUrl() + `/knitapi/knitworkorder_buyer_Fillter?knitfty=${knitfty}&buyer=${buyer}`, this.getHeaders())
+  }
+  knitworkorder_order_Fillter(knitfty:string='',buyer:string='',order:string=''):Observable<any>{
+    return this.http.get(this.getUrl() + `/knitapi/knitworkorder_order_Fillter?knitfty=${knitfty}&buyer=${buyer}&order=${order}`, this.getHeaders())
+  }
+
+  knitdelivery_fty_Fillter(knitfty:string=''):Observable<any>{
+    return this.http.get(this.getUrl() + `/knittodye/knit-delivery_Fillter?knitfty=${knitfty}`, this.getHeaders())
+  }
+
+
+
+
+
+  dyeworkorder_fty_Fillter(dyefty:string=''):Observable<any>{
+    return this.http.get(this.getUrl() + `/dyeapi/dyeworkorder_Fty_Fillter?dyefty=${dyefty}`, this.getHeaders())
+  }
+
+  dyeworkorder_buyer_Fillter(dyefty:string='',buyer:string=''):Observable<any>{
+    return this.http.get(this.getUrl() + `/dyeapi/dyeworkorder_buyer_Fillter?dyefty=${dyefty}&buyer=${buyer}`, this.getHeaders())
+  }
+  dyeworkorder_Order_Fillter(dyefty:string='',buyer:string='',order:string=''):Observable<any>{
+    return this.http.get(this.getUrl() + `/dyeapi/dyeworkorder_order_Fillter?dyefty=${dyefty}&buyer=${buyer}&order=${order}`, this.getHeaders())
+  }
+
+  dyedelivery_fty_Fillter(knitfty:string=''):Observable<any>{
+    return this.http.get(this.getUrl() + `/knittodye/knit-delivery_Fillter?knitfty=${knitfty}`, this.getHeaders())
+  }
 }

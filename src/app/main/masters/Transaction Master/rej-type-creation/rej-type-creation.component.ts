@@ -18,6 +18,9 @@ export class RejTypeCreationComponent {
   colorDropdata: any;
   selectedColors: any;
   rejtypeAllData: any;
+  all: any;
+  rejtypeData: string | undefined;
+  FillterData: string | undefined;
 
   ngOnInit(): void {
 
@@ -26,8 +29,9 @@ export class RejTypeCreationComponent {
     })
 
     this.api.rejtype_Master_AllData().subscribe((res) => {
-      this.rejtypeAllData = res.rejtype
+      this.all = res.rejtype
     })
+    this.RejTypeFillterData()
 
   }
 
@@ -73,6 +77,13 @@ export class RejTypeCreationComponent {
     this.rejTypecreate.patchValue({
       data: this.selectedColors
     });
+  }
+
+  
+  RejTypeFillterData(){ 
+    this.api.rejtype_master_Fillter_Data(this.FillterData).subscribe((res)=>{
+      this.rejtypeData = res.rejtype
+    })
   }
 
   edit(id: any) {
