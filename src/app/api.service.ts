@@ -10,8 +10,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  apiUrl = "https://tracker.seppam.com";
-  // apiUrl = "http://localhost:2000";
+  // apiUrl = "https://tracker.seppam.com";
+  apiUrl = "http://localhost:2000";
 
   token: any;
   profilenames: any;
@@ -702,7 +702,7 @@ export class ApiService {
   }
 
   ColorId(color: any): Observable<any> {
-    return this.http.get(this.getUrl() + `/mastersapi/drop-colorId-Master?color='${color}'`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/mastersapi/drop-colorId-Master?color='${color}'&`, this.getHeaders())
   }
   Color_master(data: any): Observable<any> {
     return this.http.post(this.getUrl() + `/mastersapi/color-master`, data, this.getHeaders())
@@ -983,5 +983,36 @@ export class ApiService {
 
   dyedelivery_fty_Fillter(knitfty:string=''):Observable<any>{
     return this.http.get(this.getUrl() + `/knittodye/knit-delivery_Fillter?knitfty=${knitfty}`, this.getHeaders())
+  }
+
+
+
+  // <!-----------------------BUYER TO ORDER------------------------------------------------------------------>
+  Buyer_to_order(buyer:string=''):Observable<any>{
+    return this.http.get(this.getUrl() + `/workorderapi/buyer_order_BO?buyer=${buyer}`, this.getHeaders())
+  }
+
+  order_to_style(buyer:string='' , order : string = ''):Observable<any>{
+    return this.http.get(this.getUrl() + `/workorderapi/order_style_BO?buyer=${buyer}&order=${order}`, this.getHeaders())
+  }
+
+  style_to_color(buyer:string='' , order : string = '' , style:string = ''):Observable<any>{
+    return this.http.get(this.getUrl() + `/workorderapi/style_Color_BO?buyer=${buyer}&order=${order}&style=${style}`, this.getHeaders())
+  }
+
+  color_to_size(buyer:string='' , order : string = '' , style:string = '',color:string=''):Observable<any>{
+    return this.http.get(this.getUrl() + `/workorderapi/Color_size_BO?buyer=${buyer}&order=${order}&style=${style}&color=${color}`, this.getHeaders())
+  }
+
+  
+  size_to_id(buyer:string='' , order : string = '' , style:string = '',color:string='', size:string=''):Observable<any>{
+    return this.http.get(this.getUrl() + `/workorderapi/size_id_BO?buyer=${buyer}&order=${order}&style=${style}&color=${color}&size=${size}`, this.getHeaders())
+  }
+
+  f_size_BO(style:string = '', size:string=''):Observable<any>{
+    return this.http.get(this.getUrl() + `/workorderapi/f-size_BO?size=${size}&style=${style}`, this.getHeaders())
+  }
+  fabric_type_BO():Observable<any>{
+    return this.http.get(this.getUrl() + `/workorderapi/fabric_type_BO`, this.getHeaders())
   }
 }

@@ -35,7 +35,7 @@ export class RejTypeCreationComponent {
 
   }
 
-  color(data: any): any {
+  colorjson(data: any): any {
       return JSON.parse(data);
   }
 

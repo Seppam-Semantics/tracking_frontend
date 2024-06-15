@@ -1,0 +1,247 @@
+<!-- <mat-toolbar color="primary">
+  <mat-toolbar-row style="display: flex; justify-content: center;">
+    <span>WorkOrder Data</span>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+
+<div class="container m-5" style="width: 70%;">
+  <div style="display: flex; justify-content: start; align-items: center; gap: 10px;">
+    <input type="file" class="form-control w-50 mat-elevation-z8" (change)="readfile($event)" style="display:flex; align-items: start;">
+  
+    <button class="btn btn-primary" (click)="readexcelfile()"> Load </button>
+    <a href="../assets/WorkOrder template-2.xlsx" class="btn btn-primary" >Template</a>
+  </div>
+  
+  </div>
+  
+  <form (ngSubmit)="workordersubmit()">
+    
+    <div style="display: flex; justify-content: center;">
+      <button class="btn btn-primary">Save</button>
+    </div>
+  
+    <ngx-spinner>Loading...!</ngx-spinner>
+    
+      <div class="fixTableHead">
+        <table style="overflow: scroll;">
+          <thead>
+            <tr>
+              <th>buyer</th>
+              <th>orderNo</th>
+              <th>style</th>
+              <th>color</th>
+              <th>size</th>
+              <th>fabType</th>
+              <th>fabDia</th>
+              <th>fabGsm</th>
+              <th>knitSL</th>
+              <th>Yarn Type</th>
+              <th>yarnKgs</th>
+              <th>greigeKg</th>
+              <th>finishedKg</th>
+              <th>spinFty</th>
+              <th>knitFty</th>
+              <th>dyeingFty</th>
+              <th>noDays</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let wo of this.dataSource">
+              <td>{{wo.buyer}}</td>
+              <td>{{wo.orderNo}}</td>
+              <td>{{wo.style}}</td>
+              <td>{{wo.color}}</td>
+              <td>{{wo.size}}</td>
+              <td>{{wo.fabType}}</td>
+              <td>{{wo.fabDia}}</td>
+              <td>{{wo.fabGsm}}</td>
+              <td>{{wo.knitSL}}</td>
+              <td>{{wo.yarnType}}</td>
+              <td>{{wo.yarnKg}}</td>
+              <td>{{wo.greigeKg}}</td>
+              <td>{{wo.finishKg}}</td>
+              <td>{{wo.spinFty}}</td>         
+              <td>{{wo.knitFty}}</td>
+              <td>{{wo.dyeinFty}}</td>
+              <td>{{wo.noDays}}</td>
+            </tr>
+          </tbody>
+        </table>
+    
+      </div>
+  
+  
+
+  </form> -->
+
+
+  <mat-toolbar style="height: fit-content; padding: 10px;">
+    <div class="Template">
+        <div>
+            <a class="btn btn-primary" style="margin-left: 96%;" href="../assets/WorkOrder template 2.xlsx">Template
+                <i class="material-icons" style="font-size:medium;">file_download</i>
+            </a>
+        </div>
+    </div>
+</mat-toolbar>
+
+<div class="wrapper" style="margin-left: 44%; margin-top: 8%;" *ngIf="loaddata1">
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
+    <form class="form-container" enctype='multipart/form-data'>
+        <div class="upload-files-container">
+            <div class="drag-file-area">
+                <span class="material-icons-outlined upload-icon"> file_upload </span>
+                <label class="label">
+                    <input type="file" class="btn btn-primary"   (change)="readfile($event)"
+                    style="width: 119%; background-color: blueviolet; margin-left: -5%;"/>
+                </label>
+            </div>
+            <button type="button" class="upload-button" 
+            (click)="readexcelfile()" (click)="hideandseek()"> Upload </button>
+        </div>
+    </form>
+</div>
+
+<div *ngIf="loaddata2">
+    <div style="display: flex; justify-content: center;">
+        <button class="btn btn-primary" (click)="workordersubmit()"> Save </button>
+    </div>
+    <div class="fixTableHead">
+      <table style="overflow: scroll;">
+        <thead>
+          <tr>
+            <th>Buyer</th>
+            <th>OrderNo</th>
+            <th>Style</th>
+            <th>Color</th>
+            <th>FSize</th>
+            <th>GSize</th>
+            <th>FabType</th>
+            <th>FabDia</th>
+            <th>FabGsm</th>
+            <th>KnitSL</th>
+            <th>YarnType</th>
+            <th>YarnKg</th>
+            <th>GreigeKg</th>
+            <th>FinishKg</th>
+            <th>SpinFty</th>
+            <th>KnitFty</th>
+            <th>DyeinFty</th>
+            <th>noDays</th>
+            <th>OrderPcs</th>
+            <th>OrderFOBRate</th>
+            <th>KnitRate</th>
+            <th>DyeRate</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let wo of this.dataSource">
+            <td>{{wo.Buyer}}</td>
+            <td>{{wo.OrderNo}}</td>
+            <td>{{wo.Style}}</td>
+            <td>{{wo.Color}}</td>
+            <td>{{wo.FSize}}</td>
+            <td>{{wo.GSize}}</td>
+            <td>{{wo.FabType}}</td>
+            <td>{{wo.FabDia}}</td>
+            <td>{{wo.FabGsm}}</td>
+            <td>{{wo.KnitSL}}</td>
+            <td>{{wo.YarnType}}</td>
+            <td>{{wo.YarnKg}}</td>
+            <td>{{wo.GreigeKg}}</td>
+            <td>{{wo.FinishKg}}</td>
+            <td>{{wo.SpinFty}}</td>         
+            <td>{{wo.KnitFty}}</td>
+            <td>{{wo.DyeinFty}}</td>
+            <td>{{wo.noDays}}</td>
+
+            <td>{{wo.OrderPcs}}</td>
+            <td>{{wo.OrderFOBRate}}</td>
+            <td>{{wo.KnitRate}}</td>
+            <td>{{wo.DyeRate}}</td>
+          </tr>
+        </tbody>
+      </table>
+  
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+<!------------------------------------------------------------------------------------------->
+
+
+
+
+  loadingspinner:boolean=false;
+  orderNo: any;
+  id?: string;
+
+  constructor(private api: ApiService ,  private spinner: NgxSpinnerService) {
+
+  }
+
+  dataSource:any[]=[]
+  users: any;
+  file: any;
+  Tabledata:any[]=[]
+  loaddata1:boolean=true;
+  loaddata2:boolean=false;
+
+
+
+
+  hideandseek(){
+    this.loaddata1=!this.loaddata1
+    this.loaddata2=!this.loaddata2
+  }
+
+
+  readfile(e: any) {
+    this.file = e.target.files[0]
+  }
+
+  readexcelfile() {
+    let fr = new FileReader();
+  
+    fr.readAsArrayBuffer(this.file);
+  
+    fr.onload = () => {
+        let data = fr.result;  
+        let workbook = xls.read(data, { type: 'array' });
+       
+        const sheetname = workbook.SheetNames[0];
+        const sheet1 = workbook.Sheets[sheetname];
+  
+        this.users = xls.utils.sheet_to_json(sheet1, { raw: true });
+
+        if (!this.users[0].hasOwnProperty('noDays')) {
+
+            this.users.forEach((user:any)=> {
+                user['noDays'] = 0;
+            });
+        }
+        this.dataSource = this.users;
+          };
+  }
+
+  workordersubmit() {
+    this.spinner.show();
+    this.api.postworkorder(this.dataSource).subscribe((res)=>{
+      if(res.success){
+        alert("Your work order details have been saved....!!!!")
+        window.location.reload(); 
+      }
+      else{
+        alert("Error while saving...!!!")
+      }
+    })       
+  }

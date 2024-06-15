@@ -30,7 +30,7 @@ export class POMasterCreationComponent {
   styleDropdata: any;
   sizeDropdata: any;
   colorDropdata: any;
-  Colornamevalue: any;
+  Colornamevalue: string='';
   colorid: any;
   poAlldata: any;
   editdata: any;
@@ -62,7 +62,6 @@ export class POMasterCreationComponent {
 
     this.api.PO_Master_AllData().subscribe((res) => {
       this.poAlldata = res.po
-      console.log(res)
     })
 
   }
@@ -171,7 +170,7 @@ export class POMasterCreationComponent {
       console.log(this.colorid)
       const formArray = this.poDetailscreate.get('data') as FormArray;
       const row = formArray.at(index);
-      row.get('colorId')?.setValue(this.colorid);
+      row.get('colorId')?.setValue(  this.colorid);
     })
   }
 
@@ -204,13 +203,8 @@ export class POMasterCreationComponent {
     this.pofile = true
     this.api.get_PO_Master_line(id).subscribe((res) => {
       this.editdata = res.po
-      console.log(this.editdata)
+
       this.line_OrderNo = res.pomaster[0].orderNo
-      console.log(this.line_OrderNo)
-
-
-
-
 
       const EntryData = this.poDetailscreate.get('data') as FormArray;
       EntryData.clear();
@@ -233,9 +227,6 @@ export class POMasterCreationComponent {
         });
         EntryData.push(Details);
       });
-
-
-
 
     })
     this.poDetailscreate.patchValue({

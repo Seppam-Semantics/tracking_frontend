@@ -1,80 +1,136 @@
-import { Component, NgModule } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, NgModule, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from 'src/app/api.service';
 import * as xls from 'xlsx'
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-workorder-data',
   templateUrl: './workorder-data.component.html',
   styleUrls: ['./workorder-data.component.css']
 })
-export class WorkorderDataComponent {
+export class WorkorderDataComponent implements OnInit{
+  Buyer_Value : any;
+  buyersDta: any;
+  orderNoDta: any;
+  Order_Value: any;
+  styleDta: any;
+  style_Value: any;
+  colorDta: any;
+  color_Value: any;
+  sizeDta: any;
+  size_Value: any;
+  sizeid: any;
+  fsizeDta: any;
+  fsize_Value: any;
+  fabricstypedta: any;
+ngOnInit(): void {
+  this.buyerdata()
+  this.api.fabric_type_BO().subscribe((res)=>{
+    this.fabricstypedta = res.fabricstype
+    console.log(this.fabricstypedta)
+  })
+}
 
-  loadingspinner:boolean=false;
-  orderNo: any;
-  id?: string;
+constructor(private api : ApiService , private router : Router , private fb : FormBuilder){}
 
-  constructor(private api: ApiService ,  private spinner: NgxSpinnerService) {
+buyervalue(event:any){
+  this.Buyer_Value = event.target.value
+}
+ordervalue(event:any){
+  this.Order_Value = event.target.value
+}
 
-  }
+buyerdata(){
+  this.api.Buyer_to_order(this.Buyer_Value).subscribe((res)=>{
+      this.buyersDta = res.buyers
+      this.orderNoDta = res.orderNo
+    })
+}
 
-  dataSource:any[]=[]
-  users: any;
-  file: any;
-  Tabledata:any[]=[]
-  loaddata1:boolean=true;
-  loaddata2:boolean=false;
+orderdata(){
+  this.api.order_to_style(this.Buyer_Value,this.Order_Value).subscribe((res)=>{
+      this.styleDta = res.style
+    })
+}
 
+stylevalue(event:any){
+  this.style_Value = event.target.value
+}
 
+styledata(){
+  this.api.style_to_color(this.Buyer_Value,this.Order_Value,this.style_Value).subscribe((res)=>{
+    this.colorDta = res.color
+  })
+}
 
+colorvalue(event:any){
+  this.color_Value = event.target.value
+}
 
-  hideandseek(){
-    this.loaddata1=!this.loaddata1
-    this.loaddata2=!this.loaddata2
-  }
+colordata(){
+  this.api.color_to_size(this.Buyer_Value,this.Order_Value,this.style_Value,this.color_Value).subscribe((res)=>{
+    this.sizeDta = res.size
+  })
+}
 
+sizevalue(event:any){
+  this.size_Value = event.target.value
+}
 
-  readfile(e: any) {
-    this.file = e.target.files[0]
-  }
+sizedata(){
+  this.api.size_to_id(this.Buyer_Value,this.Order_Value,this.style_Value,this.color_Value,this.size_Value).subscribe((res)=>{
+    this.sizeid = res.sizeId
+  })
 
-  readexcelfile() {
-    let fr = new FileReader();
-  
-    fr.readAsArrayBuffer(this.file);
-  
-    fr.onload = () => {
-        let data = fr.result;  
-        let workbook = xls.read(data, { type: 'array' });
-       
-        const sheetname = workbook.SheetNames[0];
-        const sheet1 = workbook.Sheets[sheetname];
-  
-        this.users = xls.utils.sheet_to_json(sheet1, { raw: true });
+  this.api.f_size_BO(this.style_Value,this.size_Value).subscribe((res)=>{
+    this.fsizeDta = res.fsize
+  })
+}
 
-        if (!this.users[0].hasOwnProperty('noDays')) {
+fsizedata(){
+ 
+}
+fsizevalue(event:any){
+  this.fsize_Value = event.target.value
+}
 
-            this.users.forEach((user:any)=> {
-                user['noDays'] = 0;
-            });
-        }
-        this.dataSource = this.users;
-          };
-  }
+buyerorderform = new FormGroup({
+  data: this.fb.array([])
+})
+get items() {
+  return this.buyerorderform.get("data") as FormArray;
+}
+add1button(){
+  const row = this.fb.group({
+    "Buyer": new FormControl(''),
+    "OrderNo": new FormControl(''),
+    "Style": new FormControl(''),
+    "Color": new FormControl(''),
+    "FSize": new FormControl(''),
+    "GSize": new FormControl(''),
+    "FabType": new FormControl(''),
+    "FabDia": new FormControl(''),
+    "FabGsm": new FormControl(''),
+    "KnitSL": new FormControl(''),
+    "YarnType": new FormControl(''),
+    "YarnKg": new FormControl(''),
+    "GreigeKg": new FormControl(''),
+    "FinishKg": new FormControl(''),
+    "SpinFty": new FormControl(''),
+    "KnitFty": new FormControl(''),
+    "DyeinFty": new FormControl(''),
+    "OrderPcs": new FormControl(''),
+    "OrderFOBRate": new FormControl(''),
+    "KnitRate": new FormControl(''),
+    "DyeRate": new FormControl(''),
+  });
+  this.items.push(row);
+}
 
-  workordersubmit() {
-    this.spinner.show();
-    this.api.postworkorder(this.dataSource).subscribe((res)=>{
-      if(res.success){
-        alert("Your work order details have been saved....!!!!")
-        window.location.reload(); 
-      }
-      else{
-        alert("Error while saving...!!!")
-      }
-    })       
-  }
-
+Delete(index: number) {
+  this.items.removeAt(index);
+}
 }
