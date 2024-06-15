@@ -164,8 +164,9 @@ export class POMasterCreationComponent {
     this.Colornamevalue = event.target.value;
   }
 
-  getcolorId(index: any) {
-    this.api.ColorId(this.Colornamevalue).subscribe((res) => {
+  getcolorId(event:any,index: any) {
+    const a = JSON.stringify(event.target.value)
+    this.api.ColorId(a).subscribe((res) => {
       this.colorid = res.color[0].id
       console.log(this.colorid)
       const formArray = this.poDetailscreate.get('data') as FormArray;

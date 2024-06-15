@@ -10,8 +10,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  // apiUrl = "https://tracker.seppam.com";
-  apiUrl = "http://localhost:2000";
+  apiUrl = "https://tracker.seppam.com";
+  // apiUrl = "http://localhost:2000";
 
   token: any;
   profilenames: any;
@@ -702,7 +702,7 @@ export class ApiService {
   }
 
   ColorId(color: any): Observable<any> {
-    return this.http.get(this.getUrl() + `/mastersapi/drop-colorId-Master?color='${color}'&`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/mastersapi/drop-colorId-Master?color=${color}&`, this.getHeaders())
   }
   Color_master(data: any): Observable<any> {
     return this.http.post(this.getUrl() + `/mastersapi/color-master`, data, this.getHeaders())
@@ -1001,7 +1001,7 @@ export class ApiService {
   }
 
   color_to_size(buyer:string='' , order : string = '' , style:string = '',color:string=''):Observable<any>{
-    return this.http.get(this.getUrl() + `/workorderapi/Color_size_BO?buyer=${buyer}&order=${order}&style=${style}&color=${color}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/workorderapi/Color_size_BO?buyer=${buyer}&order=${order}&style=${style}&color=${color}&`, this.getHeaders())
   }
 
   
@@ -1014,5 +1014,20 @@ export class ApiService {
   }
   fabric_type_BO():Observable<any>{
     return this.http.get(this.getUrl() + `/workorderapi/fabric_type_BO`, this.getHeaders())
+  }
+
+  Spin_Fty_BO():Observable<any>{
+    return this.http.get(this.getUrl() + `/workorderapi/Spin_Fty_BO`, this.getHeaders())
+  }
+
+  Knit_Fty_BO():Observable<any>{
+    return this.http.get(this.getUrl() + `/workorderapi/Knit_Fty_BO`, this.getHeaders())
+  }
+  Dyein_Fty_BO():Observable<any>{
+    return this.http.get(this.getUrl() + `/workorderapi/Dyein_Fty_BO`, this.getHeaders())
+  }
+
+  yarn_type_BO():Observable<any>{
+    return this.http.get(this.getUrl() + `/workorderapi/yarn_type_BO`, this.getHeaders())
   }
 }

@@ -1,5 +1,5 @@
 import { Component, NgModule, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { ApiService } from 'src/app/api.service';
 import * as xls from 'xlsx'
@@ -26,11 +26,35 @@ export class WorkorderDataComponent implements OnInit{
   fsizeDta: any;
   fsize_Value: any;
   fabricstypedta: any;
+  fabdiaDta: any;
+  fabGsmDta: any;
+  fabdia_Value: any;
+  FabGsm_Value: any;
+  spinftydta: any;
+  knitFtydta: any;
+  dyeFtydta: any;
+  yarntypedta: any;
+  finishfabConsumptionDta: any;
 ngOnInit(): void {
   this.buyerdata()
   this.api.fabric_type_BO().subscribe((res)=>{
     this.fabricstypedta = res.fabricstype
-    console.log(this.fabricstypedta)
+  })
+
+  this.api.Spin_Fty_BO().subscribe((res)=>{
+    this.spinftydta = res.SpinFty
+  })
+
+  this.api.Knit_Fty_BO().subscribe((res)=>{
+    this.knitFtydta = res.knitFty
+  })
+
+  this.api.Dyein_Fty_BO().subscribe((res)=>{
+    this.dyeFtydta = res.dyeFty
+  })
+
+  this.api.yarn_type_BO().subscribe((res)=>{
+    this.yarntypedta = res.yarntype
   })
 }
 
@@ -83,10 +107,15 @@ sizevalue(event:any){
 sizedata(){
   this.api.size_to_id(this.Buyer_Value,this.Order_Value,this.style_Value,this.color_Value,this.size_Value).subscribe((res)=>{
     this.sizeid = res.sizeId
+    console.log(this.sizeid)
   })
 
   this.api.f_size_BO(this.style_Value,this.size_Value).subscribe((res)=>{
     this.fsizeDta = res.fsize
+    this.fabdiaDta = res.FabDia
+    this.fabGsmDta = res.FabGsm
+    this.finishfabConsumptionDta = res.finishfabConsumption[0].finishfabConsumption
+    console.log(res)
   })
 }
 
@@ -95,6 +124,28 @@ fsizedata(){
 }
 fsizevalue(event:any){
   this.fsize_Value = event.target.value
+}
+
+fabdiavalue(event:any){
+  this.fabdia_Value = event.target.value
+}
+
+FabGsmvalue(event:any){
+  this.FabGsm_Value = event.target.value
+}
+
+calculateDiff() {
+  this.items.controls.forEach((control: AbstractControl) => {
+    const row = control as FormGroup;
+    if (row instanceof FormGroup) {
+      const OrderPcs = parseFloat(row.get('OrderPcs')?.value) || 0;
+      const FinishKg1 = (this.finishfabConsumptionDta)* OrderPcs ;
+      console.log(this.finishfabConsumptionDta)
+      const FinishKg = parseFloat(FinishKg1.toFixed(2));
+
+      row.patchValue({ FinishKg });
+    }
+  });
 }
 
 buyerorderform = new FormGroup({
@@ -128,6 +179,11 @@ add1button(){
     "DyeRate": new FormControl(''),
   });
   this.items.push(row);
+
+  row.get('OrderPcs')?.valueChanges.subscribe(() => {
+    this.calculateDiff();
+  });
+
 }
 
 Delete(index: number) {

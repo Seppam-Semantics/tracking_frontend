@@ -82,7 +82,7 @@
             </datalist>
 
             <td><input style="width: 15vh;" formControlName="FSize" list="FSize" (input)="fsizevalue($event)"
-                (change)="fsizedata()"></td>
+                (change)="fsizedata()" ></td>
             <datalist id="FSize">
               <option *ngFor="let data of this.fsizeDta" value="{{data.machineDia}}">{{data.machineDia}}</option>
             </datalist>
@@ -92,13 +92,25 @@
               <option *ngFor="let data of this.fabricstypedta" value="{{data.fabricstype}}">{{data.fabricstype}}</option>
             </datalist>
 
-            <td><input style="width: 15vh;" formControlName="FabDia"></td>
+            <td><input style="width: 15vh;" formControlName="FabDia" list="FabDia" (input)="fabdiavalue($event)">
+              <datalist id="FabDia">
+                <option *ngFor="let data of this.fabdiaDta" value="{{data.FabDia}}">{{data.FabDia}}</option>
+              </datalist>
+            </td>
 
-            <td><input style="width: 15vh;" formControlName="FabGsm"></td>
+            <td><input style="width: 15vh;" formControlName="FabGsm" list="FabGsm" (input)="fabdiavalue($event)">
+              <datalist id="FabGsm">
+                <option *ngFor="let data of this.fabGsmDta" value="{{data.FabGsm}}">{{data.FabGsm}}</option>
+              </datalist>
+            </td>
 
-            <td><input style="width: 15vh;" formControlName="KnitSL"></td>
+            <td><input style="width: 15vh;" formControlName="KnitSL" type="number"></td>
 
-            <td><input style="width: 15vh;" formControlName="YarnType"></td>
+            <td><input style="width: 15vh;" formControlName="YarnType" list="YarnType">
+              <datalist id="YarnType">
+                <option *ngFor="let data of this.yarntypedta" value="{{data.yarntype}}">{{data.yarntype}}</option>
+              </datalist>
+            </td>
 
             <td><input style="width: 15vh;" formControlName="YarnKg"></td>
 
@@ -106,11 +118,23 @@
 
             <td><input style="width: 15vh;" formControlName="FinishKg"></td>
 
-            <td><input style="width: 15vh;" formControlName="SpinFty"></td>
+            <td><input style="width: 15vh;" formControlName="SpinFty" list="SpinFty">
+              <datalist id="SpinFty">
+                <option *ngFor="let data of this.spinftydta" value="{{data.SpinFtyName}}">{{data.SpinFtyName}}</option>
+              </datalist>
+            </td>
 
-            <td><input style="width: 15vh;" formControlName="KnitFty"></td>
+            <td><input style="width: 15vh;" formControlName="KnitFty" list="KnitFty">
+              <datalist id="KnitFty">
+                <option *ngFor="let data of this.knitFtydta" value="{{data.knitFty}}">{{data.knitFty}}</option>
+              </datalist>
+            </td>
 
-            <td><input style="width: 15vh;" formControlName="DyeinFty"></td>
+            <td><input style="width: 15vh;" formControlName="DyeinFty" list="dyeFty">
+              <datalist id="dyeFty">
+                <option *ngFor="let data of this.dyeFtydta" value="{{data.dyeFty}}">{{data.dyeFty}}</option>
+              </datalist>
+            </td>
 
             <td><input style="width: 15vh;" formControlName="OrderPcs"></td>
 

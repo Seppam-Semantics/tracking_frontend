@@ -186,7 +186,7 @@
                 </td>
                 <td>
                     <input type="text" formControlName="color" list="3" class="form-control" style="width: 20vh;"
-                    (input)="getcolorvalue($event)" (input)="getcolorId(i)">
+                    (input)="getcolorId($event,i)">
                     <datalist id="3">
                         <option *ngFor="let color of this.colorDropdata" value="{{color.color}}">{{color.color}}
                     </datalist>
