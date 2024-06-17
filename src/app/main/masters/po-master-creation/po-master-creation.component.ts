@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ApiService } from 'src/app/api.service';
 
 @Component({
@@ -114,7 +114,33 @@ export class POMasterCreationComponent {
     });
 
     this.items.push(row);
+
+    row.get('quantity')?.valueChanges.subscribe(() => {
+      this.calculateDiff();
+    });
+
+    row.get('poRate')?.valueChanges.subscribe(() => {
+      this.calculateDiff();
+    });
+
   }
+
+
+  calculateDiff() {
+    this.items.controls.forEach((control: AbstractControl) => {
+      const row = control as FormGroup;
+      if (row instanceof FormGroup) {
+        const quantity = parseFloat(row.get('quantity')?.value);
+        const poRate = parseFloat(row.get('poRate')?.value);
+  
+        const poValue1 = quantity * poRate
+        const poValue = parseFloat(poValue1.toFixed(2));
+  
+        row.patchValue({ poValue});
+      }
+    });
+  }
+
 
   Delete(index: number) {
     this.items.removeAt(index);

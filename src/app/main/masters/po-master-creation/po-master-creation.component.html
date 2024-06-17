@@ -200,10 +200,10 @@
                 </td>
 
 
-                <td><input type="text" formControlName="quantity" list="5" class="form-control" style="width: 20vh;" ></td>
-                <td><input type="text" formControlName="poValue" list="8" class="form-control" style="width: 20vh;" ></td>
-                <td><input type="text" formControlName="poRate" list="6" class="form-control" style="width: 20vh;"></td>
-                <td><input type="text" formControlName="popl" list="7" class="form-control" style="width: 20vh;"></td>
+                <td><input type="text" formControlName="quantity" list="5" class="form-control" style="width: 20vh;" (click)="calculateDiff()"></td>
+                <td><input type="text" formControlName="poValue" list="8" class="form-control" style="width: 20vh;" (click)="calculateDiff()"></td>
+                <td><input type="text" formControlName="poRate" list="6" class="form-control" style="width: 20vh;" (click)="calculateDiff()"></td>
+                <td><input type="text" formControlName="popl" list="7" class="form-control" style="width: 20vh;" (click)="calculateDiff()"></td>
 
                 <td><button class="btn btn-danger" (click)="delectheder_line(i)">x</button></td>
             </tr>
