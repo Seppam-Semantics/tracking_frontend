@@ -150,6 +150,9 @@ export class StyleCreationComponent implements OnInit {
       this.Stylecreate.patchValue({
         buyerId: this.buyerid
       })
+      this.Styleedit.patchValue({
+        buyerId: this.buyerid
+      })
     })
   }
 
@@ -157,6 +160,9 @@ export class StyleCreationComponent implements OnInit {
     this.api.yarnTypeId(this.Yarntypenamevalue).subscribe((res) => {
       this.yarnTypeid = res.yarnType[0].id
       this.Stylecreate.patchValue({
+        yarnTypeId: this.yarnTypeid
+      })
+      this.Styleedit.patchValue({
         yarnTypeId: this.yarnTypeid
       })
     })
@@ -168,6 +174,9 @@ export class StyleCreationComponent implements OnInit {
       this.Stylecreate.patchValue({
         fabricTypeId: this.fabricstypeid
       })
+      this.Styleedit.patchValue({
+        fabricTypeId: this.fabricstypeid
+      })
     })
   }
 
@@ -175,6 +184,9 @@ export class StyleCreationComponent implements OnInit {
     this.api.DyeTypeId(this.dyeTypenamevalue).subscribe((res) => {
       this.dyeTypeid = res.dyeType[0].id
       this.Stylecreate.patchValue({
+        dyeTypeId: this.dyeTypeid
+      })
+      this.Styleedit.patchValue({
         dyeTypeId: this.dyeTypeid
       })
     })

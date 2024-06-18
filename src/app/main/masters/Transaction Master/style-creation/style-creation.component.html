@@ -223,7 +223,7 @@
       <div>
         <mat-form-field appearance="outline">
           <mat-label>Buyer Name</mat-label>
-          <mat-select formControlName="buyer">
+          <mat-select formControlName="buyer" [(ngModel)]="Buyernamevalue" (selectionChange)="getbuyerId()">
             <mat-option *ngFor="let buyer of this.buyerDrop" value="{{buyer.buyer}}">{{buyer.buyer}}</mat-option>
           </mat-select>
         </mat-form-field>

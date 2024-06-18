@@ -37,6 +37,7 @@ export class WorkorderDataComponent implements OnInit {
   finishfabConsumptionDta: any;
   poid: any;
   polineId: any;
+  BuyerCrationPopup : boolean = false;
   ngOnInit(): void {
     this.buyerdata()
     this.api.fabric_type_BO().subscribe((res) => {
@@ -129,7 +130,7 @@ export class WorkorderDataComponent implements OnInit {
       row.get('FabricConsumption')?.setValue(this.finishfabConsumptionDta);
     })
   }
-
+ 
   fsizedata() {
 
   }
