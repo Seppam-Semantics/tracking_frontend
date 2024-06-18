@@ -753,6 +753,10 @@ export class ApiService {
 
   // ========================== Yarn Type ========================================================================================
   
+  yarnTypeId(yarnType: string = ''): Observable<any> {
+    return this.http.get(this.getUrl() + `/mastersapi/drop-yarnTypeId-Master?yarnType='${yarnType}'`, this.getHeaders())
+  }
+
   yarnType_master(data: any): Observable<any> {
     return this.http.post(this.getUrl() + `/mastersapi/yarn-type-master`, data, this.getHeaders())
   }
@@ -773,6 +777,10 @@ export class ApiService {
   }
 
   // =================================== Fabric Type =============================================================================
+
+  fabrictypeId(FabricType: string = ''): Observable<any> {
+    return this.http.get(this.getUrl() + `/mastersapi/drop-fabricstypeId-Master?fabricType='${FabricType}'`, this.getHeaders())
+  }
 
   fabrictype_master(data: any): Observable<any> {
     return this.http.post(this.getUrl() + `/mastersapi/fabric-type-master`, data, this.getHeaders())
@@ -810,6 +818,11 @@ export class ApiService {
   }
 
   // =================================== dyetype=============================================================================
+
+  DyeTypeId(dyetype: string = ''): Observable<any> {
+    return this.http.get(this.getUrl() + `/mastersapi/drop-dyetypeId-Master?DyeType='${dyetype}'`, this.getHeaders())
+  }
+
 
   dyetype_master(data: any): Observable<any> {
     return this.http.post(this.getUrl() + `/mastersapi/dye-type-master`, data, this.getHeaders())

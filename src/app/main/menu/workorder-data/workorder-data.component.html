@@ -40,6 +40,7 @@
 
             <th>DyeRate</th>
             <th>Remove</th>
+            <th style="display: none;">Fabric Consumption</th>
           </tr>
         </thead>
         <tbody formArrayName="data">
@@ -76,7 +77,7 @@
             </td>
 
             <td><input style="width: 15vh;" formControlName="GSize" list="GSize" (input)="sizevalue($event)"
-                (change)="sizedata()"></td>
+                (change)="sizedata(i)"></td>
             <datalist id="GSize">
               <option *ngFor="let data of this.sizeDta" value="{{data.size}}">{{data.size}}</option>
             </datalist>
@@ -145,6 +146,8 @@
             <td><input style="width: 15vh;" formControlName="DyeRate"></td>
 
             <td><button (click)="Delete(i)" style="background-color: red; color: white;">x</button></td>
+          
+            <td><input style="width: 15vh; display: none;" formControlName="FabricConsumption" ></td>
           </tr>
         </tbody>
       </table>
