@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/api.service';
 
 @Component({
@@ -61,6 +61,8 @@ export class FabricsdiaCreationComponent {
       this.Fabricsdiacreate.patchValue({
         sizeId : this.sizeid 
       })
+      this.concatedSize()
+      this.editConcatedSize()
     })
   }
 
@@ -84,7 +86,8 @@ export class FabricsdiaCreationComponent {
       others : new FormControl('') ,
       finishFabricsConsumptionDozn : new FormControl('') ,
       machineDia : new FormControl('') ,
-      finishDia : new FormControl('')
+      finishDia : new FormControl(''),
+      concatSize : new FormControl('', Validators.required)
     })
   
   
@@ -106,7 +109,8 @@ export class FabricsdiaCreationComponent {
       others : new FormControl('') ,
       finishFabricsConsumptionDozn : new FormControl('') ,
       machineDia : new FormControl('') ,
-      finishDia : new FormControl('')
+      finishDia : new FormControl(''),
+      concatSize : new FormControl('', Validators.required)
     })
   }
   
@@ -131,25 +135,48 @@ export class FabricsdiaCreationComponent {
         others : this.datalist[0].others ,
         finishFabricsConsumptionDozn : this.datalist[0].finishfabConsumption ,
         machineDia : this.datalist[0].machineDia ,
-        finishDia : this.datalist[0].finishDia
+        finishDia : this.datalist[0].finishDia,
+        concatSize : this.datalist[0].concatSize ? this.datalist[0].concatSize : this.datalist[0].machineDia + '-' + this.datalist[0].size + '-' + this.datalist[0].finishDia
       })
     })
   }
 
+  concatedSize(){
+    const machineDia = this.Fabricsdiacreate.get('machineDia')?.value;
+    const size = this.Fabricsdiacreate.get('sizeName')?.value;
+    const finishDia = this.Fabricsdiacreate.get('finishDia')?.value;
 
+    const concatSize = machineDia  + '-' + size + '-' + finishDia
+
+    this.Fabricsdiacreate.get('concatSize')?.setValue(concatSize)
+  }
+
+  editConcatedSize(){
+    const machineDia = this.Fabricsdiaedit.get('machineDia')?.value;
+    const size = this.Fabricsdiaedit.get('sizeName')?.value;
+    const finishDia = this.Fabricsdiaedit.get('finishDia')?.value;
+
+    const concatSize = machineDia  + '-' + size + '-' + finishDia
+
+    this.Fabricsdiaedit.get('concatSize')?.setValue(concatSize)
+  }
 
 
   update(){
     this.api.fsize_master(this.Fabricsdiaedit.value).subscribe((res)=>{
       alert(res.message)
-      window.location.reload()
+      this.api.fsize_master_AllData().subscribe((res)=>{
+        this.fsizedata = res.fsize
+      })
     })
   }
   
   delete(id:any){
     this.api.delete_fsize_master(id).subscribe((res)=>{
       alert(res.message)
-      window.location.reload()
+      this.api.fsize_master_AllData().subscribe((res)=>{
+        this.fsizedata = res.fsize
+      })
     })
   }
 
@@ -157,7 +184,10 @@ export class FabricsdiaCreationComponent {
   saveButton(){
     this.api.fsize_master(this.Fabricsdiacreate.value).subscribe((res)=>{
       alert(res.message)
-      window.location.reload()
+      this.api.fsize_master_AllData().subscribe((res)=>{
+        this.fsizedata = res.fsize
+      })
+      this.Fabricsdiacreate.reset()
     })
   }
 }

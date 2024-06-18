@@ -33,6 +33,7 @@
                 <th>FinishFabrics Consumption/Dozn</th>
                 <th>Machine Dia</th>
                 <th>FinishDia</th>
+                <th>F-Size</th>
                 
                 <th>Action</th>
             </tr>
@@ -60,6 +61,7 @@
                 <td>{{data.finishfabConsumption}}</td>
                 <td>{{data.machineDia}}</td>
                 <td>{{data.finishDia}}</td>
+                <td>{{data.concatSize}}</td>
 
                 <td>
                     <div style="display: flex; gap: 10px; width: 100%; justify-content: center;">
@@ -91,7 +93,7 @@
 
             <div>
                 <mat-form-field appearance="outline">
-                    <mat-label> Size Name</mat-label>
+                    <mat-label> Size </mat-label>
                     <mat-select formControlName="sizeName" [(ngModel)]="Sizenamevalue" (selectionChange)="getsizeId()">
                         <mat-option *ngFor="let size of this.sizeDropdata" value="{{size.size}}">{{size.size}}</mat-option>
                     </mat-select>
@@ -187,19 +189,23 @@
             <div>
                 <mat-form-field appearance="outline">
                     <mat-label>Machine Dia</mat-label>
-                    <input matInput formControlName="machineDia">
+                    <input matInput formControlName="machineDia" (input)="concatedSize()">
                 </mat-form-field>
             </div>
 
             <div>
                 <mat-form-field appearance="outline">
                     <mat-label>Finish Dia</mat-label>
-                    <input matInput formControlName="finishDia">
+                    <input matInput formControlName="finishDia" (input)="concatedSize()">
                 </mat-form-field>
             </div>
         </div>
-
-
+    </div>
+    <div>
+        <mat-form-field appearance="outline">
+            <mat-label>F-Size</mat-label>
+            <input matInput formControlName="concatSize" readonly>
+        </mat-form-field>
     </div>
     <ng-template pTemplate="footer">
         <div style="width: 100%; display: flex; justify-content: center;">
@@ -325,19 +331,23 @@
             <div>
                 <mat-form-field appearance="outline">
                     <mat-label>Machine Dia</mat-label>
-                    <input matInput formControlName="machineDia">
+                    <input matInput formControlName="machineDia" (input)="editConcatedSize()">
                 </mat-form-field>
             </div>
 
             <div>
                 <mat-form-field appearance="outline">
                     <mat-label>Finish Dia</mat-label>
-                    <input matInput formControlName="finishDia">
+                    <input matInput formControlName="finishDia" (input)="editConcatedSize()">
                 </mat-form-field>
             </div>
         </div>
-
-
+    </div>
+    <div>
+        <mat-form-field appearance="outline">
+            <mat-label>F-Size</mat-label>
+            <input matInput formControlName="concatSize" readonly>
+        </mat-form-field>
     </div>
     <ng-template pTemplate="footer">
         <div style="width: 100%; display: flex; justify-content: center;">
