@@ -122,7 +122,7 @@ export class FabricRollData2Component implements OnInit {
   loadworkorder(buyer: string = '', orderNo: string = '', style: string ='', color: string = '', size: string ='') {
     this.api.getwodetails(buyer, orderNo, style, color, size).subscribe((res) => {
       this.data = res.workorders;
-    
+      console.log(this.data)
     });
   }
   
@@ -220,6 +220,7 @@ export class FabricRollData2Component implements OnInit {
     this.woupdateid=id
     this.api.getsinglewodetails(id).subscribe((res) => {
       this.Woupdate = res.workorder
+      console.log(this.Woupdate)
       const value = this.Woupdate.status
       if(value == 1){
         this.status = true
@@ -251,7 +252,7 @@ export class FabricRollData2Component implements OnInit {
         dyeRate: this.Woupdate.dyeRate,
         knitRate: this.Woupdate.knitRate,
 
-        gSize: this.Woupdate.gSize,
+        gSize: this.Woupdate.FSize,
       })
     })
      }

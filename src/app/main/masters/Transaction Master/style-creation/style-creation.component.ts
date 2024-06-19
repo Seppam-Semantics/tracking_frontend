@@ -130,7 +130,7 @@ export class StyleCreationComponent implements OnInit {
         utility: this.datalist[0].utility,
         buyer: this.datalist[0].buyer,
         brand: this.datalist[0].brand,
-        buyerId: this.datalist[0].buyerId,
+        buyerId: this.datalist[0].buyer_id,
         yarnType: this.datalist[0].yarnType,
         yarnTypeId: this.datalist[0].yarnTypeId,
         fabricType: this.datalist[0].fabricType,
@@ -196,9 +196,12 @@ export class StyleCreationComponent implements OnInit {
 
 update(){
   this.api.style_master(this.Styleedit.value).subscribe((res) => {
-    alert(res.message)
-    window.location.reload()
+    
+    this.stylefilter()
   })
+
+  this.Styleedit.reset()
+  this.Styleediting = false
 }
 
 delete (id:any) {
@@ -211,9 +214,11 @@ delete (id:any) {
 saveButton(){
   console.log(this.Stylecreate.value)
   this.api.style_master(this.Stylecreate.value).subscribe((res) => {
-    alert(res.message)
-    window.location.reload()
+  
   })
+  this.stylefilter()
+  this.Stylecreate.reset()
+  this.Stylecreation = false
 }
   
   }

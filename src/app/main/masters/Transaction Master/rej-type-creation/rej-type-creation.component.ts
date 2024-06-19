@@ -21,7 +21,9 @@ export class RejTypeCreationComponent {
   all: any;
   rejtypeData: string | undefined;
   FillterData: string | undefined;
-
+  rejtypeDta: any;
+  availableColors: string[] = ['Aqua', 'Burgundy', 'Grey Melange', 'Kelly Green', 'White'];
+  rejtypeColorDta: any;
   ngOnInit(): void {
 
     this.api.Drop_Color_master().subscribe((res) => {
@@ -47,7 +49,7 @@ export class RejTypeCreationComponent {
       id: new FormControl(''),
       rejType: new FormControl(''),
       rejName: new FormControl(''),
-      colors: new FormControl(),
+      colors: new FormControl(''),
       data: new FormControl(''),
       losses: new FormControl('')
     })
@@ -57,18 +59,16 @@ export class RejTypeCreationComponent {
       id: new FormControl(''),
       rejType: new FormControl(''),
       rejName: new FormControl(''),
-      colors: new FormControl(''),
-      loss: new FormControl('')
+      colors:   [[]], 
+      data: new FormControl(''),
+      losses: new FormControl('')
     })
   }
 
-  color(value:any){
-    return JSON.parse(value)
-  }
+
 
   getSelectedColors() {
     const selectedColorIds = this.rejTypecreate.get('colors')?.value || [];
-
 
     this.selectedColors = this.colorDropdata
       .filter((color: { id: number; color: string }) => selectedColorIds.includes(color.id));
@@ -91,15 +91,42 @@ export class RejTypeCreationComponent {
 
   edit(id: any) {
     this.api.rejtype_Master_SingleData(id).subscribe((res) => {
-
+     this.rejtypeDta =  res.rejtype
+     this.rejtypeColorDta =  res.rejtype[0].color
+     
+     this.rejTypeedit.patchValue({
+      id: this.rejtypeDta[0].id,
+      rejType: this.rejtypeDta[0].rejType,
+      rejName: this.rejtypeDta[0].rejName,
+      data : JSON.parse(this.rejtypeDta[0].colors) ,
+      losses: this.rejtypeDta[0].losses
+     })
     })
   }
+
+update(){
+  console.log(this.rejTypeedit.value)
+  this.api.rejtype_Master(this.rejTypeedit.value).subscribe((res) => {
+    alert(res.message)
+    this.RejTypeFillterData()
+    this.rejTypeediting = false;
+  })
+}
 
   saveButton() {
     this.api.rejtype_Master(this.rejTypecreate.value).subscribe((res) => {
       alert(res.message)
-      window.location.reload()
+      this.RejTypeFillterData()
+      this.rejTypecreation = false;
     })
     console.log(this.rejTypecreate.value)
   }
+
+
+delete(id:any){
+ this.api.delete_rejtype_master(id).subscribe((res)=>{
+  alert(res.message)
+  this.RejTypeFillterData()
+ }) 
+}
 }
