@@ -110,6 +110,7 @@ import { DyeFtyCreationComponent } from './masters/Transaction Master/dye-fty-cr
 import { KnitFtyCreationComponent } from './masters/Transaction Master/knit-fty-creation/knit-fty-creation.component';
 import { POMasterCreationComponent } from './masters/po-master-creation/po-master-creation.component';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { FabricBookingReportComponent } from './menu/workorder-data/fabric-booking-report/fabric-booking-report.component';
 @NgModule({
   declarations: [
     MainComponent,
@@ -175,6 +176,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
     DyeFtyCreationComponent,
     KnitFtyCreationComponent,
     POMasterCreationComponent,
+    FabricBookingReportComponent,
 
   ],
   imports: [

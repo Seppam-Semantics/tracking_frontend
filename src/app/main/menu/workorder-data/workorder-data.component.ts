@@ -389,7 +389,9 @@ export class WorkorderDataComponent implements OnInit {
       }
     })
   }
-
+  FBReport(){
+    this.router.navigate(['/main/FBReport'])
+  }
   Delete(index: number) {
     this.items.removeAt(index);
   }
