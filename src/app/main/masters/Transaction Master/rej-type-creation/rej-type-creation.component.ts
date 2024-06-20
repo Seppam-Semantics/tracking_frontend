@@ -156,12 +156,7 @@ getSelectedColors1() {
 
   delete(id: any) {
     this.api.delete_rejtype_master(id).subscribe((res) => {
-    //   mobiscroll.confirm({
-    //     title: 'Use location service?',
-    //     message: 'Help apps determine the location. This means sending anonymous location data, even when no apps are running.',
-    //     okText: 'Agree',
-    //     cancelText: 'Disagree'
-    // });
+      alert(res.message)
       this.RejTypeFillterData()
     })
   }
