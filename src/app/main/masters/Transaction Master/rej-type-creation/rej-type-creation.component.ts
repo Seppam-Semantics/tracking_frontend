@@ -22,8 +22,11 @@ export class RejTypeCreationComponent {
   rejtypeData: string | undefined;
   FillterData: string | undefined;
   rejtypeDta: any;
-  availableColors: string[] = ['Aqua', 'Burgundy', 'Grey Melange', 'Kelly Green', 'White'];
   rejtypeColorDta: any;
+  selected: any[] = ['Kelly Green'];
+  selectedColors1: any;
+  selectedColors2: any;
+
   ngOnInit(): void {
 
     this.api.Drop_Color_master().subscribe((res) => {
@@ -38,10 +41,8 @@ export class RejTypeCreationComponent {
   }
 
   colorjson(data: any): any {
-      return JSON.parse(data);
+    return JSON.parse(data);
   }
-
-
 
   constructor(private fb: FormBuilder, private api: ApiService) {
 
@@ -59,7 +60,7 @@ export class RejTypeCreationComponent {
       id: new FormControl(''),
       rejType: new FormControl(''),
       rejName: new FormControl(''),
-      colors:   [[]], 
+      colors: new FormControl(''),
       data: new FormControl(''),
       losses: new FormControl('')
     })
@@ -82,38 +83,68 @@ export class RejTypeCreationComponent {
     });
   }
 
-  
-  RejTypeFillterData(){ 
-    this.api.rejtype_master_Fillter_Data(this.FillterData).subscribe((res)=>{
+
+  RejTypeFillterData() {
+    this.api.rejtype_master_Fillter_Data(this.FillterData).subscribe((res) => {
       this.rejtypeData = res.rejtype
     })
   }
 
   edit(id: any) {
     this.api.rejtype_Master_SingleData(id).subscribe((res) => {
-     this.rejtypeDta =  res.rejtype
-     this.rejtypeColorDta =  res.rejtype[0].color
-     
-     this.rejTypeedit.patchValue({
-      id: this.rejtypeDta[0].id,
-      rejType: this.rejtypeDta[0].rejType,
-      rejName: this.rejtypeDta[0].rejName,
-      data : JSON.parse(this.rejtypeDta[0].colors) ,
-      losses: this.rejtypeDta[0].losses
-     })
+        this.rejtypeDta = res.rejtype;
+        this.rejtypeColorDta = JSON.parse(res.rejtype[0].colors).map((colorObj: any) => ({
+          // this.rejtypeColorDta = res.rejtype[0].colors.map((colorObj: any) => ({
+            colorId: colorObj.colorId,
+            color: colorObj.color,
+            lineid: colorObj.lineid
+        }));
+
+        const colorIdsArray = this.rejtypeColorDta.map((colorObj: any) => colorObj.colorId);
+
+        console.log(colorIdsArray)
+        this.rejTypeedit.patchValue({
+            id: this.rejtypeDta[0].id,
+            rejType: this.rejtypeDta[0].rejType,
+            rejName: this.rejtypeDta[0].rejName,
+            losses: this.rejtypeDta[0].losses,
+            colors: colorIdsArray // Patch form control with colorId values
+        });
+
+        this.getSelectedColors1();
+    });
+}
+getSelectedColors1() {
+  const selectedColorIds = this.rejTypeedit.get('colors')?.value || [];
+
+  this.selectedColors1 = this.colorDropdata.filter((color: any) => selectedColorIds.includes(color.id));
+
+  this.selectedColors2 = this.selectedColors1.map((color: any) => {
+      const colorWithLineId = this.rejtypeColorDta.find(
+          (colorObj: any) => colorObj.colorId === color.id
+      );
+
+      return {
+          ...color,
+          lineid: colorWithLineId ? colorWithLineId.lineid : 0
+      };
+  });
+  this.rejTypeedit.patchValue({
+      data: this.selectedColors2
+  });
+}
+
+  update() {
+    console.log(this.rejTypeedit.value)
+    this.api.rejtype_Master(this.rejTypeedit.value).subscribe((res) => {
+      alert(res.message)
+      this.RejTypeFillterData()
+      this.rejTypeediting = false;
     })
   }
 
-update(){
-  console.log(this.rejTypeedit.value)
-  this.api.rejtype_Master(this.rejTypeedit.value).subscribe((res) => {
-    alert(res.message)
-    this.RejTypeFillterData()
-    this.rejTypeediting = false;
-  })
-}
-
   saveButton() {
+    console.log(this.rejTypecreate.value)
     this.api.rejtype_Master(this.rejTypecreate.value).subscribe((res) => {
       alert(res.message)
       this.RejTypeFillterData()
@@ -123,10 +154,15 @@ update(){
   }
 
 
-delete(id:any){
- this.api.delete_rejtype_master(id).subscribe((res)=>{
-  alert(res.message)
-  this.RejTypeFillterData()
- }) 
-}
+  delete(id: any) {
+    this.api.delete_rejtype_master(id).subscribe((res) => {
+    //   mobiscroll.confirm({
+    //     title: 'Use location service?',
+    //     message: 'Help apps determine the location. This means sending anonymous location data, even when no apps are running.',
+    //     okText: 'Agree',
+    //     cancelText: 'Disagree'
+    // });
+      this.RejTypeFillterData()
+    })
+  }
 }
