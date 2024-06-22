@@ -109,8 +109,8 @@ export class ApiService {
     return this.http.get(this.getUrl() + `/workorderapi/workorders-filter?buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&size=${size}&`, this.getHeaders())
   }
 
-  getwodetailsline(orderNo: any, style?: any, color?: any, size?: any): Observable<any> {
-    return this.http.get(this.getUrl() + `/workorderapi/workorders-filter?orderNo=${orderNo}&style=${style}&color=${color}&size=${size}&`, this.getHeaders())
+  getwolinedetails(buyer: any, orderNo?: any, style?: any, color?: any, size?: any): Observable<any> {
+    return this.http.get(this.getUrl() + `/workorderapi/workorders-details-filter?orderNo=${orderNo}&style=${style}&color=${color}&size=${size}&`, this.getHeaders())
   }
 
   getknitwodetails(buyer: any, orderNo?: any, style?: any, color?: any, size?: any): Observable<any> {
@@ -126,8 +126,8 @@ export class ApiService {
     return this.http.get(this.getUrl() + `/filtersapi/buyers-orders_data?buyer=${buyer}&`, this.getHeaders())
   }
 
-  getstyleData(buyer: string, order: string): Observable<any> {
-    return this.http.get(this.getUrl() + `/filtersapi/orders-styles_data?buyer=${buyer}&orderNo=${order}&`, this.getHeaders())
+  getstyleData(order: string): Observable<any> {
+    return this.http.get(this.getUrl() + `/filtersapi/orders-styles_data?orderNo=${order}&`, this.getHeaders())
   }
 
   getcolorData(buyer: string, order: string, style: string): Observable<any> {

@@ -268,19 +268,19 @@ export class DyeBatchReportComponent implements OnInit {
   }
 
   getstyle(buyer: any, orderNo: any) {
-    this.api.getstyleData(buyer, orderNo).subscribe((res) => {
+    this.api.getstyle(buyer, orderNo).subscribe((res) => {
       this.stylelist = res.styles;
     })
   }
 
   getcolor(buyer: any, orderNo: any, style: any) {
-    this.api.getcolorData(buyer, orderNo, style).subscribe((res) => {
+    this.api.getcolor(buyer, orderNo, style).subscribe((res) => {
       this.colorlist = res.colors;
     })
   }
 
   getsize(buyer: any, orderNo: any, style: any, color: any) {
-    this.api.getsizeData(buyer, orderNo, style, color).subscribe((res) => {
+    this.api.getsize(buyer, orderNo, style, color).subscribe((res) => {
       this.sizelist = res.sizes;
     })
   }
