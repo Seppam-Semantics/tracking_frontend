@@ -31,60 +31,6 @@
 <button mat-button color='primary' (click)="FBReport()">Report</button>
 </mat-toolbar>
 
-
-<!-- <div style="display: flex;">
-<div style="width: 100%; display: flex; justify-content: center; gap: 10px;">
-  <mat-form-field appearance="outline" (click)="clearAll()">
-    <mat-label>Buyer</mat-label>
-    <mat-select [(ngModel)]="buyerName" (selectionChange)="woByBuyer()">
-      <mat-option value=""> </mat-option>
-      <mat-option *ngFor="let buyer of this.buyers" value="{{buyer.buyer}}">{{buyer.buyer}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <mat-form-field appearance="outline">
-    <mat-label>Order</mat-label>
-    <mat-select [(ngModel)]="ordernumbers" (selectionChange)="wobyOrder()">
-      <mat-option value=""> </mat-option>
-      <mat-option *ngFor="let order of this.order" value="{{order.orderNO}}">{{order.orderNO}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <mat-form-field appearance="outline">
-    <mat-label>Style</mat-label>
-    <mat-select [(ngModel)]="styleslist" (selectionChange)="wobystyle()">
-      <mat-option value=""> </mat-option>
-      <mat-option *ngFor="let style of this.stylelist" value="{{style.style}}">{{style.style}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <mat-form-field appearance="outline">
-    <mat-label>Color</mat-label>
-    <mat-select [(ngModel)]="colorslist" (selectionChange)="wobycolor()">
-      <mat-option value=""> </mat-option>
-      <mat-option *ngFor="let color of this.colorlist" value="{{color.color}}">{{color.color}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <mat-form-field appearance="outline">
-    <mat-label>Size</mat-label>
-    <mat-select [(ngModel)]="sizeslist" (selectionChange)="wobysize()">
-      <mat-option value=""> </mat-option>
-      <mat-option *ngFor="let size of this.sizelist" value="{{size.size}}">{{size.size}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-</div>
-  <div style="display: flex; justify-content: flex-end; gap: 10px;">
-    <button mat-button color='primary' style="margin-right: 12px; margin-top: 2%;"
-      (click)="exportexcel2()"><mat-icon>download</mat-icon>
-      Download</button>
-    <button mat-button color='primary' style="margin-right: 12px; margin-top: 2%;" (click)="fabricEntry()">New</button>
-
-    <button mat-button color='primary' style="margin-right: 12px; margin-top: 2%;" (click)="FBReport()">Report</button>
-
-  </div>
-</div> -->
-
 <!---===========================================================================================================-->
 
 <div class="table-wrapper">
@@ -106,7 +52,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let work of this.data; let i=index" (click)="check(work.id)">
+      <tr *ngFor="let work of this.data; let i=index">
 
         <td>{{i+1}}</td>
         <td>{{work.buyer}}</td>
@@ -120,7 +66,7 @@
         <td>{{work.status === 1 ? 'Open' : 'Close'}}</td>
 
 
-        <td><button class="btn btn-success" (click)="visibleEntry = true" ><mat-icon>insert_drive_file</mat-icon>
+        <td><button class="btn btn-success" (click)="woLineDetails(work.orderNo)" ><mat-icon>insert_drive_file</mat-icon>
           </button></td>
 
         <td><button class="btn btn-primary" data-toggle="modal" data-target="#edit"

@@ -106,6 +106,7 @@ export class FabricRollData2Component implements OnInit {
     this.api.getstyleData(orderNo).subscribe((res) => {
       this.stylelist = res.styles;
     })
+    this.loadworkorderdetails(orderNo)
   }
 
   getcolor(buyer: any, orderNo: any, style: any) {
@@ -126,9 +127,10 @@ export class FabricRollData2Component implements OnInit {
     });
   }
 
-  loadworkorderdetails(orderNo: string = '', style: string = '', color: string = '', size: string = '') {
+  loadworkorderdetails(orderNo: string, style: string = '', color: string = '', size: string = '') {
     this.api.getwolinedetails(orderNo, style, color, size).subscribe((res) => {
       this.data = res.workorders;
+      console.log(res)
     });
   }
 
@@ -138,7 +140,15 @@ export class FabricRollData2Component implements OnInit {
   }
   wobyOrder() {
     this.getstyle(this.ordernumbers)
+    this.loadworkorder(this.buyerName, this.ordernumbers);
   }
+
+  woLineDetails(orderNo : any){
+    this.visibleEntry = true
+    console.log(orderNo)
+    this.loadworkorderdetails(orderNo)
+  }
+
   wobystyle() {
     this.getcolor(this.buyerName, this.ordernumbers, this.styleslist)
     this.loadworkorderdetails(this.ordernumbers, this.styleslist);

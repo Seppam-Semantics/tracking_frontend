@@ -109,7 +109,7 @@ export class ApiService {
     return this.http.get(this.getUrl() + `/workorderapi/workorders-filter?buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&size=${size}&`, this.getHeaders())
   }
 
-  getwolinedetails(buyer: any, orderNo?: any, style?: any, color?: any, size?: any): Observable<any> {
+  getwolinedetails(orderNo: any, style?: any, color?: any, size?: any): Observable<any> {
     return this.http.get(this.getUrl() + `/workorderapi/workorders-details-filter?orderNo=${orderNo}&style=${style}&color=${color}&size=${size}&`, this.getHeaders())
   }
 
