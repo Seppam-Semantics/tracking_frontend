@@ -73,10 +73,17 @@ export class MainComponent implements OnInit {
     knitwo(){
       this.router.navigate(['/main/KnitWorkOrderListing'])
     }
+
+    ST1(){
+      this.router.navigate(['/main/fabricroll1'])
+    }
     dyeWO(){
       this.router.navigate(['/main/DyeWorkOrderListing'])
     }
     OCR(){
       this.router.navigate(['/main/OCR'])
+    }
+    TransactionMaster(){
+      this.router.navigate(['/main/TransactionMaster'])
     }
   }

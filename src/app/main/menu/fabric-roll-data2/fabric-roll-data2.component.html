@@ -6,62 +6,59 @@
 </mat-toolbar> -->
 
 
-    <div style="display: flex; justify-content: center; gap: 15px;">
+<div style="display: flex; justify-content: center; gap: 15px;">
 
-      <mat-form-field appearance="outline" (click)="clearAll()">
-        <mat-label>Buyer</mat-label>
-        <mat-select [(ngModel)]="buyerName" (selectionChange)="woByBuyer()">
-          <mat-option value=""> </mat-option>
-          <mat-option *ngFor="let buyer of this.buyers" value="{{buyer.buyer}}">{{buyer.buyer}}</mat-option>
-        </mat-select>
-      </mat-form-field>
+  <mat-form-field appearance="outline" (click)="clearAll()">
+    <mat-label>Buyer</mat-label>
+    <mat-select [(ngModel)]="buyerName" (selectionChange)="woByBuyer()">
+      <mat-option value=""> </mat-option>
+      <mat-option *ngFor="let buyer of this.buyers" value="{{buyer.buyer}}">{{buyer.buyer}}</mat-option>
+    </mat-select>
+  </mat-form-field>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Order</mat-label>
-        <mat-select [(ngModel)]="ordernumbers" (selectionChange)="wobyOrder()">
-          <mat-option value=""> </mat-option>
-          <mat-option *ngFor="let order of this.order" value="{{order.orderNO}}">{{order.orderNO}}</mat-option>
-        </mat-select>
-      </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Order</mat-label>
+    <mat-select [(ngModel)]="ordernumbers" (selectionChange)="wobyOrder()">
+      <mat-option value=""> </mat-option>
+      <mat-option *ngFor="let order of this.order" value="{{order.orderNO}}">{{order.orderNO}}</mat-option>
+    </mat-select>
+  </mat-form-field>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Style</mat-label>
-        <mat-select [(ngModel)]="styleslist" (selectionChange)="wobystyle()">
-          <mat-option value=""> </mat-option>
-          <mat-option *ngFor="let style of this.stylelist" value="{{style.style}}">{{style.style}}</mat-option>
-        </mat-select>
-      </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Style</mat-label>
+    <mat-select [(ngModel)]="styleslist" (selectionChange)="wobystyle()">
+      <mat-option value=""> </mat-option>
+      <mat-option *ngFor="let style of this.stylelist" value="{{style.style}}">{{style.style}}</mat-option>
+    </mat-select>
+  </mat-form-field>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Color</mat-label>
-        <mat-select [(ngModel)]="colorslist" (selectionChange)="wobycolor()">
-          <mat-option value=""> </mat-option>
-          <mat-option *ngFor="let color of this.colorlist" value="{{color.color}}">{{color.color}}</mat-option>
-        </mat-select>
-      </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Color</mat-label>
+    <mat-select [(ngModel)]="colorslist" (selectionChange)="wobycolor()">
+      <mat-option value=""> </mat-option>
+      <mat-option *ngFor="let color of this.colorlist" value="{{color.color}}">{{color.color}}</mat-option>
+    </mat-select>
+  </mat-form-field>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Size</mat-label>
-        <mat-select [(ngModel)]="sizeslist" (selectionChange)="wobysize()">
-          <mat-option value=""> </mat-option>
-          <mat-option *ngFor="let size of this.sizelist" value="{{size.size}}">{{size.size}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <div style="display: flex; justify-content: flex-end; gap: 10px;">
-        <button mat-button color='primary' style="margin-right: 12px; margin-top: 2%;" (click)="exportexcel2()"><mat-icon>download</mat-icon>
-          Download</button>
-        <button mat-button color='primary' style="margin-right: 12px; margin-top: 2%;" (click)="fabricEntry()">New</button>
-      </div>
-    </div>
+  <mat-form-field appearance="outline">
+    <mat-label>Size</mat-label>
+    <mat-select [(ngModel)]="sizeslist" (selectionChange)="wobysize()">
+      <mat-option value=""> </mat-option>
+      <mat-option *ngFor="let size of this.sizelist" value="{{size.size}}">{{size.size}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div style="display: flex; justify-content: flex-end; gap: 10px;">
+    <button mat-button color='primary' style="margin-right: 12px; margin-top: 2%;"
+      (click)="exportexcel2()"><mat-icon>download</mat-icon>
+      Download</button>
+    <button mat-button color='primary' style="margin-right: 12px; margin-top: 2%;" (click)="fabricEntry()">New</button>
+
+    <button mat-button color='primary' style="margin-right: 12px; margin-top: 2%;" (click)="FBReport()">Report</button>
+
+  </div>
+</div>
 
 <!---===========================================================================================================-->
-
-
-<!-- <mat-toolbar style="height: fit-content; padding: 10px;">
-  <span style="flex: 1 1 auto;"></span>
-
-</mat-toolbar> -->
-
 
 <div class="table-wrapper">
   <table id="table-data2" class="fl-table">
@@ -69,145 +66,39 @@
       <tr>
         <th>S.No</th>
         <th>Buyer</th>
-        <th>Order No</th>
-        <th>Style</th>
-        <th>Color</th>
-        <th>FSize</th>
-        <th>GSize</th>
-        <th>Fab Type</th>
-        <th>Fab Dia</th>
-        <th>Fab GSM</th>
-        <th>KnitSL</th>
-        <th>Yarn Type</th>
+        <th>OrderNo</th>
         <th>Yarn Kg</th>
         <th>Greige Kg</th>
         <th>Finished Kg</th>
-        <th>SpinFty</th>
-        <th>KnitFty</th>
-        <th>DyeingFty</th>
-        <!-- <th>No.Of Days</th> -->
-
         <th>Order Pcs</th>
-        <th>Order FOB Rate</th>
-        <th>Knit Rate</th>
-        <th>Dye Rate</th>
-
-        <th>Status</th>
-        <th colspan="2">Knit Prod</th>
-        <th colspan="2">Greige Delivery</th>
-        <th colspan="2">Dye Prod</th>
-        <th colspan="2">Dye fin Prod</th>
-        <th colspan="2">Dye delivery</th>
-        <th colspan="2">Plan Cut</th>
-        <th colspan="2">Actual Cut</th>
-        <th>Print Status</th>
+        <th>Order Value</th>
+        <th>status</th>
         <th>Entry</th>
         <th>Edit</th>
         <th>Delet</th>
-      </tr>
-      <tr>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th>Roll</th>
-        <th>Total</th>
-        <th>Roll</th>
-        <th>Total</th>
-        <th>Roll</th>
-        <th>Total</th>
-        <th>Roll</th>
-        <th>Total</th>
-        <th>Roll</th>
-        <th>Total</th>
-        <th>Roll</th>
-        <th>Total</th>
-        <th>Roll</th>
-        <th>Total</th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let work of this.data; let i=index" (click)="check(work.id)">
 
         <td>{{i+1}}</td>
-        <td >{{work.buyer}}</td>
-        <td >{{work.orderNo}}</td>
-        <td >{{work.style}}</td>
-        <td >{{work.color}}</td>
-        <td >{{work.size}}</td>
-        <td >{{work.FSize}}</td>
-        <td >{{work.fabType}}</td>
-        <td >{{work.fabDia}}</td>
-        <td >{{work.fabGsm}}</td>
-        <td >{{work.knitSL}}</td>
-        <td >{{work.yarnType}}</td>
-        <td >{{work.yarnKg}}</td>
-        <td >{{work.greigeKg}}</td>
-        <td >{{work.finishKg}}</td>
-        <td >{{work.spinFty}}</td>
-        <td >{{work.knitFty}}</td>
-        <td >{{work.dyeinFty}}</td>
-        <!-- <td data-toggle="modal" data-target="#myModal">{{work.noDays}}</td> -->
+        <td>{{work.buyer}}</td>
+        <td>{{work.orderNo}}</td>
+        <td>{{work.yarnKg}}</td>
+        <td>{{work.greigeKg}}</td>
+        <td>{{work.finishKg}}</td>
+        <td>{{work.orderPcs}}</td>
+        <td>{{work.ordervalue}}</td>
 
-        <td >{{work.orderPcs}}</td>
-        <td >{{work.orderFOBRate}}</td>
-        <td >{{work.knitRate}}</td>
-        <td >{{work.dyeRate}}</td>
+        <td>{{work.status === 1 ? 'Open' : 'Close'}}</td>
 
-        <td >{{work.status === 1 ? 'Open' : 'Close'}}</td>
 
-        <td >{{work.totalRolls_1 || 0}}</td>
-        <td >{{work.total_1}}</td>
-
-        <td >{{work.totalRolls_2 || 0}}</td>
-        <th >{{work.total_2}}</th>
-
-        <td >{{work.totalRolls_3 || 0}}</td>
-        <th >{{work.total_3}}</th>
-
-        <td >{{work.totalRolls_4 || 0}}</td>
-        <th >{{work.total_4}}</th>
-
-        <td >{{work.totalRolls_5 || 0}}</td>
-        <th >{{work.total_5}}</th>
-
-        <td >{{work.totalRolls_6 || 0}}</td>
-        <th >{{work.total_6}}</th>
-
-        <td >{{work.totalRolls_7 || 0}}</td>
-        <th >{{work.total_7}}</th>
-
-        <td >{{work.isPrint}}</td>
-
-        <td><button class="btn btn-success" (click)=" visibleEntry = true"><mat-icon>insert_drive_file</mat-icon> </button></td>
+        <td><button class="btn btn-success" (click)=" visibleEntry = true"><mat-icon>insert_drive_file</mat-icon>
+          </button></td>
 
         <td><button class="btn btn-primary" data-toggle="modal" data-target="#edit"
             (click)="edit(work.id)"><mat-icon>edit</mat-icon></button></td>
-        <td><button class="btn btn-danger" 
-              (click)="delete(work.id)"><mat-icon>delete</mat-icon></button></td>
+        <td><button class="btn btn-danger" (click)="delete(work.id)"><mat-icon>delete</mat-icon></button></td>
       </tr>
 
     <tbody>
@@ -220,140 +111,76 @@
 
 <!---===========================================================================================================-->
 
-<!-- <div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-fullscreen" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-
-      </div>
-
-      <div class="modal-footer" style="display: flex;">
-
-        <button type="button" mat-button color="danger" data-dismiss="modal" style="margin-right: 40%;"><mat-icon style="color: red;">close</mat-icon>Close</button>
-        <button mat-button color="primary" (click)="exportexcel()" style="display: flex; justify-content: lefts;">
-         <mat-icon>download</mat-icon> Download File
-        </button>
-      </div>
-    </div>
-  </div>
-</div> -->
-
 <p-dialog [resizable]="true" [modal]="true" [maximizable]="true" [(visible)]="visibleEntry" [style]="{width: '90vw'}"
-  [contentStyle]="{height: '90vh'}">
+  [contentStyle]="{height: '90vh'}" header="Fabric Entry">
+  <fieldset>
+    <legend>Buyer :  SOLO | OrderNo :  1012267  </legend>
+    <div class="tableoverall">
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>Style</th>
+            <th>Color</th>
+            <th>GSize</th>
 
-  <div style="table-layout: fixed;">
-    <table id="table-data" class="table table-hover">
-      <thead class="thead-dark">
-        <tr>
-          <th></th>
-          <th></th>
-          <th colspan="4">FirstrollWeight</th>
-          <th colspan="4">GriegeFab</th>
-          <th colspan="4">DyeBatching</th>
-          <th colspan="4">DyeFinish</th>
-          <th colspan="4">DeliverytoGarmenth</th>
-          <th colspan="4">PlanCutPanels</th>
-          <th colspan="4">ActualCutPanels</th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-        </tr>
+            <th>FSize</th>
+            <th>FabDia</th>
+            <th>FabGsm</th>
 
-        <tr>
-          <th>S.No</th>
-          <th>WoNo</th>
+            <th>KnitSL</th>
+            <th>Yarn Type</th>
+            <th>FabType</th>
 
-          <th>No.Of Days</th>
-          <th>No.Of Rolls</th>
-          <th>Kgs</th>
-          <th>Date</th>
+            <th>Dye Type</th>
+            <th>SpinFty</th>
+            <th>KnitFty</th>
 
-          <th>No.Of Days</th>
-          <th>No.Of Rolls</th>
-          <th>Kgs</th>
-          <th>Date</th>
+            <th>DyeinFty</th>
+            <th>OrderPcs</th>
+            <th>OrderFOBRate</th>
 
-          <th>No.Of Days</th>
-          <th>No.Of Rolls</th>
-          <th>Kgs</th>
-          <th>Date</th>
+            <th>KnitRate</th>
+            <th>DyeRate</th>
+            <th>YarnKg</th>
 
-          <th>No.Of Days</th>
-          <th>No.Of Rolls</th>
-          <th>Kgs</th>
-          <th>Date</th>
+            <th>GreigeKg</th>
+            <th>FinishKg</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
 
-          <th>No.Of Days</th>
-          <th>No.Of Rolls</th>
-          <th>Kgs</th>
-          <th>Date</th>
+            <td></td>
+            <td></td>
+            <td></td>
 
-          <th>No.Of Days</th>
-          <th>No.Of Rolls</th>
-          <th>Pcs</th>
-          <th>Date</th>
+            <td></td>
+            <td></td>
+            <td></td>
 
-          <th>No.Of Days</th>
-          <th>No.Of Rolls</th>
-          <th>Pcs</th>
-          <th>Date</th>
+            <td></td>
+            <td></td>
+            <td></td>
 
-          <th>Pcs per Bundle</th>
-          <th>Planned Bundles</th>
-          <th>Actual Bundles </th>
-          <th>Print Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let i of newfabEntry">
-          <td>{{i}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
 
-          <td>{{fabentrydata1[i - 1]?.workorderId}}</td>
-          <td>{{fabentrydata1[i - 1]?.days}}</td>
-          <td>{{fabentrydata1[i - 1]?.noOfRolls || 0}}</td>
-          <td>{{fabentrydata1[i - 1]?.entry_1 || 0}}</td>
-          <td>{{fabentrydata1[i - 1]?.production_date || '-'}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
 
-          <td>{{fabentrydata2[i - 1]?.days}}</td>
-          <td>{{fabentrydata2[i - 1]?.noOfRolls || 0}}</td>
-          <td>{{fabentrydata2[i - 1]?.entry_2 || 0}}</td>
-          <td>{{fabentrydata2[i - 1]?.production_date || '-'}}</td>
+            <td></td>
+            <td></td>
 
-          <td>{{fabentrydata3[i - 1]?.days}}</td>
-          <td>{{fabentrydata3[i - 1]?.noOfRolls || 0}}</td>
-          <td>{{fabentrydata3[i - 1]?.entry_3 || 0}}</td>
-          <td>{{fabentrydata3[i - 1]?.production_date || '-'}}</td>
-
-          <td>{{fabentrydata4[i - 1]?.days}}</td>
-          <td>{{fabentrydata4[i - 1]?.noOfRolls || 0}}</td>
-          <td>{{fabentrydata4[i - 1]?.entry_4 || 0}}</td>
-          <td>{{fabentrydata4[i - 1]?.production_date || '-'}}</td>
-
-          <td>{{fabentrydata5[i - 1]?.days}}</td>
-          <td>{{fabentrydata5[i - 1]?.noOfRolls || 0}}</td>
-          <td>{{fabentrydata5[i - 1]?.entry_5 || 0}}</td>
-          <td>{{fabentrydata5[i - 1]?.production_date || '-'}}</td>
-
-          <td>{{fabentrydata6[i - 1]?.days}}</td>
-          <td>{{fabentrydata6[i - 1]?.noOfRolls || 0}}</td>
-          <td>{{fabentrydata6[i - 1]?.entry_6 || 0}}</td>
-          <td>{{fabentrydata6[i - 1]?.production_date || '-'}}</td>
-
-          <td>{{fabentrydata7[i - 1]?.days}}</td>
-          <td>{{fabentrydata7[i - 1]?.noOfRolls || 0}}</td>
-          <td>{{fabentrydata7[i - 1]?.entry_7 || 0}}</td>
-          <td>{{fabentrydata7[i - 1]?.production_date || '-'}}</td>
-
-          <td>-</td>
-          <td>-</td>
-          <td>-</td>
-          <td>-</td>
-        </tr>
-      </tbody>
-
-    </table>
-  </div>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </fieldset>
 
   <ng-template pTemplate="footer">
     <button mat-button color="primary" (click)="exportexcel()" style="display: flex; justify-content: lefts;">
@@ -364,159 +191,102 @@
 <!---===========================================================================================================-->
 
 <p-dialog [resizable]="true" [modal]="true" [maximizable]="true" [(visible)]="visible" [style]="{width: '90vw'}"
-  [contentStyle]="{height: '90vh'}" [formGroup]="woUpdateFrom">
+  [contentStyle]="{height: '90vh'}" [formGroup]="buyerorderform" header="Fabric Booking">
+  <fieldset>
+    <legend><div style="display: flex;"> <div><p>Buyer</p> : <p> SOLO </p> </div> <div> <p>OrderNo</p> : <p> 1012267 </p> </div>  </div></legend>
+    <div class="tableoverall">
+    <table class="table table-striped">
+      <thead class="thead-dark">
+        <tr>  
+          <th><Button class="btn btn-primary" (click)="add1button()">+</Button></th>
+          <th>Style</th>
+          <th>Color</th>
+          <th>GSize</th>
+  
+          <th>FSize</th>
+          <th>FabDia</th>
+          <th>FabGsm</th>
+          <th>KnitSL</th>
+  
+          <th>Yarn Type</th>
+          <th>FabType</th>
+          <th>Dye Type</th>
+  
+          <th>SpinFty</th>
+          <th>KnitFty</th>
+          <th>DyeinFty</th>
+  
+          <th>OrderPcs</th>
+          <th>OrderFOBRate</th>
+          <th>KnitRate</th>
+          <th>DyeRate</th>
+  
+          <th>YarnKg</th>
+          <th>GreigeKg</th>
+          <th>FinishKg</th>
+  
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody formArrayName="data">
+        <tr *ngFor="let process of items.controls; let i=index" [formGroupName]="i">
+          <td></td>
+          
+          <td><input style="width: 15vh;" formControlName="Style" class="form-control"></td>
+  
+  
+          <td><input style="width: 15vh;" formControlName="Color" class="form-control"></td>
+  
+          <td><input style="width: 15vh;" formControlName="Size" class="form-control"></td>
+  
+          <td><input style="width: 15vh;" formControlName="fSize" class="form-control"></td>
+  
+          <td><input style="width: 15vh;" formControlName="FabDia" class="form-control"></td>
+  
+          <td><input style="width: 15vh;" formControlName="FabGsm" class="form-control"></td>
+  
+          <td><input style="width: 15vh;" formControlName="KnitSL" type="number" class="form-control"></td>
+  
+          <td><input style="width: 15vh;" formControlName="YarnType" class="form-control"></td>
+  
+          <td><input style="width: 15vh;" formControlName="FabType" class="form-control"></td>
+  
+          <td><input style="width: 15vh;" formControlName="dyetype" class="form-control"></td>
+  
+  
+          <td><input style="width: 15vh;" formControlName="SpinFty" class="form-control"></td>
+  
+          <td><input style="width: 15vh;" formControlName="KnitFty" class="form-control"></td>
+  
+          <td><input style="width: 15vh;" formControlName="DyeinFty" class="form-control"></td>
+  
+          <td><input style="width: 15vh;" formControlName="OrderPcs" class="form-control"></td>
+  
+          <td><input style="width: 15vh;" formControlName="OrderFOBRate" class="form-control"></td>
+  
+          <td><input style="width: 15vh;" formControlName="KnitRate" class="form-control"></td>
+  
+          <td><input style="width: 15vh;" formControlName="DyeRate" class="form-control"></td>
+  
+          <td><input style="width: 15vh;" formControlName="YarnKg" class="form-control"></td>
+  
+          <td><input style="width: 15vh;" formControlName="GreigeKg" class="form-control"></td>
+  
+          <td><input style="width: 15vh;" formControlName="FinishKg" class="form-control"></td>
+  
+          <td><button (click)="Delete(i)" style="background-color: red; color: white;">x</button></td>
+  
+  
+  
+        </tr>
+      </tbody>
+    </table>
+</div>
+  </fieldset>
 
-  <p-panel header="Fabric Roll Update " class="custom-panel">
-    <div>
-      <div style="display: flex; justify-content: space-around; ">
-
-        <mat-form-field appearance="outline">
-          <mat-label>Buyer</mat-label>
-          <input matInput placeholder="Buyer" formControlName="buyer">
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Order No</mat-label>
-          <input matInput placeholder="Order No" formControlName="orderNo">
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Style</mat-label>
-          <input matInput placeholder="Buyer" formControlName="style">
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Color</mat-label>
-          <input matInput placeholder="Order No" formControlName="color">
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Size</mat-label>
-          <input matInput placeholder="size" formControlName="size">
-        </mat-form-field>
-      </div>
-
-
-      <div style="display: flex; justify-content: space-around; ">
-
-        <mat-form-field appearance="outline">
-          <mat-label>FabType</mat-label>
-          <input matInput placeholder="FabType" formControlName="fabType">
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>FabDia</mat-label>
-          <input matInput placeholder="FabDia" formControlName="fabDia">
-        </mat-form-field>
-
-
-        <mat-form-field appearance="outline">
-          <mat-label>FabGsm</mat-label>
-          <input matInput placeholder="fabGsm" formControlName="fabGsm">
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>KnitSL</mat-label>
-          <input matInput placeholder="KnitSL" formControlName="knitSL">
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>YarnKg</mat-label>
-          <input matInput placeholder="YarnKg" formControlName="yarnKg">
-        </mat-form-field>
-
-      </div>
-
-
-      <div style="display: flex; justify-content: space-around; ">
-
-        <mat-form-field appearance="outline">
-          <mat-label>GreigeKg</mat-label>
-          <input matInput placeholder="GreigeKg" formControlName="greigeKg">
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>FinishKg</mat-label>
-          <input matInput placeholder="FinishKg" formControlName="finishKg">
-        </mat-form-field>
-     
-        <mat-form-field appearance="outline">
-          <mat-label>SpinFty</mat-label>
-          <input matInput placeholder="spinFty" formControlName="spinFty">
-        </mat-form-field>
-     
-        <mat-form-field appearance="outline">
-          <mat-label>KnitFty</mat-label>
-          <input matInput placeholder="KnitFty" formControlName="knitFty">
-        </mat-form-field>
-        
-        <mat-form-field appearance="outline">
-          <mat-label>DyeingFty</mat-label>
-          <input matInput placeholder="DyeingFty" formControlName="dyeinFty">
-        </mat-form-field>
-
-      </div>
-
-
-      <div style="display: flex; justify-content: space-around;">
-     
-
-        <mat-form-field appearance="outline">
-          <mat-label>YarnType</mat-label>
-          <input matInput placeholder="YarnType" formControlName="yarnType">
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>OrderPcs</mat-label>
-          <input matInput placeholder="OrderPcs" formControlName="orderPcs">
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>FOBRate</mat-label>
-          <input matInput placeholder="FOBRate" formControlName="orderFOBRate">
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>KnitRate</mat-label>
-          <input matInput placeholder="KnitRate" formControlName="knitRate">
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>DyeRate</mat-label>
-          <input matInput placeholder="DyeRate" formControlName="dyeRate">
-        </mat-form-field>
-
-      </div>
-
-
-      <div style="display: flex; justify-content: space-around;">
-        <mat-form-field appearance="outline">
-          <mat-label>GSize</mat-label>
-          <input matInput placeholder="DyeRate" formControlName="gSize">
-        </mat-form-field>
-
-      </div>
-
-      <div style="display: flex; justify-content: space-around;">
-
-        <div style="display: flex; width : fit-content;">
-
-          <p-dropdown [options]="[{ 'name': 'Open', 'id': true }, { 'name': 'Close', 'id': false }]"
-            placeholder="Select a Status" formControlName="status" [(ngModel)]="status" optionLabel="name"
-            optionValue="id"></p-dropdown>
-
-        </div>
-
-      </div>
-
-
-    </div>
-  </p-panel>
   <ng-template pTemplate="footer">
-<div style="display: flex; width: 100%; justify-content: center;">
-    <button (click)="woupdatesubmit()" mat-button color="primary"><mat-icon>save</mat-icon>Save</button>
-  </div>
+    <div style="display: flex; width: 100%; justify-content: center;">
+      <!-- <button (click)="woupdatesubmit()" mat-button color="primary"><mat-icon>save</mat-icon>Save</button> -->
+    </div>
   </ng-template>
-  </p-dialog>
-
-
+</p-dialog>

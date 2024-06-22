@@ -1,7 +1,7 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ApiService } from 'src/app/api.service';
@@ -26,17 +26,17 @@ export class FabricRollData2Component implements OnInit {
   dataSource: any[] = []
   data: any[] = [];
   fabricdetails: any
-  ordernumber:any
+  ordernumber: any
   buyers: any;
   buyerName: any
   order: any;
-  ordernumbers:any
+  ordernumbers: any
   stylelist: any;
-  styleslist:any
+  styleslist: any
   colorlist: any;
-  colorslist:any
+  colorslist: any
   sizelist: any;
-  sizeslist:any
+  sizeslist: any
   workorderhide: boolean = true;
   workorderId: any;
   WoNumber: any;
@@ -59,13 +59,13 @@ export class FabricRollData2Component implements OnInit {
   entry5total: any;
   entry6total: any;
   entry7total: any;
-  LoadingTotal:boolean=false;
+  LoadingTotal: boolean = false;
   totalcount: any;
   totalvalues: any;
-  woupdateid:any;
-  fabentrydata:any;
-  fabentryentry:any;
-  Woupdate:any;
+  woupdateid: any;
+  fabentrydata: any;
+  fabentryentry: any;
+  Woupdate: any;
   fabentrydata7: any;
   fabentrydata6: any;
   fabentrydata1: any;
@@ -73,18 +73,18 @@ export class FabricRollData2Component implements OnInit {
   fabentrydata3: any;
   fabentrydata4: any;
   fabentrydata5: any;
-  dataIndex:any;
-  newfabEntry:any[] = []
+  dataIndex: any;
+  newfabEntry: any[] = []
   visible: boolean = false;
-  visibleEntry : boolean = false;
-  status : any;
-  constructor(private api: ApiService, private router : Router) { }
+  visibleEntry: boolean = false;
+  status: any;
+  constructor(private api: ApiService, private router: Router, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.getbuyers();
     this.loadworkorder()
-}
-  
+  }
+
 
 
 
@@ -119,40 +119,40 @@ export class FabricRollData2Component implements OnInit {
     })
   }
 
-  loadworkorder(buyer: string = '', orderNo: string = '', style: string ='', color: string = '', size: string ='') {
+  loadworkorder(buyer: string = '', orderNo: string = '', style: string = '', color: string = '', size: string = '') {
     this.api.getwodetails(buyer, orderNo, style, color, size).subscribe((res) => {
       this.data = res.workorders;
     });
   }
-  
-  woByBuyer(){
+
+  woByBuyer() {
     this.getorders(this.buyerName);
     this.loadworkorder(this.buyerName);
   }
-  wobyOrder(){
+  wobyOrder() {
     this.getstyle(this.buyerName, this.ordernumbers)
-      this.loadworkorder(this.buyerName, this.ordernumbers);
+    this.loadworkorder(this.buyerName, this.ordernumbers);
   }
-  wobystyle(){
+  wobystyle() {
     this.getcolor(this.buyerName, this.ordernumbers, this.styleslist)
-      this.loadworkorder(this.buyerName, this.ordernumbers, this.styleslist);
+    this.loadworkorder(this.buyerName, this.ordernumbers, this.styleslist);
   }
-  wobycolor(){
+  wobycolor() {
     this.getsize(this.buyerName, this.ordernumbers, this.styleslist, this.colorslist)
     this.loadworkorder(this.buyerName, this.ordernumbers, this.styleslist, this.colorslist);
   }
-  wobysize(){
+  wobysize() {
     this.loadworkorder(this.buyerName, this.ordernumbers, this.styleslist, this.colorslist, this.sizeslist);
   }
 
-  clearAll(){
+  clearAll() {
     this.buyerName = ''
     this.ordernumbers = ''
     this.styleslist = ''
     this.colorslist = ''
     this.sizeslist = ''
   }
-  fileName2="Workorder-data.xlsx"
+  fileName2 = "Workorder-data.xlsx"
   exportexcel2() {
     let data2 = document.getElementById("table-data2");
     const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(data2);
@@ -178,26 +178,21 @@ export class FabricRollData2Component implements OnInit {
       this.fabentrydata5 = res.entry5;
       this.fabentrydata6 = res.entry6;
       this.fabentrydata7 = res.entry7;
-  
-      // Creating an array containing all entry arrays
+
       const fabEntryArray = [this.fabentrydata1, this.fabentrydata2, this.fabentrydata3, this.fabentrydata4, this.fabentrydata5, this.fabentrydata6, this.fabentrydata7];
-  
-      // Finding the index of the longest entry array
+
       let maxIndex = 0;
       for (let i = 1; i < fabEntryArray.length; i++) {
         if (fabEntryArray[i].length > fabEntryArray[maxIndex].length) {
           maxIndex = i;
         }
       }
-  
-      // Setting the index of the longest entry array
+
       this.dataIndex = maxIndex;
-  
-      // Creating an array from 1 to the length of the longest entry array
-      this.newfabEntry = Array.from({length: fabEntryArray[this.dataIndex].length}, (_, i) => i + 1);
+      this.newfabEntry = Array.from({ length: fabEntryArray[this.dataIndex].length }, (_, i) => i + 1);
     });
   }
-  
+
   getMaxIndex(): number {
     let maxLength = 0;
     let maxIndex = 0;
@@ -216,18 +211,17 @@ export class FabricRollData2Component implements OnInit {
 
   edit(id: any) {
     this.visible = true;
-    this.woupdateid=id
+    this.woupdateid = id
     this.api.getsinglewodetails(id).subscribe((res) => {
       this.Woupdate = res.workorder
-      console.log(this.Woupdate)
       const value = this.Woupdate.status
-      if(value == 1){
+      if (value == 1) {
         this.status = true
-      }else{
-        this.status = false
-      }
+      } else {
+        this.status = false
+      }
       this.woUpdateFrom.patchValue({
-        id:this.Woupdate.id,
+        id: this.Woupdate.id,
         buyer: this.Woupdate.buyer,
         orderNo: this.Woupdate.orderNo,
         style: this.Woupdate.style,
@@ -254,11 +248,11 @@ export class FabricRollData2Component implements OnInit {
         gSize: this.Woupdate.FSize,
       })
     })
-     }
+  }
 
 
   woUpdateFrom = new FormGroup({
-    id:new FormControl(),
+    id: new FormControl(),
     buyer: new FormControl(''),
     orderNo: new FormControl(''),
     style: new FormControl(''),
@@ -269,7 +263,7 @@ export class FabricRollData2Component implements OnInit {
     fabGsm: new FormControl(''),
     knitSL: new FormControl(''),
     yarnKg: new FormControl(''),
-    greigeKg : new FormControl(''),
+    greigeKg: new FormControl(''),
     yarnType: new FormControl(''),
     finishKg: new FormControl(''),
     spinFty: new FormControl(''),
@@ -282,42 +276,95 @@ export class FabricRollData2Component implements OnInit {
     knitRate: new FormControl(''),
     dyeRate: new FormControl(''),
 
-    gSize : new FormControl(''),
+    gSize: new FormControl(''),
 
-    status:new FormControl('')
+    status: new FormControl('')
   })
 
-woupdatesubmit(){
-  this.api.postsinglewodetails(this.woUpdateFrom.value,this.woupdateid).subscribe((res) => {
-    alert(res.message)
-    this.visible = false;
-    this.woByBuyer()
+  buyerorderform = new FormGroup({
+    data: this.fb.array([])
   })
-}
-
-delete(id:any){
-  this.api.Workorderdelect(id).subscribe((res)=>{
-    alert(res.message)
-    window.location.reload()
-  })
-}
-knite(){
-this.router.navigate(['/main/Knit-Report'])
-}
-Dye(){
-  this.router.navigate(['/main/Dye-Report'])
+  get items() {
+    return this.buyerorderform.get("data") as FormArray;
   }
-  yarn(){
+  add1button() {
+    const row = this.fb.group({
+      "id": new FormControl(''),
+      "poid": new FormControl('', Validators.required),
+      "polineId": new FormControl('', Validators.required),
+      "Buyer": new FormControl(''),
+      "OrderNo": new FormControl(''),
+      "Style": new FormControl(''),
+      "Color": new FormControl(''),
+      "Size": new FormControl(''),
+      "fSize": new FormControl(''),
+      "SizeId": new FormControl(''),
+      "FabType": new FormControl(''),
+      "fabricTypeId": new FormControl(''),
+      "FabDia": new FormControl(''),
+      "FabDiaId": new FormControl(''),
+      "FabGsm": new FormControl(''),
+      "FabGsmId": new FormControl(0),
+      "YarnKg": new FormControl(''),
+      "GreigeKg": new FormControl(''),
+      "YarnType": new FormControl(''),
+      "YarnTypeId": new FormControl(''),
+      "FinishKg": new FormControl(''),
+      "KnitSL": new FormControl(''),
+      "SpinFty": new FormControl(''),
+      "SpinFtyId": new FormControl(''),
+      "KnitFty": new FormControl(''),
+      "KnitFtyId": new FormControl(''),
+      "DyeinFty": new FormControl(''),
+      "DyeinFtyId": new FormControl(''),
+
+      "dyetype": new FormControl(''),
+      "dyeTypeId": new FormControl(''),
+      "OrderPcs": new FormControl(''),
+      "OrderFOBRate": new FormControl(''),
+      "KnitRate": new FormControl(''),
+      "DyeRate": new FormControl(''),
+    });
+    this.items.push(row);
+  }
+
+  woupdatesubmit() {
+    this.api.postsinglewodetails(this.woUpdateFrom.value, this.woupdateid).subscribe((res) => {
+      alert(res.message)
+      this.visible = false;
+      this.woByBuyer()
+      this.loadworkorder()
+    })
+  }
+
+  delete(id: any) {
+    this.api.Workorderdelect(id).subscribe((res) => {
+      alert(res.message)
+      window.location.reload()
+    })
+  }
+  knite() {
+    this.router.navigate(['/main/Knit-Report'])
+  }
+  Dye() {
+    this.router.navigate(['/main/Dye-Report'])
+  }
+  yarn() {
     this.router.navigate(['/main/Yarn-Report'])
   }
-  fabricEntry(){
-    this.router.navigate(['/main/fabricroll1'])
-  }
-  workorder(){
+  fabricEntry() {
     this.router.navigate(['/main/WorkorderData'])
   }
-  Upload(){
+
+  FBReport() {
+    this.router.navigate(['/main/FBReport'])
+  }
+
+  workorder() {
     this.router.navigate(['/main/WorkorderData'])
   }
-  
+  Upload() {
+    this.router.navigate(['/main/WorkorderData'])
+  }
+
 }

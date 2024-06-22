@@ -75,12 +75,17 @@
             <div>
                 <mat-form-field appearance="outline" style="width: 40vh;">
                     <mat-label>Colors</mat-label>
-                    <mat-select multiple formControlName="colors" (selectionChange)="getSelectedColors()">
-                        <mat-option *ngFor="let color of colorDropdata" [value]="color.id">
-                            {{ color.color }}
-                        </mat-option>
+                    <mat-select multiple formControlName="colors" (selectionChange)="getSelectedColors2($event)" #colorSelect>
+
+                      <mat-option (click)="toggleAllSelection()" (click)="AllSelected()" value="valid"checked="true">
+                          Select All
+                      </mat-option>
+
+                      <mat-option *ngFor="let color of colorDropdata" [value]="color.id" >
+                        {{ color.color }}
+                      </mat-option>
                     </mat-select>
-                </mat-form-field>
+                  </mat-form-field>
             </div>
 
             <div>

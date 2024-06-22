@@ -25,3 +25,9 @@ th,tr,td{
     font-weight: normal;
     text-align: center;
 }
+thead {
+    position: sticky;
+    top: 0;
+    background-color: #f2f2f2;
+  }
+

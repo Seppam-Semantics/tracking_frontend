@@ -7,7 +7,7 @@
 
   <div style="display: flex;">
     <!-- <button mat-button color="primary" (click)="BuyerCrationPopup = true">New</button> -->
-         <button mat-button color="primary" (click)="FBReport() ">Report</button>
+     <!-- <button mat-button color="primary" (click)="FBReport() ">Report</button> -->
   </div>
 
 </mat-toolbar>
@@ -100,7 +100,7 @@
    -->
 <div>
 
-  <div class="table" [formGroup]="buyerorderform">
+  <div class="table-wrapper" [formGroup]="buyerorderform">
     <table class="fl-table">
       <thead>
         <tr>
@@ -136,9 +136,6 @@
           <th>FinishKg</th>
 
           <th>Remove</th>
-          <th style="display: none;">Fabric Consumption</th>
-          <th style="display: none;">REJ Losses</th>
-          <th style="display: none;">PODetailsLoss</th>
         </tr>
       </thead>
       <tbody formArrayName="data">
@@ -259,6 +256,8 @@
     </table>
   </div>
 </div>
+<br/>
+
 <div style="width: 100%; display: flex; justify-content: center;">
   <button class="btn btn-primary" (click)="save()">Save</button>
 </div>

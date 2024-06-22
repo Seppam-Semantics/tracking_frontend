@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { MatSelect } from '@angular/material/select';
 import { ApiService } from 'src/app/api.service';
 
 @Component({
@@ -26,7 +27,14 @@ export class RejTypeCreationComponent {
   selected: any[] = ['Kelly Green'];
   selectedColors1: any;
   selectedColors2: any;
+  isAllSelected = false;
 
+  AllSelected(){
+    this.isAllSelected = !this.isAllSelected
+  }
+
+  @ViewChild('colorSelect') colorSelect!: MatSelect;
+  
   ngOnInit(): void {
 
     this.api.Drop_Color_master().subscribe((res) => {
@@ -35,6 +43,7 @@ export class RejTypeCreationComponent {
 
     this.api.rejtype_Master_AllData().subscribe((res) => {
       this.all = res.rejtype
+
     })
     this.RejTypeFillterData()
 
@@ -82,6 +91,24 @@ export class RejTypeCreationComponent {
       data: this.selectedColors
     });
   }
+
+  getSelectedColors2(event: any) {
+    const selectedColors = this.rejTypecreate.get('colors')?.value;
+  }
+
+  toggleAllSelection() {
+    const selectedColors = this.rejTypecreate.get('colors')?.value || [];
+
+    if (this.isAllSelected) {
+      this.rejTypecreate.get('colors')?.setValue([]);
+    } else {
+      const allColorIds = this.colorDropdata.map((color:any) => color.id);
+      this.rejTypecreate.get('colors')?.setValue(allColorIds);
+    }
+
+  }
+
+
 
 
   RejTypeFillterData() {
@@ -160,4 +187,6 @@ getSelectedColors1() {
       this.RejTypeFillterData()
     })
   }
+
+  
 }

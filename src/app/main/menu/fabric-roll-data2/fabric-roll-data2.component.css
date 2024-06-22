@@ -20,49 +20,6 @@ table {
     width: 100%;
   }
   
-  tr.example-detail-row {
-    height: 0;
-  }
-  
-  tr.example-element-row:not(.example-expanded-row):hover {
-    background: whitesmoke;
-  }
-  
-  tr.example-element-row:not(.example-expanded-row):active {
-    background: #efefef;
-  }
-  
-  .example-element-row td {
-    border-bottom-width: 0;
-  }
-  
-  .example-element-detail {
-    overflow: hidden;
-    display: flex;
-  }
-  
-  .example-element-diagram {
-    min-width: 80px;
-    border: 2px solid black;
-    padding: 8px;
-    font-weight: lighter;
-    margin: 8px 0;
-    height: 104px;
-  }
-  
-  .example-element-symbol {
-    font-weight: bold;
-    font-size: 40px;
-    line-height: normal;
-  }
-  
-  .example-element-description {
-    padding: 16px;
-  }
-  
-  .example-element-description-attribution {
-    opacity: 0.5;
-  }
   table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
@@ -90,9 +47,6 @@ table {
   th{
     text-align: center;
   }
-  :host::ng-deep .modal-backdrop.show {
-    display: contents;
-  }
   .fixTableHead{
     overflow: scroll;
     height: 86%;
@@ -102,23 +56,7 @@ table {
     text-align: center;
     font-weight: normal;
   }
-  :host::ng-deep.p-dropdown-panel .p-dropdown-items {
-    margin-left:-27px
-}
-:host::ng-deep.p-panel .p-panel-header{
-  border: 1px solid #e5e7eb;
-  padding: 1.25rem;
-  background: #f9fafb;
-  color: #374151;
-  border-top-right-radius: 6px;
-  border-top-left-radius: 6px;
-  background-color: darkorchid;
-  color: white;
-}
 
-.popupwoUpdate2{
-  display: none;
-}
 @media screen and (max-width: 600px) {
   
 }
@@ -144,16 +82,6 @@ table {
 
 
 }
-
-
-.delete{
-  position: sticky;
-  top: 0;
-}
-.sticky {
-  right: 0; /* Stick to the right */
-}
-
 
 
 
@@ -309,4 +237,28 @@ div::-webkit-scrollbar-thumb
     background-color: grey;
     border-radius: 10px;
     webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+
+.tableoverall {
+  overflow: scroll;
+  height: 100%;
+}
+
+fieldset {
+  margin-bottom: 1em !important;
+  border: 1px solid #666 !important;
+  padding:1px !important;
+  margin-top: 2vh;
+  /* width: 100%; */
+}
+
+legend {
+  padding: 1px 10px !important;
+  float:none;
+  width:auto;
+  font-size: large;
+  background-color: black;
+  color: white;
+  font-family: cursive;
+
 }
