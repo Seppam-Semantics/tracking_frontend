@@ -1,13 +1,39 @@
-<!-- <mat-toolbar style="display: flex; justify-content: space-around;">
-  <button  (click)="workorder()" class="btn btn-primary">Work Order</button>
-  <button  (click)="yarn()" class="btn btn-primary">Yarn-Entry</button>
-  <button  (click)="knite()" class="btn btn-primary">Knit-Entry</button>
-  <button  (click)="Dye()" class="btn btn-primary">Dye-Entry</button>
-</mat-toolbar> -->
+<mat-toolbar style="display: flex; justify-content: center; height: 7vh;">
+
+  <div style="flex: 1 1 auto;"></div>
+  <div style="display: flex; gap: 10px;">
+      <div style="display: flex; gap: 10px;">
+
+          <input class="form-control me-2" type="search" placeholder="Buyer Search" aria-label="Search"
+          [(ngModel)]="buyerName" (change)="woByBuyer()" list="BuyerSearch">
+  
+        <datalist id="BuyerSearch">
+          <option *ngFor="let data of buyers;" [value]="data.buyer">{{data.buyer}}</option>
+        </datalist>
 
 
-<div style="display: flex; justify-content: center; gap: 15px;">
+        <input class="form-control me-2" type="search" placeholder="Order Search" aria-label="Search"
+        [(ngModel)]="ordernumbers" (change)="wobyOrder()" list="Order" >
 
+      <datalist id="Order">
+        <option *ngFor="let data of this.order;" [value]="data.orderNO">{{data.orderNO}}</option>
+      </datalist>
+
+      </div>
+
+  </div>
+
+  <button mat-button color='primary' 
+  (click)="exportexcel2()"><mat-icon>download</mat-icon>
+  Download</button>
+<button mat-button color='primary' (click)="fabricEntry()">New</button>
+
+<button mat-button color='primary' (click)="FBReport()">Report</button>
+</mat-toolbar>
+
+
+<!-- <div style="display: flex;">
+<div style="width: 100%; display: flex; justify-content: center; gap: 10px;">
   <mat-form-field appearance="outline" (click)="clearAll()">
     <mat-label>Buyer</mat-label>
     <mat-select [(ngModel)]="buyerName" (selectionChange)="woByBuyer()">
@@ -47,6 +73,7 @@
       <mat-option *ngFor="let size of this.sizelist" value="{{size.size}}">{{size.size}}</mat-option>
     </mat-select>
   </mat-form-field>
+</div>
   <div style="display: flex; justify-content: flex-end; gap: 10px;">
     <button mat-button color='primary' style="margin-right: 12px; margin-top: 2%;"
       (click)="exportexcel2()"><mat-icon>download</mat-icon>
@@ -56,7 +83,7 @@
     <button mat-button color='primary' style="margin-right: 12px; margin-top: 2%;" (click)="FBReport()">Report</button>
 
   </div>
-</div>
+</div> -->
 
 <!---===========================================================================================================-->
 
@@ -93,11 +120,11 @@
         <td>{{work.status === 1 ? 'Open' : 'Close'}}</td>
 
 
-        <td><button class="btn btn-success" (click)=" visibleEntry = true"><mat-icon>insert_drive_file</mat-icon>
+        <td><button class="btn btn-success" (click)=" visibleEntry = true" (click)="view(work.orderNo)"><mat-icon>insert_drive_file</mat-icon>
           </button></td>
 
         <td><button class="btn btn-primary" data-toggle="modal" data-target="#edit"
-            (click)="edit(work.id)"><mat-icon>edit</mat-icon></button></td>
+            (click)="edit(work.orderNo)"><mat-icon>edit</mat-icon></button></td>
         <td><button class="btn btn-danger" (click)="delete(work.id)"><mat-icon>delete</mat-icon></button></td>
       </tr>
 
@@ -114,7 +141,7 @@
 <p-dialog [resizable]="true" [modal]="true" [maximizable]="true" [(visible)]="visibleEntry" [style]="{width: '90vw'}"
   [contentStyle]="{height: '90vh'}" header="Fabric Entry">
   <fieldset>
-    <legend>Buyer :  SOLO | OrderNo :  1012267  </legend>
+    <legend>Buyer :  SOLO / OrderNo :  1012267  </legend>
     <div class="tableoverall">
       <table class="table table-striped">
         <thead class="thead-dark">
@@ -193,7 +220,7 @@
 <p-dialog [resizable]="true" [modal]="true" [maximizable]="true" [(visible)]="visible" [style]="{width: '90vw'}"
   [contentStyle]="{height: '90vh'}" [formGroup]="buyerorderform" header="Fabric Booking">
   <fieldset>
-    <legend><div style="display: flex;"> <div><p>Buyer</p> : <p> SOLO </p> </div> <div> <p>OrderNo</p> : <p> 1012267 </p> </div>  </div></legend>
+    <legend>Buyer :  SOLO  /  OrderNo :  1012267 </legend>
     <div class="tableoverall">
     <table class="table table-striped">
       <thead class="thead-dark">

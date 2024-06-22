@@ -125,6 +125,13 @@ export class FabricRollData2Component implements OnInit {
     });
   }
 
+  loadworkorderline(orderNo: string = '', style: string = '', color: string = '', size: string = '') {
+    this.api.getwodetailsline(orderNo, style, color, size).subscribe((res) => {
+      this.data = res.workorders;
+      console.log(res)
+    });
+  }
+
   woByBuyer() {
     this.getorders(this.buyerName);
     this.loadworkorder(this.buyerName);
@@ -209,47 +216,51 @@ export class FabricRollData2Component implements OnInit {
     return Array.from({ length: maxIndex }, (_, index) => index + 1);
   }
 
-  edit(id: any) {
+  edit(orderNo: any) {
+   console.log(orderNo) 
     this.visible = true;
-    this.woupdateid = id
-    this.api.getsinglewodetails(id).subscribe((res) => {
-      this.Woupdate = res.workorder
-      const value = this.Woupdate.status
-      if (value == 1) {
-        this.status = true
-      } else {
-        this.status = false
-      }
-      this.woUpdateFrom.patchValue({
-        id: this.Woupdate.id,
-        buyer: this.Woupdate.buyer,
-        orderNo: this.Woupdate.orderNo,
-        style: this.Woupdate.style,
-        color: this.Woupdate.color,
-        size: this.Woupdate.size,
-        fabType: this.Woupdate.fabType,
-        fabDia: this.Woupdate.fabDia,
-        fabGsm: this.Woupdate.fabGsm,
-        knitSL: this.Woupdate.knitSL,
-        yarnKg: this.Woupdate.yarnKg,
-        greigeKg: this.Woupdate.greigeKg,
-        yarnType: this.Woupdate.yarnType,
-        finishKg: this.Woupdate.finishKg,
-        spinFty: this.Woupdate.spinFty,
-        knitFty: this.Woupdate.knitFty,
-        dyeinFty: this.Woupdate.dyeinFty,
-        noDays: this.Woupdate.noRolls,
+    // this.woupdateid = id
+    // this.api.getsinglewodetails(id).subscribe((res) => {
+    //   this.Woupdate = res.workorder
+    //   const value = this.Woupdate.status
+    //   if (value == 1) {
+    //     this.status = true
+    //   } else {
+    //     this.status = false
+    //   }
+    //   this.woUpdateFrom.patchValue({
+    //     id: this.Woupdate.id,
+    //     buyer: this.Woupdate.buyer,
+    //     orderNo: this.Woupdate.orderNo,
+    //     style: this.Woupdate.style,
+    //     color: this.Woupdate.color,
+    //     size: this.Woupdate.size,
+    //     fabType: this.Woupdate.fabType,
+    //     fabDia: this.Woupdate.fabDia,
+    //     fabGsm: this.Woupdate.fabGsm,
+    //     knitSL: this.Woupdate.knitSL,
+    //     yarnKg: this.Woupdate.yarnKg,
+    //     greigeKg: this.Woupdate.greigeKg,
+    //     yarnType: this.Woupdate.yarnType,
+    //     finishKg: this.Woupdate.finishKg,
+    //     spinFty: this.Woupdate.spinFty,
+    //     knitFty: this.Woupdate.knitFty,
+    //     dyeinFty: this.Woupdate.dyeinFty,
+    //     noDays: this.Woupdate.noRolls,
 
-        orderPcs: this.Woupdate.orderPcs,
-        orderFOBRate: this.Woupdate.orderFOBRate,
-        dyeRate: this.Woupdate.dyeRate,
-        knitRate: this.Woupdate.knitRate,
+    //     orderPcs: this.Woupdate.orderPcs,
+    //     orderFOBRate: this.Woupdate.orderFOBRate,
+    //     dyeRate: this.Woupdate.dyeRate,
+    //     knitRate: this.Woupdate.knitRate,
 
-        gSize: this.Woupdate.FSize,
-      })
-    })
+    //     gSize: this.Woupdate.FSize,
+    //   })
+    // })
   }
 
+  view(orderNo:any){
+    console.log(orderNo)
+  }
 
   woUpdateFrom = new FormGroup({
     id: new FormControl(),

@@ -10,8 +10,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  apiUrl = "https://tracker.seppam.com";
-  // apiUrl = "http://localhost:2000";
+  // apiUrl = "https://tracker.seppam.com";
+  apiUrl = "http://localhost:2000";
 
   token: any;
   profilenames: any;
@@ -108,6 +108,11 @@ export class ApiService {
   getwodetails(buyer: any, orderNo?: any, style?: any, color?: any, size?: any): Observable<any> {
     return this.http.get(this.getUrl() + `/workorderapi/workorders-filter?buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&size=${size}&`, this.getHeaders())
   }
+
+  getwodetailsline(orderNo: any, style?: any, color?: any, size?: any): Observable<any> {
+    return this.http.get(this.getUrl() + `/workorderapi/workorders-filter?orderNo=${orderNo}&style=${style}&color=${color}&size=${size}&`, this.getHeaders())
+  }
+
   getknitwodetails(buyer: any, orderNo?: any, style?: any, color?: any, size?: any): Observable<any> {
     return this.http.get(this.getUrl() + `/workorderapi/workorders-filter?buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&size=${size}`, this.getHeaders())
   }
