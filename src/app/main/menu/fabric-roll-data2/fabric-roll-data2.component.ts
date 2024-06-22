@@ -101,8 +101,9 @@ export class FabricRollData2Component implements OnInit {
     })
   }
 
-  getstyle(buyer: any, orderNo: any) {
-    this.api.getstyleData(buyer, orderNo).subscribe((res) => {
+
+  getstyle(orderNo: any) {
+    this.api.getstyleData(orderNo).subscribe((res) => {
       this.stylelist = res.styles;
     })
   }
@@ -125,24 +126,29 @@ export class FabricRollData2Component implements OnInit {
     });
   }
 
+  loadworkorderdetails(orderNo: string = '', style: string = '', color: string = '', size: string = '') {
+    this.api.getwolinedetails(orderNo, style, color, size).subscribe((res) => {
+      this.data = res.workorders;
+    });
+  }
+
   woByBuyer() {
     this.getorders(this.buyerName);
     this.loadworkorder(this.buyerName);
   }
   wobyOrder() {
-    this.getstyle(this.buyerName, this.ordernumbers)
-    this.loadworkorder(this.buyerName, this.ordernumbers);
+    this.getstyle(this.ordernumbers)
   }
   wobystyle() {
     this.getcolor(this.buyerName, this.ordernumbers, this.styleslist)
-    this.loadworkorder(this.buyerName, this.ordernumbers, this.styleslist);
+    this.loadworkorderdetails(this.ordernumbers, this.styleslist);
   }
   wobycolor() {
     this.getsize(this.buyerName, this.ordernumbers, this.styleslist, this.colorslist)
-    this.loadworkorder(this.buyerName, this.ordernumbers, this.styleslist, this.colorslist);
+    this.loadworkorderdetails(this.ordernumbers, this.styleslist, this.colorslist);
   }
   wobysize() {
-    this.loadworkorder(this.buyerName, this.ordernumbers, this.styleslist, this.colorslist, this.sizeslist);
+    this.loadworkorderdetails(this.ordernumbers, this.styleslist, this.colorslist, this.sizeslist);
   }
 
   clearAll() {
