@@ -7,6 +7,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ApiService } from 'src/app/api.service';
 import * as XLSX from 'xlsx'
 import Swal from 'sweetalert2'
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-fabric-roll2-data',
@@ -234,11 +235,32 @@ export class FabricRollData2Component implements OnInit {
   }
   fileName2 = "Workorder-data.xlsx"
   exportexcel2() {
-    let data2 = document.getElementById("table-data2");
-    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(data2);
-    const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Sheet2');
-    XLSX.writeFile(wb, this.fileName2);
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You Want To Download Report!!!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Download it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        let data2 = document.getElementById("table-data2");
+        const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(data2);
+        const wb: XLSX.WorkBook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Sheet2');
+        XLSX.writeFile(wb, this.fileName2);      
+        
+        Swal.fire({
+          title: "Good job!",
+          text: "Your Download Compleated !!!",
+          icon: "success"
+        });
+      }
+    });
+
   }
   fileName1 = "Fabricrolldata.xlsx"
   exportexcel() {

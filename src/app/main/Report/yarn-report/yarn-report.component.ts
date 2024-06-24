@@ -134,11 +134,32 @@ export class YarnReportComponent implements OnInit {
 
   fileName = "YarnReport.xlsx"
   exportexcel() {
-    let data = document.getElementById("table-data");
-    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(data);
-    const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-    XLSX.writeFile(wb, this.fileName);
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You Want To Download Report!!!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Download it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        let data = document.getElementById("table-data");
+        const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(data);
+        const wb: XLSX.WorkBook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+        XLSX.writeFile(wb, this.fileName);             
+        
+        Swal.fire({
+          title: "Good job!",
+          text: "Your Download Compleated !!!",
+          icon: "success"
+        });
+      }
+    });
+
   }
 
 
@@ -224,22 +245,43 @@ export class YarnReportComponent implements OnInit {
 
 
   exportToPDF() { 
-    this.download = false ;
-    const element = document.getElementById('print');
 
-    html2canvas(element!).then(canvas => {
-      const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF('p', 'mm', 'a5');
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You Want To Download Report!!!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Download it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
 
-      // For full page capture, set proper width and height
-      const imgProps = pdf.getImageProperties(imgData);
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-
-      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-      pdf.save('LC-Closure-Report.pdf');
-  
+        this.download = false ;
+        const element = document.getElementById('print');
+    
+        html2canvas(element!).then(canvas => {
+          const imgData = canvas.toDataURL('image/png');
+          const pdf = new jsPDF('p', 'mm', 'a5');
+    
+          // For full page capture, set proper width and height
+          const imgProps = pdf.getImageProperties(imgData);
+          const pdfWidth = pdf.internal.pageSize.getWidth();
+          const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+    
+          pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+          pdf.save('LC-Closure-Report.pdf');
+      
+        });
+        
+        Swal.fire({
+          title: "Good job!",
+          text: "Your Download Compleated !!!",
+          icon: "success"
+        });
+      }
     });
+
   }
   
 
@@ -282,5 +324,9 @@ export class YarnReportComponent implements OnInit {
         })
       }
     });
+
+
+
+
   }
 }

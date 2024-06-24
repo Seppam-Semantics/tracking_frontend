@@ -177,11 +177,34 @@ export class KnitWorkOrderListingComponent implements OnInit {
 
   fileName = "KnitWorkOrderReport.xlsx"
 exportexcel() {
-  let data = document.getElementById("table-data");
-  const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(data);
-  const wb: XLSX.WorkBook = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-  XLSX.writeFile(wb, this.fileName);
+
+
+
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You Want To Download Report!!!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, Download it!"
+  }).then((result) => {
+    if (result.isConfirmed) {
+
+      let data = document.getElementById("table-data");
+      const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(data);
+      const wb: XLSX.WorkBook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+      XLSX.writeFile(wb, this.fileName);           
+      
+      Swal.fire({
+        title: "Good job!",
+        text: "Your Download Compleated !!!",
+        icon: "success"
+      });
+    }
+  });
+
 }
   edit(id:any) {
     this.editview = true;
