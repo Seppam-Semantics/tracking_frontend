@@ -129,7 +129,6 @@ export class RejTypeCreationComponent {
 
         const colorIdsArray = this.rejtypeColorDta.map((colorObj: any) => colorObj.colorId);
 
-        console.log(colorIdsArray)
         this.rejTypeedit.patchValue({
             id: this.rejtypeDta[0].id,
             rejType: this.rejtypeDta[0].rejType,
@@ -162,7 +161,6 @@ getSelectedColors1() {
 }
 
   update() {
-    console.log(this.rejTypeedit.value)
     this.api.rejtype_Master(this.rejTypeedit.value).subscribe((res) => {
       alert(res.message)
       this.RejTypeFillterData()
@@ -171,13 +169,13 @@ getSelectedColors1() {
   }
 
   saveButton() {
-    console.log(this.rejTypecreate.value)
+
     this.api.rejtype_Master(this.rejTypecreate.value).subscribe((res) => {
       alert(res.message)
       this.RejTypeFillterData()
       this.rejTypecreation = false;
     })
-    console.log(this.rejTypecreate.value)
+
   }
 
 

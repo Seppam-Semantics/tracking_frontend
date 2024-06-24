@@ -48,7 +48,7 @@
         <th>status</th>
         <th>Entry</th>
         <th>Edit</th>
-        <th>Delet</th>
+        <th>Delete</th>
       </tr>
     </thead>
     <tbody>
@@ -69,8 +69,7 @@
         <td><button class="btn btn-success" (click)="woLineDetails(work.orderNo)" ><mat-icon>insert_drive_file</mat-icon>
           </button></td>
 
-        <td><button class="btn btn-primary" data-toggle="modal" data-target="#edit"
-            (click)="edit(work.orderNo)"><mat-icon>edit</mat-icon></button></td>
+        <td><button class="btn btn-primary" (click)="edit(work.orderNo)"><mat-icon>edit</mat-icon></button></td>
         <td><button class="btn btn-danger" (click)="delete(work.id)"><mat-icon>delete</mat-icon></button></td>
       </tr>
 
@@ -87,7 +86,7 @@
 <p-dialog [resizable]="true" [modal]="true" [maximizable]="true" [(visible)]="visibleEntry" [style]="{width: '90vw'}"
   [contentStyle]="{height: '90vh'}" header="Fabric Entry">
   <fieldset>
-    <legend>Buyer :  SOLO / OrderNo :  1012267  </legend>
+    <legend>Buyer :  {{this.woBuyervalue}} / OrderNo :  {{this.woorderNovalue}}  </legend>
     <div class="tableoverall">
       <table class="table table-striped">
         <thead class="thead-dark">
@@ -118,36 +117,40 @@
 
             <th>GreigeKg</th>
             <th>FinishKg</th>
+
+            <th>Fabric Report</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
+          <tr *ngFor="let data of this.data2; let i = index;" style="width: auto;">
+            <td>{{data.style}}</td>
+            <td>{{data.color}}</td>
+            <td>{{data.size}}</td>
 
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{data.FSize}}</td>
+            <td>{{data.fabDia}}</td>
+            <td>{{data.fabGsm}}</td>
 
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{data.knitSL}}</td>
+            <td>{{data.yarnType}}</td>
+            <td>{{data.fabType}}</td>
 
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{data.dyetype}}</td>
+            <td>{{data.spinFty}}</td>
+            <td>{{data.knitFty}}</td>
 
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{data.dyeinFty}}</td>
+            <td>{{data.orderPcs}}</td>
+            <td>{{data.orderFOBRate}}</td>
 
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{data.knitRate}}</td>
+            <td>{{data.dyeRate}}</td>
+            <td>{{data.yarnKg}}</td>
 
-            <td></td>
-            <td></td>
+            <td>{{data.greigeKg}}</td>
+            <td>{{data.finishKg}}</td>
+
+            <td><button class="btn btn-success" (click)="fabricreport(data)"><mat-icon>insert_drive_file</mat-icon></button></td>
 
           </tr>
         </tbody>
@@ -166,12 +169,12 @@
 <p-dialog [resizable]="true" [modal]="true" [maximizable]="true" [(visible)]="visible" [style]="{width: '90vw'}"
   [contentStyle]="{height: '90vh'}" [formGroup]="buyerorderform" header="Fabric Booking">
   <fieldset>
-    <legend>Buyer :  SOLO  /  OrderNo :  1012267 </legend>
+    <legend>Buyer :  {{this.woBuyervalue2}}  /  OrderNo :  {{this.woorderNovalue2}} </legend>
     <div class="tableoverall">
     <table class="table table-striped">
       <thead class="thead-dark">
         <tr>  
-          <th><Button class="btn btn-primary" (click)="add1button()">+</Button></th>
+          <!-- <th><Button class="btn btn-primary" (click)="add1button()">+</Button></th> -->
           <th>Style</th>
           <th>Color</th>
           <th>GSize</th>
@@ -198,55 +201,60 @@
           <th>GreigeKg</th>
           <th>FinishKg</th>
   
+          <th>Status</th>
           <th>Remove</th>
         </tr>
       </thead>
       <tbody formArrayName="data">
         <tr *ngFor="let process of items.controls; let i=index" [formGroupName]="i">
-          <td></td>
           
-          <td><input style="width: 15vh;" formControlName="Style" class="form-control"></td>
+          <td><input style="width: 15vh;" formControlName="Style" class="form-control" readonly ></td>
   
   
-          <td><input style="width: 15vh;" formControlName="Color" class="form-control"></td>
+          <td><input style="width: 15vh;" formControlName="Color" class="form-control" readonly ></td>
   
-          <td><input style="width: 15vh;" formControlName="Size" class="form-control"></td>
+          <td><input style="width: 15vh;" formControlName="Size" class="form-control" readonly ></td>
   
-          <td><input style="width: 15vh;" formControlName="fSize" class="form-control"></td>
+          <td><input style="width: 15vh;" formControlName="fSize" class="form-control" readonly ></td>
   
-          <td><input style="width: 15vh;" formControlName="FabDia" class="form-control"></td>
+          <td><input style="width: 15vh;" formControlName="FabDia" class="form-control" readonly ></td>
   
-          <td><input style="width: 15vh;" formControlName="FabGsm" class="form-control"></td>
+          <td><input style="width: 15vh;" formControlName="FabGsm" class="form-control" readonly></td>
   
-          <td><input style="width: 15vh;" formControlName="KnitSL" type="number" class="form-control"></td>
+          <td><input style="width: 15vh;" formControlName="KnitSL" type="number" class="form-control" ></td>
   
-          <td><input style="width: 15vh;" formControlName="YarnType" class="form-control"></td>
+          <td><input style="width: 15vh;" formControlName="YarnType" class="form-control" readonly></td>
   
-          <td><input style="width: 15vh;" formControlName="FabType" class="form-control"></td>
+          <td><input style="width: 15vh;" formControlName="FabType" class="form-control" readonly></td>
   
-          <td><input style="width: 15vh;" formControlName="dyetype" class="form-control"></td>
+          <td><input style="width: 15vh;" formControlName="dyetype" class="form-control" readonly></td>
   
   
-          <td><input style="width: 15vh;" formControlName="SpinFty" class="form-control"></td>
+          <td><input style="width: 15vh;" formControlName="SpinFty" class="form-control" readonly></td>
   
-          <td><input style="width: 15vh;" formControlName="KnitFty" class="form-control"></td>
+          <td><input style="width: 15vh;" formControlName="KnitFty" class="form-control" readonly></td>
   
-          <td><input style="width: 15vh;" formControlName="DyeinFty" class="form-control"></td>
+          <td><input style="width: 15vh;" formControlName="DyeinFty" class="form-control" readonly></td>
   
-          <td><input style="width: 15vh;" formControlName="OrderPcs" class="form-control"></td>
+          <td><input style="width: 15vh;" formControlName="OrderPcs" class="form-control" ></td>
   
-          <td><input style="width: 15vh;" formControlName="OrderFOBRate" class="form-control"></td>
+          <td><input style="width: 15vh;" formControlName="OrderFOBRate" class="form-control" ></td>
   
-          <td><input style="width: 15vh;" formControlName="KnitRate" class="form-control"></td>
+          <td><input style="width: 15vh;" formControlName="KnitRate" class="form-control" ></td>
   
-          <td><input style="width: 15vh;" formControlName="DyeRate" class="form-control"></td>
+          <td><input style="width: 15vh;" formControlName="DyeRate" class="form-control" ></td>
   
-          <td><input style="width: 15vh;" formControlName="YarnKg" class="form-control"></td>
+          <td><input style="width: 15vh;" formControlName="YarnKg" class="form-control" readonly></td>
   
-          <td><input style="width: 15vh;" formControlName="GreigeKg" class="form-control"></td>
+          <td><input style="width: 15vh;" formControlName="GreigeKg" class="form-control" readonly></td>
   
-          <td><input style="width: 15vh;" formControlName="FinishKg" class="form-control"></td>
+          <td><input style="width: 15vh;" formControlName="FinishKg" class="form-control" readonly></td>
   
+          <td> <p-dropdown [options]="[{ 'name': 'True', 'id':1 }, { 'name': 'False', 'id': 0 }]"
+            placeholder="Select a Status" formControlName="status"  optionLabel="name"
+            optionValue="id"></p-dropdown>
+          </td>
+
           <td><button (click)="Delete(i)" style="background-color: red; color: white;">x</button></td>
   
   
@@ -259,7 +267,7 @@
 
   <ng-template pTemplate="footer">
     <div style="display: flex; width: 100%; justify-content: center;">
-      <!-- <button (click)="woupdatesubmit()" mat-button color="primary"><mat-icon>save</mat-icon>Save</button> -->
+      <button (click)="woupdatesubmit()" mat-button color="primary"><mat-icon>save</mat-icon>Update</button>
     </div>
   </ng-template>
 </p-dialog>

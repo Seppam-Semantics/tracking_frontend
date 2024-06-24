@@ -211,7 +211,6 @@ export class POMasterCreationComponent {
   edit(id: any) {
     this.api.PO_Master_SingleData(id).subscribe((res) => {
       this.editdata = res.po
-      console.log(res)
       this.poedit.patchValue({
         id: this.editdata[0].id,
         buyer: this.editdata[0].buyer,
@@ -262,7 +261,7 @@ export class POMasterCreationComponent {
   }
 
   saveButton() {
-    console.log(this.pocreate.value)
+
     this.api.PO_Master(this.pocreate.value).subscribe((res) => {
       alert(res.message)
       window.location.reload()
@@ -270,7 +269,6 @@ export class POMasterCreationComponent {
   }
 
   PoDetailssave() {
-    console.log(this.poDetailscreate.value)
     this.api.PO_Master_line(this.poDetailscreate.value).subscribe((res) => {
       alert(res.message)
       window.location.reload()

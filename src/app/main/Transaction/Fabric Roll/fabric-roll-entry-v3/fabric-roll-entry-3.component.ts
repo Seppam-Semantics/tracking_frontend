@@ -83,6 +83,7 @@ export class FabricRollEntry3Component {
   ngOnInit(): void {
     this.getbuyers();
     this.getworkorderdetails()
+    this.fabrollweight()
   }
 
   ngAfterContentChecked() {
@@ -299,7 +300,14 @@ export class FabricRollEntry3Component {
   loaddetails() {
     const proftoken = 'Bearer ' + sessionStorage.getItem('token');
     const headers = new HttpHeaders().set('x-access-token', proftoken);
-    return this.http.get<any>(`${this.api.apiUrl}/fabricrollapi/transcation-entrys?id=&entry=1&buyer=${this.buyerName}&orderNo=${this.ordernumbers}&style=${this.styleslist}&color=${this.colorslist}&size=${this.sizeslist}`, { headers })
+
+    const a = sessionStorage.getItem('FabricEntrybuyer')
+    const b = sessionStorage.getItem('FabricEntryorderNo')
+    const c = sessionStorage.getItem('FabricEntrystyle')
+    const d = sessionStorage.getItem('FabricEntrycolor')
+    const e = sessionStorage.getItem('FabricEntrysize')
+
+    return this.http.get<any>(`${this.api.apiUrl}/fabricrollapi/transcation-entrys?id=&entry=1&buyer=${a}&orderNo=${b}&style=${c}&color=${d}&size=${e}`, { headers })
       .pipe(
         tap((res) => {
           this.fabdetails = res.workorder;

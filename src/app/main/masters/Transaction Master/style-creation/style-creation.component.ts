@@ -121,7 +121,6 @@ export class StyleCreationComponent implements OnInit {
   edit(id: any) {
     this.api.style_master_SingleData(id).subscribe((res) => {
       this.datalist = res.styles
-      console.log(this.datalist)
       this.Styleedit.patchValue({
         id: this.datalist[0].id,
         style: this.datalist[0].style,
@@ -212,7 +211,6 @@ delete (id:any) {
 }
 
 saveButton(){
-  console.log(this.Stylecreate.value)
   this.api.style_master(this.Stylecreate.value).subscribe((res) => {
   
   })

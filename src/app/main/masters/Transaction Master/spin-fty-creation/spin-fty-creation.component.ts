@@ -55,7 +55,7 @@ export class SpinFtyCreationComponent {
   edit(id:any){
     this.api.spinFty_Master_SingleData(id).subscribe((res)=>{
       this.datalist = res.SpinFty
-      console.log(this.datalist)
+
       this.spinFtyedit .patchValue({
         id :this.datalist[0].id, 
         spinFty : this.datalist[0].SpinFtyName,

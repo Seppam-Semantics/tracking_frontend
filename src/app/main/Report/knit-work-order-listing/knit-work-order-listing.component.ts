@@ -125,7 +125,7 @@ export class KnitWorkOrderListingComponent implements OnInit {
     this.api.knitworkorder_fty_Fillter(this.KnitFtyFillter).subscribe((res)=>{
       this.KnitWorkOrderAllData   = res.workorders
       this.BuyerAllData = res.buyer
-      console.log(res)
+
 
     })
   }
