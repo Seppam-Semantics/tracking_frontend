@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ApiService } from 'src/app/api.service';
 import * as XLSX from 'xlsx'
-
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-fabric-roll2-data',
@@ -386,11 +386,28 @@ export class FabricRollData2Component implements OnInit {
     })
   }
 
-  delete(id: any) {
-    this.api.Workorderdelect(id).subscribe((res) => {
-      alert(res.message)
-      window.location.reload()
-    })
+  delete(id: any) { 
+   Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        
+        this.api.Workorderdelect(id).subscribe((res) => {
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success"
+          });
+          this.loadworkorder()
+        })
+      }
+    });
   }
   knite() {
     this.router.navigate(['/main/Knit-Report'])

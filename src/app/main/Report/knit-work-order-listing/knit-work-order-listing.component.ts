@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
+import Swal from 'sweetalert2';
 import * as XLSX from 'xlsx'
 @Component({
   selector: 'app-knit-work-order-listing',
@@ -241,10 +242,34 @@ exportexcel() {
   }
 
   delete(id:any){
-    this.api.deleteKnitWorkOrder(id).subscribe((res)=>{
-      alert(res.message)
-      window.location.reload()
-    })
+    // this.api.deleteKnitWorkOrder(id).subscribe((res)=>{
+    //   alert(res.message)
+    //   window.location.reload()
+    // })
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        
+        this.api.deleteKnitWorkOrder(id).subscribe((res) => {
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success"
+          });
+          this.alldata()
+        })
+      }
+    });
+
+
   }
 
   update(){

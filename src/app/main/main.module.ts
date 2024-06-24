@@ -111,6 +111,8 @@ import { KnitFtyCreationComponent } from './masters/Transaction Master/knit-fty-
 import { POMasterCreationComponent } from './masters/po-master-creation/po-master-creation.component';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { FabricBookingReportComponent } from './menu/workorder-data/fabric-booking-report/fabric-booking-report.component';
+
+
 @NgModule({
   declarations: [
     MainComponent,
@@ -222,7 +224,7 @@ import { FabricBookingReportComponent } from './menu/workorder-data/fabric-booki
     FieldsetModule,
     InputNumberModule,
     MultiSelectModule,
-
+  
     // DxDataGridModule
   ]
 })
