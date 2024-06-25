@@ -2,33 +2,32 @@
 
   <div style="flex: 1 1 auto;"></div>
   <div style="display: flex; gap: 10px;">
-      <div style="display: flex; gap: 10px;">
+    <div style="display: flex; gap: 10px;">
 
-          <input class="form-control me-2" type="search" placeholder="Buyer Search" aria-label="Search"
-          [(ngModel)]="buyerName" (change)="woByBuyer()" list="BuyerSearch">
-  
-        <datalist id="BuyerSearch">
-          <option *ngFor="let data of buyers;" [value]="data.buyer">{{data.buyer}}</option>
-        </datalist>
+      <input class="form-control me-2" type="search" placeholder="Buyer Search" aria-label="Search"
+        [(ngModel)]="buyerName" (change)="woByBuyer()" list="BuyerSearch">
+
+      <datalist id="BuyerSearch">
+        <option *ngFor="let data of buyers;" [value]="data.buyer">{{data.buyer}}</option>
+      </datalist>
 
 
-        <input class="form-control me-2" type="search" placeholder="Order Search" aria-label="Search"
-        [(ngModel)]="ordernumbers" (change)="wobyOrder()" list="Order" >
+      <input class="form-control me-2" type="search" placeholder="Order Search" aria-label="Search"
+        [(ngModel)]="ordernumbers" (change)="wobyOrder()" list="Order">
 
       <datalist id="Order">
         <option *ngFor="let data of this.order;" [value]="data.orderNO">{{data.orderNO}}</option>
       </datalist>
 
-      </div>
+    </div>
 
   </div>
 
-  <button mat-button color='primary' 
-  (click)="exportexcel2()"><mat-icon>download</mat-icon>
-  Download</button>
-<button mat-button color='primary' (click)="fabricEntry()">New</button>
+  <button mat-button color='primary' (click)="exportexcel2()"><mat-icon>download</mat-icon>
+    Download</button>
+  <button mat-button color='primary' (click)="fabricEntry()">New</button>
 
-<button mat-button color='primary' (click)="FBReport()">Report</button>
+  <button mat-button color='primary' (click)="FBReport()">Report</button>
 </mat-toolbar>
 
 <!---===========================================================================================================-->
@@ -46,9 +45,10 @@
         <th>Order Pcs</th>
         <th>Order Value</th>
         <th>status</th>
+
         <th>Entry</th>
         <th>Edit</th>
-        <th>Delete</th>
+        <th>Report</th>
       </tr>
     </thead>
     <tbody>
@@ -66,11 +66,15 @@
         <td>{{work.status === 1 ? 'Open' : 'Close'}}</td>
 
 
-        <td><button class="btn btn-success" (click)="woLineDetails(work.orderNo)" ><mat-icon>insert_drive_file</mat-icon>
+
+          <td><button class="btn btn-warning" (click)="woLineDetails(work.orderNo)"><mat-icon>content_paste</mat-icon>
           </button></td>
 
         <td><button class="btn btn-primary" (click)="edit(work.orderNo)"><mat-icon>edit</mat-icon></button></td>
-        <td><button class="btn btn-danger" (click)="delete(work.id)"><mat-icon>delete</mat-icon></button></td>
+
+        <td><button class="btn btn-success" (click)="Report(work.id , i)"><mat-icon>insert_drive_file</mat-icon>
+        </button></td>
+        <!-- <td><button class="btn btn-danger" (click)="delete(work.id)"><mat-icon>delete</mat-icon></button></td> -->
       </tr>
 
     <tbody>
@@ -86,7 +90,7 @@
 <p-dialog [resizable]="true" [modal]="true" [maximizable]="true" [(visible)]="visibleEntry" [style]="{width: '90vw'}"
   [contentStyle]="{height: '90vh'}" header="Fabric Entry">
   <fieldset>
-    <legend>Buyer :  {{this.woBuyervalue}} / OrderNo :  {{this.woorderNovalue}}  </legend>
+    <legend>Buyer : {{this.woBuyervalue}} / OrderNo : {{this.woorderNovalue}} </legend>
     <div class="tableoverall">
       <table class="table table-striped">
         <thead class="thead-dark">
@@ -150,7 +154,8 @@
             <td>{{data.greigeKg}}</td>
             <td>{{data.finishKg}}</td>
 
-            <td><button class="btn btn-success" (click)="fabricreport(data)"><mat-icon>insert_drive_file</mat-icon></button></td>
+            <td><button class="btn btn-success"
+                (click)="fabricreport(data)"><mat-icon>insert_drive_file</mat-icon></button></td>
 
           </tr>
         </tbody>
@@ -169,100 +174,99 @@
 <p-dialog [resizable]="true" [modal]="true" [maximizable]="true" [(visible)]="visible" [style]="{width: '90vw'}"
   [contentStyle]="{height: '90vh'}" [formGroup]="buyerorderform" header="Fabric Booking">
   <fieldset>
-    <legend>Buyer :  {{this.woBuyervalue2}}  /  OrderNo :  {{this.woorderNovalue2}} </legend>
+    <legend>Buyer : {{this.woBuyervalue2}} / OrderNo : {{this.woorderNovalue2}} </legend>
     <div class="tableoverall">
-    <table class="table table-striped">
-      <thead class="thead-dark">
-        <tr>  
-          <!-- <th><Button class="btn btn-primary" (click)="add1button()">+</Button></th> -->
-          <th>Style</th>
-          <th>Color</th>
-          <th>GSize</th>
-  
-          <th>FSize</th>
-          <th>FabDia</th>
-          <th>FabGsm</th>
-          <th>KnitSL</th>
-  
-          <th>Yarn Type</th>
-          <th>FabType</th>
-          <th>Dye Type</th>
-  
-          <th>SpinFty</th>
-          <th>KnitFty</th>
-          <th>DyeinFty</th>
-  
-          <th>OrderPcs</th>
-          <th>OrderFOBRate</th>
-          <th>KnitRate</th>
-          <th>DyeRate</th>
-  
-          <th>YarnKg</th>
-          <th>GreigeKg</th>
-          <th>FinishKg</th>
-  
-          <th>Status</th>
-          <th>Remove</th>
-        </tr>
-      </thead>
-      <tbody formArrayName="data">
-        <tr *ngFor="let process of items.controls; let i=index" [formGroupName]="i">
-          
-          <td><input style="width: 15vh;" formControlName="Style" class="form-control" readonly ></td>
-  
-  
-          <td><input style="width: 15vh;" formControlName="Color" class="form-control" readonly ></td>
-  
-          <td><input style="width: 15vh;" formControlName="Size" class="form-control" readonly ></td>
-  
-          <td><input style="width: 15vh;" formControlName="fSize" class="form-control" readonly ></td>
-  
-          <td><input style="width: 15vh;" formControlName="FabDia" class="form-control" readonly ></td>
-  
-          <td><input style="width: 15vh;" formControlName="FabGsm" class="form-control" readonly></td>
-  
-          <td><input style="width: 15vh;" formControlName="KnitSL" type="number" class="form-control" ></td>
-  
-          <td><input style="width: 15vh;" formControlName="YarnType" class="form-control" readonly></td>
-  
-          <td><input style="width: 15vh;" formControlName="FabType" class="form-control" readonly></td>
-  
-          <td><input style="width: 15vh;" formControlName="dyetype" class="form-control" readonly></td>
-  
-  
-          <td><input style="width: 15vh;" formControlName="SpinFty" class="form-control" readonly></td>
-  
-          <td><input style="width: 15vh;" formControlName="KnitFty" class="form-control" readonly></td>
-  
-          <td><input style="width: 15vh;" formControlName="DyeinFty" class="form-control" readonly></td>
-  
-          <td><input style="width: 15vh;" formControlName="OrderPcs" class="form-control" ></td>
-  
-          <td><input style="width: 15vh;" formControlName="OrderFOBRate" class="form-control" ></td>
-  
-          <td><input style="width: 15vh;" formControlName="KnitRate" class="form-control" ></td>
-  
-          <td><input style="width: 15vh;" formControlName="DyeRate" class="form-control" ></td>
-  
-          <td><input style="width: 15vh;" formControlName="YarnKg" class="form-control" readonly></td>
-  
-          <td><input style="width: 15vh;" formControlName="GreigeKg" class="form-control" readonly></td>
-  
-          <td><input style="width: 15vh;" formControlName="FinishKg" class="form-control" readonly></td>
-  
-          <td> <p-dropdown [options]="[{ 'name': 'True', 'id':1 }, { 'name': 'False', 'id': 0 }]"
-            placeholder="Select a Status" formControlName="status"  optionLabel="name"
-            optionValue="id"></p-dropdown>
-          </td>
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <!-- <th><Button class="btn btn-primary" (click)="add1button()">+</Button></th> -->
+            <th>Style</th>
+            <th>Color</th>
+            <th>GSize</th>
 
-          <td><button (click)="Delete(i)" style="background-color: red; color: white;">x</button></td>
-  
-  
-  
-        </tr>
-      </tbody>
-    </table>
-</div>
+            <th>FSize</th>
+            <th>FabDia</th>
+            <th>FabGsm</th>
+            <th>KnitSL</th>
+
+            <th>Yarn Type</th>
+            <th>FabType</th>
+            <th>Dye Type</th>
+
+            <th>SpinFty</th>
+            <th>KnitFty</th>
+            <th>DyeinFty</th>
+
+            <th>OrderPcs</th>
+            <th>OrderFOBRate</th>
+            <th>KnitRate</th>
+            <th>DyeRate</th>
+
+            <th>YarnKg</th>
+            <th>GreigeKg</th>
+            <th>FinishKg</th>
+
+            <th>Status</th>
+            <th>Remove</th>
+          </tr>
+        </thead>
+        <tbody formArrayName="data">
+          <tr *ngFor="let process of items.controls; let i=index" [formGroupName]="i">
+
+            <td><input style="width: 15vh;" formControlName="Style" class="form-control" readonly></td>
+
+
+            <td><input style="width: 15vh;" formControlName="Color" class="form-control" readonly></td>
+
+            <td><input style="width: 15vh;" formControlName="Size" class="form-control" readonly></td>
+
+            <td><input style="width: 15vh;" formControlName="fSize" class="form-control" readonly></td>
+
+            <td><input style="width: 15vh;" formControlName="FabDia" class="form-control" readonly></td>
+
+            <td><input style="width: 15vh;" formControlName="FabGsm" class="form-control" readonly></td>
+
+            <td><input style="width: 15vh;" formControlName="KnitSL" type="number" class="form-control"></td>
+
+            <td><input style="width: 15vh;" formControlName="YarnType" class="form-control" readonly></td>
+
+            <td><input style="width: 15vh;" formControlName="FabType" class="form-control" readonly></td>
+
+            <td><input style="width: 15vh;" formControlName="dyetype" class="form-control" readonly></td>
+
+
+            <td><input style="width: 15vh;" formControlName="SpinFty" class="form-control" readonly></td>
+
+            <td><input style="width: 15vh;" formControlName="KnitFty" class="form-control" readonly></td>
+
+            <td><input style="width: 15vh;" formControlName="DyeinFty" class="form-control" readonly></td>
+
+            <td><input style="width: 15vh;" formControlName="OrderPcs" class="form-control"></td>
+
+            <td><input style="width: 15vh;" formControlName="OrderFOBRate" class="form-control"></td>
+
+            <td><input style="width: 15vh;" formControlName="KnitRate" class="form-control"></td>
+
+            <td><input style="width: 15vh;" formControlName="DyeRate" class="form-control"></td>
+
+            <td><input style="width: 15vh;" formControlName="YarnKg" class="form-control" readonly></td>
+
+            <td><input style="width: 15vh;" formControlName="GreigeKg" class="form-control" readonly></td>
+
+            <td><input style="width: 15vh;" formControlName="FinishKg" class="form-control" readonly></td>
+
+            <td> <p-dropdown [options]="[{ 'name': 'True', 'id':1 }, { 'name': 'False', 'id': 0 }]"
+                placeholder="Select a Status" formControlName="status" optionLabel="name" optionValue="id"></p-dropdown>
+            </td>
+
+            <td><button (click)="Delete(i)" style="background-color: red; color: white;">x</button></td>
+
+
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </fieldset>
 
   <ng-template pTemplate="footer">
@@ -271,3 +275,344 @@
     </div>
   </ng-template>
 </p-dialog>
+
+<!-- <!====================================================================================================> -->
+
+<p-dialog [resizable]="true" [modal]="true" [maximizable]="true" [(visible)]="FabricBookingReport" [style]="{width: '90vw'}"
+  [contentStyle]="{height: '90vh'}" [formGroup]="buyerorderform" header="Fabric Booking Report">
+
+
+  <div>
+
+    <div style="display: flex; margin-top: 1%; flex-wrap: wrap;" *ngFor="let data of this.headerData;">
+
+        <div style="display: flex;">
+            <label style="display: inline-block; width: 10vh; border: none;" class="form-control">Buyer </label>
+            <input type="text" class="form-control" value="{{data.buyer}}" readonly  style="width: 20vh;">
+        </div>
+
+        <div style="display: flex;">
+            <label style="display: inline-block; width: 15vh; border: none;" class="form-control">PO No </label>
+            <input type="text" class="form-control" value="{{data.orderNo}}" readonly  style="width: 20vh;">
+        </div>
+
+        <div style="display: flex;">
+            <label style="display: inline-block; width: 20vh; border: none;" class="form-control">Creation Date </label>
+            <input type="text" class="form-control" style="width: 25vh;" value="{{data.created_date}}" readonly>
+        </div>
+
+        <div style="display: flex;">
+            <label style="display: inline-block; width: 20vh; border: none;" class="form-control">Revision Date </label>
+            <input type="text" class="form-control" style="width: 25vh;" value="{{data.revised_date}}" readonly>
+        </div>
+
+        <div style="display: flex;">
+            <label style="display: inline-block; width: 11vh; border: none;" class="form-control">FB No </label>
+            <input type="text" class="form-control" style="width: 25vh;" readonly>
+        </div>
+    </div>
+
+    <!--------------------------------------------------------------------------------------------->
+    <div>
+
+        <div *ngFor="let data of this.headerstylevalue; let i = index">
+            <fieldset>
+                <legend>{{i+1}}. Style : {{data.style}}</legend>
+
+                <div *ngFor="let data of parseheaders(data)">
+
+                    <div style="display: flex; flex-wrap: wrap; justify-content: space-evenly;">
+
+                        <div style="display: flex; gap: 10px;">
+                            <label style="display: inline-block; width: 14vh; border: none;" class="form-control">Order
+                                Qty</label>
+                            <input type="text" class="form-control" style="width: 25vh;" readonly>
+                        </div>
+
+                        <div style="display: flex; gap: 10px;">
+                            <label style="display: inline-block; width: 18vh; border: none;"
+                                class="form-control">Fabrics Type</label>
+                            <input type="text" class="form-control" style="width: 25vh;" readonly>
+                        </div>
+
+                        <div style="display: flex; gap: 10px;">
+                            <label style="display: inline-block; width: 18vh; border: none;" class="form-control">Ship
+                                Date </label>
+                            <input type="text" class="form-control" style="width: 25vh;" readonly>
+                        </div>
+
+                        <div style="display: flex; gap: 10px;">
+                            <label style="display: inline-block; width: 22vh; border: none;"
+                                class="form-control">Fabrics Process</label>
+                            <input type="text" class="form-control" style="width: 25vh;" readonly>
+                        </div>
+
+                    </div>
+
+
+                    <div style="display: flex; flex-wrap: wrap; justify-content: space-evenly;">
+
+                        <div style="display: flex; gap: 10px;">
+                            <label style="display: inline-block; width: 14vh; border: none;"
+                                class="form-control">Garment</label>
+                            <input type="text" class="form-control" style="width: 25vh;" readonly>
+                        </div>
+
+                        <div style="display: flex; gap: 10px;">
+                            <label style="display: inline-block; width: 18vh; border: none;" class="form-control">Fabric
+                                GSM</label>
+                            <input type="text" class="form-control" style="width: 25vh;" readonly>
+                        </div>
+
+                        <div style="display: flex; gap: 10px;">
+                            <label style="display: inline-block; width: 18vh; border: none;"
+                                class="form-control">Packing Sys </label>
+                            <input type="text" class="form-control" style="width: 25vh;" readonly>
+                        </div>
+
+                        <div style="display: flex; gap: 10px;">
+                            <label style="display: inline-block; width: 22vh; border: none;" class="form-control">Yarn
+                                Type</label>
+                            <input type="text" class="form-control" style="width: 25vh;" readonly>
+                        </div>
+
+                    </div>
+
+                    <div style="display: flex; flex-wrap: wrap; justify-content: center;">
+                        <div style="display: flex; gap: 10px;">
+                            <label style="display: inline-block; width: 40vh; border: none;" class="form-control">Avg
+                                Consumpsion</label>
+                            <input type="text" class="form-control" readonly>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-------------------------------------------------------------------------------------------------->
+
+                <fieldset>
+                    <legend>Garments Breakdown Size wise Quantity</legend>
+
+                    <div>
+                        <table class="table table-bordered">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th rowspan="2">Color</th>
+                                    <th colspan="11">Size</th>
+                                    <th></th>
+                                    <th>Total / Pcs</th>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <th>XS</th>
+                                    <th>S</th>
+                                    <th>M</th>
+                                    <th>L</th>
+                                    <th>XL</th>
+                                    <th>L</th>
+                                    <th>XL</th>
+                                    <th>2XL</th>
+                                    <th>3XL</th>
+                                    <th>4XL</th>
+
+                                    <th></th>
+
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td></td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                    <td></td>
+                                    <td>1</td>
+                                </tr>
+                            </tbody>
+                            <thead>
+                                <tr>
+                                    <th style="background-color: #343a40; color: #fff;">Total</th>
+                                    <th></th>
+                                    <th>1</th>
+                                    <th>1</th>
+                                    <th>1</th>
+                                    <th>1</th>
+                                    <th>1</th>
+                                    <th>1</th>
+                                    <th>1</th>
+                                    <th>1</th>
+                                    <th>1</th>
+                                    <th>1</th>
+                                    <th></th>
+                                    <th>1</th>
+
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+
+
+                </fieldset>
+
+                <!-------------------------------------------------------------------------------------------------->
+
+                <fieldset>
+                    <legend>Finish Fabric Requirement</legend>
+
+                    <div>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr class="thead-dark">
+                                    <th>F Size</th>
+                                    <th></th>
+                                    <th>16 - XS - 44</th>
+                                    <th>17 - S - 46</th>
+                                    <th>17 - S - 46</th>
+                                    <th>17 - S - 46</th>
+                                    <th>17 - S - 46</th>
+                                    <th rowspan="3">Total / Kgs</th>
+                                </tr>
+
+                                <tr class="thead-dark">
+
+                                    <th>Consumption</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+
+                                </tr>
+
+                                <tr class="thead-dark">
+
+                                    <th>Colour</th>
+                                    <th>Loss</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>2</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                    <td>5</td>
+                                    <td>6</td>
+                                    <td>7</td>
+                                    <td>8</td>
+                                </tr>
+                            </tbody>
+                            <thead>
+                                <th style="background-color: #343a40; color: #fff;">Total</th>
+                                <th>1</th>
+                                <th>1</th>
+                                <th>1</th>
+                                <th>1</th>
+                                <th>1</th>
+                                <th>1</th>
+                                <th>1</th>
+                            </thead>
+                        </table>
+                    </div>
+
+
+                </fieldset>
+
+                <!-------------------------------------------------------------------------------------------------->
+
+                <fieldset>
+                    <legend>Greige Fabric Requirement</legend>
+
+                    <div>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr class="thead-dark">
+                                    <th>F Size</th>
+                                    <th></th>
+                                    <th>16 - XS - 44</th>
+                                    <th>17 - S - 46</th>
+                                    <th>17 - S - 46</th>
+                                    <th>17 - S - 46</th>
+                                    <th>17 - S - 46</th>
+                                    <th rowspan="3">Total / Kgs</th>
+                                </tr>
+
+                                <tr class="thead-dark">
+
+                                    <th>Consumption</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+
+                                </tr>
+
+                                <tr class="thead-dark">
+
+                                    <th>Colour</th>
+                                    <th>Loss</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>2</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                    <td>5</td>
+                                    <td>6</td>
+                                    <td>7</td>
+                                    <td>8</td>
+                                </tr>
+                            </tbody>
+                            <thead>
+                                <th style="background-color: #343a40; color: #fff;">Total</th>
+                                <th>1</th>
+                                <th>1</th>
+                                <th>1</th>
+                                <th>1</th>
+                                <th>1</th>
+                                <th>1</th>
+                                <th>1</th>
+                            </thead>
+                        </table>
+                    </div>
+
+
+                </fieldset>
+
+
+            </fieldset>
+
+        </div>
+
+
+    </div>
+</div>
+
+
+  </p-dialog>
