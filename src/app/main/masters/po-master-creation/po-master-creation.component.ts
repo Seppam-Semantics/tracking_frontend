@@ -151,7 +151,7 @@ export class POMasterCreationComponent {
   getbuyerId() {
     this.api.BuyerId(this.Buyernamevalue).subscribe((res) => {
       this.buyerid = res.buyer[0].id
-      console.log(this.buyerid)
+
       this.pocreate.patchValue({
         buyerId: this.buyerid
       })
@@ -165,7 +165,7 @@ export class POMasterCreationComponent {
   getstyleId(index: any) {
     this.api.StyleId(this.Stylenamevalue).subscribe((res) => {
       this.styleid = res.style[0].id
-      console.log(this.styleid)
+
       const formArray = this.poDetailscreate.get('data') as FormArray;
       const row = formArray.at(index);
       row.get('styleId')?.setValue(this.styleid);
@@ -179,7 +179,7 @@ export class POMasterCreationComponent {
   getsizeId(index: any) {
     this.api.SizeId(this.Sizenamevalue).subscribe((res) => {
       this.sizeid = res.sizes[0].id
-      console.log(this.sizeid)
+
       const formArray = this.poDetailscreate.get('data') as FormArray;
       const row = formArray.at(index);
       row.get('sizeId')?.setValue(this.sizeid);
@@ -194,7 +194,7 @@ export class POMasterCreationComponent {
     const a = JSON.stringify(event.target.value)
     this.api.ColorId(a).subscribe((res) => {
       this.colorid = res.color[0].id
-      console.log(this.colorid)
+
       const formArray = this.poDetailscreate.get('data') as FormArray;
       const row = formArray.at(index);
       row.get('colorId')?.setValue(  this.colorid);
@@ -224,7 +224,7 @@ export class POMasterCreationComponent {
 
 
   linedata(id: any) {
-    console.log(id)
+
     this.order_id = id
     this.pofile = true
     this.api.get_PO_Master_line(id).subscribe((res) => {
