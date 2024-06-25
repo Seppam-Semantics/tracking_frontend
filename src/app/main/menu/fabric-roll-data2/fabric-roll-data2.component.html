@@ -315,79 +315,64 @@
     <!--------------------------------------------------------------------------------------------->
     <div>
 
-        <div *ngFor="let data of this.headerstylevalue; let i = index">
+        <div *ngFor="let data of this.headerdatavalue; let i = index">
             <fieldset>
                 <legend>{{i+1}}. Style : {{data.style}}</legend>
 
-                <div *ngFor="let data of parseheaders(data)">
-
-                    <div style="display: flex; flex-wrap: wrap; justify-content: space-evenly;">
-
-                        <div style="display: flex; gap: 10px;">
-                            <label style="display: inline-block; width: 14vh; border: none;" class="form-control">Order
-                                Qty</label>
-                            <input type="text" class="form-control" style="width: 25vh;" readonly>
-                        </div>
-
-                        <div style="display: flex; gap: 10px;">
-                            <label style="display: inline-block; width: 18vh; border: none;"
-                                class="form-control">Fabrics Type</label>
-                            <input type="text" class="form-control" style="width: 25vh;" readonly>
-                        </div>
-
-                        <div style="display: flex; gap: 10px;">
-                            <label style="display: inline-block; width: 18vh; border: none;" class="form-control">Ship
-                                Date </label>
-                            <input type="text" class="form-control" style="width: 25vh;" readonly>
-                        </div>
-
-                        <div style="display: flex; gap: 10px;">
-                            <label style="display: inline-block; width: 22vh; border: none;"
-                                class="form-control">Fabrics Process</label>
-                            <input type="text" class="form-control" style="width: 25vh;" readonly>
-                        </div>
-
+                <div *ngFor="let data3 of parseheaders1(data)">
+                  <div *ngFor="let data2 of parseheaders2(data)">
+                  <div style="display: flex; flex-wrap: wrap; justify-content: space-evenly;">
+                    <div style="display: flex; gap: 10px;">
+                      <label style="display: inline-block; width: 14vh; border: none;" class="form-control">Order Qty</label>
+                      <input type="text" class="form-control" style="width: 25vh;" readonly value="{{data2.poQuantity}}">
                     </div>
-
-
-                    <div style="display: flex; flex-wrap: wrap; justify-content: space-evenly;">
-
-                        <div style="display: flex; gap: 10px;">
-                            <label style="display: inline-block; width: 14vh; border: none;"
-                                class="form-control">Garment</label>
-                            <input type="text" class="form-control" style="width: 25vh;" readonly>
-                        </div>
-
-                        <div style="display: flex; gap: 10px;">
-                            <label style="display: inline-block; width: 18vh; border: none;" class="form-control">Fabric
-                                GSM</label>
-                            <input type="text" class="form-control" style="width: 25vh;" readonly>
-                        </div>
-
-                        <div style="display: flex; gap: 10px;">
-                            <label style="display: inline-block; width: 18vh; border: none;"
-                                class="form-control">Packing Sys </label>
-                            <input type="text" class="form-control" style="width: 25vh;" readonly>
-                        </div>
-
-                        <div style="display: flex; gap: 10px;">
-                            <label style="display: inline-block; width: 22vh; border: none;" class="form-control">Yarn
-                                Type</label>
-                            <input type="text" class="form-control" style="width: 25vh;" readonly>
-                        </div>
-
+                
+                    <div style="display: flex; gap: 10px;">
+                      <label style="display: inline-block; width: 18vh; border: none;" class="form-control">Fabrics Type</label>
+                      <input type="text" class="form-control" style="width: 25vh;" readonly value="{{data3.fabricType}}">
                     </div>
-
-                    <div style="display: flex; flex-wrap: wrap; justify-content: center;">
-                        <div style="display: flex; gap: 10px;">
-                            <label style="display: inline-block; width: 40vh; border: none;" class="form-control">Avg
-                                Consumpsion</label>
-                            <input type="text" class="form-control" readonly>
-                        </div>
+                
+                    <div style="display: flex; gap: 10px;">
+                      <label style="display: inline-block; width: 18vh; border: none;" class="form-control">Ship Date</label>
+                      <input type="text" class="form-control" style="width: 25vh;" readonly value="{{data2.ship_date}}">
                     </div>
-
+                
+                    <div style="display: flex; gap: 10px;">
+                      <label style="display: inline-block; width: 22vh; border: none;" class="form-control">Fabrics Process</label>
+                      <input type="text" class="form-control" style="width: 25vh;" readonly value="{{data3.dyeType}}">
+                    </div>
+                  </div>
+                
+                  <div style="display: flex; flex-wrap: wrap; justify-content: space-evenly;">
+                    <div style="display: flex; gap: 10px;">
+                      <label style="display: inline-block; width: 14vh; border: none;" class="form-control">Garment</label>
+                      <input type="text" class="form-control" style="width: 25vh;" readonly value="{{data3.utility}}">
+                    </div>
+                
+                    <div style="display: flex; gap: 10px;">
+                      <label style="display: inline-block; width: 18vh; border: none;" class="form-control">Fabric GSM</label>
+                      <input type="text" class="form-control" style="width: 25vh;" readonly value="{{data3.fabricGSM}}">
+                    </div>
+                
+                    <div style="display: flex; gap: 10px;">
+                      <label style="display: inline-block; width: 18vh; border: none;" class="form-control">Packing Sys</label>
+                      <input type="text" class="form-control" style="width: 25vh;" readonly value="{{data3.packingType}}">
+                    </div>
+                
+                    <div style="display: flex; gap: 10px;">
+                      <label style="display: inline-block; width: 22vh; border: none;" class="form-control">Yarn Type</label>
+                      <input type="text" class="form-control" style="width: 25vh;" readonly value="{{data3.yarnType}}">
+                    </div>
+                  </div>
+                
+                  <div style="display: flex; flex-wrap: wrap; justify-content: center;">
+                    <div style="display: flex; gap: 10px;">
+                      <label style="display: inline-block; width: 40vh; border: none;" class="form-control">Avg Consumpsion</label>
+                      <input type="text" class="form-control" readonly>
+                    </div>
+                  </div>
                 </div>
-
+              </div>
                 <!-------------------------------------------------------------------------------------------------->
 
                 <fieldset>

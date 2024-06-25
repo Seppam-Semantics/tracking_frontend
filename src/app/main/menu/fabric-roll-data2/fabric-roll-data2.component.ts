@@ -88,6 +88,7 @@ export class FabricRollData2Component implements OnInit {
   woBuyervalue2: any;
   headerData: any;
   headerstylevalue: any;
+  headerdatavalue: any;
   constructor(private api: ApiService, private router: Router, private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -323,26 +324,38 @@ export class FabricRollData2Component implements OnInit {
   Report(id:any , i:any){
     
     const a = this.data[i]
-    console.log(a)
+    
     this.FabricBookingReport = true
     this.api.fabbooking(a).subscribe((res)=>{
-     this.headerData = res.data[0]
-     this.headerstylevalue = res.head
+     this.headerData = res.head
+     this.headerdatavalue = res.data
+     console.log(res)
+    
     })
   }
 
-  parseheaders(data: any): any {
+  parseheaders1(data: any): any {
     if (data && data.headers) {
       let fixedheadersData = data.headers.replace(/([{,]\s*)(\w+)\s*:/g, '$1"$2":')
         .replace(/:\s*([^,\}\[]+)\s*(?=[,\}])/g, ': "$1"');
+       try {
+        const parsedData1 = JSON.parse(fixedheadersData);
+         return parsedData1;
+      } catch (error) {
+        console.error('Error parsing order_allocation data:', error);
+        return;
+      }
+    }
+    return;
+  }
+
+  parseheaders2(data: any): any {
+    if (data && data.pohead) {
         let fixedpoheadData = data.pohead.replace(/([{,]\s*)(\w+)\s*:/g, '$1"$2":')
         .replace(/:\s*([^,\}\[]+)\s*(?=[,\}])/g, ': "$1"');
       try {
-        const parsedData1 = JSON.parse(fixedheadersData);
         const parsedData2 = JSON.parse(fixedpoheadData);
-        // console.log(parsedData1)
-        // console.log(parsedData2)
-        return parsedData1;
+        return parsedData2;
       } catch (error) {
         console.error('Error parsing order_allocation data:', error);
         return;
