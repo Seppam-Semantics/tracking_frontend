@@ -10,8 +10,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  // apiUrl = "https://tracker.seppam.com";
-  apiUrl = "http://localhost:2000";
+  apiUrl = "https://tracker.seppam.com";
+  // apiUrl = "http://localhost:2000";
 
   token: any;
   profilenames: any;
@@ -142,8 +142,8 @@ export class ApiService {
     return this.http.get(this.getUrl() + `/dyeapi/DyecodeFilter?dyeFactory=${factory}&buyer=${buyer}&orderNo=${order}&style=${style}&color=${color}`, this.getHeaders())
   }
 
-  postsinglewodetails(data: any, id: any): Observable<any> {
-    return this.http.put(this.getUrl() + `/workorderapi/workorder/${id}`, data, this.getHeaders())
+  postsinglewodetails(data: any): Observable<any> {
+    return this.http.put(this.getUrl() + `/workorderapi/workorder`, data, this.getHeaders())
   }
   getsinglewodetails(id: any): Observable<any> {
     return this.http.get(this.getUrl() + `/fabricrollapi/transcation-entrys?id=${id}`, this.getHeaders())
@@ -1073,4 +1073,9 @@ export class ApiService {
   fabricType_BO(StyleId:string='' , fabTypeId:string=''):Observable<any>{
     return this.http.get(this.getUrl() + `/workorderapi/fabricType_BO?StyleId=${StyleId}&fabTypeId=${fabTypeId}`, this.getHeaders())
   }
+
+  fabbooking(data:any ): Observable<any> {
+    return this.http.post(this.getUrl() + `/workorderapi/fab-booking`, data,this.getHeaders())
+  }
+  
 }

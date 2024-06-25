@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from '../api.service';
 import { FormControl, FormGroup, } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -39,7 +40,12 @@ token:any;
     sessionStorage.setItem('name', res.userContext.name);
     sessionStorage.setItem('token', token)
     this.router.navigate(['/main/FabricRollData']);
-    alert(res.message)
+    Swal.fire({
+      title: "Welcome to TeeTrack!",
+      text: "Click Ok To Continue Journey",
+      icon: "success"
+    });
+
   }
   else{
     alert(res.error);

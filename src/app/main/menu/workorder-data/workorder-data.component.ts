@@ -191,7 +191,6 @@ export class WorkorderDataComponent implements OnInit {
       const row = formArray.at(index);
       row.get('DyeinFtyId')?.setValue(this.DyeinFtyId_Value);
 
-      console.log(this.DyeinFtyId_Value)
     } else {
       console.error('No matching fabric type found for the selected value');
     }
@@ -378,7 +377,7 @@ export class WorkorderDataComponent implements OnInit {
   }
 
   save(){
-    console.log(this.buyerorderform.value.data)
+
     this.api.postworkorder(this.buyerorderform.value.data).subscribe((res)=>{
       if(res.success){
         alert("Your work order details have been saved....!!!!")

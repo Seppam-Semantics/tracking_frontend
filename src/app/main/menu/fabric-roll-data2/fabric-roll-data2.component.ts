@@ -6,7 +6,8 @@ import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ApiService } from 'src/app/api.service';
 import * as XLSX from 'xlsx'
-
+import Swal from 'sweetalert2'
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-fabric-roll2-data',
@@ -77,7 +78,16 @@ export class FabricRollData2Component implements OnInit {
   newfabEntry: any[] = []
   visible: boolean = false;
   visibleEntry: boolean = false;
+  FabricBookingReport : boolean = false;
   status: any;
+  woBuyervalue: any;
+  woorderNovalue: any;
+  data2: any[]=[];
+  data3: any[]=[];
+  woorderNovalue2: any;
+  woBuyervalue2: any;
+  headerData: any;
+  headerstylevalue: any;
   constructor(private api: ApiService, private router: Router, private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -129,8 +139,67 @@ export class FabricRollData2Component implements OnInit {
 
   loadworkorderdetails(orderNo: string, style: string = '', color: string = '', size: string = '') {
     this.api.getwolinedetails(orderNo, style, color, size).subscribe((res) => {
-      this.data = res.workorders;
-      console.log(res)
+      this.data2 = res.workorders;
+      this.woBuyervalue = res.workorders[0].buyer
+      this.woorderNovalue = res.workorders[0].orderNo
+    });
+  }
+
+  loadworkorderdetails2(orderNo: string, style: string = '', color: string = '', size: string = '') {
+    this.api.getwolinedetails(orderNo, style, color, size).subscribe((res) => {
+      this.data3 = res.workorders;
+      this.woBuyervalue2 = res.workorders[0].buyer
+      this.woorderNovalue2 = res.workorders[0].orderNo
+
+
+      const EntryData = this.buyerorderform.get('data') as FormArray;
+      EntryData.clear();
+      this.data3.forEach((dataItem: any) => {
+        const Details = this.fb.group({
+          "id": dataItem.id,
+          "poid": dataItem.poid,
+          "polineId": dataItem.polineId,
+          "Buyer": dataItem.buyer,
+          "OrderNo": dataItem.orderNo,
+          "Style": dataItem.style,
+          "Color": dataItem.color,
+          "Size": dataItem.size,
+          "fSize": dataItem.FSize,
+          "SizeId": dataItem.sizeid,
+          "FabType": dataItem.fabType,
+          "fabricTypeId": dataItem.fabricTypeId,
+          "FabDia": dataItem.fabDia,
+          "FabDiaId": dataItem.fabdiaId,
+          "FabGsm": dataItem.fabGsm,
+          "FabGsmId": 0,
+          "YarnKg": dataItem.yarnKg,
+          "GreigeKg": dataItem.greigeKg,
+          "YarnType": dataItem.yarnType,
+          "YarnTypeId": dataItem.yarnTypeId,
+          "FinishKg": dataItem.finishKg,
+          "KnitSL": dataItem.knitSL,
+          "SpinFty": dataItem.spinFty,
+          "SpinFtyId": dataItem.spinFtyId,
+          "KnitFty": dataItem.knitFty,
+          "KnitFtyId": dataItem.knitFtyId,
+          "DyeinFty": dataItem.dyeinFty,
+          "DyeinFtyId": dataItem.dyeinFtyId,
+    
+          "dyetype": dataItem.dyetype,
+          "dyeTypeId": dataItem.dyeTypeId,
+          "OrderPcs": dataItem.orderPcs,
+          "OrderFOBRate": dataItem.orderFOBRate,
+          "KnitRate": dataItem.knitRate,
+          "DyeRate": dataItem.dyeRate,
+          
+          "status": dataItem.status,
+        });
+        EntryData.push(Details);
+      });
+  
+
+
+
     });
   }
 
@@ -145,8 +214,7 @@ export class FabricRollData2Component implements OnInit {
 
   woLineDetails(orderNo : any){
     this.visibleEntry = true
-    console.log(orderNo)
-    this.loadworkorderdetails(orderNo)
+    this.loadworkorderdetails(JSON.stringify(orderNo))
   }
 
   wobystyle() {
@@ -170,11 +238,32 @@ export class FabricRollData2Component implements OnInit {
   }
   fileName2 = "Workorder-data.xlsx"
   exportexcel2() {
-    let data2 = document.getElementById("table-data2");
-    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(data2);
-    const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Sheet2');
-    XLSX.writeFile(wb, this.fileName2);
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You Want To Download Report!!!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Download it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        let data2 = document.getElementById("table-data2");
+        const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(data2);
+        const wb: XLSX.WorkBook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Sheet2');
+        XLSX.writeFile(wb, this.fileName2);      
+        
+        Swal.fire({
+          title: "Good job!",
+          text: "Your Download Compleated !!!",
+          icon: "success"
+        });
+      }
+    });
+
   }
   fileName1 = "Fabricrolldata.xlsx"
   exportexcel() {
@@ -226,49 +315,40 @@ export class FabricRollData2Component implements OnInit {
   }
 
   edit(orderNo: any) {
-   console.log(orderNo) 
+ 
+    this.loadworkorderdetails2(JSON.stringify(orderNo))
     this.visible = true;
-    // this.woupdateid = id
-    // this.api.getsinglewodetails(id).subscribe((res) => {
-    //   this.Woupdate = res.workorder
-    //   const value = this.Woupdate.status
-    //   if (value == 1) {
-    //     this.status = true
-    //   } else {
-    //     this.status = false
-    //   }
-    //   this.woUpdateFrom.patchValue({
-    //     id: this.Woupdate.id,
-    //     buyer: this.Woupdate.buyer,
-    //     orderNo: this.Woupdate.orderNo,
-    //     style: this.Woupdate.style,
-    //     color: this.Woupdate.color,
-    //     size: this.Woupdate.size,
-    //     fabType: this.Woupdate.fabType,
-    //     fabDia: this.Woupdate.fabDia,
-    //     fabGsm: this.Woupdate.fabGsm,
-    //     knitSL: this.Woupdate.knitSL,
-    //     yarnKg: this.Woupdate.yarnKg,
-    //     greigeKg: this.Woupdate.greigeKg,
-    //     yarnType: this.Woupdate.yarnType,
-    //     finishKg: this.Woupdate.finishKg,
-    //     spinFty: this.Woupdate.spinFty,
-    //     knitFty: this.Woupdate.knitFty,
-    //     dyeinFty: this.Woupdate.dyeinFty,
-    //     noDays: this.Woupdate.noRolls,
-
-    //     orderPcs: this.Woupdate.orderPcs,
-    //     orderFOBRate: this.Woupdate.orderFOBRate,
-    //     dyeRate: this.Woupdate.dyeRate,
-    //     knitRate: this.Woupdate.knitRate,
-
-    //     gSize: this.Woupdate.FSize,
-    //   })
-    // })
   }
 
-  view(orderNo:any){
-    console.log(orderNo)
+  Report(id:any , i:any){
+    
+    const a = this.data[i]
+    console.log(a)
+    this.FabricBookingReport = true
+    this.api.fabbooking(a).subscribe((res)=>{
+     this.headerData = res.data[0]
+     this.headerstylevalue = res.head
+    })
+  }
+
+  parseheaders(data: any): any {
+    if (data && data.headers) {
+      let fixedheadersData = data.headers.replace(/([{,]\s*)(\w+)\s*:/g, '$1"$2":')
+        .replace(/:\s*([^,\}\[]+)\s*(?=[,\}])/g, ': "$1"');
+        let fixedpoheadData = data.pohead.replace(/([{,]\s*)(\w+)\s*:/g, '$1"$2":')
+        .replace(/:\s*([^,\}\[]+)\s*(?=[,\}])/g, ': "$1"');
+      try {
+        const parsedData1 = JSON.parse(fixedheadersData);
+        const parsedData2 = JSON.parse(fixedpoheadData);
+        // console.log(parsedData1)
+        // console.log(parsedData2)
+        return parsedData1;
+      } catch (error) {
+        console.error('Error parsing order_allocation data:', error);
+        return;
+      }
+    }
+    return;
   }
 
   woUpdateFrom = new FormGroup({
@@ -344,12 +424,13 @@ export class FabricRollData2Component implements OnInit {
       "OrderFOBRate": new FormControl(''),
       "KnitRate": new FormControl(''),
       "DyeRate": new FormControl(''),
+      "status": new FormControl(''),
     });
     this.items.push(row);
   }
 
   woupdatesubmit() {
-    this.api.postsinglewodetails(this.woUpdateFrom.value, this.woupdateid).subscribe((res) => {
+    this.api.postworkorder(this.buyerorderform.value.data).subscribe((res) => {
       alert(res.message)
       this.visible = false;
       this.woByBuyer()
@@ -357,11 +438,28 @@ export class FabricRollData2Component implements OnInit {
     })
   }
 
-  delete(id: any) {
-    this.api.Workorderdelect(id).subscribe((res) => {
-      alert(res.message)
-      window.location.reload()
-    })
+  delete(id: any) { 
+   Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        
+        this.api.Workorderdelect(id).subscribe((res) => {
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success"
+          });
+          this.loadworkorder()
+        })
+      }
+    });
   }
   knite() {
     this.router.navigate(['/main/Knit-Report'])
@@ -386,5 +484,16 @@ export class FabricRollData2Component implements OnInit {
   Upload() {
     this.router.navigate(['/main/WorkorderData'])
   }
+
+  fabricreport(data:any){
+    sessionStorage.setItem('FabricEntrybuyer' ,data.buyer)
+    sessionStorage.setItem('FabricEntrystyle' ,data.style)
+    sessionStorage.setItem('FabricEntrycolor' ,data.color)
+    sessionStorage.setItem('FabricEntrysize' ,data.size)
+    sessionStorage.setItem('FabricEntryorderNo' ,data.orderNo)
+
+   this.router.navigate(["/main/fabricroll1"])
+  }
+
 
 }

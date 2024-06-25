@@ -6,6 +6,7 @@ import { ApiService } from 'src/app/api.service';
 import * as XLSX from 'xlsx'
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-yarn-report',
@@ -133,11 +134,32 @@ export class YarnReportComponent implements OnInit {
 
   fileName = "YarnReport.xlsx"
   exportexcel() {
-    let data = document.getElementById("table-data");
-    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(data);
-    const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-    XLSX.writeFile(wb, this.fileName);
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You Want To Download Report!!!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Download it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        let data = document.getElementById("table-data");
+        const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(data);
+        const wb: XLSX.WorkBook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+        XLSX.writeFile(wb, this.fileName);             
+        
+        Swal.fire({
+          title: "Good job!",
+          text: "Your Download Compleated !!!",
+          icon: "success"
+        });
+      }
+    });
+
   }
 
 
@@ -223,22 +245,43 @@ export class YarnReportComponent implements OnInit {
 
 
   exportToPDF() { 
-    this.download = false ;
-    const element = document.getElementById('print');
 
-    html2canvas(element!).then(canvas => {
-      const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF('p', 'mm', 'a5');
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You Want To Download Report!!!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Download it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
 
-      // For full page capture, set proper width and height
-      const imgProps = pdf.getImageProperties(imgData);
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-
-      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-      pdf.save('LC-Closure-Report.pdf');
-  
+        this.download = false ;
+        const element = document.getElementById('print');
+    
+        html2canvas(element!).then(canvas => {
+          const imgData = canvas.toDataURL('image/png');
+          const pdf = new jsPDF('p', 'mm', 'a5');
+    
+          // For full page capture, set proper width and height
+          const imgProps = pdf.getImageProperties(imgData);
+          const pdfWidth = pdf.internal.pageSize.getWidth();
+          const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+    
+          pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+          pdf.save('LC-Closure-Report.pdf');
+      
+        });
+        
+        Swal.fire({
+          title: "Good job!",
+          text: "Your Download Compleated !!!",
+          icon: "success"
+        });
+      }
     });
+
   }
   
 
@@ -246,16 +289,44 @@ export class YarnReportComponent implements OnInit {
 
 
   delete(id: any) {
-    let text = "Press Ok to delete the details";
-    if (confirm(text) == true) {
-      this.api.deleteYarn(id).subscribe(
-        (res) => {
-          alert(res.message);
-          window.location.reload();
-        }
-      )
-    } else {
-      alert("Cancelled");
-    }
+    // let text = "Press Ok to delete the details";
+    // if (confirm(text) == true) {
+    //   this.api.deleteYarn(id).subscribe(
+    //     (res) => {
+    //       alert(res.message);
+    //       window.location.reload();
+    //     }
+    //   )
+    // } else {
+    //   alert("Cancelled");
+    // }
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        
+        this.api.deleteYarn(id).subscribe((res) => {
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success"
+          });
+          this.api.getAllYarn().subscribe((res) => {
+            this.AllData = res.yarn
+          })
+        })
+      }
+    });
+
+
+
+
   }
 }

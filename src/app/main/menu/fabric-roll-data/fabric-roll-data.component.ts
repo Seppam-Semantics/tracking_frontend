@@ -213,11 +213,11 @@ export class FabricRollDataComponent implements OnInit {
   })
 
 woupdatesubmit(){
-  const entry = 1
-  this.api.postsinglewodetails(this.woUpdateFrom.value,this.woupdateid).subscribe((res) => {
-    alert(res.message)
-    this.woByBuyer()
-  })
+  // const entry = 1
+  // this.api.postsinglewodetails(this.woUpdateFrom.value,this.woupdateid).subscribe((res) => {
+  //   alert(res.message)
+  //   this.woByBuyer()
+  // })
 }
 
 
