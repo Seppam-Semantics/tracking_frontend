@@ -423,34 +423,20 @@
                             <thead>
                                 <tr class="thead-dark">
                                     <th>F Size</th>
-                                    <th></th>
-                                    <th>17 - S - 46</th>
-                                    <th>17 - S - 46</th>
-                                    <th>17 - S - 46</th>
-                                    <th>17 - S - 46</th>
+                                    <th *ngFor="let data4 of dataItem3.sizes">{{data4.size}}</th>
                                     <th rowspan="3">Total / Kgs</th>
-                                </tr>
-
-                                <tr class="thead-dark">
-
-                                    <th>Colour</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-
+                                <tr *ngFor="let data4 of dataItem3.colors;">
+                                    <td>{{data4.color}}</td>
+                                    <td *ngFor="let data4 of dataItem3.sizes; let i = index">{{data4.entry[i]}}</td>
+                                    <td>{{data4.total}}</td>
                                 </tr>
                             </tbody>
                             <thead>
                                 <th style="background-color: #343a40; color: #fff;">Total</th>
-                                <th>1</th>
+                                <td *ngFor="let data4 of dataItem3.sizes; let i = index">{{data4.total}}</td>
                                 
                             </thead>
                         </table>
@@ -464,67 +450,28 @@
                 <fieldset>
                     <legend>Greige Fabric Requirement</legend>
 
-                    <div>
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr class="thead-dark">
-                                    <th>F Size</th>
-                                    <th></th>
-                                    <th>16 - XS - 44</th>
-                                    <th>17 - S - 46</th>
-                                    <th>17 - S - 46</th>
-                                    <th>17 - S - 46</th>
-                                    <th>17 - S - 46</th>
-                                    <th rowspan="3">Total / Kgs</th>
-                                </tr>
-
-                                <tr class="thead-dark">
-
-                                    <th>Consumption</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-
-                                </tr>
-
-                                <tr class="thead-dark">
-
-                                    <th>Colour</th>
-                                    <th>Loss</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>5</td>
-                                    <td>6</td>
-                                    <td>7</td>
-                                    <td>8</td>
-                                </tr>
-                            </tbody>
-                            <thead>
-                                <th style="background-color: #343a40; color: #fff;">Total</th>
-                                <th>1</th>
-                                <th>1</th>
-                                <th>1</th>
-                                <th>1</th>
-                                <th>1</th>
-                                <th>1</th>
-                                <th>1</th>
-                            </thead>
-                        </table>
+                    <div *ngFor="let dataItem3 of parseheaders6(data)">
+                      <table class="table table-bordered">
+                        <thead>
+                            <tr class="thead-dark">
+                                <th>F Size</th>
+                                <th *ngFor="let data4 of dataItem3.sizes">{{data4.size}}</th>
+                                <th rowspan="3">Total / Kgs</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data4 of dataItem3.colors;">
+                                <td>{{data4.color}}</td>
+                                <td *ngFor="let data4 of dataItem3.sizes; let i = index">{{data4.entry[i]}}</td>
+                                <td>{{data4.total}}</td>
+                            </tr>
+                        </tbody>
+                        <thead>
+                            <th style="background-color: #343a40; color: #fff;">Total</th>
+                            <td *ngFor="let data4 of dataItem3.sizes; let i = index">{{data4.total}}</td>
+                            
+                        </thead>
+                    </table>
                     </div>
 
 
