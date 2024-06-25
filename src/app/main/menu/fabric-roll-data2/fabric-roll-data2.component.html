@@ -428,9 +428,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let data4 of dataItem3.colors;">
+                                <tr *ngFor="let data4 of dataItem3.colors; let i = index">
                                     <td>{{data4.color}}</td>
-                                    <td *ngFor="let data4 of dataItem3.sizes; let i = index">{{data4.entry[i]}}</td>
+                                    <td *ngFor="let data4 of dataItem3.sizes;">{{data4.entry[i]}}</td>
                                     <td>{{data4.total}}</td>
                                 </tr>
                             </tbody>
@@ -460,9 +460,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let data4 of dataItem3.colors;">
+                            <tr *ngFor="let data4 of dataItem3.colors;let i = index">
                                 <td>{{data4.color}}</td>
-                                <td *ngFor="let data4 of dataItem3.sizes; let i = index">{{data4.entry[i]}}</td>
+                                <td *ngFor="let data4 of dataItem3.sizes;">{{data4.entry[i]}}</td>
                                 <td>{{data4.total}}</td>
                             </tr>
                         </tbody>
