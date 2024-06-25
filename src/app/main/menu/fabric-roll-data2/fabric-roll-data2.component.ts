@@ -363,7 +363,6 @@ export class FabricRollData2Component implements OnInit {
         .replace(/:\s*([^,\}\[]+)\s*(?=[,\}])/g, ': "$1"');
       try {
         const parsedData3 = JSON.parse(fixedgreige_fabricData);
-        console.log(parsedData3)
         return parsedData3;
       } catch (error) {
         console.error('Error parsing order_allocation data:', error);
@@ -379,7 +378,6 @@ export class FabricRollData2Component implements OnInit {
         .replace(/:\s*([^,\}\[]+)\s*(?=[,\}])/g, ': "$1"');
       try {
         const parsedData4 = JSON.parse(fixedgarment_break_downData);
-        console.log(parsedData4)
         return parsedData4;
       } catch (error) {
         console.error('Error parsing order_allocation data:', error);
@@ -388,6 +386,24 @@ export class FabricRollData2Component implements OnInit {
     }
     return;
   }
+
+  parseheaders5(data: any): any {
+    if (data && data.finish_fabric) {
+        let fixedfinish_fabricData = data.finish_fabric.replace(/([{,]\s*)(\w+)\s*:/g, '$1"$2":')
+        .replace(/:\s*([^,\}\[]+)\s*(?=[,\}])/g, ': "$1"');
+      try {
+        const parsedData5 = JSON.parse(fixedfinish_fabricData);
+        console.log(parsedData5)
+        return parsedData5;
+      } catch (error) {
+        console.error('Error parsing order_allocation data:', error);
+        return;
+      }
+    }
+    return;
+  }
+
+
 
   woUpdateFrom = new FormGroup({
     id: new FormControl(),

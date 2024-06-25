@@ -378,66 +378,32 @@
                     <legend>Garments Breakdown Size wise Quantity</legend>
 
                     <div  *ngFor="let dataItem1 of parseheaders4(data)">
-                        <table class="table table-bordered" *ngFor="let dataItem3 of dataItem1.sizes; let i = index">
-                            <thead class="thead-dark">
+                        <table class="table table-bordered">
+                            <thead class="thead-dark" >
                                 <tr>
                                     <th rowspan="2">Color</th>
-                                    <th colspan="11">Size</th>
-                                    <th></th>
+                                    
+                                    <th *ngFor="let dataItem5 of dataItem1.sizes">{{dataItem5.size}}</th>
+
                                     <th>Total / Pcs</th>
                                 </tr>
-                                <tr>
-                                    <th></th>
-                                    <th>XS</th>
-                                    <th>S</th>
-                                    <th>M</th>
-                                    <th>L</th>
-                                    <th>XL</th>
-                                    <th>L</th>
-                                    <th>XL</th>
-                                    <th>2XL</th>
-                                    <th>3XL</th>
-                                    <th>4XL</th>
 
-                                    <th></th>
-
-                                    <th></th>
-                                </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let dataItem2 of dataItem1.colors">
-                                    <td >{{dataItem2.color}}</td>
-                                    <td></td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td>1</td>
-                                    <td></td>
+                                <tr *ngFor="let dataItem2 of dataItem1.colors ; let i = index">
+                                    <td>{{dataItem2.color}}</td>
+                                    
+                                    <td *ngFor="let dataItem5 of dataItem1.sizes">{{dataItem5.entry[i]}}</td>
+                                
                                     <td>{{dataItem2.total}}</td>
                                 </tr>
                             </tbody>
                             <thead>
                                 <tr>
                                     <th style="background-color: #343a40; color: #fff;">Total</th>
-                                    <th></th>
-                                    <th>1</th>
-                                    <th>1</th>
-                                    <th>1</th>
-                                    <th>1</th>
-                                    <th>1</th>
-                                    <th>1</th>
-                                    <th>1</th>
-                                    <th>1</th>
-                                    <th>1</th>
-                                    <th>1</th>
-                                    <th></th>
-                                    <th>1</th>
+                                  
+                                  <th *ngFor="let dataItem5 of dataItem1.sizes">{{dataItem5.total}}</th>
+                                  <th></th>
 
                                 </tr>
                             </thead>
@@ -452,13 +418,12 @@
                 <fieldset>
                     <legend>Finish Fabric Requirement</legend>
 
-                    <div>
+                    <div *ngFor="let dataItem3 of parseheaders5(data)">
                         <table class="table table-bordered">
                             <thead>
                                 <tr class="thead-dark">
                                     <th>F Size</th>
                                     <th></th>
-                                    <th>16 - XS - 44</th>
                                     <th>17 - S - 46</th>
                                     <th>17 - S - 46</th>
                                     <th>17 - S - 46</th>
@@ -468,20 +433,7 @@
 
                                 <tr class="thead-dark">
 
-                                    <th>Consumption</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-
-                                </tr>
-
-                                <tr class="thead-dark">
-
                                     <th>Colour</th>
-                                    <th>Loss</th>
                                     <th></th>
                                     <th></th>
                                     <th></th>
@@ -493,24 +445,13 @@
                             <tbody>
                                 <tr>
                                     <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>5</td>
-                                    <td>6</td>
-                                    <td>7</td>
-                                    <td>8</td>
+
                                 </tr>
                             </tbody>
                             <thead>
                                 <th style="background-color: #343a40; color: #fff;">Total</th>
                                 <th>1</th>
-                                <th>1</th>
-                                <th>1</th>
-                                <th>1</th>
-                                <th>1</th>
-                                <th>1</th>
-                                <th>1</th>
+                                
                             </thead>
                         </table>
                     </div>
