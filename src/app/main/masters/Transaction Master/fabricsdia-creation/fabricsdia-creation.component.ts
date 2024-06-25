@@ -47,7 +47,7 @@ export class FabricsdiaCreationComponent {
   getstyleId() {
     this.api.StyleId(this.Stylenamevalue).subscribe((res)=>{
       this.styleid = res.style[0].id
-      console.log(this.styleid)
+
       this.Fabricsdiacreate.patchValue({
         styleId : this.styleid 
       })
@@ -57,7 +57,7 @@ export class FabricsdiaCreationComponent {
   getsizeId() {
     this.api.SizeId(this.Sizenamevalue).subscribe((res)=>{
       this.sizeid = res.sizes[0].id
-      console.log(this.sizeid)
+
       this.Fabricsdiacreate.patchValue({
         sizeId : this.sizeid 
       })

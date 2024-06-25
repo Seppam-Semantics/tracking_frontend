@@ -218,9 +218,9 @@
 
             <td><input style="width: 15vh;" formControlName="Color" class="form-control" readonly></td>
 
-            <td><input style="width: 15vh;" formControlName="Size" class="form-control" readonly></td>
-
             <td><input style="width: 15vh;" formControlName="fSize" class="form-control" readonly></td>
+
+            <td><input style="width: 15vh;" formControlName="Size" class="form-control" readonly></td>
 
             <td><input style="width: 15vh;" formControlName="FabDia" class="form-control" readonly></td>
 
@@ -464,30 +464,14 @@
                 <fieldset>
                     <legend>Greige Fabric Requirement</legend>
 
-                    <div>
+                    <div *ngFor="let dataItem3 of parseheaders3(data)">
                         <table class="table table-bordered">
                             <thead>
                                 <tr class="thead-dark">
                                     <th>F Size</th>
                                     <th></th>
-                                    <th>16 - XS - 44</th>
-                                    <th>17 - S - 46</th>
-                                    <th>17 - S - 46</th>
-                                    <th>17 - S - 46</th>
-                                    <th>17 - S - 46</th>
+                                    <th *ngFor="let dataItem3 of dataItem3.sizes">{{dataItem3.size}}</th>
                                     <th rowspan="3">Total / Kgs</th>
-                                </tr>
-
-                                <tr class="thead-dark">
-
-                                    <th>Consumption</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-
                                 </tr>
 
                                 <tr class="thead-dark">
@@ -499,30 +483,18 @@
                                     <th></th>
                                     <th></th>
                                     <th></th>
-
+                                    
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>5</td>
-                                    <td>6</td>
-                                    <td>7</td>
-                                    <td>8</td>
+                                <tr *ngFor="let dataItem3 of dataItem3.colors ; let i = index">
+                                    <td>{{dataItem3.color}}</td>
+                                    <td *ngFor="let dataItem3 of dataItem3.sizes">{{dataItem3.entry[i]}}</td>
                                 </tr>
                             </tbody>
                             <thead>
                                 <th style="background-color: #343a40; color: #fff;">Total</th>
-                                <th>1</th>
-                                <th>1</th>
-                                <th>1</th>
-                                <th>1</th>
-                                <th>1</th>
-                                <th>1</th>
-                                <th>1</th>
+                                <th *ngFor="let dataItem5 of dataItem1.sizes">{{dataItem5.total}}</th>
                             </thead>
                         </table>
                     </div>

@@ -242,7 +242,7 @@ export class WorkorderDataComponent implements OnInit {
       this.dyeTypeFBC = res.sizeId[0]?.dyeType
       this.dyeTypeFBCId = res.sizeId[0]?.dyeTypeId
 
-     console.log(this.polineId)
+
       
       this.api.DyeTypeMaster_BO(this.styleIdDta, this.dyeTypeFBCId).subscribe((res) => {
         this.DyeTypeLossDta = res.DyeTypeLoss[0].dyepl
@@ -305,11 +305,6 @@ export class WorkorderDataComponent implements OnInit {
         const RejlossesValue = parseFloat(row.get('rejlosses')?.value) || 0;
         const PODetailsLossValue = parseFloat(row.get('PODetailsLoss')?.value) || 0;
         const FabDiaValue = parseFloat(row.get('FabDia')?.value) || 0;
-
-        console.log(this.DyeProcessLossValue)
-        console.log(this.DyeTypeLossDta)
-        console.log(this.fabTypeLossDta)
-
 
         const FinishKg1 = (this.finishDiaFBC - this.finishfabConsumptionDta) * OrderPcsValue / (100 - (this.rejloss) - (this.PODetailsLossValue));
         const FinishKg2 = FinishKg1 / (100  - this.DyeProcessLossValue - this.DyeTypeLossDta - this.fabTypeLossDta)
