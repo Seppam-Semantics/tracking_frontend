@@ -145,7 +145,7 @@ export class StyleCreationComponent implements OnInit {
   getbuyerId() {
     this.api.BuyerId(this.Buyernamevalue).subscribe((res) => {
       this.buyerid = res.buyer[0].id
-      console.log(this.buyerid)
+
       this.Stylecreate.patchValue({
         buyerId: this.buyerid
       })
