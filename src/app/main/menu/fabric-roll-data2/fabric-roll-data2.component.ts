@@ -164,8 +164,8 @@ export class FabricRollData2Component implements OnInit {
           "OrderNo": dataItem.orderNo,
           "Style": dataItem.style,
           "Color": dataItem.color,
-          "Size": dataItem.size,
-          "fSize": dataItem.FSize,
+          "Size": dataItem.FSize,
+          "fSize": dataItem.size,
           "SizeId": dataItem.sizeid,
           "FabType": dataItem.fabType,
           "fabricTypeId": dataItem.fabricTypeId,
@@ -329,7 +329,7 @@ export class FabricRollData2Component implements OnInit {
     this.api.fabbooking(a).subscribe((res)=>{
      this.headerData = res.head
      this.headerdatavalue = res.data
-
+     console.log(res)
     
     })
   }
@@ -394,6 +394,7 @@ export class FabricRollData2Component implements OnInit {
         .replace(/:\s*([^,\}\[]+)\s*(?=[,\}])/g, ': "$1"');
       try {
         const parsedData5 = JSON.parse(fixedfinish_fabricData);
+        console.log(parsedData5)
         return parsedData5;
       } catch (error) {
         console.error('Error parsing order_allocation data:', error);
