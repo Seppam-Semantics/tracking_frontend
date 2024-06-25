@@ -416,7 +416,14 @@ export class FabricRollData2Component implements OnInit {
     return;
   }
 
-
+  calculateSizeTotal(colors: any[], sizeIndex: number): number {
+    return colors.reduce((total, color) => total + color.sizes[sizeIndex].entry, 0);
+  }
+  
+  // Calculate overall total for all colors
+  calculateOverallTotal(colors: any[]): number {
+    return colors.reduce((total, color) => total + color.total, 0);
+  }
 
   woUpdateFrom = new FormGroup({
     id: new FormControl(),

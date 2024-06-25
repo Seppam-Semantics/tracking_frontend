@@ -287,28 +287,28 @@
     <div style="display: flex; margin-top: 1%; flex-wrap: wrap;" *ngFor="let data of this.headerData;">
 
         <div style="display: flex;">
-            <label style="display: inline-block; width: 10vh; border: none;" class="form-control">Buyer </label>
+            <label style="display: inline-block; width: 16vh; border: none;" class="form-control">Buyer </label>
             <input type="text" class="form-control" value="{{data.buyer}}" readonly  style="width: 20vh;">
         </div>
 
         <div style="display: flex;">
-            <label style="display: inline-block; width: 15vh; border: none;" class="form-control">PO No </label>
+            <label style="display: inline-block; width: 16vh; border: none;" class="form-control">PO No </label>
             <input type="text" class="form-control" value="{{data.orderNo}}" readonly  style="width: 20vh;">
         </div>
 
         <div style="display: flex;">
-            <label style="display: inline-block; width: 20vh; border: none;" class="form-control">Creation Date </label>
-            <input type="text" class="form-control" style="width: 25vh;" value="{{data.created_date}}" readonly>
+            <label style="display: inline-block; width: 16vh; border: none;" class="form-control">Creation Date </label>
+            <input type="text" class="form-control" style="width: 20vh;" value="{{data.created_date}}" readonly>
         </div>
 
         <div style="display: flex;">
-            <label style="display: inline-block; width: 20vh; border: none;" class="form-control">Revision Date </label>
-            <input type="text" class="form-control" style="width: 25vh;" value="{{data.revised_date}}" readonly>
+            <label style="display: inline-block; width: 16vh; border: none;" class="form-control">Revision Date </label>
+            <input type="text" class="form-control" style="width: 20vh;" value="{{data.revised_date}}" readonly>
         </div>
 
         <div style="display: flex;">
-            <label style="display: inline-block; width: 11vh; border: none;" class="form-control">FB No </label>
-            <input type="text" class="form-control" style="width: 25vh;" readonly>
+            <label style="display: inline-block; width: 16vh; border: none;" class="form-control">FB No </label>
+            <input type="text" class="form-control" style="width: 20vh;" readonly>
         </div>
     </div>
 
@@ -322,45 +322,45 @@
                 <div *ngFor="let dataItem of parseHeaders(data)">
                   <div style="display: flex; flex-wrap: wrap; justify-content: space-evenly;">
                     <div style="display: flex; gap: 10px;">
-                      <label style="display: inline-block; width: 14vh; border: none;" class="form-control">Order Qty</label>
-                      <input type="text" class="form-control" style="width: 25vh;" readonly value="{{dataItem.poQuantity}}">
+                      <label style="display: inline-block; width: 20vh; border: none;" class="form-control">Order Qty</label>
+                      <input type="text" class="form-control" style="width: 20vh;" readonly value="{{dataItem.poQuantity}}">
                     </div>
                 
                     <div style="display: flex; gap: 10px;">
-                      <label style="display: inline-block; width: 18vh; border: none;" class="form-control">Fabrics Type</label>
-                      <input type="text" class="form-control" style="width: 25vh;" readonly value="{{dataItem.fabricType}}">
+                      <label style="display: inline-block; width: 20vh; border: none;" class="form-control">Fab Type</label>
+                      <input type="text" class="form-control" style="width: 20vh;" readonly value="{{dataItem.fabricType}}">
                     </div>
                 
                     <div style="display: flex; gap: 10px;">
-                      <label style="display: inline-block; width: 18vh; border: none;" class="form-control">Ship Date</label>
-                      <input type="text" class="form-control" style="width: 25vh;" readonly value="{{dataItem.ship_date}}">
+                      <label style="display: inline-block; width: 20vh; border: none;" class="form-control">Ship Date</label>
+                      <input type="text" class="form-control" style="width: 20vh;" readonly value="{{dataItem.ship_date}}">
                     </div>
                 
                     <div style="display: flex; gap: 10px;">
-                      <label style="display: inline-block; width: 22vh; border: none;" class="form-control">Fabrics Process</label>
-                      <input type="text" class="form-control" style="width: 25vh;" readonly value="{{dataItem.dyeType}}">
+                      <label style="display: inline-block; width: 20vh; border: none;" class="form-control">Fab Process</label>
+                      <input type="text" class="form-control" style="width: 20vh;" readonly value="{{dataItem.dyeType}}">
                     </div>
                   </div>
                 
                   <div style="display: flex; flex-wrap: wrap; justify-content: space-evenly;">
                     <div style="display: flex; gap: 10px;">
-                      <label style="display: inline-block; width: 14vh; border: none;" class="form-control">Garment</label>
-                      <input type="text" class="form-control" style="width: 25vh;" readonly value="{{dataItem.utility}}">
+                      <label style="display: inline-block; width: 20vh; border: none;" class="form-control">Garment</label>
+                      <input type="text" class="form-control" style="width: 20vh;" readonly value="{{dataItem.utility}}">
                     </div>
                 
                     <div style="display: flex; gap: 10px;">
-                      <label style="display: inline-block; width: 18vh; border: none;" class="form-control">Fabric GSM</label>
-                      <input type="text" class="form-control" style="width: 25vh;" readonly value="{{dataItem.fabricGSM}}">
+                      <label style="display: inline-block; width: 20vh; border: none;" class="form-control">Fab GSM</label>
+                      <input type="text" class="form-control" style="width: 20vh;" readonly value="{{dataItem.fabricGSM}}">
                     </div>
                 
                     <div style="display: flex; gap: 10px;">
-                      <label style="display: inline-block; width: 18vh; border: none;" class="form-control">Packing Sys</label>
-                      <input type="text" class="form-control" style="width: 25vh;" readonly value="{{dataItem.packingType}}">
+                      <label style="display: inline-block; width: 20vh; border: none;" class="form-control">Packing Sys</label>
+                      <input type="text" class="form-control" style="width: 20vh;" readonly value="{{dataItem.packingType}}">
                     </div>
                 
                     <div style="display: flex; gap: 10px;">
-                      <label style="display: inline-block; width: 22vh; border: none;" class="form-control">Yarn Type</label>
-                      <input type="text" class="form-control" style="width: 25vh;" readonly value="{{dataItem.yarnType}}">
+                      <label style="display: inline-block; width: 20vh; border: none;" class="form-control">Yarn Type</label>
+                      <input type="text" class="form-control" style="width: 20vh;" readonly value="{{dataItem.yarnType}}">
                     </div>
                   </div>
                 
@@ -403,7 +403,7 @@
                                     <th style="background-color: #343a40; color: #fff;">Total</th>
                                   
                                   <th *ngFor="let dataItem5 of dataItem1.sizes">{{dataItem5.total}}</th>
-                                  <th></th>
+                                  <th>{{ calculateOverallTotal(dataItem1.colors) }}</th>
 
                                 </tr>
                             </thead>
