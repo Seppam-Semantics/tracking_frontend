@@ -319,49 +319,48 @@
             <fieldset>
                 <legend>{{i+1}}. Style : {{data.style}}</legend>
 
-                <div *ngFor="let data3 of parseheaders1(data)">
-                  <div *ngFor="let data2 of parseheaders2(data)">
+                <div *ngFor="let dataItem of parseHeaders(data)">
                   <div style="display: flex; flex-wrap: wrap; justify-content: space-evenly;">
                     <div style="display: flex; gap: 10px;">
                       <label style="display: inline-block; width: 14vh; border: none;" class="form-control">Order Qty</label>
-                      <input type="text" class="form-control" style="width: 25vh;" readonly value="{{data2.poQuantity}}">
+                      <input type="text" class="form-control" style="width: 25vh;" readonly value="{{dataItem.poQuantity}}">
                     </div>
                 
                     <div style="display: flex; gap: 10px;">
                       <label style="display: inline-block; width: 18vh; border: none;" class="form-control">Fabrics Type</label>
-                      <input type="text" class="form-control" style="width: 25vh;" readonly value="{{data3.fabricType}}">
+                      <input type="text" class="form-control" style="width: 25vh;" readonly value="{{dataItem.fabricType}}">
                     </div>
                 
                     <div style="display: flex; gap: 10px;">
                       <label style="display: inline-block; width: 18vh; border: none;" class="form-control">Ship Date</label>
-                      <input type="text" class="form-control" style="width: 25vh;" readonly value="{{data2.ship_date}}">
+                      <input type="text" class="form-control" style="width: 25vh;" readonly value="{{dataItem.ship_date}}">
                     </div>
                 
                     <div style="display: flex; gap: 10px;">
                       <label style="display: inline-block; width: 22vh; border: none;" class="form-control">Fabrics Process</label>
-                      <input type="text" class="form-control" style="width: 25vh;" readonly value="{{data3.dyeType}}">
+                      <input type="text" class="form-control" style="width: 25vh;" readonly value="{{dataItem.dyeType}}">
                     </div>
                   </div>
                 
                   <div style="display: flex; flex-wrap: wrap; justify-content: space-evenly;">
                     <div style="display: flex; gap: 10px;">
                       <label style="display: inline-block; width: 14vh; border: none;" class="form-control">Garment</label>
-                      <input type="text" class="form-control" style="width: 25vh;" readonly value="{{data3.utility}}">
+                      <input type="text" class="form-control" style="width: 25vh;" readonly value="{{dataItem.utility}}">
                     </div>
                 
                     <div style="display: flex; gap: 10px;">
                       <label style="display: inline-block; width: 18vh; border: none;" class="form-control">Fabric GSM</label>
-                      <input type="text" class="form-control" style="width: 25vh;" readonly value="{{data3.fabricGSM}}">
+                      <input type="text" class="form-control" style="width: 25vh;" readonly value="{{dataItem.fabricGSM}}">
                     </div>
                 
                     <div style="display: flex; gap: 10px;">
                       <label style="display: inline-block; width: 18vh; border: none;" class="form-control">Packing Sys</label>
-                      <input type="text" class="form-control" style="width: 25vh;" readonly value="{{data3.packingType}}">
+                      <input type="text" class="form-control" style="width: 25vh;" readonly value="{{dataItem.packingType}}">
                     </div>
                 
                     <div style="display: flex; gap: 10px;">
                       <label style="display: inline-block; width: 22vh; border: none;" class="form-control">Yarn Type</label>
-                      <input type="text" class="form-control" style="width: 25vh;" readonly value="{{data3.yarnType}}">
+                      <input type="text" class="form-control" style="width: 25vh;" readonly value="{{dataItem.yarnType}}">
                     </div>
                   </div>
                 
@@ -372,14 +371,14 @@
                     </div>
                   </div>
                 </div>
-              </div>
+                
                 <!-------------------------------------------------------------------------------------------------->
 
                 <fieldset>
                     <legend>Garments Breakdown Size wise Quantity</legend>
 
-                    <div>
-                        <table class="table table-bordered">
+                    <div  *ngFor="let dataItem1 of parseheaders4(data)">
+                        <table class="table table-bordered" *ngFor="let dataItem3 of dataItem1.sizes; let i = index">
                             <thead class="thead-dark">
                                 <tr>
                                     <th rowspan="2">Color</th>
@@ -406,8 +405,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
+                                <tr *ngFor="let dataItem2 of dataItem1.colors">
+                                    <td >{{dataItem2.color}}</td>
                                     <td></td>
                                     <td>1</td>
                                     <td>1</td>
@@ -420,7 +419,7 @@
                                     <td>1</td>
                                     <td>1</td>
                                     <td></td>
-                                    <td>1</td>
+                                    <td>{{dataItem2.total}}</td>
                                 </tr>
                             </tbody>
                             <thead>

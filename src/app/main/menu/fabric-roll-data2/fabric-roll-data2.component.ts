@@ -334,13 +334,37 @@ export class FabricRollData2Component implements OnInit {
     })
   }
 
-  parseheaders1(data: any): any {
-    if (data && data.headers) {
-      let fixedheadersData = data.headers.replace(/([{,]\s*)(\w+)\s*:/g, '$1"$2":')
+  parseHeaders(data: any): any[] {
+    if (data) {
+      try {
+        const fixedHeadersData = data.headers?.replace(/([{,]\s*)(\w+)\s*:/g, '$1"$2":')
+          .replace(/:\s*([^,\}\[]+)\s*(?=[,\}])/g, ': "$1"');
+        const fixedPoheadData = data.pohead?.replace(/([{,]\s*)(\w+)\s*:/g, '$1"$2":')
+          .replace(/:\s*([^,\}\[]+)\s*(?=[,\}])/g, ': "$1"');
+  
+        const parsedData1 = fixedHeadersData ? JSON.parse(fixedHeadersData) : {};
+        const parsedData2 = fixedPoheadData ? JSON.parse(fixedPoheadData) : {};
+  
+        return parsedData1.map((item1 : any, index:any) => {
+          const item2 = parsedData2[index] || {};
+          return { ...item1, ...item2 };
+        });
+  
+      } catch (error) {
+        console.error('Error parsing data:', error);
+        return [];
+      }
+    }
+    return [];
+  }
+  parseheaders3(data: any): any {
+    if (data && data.greige_fabric) {
+        let fixedgreige_fabricData = data.greige_fabric.replace(/([{,]\s*)(\w+)\s*:/g, '$1"$2":')
         .replace(/:\s*([^,\}\[]+)\s*(?=[,\}])/g, ': "$1"');
-       try {
-        const parsedData1 = JSON.parse(fixedheadersData);
-         return parsedData1;
+      try {
+        const parsedData3 = JSON.parse(fixedgreige_fabricData);
+        console.log(parsedData3)
+        return parsedData3;
       } catch (error) {
         console.error('Error parsing order_allocation data:', error);
         return;
@@ -349,13 +373,14 @@ export class FabricRollData2Component implements OnInit {
     return;
   }
 
-  parseheaders2(data: any): any {
-    if (data && data.pohead) {
-        let fixedpoheadData = data.pohead.replace(/([{,]\s*)(\w+)\s*:/g, '$1"$2":')
+  parseheaders4(data: any): any {
+    if (data && data.garment_break_down) {
+        let fixedgarment_break_downData = data.garment_break_down.replace(/([{,]\s*)(\w+)\s*:/g, '$1"$2":')
         .replace(/:\s*([^,\}\[]+)\s*(?=[,\}])/g, ': "$1"');
       try {
-        const parsedData2 = JSON.parse(fixedpoheadData);
-        return parsedData2;
+        const parsedData4 = JSON.parse(fixedgarment_break_downData);
+        console.log(parsedData4)
+        return parsedData4;
       } catch (error) {
         console.error('Error parsing order_allocation data:', error);
         return;
