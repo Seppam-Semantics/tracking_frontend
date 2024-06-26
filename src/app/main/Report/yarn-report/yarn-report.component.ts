@@ -99,38 +99,37 @@ export class YarnReportComponent implements OnInit {
     })
   }
 
-  yarnlcNo() {
-    this.api.yarnLcNo(this.spinfactory).subscribe((res: any) => {
-      this.spinDDLcNo = res.lcNo
-    })
-    this.api.yarnFilter(this.spinfactory).subscribe((res) => {
+  yarnlcNo(event:any) {
+    // this.api.yarnLcNo(this.spinfactory).subscribe((res: any) => {
+    //   this.spinDDLcNo = res.lcNo
+    // })
+    this.api.yarnFilter(event.target.value).subscribe((res) => {
       this.AllData = res.knit
     })
   }
 
-  yarnStatus() {
-    if (this.spinfactory && this.spinLcNo) {
-      this.api.yarnSomeStatus(this.spinfactory, this.spinLcNo).subscribe((res) => {
-        this.someStatus = res.status
-      })
-    }
-    this.api.yarnFilter(this.spinfactory, this.spinLcNo).subscribe((res) => {
+  yarnStatus(event:any) {
+    // if (this.spinfactory && this.spinLcNo) {
+    //   this.api.yarnSomeStatus(this.spinfactory, this.spinLcNo).subscribe((res) => {
+    //     this.someStatus = res.status
+    //   })
+    // }
+    this.api.yarnFilter('', event.target.value).subscribe((res) => {
       this.AllData = res.knit
     })
   }
 
-  yarnDatawithStatus() {
-    if (this.spinfactory && this.spinLcNo) {
-      this.api.yarnFilter(this.spinfactory, this.spinLcNo, '', this.spinStatus).subscribe((res) => {
+  yarnDatawithStatus(event:any) {
+    // if (this.spinfactory && this.spinLcNo) {
+    //   this.api.yarnFilter(this.spinfactory, this.spinLcNo, '', this.spinStatus).subscribe((res) => {
+    //     this.AllData = res.knit
+    //   })
+    // }
+    // else {
+      this.api.yarnFilter('', '', '', event.target.value).subscribe((res) => {
         this.AllData = res.knit
       })
     }
-    else {
-      this.api.yarnFilter('', '', '', this.spinStatus).subscribe((res) => {
-        this.AllData = res.knit
-      })
-    }
-  }
 
   fileName = "YarnReport.xlsx"
   exportexcel() {

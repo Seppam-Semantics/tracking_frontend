@@ -27,7 +27,6 @@
     Download</button>
   <button mat-button color='primary' (click)="fabricEntry()">New</button>
 
-  <button mat-button color='primary' (click)="FBReport()">Report</button>
 </mat-toolbar>
 
 <!---===========================================================================================================-->
@@ -218,9 +217,9 @@
 
             <td><input style="width: 15vh;" formControlName="Color" class="form-control" readonly></td>
 
-            <td><input style="width: 15vh;" formControlName="fSize" class="form-control" readonly></td>
-
             <td><input style="width: 15vh;" formControlName="Size" class="form-control" readonly></td>
+
+            <td><input style="width: 15vh;" formControlName="fSize" class="form-control" readonly></td>
 
             <td><input style="width: 15vh;" formControlName="FabDia" class="form-control" readonly></td>
 
@@ -403,7 +402,7 @@
                                     <th style="background-color: #343a40; color: #fff;">Total</th>
                                   
                                   <th *ngFor="let dataItem5 of dataItem1.sizes">{{dataItem5.total}}</th>
-                                  <th>{{ calculateOverallTotal(dataItem1.colors) }}</th>
+                                  <th> </th>
 
                                 </tr>
                             </thead>

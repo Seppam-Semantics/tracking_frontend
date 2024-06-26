@@ -361,7 +361,7 @@ export class ApiService {
     return this.http.get(this.getUrl() + `/yarnapi/yarn_type`, this.getHeaders())
   }
 
-  yarnFilter(spinner: any, lcNo: any = '', lcValue: any = '', yarnStatus: any = '', pi: any = ''): Observable<any> {
+  yarnFilter(spinner: any = '', lcNo: any = '', lcValue: any = '', yarnStatus: any = '', pi: any = ''): Observable<any> {
     return this.http.get(this.getUrl() + `/yarnapi/yarn-filter?id=&spinner=${spinner}&lcNo=${lcNo}&lcValue=${lcValue}&yarnStatus=${yarnStatus}&pi=${pi}`, this.getHeaders())
   }
 

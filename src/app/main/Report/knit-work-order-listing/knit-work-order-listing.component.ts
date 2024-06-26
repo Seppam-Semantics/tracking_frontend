@@ -41,6 +41,9 @@ export class KnitWorkOrderListingComponent implements OnInit {
   ngOnInit(): void { 
     this.buyername(), this.factoryName() 
     this.alldata()
+    this.KnitWorkOrderFactoryFilter()
+    this.KnitWorkOrderBuyerFilter()
+    this.KnitWorkOrderOrderFilter()
     this.BuyerAllData = [{buyer:"Nodata"}]
     this.OrderAllData = [{orderNo:"Nodata"}]
   }

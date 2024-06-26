@@ -138,7 +138,7 @@
 
                     <td>
                         <input type="text" class="form-control" formControlName="machDia" list="5"
-                            (input)="getWoId($event.target.value, i)">
+                            (input)="getWoId($event.target.value, i)" (click)="calculateDiff5()">
                         <datalist id="5">
                             <option *ngFor="let size of this.sizelist" [value]="size.size">
                         </datalist>
