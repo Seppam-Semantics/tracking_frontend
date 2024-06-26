@@ -1,23 +1,28 @@
-<mat-toolbar style="display: flex; justify-content: center; height: 7vh;">
+<mat-toolbar style="display: flex; justify-content: center; height: 10vh;">
 
   <div style="flex: 1 1 auto;"></div>
   <div style="display: flex; gap: 10px;">
     <div style="display: flex; gap: 10px;">
 
-      <input class="form-control me-2" type="search" placeholder="Buyer Search" aria-label="Search"
+      <!-- <input class="form-control me-2" type="search" placeholder="Buyer Search" aria-label="Search"
         [(ngModel)]="buyerName" (change)="woByBuyer()" list="BuyerSearch">
-
       <datalist id="BuyerSearch">
         <option *ngFor="let data of buyers;" [value]="data.buyer">{{data.buyer}}</option>
-      </datalist>
+      </datalist> -->
 
+      <p-dropdown [options]="buyers" [(ngModel)]="buyerName" placeholder="Buyer" optionLabel="buyer"
+      optionValue="buyer" (onChange)="woByBuyer()" autoWidth="false"
+      [style]="{ minWidth: '22vh', minHeight:'2vh' }" [editable]="true" ></p-dropdown>
 
-      <input class="form-control me-2" type="search" placeholder="Order Search" aria-label="Search"
+      <!-- <input class="form-control me-2" type="search" placeholder="Order Search" aria-label="Search"
         [(ngModel)]="ordernumbers" (change)="wobyOrder()" list="Order">
-
       <datalist id="Order">
         <option *ngFor="let data of this.order;" [value]="data.orderNO">{{data.orderNO}}</option>
-      </datalist>
+      </datalist> -->
+
+      <p-dropdown [options]="order" [(ngModel)]="ordernumbers" placeholder="OrderNo" optionLabel="orderNO"
+      optionValue="orderNO" (onChange)="wobyOrder()" autoWidth="false"
+      [style]="{ minWidth: '22vh', minHeight:'2vh' }" [editable]="true" ></p-dropdown>
 
     </div>
 

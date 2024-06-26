@@ -147,11 +147,8 @@ export class ReportEntryComponent implements OnInit {
   }
 
   add() {
-    const numberOfEntries = parseInt(this.load.get('allocatedDay')?.value);
-    const formControls = [];
-    for (let i = 0; i < numberOfEntries; i++) {
-      formControls.push(
-        this.fb.group({
+
+    const row = this.fb.group({
           "buyer": [''],
           "orderNo": [''],
           "style": [''],
@@ -173,10 +170,9 @@ export class ReportEntryComponent implements OnInit {
           "allStopMotion": [''],
           "takeupRollerTension": [''],
           "remarks": ['']
-        })
-      );
-    }
-    this.load.setControl('data', this.fb.array(formControls));
+        });
+        this.items.push(row);
+
   }
 
   save() {

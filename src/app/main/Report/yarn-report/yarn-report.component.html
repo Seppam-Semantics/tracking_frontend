@@ -1,45 +1,58 @@
 <div>
   <div>
-    <mat-toolbar style="display: flex; justify-content: center; height: 7vh;">
+    <mat-toolbar style="display: flex; justify-content: center; height: 10vh;">
       <div style="width: 100%; justify-content: center; display: flex;">
-      <span>Yarn Report</span>
-    </div>
-<div style="display: flex; gap: 10px;">
-    <input type="search" class="form-control" list="spinner" (input)="yarnlcNo($event)" style="width: 23vh;" placeholder="spinner search">
-    <datalist id="spinner"><option *ngFor="let spin of this.spinfty" value="{{spin.spinner}}">{{spin.spinner}}</option></datalist>
+        <span>Yarn Report</span>
+      </div>
+      <div style="display: flex; gap: 10px;">
 
-    <input type="search" class="form-control" list="lcno" (input)="yarnStatus($event)" style="width: 23vh;" placeholder="LCno search">
-    <datalist id="lcno"><option *ngFor="let data of this.AllData;"value="{{data.lcNo}}">{{data.lcNo}}</option></datalist>
+        <p-dropdown [options]="spinfty" (onChange)="yarnlcNo()" [(ngModel)]="spinfactory" placeholder="Spin Fty"
+          optionLabel="spinner" optionValue="spinner" autoWidth="false" [style]="{ minWidth: '22vh', minHeight:'2vh' }"
+          [editable]="true"></p-dropdown>
 
-    <input type="search" class="form-control" list="yarnStatus" (input)="yarnDatawithStatus($event)" style="width: 23vh;"  placeholder="Status search">
-    <datalist id="yarnStatus"><option *ngFor="let spin of this.someStatus" value="{{spin.yarnStatus}}">{{spin.yarnStatus}}</option></datalist>
-</div>
-    <div style="flex: 1 1 auto;"></div>
+        <!-- <input type="search" class="form-control" list="spinner" (input)="yarnlcNo($event)" style="width: 23vh;" placeholder="spinner search">
+    <datalist id="spinner"><option *ngFor="let spin of this.spinfty" value="{{spin.spinner}}">{{spin.spinner}}</option></datalist> -->
 
-    <div>
-      <button mat-button color="primary" (click)="yarnHead()">New Header</button>
-    </div>
+        <p-dropdown [options]="AllData" (onChange)="yarnStatus()" [(ngModel)]="spinLcNo" placeholder="LCno"
+          optionLabel="lcNo" optionValue="lcNo" autoWidth="false" [style]="{ minWidth: '22vh', minHeight:'2vh' }"
+          [editable]="true"></p-dropdown>
 
-    <div>
-      <button mat-button color="primary" (click)="exportexcel()"><mat-icon>download</mat-icon>Download</button>
-    </div>
+        <!-- <input type="search" class="form-control" list="lcno" (input)="yarnStatus($event)" style="width: 23vh;" placeholder="LCno search">
+    <datalist id="lcno"><option *ngFor="let data of this.AllData;"value="{{data.lcNo}}">{{data.lcNo}}</option></datalist> -->
+
+        <p-dropdown [options]="someStatus" (onChange)="yarnDatawithStatus()" [(ngModel)]="spinStatus"
+          placeholder="Status" optionLabel="yarnStatus" optionValue="yarnStatus" autoWidth="false"
+          [style]="{ minWidth: '22vh', minHeight:'2vh' }" [editable]="true"></p-dropdown>
+
+        <!-- <input type="search" class="form-control" list="yarnStatus" (input)="yarnDatawithStatus($event)" style="width: 23vh;"  placeholder="Status search">
+    <datalist id="yarnStatus"><option *ngFor="let spin of this.someStatus" value="{{spin.yarnStatus}}">{{spin.yarnStatus}}</option></datalist> -->
+      </div>
+      <div style="flex: 1 1 auto;"></div>
+
+      <div>
+        <button mat-button color="primary" (click)="yarnHead()">New Header</button>
+      </div>
+
+      <div>
+        <button mat-button color="primary" (click)="exportexcel()"><mat-icon>download</mat-icon>Download</button>
+      </div>
 
 
-    <button mat-button color="primary" [matMenuTriggerFor]="menu">
-      Report
-    </button>
-    <mat-menu #menu="matMenu">
-      <!-- <button mat-menu-item (click)="yarnHead()">
+      <button mat-button color="primary" [matMenuTriggerFor]="menu">
+        Report
+      </button>
+      <mat-menu #menu="matMenu">
+        <!-- <button mat-menu-item (click)="yarnHead()">
         <span>New Header</span>
       </button> -->
-      <button mat-menu-item (click)="outstanding()">
-        <span>LC Outstanding</span>
-      </button>
-      <button mat-menu-item (click)="reconciliation()">
-        <span>Reconciliation</span>
-      </button>
-    </mat-menu>
-    
+        <button mat-menu-item (click)="outstanding()">
+          <span>LC Outstanding</span>
+        </button>
+        <button mat-menu-item (click)="reconciliation()">
+          <span>Reconciliation</span>
+        </button>
+      </mat-menu>
+
     </mat-toolbar>
   </div>
   <!-- <div style="display: flex; align-items: center; justify-content: space-between;">
@@ -186,7 +199,8 @@
       <div style="display: flex; flex-direction: column;">
         <div style="display: flex;">
           <label style="display: inline-block; width: 24vh; border: transparent;" class="form-control">Diff Qty</label>
-          <input type="text" class="form-control" readonly value="{{ (YarnData.lcYarnTotal - YarnData.recQty).toFixed(2)}} ">
+          <input type="text" class="form-control" readonly
+            value="{{ (YarnData.lcYarnTotal - YarnData.recQty).toFixed(2)}} ">
         </div>
         <div style="display: flex;">
           <label style="display: inline-block; width: 24vh; border: transparent;" class="form-control">Diff
@@ -203,7 +217,8 @@
         <div style="display: flex; justify-content:space-around;">
           <div style="display: flex; flex-direction: column;">
             <div style="display: flex;">
-              <label style="display: inline-block; width: 24vh; border: transparent;" class="form-control">LC Value</label>
+              <label style="display: inline-block; width: 24vh; border: transparent;" class="form-control">LC
+                Value</label>
               <input type="text" class="form-control" readonly value="{{data.yarnValue}}">
             </div>
 
@@ -214,7 +229,8 @@
             </div>
 
             <div style="display: flex;">
-              <label style="display: inline-block; width: 24vh; border: transparent;" class="form-control">Yarn Kgs</label>
+              <label style="display: inline-block; width: 24vh; border: transparent;" class="form-control">Yarn
+                Kgs</label>
               <input type="text" class="form-control" readonly value="{{data.lcYarnKgs}}">
             </div>
           </div>
@@ -308,8 +324,9 @@
 
   <ng-template pTemplate="footer">
     <!-- <button mat-button color="danger" (click)="ViewAllYarnData = false"><mat-icon>close</mat-icon>close</button> -->
-    <button mat-button color="primary" (click)="exportToPDF()" *ngIf="download"><mat-icon>download</mat-icon>Download</button>
+    <button mat-button color="primary" (click)="exportToPDF()"
+      *ngIf="download"><mat-icon>download</mat-icon>Download</button>
     <!-- <button mat-button color="primary"  *ngIf="download"><mat-icon>download</mat-icon>Download</button> -->
-    
+
   </ng-template>
 </p-dialog>

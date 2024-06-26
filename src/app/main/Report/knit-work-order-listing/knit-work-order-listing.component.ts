@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 import { ApiService } from 'src/app/api.service';
 import Swal from 'sweetalert2';
 import * as XLSX from 'xlsx'
@@ -26,26 +28,30 @@ export class KnitWorkOrderListingComponent implements OnInit {
   size: any;
   factoryname: any;
   editview: boolean = false;
+  viewEntry: boolean = false;
   ftyName: any;
   ftyname: any
   KnitWorkOrderAllData: any;
   KnitWorkOrderhederdata: any;
   KnitWorkOrderlineData: any;
-  KnitWorkOrderlineData1: any[]=[];
-  KnitFtyFillter : string  = '' ;
-  BuyerFillter : any ;
-  OrderFillter : any ;
-  BuyerAllData: any[]=[];
+  KnitWorkOrderlineData1: any[] = [];
+  KnitFtyFillter: string = '';
+  BuyerFillter: any;
+  OrderFillter: any;
+  BuyerAllData: any[] = [];
   OrderAllData: any;
+  ViewEtyKnitWorkOrderhederdata: any;
+  ViewEtyKnitWorkOrderlineData1: any;
+  download: any;
 
-  ngOnInit(): void { 
-    this.buyername(), this.factoryName() 
+  ngOnInit(): void {
+    this.buyername(), this.factoryName()
     this.alldata()
     this.KnitWorkOrderFactoryFilter()
     this.KnitWorkOrderBuyerFilter()
     this.KnitWorkOrderOrderFilter()
-    this.BuyerAllData = [{buyer:"Nodata"}]
-    this.OrderAllData = [{orderNo:"Nodata"}]
+    this.BuyerAllData = [{ buyer: "Nodata" }]
+    this.OrderAllData = [{ orderNo: "Nodata" }]
   }
   constructor(private fb: FormBuilder, private api: ApiService, private router: Router) {
 
@@ -125,32 +131,32 @@ export class KnitWorkOrderListingComponent implements OnInit {
     });
   }
 
-  KnitWorkOrderFactoryFilter(){
-    this.api.knitworkorder_fty_Fillter(this.KnitFtyFillter).subscribe((res)=>{
-      this.KnitWorkOrderAllData   = res.workorders
+  KnitWorkOrderFactoryFilter() {
+    this.api.knitworkorder_fty_Fillter(this.KnitFtyFillter).subscribe((res) => {
+      this.KnitWorkOrderAllData = res.workorders
       this.BuyerAllData = res.buyer
 
 
     })
   }
 
-  KnitWorkOrderBuyerFilter(){
-    this.api.knitworkorder_buyer_Fillter(this.KnitFtyFillter,this.BuyerFillter).subscribe((res)=>{
+  KnitWorkOrderBuyerFilter() {
+    this.api.knitworkorder_buyer_Fillter(this.KnitFtyFillter, this.BuyerFillter).subscribe((res) => {
       this.KnitWorkOrderAllData = res.workorders
       this.OrderAllData = res.orderNo
 
     })
   }
 
-  KnitWorkOrderOrderFilter(){
-    this.api.knitworkorder_order_Fillter(this.KnitFtyFillter,this.BuyerFillter,this.OrderFillter).subscribe((res)=>{
-      this.KnitWorkOrderAllData = res.workorders      
+  KnitWorkOrderOrderFilter() {
+    this.api.knitworkorder_order_Fillter(this.KnitFtyFillter, this.BuyerFillter, this.OrderFillter).subscribe((res) => {
+      this.KnitWorkOrderAllData = res.workorders
     })
   }
 
-  alldata(){
-    this.api.KnitWorkOrderAllData().subscribe((res)=>{
-    this. KnitWorkOrderAllData   = res.workorders
+  alldata() {
+    this.api.KnitWorkOrderAllData().subscribe((res) => {
+      this.KnitWorkOrderAllData = res.workorders
     })
   }
 
@@ -158,8 +164,22 @@ export class KnitWorkOrderListingComponent implements OnInit {
     return this.KnitWorkOrderFrom.get("data") as FormArray
   }
 
-  KnitWorkOrderAddButton() {
+  calculateDiff5() {
+    this.items.controls.forEach((control: AbstractControl) => {
+      const row = control as FormGroup;
+      if (row instanceof FormGroup) {
+        const knitRate = parseFloat(row.get('knitRate')?.value);
+        const knitKg = parseFloat(row.get('knitKg')?.value);
+  
+        const a = knitRate * knitKg
+        const knitValue = parseFloat(a.toFixed(2));
+  
+        row.patchValue({ knitValue});
+      }
+    });
+  }
 
+  KnitWorkOrderAddButton() {
     const row = this.fb.group({
       "id": new FormControl(''),
       "knitWoId": new FormControl(''),
@@ -176,42 +196,47 @@ export class KnitWorkOrderListingComponent implements OnInit {
       "remarks": new FormControl('')
     });
     this.items.push(row);
+  
+    row.get('knitKg')?.valueChanges.subscribe(() => {
+      this.calculateDiff5()
+    });
+    row.get('knitRate')?.valueChanges.subscribe(() => {
+      this.calculateDiff5()
+    });
   }
 
   fileName = "KnitWorkOrderReport.xlsx"
-exportexcel() {
+  exportexcel() {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You Want To Download Report!!!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Download it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
 
+        let data = document.getElementById("table-data");
+        const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(data);
+        const wb: XLSX.WorkBook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+        XLSX.writeFile(wb, this.fileName);
 
+        Swal.fire({
+          title: "Good job!",
+          text: "Your Download Compleated !!!",
+          icon: "success"
+        });
+      }
+    });
 
-  Swal.fire({
-    title: "Are you sure?",
-    text: "You Want To Download Report!!!",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "Yes, Download it!"
-  }).then((result) => {
-    if (result.isConfirmed) {
+  }
 
-      let data = document.getElementById("table-data");
-      const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(data);
-      const wb: XLSX.WorkBook = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-      XLSX.writeFile(wb, this.fileName);           
-      
-      Swal.fire({
-        title: "Good job!",
-        text: "Your Download Compleated !!!",
-        icon: "success"
-      });
-    }
-  });
-
-}
-  edit(id:any) {
+  edit(id: any) {
     this.editview = true;
-    this.api.KnitWorkOrderSingleData(id).subscribe((res)=>{
+    this.api.KnitWorkOrderSingleData(id).subscribe((res) => {
       this.KnitWorkOrderhederdata = res.headerData[0]
       this.KnitWorkOrderlineData1 = res.lineData
 
@@ -257,22 +282,23 @@ exportexcel() {
             "knitValue": dataItem.knitValue,
             "remarks": dataItem.remarks
           })
-
         );
       }
-    );
-
+      );
       this.KnitWorkOrderFrom.setControl('data', this.fb.array(formControls));
     })
 
   }
 
-  delete(id:any){
-    // this.api.deleteKnitWorkOrder(id).subscribe((res)=>{
-    //   alert(res.message)
-    //   window.location.reload()
-    // })
+  Entry(id: any) {
+    this.viewEntry = true;
+    this.api.KnitWorkOrderSingleData(id).subscribe((res) => {
+      this.ViewEtyKnitWorkOrderhederdata = res.headerData
+      this.ViewEtyKnitWorkOrderlineData1 = res.lineData
+    })
+  }
 
+  delete(id: any) {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -283,7 +309,6 @@ exportexcel() {
       confirmButtonText: "Yes, delete it!"
     }).then((result) => {
       if (result.isConfirmed) {
-        
         this.api.deleteKnitWorkOrder(id).subscribe((res) => {
           Swal.fire({
             title: "Deleted!",
@@ -298,14 +323,47 @@ exportexcel() {
 
   }
 
-  update(){
+  update() {
     this.api.KnitWorkOrderData(this.KnitWorkOrderFrom.value).subscribe((res) => {
       alert(res.message)
       window.location.reload()
     })
   }
-  
+
   new() {
     this.router.navigate(['/main/KnitWorkOrderCreation'])
+  }
+
+  exportToPDF() {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You Want To Download Report!!!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Download it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        this.download = false;
+        const element = document.getElementById('print');
+
+        html2canvas(element!).then(canvas => {
+          const imgData = canvas.toDataURL('image/png');
+          const pdf = new jsPDF('l', 'mm', 'a5');
+          const imgProps = pdf.getImageProperties(imgData);
+          const pdfWidth = pdf.internal.pageSize.getWidth();
+          const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+          pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+          pdf.save('KnitWOEntry.pdf');
+        });
+        Swal.fire({
+          title: "Good job!",
+          text: "Your Download Compleated !!!",
+          icon: "success"
+        });
+      }
+    });
   }
 }

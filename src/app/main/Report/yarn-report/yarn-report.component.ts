@@ -99,34 +99,34 @@ export class YarnReportComponent implements OnInit {
     })
   }
 
-  yarnlcNo(event:any) {
+  yarnlcNo() {
     // this.api.yarnLcNo(this.spinfactory).subscribe((res: any) => {
     //   this.spinDDLcNo = res.lcNo
     // })
-    this.api.yarnFilter(event.target.value).subscribe((res) => {
+    this.api.yarnFilter(this.spinfactory).subscribe((res) => {
       this.AllData = res.knit
     })
   }
 
-  yarnStatus(event:any) {
+  yarnStatus() {
     // if (this.spinfactory && this.spinLcNo) {
     //   this.api.yarnSomeStatus(this.spinfactory, this.spinLcNo).subscribe((res) => {
     //     this.someStatus = res.status
     //   })
     // }
-    this.api.yarnFilter('', event.target.value).subscribe((res) => {
+    this.api.yarnFilter('', this.spinLcNo).subscribe((res) => {
       this.AllData = res.knit
     })
   }
 
-  yarnDatawithStatus(event:any) {
+  yarnDatawithStatus() {
     // if (this.spinfactory && this.spinLcNo) {
     //   this.api.yarnFilter(this.spinfactory, this.spinLcNo, '', this.spinStatus).subscribe((res) => {
     //     this.AllData = res.knit
     //   })
     // }
     // else {
-      this.api.yarnFilter('', '', '', event.target.value).subscribe((res) => {
+      this.api.yarnFilter('', '', '', this.spinStatus).subscribe((res) => {
         this.AllData = res.knit
       })
     }

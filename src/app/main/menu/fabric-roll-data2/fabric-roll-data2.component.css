@@ -262,3 +262,22 @@ legend {
   font-family: cursive;
 
 }
+:host ::ng-deep .p-dropdown .p-dropdown-label.p-placeholder{
+  color: #6b7280;
+  padding: 6px;
+  margin-left: 2vh;
+}
+:host ::ng-deep .p-dropdown .p-dropdown-label{
+  color: #6b7280;
+  padding: 6px;
+  margin-left: 2vh;
+}
+
+:host ::ng-deep .p-dropdown {
+ width: min-content;
+}
+
+:host ::ng-deep.p-dropdown-panel .p-dropdown-items {
+  margin-left:-27px
+}
+

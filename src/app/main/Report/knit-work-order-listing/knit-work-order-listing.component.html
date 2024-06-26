@@ -1,4 +1,4 @@
-<mat-toolbar style="display: flex; justify-content: center; height: 7vh;">
+<mat-toolbar style="display: flex; justify-content: center; height: 10vh;">
     <div style="width: 90%; display: flex; justify-content: center;">
         Knit Work Order Listing
     </div>
@@ -8,41 +8,42 @@
     <div style="display: flex; gap: 10px;">
         <div style="display: flex; gap: 10px;">
 
-            <!-- <p-dropdown [options]="ftyName" [(ngModel)]="KnitFtyFillter" placeholder="Factory" optionLabel="knitFty"
-            optionValue="knitFty" (onChange)="KnitWorkOrderFactoryFilter()"></p-dropdown> -->
+            <p-dropdown [options]="ftyName" [(ngModel)]="KnitFtyFillter" placeholder="Factory" optionLabel="knitFty"
+            optionValue="knitFty" (onChange)="KnitWorkOrderFactoryFilter()" autoWidth="false"
+            [style]="{ minWidth: '20vh', minHeight:'2vh' }"></p-dropdown>
 
-            <input class="form-control me-2" type="search" placeholder="Factory Search" aria-label="Search"
+            <!-- <input class="form-control me-2" type="search" placeholder="Factory Search" aria-label="Search"
             [(ngModel)]="KnitFtyFillter" (change)="KnitWorkOrderFactoryFilter()" list="ftyList">
     
           <datalist id="ftyList">
             <option *ngFor="let data of ftyName;" [value]="data.knitFty">{{data.knitFty}}</option>
-          </datalist>
+          </datalist> -->
 
         </div>
         <div style="display: flex; gap: 10px;">
 
-            <!-- <p-dropdown [options]="BuyerAllData" [(ngModel)]="BuyerFillter" placeholder="Buyer" optionLabel="buyer"
-            optionValue="buyer" (onChange)="KnitWorkOrderBuyerFilter()"></p-dropdown> -->
+            <p-dropdown [options]="BuyerAllData" [(ngModel)]="BuyerFillter" placeholder="Buyer" optionLabel="buyer"
+            optionValue="buyer" (onChange)="KnitWorkOrderBuyerFilter()"></p-dropdown>
 
-            <input class="form-control me-2" type="search" placeholder="Buyer Search" aria-label="Search"
+            <!-- <input class="form-control me-2" type="search" placeholder="Buyer Search" aria-label="Search"
             [(ngModel)]="BuyerFillter" (input)="KnitWorkOrderBuyerFilter()" list="buyerList">
     
           <datalist id="buyerList">
             <option *ngFor="let data of BuyerAllData;" [value]="data.buyer">{{data.buyer}}</option>
-          </datalist>
+          </datalist> -->
 
         </div>
         <div style="display: flex; gap: 10px;">
            
-            <!-- <p-dropdown [options]="OrderAllData" [(ngModel)]="OrderFillter" placeholder="OrderNo" optionLabel="orderNo"
-            optionValue="orderNo" (onChange)="KnitWorkOrderOrderFilter()"></p-dropdown> -->
+            <p-dropdown [options]="OrderAllData" [(ngModel)]="OrderFillter" placeholder="OrderNo" optionLabel="orderNo"
+            optionValue="orderNo" (onChange)="KnitWorkOrderOrderFilter()"></p-dropdown>
 
-            <input class="form-control me-2" type="search" placeholder="order Search" aria-label="Search"
+            <!-- <input class="form-control me-2" type="search" placeholder="order Search" aria-label="Search"
             [(ngModel)]="OrderFillter" (input)="KnitWorkOrderOrderFilter()" list="orderList">
     
           <datalist id="orderList">
             <option *ngFor="let data of OrderAllData;" [value]="data.orderNo">{{data.orderNo}}</option>
-          </datalist>
+          </datalist> -->
 
         </div>
     </div>
@@ -63,7 +64,7 @@
                 <th>Order</th>
                 <th>Knit Kgs</th>
                 <th>Knit Value</th>
-
+                <th>Entry</th>
                 <th>Edit</th>
                 <th>Delete</th>
 
@@ -80,8 +81,8 @@
                 <td>{{data.orderNo}}</td>
                 <td>{{data.knitKg}}</td>
                 <td>{{data.knitValue}}</td>
-
-                <td><button class="btn btn-primary" (click)="edit(data.id)"><mat-icon>edit</mat-icon></button></td>
+                <td><button class="btn btn-warning"(click)="Entry(data.id)"><mat-icon>content_paste</mat-icon></button></td>
+                <td><button class="btn btn-primary" (click)="edit(data.id)" (click)="calculateDiff5()"><mat-icon>edit</mat-icon></button></td>
                 <td><button class="btn btn-danger" (click)="delete(data.id)"><mat-icon>delete</mat-icon></button></td>
             </tr>
         </tbody>
@@ -230,9 +231,9 @@
                         </td>
                         <td><input class="form-control" type="text" formControlName="KnitSl"></td>
     
-                        <td><input class="form-control" type="text" formControlName="knitKg"></td>
-                        <td><input class="form-control" type="text" formControlName="knitRate"></td>
-                        <td><input class="form-control" type="text" formControlName="knitValue"></td>
+                        <td><input class="form-control" type="text" formControlName="knitKg" (click)="calculateDiff5()"></td>
+                        <td><input class="form-control" type="text" formControlName="knitRate" (click)="calculateDiff5()"></td>
+                        <td><input class="form-control" type="text" formControlName="knitValue" (click)="calculateDiff5()"></td>
                         <td><input class="form-control" type="text" formControlName="remarks"></td>
                     </tr>
                 </tbody>
@@ -266,4 +267,71 @@
             <button class="btn btn-primary" (click)="update()">Update</button>
         </div>
     </ng-template>
+</p-dialog>
+
+
+<p-dialog [(visible)]="viewEntry" [modal]="true" header=" Knit Work Order Entry" [maximizable]="true"
+    [style]="{width: '100vw', height:'100vh'}">
+    
+    <div id="print">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr *ngFor="let data of this.ViewEtyKnitWorkOrderhederdata ;">
+                    <th>Buyer : {{data.buyer}}</th>
+                    <th>Order : {{data.orderNo}}</th>
+                    <th>Knit Factory : {{data.knitfty}}</th>
+                    <th>woNo : {{data.woNo}}</th>
+                    <th>woRefNo : {{data.woRefNo}}</th>
+                    <th>woDate : {{data.woDate}}</th>
+                    <th>completedDate : {{data.completedDate}}</th>
+                </tr>
+            </thead>
+        </table>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Mach Dia</th>
+                    <th>Fab Dia</th>
+                    <th>Fab Type</th>
+
+                    <th>Style</th>
+                    <th>Fab GSM</th>
+                    <th>Color</th>
+
+                    <th>Knit SL</th>
+                    <th>Knit Kgs</th>
+                    <th>Knit Rate</th>
+
+                    <th>Knit Value</th>
+                    <th>Remarks</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of this.ViewEtyKnitWorkOrderlineData1">
+                    <td>{{data.machDia}}</td>
+                    <td>{{data.fabDia}}</td>
+                    <td>{{data.fabType}}</td>
+
+                    <td>{{data.style}}</td>
+                    <td>{{data.fabGSM}}</td>
+                    <td>{{data.color}}</td>
+
+                    <td>{{data.KnitSl}}</td>
+                    <td>{{data.knitKg}}</td>
+                    <td>{{data.knitRate}}</td>
+
+                    <td>{{data.knitValue}}</td>
+                    <td>{{data.remarks}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <ng-template pTemplate="footer">
+        <div style="width: 100%; display: flex; justify-content: center;">
+            <div>
+                <button mat-button color="primary" (click)="exportToPDF()"><mat-icon>download</mat-icon> Download </button>
+            </div>
+        </div>
+    </ng-template>
+
 </p-dialog>

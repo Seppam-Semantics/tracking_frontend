@@ -15,17 +15,17 @@
             <span>Knit Production Entry</span>
         </div>
         <div style="display: flex; gap: 10px;">
-            <div style="display: inline-block;">
+            <!-- <div style="display: inline-block;">
                 <label class="day-label">Machine allocated for the day</label>
                 <label class="day-label1">Machine allocated for the day</label>
-            </div>
+            </div> -->
             <div style="display: flex; gap: 10px;">
-                <div>
+                <!-- <div>
                     <input class="form-control me-2" id="numberOfEntries" type="number" formControlName="allocatedDay">
                 </div>
                 <div>
                     <button class="btn btn-primary" id="loadcls" (click)="add()">Load</button>
-                </div>
+                </div> -->
                 <div style="margin-left: 5px;">
                     <input type="date" class="form-control date" formControlName="date">
                 </div>
@@ -81,7 +81,7 @@
         <table class="table table-bordered  table-hover" style="width: 100%;">
             <thead class="thead-dark">
                 <tr>
-                    <th style="min-width: 40px;">S.No</th>
+                    <th><button class="btn btn-primary" (click)="add()">+</button></th>
                     <th style="min-width: 80px;">Buyer</th>
                     <th style="min-width: 80px;">Work Order</th>
                     <th style="min-width: 80px;">Style</th>
