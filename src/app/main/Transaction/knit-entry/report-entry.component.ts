@@ -33,9 +33,9 @@ export class ReportEntryComponent implements OnInit {
   valueExceeded : boolean = false;
   constructor(private fb: FormBuilder, private api: ApiService, private router: Router) {
     this.load = this.fb.group({
-      id: new FormControl(0),
-      date: new FormControl(''),
-      factory: new FormControl('', Validators.required),
+      id: new FormControl(''),
+      date: new FormControl('' , Validators.required),
+      factory: new FormControl('' , Validators.required),
       houseKeepingStatus: new FormControl(''),
       gasElecAvailability: new FormControl(''),
       floorLightingStatus: new FormControl(''),
@@ -149,11 +149,11 @@ export class ReportEntryComponent implements OnInit {
   add() {
 
     const row = this.fb.group({
-          "buyer": [''],
-          "orderNo": [''],
-          "style": [''],
-          "color": [''],
-          "size": [''],
+          "buyer": ['' , Validators.required],
+          "orderNo": ['' , Validators.required],
+          "style": ['' , Validators.required],
+          "color": ['' , Validators.required],
+          "size": ['' , Validators.required],
           "woId": [],
           "knitMachineno": [''],
           "yarnLot": [''],
@@ -176,6 +176,7 @@ export class ReportEntryComponent implements OnInit {
   }
 
   save() {
+    console.log(this.load.value)
     if (this.load.valid) {
       this.loading = true;
       this.api.knit_entry(this.load.value).subscribe((res) => {
@@ -184,7 +185,7 @@ export class ReportEntryComponent implements OnInit {
         this.router.navigate(['/main/Knit-Report'])
       })
     } else {
-      alert('Please fill No.Rolls Produced fields // Entry should more then 0.');
+      alert('Please fill No.Rolls Produced fields and Date fields // Entry should more then 0.');
     }
   }
 

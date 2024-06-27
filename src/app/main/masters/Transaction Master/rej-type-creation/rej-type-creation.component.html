@@ -2,11 +2,11 @@
     <mat-toolbar style="height: fit-content; padding: 10px;">
         <div class="d-flex">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
-            [(ngModel)]="FillterData" (input)="RejTypeFillterData()" list="buyerList">
-    
-          <datalist id="buyerList">
-            <option *ngFor="let data of all;" [value]="data.rejName">{{data.rejName}}</option>
-          </datalist>
+                [(ngModel)]="FillterData" (input)="RejTypeFillterData()" list="buyerList">
+
+            <datalist id="buyerList">
+                <option *ngFor="let data of all;" [value]="data.rejName">{{data.rejName}}</option>
+            </datalist>
         </div>
         <div style="flex: 1 1 auto;"></div>
         <span class="flex-spacer"></span>
@@ -75,17 +75,18 @@
             <div>
                 <mat-form-field appearance="outline" style="width: 40vh;">
                     <mat-label>Colors</mat-label>
-                    <mat-select multiple formControlName="colors" (selectionChange)="getSelectedColors2($event)" #colorSelect>
+                    <mat-select multiple formControlName="colors" (selectionChange)="getSelectedColors()">
 
-                      <mat-option (click)="toggleAllSelection()" (click)="AllSelected()" value="valid"checked="true">
-                          Select All
-                      </mat-option>
+                        <mat-option (click)="toggleAllSelection()" (click)="AllSelected()" value="valid" checked="true"
+                            (click)="getSelectedColors()">
+                            Select All
+                        </mat-option>
 
-                      <mat-option *ngFor="let color of colorDropdata" [value]="color.id" >
-                        {{ color.color }}
-                      </mat-option>
+                        <mat-option *ngFor="let color of colorDropdata" [value]="color.id">
+                            {{ color.color }}
+                        </mat-option>
                     </mat-select>
-                  </mat-form-field>
+                </mat-form-field>
             </div>
 
             <div>
@@ -107,7 +108,7 @@
 </p-dialog>
 
 <!----------------------------------------rejType Creation [End]--------------------------------------------->
-                                                           
+
 <!----------------------------------------rejType Editing  [Start]--------------------------------------------->
 
 <p-dialog [(visible)]="rejTypeediting" [modal]="true" header="Rej Type Editing" [formGroup]="rejTypeedit">
@@ -131,11 +132,12 @@
         </div>
 
         <div style="display: flex; gap: 10vh; justify-content: center;">
-            
+
             <div>
                 <mat-form-field appearance="outline" style="width: 40vh;">
                     <mat-label>Colors</mat-label>
-                    <mat-select multiple formControlName="colors" (selectionChange)="getSelectedColors1()" [(ngModel)]="selected">
+                    <mat-select multiple formControlName="colors" (selectionChange)="getSelectedColors1()"
+                        [(ngModel)]="selected">
                         <mat-option *ngFor="let color of colorDropdata" [value]="color.id">
                             {{ color.color }}
                         </mat-option>

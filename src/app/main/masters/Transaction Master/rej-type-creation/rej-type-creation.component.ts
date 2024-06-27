@@ -56,7 +56,7 @@ export class RejTypeCreationComponent {
   constructor(private fb: FormBuilder, private api: ApiService) {
 
     this.rejTypecreate = this.fb.group({
-      id: new FormControl(''),
+      id: new FormControl(0),
       rejType: new FormControl(''),
       rejName: new FormControl(''),
       colors: new FormControl(''),
@@ -169,7 +169,7 @@ getSelectedColors1() {
   }
 
   saveButton() {
-
+    console.log(this.rejTypecreate.value)
     this.api.rejtype_Master(this.rejTypecreate.value).subscribe((res) => {
       alert(res.message)
       this.RejTypeFillterData()

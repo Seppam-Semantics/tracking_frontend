@@ -177,7 +177,7 @@
             <option *ngFor="let data of this.sizeDta" value="{{data.size}}">{{data.size}}</option>
           </datalist>
 
-          <td><input style="width: 15vh;" formControlName="fSize" list="FSize" (input)="fsizevalue($event)"
+          <td><input style="width: 15vh;" formControlName="FSize" list="FSize" (input)="fsizevalue($event)"
               (change)="fsizedata()" readonly ></td>
           <datalist id="FSize">
             <option *ngFor="let data of this.fsizeDta" value="{{data.machineDia}}">{{data.machineDia}}</option>

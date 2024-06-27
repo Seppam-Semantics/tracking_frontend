@@ -75,8 +75,6 @@ export class WorkorderDataComponent implements OnInit {
 
   ngOnInit(): void {
     this.buyerdata()
-
-
     
     this.api.fabric_type_BO().subscribe((res) => {
       this.fabricstypedta = res.fabricstype
@@ -256,7 +254,7 @@ export class WorkorderDataComponent implements OnInit {
       const row = formArray.at(index);
       row.get('polineId')?.setValue(this.polineId);
       row.get('poid')?.setValue(this.poid);
-      row.get('fSize')?.setValue(this.FSizeFBC);
+      row.get('FSize')?.setValue(this.FSizeFBC);
       row.get('FabType')?.setValue(this.fabricTypeFBC);
       row.get('fabricTypeId')?.setValue(this.fabricTypeFBCId)
       row.get('FabGsm')?.setValue(this.fabricGSMFBC);
@@ -301,10 +299,7 @@ export class WorkorderDataComponent implements OnInit {
       const row = control as FormGroup;
       if (row instanceof FormGroup) {
         const OrderPcsValue = parseFloat(row.get('OrderPcs')?.value) || 0;
-        const FabricConsumptionValue = parseFloat(row.get('FabricConsumption')?.value) || 0;
-        const RejlossesValue = parseFloat(row.get('rejlosses')?.value) || 0;
-        const PODetailsLossValue = parseFloat(row.get('PODetailsLoss')?.value) || 0;
-        const FabDiaValue = parseFloat(row.get('FabDia')?.value) || 0;
+
 
         const FinishKg1 = (this.finishDiaFBC - this.finishfabConsumptionDta) * OrderPcsValue / (100 - (this.rejloss) - (this.PODetailsLossValue));
         const FinishKg2 = FinishKg1 / (100  - this.DyeProcessLossValue - this.DyeTypeLossDta - this.fabTypeLossDta)
@@ -333,7 +328,7 @@ export class WorkorderDataComponent implements OnInit {
       "Style": new FormControl(''),
       "Color": new FormControl(''),
       "Size": new FormControl(''),
-      "fSize": new FormControl(''),
+      "FSize": new FormControl(''),
       "SizeId": new FormControl(''),
       "FabType": new FormControl(''),
       "fabricTypeId": new FormControl(''),
