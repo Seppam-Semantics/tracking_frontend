@@ -94,6 +94,7 @@
 <p-dialog [resizable]="true" [modal]="true" [maximizable]="true" [(visible)]="visibleEntry" [style]="{width: '90vw'}"
   [contentStyle]="{height: '90vh'}" header="Fabric Entry">
   <fieldset>
+    <div id="print">
     <legend>Buyer : {{this.woBuyervalue}} / OrderNo : {{this.woorderNovalue}} </legend>
     <div class="tableoverall">
       <table class="table table-striped" id="table-data">
@@ -168,6 +169,7 @@
           </tr>
         </tbody>
       </table>
+    </div>
     </div>
   </fieldset>
 

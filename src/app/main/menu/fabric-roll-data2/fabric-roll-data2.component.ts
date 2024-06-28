@@ -8,6 +8,8 @@ import { ApiService } from 'src/app/api.service';
 import * as XLSX from 'xlsx'
 import Swal from 'sweetalert2'
 import { ToastModule } from 'primeng/toast';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-fabric-roll2-data',
@@ -351,6 +353,7 @@ export class FabricRollData2Component implements OnInit {
         XLSX.utils.book_append_sheet(wb, ws, 'Sheet2');
         XLSX.writeFile(wb, this.fileName2);
 
+
         Swal.fire({
           title: "Good job!",
           text: "Your Download Compleated !!!",
@@ -375,11 +378,27 @@ export class FabricRollData2Component implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
 
-        let data = document.getElementById("table-data");
-        const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(data);
-        const wb: XLSX.WorkBook = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-        XLSX.writeFile(wb, this.fileName1);
+        // let data = document.getElementById("table-data");
+        // const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(data);
+        // const wb: XLSX.WorkBook = XLSX.utils.book_new();
+        // XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+        // XLSX.writeFile(wb, this.fileName1);
+
+        const element = document.getElementById('print');
+    
+        html2canvas(element!).then(canvas => {
+          const imgData = canvas.toDataURL('image/png');
+          const pdf = new jsPDF('p', 'mm', 'a5');
+    
+          // For full page capture, set proper width and height
+          const imgProps = pdf.getImageProperties(imgData);
+          const pdfWidth = pdf.internal.pageSize.getWidth();
+          const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+    
+          pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+          pdf.save('Fabric-Entry-Report.pdf');
+      
+        });
 
         Swal.fire({
           title: "Good job!",
