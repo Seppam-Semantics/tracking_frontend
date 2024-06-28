@@ -122,7 +122,7 @@
                     <td>{{i+1}}</td>
                     <td>
                         <input type="text" class="form-control" formControlName="style" list="3"
-                            (input)="getstylevalue($event)" (change)="getcolor()">
+                            (input)="getstylevalue(i)" (change)="getcolor()">
                         <datalist id="3">
                             <option *ngFor="let style of this.stylelist" [value]="style.style">
                         </datalist>
@@ -130,7 +130,7 @@
 
                     <td>
                         <input type="text" class="form-control" formControlName="color" list="4"
-                            (input)="getcolorvalue($event)" (change)="getsize()">
+                            (input)="getsize(i)" (mouseenter)="getstylevalue(i)" >
                         <datalist id="4">
                             <option *ngFor="let color of this.colorlist" [value]="color.color">
                         </datalist>
@@ -138,7 +138,7 @@
 
                     <td>
                         <input type="text" class="form-control" formControlName="machDia" list="5"
-                            (input)="getWoId($event.target.value, i)" (click)="calculateDiff5()">
+                            (input)="getWoId($event.target.value, i)" (click)="calculateDiff5()" (mouseenter)="getsize(i)">
                         <datalist id="5">
                             <option *ngFor="let size of this.sizelist" [value]="size.size">
                         </datalist>

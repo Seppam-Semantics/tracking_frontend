@@ -152,3 +152,6 @@ thead {
   position: sticky;
   top: 0;
 }
+:host ::ng-deep .form-control { 
+  border: 1px solid;
+}

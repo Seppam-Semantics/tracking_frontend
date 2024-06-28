@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-yarn-header',
@@ -85,10 +86,10 @@ export class YarnHeaderComponent implements OnInit{
 
   Yarn_Entry_1 = new FormGroup({
     spinner : new FormControl(),
-    lcDate : new FormControl(),
+    lcDate : new FormControl('',Validators.required),
     lcNo : new FormControl(),
     pi : new FormControl(),
-    piDate : new FormControl(),
+    piDate : new FormControl('',Validators.required),
     lcYarnKgs:new FormControl(),
     lcValue : new FormControl(),
     yarnStatus : new FormControl(),
@@ -168,6 +169,7 @@ add1button(){
 
   Yarn_Entry_save(){
     this.loading = true
+    if(this.Yarn_Entry_1.valid){
     this.api.addUpdateYarn(this.Yarn_Entry_1.value).subscribe((res)=>{
       alert(res.message)
       this.loading = false
@@ -175,5 +177,12 @@ add1button(){
         this.router.navigate(['/Yarn-Report']);
       }
     })
+    }else{
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "LC Date (or) PI Date Missing"
+      });
+    }
   }
 }

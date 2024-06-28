@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ApiService } from 'src/app/api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-buyer-creation',
@@ -86,9 +87,17 @@ update(){
 
   saveButton() {
     this.api.Buyer_master(this.Buyercreate.value).subscribe((res) => {
-      alert(res.message)
-      window.location.reload()
+      Swal.fire({
+        title: "Added SuccessFully!",
+        text: "You clicked the button!",
+        icon: "success"
+      });
+    this.Buyercreation = false;
+    
+    this.api.Buyer_master_AllData().subscribe((res) => {
+      this.all = res.buyers
     })
+  })
   }
 
 }

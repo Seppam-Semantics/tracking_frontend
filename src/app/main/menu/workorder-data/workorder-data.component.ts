@@ -5,6 +5,7 @@ import { ApiService } from 'src/app/api.service';
 import * as xls from 'xlsx'
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-workorder-data',
@@ -105,11 +106,20 @@ export class WorkorderDataComponent implements OnInit {
 
   constructor(private api: ApiService, private router: Router, private fb: FormBuilder) { }
 
-  buyervalue(event: any) {
-    this.Buyer_Value = event.target.value
+  buyervalue(index: any) {
+    const formArray = this.buyerorderform.get('data') as FormArray;
+    const row = formArray.at(index);
+    this.Buyer_Value = row.get('Buyer')?.value;
+    this.buyerdata()
   }
-  ordervalue(event: any) {
-    this.Order_Value = event.target.value
+  ordervalue(index: any) {
+    // this.Order_Value = event.target.value
+    const formArray = this.buyerorderform.get('data') as FormArray;
+    const row = formArray.at(index);
+    this.Buyer_Value = row.get('Buyer')?.value;
+    this.Order_Value = row.get('OrderNo')?.value;
+    
+    this.orderdata()
   }
 
   buyerdata() {
@@ -120,13 +130,20 @@ export class WorkorderDataComponent implements OnInit {
   }
 
   orderdata() {
+
     this.api.order_to_style(this.Buyer_Value, this.Order_Value).subscribe((res) => {
       this.styleDta = res.style
     })
   }
 
-  stylevalue(event: any) {
-    this.style_Value = event.target.value
+  stylevalue(index: any) {
+    const formArray = this.buyerorderform.get('data') as FormArray;
+    const row = formArray.at(index);
+    this.Buyer_Value = row.get('Buyer')?.value;
+    this.Order_Value = row.get('OrderNo')?.value;
+    this.style_Value = row.get('Style')?.value;
+
+      this.styledata()
   }
 
   styledata() {
@@ -135,9 +152,20 @@ export class WorkorderDataComponent implements OnInit {
     })
   }
 
-  colorvalue(event: any) {
-    this.color_Value = event.target.value
+  colorvalue(index: any) {  
+    const formArray = this.buyerorderform.get('data') as FormArray;
+    const row = formArray.at(index);
+    this.Buyer_Value = row.get('Buyer')?.value;
+    this.Order_Value = row.get('OrderNo')?.value;
+    this.style_Value = row.get('Style')?.value;
+    this.color_Value = row.get('Color')?.value;
+
+    this.colordata()
+    // this.color_Value = event.target.value
+    this.RejTypeLoss(index)
+    this.colorprocessloss(index)
   }
+
 
   colordata() {
     this.api.color_to_size(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value).subscribe((res) => {
@@ -145,8 +173,19 @@ export class WorkorderDataComponent implements OnInit {
     })
   }
 
-  sizevalue(event: any) {
-    this.size_Value = event.target.value
+  sizevalue(index: any) {
+
+    const formArray = this.buyerorderform.get('data') as FormArray;
+    const row = formArray.at(index);
+    this.Buyer_Value = row.get('Buyer')?.value;
+    this.Order_Value = row.get('OrderNo')?.value;
+    this.style_Value = row.get('Style')?.value;
+    this.color_Value = row.get('Color')?.value;
+    this.size_Value = row.get('Size')?.value;
+
+    // this.size_Value = event.target.value
+    this.sizedata(index)
+    this.PODetailsLoss(index)
   }
 
   SpinFtyIdvalue(event: any,index:any) {
@@ -223,6 +262,7 @@ export class WorkorderDataComponent implements OnInit {
 
   sizedata(index: any) {
     this.api.size_to_id(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, this.size_Value).subscribe((res) => {
+     
       this.polineId = res.sizeId[0]?.id
 
       this.poid = res.sizeId[0]?.orderId
@@ -320,42 +360,42 @@ export class WorkorderDataComponent implements OnInit {
   }
   add1button() {
     const row = this.fb.group({
-      "id" : new FormControl(''),
-      "poid": new FormControl('', Validators.required),     
-      "polineId": new FormControl('', Validators.required),     
-      "Buyer": new FormControl(''),
-      "OrderNo": new FormControl(''),
-      "Style": new FormControl(''),
-      "Color": new FormControl(''),
-      "Size": new FormControl(''),
-      "FSize": new FormControl(''),
-      "SizeId": new FormControl(''),
-      "FabType": new FormControl(''),
-      "fabricTypeId": new FormControl(''),
-      "FabDia": new FormControl(''),
-      "FabDiaId": new FormControl(''),
-      "FabGsm": new FormControl(''),
-      "FabGsmId": new FormControl(0),
-      "YarnKg": new FormControl(''),
-      "GreigeKg": new FormControl(''),
-      "YarnType": new FormControl(''),
-      "YarnTypeId" : new FormControl(''),
-      "FinishKg": new FormControl(''),
-      "KnitSL": new FormControl(''),
-      "SpinFty": new FormControl(''),
-      "SpinFtyId": new FormControl(''),
-      "KnitFty": new FormControl(''),
-      "KnitFtyId": new FormControl(''),
-      "DyeinFty" : new FormControl(''),      
-      "DyeinFtyId" : new FormControl(''),
+      "id" : [''],
+      "poid": [''],     
+      "polineId": [''],     
+      "Buyer": [''],
+      "OrderNo": [''],
+      "Style": [''],
+      "Color": [''],
+      "Size": [''],
+      "FSize": [''],
+      "SizeId": ['' ,Validators.required],
+      "FabType": [''],
+      "fabricTypeId": [''],
+      "FabDia": [''],
+      "FabDiaId": [''],
+      "FabGsm": [''],
+      "FabGsmId": [''],
+      "YarnKg": [''],
+      "GreigeKg": [''],
+      "YarnType": [''],
+      "YarnTypeId" : [''],
+      "FinishKg": [''],
+      "KnitSL": [''],
+      "SpinFty": [''],
+      "SpinFtyId": [''],
+      "KnitFty": [''],
+      "KnitFtyId": [''],
+      "DyeinFty" : [''],      
+      "DyeinFtyId" : [''],
 
-      "dyetype": new FormControl(''),
-      "dyeTypeId": new FormControl(''),
+      "dyetype": [''],
+      "dyeTypeId": [''],
 
-      "OrderPcs": new FormControl(''),
-      "OrderFOBRate": new FormControl(''),
-      "KnitRate": new FormControl(''),
-      "DyeRate": new FormControl(''),
+      "OrderPcs": [''],
+      "OrderFOBRate": [''],
+      "KnitRate": [''],
+      "DyeRate": [''],
 
 
     });
@@ -367,7 +407,7 @@ export class WorkorderDataComponent implements OnInit {
   }
 
   save(){
-
+    if(this.buyerorderform.valid){
     this.api.postworkorder(this.buyerorderform.value.data).subscribe((res)=>{
       if(res.success){
         alert("Your work order details have been saved....!!!!")
@@ -377,6 +417,13 @@ export class WorkorderDataComponent implements OnInit {
         alert("Error while saving...!!!")
       }
     })
+    }else{
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Size Id Missing"
+      });
+    }
   }
   FBReport(){
     this.router.navigate(['/main/FBReport'])

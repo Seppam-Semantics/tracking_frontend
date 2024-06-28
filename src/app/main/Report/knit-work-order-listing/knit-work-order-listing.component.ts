@@ -102,8 +102,15 @@ export class KnitWorkOrderListingComponent implements OnInit {
     })
   }
 
-  getstylevalue(event: any) {
-    this.style = event.target.value
+  getstylevalue(index: any) {
+    // this.style = event.target.value
+    const formArray = this.KnitWorkOrderFrom.get('data') as FormArray;
+    const row = formArray.at(index);
+    this.style = row.get('style')?.value;
+ 
+    this.api.getcolor(this.buyerName, this.orderNo, this.style).subscribe((res) => {
+      this.colorlist = res.colors;
+    })
   }
 
   getcolor() {
@@ -116,7 +123,13 @@ export class KnitWorkOrderListingComponent implements OnInit {
     this.color = event.target.value
   }
 
-  getsize() {
+  getsize(index:any) {
+
+    const formArray = this.KnitWorkOrderFrom.get('data') as FormArray;
+    const row = formArray.at(index);
+    this. style = row.get('style')?.value;
+    this. color = row.get('color')?.value;
+
     this.api.getsize(this.buyerName, this.orderNo, this.style, this.color).subscribe((res) => {
       this.sizelist = res.sizes;
     })
