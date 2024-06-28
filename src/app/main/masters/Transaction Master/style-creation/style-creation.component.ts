@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatTabGroup } from '@angular/material/tabs';
 import { ApiService } from 'src/app/api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-style-creation',
@@ -42,28 +43,38 @@ export class StyleCreationComponent implements OnInit {
   yarnTypeid: any;
   ngOnInit(): void {
 
-    this.api.Drop_Buyer_master().subscribe((res) => {
-      this.buyerDrop = res.buyer;
-    })
-
+    this.Drop_Buyer_master()
     this.api.style_master_AllData().subscribe((res) => {
       this.all = res.style
     })
     this.stylefilter()
+    this.dyetype_master_AllData()
+    this.fabrictype_master_AllData()
+    this.yarnType_master_AllData()
+  }
 
-    this.api.yarnType_master_AllData().subscribe((res) => {
-      this.allyarnType = res.yarnType
+  Drop_Buyer_master() {
+    this.api.Drop_Buyer_master().subscribe((res) => {
+      this.buyerDrop = res.buyer;
     })
+  }
 
-
-    this.api.fabrictype_master_AllData().subscribe((res) => {
-      this.allfabricType = res.fabricType
-    })
-
+  dyetype_master_AllData() {
     this.api.dyetype_master_AllData().subscribe((res) => {
       this.alldyeType = res.DyeType
     })
+  }
 
+  fabrictype_master_AllData() {
+    this.api.fabrictype_master_AllData().subscribe((res) => {
+      this.allfabricType = res.fabricType
+    })
+  }
+
+  yarnType_master_AllData() {
+    this.api.yarnType_master_AllData().subscribe((res) => {
+      this.allyarnType = res.yarnType
+    })
   }
 
   stylefilter() {
@@ -193,30 +204,38 @@ export class StyleCreationComponent implements OnInit {
 
 
 
-update(){
-  this.api.style_master(this.Styleedit.value).subscribe((res) => {
-    
-    this.stylefilter()
-  })
-
-  this.Styleedit.reset()
-  this.Styleediting = false
-}
-
-delete (id:any) {
-  this.api.delete_style_master(id).subscribe((res) => {
-    alert(res.message)
-    window.location.reload()
-  })
-}
-
-saveButton(){
-  this.api.style_master(this.Stylecreate.value).subscribe((res) => {
-  
-  })
-  this.stylefilter()
-  this.Stylecreate.reset()
-  this.Stylecreation = false
-}
-  
+  update() {
+    this.api.style_master(this.Styleedit.value).subscribe((res) => {
+      Swal.fire({
+        title: "Updated SuccessFully!",
+        text: "You clicked the button!",
+        icon: "success"
+      });
+      this.stylefilter()
+    })
+    this.Styleediting = false
+    this.Styleedit.reset()
+    this.Stylecreate.reset()
   }
+
+  delete(id: any) {
+    this.api.delete_style_master(id).subscribe((res) => {
+      alert(res.message)
+      window.location.reload()
+    })
+  }
+
+  saveButton() {
+    this.api.style_master(this.Stylecreate.value).subscribe((res) => {
+      Swal.fire({
+        title: "Added SuccessFully!",
+        text: "You clicked the button!",
+        icon: "success"
+      });
+      this.stylefilter()
+    })
+    this.Stylecreate.reset()
+    this.Stylecreation = false
+  }
+
+}

@@ -137,31 +137,31 @@
                     </td>
                     <td>
                         <input type="text" class="form-control" formControlName="buyer" list="1"
-                            (input)="getBuyerValue($event)" (change)="getorders()">
+                            (input)="getBuyerValue(i)" (change)="getorders()">
                         <datalist id="1">
                             <option *ngFor="let name of this.buyer" [value]="name.buyer">{{name.buyer}}</option>
                         </datalist>
                     </td>
                     <td><input type="text" class="form-control" formControlName="orderNo" list="2"
-                            (input)="getOrderValue($event)" (change)="getstyle()">
+                            (input)="getOrderValue(i)" (change)="getstyle()" (mouseenter)="getBuyerValue(i)">
                         <datalist id="2">
                             <option *ngFor="let number of this.order" [value]="number.orderNo">
                         </datalist>
                     </td>
                     <td><input type="text" class="form-control" formControlName="style" list="3"
-                            (input)="getstylevalue($event)" (change)="getcolor()">
+                            (input)="getstylevalue(i)" (change)="getcolor()" (mouseenter)="getOrderValue(i)">
                         <datalist id="3">
                             <option *ngFor="let style of this.stylelist" [value]="style.style">
                         </datalist>
                     </td>
                     <td><input type="text" class="form-control" formControlName="color" list="4"
-                            (input)="getcolorvalue($event)" (change)="getsize()">
+                            (input)="getcolorvalue(i)" (change)="getsize()" (mouseenter)="getstylevalue(i)">
                         <datalist id="4">
                             <option *ngFor="let color of this.colorlist" [value]="color.color">
                         </datalist>
                     </td>
                     <td><input type="text" class="form-control" formControlName="size" list="5"
-                            (input)="getWoId($event.target.value, i)">
+                            (input)="getWoId($event.target.value, i)" (mouseenter)="getcolorvalue(i)" >
                         <datalist id="5">
                             <option *ngFor="let size of this.sizelist" [value]="size.machDia">
                         </datalist>

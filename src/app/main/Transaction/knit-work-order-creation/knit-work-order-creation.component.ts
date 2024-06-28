@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-knit-work-order-creation',
@@ -45,10 +46,10 @@ export class KnitWorkOrderCreationComponent implements OnInit {
       "orderNo": new FormControl(''),
       "knitfty": new FormControl(''),
       "knitfty_details": new FormControl(''),
-      "woNo": new FormControl(''),
-      "woRefNo": new FormControl(''),
-      "woDate": new FormControl(''),
-      "completedDate": new FormControl(''),
+      "woNo": new FormControl('' ,Validators.required),
+      "woRefNo": new FormControl('',Validators.required),
+      "woDate": new FormControl('',Validators.required),
+      "completedDate": new FormControl('',Validators.required),
       "notes": new FormControl(''),
       data: this.fb.array([]),
     })
@@ -162,19 +163,19 @@ export class KnitWorkOrderCreationComponent implements OnInit {
   KnitWorkOrderAddButton() {
 
     const row = this.fb.group({
-      "id": new FormControl(''),
-      "knitWoId": new FormControl(''),
-      "machDia": new FormControl(''),
-      "fabDia": new FormControl(''),
-      "fabType": new FormControl(''),
-      "style": new FormControl(''),
-      "color": new FormControl(''),
-      "fabGSM": new FormControl(''),
-      "KnitSl": new FormControl(''),
-      "knitKg": new FormControl(''),
-      "knitRate": new FormControl(''),
-      "knitValue": new FormControl(''),
-      "remarks": new FormControl('')
+      "id": [''],
+      "knitWoId": [''],
+      "machDia": ['' ,Validators.required],
+      "fabDia": [''],
+      "fabType": [''],
+      "style": ['',Validators.required],
+      "color": ['',Validators.required],
+      "fabGSM": [''],
+      "KnitSl": [''],
+      "knitKg": [''],
+      "knitRate": [''],
+      "knitValue": [''],
+      "remarks": ['']
     });
     this.items.push(row);
 
@@ -205,9 +206,17 @@ export class KnitWorkOrderCreationComponent implements OnInit {
 
 
   save() {
+    if(this.KnitWorkOrderFrom.valid){
     this.api.KnitWorkOrderData(this.KnitWorkOrderFrom.value).subscribe((res) => {
       alert(res.message)
       this.router.navigate(['/main/KnitWorkOrderListing'])
     })
+    }else{
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Missing machDia (or) style (or) color (or) Date ",
+      });
+    }
   }
 }

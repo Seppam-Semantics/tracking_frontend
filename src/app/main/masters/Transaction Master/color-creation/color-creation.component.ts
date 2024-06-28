@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ApiService } from 'src/app/api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-color-creation',
@@ -28,16 +29,13 @@ export class ColorCreationComponent {
   
   ngOnInit(): void {
 
-    this.api.Drop_Buyer_master().subscribe((res)=>{
-      this.buyerDrop = res.buyer
-    })
-
-
     this.api.Color_master_AllData().subscribe((res)=>{
       this.AllColor = res.colors
     })
-
+    
     this.colorfilter()
+
+    this.Drop_Buyer_master()
   }
   constructor(private fb : FormBuilder , private api : ApiService){
   
@@ -63,6 +61,13 @@ export class ColorCreationComponent {
     })
   }
 
+  Drop_Buyer_master(){
+  this.api.Drop_Buyer_master().subscribe((res)=>{
+    this.buyerDrop = res.buyer
+  })
+}
+
+
   colorfilter(){
     this.api.Color_master_Fillter_Data(this.colorfilterdata).subscribe((res)=>{
       this.ColorData = res.colors
@@ -87,9 +92,16 @@ export class ColorCreationComponent {
 
 update(){
   this.api.Color_master(this.Coloredit.value).subscribe((res)=>{
-    alert(res.message)
-    window.location.reload()
+    Swal.fire({
+      title: "Updated SuccessFully!",
+      text: "You clicked the button!",
+      icon: "success"
+    });
+    this.colorfilter()
   })
+  this.Colorediting = false
+  this.Colorcreate.reset()
+  this.Coloredit.reset()
 }
 
 delete(id:any){
@@ -111,8 +123,14 @@ getbuyerId() {
 
   saveButton(){
     this.api.Color_master(this.Colorcreate.value).subscribe((res)=>{
-      alert(res.message)
-      window.location.reload()
+      Swal.fire({
+        title: "Added SuccessFully!",
+        text: "You clicked the button!",
+        icon: "success"
+      });
+      this.colorfilter()
     })
+    this.Colorcreation = false
+    this.Colorcreate.reset()
   }
 }

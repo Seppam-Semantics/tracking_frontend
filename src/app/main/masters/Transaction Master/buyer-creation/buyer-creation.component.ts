@@ -80,8 +80,14 @@ view(id:any){
 
 update(){
   this.api.Buyer_master(this.Buyeredit.value).subscribe((res) => {
-    alert(res.message)
-    window.location.reload()
+    Swal.fire({
+      title: "Updated SuccessFully!",
+      text: "You clicked the button!",
+      icon: "success"
+    });
+  this.Buyerediting = false;
+
+  this.buyerFilter()
   })
 }
 
@@ -93,10 +99,8 @@ update(){
         icon: "success"
       });
     this.Buyercreation = false;
-    
-    this.api.Buyer_master_AllData().subscribe((res) => {
-      this.all = res.buyers
-    })
+    this.Buyercreate.reset()
+    this.buyerFilter()
   })
   }
 

@@ -64,8 +64,13 @@ export class ReportEntryComponent implements OnInit {
       this.buyer = res.buyers
     })
   }
-  getBuyerValue(event: any) {
-    this.buyerName = event.target.value;
+  getBuyerValue(index: any) {
+    // this.buyerName = event.target.value;
+    const formArray = this.load.get('data') as FormArray;
+    const row = formArray.at(index);
+    this.buyerName = row.get('buyer')?.value;
+    console.log(this.factorynamevalue , this.buyerName)
+    this.getorders()
   }
 
   getorders() {
@@ -74,8 +79,13 @@ export class ReportEntryComponent implements OnInit {
     })
   }
 
-  getOrderValue(event: any) {
-    this.orderNo = event.target.value
+  getOrderValue(index: any) {
+    const formArray = this.load.get('data') as FormArray;
+    const row = formArray.at(index);
+    this.buyerName = row.get('buyer')?.value;
+    this.orderNo = row.get('orderNo')?.value;
+
+    this.getstyle()
   }
 
   getstyle() {
@@ -84,8 +94,15 @@ export class ReportEntryComponent implements OnInit {
     })
   }
 
-  getstylevalue(event: any) {
-    this.style = event.target.value
+  getstylevalue(index: any) {
+
+    const formArray = this.load.get('data') as FormArray;
+    const row = formArray.at(index);
+    this.buyerName = row.get('buyer')?.value;
+    this.orderNo = row.get('orderNo')?.value;
+    this.style = row.get('style')?.value;
+    this.getcolor()
+    // this.style = event.target.value
   }
 
   getcolor() {
@@ -94,8 +111,17 @@ export class ReportEntryComponent implements OnInit {
     })
   }
 
-  getcolorvalue(event: any) {
-    this.color = event.target.value
+  getcolorvalue(index: any) {
+
+    const formArray = this.load.get('data') as FormArray;
+    const row = formArray.at(index);
+    this.buyerName = row.get('buyer')?.value;
+    this.orderNo = row.get('orderNo')?.value;
+    this.style = row.get('style')?.value;
+    this.color = row.get('color')?.value;
+    
+    // this.color = event.target.value
+    this.getsize()
   }
 
   getsize() {
