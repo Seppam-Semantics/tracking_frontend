@@ -17,7 +17,7 @@ input {
 }
 .YarnReportScrol{
     display: block;
-    height: 420px;
+    height: 75vh;
     overflow-y: auto;
     scrollbar-width: none;
 }
