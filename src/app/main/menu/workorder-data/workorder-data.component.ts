@@ -21,7 +21,7 @@ export class WorkorderDataComponent implements OnInit {
   style_Value: any;
   colorDta: any;
   color_Value: any;
-  sizeDta: any;
+  sizeDta: string = '';
   size_Value: any;
   sizeid: any;
   fsizeDta: any;
@@ -72,11 +72,13 @@ export class WorkorderDataComponent implements OnInit {
   DyeinFty_Name: any;
   DyeinFtyId_Value: any;
   data: any;
+  concatSizeDta: any;
+  FsizeidId_Value: any;
 
 
   ngOnInit(): void {
     this.buyerdata()
-    
+
     this.api.fabric_type_BO().subscribe((res) => {
       this.fabricstypedta = res.fabricstype
     })
@@ -120,13 +122,11 @@ export class WorkorderDataComponent implements OnInit {
     const row = formArray.at(index);
     this.Buyer_Value = this.buyerorderform.get('Buyer')?.value;
     this.Order_Value = this.buyerorderform.get('OrderNo')?.value;
-    console.log(this.Order_Value,this.Buyer_Value)
     this.orderdata()
   }
 
   buyerdata() {
     this.Buyer_Value = this.buyerorderform.get('Buyer')?.value;
-    console.log(this.Buyer_Value)
     this.api.Buyer_to_order(this.Buyer_Value).subscribe((res) => {
       this.buyersDta = res.buyers
       this.orderNoDta = res.orderNo
@@ -149,16 +149,20 @@ export class WorkorderDataComponent implements OnInit {
     this.Order_Value = this.buyerorderform.get('OrderNo')?.value;
     this.style_Value = row.get('Style')?.value;
 
-      this.styledata()
+    this.styledata()
   }
 
   styledata() {
     this.api.style_to_color(this.Buyer_Value, this.Order_Value, this.style_Value).subscribe((res) => {
       this.colorDta = res.color
     })
+    this.api.Gsize_BO(this.style_Value).subscribe((res) => {
+      this.concatSizeDta = res.Gsize
+      console.log(this.concatSizeDta)
+    })
   }
 
-  colorvalue(index: any) {  
+  colorvalue(index: any) {
     const formArray = this.buyerorderform.get('data') as FormArray;
     const row = formArray.at(index);
     this.Buyer_Value = this.buyerorderform.get('Buyer')?.value;
@@ -174,28 +178,13 @@ export class WorkorderDataComponent implements OnInit {
 
 
   colordata() {
-    this.api.color_to_size(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value).subscribe((res) => {
-      this.sizeDta = res.size
-    })
+    // this.api.color_to_size(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value).subscribe((res) => {
+    //   this.sizeDta = res.size
+    // })
+
   }
 
-  sizevalue(index: any) {
-
-    const formArray = this.buyerorderform.get('data') as FormArray;
-    const row = formArray.at(index);
-    this.Buyer_Value = this.buyerorderform.get('Buyer')?.value;
-    this.Order_Value = this.buyerorderform.get('OrderNo')?.value;
-    this.style_Value = row.get('Style')?.value;
-    this.color_Value = row.get('Color')?.value;
-    this.size_Value = row.get('Size')?.value;
-
-    console.log(this.Buyer_Value , this.Order_Value , this.style_Value , this.color_Value , this.size_Value)
-    // this.size_Value = event.target.value
-    this.sizedata(index)
-    this.PODetailsLoss(index)
-  }
-
-  SpinFtyIdvalue(event: any,index:any) {
+  SpinFtyIdvalue(event: any, index: any) {
     this.SpinFty_Name = event.target.value
 
     const selectedFabric = this.spinftydta.find((SpinFty: { SpinFtyName: any; }) => SpinFty.SpinFtyName === this.SpinFty_Name);
@@ -211,21 +200,21 @@ export class WorkorderDataComponent implements OnInit {
     }
   }
 
-  KnitFtyIdvalue(event: any , index:any) {
+  KnitFtyIdvalue(event: any, index: any) {
     this.KnitFty_Name = event.target.value
     const selectedFabric = this.knitFtydta.find((knitFty: { knitFty: any; }) => knitFty.knitFty === this.KnitFty_Name);
     if (selectedFabric) {
-      this.KnitFtyId_Value = selectedFabric.id;    
+      this.KnitFtyId_Value = selectedFabric.id;
       const formArray = this.buyerorderform.get('data') as FormArray;
       const row = formArray.at(index);
       row.get('KnitFtyId')?.setValue(this.KnitFtyId_Value);
-    
+
     } else {
       console.error('No matching fabric type found for the selected value');
     }
   }
 
-  DyeinFtyIdvalue(event: any , index:any) {
+  DyeinFtyIdvalue(event: any, index: any) {
     this.DyeinFty_Name = event.target.value
     const selectedFabric = this.dyeFtydta.find((DyeinFty: { dyeFty: any; }) => DyeinFty.dyeFty === this.DyeinFty_Name);
     if (selectedFabric) {
@@ -252,7 +241,7 @@ export class WorkorderDataComponent implements OnInit {
 
   PODetailsLoss(index: any) {
 
-    this.api.PODetailsLoss_BO(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, this.size_Value).subscribe((res) => {
+    this.api.PODetailsLoss_BO(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, this.sizeDta).subscribe((res) => {
 
       this.PODetailsLossValue = res.Colorlosses[0].popl
       const formArray = this.buyerorderform.get('data') as FormArray;
@@ -267,28 +256,62 @@ export class WorkorderDataComponent implements OnInit {
     })
   }
 
-  sizedata(index: any) {
+
+  fsizedata(index: any , event:any) {
+    this.fsize_Value = event.target.value
+
+    this.api.Fsize_to_Gsize(this.style_Value,this.fsize_Value).subscribe((res) => {
+      this.sizeDta = res.Gsize[0]?.size;
+      const formArray = this.buyerorderform.get('data') as FormArray;
+      const row = formArray.at(index);
+      row.get('Size')?.setValue(this.sizeDta);
+      this.fsizevalue(index, this.sizeDta)
+    })
+
+  }
+
+
+  fsizevalue(index: any, size : any) {
+    // this.fsize_Value = event.target.value
+    const formArray = this.buyerorderform.get('data') as FormArray;
+    const row = formArray.at(index);
+    this.Buyer_Value = this.buyerorderform.get('Buyer')?.value;
+    this.Order_Value = this.buyerorderform.get('OrderNo')?.value;
+    this.style_Value = row.get('Style')?.value;
+    this.color_Value = row.get('Color')?.value;
+    this.size_Value = size
+    this.sizedata(index)
+    this.PODetailsLoss(index)
+  }
+
+  sizevalue(index: any) {
+    // this.sizedata(index)
+    // this.PODetailsLoss(index)
+  }
+
+  sizedata(index : any) {
+    console.log(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, this.size_Value)
     this.api.size_to_id(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, this.size_Value).subscribe((res) => {
-     
-      this.polineId = res.sizeId[0]?.id
 
-      this.poid = res.sizeId[0]?.orderId
-      this.FSizeFBC = res.sizeId[0]?.concatSize
+      this.polineId = res.sizeId[0]?.id ? res.sizeId[0]?.id : ''
+  
+      this.poid = res.sizeId[0]?.orderId ? res.sizeId[0]?.orderId : ''
+      this.FSizeFBC = res.sizeId[0]?.concatSize ? res.sizeId[0]?.concatSize : ''
       this.FSizeFBCId = res.sizeId[0]?.concatSizeId
-      this.fabricTypeFBC = res.sizeId[0]?.fabricType
-      this.fabricTypeFBCId = res.sizeId[0]?.fabricTypeId
-      this.fabricGSMFBC = res.sizeId[0]?.fabricGSM
-      this.fabricGSMFBCId = res.sizeId[0]?.fabricGSMId
-      this.yarnTypeFBC = res.sizeId[0]?.yarnType
-      this.yarnTypeFBCId = res.sizeId[0]?.yarnTypeId
-      this.finishDiaFBC = res.sizeId[0]?.finishDia
-      this.finishDiaFBCId = res.sizeId[0]?.finishDiaId
-      this.styleIdDta = res.sizeId[0]?.styleId
-      this.dyeTypeFBC = res.sizeId[0]?.dyeType
-      this.dyeTypeFBCId = res.sizeId[0]?.dyeTypeId
+      this.fabricTypeFBC = res.sizeId[0]?.fabricType ? res.sizeId[0]?.fabricType : ''
+      this.fabricTypeFBCId = res.sizeId[0]?.fabricTypeId ? res.sizeId[0]?.fabricTypeId : ''
+      this.fabricGSMFBC = res.sizeId[0]?.fabricGSM ? res.sizeId[0]?.fabricGSM : ''
+      this.fabricGSMFBCId = res.sizeId[0]?.fabricGSMId ? res.sizeId[0]?.fabricGSMId : ''
+      this.yarnTypeFBC = res.sizeId[0]?.yarnType ? res.sizeId[0]?.yarnType : ''
+      this.yarnTypeFBCId = res.sizeId[0]?.yarnTypeId ? res.sizeId[0]?.yarnTypeId : ''
+      this.finishDiaFBC = res.sizeId[0]?.finishDia ? res.sizeId[0]?.finishDia : ''
+      this.finishDiaFBCId = res.sizeId[0]?.finishDiaId ? res.sizeId[0]?.finishDiaId : ''
+      this.styleIdDta = res.sizeId[0]?.styleId ? res.sizeId[0]?.styleId : ''
+      this.dyeTypeFBC = res.sizeId[0]?.dyeType ? res.sizeId[0]?.dyeType : ''
+      this.dyeTypeFBCId = res.sizeId[0]?.dyeTypeId ? res.sizeId[0]?.dyeTypeId : ''
 
 
-      
+
       this.api.DyeTypeMaster_BO(this.styleIdDta, this.dyeTypeFBCId).subscribe((res) => {
         this.DyeTypeLossDta = res.DyeTypeLoss[0].dyepl
       })
@@ -301,7 +324,7 @@ export class WorkorderDataComponent implements OnInit {
       const row = formArray.at(index);
       row.get('polineId')?.setValue(this.polineId);
       row.get('poid')?.setValue(this.poid);
-      row.get('FSize')?.setValue(this.FSizeFBC);
+      // row.get('FSize')?.setValue(this.FSizeFBC);
       row.get('FabType')?.setValue(this.fabricTypeFBC);
       row.get('fabricTypeId')?.setValue(this.fabricTypeFBCId)
       row.get('FabGsm')?.setValue(this.fabricGSMFBC);
@@ -314,7 +337,7 @@ export class WorkorderDataComponent implements OnInit {
       row.get('fabricType')?.setValue(this.fabTypeLossDta);
       row.get('SizeId')?.setValue(this.FSizeFBCId);
       row.get('FabDiaId')?.setValue(this.finishDiaFBCId);
-      
+
     })
 
     this.api.f_size_BO(this.style_Value, this.size_Value).subscribe((res) => {
@@ -322,16 +345,14 @@ export class WorkorderDataComponent implements OnInit {
       this.fabdiaDta = res.FabDia
       this.fabGsmDta = res.FabGsm
 
-      this.finishfabConsumptionDta = res.finishfabConsumption[0].finishfabConsumption
+      this.finishfabConsumptionDta = res.finishfabConsumption[0].finishfabConsumption ? res.finishfabConsumption[0].finishfabConsumption : ''
       const formArray = this.buyerorderform.get('data') as FormArray;
       const row = formArray.at(index);
       row.get('FabricConsumption')?.setValue(this.finishfabConsumptionDta);
     })
+
   }
 
-  fsizevalue(event: any) {
-    this.fsize_Value = event.target.value
-  }
 
   fabdiavalue(event: any) {
     this.fabdia_Value = event.target.value
@@ -349,7 +370,7 @@ export class WorkorderDataComponent implements OnInit {
 
 
         const FinishKg1 = (this.finishDiaFBC - this.finishfabConsumptionDta) * OrderPcsValue / (100 - (this.rejloss) - (this.PODetailsLossValue));
-        const FinishKg2 = FinishKg1 / (100  - this.DyeProcessLossValue - this.DyeTypeLossDta - this.fabTypeLossDta)
+        const FinishKg2 = FinishKg1 / (100 - this.DyeProcessLossValue - this.DyeTypeLossDta - this.fabTypeLossDta)
 
         const FinishKg = parseFloat(FinishKg1.toFixed(2));
         const GreigeKg = parseFloat(FinishKg2.toFixed(2));
@@ -360,7 +381,7 @@ export class WorkorderDataComponent implements OnInit {
   }
 
   buyerorderform = new FormGroup({
-    data: this.fb.array([]) ,
+    data: this.fb.array([]),
     Buyer: new FormControl(''),
     OrderNo: new FormControl(''),
   })
@@ -369,14 +390,14 @@ export class WorkorderDataComponent implements OnInit {
   }
   add1button() {
     const row = this.fb.group({
-      "id" : [''],
-      "poid": [''],     
-      "polineId": [''],     
+      "id": [''],
+      "poid": [''],
+      "polineId": [''],
       "Style": [''],
       "Color": [''],
       "Size": [''],
       "FSize": [''],
-      "SizeId": ['' ,Validators.required],
+      "SizeId": ['', Validators.required],
       "FabType": [''],
       "fabricTypeId": [''],
       "FabDia": [''],
@@ -386,15 +407,15 @@ export class WorkorderDataComponent implements OnInit {
       "YarnKg": [''],
       "GreigeKg": [''],
       "YarnType": [''],
-      "YarnTypeId" : [''],
+      "YarnTypeId": [''],
       "FinishKg": [''],
       "KnitSL": [''],
       "SpinFty": [''],
       "SpinFtyId": [''],
       "KnitFty": [''],
       "KnitFtyId": [''],
-      "DyeinFty" : [''],      
-      "DyeinFtyId" : [''],
+      "DyeinFty": [''],
+      "DyeinFtyId": [''],
 
       "dyetype": [''],
       "dyeTypeId": [''],
@@ -413,19 +434,19 @@ export class WorkorderDataComponent implements OnInit {
     });
   }
 
-  save(){
+  save() {
     console.log(this.buyerorderform.value)
-    if(this.buyerorderform.valid){
-    this.api.postworkorder(this.buyerorderform.value).subscribe((res)=>{
-      if(res.success){
-        alert("Your work order details have been saved....!!!!")
-        window.location.reload(); 
-      }
-      else{
-        alert("Error while saving...!!!")
-      }
-    })
-    }else{
+    if (this.buyerorderform.valid) {
+      this.api.postworkorder(this.buyerorderform.value).subscribe((res) => {
+        if (res.success) {
+          alert("Your work order details have been saved....!!!!")
+          window.location.reload();
+        }
+        else {
+          alert("Error while saving...!!!")
+        }
+      })
+    } else {
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -433,7 +454,7 @@ export class WorkorderDataComponent implements OnInit {
       });
     }
   }
-  FBReport(){
+  FBReport() {
     this.router.navigate(['/main/FBReport'])
   }
   Delete(index: number) {

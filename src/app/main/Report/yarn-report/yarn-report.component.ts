@@ -132,6 +132,7 @@ export class YarnReportComponent implements OnInit {
     }
 
   fileName = "YarnReport.xlsx"
+
   exportexcel() {
 
     Swal.fire({

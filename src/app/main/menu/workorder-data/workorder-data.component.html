@@ -45,9 +45,10 @@
 
             <th>Style</th>
             <th>Color</th>
-            <th>GSize</th>
 
             <th>FSize</th>
+
+            <th>GSize</th>
             <th>FabDia</th>
             <th>FabGsm</th>
             <th>KnitSL</th>
@@ -106,18 +107,19 @@
               </datalist>
             </td>
 
-            <td><input style="width: 15vh;" formControlName="Size" list="GSize" (input)="sizevalue(i)"
-                (change)="sizedata(i)" (change)="PODetailsLoss(i)" class="form-control" (mouseenter)="colorvalue(i)">
-            </td>
-            <datalist id="GSize">
-              <option *ngFor="let data of this.sizeDta" value="{{data.size}}">{{data.size}}</option>
-            </datalist>
+            <td><input style="width: 15vh;" formControlName="FSize" list="FSize" 
+              (change)="fsizedata(i , $event)" class="form-control"></td>
+          <datalist id="FSize">
+            <option *ngFor="let data of this.concatSizeDta" value="{{data.concatSize}}">{{data.concatSize}}</option>
+          </datalist>
 
-            <td><input style="width: 15vh;" formControlName="FSize" list="FSize" (input)="fsizevalue($event)"
-                (change)="fsizedata()" readonly class="form-control"></td>
-            <datalist id="FSize">
-              <option *ngFor="let data of this.fsizeDta" value="{{data.machineDia}}">{{data.machineDia}}</option>
-            </datalist>
+
+
+            <td><input style="width: 15vh;" formControlName="Size" list="GSize" (input)="sizevalue(i)"
+                 class="form-control" 
+                readonly>
+            </td>
+
 
             <td><input style="width: 15vh;" formControlName="FabDia" list="FabDia" (input)="fabdiavalue($event)"
                 readonly class="form-control">

@@ -1022,6 +1022,10 @@ export class ApiService {
     return this.http.get(this.getUrl() + `/workorderapi/Color_size_BO?buyer=${buyer}&order=${order}&style=${style}&color=${color}&`, this.getHeaders())
   }
 
+  Fsize_to_Gsize(style:string='' , fsize : string = ''):Observable<any>{
+    return this.http.get(this.getUrl() + `/workorderapi/Fsize_Gsize_BO?style=${style}&fsize=${fsize}&`, this.getHeaders())
+  }
+
   
   size_to_id(buyer:string='' , order : string = '' , style:string = '',color:string='', size:string=''):Observable<any>{
     return this.http.get(this.getUrl() + `/workorderapi/size_id_BO?buyer=${buyer}&order=${order}&style=${style}&color=${color}&size=${size}`, this.getHeaders())
@@ -1073,6 +1077,12 @@ export class ApiService {
   fabricType_BO(StyleId:string='' , fabTypeId:string=''):Observable<any>{
     return this.http.get(this.getUrl() + `/workorderapi/fabricType_BO?StyleId=${StyleId}&fabTypeId=${fabTypeId}`, this.getHeaders())
   }
+
+
+  Gsize_BO(style:string=''):Observable<any>{
+    return this.http.get(this.getUrl() + `/workorderapi/gsize_BO?style=${style}&`, this.getHeaders())
+  }
+
 
   fabbooking(data:any ): Observable<any> {
     return this.http.post(this.getUrl() + `/workorderapi/fab-booking`, data,this.getHeaders())

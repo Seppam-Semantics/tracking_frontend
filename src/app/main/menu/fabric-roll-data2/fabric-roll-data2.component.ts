@@ -10,6 +10,7 @@ import Swal from 'sweetalert2'
 import { ToastModule } from 'primeng/toast';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import 'jspdf-autotable'; 
 
 @Component({
   selector: 'app-fabric-roll2-data',
@@ -311,7 +312,9 @@ export class FabricRollData2Component implements OnInit {
 
   woLineDetails(orderNo: any) {
     this.visibleEntry = true
+   
     this.loadworkorderdetails(JSON.stringify(orderNo))
+  console.log(this.data2)
   }
 
   wobystyle() {
@@ -363,6 +366,18 @@ export class FabricRollData2Component implements OnInit {
     });
 
   }
+
+  tableData: any[] = [
+    { id: 1, name: 'John Doe', age: 30 },
+    { id: 2, name: 'Jane Smith', age: 25 },
+    // Add more data as needed
+  ];
+
+
+  downloadPDF(): void {
+  }
+
+
   fileName1 = "Fabricrolldata.xlsx"
   exportexcel() {
 
@@ -378,21 +393,46 @@ export class FabricRollData2Component implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
 
-        const element = document.getElementById('print');
-    
-        html2canvas(element!).then(canvas => {
-          const imgData = canvas.toDataURL('image/png');
-          const pdf = new jsPDF('p', 'mm', 'a5');
-    
-          // For full page capture, set proper width and height
-          const imgProps = pdf.getImageProperties(imgData);
-          const pdfWidth = pdf.internal.pageSize.getWidth();
-          const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-    
-          pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-          pdf.save('Fabric-Entry-Report.pdf');
-      
-        });
+        // let data = document.getElementById("table-data");
+        // const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(data);
+        // const wb: XLSX.WorkBook = XLSX.utils.book_new();
+        // XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+        // XLSX.writeFile(wb, this.fileName1);
+
+        // const element = document.getElementById('print');
+        // html2canvas(element!).then(canvas => {
+        //   const imgData = canvas.toDataURL('image/png');
+        //   const pdf = new jsPDF('p', 'mm', 'a5');
+        //   const imgProps = pdf.getImageProperties(imgData);
+        //   const pdfWidth = pdf.internal.pageSize.getWidth();
+        //   const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+        //   pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+        //   pdf.save('Fabric-Entry-Report.pdf');  
+        // });
+
+        const doc = new jsPDF({
+          orientation: 'landscape'
+       });
+       const options = {
+         styles: {
+           fontSize: 6,
+         },
+         margin: { top: 1 ,left : 1},
+         tableWidth: 'auto'
+       };
+   
+       const data = this.data2.map(row => [row.buyer , row.orderNo , row.style , row.color , row.size , row.FSize , row.fabDia , row.fabGsm , row.knitSL
+         ,row.yarnType,row.fabType,row.dyetype,row.spinFty,row.knitFty,row.dyeinFty,row.orderPcs,row.orderFOBRate,row.knitRate,row.dyeRate,row.yarnKg,row.greigeKg,row.finishKg
+       ]);
+       (doc as any).autoTable({
+         head: [["buyer","orderNo" , "style", "color","size","FSize","fabDia","fabGsm","knitSL",
+           "yarnType","fabType","dyetype","spinFty","knitFty","dyeinFty","orderPcs","orderFOBRate","knitRate","dyeRate","yarnKg","greigeKg","finishKg"]],
+         body: data , 
+         ...options
+       });
+       doc.save('Fabricrolldata.pdf');
+   
+
 
         Swal.fire({
           title: "Good job!",
