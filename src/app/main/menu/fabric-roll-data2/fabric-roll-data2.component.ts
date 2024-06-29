@@ -378,12 +378,6 @@ export class FabricRollData2Component implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
 
-        // let data = document.getElementById("table-data");
-        // const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(data);
-        // const wb: XLSX.WorkBook = XLSX.utils.book_new();
-        // XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-        // XLSX.writeFile(wb, this.fileName1);
-
         const element = document.getElementById('print');
     
         html2canvas(element!).then(canvas => {

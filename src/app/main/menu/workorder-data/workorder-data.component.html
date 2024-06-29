@@ -1,150 +1,84 @@
-<mat-toolbar style="height: auto;">
-  <div style="width: 100%; display: flex; justify-content: center;">
-    <span>Fabric Booking</span>
-  </div>
+<div [formGroup]="buyerorderform">
+  <mat-toolbar style="height: auto;">
+    <div style="width: 100%; display: flex; justify-content: center;">
+      <span>Fabric Booking</span>
+    </div>
 
-  <div style="flex: 1 1 auto;"></div>
-
-  <div style="display: flex;">
     <!-- <button mat-button color="primary" (click)="BuyerCrationPopup = true">New</button> -->
-     <!-- <button mat-button color="primary" (click)="FBReport() ">Report</button> -->
-  </div>
+    <!-- <button mat-button color="primary" (click)="FBReport() ">Report</button> -->
+  </mat-toolbar>
+  <mat-toolbar>
+    <div>
 
-</mat-toolbar>
-<!-- <div class="table-wrapper">
-  <table class="fl-table">
-    <thead>
-      <tr>
-        <th>S.No</th>
-
-        <th>Buyer</th>
-        <th>OrderNo</th>
-        <th>Style</th>
-        
-        <th>Color</th>
-        <th>FSize</th>
-        <th>GSize</th>
-        
-        <th>FabType</th>
-        <th>FabDia</th>
-        <th>FabGsm</th>
-        
-        <th>KnitSL</th>
-        <th>YarnType</th>
-        <th>YarnKg</th>
-        
-        <th>GreigeKg</th>
-        <th>FinishKg</th>
-        <th>SpinFty</th>    
-        
-        <th>KnitFty</th>    
-        <th>DyeinFty</th>    
-        <th>OrderPcs</th>    
-        
-        <th>OrderFOBRate</th>
-        <th>KnitRate</th>
-        <th>DyeRate</th>   
-        
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let data of this.data; let i = index;">
-        <td></td>
-
-        <td></td>
-        <td></td>
-        <td></td>
-
-        <td></td>
-        <td></td>
-        <td></td>
-
-        <td></td>
-        <td></td>
-        <td></td>
-
-        <td></td>
-        <td></td>
-        <td></td>
-
-        <td></td>
-        <td></td>
-        <td></td>
-
-        <td></td>
-        <td></td>
-        <td></td>
-
-        <td></td>
-        <td></td>
-        <td></td>
-
-        <td>
-          <div style="display: flex; gap: 10px;">
-          <button class="btn btn-success"><mat-icon>insert_drive_file</mat-icon></button>
-          <button class="btn btn-primary"><mat-icon>edit</mat-icon></button>
-          <button class="btn btn-danger"><mat-icon>delete</mat-icon></button>
+      <div style="display: flex; justify-content: start; gap: 10vh;">
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Buyer</mat-label>
+            <mat-select formControlName="Buyer" (selectionChange)="buyerdata()">
+              <mat-option *ngFor="let data of this.buyersDta" value="{{data.buyer}}">{{data.buyer}}</mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div> -->
 
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>OrderNo</mat-label>
+            <mat-select formControlName="OrderNo" (selectionChange)="orderdata()">
+              <mat-option *ngFor="let data of this.orderNoDta" value="{{data.orderNo}}">{{data.orderNo}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
 
+      </div>
+    </div>
+  </mat-toolbar>
+  <div>
 
-<!------------------------------------------------------------------------------->
-<!-- <p-dialog [resizable]="true" [modal]="true" header="Fabric Booking Creation" [maximizable]="true" [(visible)]="BuyerCrationPopup" [style]="{width: '90vw'}"
-  [contentStyle]="{height: '90vh'}">
-   -->
-<div>
+    <div class="table-wrapper">
+      <table class="fl-table">
+        <thead>
+          <tr>
+            <th><button class="btn btn-primary" (click)="add1button()">+</button></th>
+            <th>S.no</th>
+            <!-- <th>Buyer</th>
+          <th>OrderNo</th> -->
 
-  <div class="table-wrapper" [formGroup]="buyerorderform">
-    <table class="fl-table">
-      <thead>
-        <tr>
-          <th><button class="btn btn-primary" (click)="add1button()">+</button></th>
-          <th>S.no</th>
-          <th>Buyer</th>
-          <th>OrderNo</th>
+            <th>Style</th>
+            <th>Color</th>
+            <th>GSize</th>
 
-          <th>Style</th>
-          <th>Color</th>
-          <th>GSize</th>
+            <th>FSize</th>
+            <th>FabDia</th>
+            <th>FabGsm</th>
+            <th>KnitSL</th>
 
-          <th>FSize</th>
-          <th>FabDia</th>
-          <th>FabGsm</th>
-          <th>KnitSL</th>
+            <th>Yarn Type</th>
+            <th>FabType</th>
+            <th>Dye Type</th>
 
-          <th>Yarn Type</th>
-          <th>FabType</th>
-          <th>Dye Type</th>
+            <th>SpinFty</th>
+            <th>KnitFty</th>
+            <th>DyeinFty</th>
 
-          <th>SpinFty</th>
-          <th>KnitFty</th>
-          <th>DyeinFty</th>
+            <th>OrderPcs</th>
+            <th>OrderFOBRate</th>
+            <th>KnitRate</th>
+            <th>DyeRate</th>
 
-          <th>OrderPcs</th>
-          <th>OrderFOBRate</th>
-          <th>KnitRate</th>
-          <th>DyeRate</th>
+            <th>YarnKg</th>
+            <th>GreigeKg</th>
+            <th>FinishKg</th>
 
-          <th>YarnKg</th>
-          <th>GreigeKg</th>
-          <th>FinishKg</th>
+            <th>Remove</th>
+          </tr>
+        </thead>
+        <tbody formArrayName="data">
+          <tr *ngFor="let process of items.controls; let i=index" [formGroupName]="i">
+            <td></td>
 
-          <th>Remove</th>
-        </tr>
-      </thead>
-      <tbody formArrayName="data">
-        <tr *ngFor="let process of items.controls; let i=index" [formGroupName]="i">
-          <td></td>
+            <td>{{i+1}}</td>
 
-          <td>{{i+1}}</td>
-
-          <td><input style="width: 15vh;" formControlName="Buyer" (input)="buyervalue(i)" list="buyer"
+            <!-- <td><input style="width: 15vh;" formControlName="Buyer" (input)="buyervalue(i)" list="buyer"
               (change)="buyerdata()" class="form-control">
             <datalist id="buyer">
               <option *ngFor="let data of this.buyersDta" value="{{data.buyer}}">{{data.buyer}}</option>
@@ -156,109 +90,119 @@
             <datalist id="order">
               <option *ngFor="let data of this.orderNoDta" value="{{data.orderNo}}">{{data.orderNo}}</option>
             </datalist>
-          </td>
+          </td> -->
 
-          <td><input style="width: 15vh;" formControlName="Style" list="Style" (input)="stylevalue(i)"
-              (change)="styledata()" class="form-control" (mouseenter)="ordervalue(i)"></td>
-          <datalist id="Style">
-            <option *ngFor="let data of this.styleDta" value="{{data.style}}">{{data.style}}</option>
-          </datalist>
-
-          <td><input style="width: 15vh;" formControlName="Color" list="Color" (input)="colorvalue(i)"
-              (change)="colordata()" (change)="RejTypeLoss(i)" (change)="colorprocessloss(i)" class="form-control" (mouseenter)="stylevalue(i)">
-            <datalist id="Color">
-              <option *ngFor="let data of this.colorDta" value="{{data.color}}">{{data.color}}</option>
+            <td><input style="width: 15vh;" formControlName="Style" list="Style" (input)="stylevalue(i)"
+                (change)="styledata()" class="form-control" (mouseenter)="ordervalue(i)"></td>
+            <datalist id="Style">
+              <option *ngFor="let data of this.styleDta" value="{{data.style}}">{{data.style}}</option>
             </datalist>
-          </td>
 
-          <td><input style="width: 15vh;" formControlName="Size" list="GSize" (input)="sizevalue(i)"
-              (change)="sizedata(i)" (change)="PODetailsLoss(i)" class="form-control" (mouseenter)="colorvalue(i)"></td>
-          <datalist id="GSize">
-            <option *ngFor="let data of this.sizeDta" value="{{data.size}}">{{data.size}}</option>
-          </datalist>
+            <td><input style="width: 15vh;" formControlName="Color" list="Color" (input)="colorvalue(i)"
+                (change)="colordata()" (change)="RejTypeLoss(i)" (change)="colorprocessloss(i)" class="form-control"
+                (mouseenter)="stylevalue(i)">
+              <datalist id="Color">
+                <option *ngFor="let data of this.colorDta" value="{{data.color}}">{{data.color}}</option>
+              </datalist>
+            </td>
 
-          <td><input style="width: 15vh;" formControlName="FSize" list="FSize" (input)="fsizevalue($event)"
-              (change)="fsizedata()" readonly class="form-control"></td>
-          <datalist id="FSize">
-            <option *ngFor="let data of this.fsizeDta" value="{{data.machineDia}}">{{data.machineDia}}</option>
-          </datalist>
-
-          <td><input style="width: 15vh;" formControlName="FabDia" list="FabDia" (input)="fabdiavalue($event)" readonly class="form-control">
-            <datalist id="FabDia">
-              <option *ngFor="let data of this.fabdiaDta" value="{{data.FabDia}}">{{data.FabDia}}</option>
+            <td><input style="width: 15vh;" formControlName="Size" list="GSize" (input)="sizevalue(i)"
+                (change)="sizedata(i)" (change)="PODetailsLoss(i)" class="form-control" (mouseenter)="colorvalue(i)">
+            </td>
+            <datalist id="GSize">
+              <option *ngFor="let data of this.sizeDta" value="{{data.size}}">{{data.size}}</option>
             </datalist>
-          </td>
 
-          <td><input style="width: 15vh;" formControlName="FabGsm" list="FabGsm" (input)="fabdiavalue($event)" readonly class="form-control">
-            <datalist id="FabGsm">
-              <option *ngFor="let data of this.fabGsmDta" value="{{data.FabGsm}}">{{data.FabGsm}}</option>
+            <td><input style="width: 15vh;" formControlName="FSize" list="FSize" (input)="fsizevalue($event)"
+                (change)="fsizedata()" readonly class="form-control"></td>
+            <datalist id="FSize">
+              <option *ngFor="let data of this.fsizeDta" value="{{data.machineDia}}">{{data.machineDia}}</option>
             </datalist>
-          </td>
 
-          <td><input style="width: 15vh;" formControlName="KnitSL" type="number" class="form-control"></td>
+            <td><input style="width: 15vh;" formControlName="FabDia" list="FabDia" (input)="fabdiavalue($event)"
+                readonly class="form-control">
+              <datalist id="FabDia">
+                <option *ngFor="let data of this.fabdiaDta" value="{{data.FabDia}}">{{data.FabDia}}</option>
+              </datalist>
+            </td>
 
-          <td><input style="width: 15vh;" formControlName="YarnType" list="YarnType" readonly class="form-control">
-            <datalist id="YarnType">
-              <option *ngFor="let data of this.yarntypedta" value="{{data.yarntype}}">{{data.yarntype}}</option>
+            <td><input style="width: 15vh;" formControlName="FabGsm" list="FabGsm" (input)="fabdiavalue($event)"
+                readonly class="form-control">
+              <datalist id="FabGsm">
+                <option *ngFor="let data of this.fabGsmDta" value="{{data.FabGsm}}">{{data.FabGsm}}</option>
+              </datalist>
+            </td>
+
+            <td><input style="width: 15vh;" formControlName="KnitSL" type="number" class="form-control"></td>
+
+            <td><input style="width: 15vh;" formControlName="YarnType" list="YarnType" readonly class="form-control">
+              <datalist id="YarnType">
+                <option *ngFor="let data of this.yarntypedta" value="{{data.yarntype}}">{{data.yarntype}}</option>
+              </datalist>
+            </td>
+
+            <td><input style="width: 15vh;" formControlName="FabType" list="FabType" (input)="fabrictypeIdvalue($event)"
+                readonly class="form-control"></td>
+            <datalist id="FabType">
+              <option *ngFor="let data of this.fabricstypedta" value="{{data.fabricstype}}">{{data.fabricstype}}
+              </option>
             </datalist>
-          </td>
 
-          <td><input style="width: 15vh;" formControlName="FabType" list="FabType" (input)="fabrictypeIdvalue($event)" readonly class="form-control"></td>
-          <datalist id="FabType">
-            <option *ngFor="let data of this.fabricstypedta" value="{{data.fabricstype}}">{{data.fabricstype}}</option>
-          </datalist>
-
-          <td><input style="width: 15vh;" formControlName="dyetype" list="DyeType" readonly class="form-control">
-            <datalist id="DyeType">
-              <option *ngFor="let data of this.dyetypedta" value="{{data.dyeType}}">{{data.dyeType}}</option>
-            </datalist>
-          </td>
+            <td><input style="width: 15vh;" formControlName="dyetype" list="DyeType" readonly class="form-control">
+              <datalist id="DyeType">
+                <option *ngFor="let data of this.dyetypedta" value="{{data.dyeType}}">{{data.dyeType}}</option>
+              </datalist>
+            </td>
 
 
-          <td><input style="width: 15vh;" formControlName="SpinFty" list="SpinFty" (input)="SpinFtyIdvalue($event,i)" class="form-control">
-            <datalist id="SpinFty">
-              <option *ngFor="let data of this.spinftydta" value="{{data.SpinFtyName}}">{{data.SpinFtyName}}</option>
-            </datalist>
-          </td>
+            <td><input style="width: 15vh;" formControlName="SpinFty" list="SpinFty" (input)="SpinFtyIdvalue($event,i)"
+                class="form-control">
+              <datalist id="SpinFty">
+                <option *ngFor="let data of this.spinftydta" value="{{data.SpinFtyName}}">{{data.SpinFtyName}}</option>
+              </datalist>
+            </td>
 
-          <td><input style="width: 15vh;" formControlName="KnitFty" list="KnitFty" (input)="KnitFtyIdvalue($event,i)" class="form-control">
-            <datalist id="KnitFty">
-              <option *ngFor="let data of this.knitFtydta" value="{{data.knitFty}}">{{data.knitFty}}</option>
-            </datalist>
-          </td>
+            <td><input style="width: 15vh;" formControlName="KnitFty" list="KnitFty" (input)="KnitFtyIdvalue($event,i)"
+                class="form-control">
+              <datalist id="KnitFty">
+                <option *ngFor="let data of this.knitFtydta" value="{{data.knitFty}}">{{data.knitFty}}</option>
+              </datalist>
+            </td>
 
-          <td><input style="width: 15vh;" formControlName="DyeinFty" list="dyeFty" (input)="DyeinFtyIdvalue($event , i)" class="form-control">
-            <datalist id="dyeFty">
-              <option *ngFor="let data of this.dyeFtydta" value="{{data.dyeFty}}">{{data.dyeFty}}</option>
-            </datalist>
-          </td>
+            <td><input style="width: 15vh;" formControlName="DyeinFty" list="dyeFty"
+                (input)="DyeinFtyIdvalue($event , i)" class="form-control">
+              <datalist id="dyeFty">
+                <option *ngFor="let data of this.dyeFtydta" value="{{data.dyeFty}}">{{data.dyeFty}}</option>
+              </datalist>
+            </td>
 
-          <td><input style="width: 15vh;" formControlName="OrderPcs" class="form-control"></td>
+            <td><input style="width: 15vh;" formControlName="OrderPcs" class="form-control"></td>
 
-          <td><input style="width: 15vh;" formControlName="OrderFOBRate" class="form-control"></td>
+            <td><input style="width: 15vh;" formControlName="OrderFOBRate" class="form-control"></td>
 
-          <td><input style="width: 15vh;" formControlName="KnitRate" class="form-control"></td>
+            <td><input style="width: 15vh;" formControlName="KnitRate" class="form-control"></td>
 
-          <td><input style="width: 15vh;" formControlName="DyeRate" class="form-control"></td>
+            <td><input style="width: 15vh;" formControlName="DyeRate" class="form-control"></td>
 
-          <td><input style="width: 15vh;" formControlName="YarnKg" readonly class="form-control"></td>
+            <td><input style="width: 15vh;" formControlName="YarnKg" readonly class="form-control"></td>
 
-          <td><input style="width: 15vh;" formControlName="GreigeKg" readonly class="form-control"></td>
+            <td><input style="width: 15vh;" formControlName="GreigeKg" readonly class="form-control"></td>
 
-          <td><input style="width: 15vh;" formControlName="FinishKg" readonly class="form-control"></td>
+            <td><input style="width: 15vh;" formControlName="FinishKg" readonly class="form-control"></td>
 
-          <td><button (click)="Delete(i)" style="background-color: red; color: white;">x</button></td>
-        
+            <td><button (click)="Delete(i)" style="background-color: red; color: white;">x</button></td>
 
-  
-        </tr>
-      </tbody>
-    </table>
+
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>
-<br/>
+  <br />
 
-<div style="width: 100%; display: flex; justify-content: center;">
-  <button class="btn btn-primary" (click)="save()">Save</button>
+  <div style="width: 100%; display: flex; justify-content: center;">
+    <button class="btn btn-primary" (click)="save()">Save</button>
+  </div>
 </div>
 <!-- </p-dialog> -->

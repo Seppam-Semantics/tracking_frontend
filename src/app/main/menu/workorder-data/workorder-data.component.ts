@@ -106,23 +106,27 @@ export class WorkorderDataComponent implements OnInit {
 
   constructor(private api: ApiService, private router: Router, private fb: FormBuilder) { }
 
-  buyervalue(index: any) {
-    const formArray = this.buyerorderform.get('data') as FormArray;
-    const row = formArray.at(index);
-    this.Buyer_Value = row.get('Buyer')?.value;
+  buyervalue() {
+    // const formArray = this.buyerorderform.get('data') as FormArray;
+    // const row = formArray.at(index);
+    // this.Buyer_Value = row.get('Buyer')?.value;
+
     this.buyerdata()
+
   }
   ordervalue(index: any) {
     // this.Order_Value = event.target.value
     const formArray = this.buyerorderform.get('data') as FormArray;
     const row = formArray.at(index);
-    this.Buyer_Value = row.get('Buyer')?.value;
-    this.Order_Value = row.get('OrderNo')?.value;
-    
+    this.Buyer_Value = this.buyerorderform.get('Buyer')?.value;
+    this.Order_Value = this.buyerorderform.get('OrderNo')?.value;
+    console.log(this.Order_Value,this.Buyer_Value)
     this.orderdata()
   }
 
   buyerdata() {
+    this.Buyer_Value = this.buyerorderform.get('Buyer')?.value;
+    console.log(this.Buyer_Value)
     this.api.Buyer_to_order(this.Buyer_Value).subscribe((res) => {
       this.buyersDta = res.buyers
       this.orderNoDta = res.orderNo
@@ -131,6 +135,8 @@ export class WorkorderDataComponent implements OnInit {
 
   orderdata() {
 
+    this.Buyer_Value = this.buyerorderform.get('Buyer')?.value;
+    this.Order_Value = this.buyerorderform.get('OrderNo')?.value;
     this.api.order_to_style(this.Buyer_Value, this.Order_Value).subscribe((res) => {
       this.styleDta = res.style
     })
@@ -139,8 +145,8 @@ export class WorkorderDataComponent implements OnInit {
   stylevalue(index: any) {
     const formArray = this.buyerorderform.get('data') as FormArray;
     const row = formArray.at(index);
-    this.Buyer_Value = row.get('Buyer')?.value;
-    this.Order_Value = row.get('OrderNo')?.value;
+    this.Buyer_Value = this.buyerorderform.get('Buyer')?.value;
+    this.Order_Value = this.buyerorderform.get('OrderNo')?.value;
     this.style_Value = row.get('Style')?.value;
 
       this.styledata()
@@ -155,8 +161,8 @@ export class WorkorderDataComponent implements OnInit {
   colorvalue(index: any) {  
     const formArray = this.buyerorderform.get('data') as FormArray;
     const row = formArray.at(index);
-    this.Buyer_Value = row.get('Buyer')?.value;
-    this.Order_Value = row.get('OrderNo')?.value;
+    this.Buyer_Value = this.buyerorderform.get('Buyer')?.value;
+    this.Order_Value = this.buyerorderform.get('OrderNo')?.value;
     this.style_Value = row.get('Style')?.value;
     this.color_Value = row.get('Color')?.value;
 
@@ -177,12 +183,13 @@ export class WorkorderDataComponent implements OnInit {
 
     const formArray = this.buyerorderform.get('data') as FormArray;
     const row = formArray.at(index);
-    this.Buyer_Value = row.get('Buyer')?.value;
-    this.Order_Value = row.get('OrderNo')?.value;
+    this.Buyer_Value = this.buyerorderform.get('Buyer')?.value;
+    this.Order_Value = this.buyerorderform.get('OrderNo')?.value;
     this.style_Value = row.get('Style')?.value;
     this.color_Value = row.get('Color')?.value;
     this.size_Value = row.get('Size')?.value;
 
+    console.log(this.Buyer_Value , this.Order_Value , this.style_Value , this.color_Value , this.size_Value)
     // this.size_Value = event.target.value
     this.sizedata(index)
     this.PODetailsLoss(index)
@@ -353,7 +360,9 @@ export class WorkorderDataComponent implements OnInit {
   }
 
   buyerorderform = new FormGroup({
-    data: this.fb.array([])
+    data: this.fb.array([]) ,
+    Buyer: new FormControl(''),
+    OrderNo: new FormControl(''),
   })
   get items() {
     return this.buyerorderform.get("data") as FormArray;
@@ -363,8 +372,6 @@ export class WorkorderDataComponent implements OnInit {
       "id" : [''],
       "poid": [''],     
       "polineId": [''],     
-      "Buyer": [''],
-      "OrderNo": [''],
       "Style": [''],
       "Color": [''],
       "Size": [''],
@@ -375,7 +382,7 @@ export class WorkorderDataComponent implements OnInit {
       "FabDia": [''],
       "FabDiaId": [''],
       "FabGsm": [''],
-      "FabGsmId": [''],
+      "FabGsmId": [0],
       "YarnKg": [''],
       "GreigeKg": [''],
       "YarnType": [''],
@@ -407,8 +414,9 @@ export class WorkorderDataComponent implements OnInit {
   }
 
   save(){
+    console.log(this.buyerorderform.value)
     if(this.buyerorderform.valid){
-    this.api.postworkorder(this.buyerorderform.value.data).subscribe((res)=>{
+    this.api.postworkorder(this.buyerorderform.value).subscribe((res)=>{
       if(res.success){
         alert("Your work order details have been saved....!!!!")
         window.location.reload(); 
