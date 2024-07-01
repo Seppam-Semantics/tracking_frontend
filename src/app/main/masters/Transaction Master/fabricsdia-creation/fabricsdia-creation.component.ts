@@ -23,48 +23,7 @@ export class FabricsdiaCreationComponent {
   Sizenamevalue: any;
   fsizedata: any;
   datalist: any;
-  
-  ngOnInit(): void {
-    
 
-    this.api.fsize_master_AllData().subscribe((res)=>{
-      this.fsizedata = res.fsize
-
-    })
-
-
-    this.api.Drop_Style_master().subscribe((res)=>{
-      this.styleDropdata = res.style
-    })
-
-
-    this.api.Drop_Size_master().subscribe((res)=>{
-      this.sizeDropdata = res.sizes
-    })
-
-  }
-
-  getstyleId() {
-    this.api.StyleId(this.Stylenamevalue).subscribe((res)=>{
-      this.styleid = res.style[0].id
-
-      this.Fabricsdiacreate.patchValue({
-        styleId : this.styleid 
-      })
-    })
-  }
-
-  getsizeId() {
-    this.api.SizeId(this.Sizenamevalue).subscribe((res)=>{
-      this.sizeid = res.sizes[0].id
-
-      this.Fabricsdiacreate.patchValue({
-        sizeId : this.sizeid 
-      })
-      this.concatedSize()
-      this.editConcatedSize()
-    })
-  }
 
   constructor(private fb : FormBuilder, private api : ApiService){
   
@@ -114,6 +73,48 @@ export class FabricsdiaCreationComponent {
     })
   }
   
+  ngOnInit(): void {
+    this.api.fsize_master_AllData().subscribe((res)=>{
+      this.fsizedata = res.fsize
+    })
+    this.api.Drop_Style_master().subscribe((res)=>{
+      this.styleDropdata = res.style
+    })
+    this.api.Drop_Size_master().subscribe((res)=>{
+      this.sizeDropdata = res.sizes
+    })
+  }
+
+  getstyleId() {
+    this.api.StyleId(this.Stylenamevalue).subscribe((res)=>{
+      this.styleid = res.style[0].id
+
+      this.Fabricsdiacreate.patchValue({
+        styleId : this.styleid 
+      })
+    })
+  }
+
+  getsizeId() {
+    this.api.SizeId(this.Sizenamevalue).subscribe((res)=>{
+      this.sizeid = res.sizes[0].id
+
+      this.Fabricsdiacreate.patchValue({
+        sizeId : this.sizeid 
+      })
+      this.concatedSize()
+      this.editConcatedSize()
+    })
+  }
+
+  fsize_filter(event:any){
+    const size = event.target.value
+    this.api.fsize_master_filter(size).subscribe((res)=>{
+      this.fsizedata = res.fsize
+
+    })
+  }
+  
   edit(id:any){
     this.api.fsize_master_SingleData(id).subscribe((res)=>{
       this.datalist = res.fsize
@@ -145,9 +146,7 @@ export class FabricsdiaCreationComponent {
     const machineDia = this.Fabricsdiacreate.get('machineDia')?.value;
     const size = this.Fabricsdiacreate.get('sizeName')?.value;
     const finishDia = this.Fabricsdiacreate.get('finishDia')?.value;
-
     const concatSize = machineDia  + '-' + size + '-' + finishDia
-
     this.Fabricsdiacreate.get('concatSize')?.setValue(concatSize)
   }
 
@@ -155,12 +154,9 @@ export class FabricsdiaCreationComponent {
     const machineDia = this.Fabricsdiaedit.get('machineDia')?.value;
     const size = this.Fabricsdiaedit.get('sizeName')?.value;
     const finishDia = this.Fabricsdiaedit.get('finishDia')?.value;
-
     const concatSize = machineDia  + '-' + size + '-' + finishDia
-
     this.Fabricsdiaedit.get('concatSize')?.setValue(concatSize)
   }
-
 
   update(){
     this.api.fsize_master(this.Fabricsdiaedit.value).subscribe((res)=>{
@@ -179,7 +175,6 @@ export class FabricsdiaCreationComponent {
       })
     })
   }
-
 
   saveButton(){
     this.api.fsize_master(this.Fabricsdiacreate.value).subscribe((res)=>{
