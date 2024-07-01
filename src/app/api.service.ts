@@ -947,6 +947,9 @@ export class ApiService {
     return this.http.delete(this.getUrl() + `/mastersapi/po-master-line/${id}`, this.getHeaders())
   }
 
+  PO_Master_filter(order:any):Observable<any>{
+   return this.http.get(this.getUrl() + `/mastersapi/po-master-filter?orderNo=${order}`, this.getHeaders())
+  }
   // =================================== Rej Type Master=============================================================================
 
   rejtype_Master(data: any): Observable<any> {

@@ -38,6 +38,34 @@ export class POMasterCreationComponent {
   line_id: any;
   order_id: any;
 
+  constructor(private fb: FormBuilder, private api: ApiService, private datePipe: DatePipe) {
+
+    this.pocreate = this.fb.group({
+      id: new FormControl(''),
+      buyer: new FormControl(''),
+      buyerId: new FormControl(''),
+      orderNo: new FormControl(''),
+      poDate: new FormControl(''),
+      shipDate: new FormControl('')
+    })
+
+    this.poedit = this.fb.group({
+      id: new FormControl(''),
+      buyer: new FormControl(''),
+      buyerId: new FormControl(''),
+      orderNo: new FormControl(''),
+      poDate: new FormControl(''),
+      shipDate: new FormControl('')
+    })
+
+
+    this.poDetailscreate = this.fb.group({
+      id :  new FormControl(this.order_id), 
+      data: this.fb.array([]),
+    })
+  }
+
+
   ngOnInit(): void {
     this.api.Buyer_master_AllData().subscribe((res) => {
       this.allData = res.buyers
@@ -64,32 +92,6 @@ export class POMasterCreationComponent {
       this.poAlldata = res.po
     })
 
-  }
-  constructor(private fb: FormBuilder, private api: ApiService, private datePipe: DatePipe) {
-
-    this.pocreate = this.fb.group({
-      id: new FormControl(''),
-      buyer: new FormControl(''),
-      buyerId: new FormControl(''),
-      orderNo: new FormControl(''),
-      poDate: new FormControl(''),
-      shipDate: new FormControl('')
-    })
-
-    this.poedit = this.fb.group({
-      id: new FormControl(''),
-      buyer: new FormControl(''),
-      buyerId: new FormControl(''),
-      orderNo: new FormControl(''),
-      poDate: new FormControl(''),
-      shipDate: new FormControl('')
-    })
-
-
-    this.poDetailscreate = this.fb.group({
-      id :  new FormControl(this.order_id), 
-      data: this.fb.array([]),
-    })
   }
 
   get items() {
@@ -198,6 +200,13 @@ export class POMasterCreationComponent {
       const formArray = this.poDetailscreate.get('data') as FormArray;
       const row = formArray.at(index);
       row.get('colorId')?.setValue(  this.colorid);
+    })
+  }
+
+  po_filter(event:any){
+    const orderNo = event.target.value
+    this.api.PO_Master_filter(orderNo).subscribe((res)=>{
+      this.poAlldata = res.po
     })
   }
 
