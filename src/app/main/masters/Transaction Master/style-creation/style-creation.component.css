@@ -17,11 +17,11 @@ tr,td,th{
   justify-content: center;
   text-align: center;
 }
-thead{
+thead {
   position: sticky;
   top: 0;
+  background-color: #f2f2f2;
 }
-
 .Scroll{
   display: block;
   overflow-y: auto;
