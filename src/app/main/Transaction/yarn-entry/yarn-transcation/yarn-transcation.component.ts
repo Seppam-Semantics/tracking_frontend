@@ -1,7 +1,9 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormArray, FormControl, FormGroup, AbstractControl } from '@angular/forms';
+import { MatTabGroup } from '@angular/material/tabs';
 import { ApiService } from 'src/app/api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-yarn-transcation',
@@ -77,7 +79,7 @@ export class YarnTranscationComponent implements OnInit {
   loading3 : boolean =false;
   loading4 : boolean =false;
   loading5 : boolean =false;
-
+  @ViewChild('tabGroup') tabGroup!: MatTabGroup;
   constructor(private fb: FormBuilder, private api: ApiService, private datePipe: DatePipe) { }
 
 
@@ -278,10 +280,17 @@ export class YarnTranscationComponent implements OnInit {
       data: this.Yarn_Entry_1.get('data')
     })
     this.api.addUpdateYarn(yarnHeaderData.value).subscribe((res) => {
-      alert(res.message)
-      this.loading1 = false;
+      Swal.fire({
+        title: "Good job!",
+        text: "Updated successfully!",
+        icon: "success"
+      });
+
       window.location.reload()
+
+      this.loading1 = false;
     })
+
   }
 
   // <!-----------------------------Lot Check------------------------------------------------------------------------>
@@ -369,7 +378,11 @@ export class YarnTranscationComponent implements OnInit {
   LotCheck_Button() {
     this.loading2=true;
     this.api.addUpdateYarnCheck(this.LotCheck.value).subscribe((res) => {
-      alert(res.message);
+      Swal.fire({
+        title: "Good job!",
+        text: "Updated successfully!",
+        icon: "success"
+      });
       this.loading2 = false;
       window.location.reload()
     });

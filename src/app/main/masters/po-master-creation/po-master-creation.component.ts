@@ -293,10 +293,10 @@ export class POMasterCreationComponent {
   }
 
   delectheder_line(id: any) {
-    this.api.delete_line_PO_master(id).subscribe((res) => {
-      alert(res.message)
-      window.location.reload()
-    })
+    // this.api.delete_line_PO_master(id).subscribe((res) => {
+    //   alert(res.message)
+    //   window.location.reload()
+    // })
   }
 
 }

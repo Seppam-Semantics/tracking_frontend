@@ -314,7 +314,7 @@ export class FabricRollData2Component implements OnInit {
     this.visibleEntry = true
    
     this.loadworkorderdetails(JSON.stringify(orderNo))
-  console.log(this.data2)
+  // console.log(this.data2)
   }
 
   wobystyle() {
@@ -587,7 +587,17 @@ export class FabricRollData2Component implements OnInit {
   woupdatesubmit() {
     if (this.buyerorderform.valid) {
         this.api.postworkorder(this.buyerorderform.value.data).subscribe((res) => {
-            alert(res.message);
+
+
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Your work has been Updated",
+            showConfirmButton: false,
+            timer: 1500
+          });
+
+
             this.visible = false;
             this.woByBuyer();
             this.loadworkorder();

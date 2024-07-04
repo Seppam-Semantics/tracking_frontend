@@ -158,7 +158,7 @@ export class WorkorderDataComponent implements OnInit {
     })
     this.api.Gsize_BO(this.style_Value).subscribe((res) => {
       this.concatSizeDta = res.Gsize
-      console.log(this.concatSizeDta)
+      // console.log(this.concatSizeDta)
     })
   }
 
@@ -290,7 +290,7 @@ export class WorkorderDataComponent implements OnInit {
   }
 
   sizedata(index : any) {
-    console.log(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, this.size_Value)
+    // console.log(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, this.size_Value)
     this.api.size_to_id(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, this.size_Value).subscribe((res) => {
 
       this.polineId = res.sizeId[0]?.id ? res.sizeId[0]?.id : ''
@@ -401,24 +401,24 @@ export class WorkorderDataComponent implements OnInit {
       "FabType": [''],
       "fabricTypeId": [''],
       "FabDia": [''],
-      "FabDiaId": [''],
+      "FabDiaId": ['', Validators.required],
       "FabGsm": [''],
       "FabGsmId": [0],
       "YarnKg": [''],
       "GreigeKg": [''],
       "YarnType": [''],
-      "YarnTypeId": [''],
+      "YarnTypeId": ['', Validators.required],
       "FinishKg": [''],
       "KnitSL": [''],
       "SpinFty": [''],
-      "SpinFtyId": [''],
+      "SpinFtyId": ['', Validators.required],
       "KnitFty": [''],
-      "KnitFtyId": [''],
+      "KnitFtyId": ['', Validators.required],
       "DyeinFty": [''],
-      "DyeinFtyId": [''],
+      "DyeinFtyId": ['', Validators.required],
 
       "dyetype": [''],
-      "dyeTypeId": [''],
+      "dyeTypeId": ['', Validators.required],
 
       "OrderPcs": [''],
       "OrderFOBRate": [''],
@@ -435,12 +435,18 @@ export class WorkorderDataComponent implements OnInit {
   }
 
   save() {
-    console.log(this.buyerorderform.value)
+    // console.log(this.buyerorderform.value)
     if (this.buyerorderform.valid) {
       this.api.postworkorder(this.buyerorderform.value).subscribe((res) => {
         if (res.success) {
-          alert("Your work order details have been saved....!!!!")
-          window.location.reload();
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Your work has been saved",
+            showConfirmButton: false,
+            timer: 1500
+          });
+          this.router.navigate(['/main/FabricRollData'])
         }
         else {
           alert("Error while saving...!!!")

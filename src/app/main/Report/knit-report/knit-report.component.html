@@ -1,13 +1,12 @@
-
 <div style="display: flex; justify-content: center; background-color: rgb(61, 57, 57); height: 40px;">
   <h3 style="color: white; margin-top: 0.5%; font-weight: normal;">Knit Production Report</h3>
 </div>
 
 <!---===========================================================================================================-->
 
-  <mat-toolbar>
-    <div style="display: flex; justify-content: center; width: 80%; gap: 2%;margin-top: 1.5%;">
-      <mat-form-field appearance="outline">
+<mat-toolbar style="height: 8vh;">
+  <!-- <div style="display: flex; justify-content: center; width: 80%; gap: 2%;margin-top: 1.5%;"> -->
+  <!-- <mat-form-field appearance="outline">
         <mat-label>Factory</mat-label>
         <mat-select [(ngModel)]="factoryvalue" (selectionChange)="factory()">
           <mat-option *ngFor="let ftyname of this.ftyName" [value]="ftyname.knitFty">{{ftyname.knitFty}}</mat-option>
@@ -19,32 +18,35 @@
         <mat-select [(ngModel)]="knitdate" (selectionChange)="factory()">
           <mat-option *ngFor="let date of this.date" [value]="date.date">{{date.date}}</mat-option>
         </mat-select>
-      </mat-form-field>
+      </mat-form-field> -->
+  <p-dropdown [options]="orderName" (onChange)="factory()" [(ngModel)]="ordervalue" placeholder="Order No"
+    optionLabel="orderNo" optionValue="orderNo" autoWidth="false" [style]="{ minWidth: '22vh', minHeight:'2vh' }"
+    [editable]="true"></p-dropdown>
 
-    </div>
-    <div style="flex: 1 1 auto;"></div>
-    <div class="newlist1">
-      <button mat-button color='primary' (click)="Report()">New </button>
-      <button mat-button color='primary' (click)="exportexcel2()"><mat-icon>download</mat-icon>Download</button>
-    </div>
-    <!-- <div class="newlist1">
+  <!-- </div> -->
+  <div style="flex: 1 1 auto;"></div>
+  <div class="newlist1">
+    <button mat-button color='primary' (click)="Report()">New </button>
+    <button mat-button color='primary' (click)="exportexcel2()"><mat-icon>download</mat-icon>Download</button>
+  </div>
+  <!-- <div class="newlist1">
       <button mat-button color='primary' (click)="Report()">New</button>
     </div> -->
 
-    <button mat-button color="primary" [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-      Report
-    </button>
-    <mat-menu #menu="matMenu">
-      <!-- <button mat-menu-item (click)="Report()">
+  <button mat-button color="primary" [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    Report
+  </button>
+  <mat-menu #menu="matMenu">
+    <!-- <button mat-menu-item (click)="Report()">
         <span>New</span>
       </button> -->
-      <button mat-menu-item (click)="KnitFactoryInventory()">
-        <span>Knit Factory Inventory</span>
-      </button>
-      <button mat-menu-item (click)="Dayknit()">
-        <span>Day Knit</span>
-      </button>
-    </mat-menu>
+    <button mat-menu-item (click)="KnitFactoryInventory()">
+      <span>Knit Factory Inventory</span>
+    </button>
+    <button mat-menu-item (click)="Dayknit()">
+      <span>Day Knit</span>
+    </button>
+  </mat-menu>
 
   <div class="newlist2">
     <button mat-button color='primary' (click)="Report()">New</button>
@@ -56,20 +58,27 @@
     <thead class="thead-dark">
       <tr>
         <th> Sl.no </th>
-        <th>Code</th>
+        <th>Order</th>
         <th>Factory</th>
+        <th>Color</th>
         <th>Date</th>
         <th>Total Day ProductionKgs</th>
         <th>Total NoOfRolls Produced</th>
         <th>Edit </th>
-        <th>Delete</th>
+        <!-- <th>Delete</th> -->
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let detail of this.data; let i= index ;">
         <td data-toggle="modal" data-target="#myModal" (click)="check(detail.id)">{{i+1}}</td>
-        <td data-toggle="modal" data-target="#myModal" (click)="check(detail.id)">{{detail.code}}</td>
+        <td data-toggle="modal" data-target="#myModal" (click)="check(detail.id)">{{detail.orderNo}}</td>
         <td data-toggle="modal" data-target="#myModal" (click)="check(detail.id)">{{detail.factory}}</td>
+        <td data-toggle="modal" data-target="#myModal" (click)="check(detail.id)">
+          <ul *ngFor="let color of colorjson(detail.colors)" style="text-align: justify;">
+            <!-- <ul *ngFor="let color of detail.colors" style="text-align: justify;"> -->
+            <li>{{color.color}}</li>
+          </ul>
+        </td>
         <td data-toggle="modal" data-target="#myModal" (click)="check(detail.id)">{{detail.date}}</td>
         <td data-toggle="modal" data-target="#myModal" (click)="check(detail.id)">{{detail.totalDayProductionKgs}}</td>
         <td data-toggle="modal" data-target="#myModal" (click)="check(detail.id)">{{detail.totalNoOfRollsProduced}}</td>
@@ -79,11 +88,11 @@
           </button>
         </td>
 
-        <td>
+        <!-- <td>
           <button class="btn btn-danger" (click)="deleteKnit(detail.id)">
             <mat-icon>delete</mat-icon>
           </button>
-        </td>
+        </td> -->
       </tr>
 
     <tbody>
@@ -97,7 +106,8 @@
 <p-dialog [resizable]="true" [modal]="true" [maximizable]="true" appendTo="body" [(visible)]="allDetailsModal"
   [style]="{width: '90vw'}" [contentStyle]="{height: '90vh'}" header="Knit Report All Entry">
 
-  <div class="example-accordion-item-header" style="display: flex; justify-content: center; gap: 0.5%; margin-top: 2%; flex-wrap: wrap;">
+  <div class="example-accordion-item-header"
+    style="display: flex; justify-content: center; gap: 0.5%; margin-top: 2%; flex-wrap: wrap;">
 
     <p-dropdown [options]="this.knitdetails" [(ngModel)]="buyerName" (selectionChange)="woByBuyer()" optionLabel="buyer"
       optionValue="buyer" placeholder="Buyer"></p-dropdown>
@@ -120,20 +130,20 @@
 
   <!------------------------------------------------------------------------------>
   <div style="table-layout: fixed; margin-top: 2%" id="table-data">
-<div class="KnitScroll">
-    <table class="table table-hover">
-      <tbody>
-        <tr *ngFor="let data of this.knitdetails2; let i = index;">
-          <td><b>Factory</b> : {{data.factory}}</td>
-          <td><b>HouseKeepingStatus</b> : {{data.houseKeepingStatus == 1 ? "Active":"InActive" }}</td>
-          <td><b>FloorLightingStatus</b> : {{data.floorLightingStatus == 1 ? "Active":"InActive" }}</td>
-          <td><b>GasElecAvailability</b> : {{data.gasElecAvailability == 1 ? "Active":"InActive" }}</td>
-          <td><b>StorageAreaStatus</b> : {{data.storageAreaStatus == 1 ? "Active":"InActive" }}</td>
-          <td><b>AllocatedDay</b> : {{data.allocatedDay}}</td>
-        </tr>
-      </tbody>
-    </table>
-</div>
+    <div class="KnitScroll">
+      <table class="table table-hover">
+        <tbody>
+          <tr *ngFor="let data of this.knitdetails2; let i = index;">
+            <td><b>Factory</b> : {{data.factory}}</td>
+            <td><b>HouseKeepingStatus</b> : {{data.houseKeepingStatus == 1 ? "Active":"InActive" }}</td>
+            <td><b>FloorLightingStatus</b> : {{data.floorLightingStatus == 1 ? "Active":"InActive" }}</td>
+            <td><b>GasElecAvailability</b> : {{data.gasElecAvailability == 1 ? "Active":"InActive" }}</td>
+            <td><b>StorageAreaStatus</b> : {{data.storageAreaStatus == 1 ? "Active":"InActive" }}</td>
+            <td><b>AllocatedDay</b> : {{data.allocatedDay}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <div class="fixTableHead">
 
       <table class="table table-hover fl-table">
@@ -194,345 +204,358 @@
   </div>
   <ng-template pTemplate="footer">
     <div style="width: 100%; display: flex; justify-content: center;">
-    <button mat-button color="primary" (click)="exportexcel()" style="display: flex; justify-content: lefts;">
-     <mat-icon>download</mat-icon> Download File
-    </button>
-  </div>
+      <button mat-button color="primary" (click)="exportexcel()" style="display: flex; justify-content: lefts;">
+        <mat-icon>download</mat-icon> Download File
+      </button>
+    </div>
   </ng-template>
 </p-dialog>
 <!-- <!============================================================================================> -->
 
 <!-- <!============================================================================================> -->
 <p-dialog [(visible)]="editpopup" [resizable]="true" [modal]="true" [maximizable]="true" appendTo="body"
-[style]="{width: '90vw'}" [contentStyle]="{height: '90vh'}" [formGroup]="load" header="Knit Entry Report">
+  [style]="{width: '90vw'}" [contentStyle]="{height: '90vh'}" [formGroup]="load" header="Knit Entry Report">
 
-<div class="editpopup1">
-  <mat-toolbar class="toolbar1" color="primary">
-    <div style="display: flex; justify-content: start;">
-      <div style="display: flex; gap: 20px;">
-        <label>Factory Name</label>
-        <input type="text" readonly formControlName="factory" class="form-control">
+  <div class="editpopup1">
+    <mat-toolbar class="toolbar1" color="primary">
+      <div style="display: flex; justify-content: start;">
+        <div style="display: flex; gap: 20px;">
+          <label>Factory Name</label>
+          <input type="text" readonly formControlName="factory" class="form-control">
+        </div>
       </div>
-    </div>
-    <div style="display: flex; gap: 10px;">
-      <!-- <div style="display: inline-block;">
+      <div style="display: flex; gap: 10px;">
+        <!-- <div style="display: inline-block;">
         <label class="day-label">Machine allocated for the day</label>
       </div> -->
-      <div style="display: flex;">
-        <!-- <div>
+        <div style="display: flex;">
+          <!-- <div>
           <input class="form-control me-2" id="numberOfEntries" type="number" formControlName="allocatedDay" readonly>
         </div> -->
-        <div style="margin-left: 5px;">
-          <input type="text" class="form-control date" formControlName="date" readonly>
+          <div style="margin-left: 5px;">
+            <input type="text" class="form-control date" formControlName="date" readonly>
+          </div>
         </div>
       </div>
-    </div>
-  </mat-toolbar>
-  <mat-toolbar style="height: fit-content; padding: 10px; display: flex; justify-content: center;
+    </mat-toolbar>
+    <mat-toolbar style="height: fit-content; padding: 10px; display: flex; justify-content: center;
     flex-wrap: wrap; gap: 50px;">
-    <div class="d-flex">
-      <div style="display: flex; gap: 10px;">
-        <div>
-          <label style="display: inline-block;">House Keeping Status</label>
+      <div class="d-flex">
+        <div style="display: flex; gap: 10px;">
+          <div>
+            <label style="display: inline-block;">House Keeping Status</label>
+          </div>
+          <div>
+            <input type="checkbox" formControlName="houseKeepingStatus" style="    width: 17px; height: 36px;">
+          </div>
         </div>
-        <div>
-          <input type="checkbox" formControlName="houseKeepingStatus" style="    width: 17px; height: 36px;">
+      </div>
+      <div class="d-flex">
+        <div style="display: flex; gap: 10px">
+          <div><label style="display: inline-block;">Gas/Elec Availability</label></div>
+          <div><input type="checkbox" formControlName="gasElecAvailability" style="    width: 17px; height: 36px;">
+          </div>
         </div>
       </div>
-    </div>
-    <div class="d-flex">
-      <div style="display: flex; gap: 10px">
-        <div><label style="display: inline-block;">Gas/Elec Availability</label></div>
-        <div><input type="checkbox" formControlName="gasElecAvailability"  style="    width: 17px; height: 36px;"></div>
+      <div class="d-flex">
+        <div style="display: flex; gap: 10px">
+          <div><label style="display: inline-block;">Floor Lighting Status</label></div>
+          <div><input type="checkbox" formControlName="floorLightingStatus" style="    width: 17px; height: 36px;">
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="d-flex">
-      <div style="display: flex; gap: 10px">
-        <div><label style="display: inline-block;">Floor Lighting Status</label></div>
-        <div><input type="checkbox" formControlName="floorLightingStatus"  style="    width: 17px; height: 36px;"></div>
+
+      <div class="d-flex">
+        <div style="display: flex; gap: 10px">
+          <div><label style="display: inline-block;">Storage Area Status</label></div>
+          <div><input type="checkbox" formControlName="storageAreaStatus" style="    width: 17px; height: 36px;"></div>
+        </div>
       </div>
-    </div>
 
-    <div class="d-flex">
-      <div style="display: flex; gap: 10px">
-        <div><label style="display: inline-block;">Storage Area Status</label></div>
-        <div><input type="checkbox" formControlName="storageAreaStatus" style="    width: 17px; height: 36px;"></div>
-      </div>
-    </div>
-
-    <span class="flex-spacer"></span>
-  </mat-toolbar>
+      <span class="flex-spacer"></span>
+    </mat-toolbar>
 
 
-  <!--------------------------------Table------------------------------------------------------------------>
-  <div class="ovralltable">
-    <table class="table table-bordered table-hover" style="width: 100%;">
-      <thead class="thead-dark">
-        <tr>
-          <th style="min-width: 40px;">S.no</th>
-          <th style="min-width: 80px;">Buyer</th>
-          <th style="min-width: 80px;">Work Order</th>
-          <th style="min-width: 80px;">Style</th>
-          <th style="min-width: 80px;">Color</th>
-          <th style="min-width: 80px;">Size</th>
-          <th style="min-width: 60px;">Knit mach. no</th>
-          <th style="min-width: 60px;">Yarn Lot</th>
-          <th style="min-width: 60px;">Day Prod</th>
-          <th style="min-width: 60px;">No.Rolls Produced</th>
-          <th style="min-width: 60px;">No.Rolls Checked</th>
-          <th style="min-width: 60px;">Knitting SL</th>
-          <th style="min-width: 60px;">Machine RPM</th>
-          <th style="min-width: 40px;">Oil Sys</th>
-          <th style="min-width: 40px;">Yarn Tension</th>
-          <th style="min-width: 40px;">Needle Qty</th>
-          <th style="min-width: 40px;">Sinker Qty</th>
-          <th style="min-width: 40px;">Moving Fan</th>
-          <th style="min-width: 40px;">All Stop Motion</th>
-          <th style="min-width: 40px;">Takeup Roller Tension</th>
-          <th style="min-width: 40px;">Remarks</th>
-        </tr>
-        <tr>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
+    <!--------------------------------Table------------------------------------------------------------------>
+    <div class="ovralltable">
+      <table class="table table-bordered table-hover" style="width: 100%;">
+        <thead class="thead-dark">
+          <tr>
+            <th style="min-width: 40px;">S.no</th>
+            <th style="min-width: 80px;">Buyer</th>
+            <th style="min-width: 80px;">Work Order</th>
+            <th style="min-width: 80px;">Style</th>
+            <th style="min-width: 80px;">Color</th>
+            <th style="min-width: 80px;">Size</th>
+            <th style="min-width: 60px;">Knit mach. no</th>
+            <th style="min-width: 60px;">Yarn Lot</th>
+            <th style="min-width: 60px;">Day Prod</th>
+            <th style="min-width: 60px;">No.Rolls Produced</th>
+            <th style="min-width: 60px;">No.Rolls Checked</th>
+            <th style="min-width: 60px;">Knitting SL</th>
+            <th style="min-width: 60px;">Machine RPM</th>
+            <th style="min-width: 40px;">Oil Sys</th>
+            <th style="min-width: 40px;">Yarn Tension</th>
+            <th style="min-width: 40px;">Needle Qty</th>
+            <th style="min-width: 40px;">Sinker Qty</th>
+            <th style="min-width: 40px;">Moving Fan</th>
+            <th style="min-width: 40px;">All Stop Motion</th>
+            <th style="min-width: 40px;">Takeup Roller Tension</th>
+            <th style="min-width: 40px;">Remarks</th>
+          </tr>
+          <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
 
-          <th>(Y/N)</th>
-          <th>(Y/N)</th>
-          <th>(Y/N)</th>
-          <th>(Y/N)</th>
-          <th>(Y/N)</th>
-          <th>(Y/N)</th>
-          <th>(Y/N)</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody formArrayName="data">
-        <tr *ngFor="let list of items.controls; let i=index" [formGroupName]="i">
-          <td>
-            <!-- <input type="text" class="form-control" [value]="i+1"> -->
-          <p>{{i+1}}</p>
-          </td>
-                              <td>
-              <input type="text" class="form-control" formControlName="buyer" list="1" (input)="getBuyerValue($event)" (change)="getorders()">
+            <th>(Y/N)</th>
+            <th>(Y/N)</th>
+            <th>(Y/N)</th>
+            <th>(Y/N)</th>
+            <th>(Y/N)</th>
+            <th>(Y/N)</th>
+            <th>(Y/N)</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody formArrayName="data">
+          <tr *ngFor="let list of items.controls; let i=index" [formGroupName]="i">
+            <td>
+              <!-- <input type="text" class="form-control" [value]="i+1"> -->
+              <p>{{i+1}}</p>
+            </td>
+            <td>
+              <input type="text" class="form-control" formControlName="buyer" list="1" (input)="getBuyerValue($event)"
+                (change)="getorders()">
               <datalist id="1">
-                  <option *ngFor="let name of this.buyer" [value]="name.buyer">{{name.buyer}}</option>
+                <option *ngFor="let name of this.buyer" [value]="name.buyer">{{name.buyer}}</option>
               </datalist>
-          </td>
-          <td><input type="text" class="form-control" formControlName="orderNo" list="2" (input)="getOrderValue($event)" (change)="getstyle()">
+            </td>
+            <td><input type="text" class="form-control" formControlName="orderNo" list="2"
+                (input)="getOrderValue($event)" (change)="getstyle()">
               <datalist id="2">
-                  <option *ngFor="let number of this.order" [value]="number.orderNO" >
+                <option *ngFor="let number of this.order" [value]="number.orderNO">
               </datalist>
-          </td>
-          <td><input type="text" class="form-control" formControlName="style" list="3"  (input)="getstylevalue($event)" (change)="getcolor()">
+            </td>
+            <td><input type="text" class="form-control" formControlName="style" list="3" (input)="getstylevalue($event)"
+                (change)="getcolor()">
               <datalist id="3">
-                  <option *ngFor="let style of this.stylelist" [value]="style.style">
+                <option *ngFor="let style of this.stylelist" [value]="style.style">
               </datalist>
-          </td>
-          <td><input type="text" class="form-control" formControlName="color" list="4"  (input)="getcolorvalue($event)" (change)="getsize()">
+            </td>
+            <td><input type="text" class="form-control" formControlName="color" list="4" (input)="getcolorvalue($event)"
+                (change)="getsize()">
               <datalist id="4">
-                  <option *ngFor="let color of this.colorlist" [value]="color.color">
+                <option *ngFor="let color of this.colorlist" [value]="color.color">
               </datalist>
-          </td>
-          <td><input type="text" class="form-control" formControlName="size" list="5" >
+            </td>
+            <td><input type="text" class="form-control" formControlName="size" list="5">
               <datalist id="5">
-                  <option *ngFor="let size of this.sizelist" [value]="size.size">
+                <option *ngFor="let size of this.sizelist" [value]="size.size">
               </datalist>
-        </td>                    
-          <td><input type="text" class="form-control" formControlName="knitMachineno"></td>
-          <td><input type="text" class="form-control" formControlName="yarnLot"></td>
-          <td><input type="text" class="form-control" formControlName="dayProductionKgs"></td>
-          <td><input type="text" class="form-control" formControlName="noOfRollsProduced"></td>
-          <td><input type="text" class="form-control" formControlName="noOfRollsChecked"></td>
-          <td><input type="text" class="form-control" formControlName="knittingSL"></td>
-          <td><input type="text" class="form-control" formControlName="machineRPM"></td>
-          <td><input type="checkbox" style="width: 20px; height: 20px;" formControlName="oilSystem"></td>
-          <td><input type="checkbox" style="width: 20px; height: 20px;" formControlName="yarnTension"></td>
-          <td><input type="checkbox" style="width: 20px; height: 20px;" formControlName="needleQuality"></td>
-          <td><input type="checkbox" style="width: 20px; height: 20px;" formControlName="sinkerQuality"></td>
-          <td><input type="checkbox" style="width: 20px; height: 20px;" formControlName="movingFan"></td>
-          <td><input type="checkbox" style="width: 20px; height: 20px;" formControlName="allStopMotion"></td>
-          <td><input type="checkbox" style="width: 20px; height: 20px;" formControlName="takeupRollerTension"></td>
-          <td><textarea formControlName="remarks" class="form-control"></textarea></td>
-        </tr>
-      </tbody>
-    </table>
+            </td>
+            <td><input type="text" class="form-control" formControlName="knitMachineno"></td>
+            <td><input type="text" class="form-control" formControlName="yarnLot"></td>
+            <td><input type="text" class="form-control" formControlName="dayProductionKgs"></td>
+            <td><input type="text" class="form-control" formControlName="noOfRollsProduced"></td>
+            <td><input type="text" class="form-control" formControlName="noOfRollsChecked"></td>
+            <td><input type="text" class="form-control" formControlName="knittingSL"></td>
+            <td><input type="text" class="form-control" formControlName="machineRPM"></td>
+            <td><input type="checkbox" style="width: 20px; height: 20px;" formControlName="oilSystem"></td>
+            <td><input type="checkbox" style="width: 20px; height: 20px;" formControlName="yarnTension"></td>
+            <td><input type="checkbox" style="width: 20px; height: 20px;" formControlName="needleQuality"></td>
+            <td><input type="checkbox" style="width: 20px; height: 20px;" formControlName="sinkerQuality"></td>
+            <td><input type="checkbox" style="width: 20px; height: 20px;" formControlName="movingFan"></td>
+            <td><input type="checkbox" style="width: 20px; height: 20px;" formControlName="allStopMotion"></td>
+            <td><input type="checkbox" style="width: 20px; height: 20px;" formControlName="takeupRollerTension"></td>
+            <td><textarea formControlName="remarks" class="form-control"></textarea></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>
 
 
 
 
 
 
-<div class="editpopup2">
-  <mat-toolbar class="toolbar2" color="primary">
-    <div style="display: flex; justify-content: start;">
+  <div class="editpopup2">
+    <mat-toolbar class="toolbar2" color="primary">
+      <div style="display: flex; justify-content: start;">
         <input type="text" readonly formControlName="factory" class="form-control">
-    </div>
-    <div style="display: flex; gap: 10px;">
-      <div style="display: flex;">
-        <div>
-          <input class="form-control me-2" style="  font-size: small; width: 50px;" type="number" formControlName="allocatedDay" readonly>
-        </div>
-        <div style="margin-left: 5px;">
-          <input type="text" class="form-control date" formControlName="date" readonly>
-        </div>
       </div>
-    </div>
-  </mat-toolbar>
-  <mat-toolbar style="height: fit-content; padding: 10px; display: flex; justify-content: center;
-    flex-wrap: wrap; gap: 50px;">
-    <div class="d-flex">
       <div style="display: flex; gap: 10px;">
-        <div>
-          <label style="display: inline-block;">House Keeping Status</label>
+        <div style="display: flex;">
+          <div>
+            <input class="form-control me-2" style="  font-size: small; width: 50px;" type="number"
+              formControlName="allocatedDay" readonly>
+          </div>
+          <div style="margin-left: 5px;">
+            <input type="text" class="form-control date" formControlName="date" readonly>
+          </div>
         </div>
-        <div>
-          <input type="checkbox" formControlName="houseKeepingStatus" style="    width: 17px; height: 36px;">
+      </div>
+    </mat-toolbar>
+    <mat-toolbar style="height: fit-content; padding: 10px; display: flex; justify-content: center;
+    flex-wrap: wrap; gap: 50px;">
+      <div class="d-flex">
+        <div style="display: flex; gap: 10px;">
+          <div>
+            <label style="display: inline-block;">House Keeping Status</label>
+          </div>
+          <div>
+            <input type="checkbox" formControlName="houseKeepingStatus" style="    width: 17px; height: 36px;">
+          </div>
         </div>
       </div>
-    </div>
-    <div class="d-flex">
-      <div style="display: flex; gap: 10px">
-        <div><label style="display: inline-block;">Gas/Elec Availability</label></div>
-        <div><input type="checkbox" formControlName="gasElecAvailability"  style="    width: 17px; height: 36px;"></div>
+      <div class="d-flex">
+        <div style="display: flex; gap: 10px">
+          <div><label style="display: inline-block;">Gas/Elec Availability</label></div>
+          <div><input type="checkbox" formControlName="gasElecAvailability" style="    width: 17px; height: 36px;">
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="d-flex">
-      <div style="display: flex; gap: 10px">
-        <div><label style="display: inline-block;">Floor Lighting Status</label></div>
-        <div><input type="checkbox" formControlName="floorLightingStatus"  style="    width: 17px; height: 36px;"></div>
+      <div class="d-flex">
+        <div style="display: flex; gap: 10px">
+          <div><label style="display: inline-block;">Floor Lighting Status</label></div>
+          <div><input type="checkbox" formControlName="floorLightingStatus" style="    width: 17px; height: 36px;">
+          </div>
+        </div>
       </div>
-    </div>
 
-    <div class="d-flex">
-      <div style="display: flex; gap: 10px">
-        <div><label style="display: inline-block;">Storage Area Status</label></div>
-        <div><input type="checkbox" formControlName="storageAreaStatus" style="    width: 17px; height: 36px;"></div>
+      <div class="d-flex">
+        <div style="display: flex; gap: 10px">
+          <div><label style="display: inline-block;">Storage Area Status</label></div>
+          <div><input type="checkbox" formControlName="storageAreaStatus" style="    width: 17px; height: 36px;"></div>
+        </div>
       </div>
-    </div>
 
-    <span class="flex-spacer"></span>
-  </mat-toolbar>
+      <span class="flex-spacer"></span>
+    </mat-toolbar>
 
 
-  <!--------------------------------Table------------------------------------------------------------------>
-  <div class="ovralltable">
-    <table class="table table-bordered table-hover" style="width: 100%;">
-      <thead class="thead-dark">
-        <tr>
-          <th style="min-width: 60px;">S.no</th>
-          <th style="min-width: 80px;">Buyer</th>
-          <th style="min-width: 80px;">Work Order</th>
-          <th style="min-width: 80px;">Style</th>
-          <th style="min-width: 80px;">Color</th>
-          <th style="min-width: 80px;">Size</th>
-          <th style="min-width: 60px;">Knit mach. no</th>
-          <th style="min-width: 60px;">Yarn Lot</th>
-          <th style="min-width: 60px;">Day Prod</th>
-          <th style="min-width: 60px;">No.Rolls Produced</th>
-          <th style="min-width: 60px;">No.Rolls Checked</th>
-          <th style="min-width: 60px;">Knitting SL</th>
-          <th style="min-width: 60px;">Machine RPM</th>
-          <th style="min-width: 40px;">Oil System</th>
-          <th style="min-width: 40px;">Yarn Tension</th>
-          <th style="min-width: 40px;">Needle Qty</th>
-          <th style="min-width: 40px;">Sinker Qty</th>
-          <th style="min-width: 40px;">Moving Fan</th>
-          <th style="min-width: 40px;">All Stop Motion</th>
-          <th style="min-width: 40px;">TakeupRoller Tension</th>
-          <th style="min-width: 40px;">Remarks</th>
-        </tr>
-        <tr>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
+    <!--------------------------------Table------------------------------------------------------------------>
+    <div class="ovralltable">
+      <table class="table table-bordered table-hover" style="width: 100%;">
+        <thead class="thead-dark">
+          <tr>
+            <th style="min-width: 60px;">S.no</th>
+            <th style="min-width: 80px;">Buyer</th>
+            <th style="min-width: 80px;">Work Order</th>
+            <th style="min-width: 80px;">Style</th>
+            <th style="min-width: 80px;">Color</th>
+            <th style="min-width: 80px;">Size</th>
+            <th style="min-width: 60px;">Knit mach. no</th>
+            <th style="min-width: 60px;">Yarn Lot</th>
+            <th style="min-width: 60px;">Day Prod</th>
+            <th style="min-width: 60px;">No.Rolls Produced</th>
+            <th style="min-width: 60px;">No.Rolls Checked</th>
+            <th style="min-width: 60px;">Knitting SL</th>
+            <th style="min-width: 60px;">Machine RPM</th>
+            <th style="min-width: 40px;">Oil System</th>
+            <th style="min-width: 40px;">Yarn Tension</th>
+            <th style="min-width: 40px;">Needle Qty</th>
+            <th style="min-width: 40px;">Sinker Qty</th>
+            <th style="min-width: 40px;">Moving Fan</th>
+            <th style="min-width: 40px;">All Stop Motion</th>
+            <th style="min-width: 40px;">TakeupRoller Tension</th>
+            <th style="min-width: 40px;">Remarks</th>
+          </tr>
+          <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
 
-          <th>(Y/N)</th>
-          <th>(Y/N)</th>
-          <th>(Y/N)</th>
-          <th>(Y/N)</th>
-          <th>(Y/N)</th>
-          <th>(Y/N)</th>
-          <th>(Y/N)</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody formArrayName="data">
-        <tr *ngFor="let list of items.controls; let i=index" [formGroupName]="i">
-          <td><input type="text" class="form-control" [value]="i+1"></td>
-                              <td>
-              <input type="text" class="form-control" formControlName="buyer" list="1" (input)="getBuyerValue($event)" (change)="getorders()">
+            <th>(Y/N)</th>
+            <th>(Y/N)</th>
+            <th>(Y/N)</th>
+            <th>(Y/N)</th>
+            <th>(Y/N)</th>
+            <th>(Y/N)</th>
+            <th>(Y/N)</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody formArrayName="data">
+          <tr *ngFor="let list of items.controls; let i=index" [formGroupName]="i">
+            <td><input type="text" class="form-control" [value]="i+1"></td>
+            <td>
+              <input type="text" class="form-control" formControlName="buyer" list="1" (input)="getBuyerValue($event)"
+                (change)="getorders()">
               <datalist id="1">
-                  <option *ngFor="let name of this.buyer" [value]="name.buyer">{{name.buyer}}</option>
+                <option *ngFor="let name of this.buyer" [value]="name.buyer">{{name.buyer}}</option>
               </datalist>
-          </td>
-          <td><input type="text" class="form-control" formControlName="orderNo" list="2" (input)="getOrderValue($event)" (change)="getstyle()">
+            </td>
+            <td><input type="text" class="form-control" formControlName="orderNo" list="2"
+                (input)="getOrderValue($event)" (change)="getstyle()">
               <datalist id="2">
-                  <option *ngFor="let number of this.order" [value]="number.orderNO" >
+                <option *ngFor="let number of this.order" [value]="number.orderNO">
               </datalist>
-          </td>
-          <td><input type="text" class="form-control" formControlName="style" list="3"  (input)="getstylevalue($event)" (change)="getcolor()">
+            </td>
+            <td><input type="text" class="form-control" formControlName="style" list="3" (input)="getstylevalue($event)"
+                (change)="getcolor()">
               <datalist id="3">
-                  <option *ngFor="let style of this.stylelist" [value]="style.style">
+                <option *ngFor="let style of this.stylelist" [value]="style.style">
               </datalist>
-          </td>
-          <td><input type="text" class="form-control" formControlName="color" list="4"  (input)="getcolorvalue($event)" (change)="getsize()">
+            </td>
+            <td><input type="text" class="form-control" formControlName="color" list="4" (input)="getcolorvalue($event)"
+                (change)="getsize()">
               <datalist id="4">
-                  <option *ngFor="let color of this.colorlist" [value]="color.color">
+                <option *ngFor="let color of this.colorlist" [value]="color.color">
               </datalist>
-          </td>
-          <td><input type="text" class="form-control" formControlName="size" list="5" >
+            </td>
+            <td><input type="text" class="form-control" formControlName="size" list="5">
               <datalist id="5">
-                  <option *ngFor="let size of this.sizelist" [value]="size.size">
+                <option *ngFor="let size of this.sizelist" [value]="size.size">
               </datalist>
-        </td>                    
-          <td><input type="text" class="form-control" formControlName="knitMachineno"></td>
-          <td><input type="text" class="form-control" formControlName="yarnLot"></td>
-          <td><input type="text" class="form-control" formControlName="dayProductionKgs"></td>
-          <td><input type="text" class="form-control" formControlName="noOfRollsProduced"></td>
-          <td><input type="text" class="form-control" formControlName="noOfRollsChecked"></td>
-          <td><input type="text" class="form-control" formControlName="knittingSL"></td>
-          <td><input type="text" class="form-control" formControlName="machineRPM"></td>
-          <td><input type="checkbox" style="width: 20px; height: 20px;" formControlName="oilSystem"></td>
-          <td><input type="checkbox" style="width: 20px; height: 20px;" formControlName="yarnTension"></td>
-          <td><input type="checkbox" style="width: 20px; height: 20px;" formControlName="needleQuality"></td>
-          <td><input type="checkbox" style="width: 20px; height: 20px;" formControlName="sinkerQuality"></td>
-          <td><input type="checkbox" style="width: 20px; height: 20px;" formControlName="movingFan"></td>
-          <td><input type="checkbox" style="width: 20px; height: 20px;" formControlName="allStopMotion"></td>
-          <td><input type="checkbox" style="width: 20px; height: 20px;" formControlName="takeupRollerTension"></td>
-          <td><textarea formControlName="remarks" class="form-control"></textarea></td>
-        </tr>
-      </tbody>
-    </table>
+            </td>
+            <td><input type="text" class="form-control" formControlName="knitMachineno"></td>
+            <td><input type="text" class="form-control" formControlName="yarnLot"></td>
+            <td><input type="text" class="form-control" formControlName="dayProductionKgs"></td>
+            <td><input type="text" class="form-control" formControlName="noOfRollsProduced"></td>
+            <td><input type="text" class="form-control" formControlName="noOfRollsChecked"></td>
+            <td><input type="text" class="form-control" formControlName="knittingSL"></td>
+            <td><input type="text" class="form-control" formControlName="machineRPM"></td>
+            <td><input type="checkbox" style="width: 20px; height: 20px;" formControlName="oilSystem"></td>
+            <td><input type="checkbox" style="width: 20px; height: 20px;" formControlName="yarnTension"></td>
+            <td><input type="checkbox" style="width: 20px; height: 20px;" formControlName="needleQuality"></td>
+            <td><input type="checkbox" style="width: 20px; height: 20px;" formControlName="sinkerQuality"></td>
+            <td><input type="checkbox" style="width: 20px; height: 20px;" formControlName="movingFan"></td>
+            <td><input type="checkbox" style="width: 20px; height: 20px;" formControlName="allStopMotion"></td>
+            <td><input type="checkbox" style="width: 20px; height: 20px;" formControlName="takeupRollerTension"></td>
+            <td><textarea formControlName="remarks" class="form-control"></textarea></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>
 
 
-<ng-template pTemplate="footer">
-  <div style="display: flex; justify-content: center;">
-    <div><button class="btn btn-primary" (click)="save()">Update</button></div>
-  </div>
-</ng-template>
+  <ng-template pTemplate="footer">
+    <div style="display: flex; justify-content: center;">
+      <div><button class="btn btn-primary" (click)="save()">Update</button></div>
+    </div>
+  </ng-template>
 
 </p-dialog>

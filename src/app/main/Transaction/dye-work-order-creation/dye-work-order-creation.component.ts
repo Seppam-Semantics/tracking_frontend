@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 
@@ -141,8 +141,29 @@ export class DyeWorkOrderCreationComponent {
       "remarks": new FormControl('')
     });
     this.items.push(row);
-  }
 
+    row.get('dyeKg')?.valueChanges.subscribe(() => {
+      this.calculateDiff();
+
+    });
+  
+    row.get('dyeRate')?.valueChanges.subscribe(() => {
+      this.calculateDiff();
+    });
+  }
+  calculateDiff() {
+    this.items.controls.forEach((control: AbstractControl) => {
+      const row = control as FormGroup;
+      if (row instanceof FormGroup) {
+        const dyeKgValue = parseFloat(row.get('dyeKg')?.value) || 0;
+        const dyeRateValue = parseFloat(row.get('dyeRate')?.value) || 0;
+        const dyeValue = dyeKgValue * dyeRateValue ;
+        const PLValue = dyeKgValue -  dyeValue / dyeKgValue * 100
+        const pl = parseFloat(PLValue.toFixed(2));
+        row.patchValue({ dyeValue , pl });
+      }
+    });
+  }
 
   save() {
     this.api.DyeWorkOrderData(this.DyeWorkOrderFrom.value).subscribe((res) => {

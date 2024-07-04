@@ -42,7 +42,7 @@ export class KnitReportComponent implements OnInit {
   totalvalues: any;
   woupdateid: any;
   factorydata: any;
-  factoryvalue: any =''
+  factoryvalue: any = ''
   ftyName: any;
   knitdate: string = '';
   ftydate: any = ''
@@ -66,10 +66,12 @@ export class KnitReportComponent implements OnInit {
   color: any;
   size: any;
   knitdetails2: any;
-  allDetailsModal : boolean = false;
+  allDetailsModal: boolean = false;
   editpopup: boolean = false;
   date: any;
-
+  orderName: any;
+  ordervalue: any
+  ktydatalineData: any;
 
   onCheckboxChange11(event: any) {
     const ischecked = event.target.checked;
@@ -109,12 +111,12 @@ export class KnitReportComponent implements OnInit {
     this.factoryName();
     this.allknitDetails();
     this.knitDate()
+    this.OrderName()
   }
 
-  knitDate(){
-    this.api.knitDate().subscribe((res)=>{
-      this.date=res.date
-
+  knitDate() {
+    this.api.knitDate().subscribe((res) => {
+      this.date = res.date
     })
   }
 
@@ -123,35 +125,53 @@ export class KnitReportComponent implements OnInit {
       this.ftyName = res.factorys
     })
   }
+  OrderName() {
+    this.api.knitfty_order().subscribe((res) => {
+      this.orderName = res.order
+    })
+  }
+
+
 
   allknitDetails() {
     this.api.getallfty_details().subscribe((res) => {
       this.data = res.workorders
+      // console.log(this.data)
     })
   }
 
+  colorjson(data: any): any {
+    return JSON.parse(data);
+  }
+
   factory() {
-    if(this.factoryvalue != '' && this.knitdate == ''){
-      this.loadknitdetails(this.factoryvalue)
-    }
-    if(this.factoryvalue == '' && this.knitdate != ''){
-      this.loadknitdetails('',this.knitdate)
-    }
-    if(this.factoryvalue && this.knitdate){
-      this.loadknitdetails(this.factoryvalue,this.knitdate)
-    }
+    // console.log(this.ordervalue);
+
+    // if(this.factoryvalue != '' && this.knitdate == ''){
+    //   this.loadknitdetails(this.factoryvalue)
+    // }
+    // if(this.factoryvalue == '' && this.knitdate != ''){
+    //   this.loadknitdetails('',this.knitdate)
+    // }
+    // if(this.factoryvalue == '' && this.knitdate != '' && this.ordervalue != ''){
+    //   this.loadknitdetails('','',this.ordervalue)
+    // }
+    // if(this.factoryvalue && this.knitdate && this.ordervalue){
+    this.loadknitdetails('', '', JSON.stringify(this.ordervalue))
+    // }
   }
 
 
-  loadknitdetails(factory: string= '', date: string='') {
-    this.api.ftydetailsFilter(factory, date).subscribe((res) => {
+  loadknitdetails(factory: string = '', date: string = '', Order: any) {
+    this.api.ftydetailsFilter(factory, date, Order).subscribe((res) => {
       this.data = res.knit;
+      // console.log(res)
     });
   }
 
-  factory_date() {
-    this.loadknitdetails(this.factoryvalue, this.knitdate)
-  }
+  // factory_date() {
+  //   this.loadknitdetails(this.factoryvalue, this.knitdate)
+  // }
 
 
   loadftydetails(buyer: any, orderNo: string = '', style: string = '', color: string = '', size: string = '') {
@@ -208,8 +228,8 @@ export class KnitReportComponent implements OnInit {
         const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(data);
         const wb: XLSX.WorkBook = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-        XLSX.writeFile(wb, this.fileName2);      
-        
+        XLSX.writeFile(wb, this.fileName2);
+
         Swal.fire({
           title: "Good job!",
           text: "Your Download Compleated !!!",
@@ -237,8 +257,8 @@ export class KnitReportComponent implements OnInit {
         const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(data);
         const wb: XLSX.WorkBook = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-        XLSX.writeFile(wb, this.fileName);      
-        
+        XLSX.writeFile(wb, this.fileName);
+
         Swal.fire({
           title: "Good job!",
           text: "Your Download Compleated !!!",
@@ -257,19 +277,20 @@ export class KnitReportComponent implements OnInit {
     })
   }
 
-  KnitFactoryInventory(){
+  KnitFactoryInventory() {
     this.router.navigate(['/main/knit-factory-inventory'])
   }
-  Dayknit(){
+  Dayknit() {
     this.router.navigate(['/main/Day-Knit'])
   }
 
   edit(id: any) {
     this.editpopup = true;
     this.ktyid = id;
+    console.log(this.ktyid)
     this.api.getsingleknit_details(this.ktyid).subscribe((res) => {
       this.ktydata = res;
-
+      this.ktydatalineData = res.lineData
       this.load.patchValue({
         date: this.datePipe.transform(this.ktydata.headerData[0].date, 'yyyy-MM-dd'),
         id: this.ktyid,
@@ -281,73 +302,42 @@ export class KnitReportComponent implements OnInit {
         allocatedDay: this.ktydata.headerData[0].allocatedDay,
       });
 
-      const numberOfEntries = this.ktydata.headerData[0].allocatedDay;
 
-      const formControls = [];
-      for (let i = 0; i < numberOfEntries; i++) {
+      const KnitEntryData = this.load.get('data') as FormArray;
+      KnitEntryData.clear();
+
+      const formControls: FormGroup[] = [];
+      this.ktydatalineData.forEach((dataItem: any) => {
         formControls.push(
           this.fb.group({
-            id: [],
-            knitId: [i + 1],
-            buyer: [''],
-            orderNo: [''],
-            style: [''],
-            color: [''],
-            size: [''],
-            woId: [],
-            knitMachineno: [''],
-            yarnLot: [''],
-            dayProductionKgs: [''],
-            noOfRollsProduced: [''],
-            noOfRollsChecked: [''],
-            knittingSL: [''],
-            machineRPM: [''],
-            oilSystem: [''],
-            yarnTension: [''],
-            needleQuality: [''],
-            sinkerQuality: [''],
-            movingFan: [''],
-            allStopMotion: [''],
-            takeupRollerTension: [''],
-            remarks: [''],
+            id: dataItem.id,
+            knitId: dataItem.knitId,
+            buyer: dataItem.buyer,
+            orderNo: dataItem.orderNo,
+            style: dataItem.style,
+            color: dataItem.color,
+            size: dataItem.size,
+            woId: dataItem.woId,
+            knitMachineno: dataItem.knitMachineno,
+            yarnLot: dataItem.yarnLot,
+            dayProductionKgs: dataItem.dayProductionKgs,
+            noOfRollsProduced: dataItem.noOfRollsProduced,
+            noOfRollsChecked: dataItem.noOfRollsChecked,
+            knittingSL: dataItem.knittingSL,
+            machineRPM: dataItem.machineRPM,
+            oilSystem: dataItem.oilSystem,
+            yarnTension: dataItem.yarnTension,
+            needleQuality: dataItem.needleQuality,
+            sinkerQuality: dataItem.sinkerQuality,
+            movingFan: dataItem.movingFan,
+            allStopMotion: dataItem.allStopMotion,
+            takeupRollerTension: dataItem.takeupRollerTension,
+            remarks: dataItem.remarks
           })
+
         );
-      }
-
-      const dataControl = this.load.get('data') as FormArray;
-      this.load.setControl('data', this.fb.array(formControls));
-
-       dataControl.clear();
-       formControls.forEach((control) => {
-        dataControl.push(this.fb.group(control));
-       });
-      this.ktydata.lineData.forEach((lineItem: any, i: any) => {
-        this.items.at(i).patchValue({
-          id: lineItem?.id,
-          knitId: lineItem?.knitId,
-          buyer: lineItem?.buyer || '',
-          orderNo: lineItem?.orderNo || '',
-          style: lineItem?.style || '',
-          color: lineItem?.color || '',
-          size: lineItem?.size || '',
-          woId: lineItem?.woId || '',
-          knitMachineno: lineItem?.knitMachineno || '',
-          yarnLot: lineItem?.yarnLot || '',
-          dayProductionKgs: lineItem?.dayProductionKgs || '',
-          noOfRollsProduced: lineItem?.noOfRollsProduced || '',
-          noOfRollsChecked: lineItem?.noOfRollsChecked || '',
-          knittingSL: lineItem?.knittingSL || '',
-          machineRPM: lineItem?.machineRPM || '',
-          oilSystem: lineItem?.oilSystem || '',
-          yarnTension: lineItem?.yarnTension || '',
-          needleQuality: lineItem?.needleQuality || '',
-          sinkerQuality: lineItem?.sinkerQuality || '',
-          movingFan: lineItem?.movingFan || '',
-          allStopMotion: lineItem?.allStopMotion || '',
-          takeupRollerTension: lineItem?.takeupRollerTension || '',
-          remarks: lineItem?.remarks || '',
-        });
       });
+      this.load.setControl('data', this.fb.array(formControls));
     });
   }
 
@@ -369,38 +359,33 @@ export class KnitReportComponent implements OnInit {
   }
 
   add() {
-    const numberOfEntries = parseInt(this.load.get('allocatedDay')?.value);
-    const formControls = [];
-    for (let i = 0; i < numberOfEntries; i++) {
-      formControls.push(
-        this.fb.group({
-          "id": [],
-          "knitId": [i + 1],
-          "buyer": [''],
-          "orderNo": [''],
-          "style": [''],
-          "color": [''],
-          "size": [''],
-          "woId": [],
-          "knitMachineno": [''],
-          "yarnLot": [''],
-          "dayProductionKgs": [''],
-          "noOfRollsProduced": [''],
-          "noOfRollsChecked": [''],
-          "knittingSL": [''],
-          "machineRPM": [''],
-          "oilSystem": [''],
-          "yarnTension": [''],
-          "needleQuality": [''],
-          "sinkerQuality": [''],
-          "movingFan": [''],
-          "allStopMotion": [''],
-          "takeupRollerTension": [''],
-          "remarks": ['']
-        })
-      );
-    }
-    this.load.setControl('data', this.fb.array(formControls));
+    const row = this.fb.group({
+      "id": [''],
+      "knitId": [''],
+      "buyer": [''],
+      "orderNo": [''],
+      "style": [''],
+      "color": [''],
+      "size": [''],
+      "woId": [],
+      "knitMachineno": [''],
+      "yarnLot": [''],
+      "dayProductionKgs": [''],
+      "noOfRollsProduced": [''],
+      "noOfRollsChecked": [''],
+      "knittingSL": [''],
+      "machineRPM": [''],
+      "oilSystem": [''],
+      "yarnTension": [''],
+      "needleQuality": [''],
+      "sinkerQuality": [''],
+      "movingFan": [''],
+      "allStopMotion": [''],
+      "takeupRollerTension": [''],
+      "remarks": ['']
+    })
+
+    this.items.push(row);
   }
 
   save() {

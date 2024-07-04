@@ -14,18 +14,6 @@
       Home
     </button>
 
-    <!-- <button mat-button class="menu" (click)="workorder1()">
-      Fabric Booking
-    </button> -->
-
-    <!-- <button mat-button class="menu" [matMenuTriggerFor]="menu4">
-      StageProcess
-    </button>
-    <mat-menu #menu4="matMenu">
-      <button mat-menu-item (click)="ST1()">Fabric Report</button>
-    </mat-menu> -->
-
-
     <button mat-button class="menu" (click)="yarn()">
       YarnEntry
     </button>
@@ -54,15 +42,14 @@
     <button mat-button class="menu" (click)="OCR()">
       OCR
     </button>
-
   </div>
 
-
+  
   <div class="menulist1">
-    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <button mat-icon-button [matMenuTriggerFor]="menu3" aria-label="Example icon-button with a menu">
       <mat-icon>more_vert</mat-icon>
     </button>
-    <mat-menu #menu="matMenu">
+    <mat-menu #menu3="matMenu">
       <button  mat-menu-item class="menu" (click)="home()">
         Home
       </button>

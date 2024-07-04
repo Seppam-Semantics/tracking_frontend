@@ -25,26 +25,26 @@ export class DyeWorkOrderListingComponent {
   factoryname: any;
   ftyName: any;
   ftyname: any
-  editview : boolean = false;
+  editview: boolean = false;
   DyeWorkOrderAllData: any;
   DyeWorkOrderHeader: any;
   DyeWorkOrderheaderData: any;
   DyeWorkOrderlineData: any;
-  DyeFtyFillter:any;
+  DyeFtyFillter: any;
   BuyerAllData: any;
-  DyeBuyerFillter :any
+  DyeBuyerFillter: any
   BuyerFillter: string | undefined;
   orderNoAllData: any;
-  ngOnInit(): void { 
-    this.buyername(), 
-    this.factoryName() 
+  ngOnInit(): void {
+    this.buyername(),
+      this.factoryName()
     this.AllData(),
-    this.BuyerAllData = [{buyer:'No'}]
+      this.BuyerAllData = [{ buyer: 'No' }]
   }
-  constructor(private fb: FormBuilder, private api: ApiService , private router : Router) {
+  constructor(private fb: FormBuilder, private api: ApiService, private router: Router) {
 
     this.DyeWorkOrderFrom = new FormGroup({
-     "id" : new FormControl(''),
+      "id": new FormControl(''),
       "buyer": new FormControl(''),
       "orderNo": new FormControl(''),
       "dyefty": new FormControl(''),
@@ -66,8 +66,8 @@ export class DyeWorkOrderListingComponent {
   }
 
   factoryName() {
-    this.api.dye_factory_name().subscribe((res)=>{
-      this.factoryname=res.factorys
+    this.api.dye_factory_name().subscribe((res) => {
+      this.factoryname = res.factorys
     })
   }
   getBuyerValue(event: any) {
@@ -120,22 +120,22 @@ export class DyeWorkOrderListingComponent {
   }
 
 
-  dyeWorkOrderFactoryFilter(){
-    this.api.dyeworkorder_fty_Fillter(this.DyeFtyFillter).subscribe((res)=>{
+  dyeWorkOrderFactoryFilter() {
+    this.api.dyeworkorder_fty_Fillter(this.DyeFtyFillter).subscribe((res) => {
       this.DyeWorkOrderAllData = res.workorders
       this.BuyerAllData = res.buyer
     })
   }
 
-  dyeWorkOrderBuyerFilter(){
-    this.api.dyeworkorder_buyer_Fillter(this.DyeFtyFillter, this.BuyerFillter).subscribe((res)=>{
+  dyeWorkOrderBuyerFilter() {
+    this.api.dyeworkorder_buyer_Fillter(this.DyeFtyFillter, this.BuyerFillter).subscribe((res) => {
       this.DyeWorkOrderAllData = res.workorders
       this.orderNoAllData = res.orderNo
     })
   }
 
-  AllData(){
-    this.api.DyeWorkOrderAllData().subscribe((res)=>{
+  AllData() {
+    this.api.DyeWorkOrderAllData().subscribe((res) => {
       this.DyeWorkOrderAllData = res.workorders
     })
   }
@@ -175,76 +175,73 @@ export class DyeWorkOrderListingComponent {
       window.location.reload()
     })
   }
-exportexcel(){ }
-edit(id:any){
-  this.editview = true;
-  this.api.DyeWorkOrderSingleData(id).subscribe((res)=>{
-    this.DyeWorkOrderheaderData = res.headerData[0]
-    this.DyeWorkOrderlineData   = res.lineData
+  exportexcel() { }
+  edit(id: any) {
+    this.editview = true;
+    this.api.DyeWorkOrderSingleData(id).subscribe((res) => {
+      this.DyeWorkOrderheaderData = res.headerData[0]
+      this.DyeWorkOrderlineData = res.lineData
 
-    this.DyeWorkOrderFrom.patchValue({
-      "id": this.DyeWorkOrderheaderData.id,
-      "buyer": this.DyeWorkOrderheaderData.buyer,
-      "orderNo": this.DyeWorkOrderheaderData.orderNo,
-      "dyefty": this.DyeWorkOrderheaderData.dyefty,
-      "dyefty_details": this.DyeWorkOrderheaderData.dyefty_details,
-      "woNo": this.DyeWorkOrderheaderData.woNo,
-      "woRefNo": this.DyeWorkOrderheaderData.woRefNo,
-      "woDate": this.DyeWorkOrderheaderData.woDate,
-      "completedDate": this.DyeWorkOrderheaderData.completedDate,
-      "notes": this.DyeWorkOrderheaderData.notes,
+      this.DyeWorkOrderFrom.patchValue({
+        "id": this.DyeWorkOrderheaderData.id,
+        "buyer": this.DyeWorkOrderheaderData.buyer,
+        "orderNo": this.DyeWorkOrderheaderData.orderNo,
+        "dyefty": this.DyeWorkOrderheaderData.dyefty,
+        "dyefty_details": this.DyeWorkOrderheaderData.dyefty_details,
+        "woNo": this.DyeWorkOrderheaderData.woNo,
+        "woRefNo": this.DyeWorkOrderheaderData.woRefNo,
+        "woDate": this.DyeWorkOrderheaderData.woDate,
+        "completedDate": this.DyeWorkOrderheaderData.completedDate,
+        "notes": this.DyeWorkOrderheaderData.notes,
+      })
+
+      const KnitEntryData = this.DyeWorkOrderFrom.get('data') as FormArray;
+      KnitEntryData.clear();
+
+      const formControls: FormGroup[] = [];
+      this.DyeWorkOrderlineData.forEach((dataItem: any) => {
+        formControls.push(
+          this.fb.group({
+            "id": dataItem.id,
+            "dyeWoId": dataItem.id,
+            "machDia": dataItem.machDia,
+            "fabDia": dataItem.fabDia,
+            "fabType": dataItem.fabType,
+            "style": dataItem.style,
+            "color": dataItem.color,
+            "fabGSM": dataItem.fabGSM,
+            "pl": dataItem.pl,
+            "dyeKg": dataItem.greigeKg,
+            "dyeRate": dataItem.dyeRate,
+            "dyeValue": dataItem.dyeValue,
+            "remarks": dataItem.remarks
+          }) );
+      });
+
+      this.DyeWorkOrderFrom.setControl('data', this.fb.array(formControls));
+
+      this.api.getorders(this.buyerName).subscribe((res) => {
+        this.order = res.orders
+      })
+
+      this.api.getstyle(this.buyerName, this.orderNo).subscribe((res) => {
+        this.stylelist = res.styles;
+      })
+
+      this.api.getcolor(this.buyerName, this.orderNo, this.style).subscribe((res) => {
+        this.colorlist = res.colors;
+      })
+
     })
+  }
 
-    const KnitEntryData = this.DyeWorkOrderFrom.get('data') as FormArray;
-    KnitEntryData.clear();
-
-    const formControls: FormGroup[] = [];
-    this.DyeWorkOrderlineData.forEach((dataItem: any) => {
-      formControls.push(
-        this.fb.group({
-          "id": dataItem.id,
-          "dyeWoId" : dataItem.id,
-          "machDia": dataItem.machDia,
-          "fabDia": dataItem.fabDia,
-          "fabType": dataItem.fabType,
-          "style": dataItem.style,
-          "color": dataItem.color,
-          "fabGSM": dataItem.fabGSM,
-          "pl": dataItem.pl,
-          "dyeKg": dataItem.greigeKg,
-          "dyeRate": dataItem.dyeRate,
-          "dyeValue": dataItem.dyeValue,
-          "remarks": dataItem.remarks
-        })
-
-      );
-    }
-  );
-
-    this.DyeWorkOrderFrom.setControl('data', this.fb.array(formControls));
-
-    this.api.getorders(this.buyerName).subscribe((res) => {
-      this.order = res.orders
+  delete(id: any) {
+    this.api.deleteDyeWorkOrder(id).subscribe((res) => {
+      alert(res.message)
+      window.location.reload()
     })
-
-    this.api.getstyle(this.buyerName, this.orderNo).subscribe((res) => {
-      this.stylelist = res.styles;
-    })
-
-    this.api.getcolor(this.buyerName, this.orderNo, this.style).subscribe((res) => {
-      this.colorlist = res.colors;
-    })
-
-  })
-}
-
-delete(id:any){
-this.api.deleteDyeWorkOrder(id).subscribe((res)=>{
-  alert(res.message)
-  window.location.reload()
-})
-}
-new(){
-this.router.navigate(['/main/DyeWorkOrderCreation'])
-}
+  }
+  new() {
+    this.router.navigate(['/main/DyeWorkOrderCreation'])
+  }
 }

@@ -171,7 +171,13 @@ add1button(){
     this.loading = true
     if(this.Yarn_Entry_1.valid){
     this.api.addUpdateYarn(this.Yarn_Entry_1.value).subscribe((res)=>{
-      alert(res.message)
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Your work has been saved",
+        showConfirmButton: false,
+        timer: 1500
+      });
       this.loading = false
       if(res.success == true){
         this.router.navigate(['/Yarn-Report']);

@@ -10,8 +10,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  // apiUrl = "https://tracker.seppam.com";
-  apiUrl = "http://localhost:2000";
+  apiUrl = "https://tracker.seppam.com";
+  // apiUrl = "http://localhost:2000";
 
   token: any;
   profilenames: any;
@@ -216,13 +216,16 @@ export class ApiService {
   knitfty_name(): Observable<any> {
     return this.http.get(this.getUrl() + `/knitapi/knit-factory`, this.getHeaders())
   }
+  knitfty_order(): Observable<any> {
+    return this.http.get(this.getUrl() + `/knitapi/order-filter`, this.getHeaders())
+  }
   woknitfty_name(): Observable<any> {
     return this.http.get(this.getUrl() + `/knitapi/Woknit-factory`, this.getHeaders())
   }
 
 
-  ftydetailsFilter(factory: any, date: any): Observable<any> {
-    return this.http.get(this.getUrl() + `/knitapi/knit-filter?id=&factory=${factory}&date=${date}&buyer=&orderNo=&style=&color=&size=`, this.getHeaders())
+  ftydetailsFilter(factory: any, date: any , Order:any): Observable<any> {
+    return this.http.get(this.getUrl() + `/knitapi/knit-filter?id=&factory=${factory}&date=${date}&buyer=&order=${Order}&style=&color=&size=`, this.getHeaders())
   }
 
   knitDetailsFilter(buyer: any, orderNo: any, style: any, color: any, size: any): Observable<any> {
