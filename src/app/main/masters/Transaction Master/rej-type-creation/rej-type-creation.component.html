@@ -20,7 +20,7 @@
                 <th>S.No</th>
                 <th>Rej Type</th>
                 <th>Reject Name</th>
-                <th>Colors</th>
+                <!-- <th>Colors</th> -->
                 <th>Loss %</th>
                 <th>Action</th>
             </tr>
@@ -30,12 +30,12 @@
                 <td>{{i+1}}</td>
                 <td>{{data.rejType}}</td>
                 <td>{{data.rejName}}</td>
-                <td style="text-align: center;">
+                <!-- <td style="text-align: center;">
                     <ul *ngFor="let color of colorjson(data.color)" style="text-align: justify;">
-                        <!-- <ul *ngFor="let color of data.color" style="text-align: justify;"> -->
+                        <ul *ngFor="let color of data.color" style="text-align: justify;">
                         <li>{{color.color}}</li>
                     </ul>
-                </td>
+                </td> -->
                 <td>{{data.losses}}</td>
                 <td>
                     <div style="display: flex; gap: 10px; width: 100%; justify-content: center;">
@@ -149,7 +149,7 @@
                 </mat-form-field> -->
                 <p-multiSelect [options]="colorDropdata" placeholder="Color"
                 optionLabel="color"  optionValue="id" appendTo="body" formControlName="colors"  
-                (onChange)="getSelectedColors()" />
+                (onChange)="getSelectedColors1()" />
             </div>
 
             <div>

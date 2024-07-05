@@ -74,6 +74,9 @@ export class WorkorderDataComponent implements OnInit {
   data: any;
   concatSizeDta: any;
   FsizeidId_Value: any;
+  OrderFOBRate: any;
+  OrderPcs: any;
+  colorId: any;
 
 
   ngOnInit(): void {
@@ -172,7 +175,7 @@ export class WorkorderDataComponent implements OnInit {
 
     this.colordata()
     // this.color_Value = event.target.value
-    this.RejTypeLoss(index)
+    // this.RejTypeLoss(index)
     this.colorprocessloss(index)
   }
 
@@ -230,13 +233,14 @@ export class WorkorderDataComponent implements OnInit {
   }
 
   RejTypeLoss(index: any) {
-    this.api.RejTypeLoss_BO(this.color_Value).subscribe((res) => {
-      this.rejloss = res.Colorlosses[0].losses
+    // this.api.RejTypeLoss_BO(this.colorId).subscribe((res) => {
 
-      const formArray = this.buyerorderform.get('data') as FormArray;
-      const row = formArray.at(index);
-      row.get('rejlosses')?.setValue(this.rejloss);
-    })
+    //   this.rejloss = res.Colorlosses[0].losses
+
+    //   const formArray = this.buyerorderform.get('data') as FormArray;
+    //   const row = formArray.at(index);
+    //   row.get('rejlosses')?.setValue(this.rejloss);
+    // })
   }
 
   PODetailsLoss(index: any) {
@@ -282,6 +286,7 @@ export class WorkorderDataComponent implements OnInit {
     this.size_Value = size
     this.sizedata(index)
     this.PODetailsLoss(index)
+
   }
 
   sizevalue(index: any) {
@@ -290,11 +295,11 @@ export class WorkorderDataComponent implements OnInit {
   }
 
   sizedata(index : any) {
-    // console.log(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, this.size_Value)
-    this.api.size_to_id(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, this.size_Value).subscribe((res) => {
 
-      this.polineId = res.sizeId[0]?.id ? res.sizeId[0]?.id : ''
-  
+    this.api.size_to_id(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, this.size_Value).subscribe((res) => {
+      this.OrderFOBRate	 = res.sizeId[0]?.poRate ? res.sizeId[0]?.poRate : ''  
+      this.OrderPcs	 = res.sizeId[0]?.quantity ? res.sizeId[0]?.quantity : ''  
+      this.polineId = res.sizeId[0]?.id ? res.sizeId[0]?.id : ''  
       this.poid = res.sizeId[0]?.orderId ? res.sizeId[0]?.orderId : ''
       this.FSizeFBC = res.sizeId[0]?.concatSize ? res.sizeId[0]?.concatSize : ''
       this.FSizeFBCId = res.sizeId[0]?.concatSizeId
@@ -309,8 +314,18 @@ export class WorkorderDataComponent implements OnInit {
       this.styleIdDta = res.sizeId[0]?.styleId ? res.sizeId[0]?.styleId : ''
       this.dyeTypeFBC = res.sizeId[0]?.dyeType ? res.sizeId[0]?.dyeType : ''
       this.dyeTypeFBCId = res.sizeId[0]?.dyeTypeId ? res.sizeId[0]?.dyeTypeId : ''
+      this.colorId = res.sizeId[0]?.colorId ? res.sizeId[0]?.colorId : ''
 
 
+      console.log(this.colorId)
+      this.api.RejTypeLoss_BO(this.colorId).subscribe((res) => {
+  
+        this.rejloss = res.Colorlosses[0].losses
+  
+        const formArray = this.buyerorderform.get('data') as FormArray;
+        const row = formArray.at(index);
+        row.get('rejlosses')?.setValue(this.rejloss);
+      })
 
       this.api.DyeTypeMaster_BO(this.styleIdDta, this.dyeTypeFBCId).subscribe((res) => {
         this.DyeTypeLossDta = res.DyeTypeLoss[0].dyepl
@@ -319,6 +334,7 @@ export class WorkorderDataComponent implements OnInit {
       this.api.fabricType_BO(this.styleIdDta, this.fabricTypeFBCId).subscribe((res) => {
         this.fabTypeLossDta = res.FabricTypeLoss[0].fabpl
       })
+
 
       const formArray = this.buyerorderform.get('data') as FormArray;
       const row = formArray.at(index);
@@ -337,6 +353,9 @@ export class WorkorderDataComponent implements OnInit {
       row.get('fabricType')?.setValue(this.fabTypeLossDta);
       row.get('SizeId')?.setValue(this.FSizeFBCId);
       row.get('FabDiaId')?.setValue(this.finishDiaFBCId);
+
+      row.get('OrderPcs')?.setValue(this.OrderPcs);
+      row.get('OrderFOBRate')?.setValue(this.OrderFOBRate);
 
     })
 
@@ -367,10 +386,13 @@ export class WorkorderDataComponent implements OnInit {
       const row = control as FormGroup;
       if (row instanceof FormGroup) {
         const OrderPcsValue = parseFloat(row.get('OrderPcs')?.value) || 0;
-
-
-        const FinishKg1 = (this.finishDiaFBC - this.finishfabConsumptionDta) * OrderPcsValue / (100 - (this.rejloss) - (this.PODetailsLossValue));
-        const FinishKg2 = FinishKg1 / (100 - this.DyeProcessLossValue - this.DyeTypeLossDta - this.fabTypeLossDta)
+        console.log(OrderPcsValue)
+        // ( Fabric Consumption /  (100% -  Rej type% - PO Details Loss) )*Order Qty
+        console.log("[finishfabConsumptionDta] = " + this.finishfabConsumptionDta + "[rejloss] = " + this.rejloss + "[LossValue] = " + this.PODetailsLossValue +"[OrderPcs] = " + OrderPcsValue)
+        const FinishKg1 = (( this.finishfabConsumptionDta  / ((100 - this.rejloss - this.PODetailsLossValue)/100)) * OrderPcsValue) ; ;
+        console.log(FinishKg1)
+        console.log("[FinishKg] = "+FinishKg1 + "[DyeLossValue] = " + this.DyeProcessLossValue + "[DyeTypeLossDta] = " + this.DyeTypeLossDta + "[fabTypeLossDta] = " + this.fabTypeLossDta)
+        const FinishKg2 = FinishKg1 / (100 - this.DyeProcessLossValue - this.fabTypeLossDta - this.DyeTypeLossDta )
 
         const FinishKg = parseFloat(FinishKg1.toFixed(2));
         const GreigeKg = parseFloat(FinishKg2.toFixed(2));
@@ -435,7 +457,6 @@ export class WorkorderDataComponent implements OnInit {
   }
 
   save() {
-    // console.log(this.buyerorderform.value)
     if (this.buyerorderform.valid) {
       this.api.postworkorder(this.buyerorderform.value).subscribe((res) => {
         if (res.success) {

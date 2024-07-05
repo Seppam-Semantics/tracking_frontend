@@ -240,19 +240,26 @@
               <thead>
                 <tr>
                   <th>Lot No</th>
+                  <th>Allocated QTY</th>
+                  <th>Receipt QTY</th>
                   <th>Sample Dt</th>
                   <th>Result Dt</th>
                   <th>Remarks</th>
                   <th>Acc/Rej</th>
+
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let lotcheckData of parseLotcheck(data); let j = index">
                   <td>{{lotcheckData.lotNo}}</td>
+                  <td>{{lotcheckData.allocatedQty}}</td>
+                  <td>{{lotcheckData.receiptQty}}</td>
                   <td>{{lotcheckData.sampleDate}}</td>
                   <td>{{lotcheckData.resultDate}}</td>
                   <td>{{lotcheckData.checkResults}}</td>
                   <td>{{lotcheckData.acceptRejectStatus == 1 ? "Accept" : "Reject"}}</td>
+                 
+
                 </tr>
               </tbody>
             </table>

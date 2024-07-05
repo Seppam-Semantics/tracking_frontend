@@ -355,24 +355,25 @@ export class YarnTranscationComponent implements OnInit {
   }
 
   lotCheckDelete(index: any) {
-    const yarnlotcheckdetails = this.lotlineDetails[index]?.id
-    if(yarnlotcheckdetails){
-    let text = "Press Ok to delete the details";
-    if (confirm(text) == true) {
-      const yarnDataId = this.yarn[0].id
-      const yarnLineId = this.yarnLcLines[0].id;
-      const yarnlotcheckdetails = this.lotlineDetails[index].id
-      this.api.lotCheckDetailsDelete(yarnLineId, yarnDataId, yarnlotcheckdetails).subscribe((res) => {
-        alert(res.message)
+  //   const yarnlotcheckdetails = this.lotlineDetails[index]?.id
+  //   if(yarnlotcheckdetails){
+  //   let text = "Press Ok to delete the details";
+  //   if (confirm(text) == true) {
+  //     const yarnDataId = this.yarn[0].id
+  //     const yarnLineId = this.yarnLcLines[0].id;
+  //     const yarnlotcheckdetails = this.lotlineDetails[index].id
+  //     this.api.lotCheckDetailsDelete(yarnLineId, yarnDataId, yarnlotcheckdetails).subscribe((res) => {
+  //       alert(res.message)
 
-      })
+  //     })
 
-    } else {
-    alert("cancel!!!")
-    }
-  }else{
-    this.LotCheckItems.removeAt(index)
-  }
+  //   } else {
+  //   alert("cancel!!!")
+  //   }
+  // }else{
+  //   this.LotCheckItems.removeAt(index)
+  // }
+  this.LotCheckItems.removeAt(index)
 }
 
   LotCheck_Button() {
@@ -521,22 +522,23 @@ export class YarnTranscationComponent implements OnInit {
   }
 
   OrderAllocationDelete(index: number) {
-    const orderid = this.orderDetails[index]?.id
-if(orderid){
-    let text = "Press Ok to delete the details";
-    if (confirm(text) == true) {
-      const yarnDataId = this.yarn[0].id
-      const yarnLineId = this.yarnLcLines[0].id;
-      const orderid = this.orderDetails[index].id
-      this.api.OrderAllocationDeleteDetails(yarnDataId, yarnLineId, orderid).subscribe((res) => {
-        alert(res.message)
-      })
-    } else {
-      alert("Cancelled");
-    }
-  }else{
-    this.items2.removeAt(index)
-  }
+//     const orderid = this.orderDetails[index]?.id
+// if(orderid){
+//     let text = "Press Ok to delete the details";
+//     if (confirm(text) == true) {
+//       const yarnDataId = this.yarn[0].id
+//       const yarnLineId = this.yarnLcLines[0].id;
+//       const orderid = this.orderDetails[index].id
+//       this.api.OrderAllocationDeleteDetails(yarnDataId, yarnLineId, orderid).subscribe((res) => {
+//         alert(res.message)
+//       })
+//     } else {
+//       alert("Cancelled");
+//     }
+//   }else{
+//     this.items2.removeAt(index)
+//   }
+this.items2.removeAt(index)
 }
 
 
@@ -644,23 +646,24 @@ if(orderid){
   }
 
   ReceiptDelete(index: number) {
-    const ReceiptdetailsId = this.ReceivedDataReceipt[index]?.id
-    if (parseInt(ReceiptdetailsId)) {
-      let text = "Press Ok to delete the details";
-      if (confirm(text) == true) {
-        const yarnDataId = this.yarn[0].id
-        const yarnOrderId = this.yarnOrderAllocations[0].id
-        const ReceiptdetailsId = this.ReceivedDataReceipt[index].id
+    // const ReceiptdetailsId = this.ReceivedDataReceipt[index]?.id
+    // if (parseInt(ReceiptdetailsId)) {
+    //   let text = "Press Ok to delete the details";
+    //   if (confirm(text) == true) {
+    //     const yarnDataId = this.yarn[0].id
+    //     const yarnOrderId = this.yarnOrderAllocations[0].id
+    //     const ReceiptdetailsId = this.ReceivedDataReceipt[index].id
         
-        this.api.ReceiptdetailsDelete(yarnDataId, yarnOrderId, ReceiptdetailsId).subscribe((res) => {
-          alert(res.message)
-        })
-      } else {
-        alert("Cancelled");
-      }
-    } else {
-      this.items3.removeAt(index);
-    }
+    //     this.api.ReceiptdetailsDelete(yarnDataId, yarnOrderId, ReceiptdetailsId).subscribe((res) => {
+    //       alert(res.message)
+    //     })
+    //   } else {
+    //     alert("Cancelled");
+    //   }
+    // } else {
+    //   this.items3.removeAt(index);
+    // }
+    this.items3.removeAt(index);
   }
 
   receiptSave() {
@@ -724,23 +727,24 @@ if(orderid){
   }
 
   YarnQCDelete(index: number) {
-    const ReceipDataId = this.ReceipReceivedDataId[index]?.id
+  //   const ReceipDataId = this.ReceipReceivedDataId[index]?.id
 
-    if(ReceipDataId){
-    let text = "Press Ok to delete the details";
-    if (confirm(text) == true) {
-      const yarnId = this.yarn[0].id
-      const yarnreceiptId = this.yarnReceiptsLines[0].id
-      const ReceipDataId = this.ReceipReceivedDataId[index].id
-      this.api.YarnQCDeleteDetails(yarnId, yarnreceiptId, ReceipDataId).subscribe((res) => {
-        alert(res.message)
-      })
-    } else {
-      alert("Cancelled");
-    }
-  }else{
-    this.items4.removeAt(index)
-  }
+  //   if(ReceipDataId){
+  //   let text = "Press Ok to delete the details";
+  //   if (confirm(text) == true) {
+  //     const yarnId = this.yarn[0].id
+  //     const yarnreceiptId = this.yarnReceiptsLines[0].id
+  //     const ReceipDataId = this.ReceipReceivedDataId[index].id
+  //     this.api.YarnQCDeleteDetails(yarnId, yarnreceiptId, ReceipDataId).subscribe((res) => {
+  //       alert(res.message)
+  //     })
+  //   } else {
+  //     alert("Cancelled");
+  //   }
+  // }else{
+  //   this.items4.removeAt(index)
+  // }
+  this.items4.removeAt(index)
 }
 
   yarnQcSave() {

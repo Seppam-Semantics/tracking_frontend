@@ -1,0 +1,11 @@
+th,tr,td { 
+    text-align: center;
+    font-weight: normal;
+}
+thead{
+    position: sticky;
+    top: 0;
+}
+::ng-deep .form-control{
+    border: 1px solid black;
+}

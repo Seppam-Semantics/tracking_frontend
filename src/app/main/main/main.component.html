@@ -39,6 +39,21 @@
       <button mat-menu-item (click)="FabricsTransferCutListReportComponent()">Fab Transfer</button>
     </mat-menu>
 
+
+    <button mat-button class="menu" [matMenuTriggerFor]="Garmenu">
+      GarEntry
+    </button>
+    <mat-menu #Garmenu="matMenu">
+      <button mat-menu-item (click)="PODetails()">PO Details</button>
+      <button mat-menu-item (click)="cutprodlist()">Cut Prod</button>
+      <button mat-menu-item (click)="SewInput()">Sew Input</button>
+      <button mat-menu-item (click)="SewOutput()">Sew Output</button>
+      <button mat-menu-item >Pack Prod</button>
+      <button mat-menu-item >Shipment</button>
+      <button mat-menu-item >Invoice</button>
+    </mat-menu>
+
+
     <button mat-button class="menu" (click)="OCR()">
       OCR
     </button>

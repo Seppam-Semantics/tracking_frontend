@@ -46,6 +46,12 @@ import { DyeBatchComponent } from './Report/dye-batch/dye-batch.component';
 import { TransactionMasteRootComponent } from './masters/Transaction Master/transaction-maste-root/transaction-maste-root.component';
 import { POMasterCreationComponent } from './masters/po-master-creation/po-master-creation.component';
 import { FabricBookingReportComponent } from './menu/workorder-data/fabric-booking-report/fabric-booking-report.component';
+import { CutProdListComponent } from './Garments/Report/cut-prod-list/cut-prod-list.component';
+import { CutProdEntryComponent } from './Garments/Transaction/cut-prod-entry/cut-prod-entry.component';
+import { SewInputEntryComponent } from './Garments/Transaction/sew-input-entry/sew-input-entry.component';
+import { SewInputListComponent } from './Garments/Report/sew-input-list/sew-input-list.component';
+import { SewOutputEntryComponent } from './Garments/Transaction/sew-output-entry/sew-output-entry.component';
+import { SewOutputListComponent } from './Garments/Report/sew-output-list/sew-output-list.component';
 
 
 const routes: Routes = [
@@ -98,7 +104,13 @@ const routes: Routes = [
   {path:"TransactionMaster" , component : TransactionMasteRootComponent} ,
   {path:"POMaster" , component : POMasterCreationComponent} ,
   {path:"FBReport" , component : FabricBookingReportComponent} ,
-
+  {path:"CutProdList" , component : CutProdListComponent} ,
+  {path:"CutProdEntry" , component : CutProdEntryComponent} ,
+  {path:"SewInputEntry" , component : SewInputEntryComponent} ,
+  {path:"SewInputList" , component : SewInputListComponent} ,
+  {path:"SewOutputEntry" , component : SewOutputEntryComponent} ,
+  {path:"SewOutputList" , component : SewOutputListComponent} ,
+ 
 ];
 
 @NgModule({

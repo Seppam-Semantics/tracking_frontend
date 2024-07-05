@@ -100,7 +100,7 @@
             </datalist>
 
             <td><input style="width: 15vh;" formControlName="Color" list="Color" (input)="colorvalue(i)"
-                (change)="colordata()" (change)="RejTypeLoss(i)" (change)="colorprocessloss(i)" class="form-control"
+                (change)="colordata()" (change)="colorprocessloss(i)" class="form-control"
                 (mouseenter)="stylevalue(i)">
               <datalist id="Color">
                 <option *ngFor="let data of this.colorDta" value="{{data.color}}">{{data.color}}</option>
@@ -108,7 +108,7 @@
             </td>
 
             <td><input style="width: 15vh;" formControlName="FSize" list="FSize" 
-              (change)="fsizedata(i , $event)" class="form-control"></td>
+              (change)="fsizedata(i , $event)" class="form-control" (click)="calculateDiff()"></td>
           <datalist id="FSize">
             <option *ngFor="let data of this.concatSizeDta" value="{{data.concatSize}}">{{data.concatSize}}</option>
           </datalist>
@@ -178,7 +178,7 @@
               </datalist>
             </td>
 
-            <td><input style="width: 15vh;" formControlName="OrderPcs" class="form-control"></td>
+            <td><input style="width: 15vh;" formControlName="OrderPcs" class="form-control" (click)="sizedata(i)"></td>
 
             <td><input style="width: 15vh;" formControlName="OrderFOBRate" class="form-control"></td>
 

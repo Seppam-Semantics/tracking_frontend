@@ -140,6 +140,7 @@ export class ReportEntryComponent implements OnInit {
       const formArray = this.load.get('data') as FormArray;
       const row = formArray.at(index);
       row.get('woId')?.setValue(woId);
+      console.log(res)
     });
     this.getknitWoDetails(this.factory,this.buyerName, this.orderNo, this.style, this.color, size)
   }
@@ -147,12 +148,14 @@ export class ReportEntryComponent implements OnInit {
   getknitWoDetails(factory:any , buyer:any, orderNo:any, style:any, color:any, size:any){
     this.api.knitauth(factory,buyer,orderNo,style,color,size).subscribe((res)=>{
       this.knitDetails = res.knitWoDetails
+      console.log(res)
+      console.log(this.knitDetails[0].knitKg)
     })
   }
 
   valid(value:any){
     const inputValue = value;
-    if(inputValue > this.knitDetails[0].knitKg + (this.knitDetails[0].knitKg * 0.5)  ){
+    if(inputValue > (this.knitDetails[0].knitKg + (this.knitDetails[0].knitKg * 0.05) ) ){
       this.valueExceeded = true;
       alert("Value exceeded");
     }

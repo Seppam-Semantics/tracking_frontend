@@ -111,6 +111,12 @@ import { KnitFtyCreationComponent } from './masters/Transaction Master/knit-fty-
 import { POMasterCreationComponent } from './masters/po-master-creation/po-master-creation.component';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { FabricBookingReportComponent } from './menu/workorder-data/fabric-booking-report/fabric-booking-report.component';
+import { CutProdListComponent } from './Garments/Report/cut-prod-list/cut-prod-list.component';
+import { CutProdEntryComponent } from './Garments/Transaction/cut-prod-entry/cut-prod-entry.component';
+import { SewInputListComponent } from './Garments/Report/sew-input-list/sew-input-list.component';
+import { SewInputEntryComponent } from './Garments/Transaction/sew-input-entry/sew-input-entry.component';
+import { SewOutputEntryComponent } from './Garments/Transaction/sew-output-entry/sew-output-entry.component';
+import { SewOutputListComponent } from './Garments/Report/sew-output-list/sew-output-list.component';
 
 
 @NgModule({
@@ -179,6 +185,12 @@ import { FabricBookingReportComponent } from './menu/workorder-data/fabric-booki
     KnitFtyCreationComponent,
     POMasterCreationComponent,
     FabricBookingReportComponent,
+    CutProdListComponent,
+    CutProdEntryComponent,
+    SewInputListComponent,
+    SewInputEntryComponent,
+    SewOutputEntryComponent,
+    SewOutputListComponent,
 
   ],
   imports: [

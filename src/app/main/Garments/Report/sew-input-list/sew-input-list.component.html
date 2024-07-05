@@ -1,0 +1,188 @@
+<mat-toolbar style="display: flex; justify-content: center; height: auto;">
+    <span>Sewing Input Transfer</span>
+</mat-toolbar>
+<mat-toolbar style="display: flex; justify-content: center; height: 8vh;">
+    
+    <div style="display: flex; gap: 25px;">
+        <div style="display: flex; gap: 10px;">
+            <label style="font-weight: normal; font-family: serif;">From</label>
+            <input type="date" class="form-control" style="margin-top: 2px;" [(ngModel)]="filterDate1" (change)="date()">
+        </div>
+        <div style="display: flex; gap: 10px;">
+            <label style="font-weight: normal; font-family: serif;">To</label>
+            <input type="date" class="form-control" style="margin-top: 2px;" [(ngModel)]="filterDate2" (change)="date()">
+        </div>
+
+    </div>
+
+
+    <div style="flex: 1 1 auto;"></div>
+
+    <div style="display: flex; gap: 10px;">
+        <div style="display: flex; gap: 10px;">
+
+            <p-dropdown  placeholder="Buyer" optionLabel="buyer"
+            optionValue="buyer" ></p-dropdown>
+
+        </div>
+        <div style="display: flex; gap: 10px;">
+           
+            <p-dropdown  placeholder="Order" optionLabel="orderNo"
+            optionValue="orderNo" ></p-dropdown>
+
+        </div>
+    </div>
+
+    <button mat-button color="primary" (click)="new()">New</button>
+    <button mat-button color="primary" (click)="exportexcel()"><mat-icon>download</mat-icon>Download</button>
+</mat-toolbar>
+<div>
+    <table class="table table-hover fl-table" id="table-data">
+        <thead class="thead-dark">
+            <tr>
+                <th>S.No</th>
+                <th>Input Date</th>
+                <th>Buyer</th>
+                <th>Order</th>
+                <th>Style</th>
+                <th>Color</th>
+                <th>G.Size</th>
+                <th>Line No.</th>
+                <th>Input Pcs</th>
+                <th>Bundle no.</th>
+                <th>Edit</th>
+                <!-- <th>Delete</th> -->
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <!-- <td><button class="btn btn-warning"(click)="Entry()"><mat-icon>content_paste</mat-icon></button></td> -->
+                <td><button class="btn btn-primary" (click)="edit()"><mat-icon>edit</mat-icon></button></td>
+                <!-- <td><button class="btn btn-danger" (click)="delete(data.id)"><mat-icon>delete</mat-icon></button></td> -->
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<p-dialog [(visible)]="editview" [modal]="true" header="Edit Cutting Production" [maximizable]="true"
+    [style]="{width: '100vw', height:'100vh'}">
+
+
+    <div [formGroup]="SewinputEty">
+        <mat-toolbar style="height: auto;">
+            <div style="display: flex; gap: 15px; width: 100%; justify-content: center;">
+                <span>Sewing Input Transfer</span>
+            </div>
+            <div style="flex: 1 1 auto;"></div>
+            <div style="display: flex; gap: 10px; margin-top: 1vh;">
+    
+                <div style="display: flex; gap: 10px;">
+                    <label style="font-weight: normal; font-family: serif; margin-top: 5px;">Input Date</label>
+                    <input type="date" class="form-control" style="margin-top: 2px;" formControlName="InputDate">
+                </div>
+    
+            </div>
+    
+    
+        </mat-toolbar>
+        <div class="tablecss">
+            <table class="table table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th><button class="btn btn-primary" (click)="SewinputEtyAddButton()">+</button></th>
+                        <th>S.No</th>
+                        <th>Buyer</th>
+                        <th>Order no</th>
+                        <th>Style</th>
+                        <th>Color</th>
+                        <th>G.Size</th>
+                        <th>LineNo</th>
+                        <th>InputPcs</th>
+                        <th>Bundleno</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody formArrayName="data">
+                    <tr *ngFor="let list of items.controls; let i=index" [formGroupName]="i">
+                        <td></td>
+                        <td>{{i+1}}</td>
+                        <td>
+                            <input type="text" class="form-control" formControlName="Buyer" list="1">
+                            <datalist id="1">
+                                <option></option>
+                            </datalist>
+                        </td>
+    
+                        <td>
+                            <input type="text" class="form-control" formControlName="Orderno" list="2" >
+                            <datalist id="2">
+                                <option></option>
+                            </datalist>
+                        </td>
+    
+                        <td>
+                            <input type="text" class="form-control" formControlName="Style" list="3">
+                            <datalist id="3">
+                                <option></option>
+                            </datalist>
+                        </td>
+    
+                        <td>
+                            <input class="form-control" type="text" formControlName="Color">
+                        </td>
+                        <td>
+                            <input class="form-control" type="text" formControlName="GSize" >
+    
+                        </td>
+    
+    
+                        <td><input class="form-control" type="text" formControlName="LineNo" ></td>
+    
+                        <td><input class="form-control" type="text" formControlName="InputPcs" ></td>
+    
+                        <td><input class="form-control" type="text" formControlName="Bundleno"></td>
+    
+                        <th><button class="btn-danger" (click)="delete(i)">x</button></th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+
+
+
+    <ng-template pTemplate="footer">
+        <div style="width: 100%; display: flex; justify-content: center;">
+            <button class="btn btn-primary" (click)="update()">Update</button>
+        </div>
+    </ng-template>
+</p-dialog>
+
+
+<p-dialog [(visible)]="viewEntry" [modal]="true" header=" Knit Work Order Entry" [maximizable]="true"
+    [style]="{width: '100vw', height:'100vh'}">
+ 
+
+    <ng-template pTemplate="footer">
+        <div style="width: 100%; display: flex; justify-content: center;">
+            <div>
+                <button mat-button color="primary" (click)="exportToPDF()"><mat-icon>download</mat-icon> Download </button>
+            </div>
+        </div>
+    </ng-template>
+
+</p-dialog>

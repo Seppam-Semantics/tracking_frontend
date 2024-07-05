@@ -161,6 +161,7 @@ export class FabricsdiaCreationComponent {
   update(){
     this.api.fsize_master(this.Fabricsdiaedit.value).subscribe((res)=>{
       alert(res.message)
+      window.location.reload()
       this.api.fsize_master_AllData().subscribe((res)=>{
         this.fsizedata = res.fsize
       })

@@ -86,4 +86,18 @@ export class MainComponent implements OnInit {
     TransactionMaster(){
       this.router.navigate(['/main/TransactionMaster'])
     }
+
+    PODetails(){
+      this.router.navigate(['/main/POMaster'])
+    }
+    cutprodlist(){
+      this.router.navigate(['/main/CutProdList'])
+    }
+    SewInput(){
+      this.router.navigate(['main/SewInputList'])
+    }
+ 
+    SewOutput(){
+      this.router.navigate(['main/SewOutputList'])
+    }
   }

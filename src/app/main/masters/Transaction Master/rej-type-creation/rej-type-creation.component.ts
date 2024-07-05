@@ -161,6 +161,7 @@ getSelectedColors1() {
 }
 
   update() {
+    console.log(this.rejTypeedit.value)
     this.api.rejtype_Master(this.rejTypeedit.value).subscribe((res) => {
       alert(res.message)
       this.RejTypeFillterData()
