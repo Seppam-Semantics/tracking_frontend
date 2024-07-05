@@ -142,14 +142,21 @@ export class ReportEntryComponent implements OnInit {
       row.get('woId')?.setValue(woId);
       console.log(res)
     });
-    this.getknitWoDetails(this.factory,this.buyerName, this.orderNo, this.style, this.color, size)
   }
 
-  getknitWoDetails(factory:any , buyer:any, orderNo:any, style:any, color:any, size:any){
+  getknitWoDetails(index:any){
+    const KnitEntryData = this.load.get('data') as FormArray;
+    const row = KnitEntryData.at(index);
+    const factory = this.factory
+    const buyer = row.get('buyer')?.value;
+    const orderNo = row.get('orderNo')?.value;
+    const style = row.get('style')?.value;
+    const color = row.get('color')?.value;
+    const size = row.get('size')?.value;
+
+    console.log(factory,buyer,orderNo,style,color,size)
     this.api.knitauth(factory,buyer,orderNo,style,color,size).subscribe((res)=>{
       this.knitDetails = res.knitWoDetails
-      console.log(res)
-      console.log(this.knitDetails[0].knitKg)
     })
   }
 

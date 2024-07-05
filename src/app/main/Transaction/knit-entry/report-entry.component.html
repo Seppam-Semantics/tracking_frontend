@@ -176,7 +176,7 @@
                             <option value="">
                         </datalist>
                     </td>
-                    <td><input type="text" class="form-control" formControlName="dayProductionKgs"
+                    <td><input type="text" class="form-control" formControlName="dayProductionKgs" (click)="getknitWoDetails(i)"
                             (input)="valid($event.target.value)"></td>
                     <td><input type="text" class="form-control" formControlName="noOfRollsProduced"></td>
                     <td><input type="text" class="form-control" formControlName="noOfRollsChecked"></td>
