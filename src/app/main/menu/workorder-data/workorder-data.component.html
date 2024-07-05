@@ -100,7 +100,7 @@
             </datalist>
 
             <td><input style="width: 15vh;" formControlName="Color" list="Color" (input)="colorvalue(i)"
-                (change)="colordata()" (change)="colorprocessloss(i)" class="form-control"
+                (change)="colordata()" class="form-control"
                 (mouseenter)="stylevalue(i)">
               <datalist id="Color">
                 <option *ngFor="let data of this.colorDta" value="{{data.color}}">{{data.color}}</option>
