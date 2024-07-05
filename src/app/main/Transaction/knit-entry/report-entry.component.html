@@ -177,7 +177,7 @@
                         </datalist>
                     </td>
                     <td><input type="text" class="form-control" formControlName="dayProductionKgs" (click)="getknitWoDetails(i)"
-                            (input)="valid($event.target.value)"></td>
+                            (input)="valid($event.target.value, i)" [ngClass]="{'is-invalid':this.toleranceValid[i]}"></td>
                     <td><input type="text" class="form-control" formControlName="noOfRollsProduced"></td>
                     <td><input type="text" class="form-control" formControlName="noOfRollsChecked"></td>
                     <td><input type="text" class="form-control" formControlName="knittingSL">

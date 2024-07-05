@@ -31,6 +31,8 @@ export class ReportEntryComponent implements OnInit {
   factory: any;
   knitDetails: any;
   valueExceeded : boolean = false;
+  toleranceValid: boolean[] = [];
+
   constructor(private fb: FormBuilder, private api: ApiService, private router: Router) {
     this.load = this.fb.group({
       id: new FormControl(''),
@@ -160,15 +162,17 @@ export class ReportEntryComponent implements OnInit {
     })
   }
 
-  valid(value:any){
+  valid(value:any, i:any){
     const inputValue = value;
     const tolerance = (this.knitDetails[0].knitKg + (this.knitDetails[0].knitKg * 0.05) )
     if(inputValue > tolerance ){
       this.valueExceeded = true;
       alert("Allowed value with 5% tolerance is : " + tolerance);
+      this.toleranceValid[i] = true
     }
     else{
       this.valueExceeded = false;
+      this.toleranceValid[i] = false
     }
   }
 
