@@ -162,9 +162,10 @@ export class ReportEntryComponent implements OnInit {
 
   valid(value:any){
     const inputValue = value;
-    if(inputValue > (this.knitDetails[0].knitKg + (this.knitDetails[0].knitKg * 0.05) ) ){
+    const tolerance = (this.knitDetails[0].knitKg + (this.knitDetails[0].knitKg * 0.05) )
+    if(inputValue > tolerance ){
       this.valueExceeded = true;
-      alert("Value exceeded");
+      alert("Allowed value with 5% tolerance is : " + tolerance);
     }
     else{
       this.valueExceeded = false;
