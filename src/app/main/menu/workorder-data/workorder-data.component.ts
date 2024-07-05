@@ -255,7 +255,7 @@ export class WorkorderDataComponent implements OnInit {
   }
 
   colorprocessloss(index: any) {
-    this.api.ColorLoss_BO(this.color_Value).subscribe((res) => {
+    this.api.ColorLoss_BO(this.colorId).subscribe((res) => {
       this.DyeProcessLossValue = res.DyeProcessLoss[0].DyeProcessLoss
     })
   }
@@ -327,6 +327,9 @@ export class WorkorderDataComponent implements OnInit {
         row.get('rejlosses')?.setValue(this.rejloss);
       })
 
+      this.api.ColorLoss_BO(this.colorId).subscribe((res) => {
+        this.DyeProcessLossValue = res.DyeProcessLoss[0].DyeProcessLoss
+      })
       this.api.DyeTypeMaster_BO(this.styleIdDta, this.dyeTypeFBCId).subscribe((res) => {
         this.DyeTypeLossDta = res.DyeTypeLoss[0].dyepl
       })
@@ -392,7 +395,7 @@ export class WorkorderDataComponent implements OnInit {
         const FinishKg1 = (( this.finishfabConsumptionDta  / ((100 - this.rejloss - this.PODetailsLossValue)/100)) * OrderPcsValue) ; ;
         console.log(FinishKg1)
         console.log("[FinishKg] = "+FinishKg1 + "[DyeLossValue] = " + this.DyeProcessLossValue + "[DyeTypeLossDta] = " + this.DyeTypeLossDta + "[fabTypeLossDta] = " + this.fabTypeLossDta)
-        const FinishKg2 = FinishKg1 / (100 - this.DyeProcessLossValue - this.fabTypeLossDta - this.DyeTypeLossDta )
+        const FinishKg2 = FinishKg1 / ((100 - this.DyeProcessLossValue - this.fabTypeLossDta - this.DyeTypeLossDta )/100)
 
         const FinishKg = parseFloat(FinishKg1.toFixed(2));
         const GreigeKg = parseFloat(FinishKg2.toFixed(2));
