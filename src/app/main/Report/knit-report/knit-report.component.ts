@@ -72,6 +72,8 @@ export class KnitReportComponent implements OnInit {
   orderName: any;
   ordervalue: any
   ktydatalineData: any;
+  knitDetails: any;
+  valueExceeded: boolean = false;
 
   onCheckboxChange11(event: any) {
     const ischecked = event.target.checked;
@@ -197,6 +199,7 @@ export class KnitReportComponent implements OnInit {
   }
 
   wobysize() {
+    const factory = this.ktydata.headerData[0].factory
     this.loadftydetails(this.buyerName, this.ordernumbers, this.styleslist, this.colorslist, this.sizeslist);
   }
 
@@ -287,7 +290,7 @@ export class KnitReportComponent implements OnInit {
   edit(id: any) {
     this.editpopup = true;
     this.ktyid = id;
-    console.log(this.ktyid)
+    // console.log(this.ktyid)
     this.api.getsingleknit_details(this.ktyid).subscribe((res) => {
       this.ktydata = res;
       this.ktydatalineData = res.lineData
@@ -341,7 +344,32 @@ export class KnitReportComponent implements OnInit {
     });
   }
 
+  getknitWoDetails(index:any){
+    const KnitEntryData = this.load.get('data') as FormArray;
+    const row = KnitEntryData.at(index);
+    const factory = this.ktydata.headerData[0].factory;
+    const buyer = row.get('buyer')?.value;
+    const orderNo = row.get('orderNo')?.value;
+    const style = row.get('style')?.value;
+    const color = row.get('color')?.value;
+    const size = row.get('size')?.value;
 
+    console.log(factory,buyer,orderNo,style,color,size)
+    this.api.knitauth(factory,buyer,orderNo,style,color,size).subscribe((res)=>{
+      this.knitDetails = res.knitWoDetails
+    })
+  }
+
+  valid(value:any){
+    const inputValue = value;
+    if(inputValue > (this.knitDetails[0].knitKg + (this.knitDetails[0].knitKg * 0.05) ) ){
+      this.valueExceeded = true;
+      alert("Value exceeded");
+    }
+    else{
+      this.valueExceeded = false;
+    }
+  }
 
 
   deleteKnit(id: any) {
