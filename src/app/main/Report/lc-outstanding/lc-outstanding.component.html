@@ -7,6 +7,12 @@
         <input type="date" class="form-control" style="margin-top: 2px;" [(ngModel)]="filterDate" (change)="dateFilter()">
     </div> -->
 <div style="display: flex; gap: 10px;">
+
+    <p-dropdown [options]="buyerlist"  [(ngModel)]="buyervalue" (onChange)="BuyerFilter()" placeholder="Buyer"
+    optionLabel="buyer" optionValue="buyer" autoWidth="false" 
+    [editable]="true"></p-dropdown>
+
+
     <p-dropdown [options]="lcnolist"  [(ngModel)]="lcnoNumber" (onChange)="lcnoFilter()" placeholder="lcNo"
     optionLabel="lcNo" optionValue="lcNo" autoWidth="false" 
     [editable]="true"></p-dropdown>
@@ -40,8 +46,12 @@
                 
 
                 <th>Pending Receipt Kgs</th>
-                <th> Receipt value</th>
-                <th>Pending LC Value</th>
+                <th> Receipt value
+                    <input value="{{this.ReceiptvalueTotal}}" style="width: 14vh;" readonly/>
+                </th>
+                <th>Pending LC Value
+                    <input value="{{this.PendingLCValueTotal}}" style="width: 14vh;" readonly/>
+                </th>
                 <th>Status</th>
             </tr>
         </thead>
@@ -60,12 +70,11 @@
                 <td>{{data.yarnValue}}</td>
 
                 <td>{{data.allocatedYarnKgs}}</td>
-                <td>{{(data.lcYarnKgs - data.allocatedYarnKgs).toFixed(2)}}</td>
+                <td>{{data.PendingallocatedKgs}}</td>
                 <td>{{data.receiptYarnKgs}}</td>
-
-                <td>{{(data.lcYarnKgs - data.receiptYarnKgs).toFixed(2)}}</td>
-                <td>{{(data.yarnRate * data.receiptYarnKgs).toFixed(2)}}</td>
-                <td>{{(data.yarnValue - (data.yarnRate * data.receiptYarnKgs)).toFixed(2)}}</td>
+                <td>{{data.PendingReceiptKgs }}</td>
+                <td>{{data.Receiptvalue}}</td>
+                <td>{{data.PendingLCValue }}</td>
                 <td>{{data.Status}}</td>
             </tr>
         </tbody>

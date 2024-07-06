@@ -478,10 +478,19 @@ export class ApiService {
 
 
 
-  LCOutstandingData(lcno: string = '' , status:string = ''): Observable<any> {
-    return this.http.get(this.getUrl() + `/yarnapi/LC-Outstanding?lcno=${lcno}&status=${status}`, this.getHeaders())
+  LCOutstandingData(lcno: string = '' , status:string = '' , buyer:string = ''): Observable<any> {
+    return this.http.get(this.getUrl() + `/yarnapi/LC-Outstanding?lcno=${lcno}&status=${status}&buyer=${buyer}`, this.getHeaders())
   }
   
+  
+  LCOutstandingTotalData(lcno: string = '' , status:string = '' , buyer:string = ''): Observable<any> {
+    return this.http.get(this.getUrl() + `/yarnapi/LCOutstandingTotal?lcno=${lcno}&status=${status}&buyer=${buyer}`, this.getHeaders())
+  }
+  
+  BuyerListData(): Observable<any> {
+    return this.http.get(this.getUrl() + `/yarnapi/Buyer-List`, this.getHeaders())
+  }
+
   lcNoListData(): Observable<any> {
     return this.http.get(this.getUrl() + `/yarnapi/lcNo-List`, this.getHeaders())
   }

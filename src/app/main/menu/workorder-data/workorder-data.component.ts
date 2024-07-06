@@ -77,7 +77,7 @@ export class WorkorderDataComponent implements OnInit {
   OrderFOBRate: any;
   OrderPcs: any;
   colorId: any;
-
+  valueExceeded : boolean = false;
 
   ngOnInit(): void {
     this.buyerdata()

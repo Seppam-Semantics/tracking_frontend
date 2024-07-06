@@ -16,6 +16,10 @@ export class LCOutstandingComponent implements OnInit{
   lcnoNumber:any
   Statuslist: any;
   yarnStatusvalue:any
+  buyerlist: any;
+  buyervalue:any
+  ReceiptvalueTotal: any;
+  PendingLCValueTotal: any;
   constructor(private api : ApiService){}
   ngOnInit(): void { 
     this.lcnoFilter()
@@ -27,6 +31,15 @@ export class LCOutstandingComponent implements OnInit{
     this.api.StatusListData().subscribe((res)=>{
       this.Statuslist = res.yarnStatus
     })
+
+    this.api.BuyerListData().subscribe((res)=>{
+      this.buyerlist = res.buyer
+    })
+
+    this.api.LCOutstandingTotalData().subscribe((res)=>{
+      this.ReceiptvalueTotal = res.LCOutstandingTotal[0].Receiptvalue
+      this.PendingLCValueTotal = res.LCOutstandingTotal[0].PendingLCValue
+    })
   }
 
 lcnoFilter(){
@@ -34,11 +47,34 @@ lcnoFilter(){
     this.LCOutstandingData = res.LCOutstanding
     // console.log(this.LCOutstandingData)
   })  
+
+  this.api.LCOutstandingTotalData(this.lcnoNumber).subscribe((res)=>{
+    this.ReceiptvalueTotal = res.LCOutstandingTotal[0].Receiptvalue
+    this.PendingLCValueTotal = res.LCOutstandingTotal[0].PendingLCValue
+  })
 }
 statusFilter(){
   this.api.LCOutstandingData('',this.yarnStatusvalue).subscribe((res)=>{
     this.LCOutstandingData = res.LCOutstanding
   })  
+
+  this.api.LCOutstandingTotalData('',this.yarnStatusvalue).subscribe((res)=>{
+    this.ReceiptvalueTotal = res.LCOutstandingTotal[0].Receiptvalue
+    this.PendingLCValueTotal = res.LCOutstandingTotal[0].PendingLCValue
+  })
+}
+
+BuyerFilter(){
+console.log(this.buyervalue)
+  this.api.LCOutstandingData('','',this.buyervalue).subscribe((res)=>{
+    this.LCOutstandingData = res.LCOutstanding
+  })  
+
+  this.api.LCOutstandingTotalData('','' ,this.buyervalue).subscribe((res)=>{
+    this.ReceiptvalueTotal = res.LCOutstandingTotal[0].Receiptvalue
+    this.PendingLCValueTotal = res.LCOutstandingTotal[0].PendingLCValue
+  })
+
 }
 
   fileName = "LCoutStandingReport.xlsx"
@@ -48,20 +84,14 @@ exportexcel() {
     title: "Are you sure?",
     text: "You Want To Download Report!!!",
     icon: "warning",
+    showDenyButton: true,
     showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "Yes, Download it!"
+    confirmButtonText: "Download Pdf",
+    denyButtonText: `Download Excel`
   }).then((result) => {
+
     if (result.isConfirmed) {
-
-      // let data = document.getElementById("table-data");
-      // const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(data);
-      // const wb: XLSX.WorkBook = XLSX.utils.book_new();
-      // XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-      // XLSX.writeFile(wb, this.fileName);      
       
-
       const doc = new jsPDF({
         orientation: 'landscape'
      });
@@ -76,29 +106,24 @@ exportexcel() {
      const data = this.LCOutstandingData.map((row:any) => [
       row.lcNo , 
       row.lcDate , 
-
       row.pi , 
       row.piDate , 
       row.yarnType , 
-
- 
       row.lcYarnKgs,
       row.yarnRate,
       row.yarnValue ,
-
       row.allocatedYarnKgs ,
-      row.lcYarnKgs - row.allocatedYarnKgs ,
+      (row.lcYarnKgs - row.allocatedYarnKgs).toFixed(2) ,
       row.receiptYarnKgs ,
-
-      row.lcYarnKgs - row.receiptYarnKgs,
+      (row.lcYarnKgs - row.receiptYarnKgs).toFixed(2),
       row.yarnRate * row.receiptYarnKgs,
-      row.yarnValue - (row.yarnRate * row.receiptYarnKgs) ,
+      (row.yarnValue - (row.yarnRate * row.receiptYarnKgs)).toFixed(2) ,
       row.Status
      ]);
      (doc as any).autoTable({
        head: [[
 
-          "LC no",
+            "LC no",
                 "LC Date",
                 
                 "PI",
@@ -115,8 +140,8 @@ exportexcel() {
                 
 
                 "Pending Receipt Kgs",
-                "Receipt value",
-                "Pending LC Value",
+                "Receipt value"+"=" +[this.ReceiptvalueTotal],
+                "Pending LC Value"+ "=" +[this.PendingLCValueTotal],
                 "Status"
 
        ]],
@@ -128,9 +153,24 @@ exportexcel() {
 
       Swal.fire({
         title: "Good job!",
-        text: "Your Download Compleated !!!",
+        text: "Your PDF Download Compleated !!!",
         icon: "success"
       });
+    } else if (result.isDenied) {
+      Swal.fire("Changes are not saved", "", "info");
+      let data = document.getElementById("table-data");
+      const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(data);
+      const wb: XLSX.WorkBook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+      XLSX.writeFile(wb, this.fileName);
+    
+    
+      Swal.fire({
+        title: "Good job!",
+        text: "Your Excel Download Compleated !!!",
+        icon: "success"
+      });
+    
     }
   });
 }
