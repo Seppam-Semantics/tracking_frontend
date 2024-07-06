@@ -1,14 +1,14 @@
-<div [formGroup]="SewoutputEty">
+<div [formGroup]="SewPkEty">
     <mat-toolbar style="height: auto;">
         <div style="display: flex; gap: 15px; width: 100%; justify-content: center;">
-            <span>Sewing Output Transfer</span>
+            <span>Sewing Packing</span>
         </div>
         <div style="flex: 1 1 auto;"></div>
         <div style="display: flex; gap: 10px; margin-top: 1vh;">
 
             <div style="display: flex; gap: 10px;">
-                <label style="font-weight: normal; font-family: serif; margin-top: 5px;">Output Date</label>
-                <input type="date" class="form-control" style="margin-top: 2px;" formControlName="OutputDate">
+                <label style="font-weight: normal; font-family: serif; margin-top: 5px;">Pack Date</label>
+                <input type="date" class="form-control" style="margin-top: 2px;" formControlName="PackDate">
             </div>
 
         </div>
@@ -19,7 +19,7 @@
         <table class="table table-hover">
             <thead class="thead-dark">
                 <tr>
-                    <th><button class="btn btn-primary" (click)="SewOutputEtyAddButton()">+</button></th>
+                    <th><button class="btn btn-primary" (click)="SewPkEtyAddButton()">+</button></th>
                     <th>S.No</th>
                     <th>Buyer</th>
                     <th>Order no</th>
@@ -27,12 +27,12 @@
                     <th>Color</th>
                     <th>G.Size</th>
                     <th>LineNo</th>
-                    <th>MC Used</th>
                     <th>MP Used</th>
                     <th>MC Hrs</th>
-                    <th>Output Pcs</th>
-                    <th>TimePeriod</th>
                     <th>Bundleno</th>
+                    <th>TimePeriod</th>
+                    <th>Pack Pcs</th>
+                    <th>Carton nos</th>
                     <th>Delete</th>
                 </tr>
             </thead>
@@ -72,14 +72,14 @@
 
                     <td><input class="form-control" type="text" formControlName="LineNo" ></td>
 
-                    <td><input class="form-control" type="text" formControlName="MCUsed" ></td>
                     <td><input class="form-control" type="text" formControlName="MPUsed" ></td>
                     <td><input class="form-control" type="text" formControlName="MCHrs" ></td>
-                    <td><input class="form-control" type="text" formControlName="OutputPcs" ></td>
+                    <td><input class="form-control" type="text" formControlName="Bundleno"></td>
                     <td><input class="form-control" type="text" formControlName="TimePeriod" ></td>
 
+                    <td><input class="form-control" type="text" formControlName="PackPcs" ></td>
 
-                    <td><input class="form-control" type="text" formControlName="Bundleno"></td>
+                    <td><input class="form-control" type="text" formControlName="CartonNos" ></td>
 
                     <th><button class="btn-danger" (click)="delete(i)">x</button></th>
                 </tr>

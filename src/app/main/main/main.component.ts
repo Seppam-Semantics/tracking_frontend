@@ -100,4 +100,16 @@ export class MainComponent implements OnInit {
     SewOutput(){
       this.router.navigate(['main/SewOutputList'])
     }
+
+    PackProd(){
+      this.router.navigate(['main/SewingPackingList'])
+    }
+
+    ShipmentListingList(){
+      this.router.navigate(['main/ShipmentListingList'])
+    }
+
+    InvoiceListing(){
+      this.router.navigate(['main/InvoiceListing'])
+    }
   }

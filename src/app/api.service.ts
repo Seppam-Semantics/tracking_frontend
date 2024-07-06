@@ -478,8 +478,16 @@ export class ApiService {
 
 
 
-  LCOutstandingData(date: any): Observable<any> {
-    return this.http.get(this.getUrl() + `/yarnapi/LC-Outstanding?date=${date}`, this.getHeaders())
+  LCOutstandingData(lcno: string = '' , status:string = ''): Observable<any> {
+    return this.http.get(this.getUrl() + `/yarnapi/LC-Outstanding?lcno=${lcno}&status=${status}`, this.getHeaders())
+  }
+  
+  lcNoListData(): Observable<any> {
+    return this.http.get(this.getUrl() + `/yarnapi/lcNo-List`, this.getHeaders())
+  }
+
+  StatusListData(): Observable<any> {
+    return this.http.get(this.getUrl() + `/yarnapi/Status-List`, this.getHeaders())
   }
 
   KFInventoryData(date: any): Observable<any> {

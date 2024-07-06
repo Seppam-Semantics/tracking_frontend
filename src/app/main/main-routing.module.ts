@@ -52,6 +52,12 @@ import { SewInputEntryComponent } from './Garments/Transaction/sew-input-entry/s
 import { SewInputListComponent } from './Garments/Report/sew-input-list/sew-input-list.component';
 import { SewOutputEntryComponent } from './Garments/Transaction/sew-output-entry/sew-output-entry.component';
 import { SewOutputListComponent } from './Garments/Report/sew-output-list/sew-output-list.component';
+import { SewingPackingEntryComponent } from './Garments/Transaction/sewing-packing-entry/sewing-packing-entry.component';
+import { SewingPackingListComponent } from './Garments/Report/sewing-packing-list/sewing-packing-list.component';
+import { ShipmentPackingEntryComponent } from './Garments/Transaction/shipment-packing-entry/shipment-packing-entry.component';
+import { ShipmentListingListComponent } from './Garments/Report/shipment-listing-list/shipment-listing-list.component';
+import { InvoiceEntryComponent } from './Garments/Transaction/invoice-entry/invoice-entry.component';
+import { InvoiceListingComponent } from './Garments/Report/invoice-listing/invoice-listing.component';
 
 
 const routes: Routes = [
@@ -110,6 +116,16 @@ const routes: Routes = [
   {path:"SewInputList" , component : SewInputListComponent} ,
   {path:"SewOutputEntry" , component : SewOutputEntryComponent} ,
   {path:"SewOutputList" , component : SewOutputListComponent} ,
+
+
+  {path:"SewingPackingEntry" , component : SewingPackingEntryComponent} ,
+  {path:"SewingPackingList" , component : SewingPackingListComponent} ,
+
+  {path:"ShipmentPackingEntry" , component : ShipmentPackingEntryComponent} ,
+  {path:"ShipmentListingList" , component : ShipmentListingListComponent} ,
+
+  {path:"InvoiceEntry" , component : InvoiceEntryComponent} ,
+  {path:"InvoiceListing" , component : InvoiceListingComponent} ,
  
 ];
 

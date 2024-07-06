@@ -117,6 +117,12 @@ import { SewInputListComponent } from './Garments/Report/sew-input-list/sew-inpu
 import { SewInputEntryComponent } from './Garments/Transaction/sew-input-entry/sew-input-entry.component';
 import { SewOutputEntryComponent } from './Garments/Transaction/sew-output-entry/sew-output-entry.component';
 import { SewOutputListComponent } from './Garments/Report/sew-output-list/sew-output-list.component';
+import { SewingPackingListComponent } from './Garments/Report/sewing-packing-list/sewing-packing-list.component';
+import { SewingPackingEntryComponent } from './Garments/Transaction/sewing-packing-entry/sewing-packing-entry.component';
+import { ShipmentListingListComponent } from './Garments/Report/shipment-listing-list/shipment-listing-list.component';
+import { ShipmentPackingEntryComponent } from './Garments/Transaction/shipment-packing-entry/shipment-packing-entry.component';
+import { InvoiceListingComponent } from './Garments/Report/invoice-listing/invoice-listing.component';
+import { InvoiceEntryComponent } from './Garments/Transaction/invoice-entry/invoice-entry.component';
 
 
 @NgModule({
@@ -191,6 +197,12 @@ import { SewOutputListComponent } from './Garments/Report/sew-output-list/sew-ou
     SewInputEntryComponent,
     SewOutputEntryComponent,
     SewOutputListComponent,
+    SewingPackingListComponent,
+    SewingPackingEntryComponent,
+    ShipmentListingListComponent,
+    ShipmentPackingEntryComponent,
+    InvoiceListingComponent,
+    InvoiceEntryComponent,
 
   ],
   imports: [

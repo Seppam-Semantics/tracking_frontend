@@ -10,7 +10,7 @@
 
             <p-dropdown [options]="ftyName" [(ngModel)]="KnitFtyFillter" placeholder="Factory" optionLabel="knitFty"
             optionValue="knitFty" (onChange)="KnitWorkOrderFactoryFilter()" autoWidth="false"
-            [style]="{ minWidth: '20vh', minHeight:'2vh' }"></p-dropdown>
+            [style]="{ minWidth: '20vh', minHeight:'2vh' }" [editable]="true" ></p-dropdown>
 
             <!-- <input class="form-control me-2" type="search" placeholder="Factory Search" aria-label="Search"
             [(ngModel)]="KnitFtyFillter" (change)="KnitWorkOrderFactoryFilter()" list="ftyList">
@@ -23,7 +23,7 @@
         <div style="display: flex; gap: 10px;">
 
             <p-dropdown [options]="BuyerAllData" [(ngModel)]="BuyerFillter" placeholder="Buyer" optionLabel="buyer"
-            optionValue="buyer" (onChange)="KnitWorkOrderBuyerFilter()"></p-dropdown>
+            optionValue="buyer" (onChange)="KnitWorkOrderBuyerFilter()" [editable]="true"></p-dropdown>
 
             <!-- <input class="form-control me-2" type="search" placeholder="Buyer Search" aria-label="Search"
             [(ngModel)]="BuyerFillter" (input)="KnitWorkOrderBuyerFilter()" list="buyerList">
@@ -36,7 +36,7 @@
         <div style="display: flex; gap: 10px;">
            
             <p-dropdown [options]="OrderAllData" [(ngModel)]="OrderFillter" placeholder="OrderNo" optionLabel="orderNo"
-            optionValue="orderNo" (onChange)="KnitWorkOrderOrderFilter()"></p-dropdown>
+            optionValue="orderNo" (onChange)="KnitWorkOrderOrderFilter()" [editable]="true"></p-dropdown>
 
             <!-- <input class="form-control me-2" type="search" placeholder="order Search" aria-label="Search"
             [(ngModel)]="OrderFillter" (input)="KnitWorkOrderOrderFilter()" list="orderList">

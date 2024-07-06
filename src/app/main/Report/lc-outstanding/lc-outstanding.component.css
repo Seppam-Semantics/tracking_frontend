@@ -83,3 +83,17 @@ thead{
       text-align: center;
   }
 }
+
+:host ::ng-deep .p-dropdown .p-dropdown-label.p-placeholder{
+    color: #6b7280;
+    padding: 6px;
+    margin-left: 2vh;
+}
+:host ::ng-deep .p-dropdown .p-dropdown-label{
+    color: #6b7280;
+    padding: 6px;
+    margin-left: 2vh;
+}
+:host ::ng-deep .p-dropdown {
+    width: 25vh;
+}
