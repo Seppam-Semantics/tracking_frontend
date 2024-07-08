@@ -13,11 +13,22 @@ export class DayKnitComponent  implements OnInit{
 
   filterDate : any
   DayKnitData: any;
-
+  orderName: any;
+  ordervalue: any;
+  statusvalue:any
+  filterDate1:string = '';
+  filterDate2:string = '';
+  status = [{status:"open"},{status:"close"}]
   ngOnInit(): void {
-    
-  }
+    this.OrderName() 
+   }
   constructor(private api : ApiService){}
+
+  OrderName() {
+    this.api.knitfty_order().subscribe((res) => {
+      this.orderName = res.order
+    })
+  }
 
   fileName = "DayKnitReport.xlsx"
   exportexcel() {
@@ -134,7 +145,20 @@ export class DayKnitComponent  implements OnInit{
 
 
   date(){
-    this.api.DayKnit(this.filterDate).subscribe((res)=>{
+    console.log(this.filterDate1)
+    console.log(this.filterDate2)
+    this.api.DayKnit(JSON.stringify(this.filterDate1),JSON.stringify(this.filterDate2)).subscribe((res)=>{
+      this.DayKnitData = res.data
+    })
+  }
+
+  order(){
+    this.api.DayKnit(JSON.stringify(this.filterDate1),JSON.stringify(this.filterDate2),JSON.stringify(this.ordervalue),'').subscribe((res)=>{
+      this.DayKnitData = res.data
+    })
+  }
+  statusfun(){
+    this.api.DayKnit(JSON.stringify(this.filterDate1),JSON.stringify(this.filterDate2),JSON.stringify(this.ordervalue),JSON.stringify(this.statusvalue)).subscribe((res)=>{
       this.DayKnitData = res.data
     })
   }

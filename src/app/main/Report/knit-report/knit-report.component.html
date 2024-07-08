@@ -80,8 +80,8 @@
         <td >{{detail.orderNo}}</td>
         <td >{{detail.factory}}</td>
         <td >
-          <!-- <ul *ngFor="let color of colorjson(detail.colors)" style="text-align: justify;"> -->
-            <ul *ngFor="let color of detail.colors" style="text-align: justify;">
+          <ul *ngFor="let color of colorjson(detail.colors)" style="text-align: justify;">
+            <!-- <ul *ngFor="let color of detail.colors" style="text-align: justify;"> -->
             <li>{{color.color}}</li>
           </ul>
         </td>

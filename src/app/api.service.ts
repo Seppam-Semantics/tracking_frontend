@@ -10,8 +10,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  // apiUrl = "https://tracker.seppam.com";
-  apiUrl = "http://localhost:2000";
+  apiUrl = "https://tracker.seppam.com";
+  // apiUrl = "http://localhost:2000";
 
   token: any;
   profilenames: any;
@@ -570,8 +570,8 @@ export class ApiService {
 
 
 
-  DayKnit(date: any): Observable<any> {
-    return this.http.get(this.getUrl() + `/knitapi/Day-Knit?date=${date}`, this.getHeaders())
+  DayKnit(date1:string='' ,date2:string='' , order: string = '' , status: string = '' ): Observable<any> {
+    return this.http.get(this.getUrl() + `/knitapi/Dayknitfilter?date1=${date1}&date2=${date2}&order=${order}&status=${status}`, this.getHeaders())
   }
 
 

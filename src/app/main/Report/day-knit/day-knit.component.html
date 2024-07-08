@@ -1,12 +1,36 @@
 <mat-toolbar style="display: flex; justify-content: center; height: 7vh;">
+    <p-dropdown [options]="orderName" (onChange)="order()" [(ngModel)]="ordervalue" placeholder="Order No"
+    optionLabel="orderNo" optionValue="orderNo" autoWidth="false" [style]="{ minWidth: '22vh', minHeight:'2vh' }"
+    [editable]="true"></p-dropdown>
+
+    <p-dropdown [options]="status" (onChange)="statusfun()" [(ngModel)]="statusvalue" placeholder="status"
+    optionLabel="status" optionValue="status" autoWidth="false" [style]="{ minWidth: '22vh', minHeight:'2vh' }"
+    [editable]="true"></p-dropdown>
+    
+    
     <div style="display: flex; width: 100%; justify-content: center;">
 <span>Day Knit</span>
 </div>
 <div style="flex: 1 1 auto;"></div>
-<div style="display: flex; gap: 25px;">
+<!-- <div style="display: flex; gap: 25px;">
     <div style="display: flex; gap: 10px;">
         <label style="font-weight: normal; font-family: serif; margin-top: 3px;">As on Date</label>
         <input type="date" class="form-control" style="margin-top: 2px;" [(ngModel)]="filterDate" (change)="date()">
+    </div>
+    <div>
+        <button mat-button color="primary" (click)="exportexcel()" style="margin-top: 3px;"><mat-icon>download</mat-icon>Download</button>
+    </div>
+
+</div> -->
+
+<div style="display: flex; gap: 25px;">
+    <div style="display: flex; gap: 10px;">
+        <label style="font-weight: normal; font-family: serif;">From</label>
+        <input type="date" class="form-control" style="margin-top: 2px;" [(ngModel)]="filterDate1" (change)="date()">
+    </div>
+    <div style="display: flex; gap: 10px;">
+        <label style="font-weight: normal; font-family: serif;">To</label>
+        <input type="date" class="form-control" style="margin-top: 2px;" [(ngModel)]="filterDate2" (change)="date()">
     </div>
     <div>
         <button mat-button color="primary" (click)="exportexcel()" style="margin-top: 3px;"><mat-icon>download</mat-icon>Download</button>
@@ -33,6 +57,7 @@
                 
                 <th>Knit till today</th>
                 <th>Knit Pending</th>
+                <th>Status</th>
             </tr>
         </thead>
         <tbody>
@@ -48,11 +73,12 @@
                 <td>{{data.size}}</td>
 
                 <td>{{data.greigeKg}}</td>
-                <td>{{data.AlldayProductionKgs - data.OnedayProductionKgs}}</td>
+                <td>{{(data.AlldayProductionKgs - data.OnedayProductionKgs).toFixed(2)}}</td>
                 <td>{{data.OnedayProductionKgs}}</td>
 
                 <td>{{data.AlldayProductionKgs}}</td>
-                <td>{{data.greigeKg - data.AlldayProductionKgs}}</td>
+                <td>{{(data.greigeKg - data.AlldayProductionKgs).toFixed(2)}}</td>
+                <td>{{data.knitstatus}}</td>
             </tr>
         </tbody>
     </table>

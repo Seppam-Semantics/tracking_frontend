@@ -83,8 +83,8 @@
                 <td>{{data.orderNo}}</td>
 
                 <td >
-                    <!-- <ul *ngFor="let color of colorjson(detail.colors)" style="text-align: justify;"> -->
-                      <ul *ngFor="let color of data.colors" style="text-align: justify;">
+                    <ul *ngFor="let color of colorjson(data.colors)" style="text-align: justify;">
+                      <!-- <ul *ngFor="let color of data.colors" style="text-align: justify;"> -->
                       <li>{{color.color}}</li>
                     </ul>
                   </td>
@@ -127,7 +127,15 @@
         <mat-toolbar style="display: inline-table; width: 100%; height: 12vh;">
             <div
                 style="display: flex; justify-content:center; gap: 3vh; margin-top: 3vh; flex-wrap: wrap; margin-bottom: 1vh;">
-    
+                
+                <mat-form-field appearance="outline">
+                    <mat-label>Knit Factory</mat-label>
+                    <mat-select [(ngModel)]="ftyname" formControlName="knitfty">
+                        <mat-option  *ngFor="let ftyName of this.ftyName" value="{{ftyName.knitFty}}">{{ftyName.knitFty}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+
   <!-- <p-dropdown placeholder="Buyer" [(ngModel)]="buyerName" (onChange)="getorders()" [options]="buyer"
                 optionLabel="buyer" optionValue="buyer" formControlName="buyer"></p-dropdown> -->
 
@@ -151,13 +159,6 @@
 
             <!-- <p-dropdown placeholder="Knit Factory" [(ngModel)]="ftyname" [options]="ftyName" optionLabel="knitFty"
                 optionValue="knitFty" formControlName="knitfty"></p-dropdown> -->
-
-                <mat-form-field appearance="outline">
-                    <mat-label>Knit Factory</mat-label>
-                    <mat-select [(ngModel)]="ftyname" formControlName="knitfty">
-                        <mat-option  *ngFor="let ftyName of this.ftyName" value="{{ftyName.knitFty}}">{{ftyName.knitFty}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
 
 
             <!-- <p-floatLabel>

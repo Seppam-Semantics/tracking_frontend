@@ -199,11 +199,10 @@ getsize() {
 getWoId(size: any, index: number) {
 
   this.api.getKnitrateIddetails(this.buyerName, this.orderNo, this.style, this.color, size ).subscribe((res) => {
-    // const woId = res.workorders[0].id;
-    console.log(res)
+    const Id = res.knitRate[0].knitRate;
     const formArray = this.KnitDelivery.get('data') as FormArray;
     const row = formArray.at(index);
-    // row.get('woId')?.setValue(woId);
+    row.get('knitRate')?.setValue(Id);
   });
 
 

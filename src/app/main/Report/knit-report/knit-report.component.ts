@@ -533,6 +533,7 @@ export class KnitReportComponent implements OnInit {
 
 
   save() {
+    console.log(this.load.value)
     if (this.load.valid) {
       this.api.knit_entry(this.load.value).subscribe((res) => {
         alert(res.message)
