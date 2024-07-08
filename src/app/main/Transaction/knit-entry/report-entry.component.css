@@ -118,3 +118,7 @@ thead {
       border: 1px solid red;
       box-shadow: 0 0 5px red;
     }
+
+    :host ::ng-deep.p-dropdown-panel .p-dropdown-items {
+      margin-left:-27px
+    }

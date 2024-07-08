@@ -74,6 +74,10 @@ export class KnitReportComponent implements OnInit {
   ktydatalineData: any;
   knitDetails: any;
   valueExceeded: boolean = false;
+  statusvalue:any
+  factorynamevalue:any
+  status = [{status:"open"},{status:"close"}]
+  toleranceValid: boolean[] = [];
 
   onCheckboxChange11(event: any) {
     const ischecked = event.target.checked;
@@ -104,6 +108,7 @@ export class KnitReportComponent implements OnInit {
       gasElecAvailability: new FormControl(''),
       floorLightingStatus: new FormControl(''),
       storageAreaStatus: new FormControl(''),
+      status: new FormControl(''),
       allocatedDay: [''],
       data: this.fb.array([])
     });
@@ -159,18 +164,22 @@ export class KnitReportComponent implements OnInit {
     //   this.loadknitdetails('','',this.ordervalue)
     // }
     // if(this.factoryvalue && this.knitdate && this.ordervalue){
-    this.loadknitdetails('', '', JSON.stringify(this.ordervalue))
+    this.loadknitdetails('', '', JSON.stringify(this.ordervalue),'')
     // }
   }
 
 
-  loadknitdetails(factory: string = '', date: string = '', Order: any) {
-    this.api.ftydetailsFilter(factory, date, Order).subscribe((res) => {
+  loadknitdetails(factory: string = '', date: string = '', Order: any , status:any) {
+    this.api.ftydetailsFilter(factory, date, Order,status).subscribe((res) => {
       this.data = res.knit;
       // console.log(res)
     });
   }
 
+  statusfun(){
+    console.log(this.statusvalue)
+    this.loadknitdetails('', '', '',this.statusvalue)
+  }
   // factory_date() {
   //   this.loadknitdetails(this.factoryvalue, this.knitdate)
   // }
@@ -204,7 +213,106 @@ export class KnitReportComponent implements OnInit {
   }
 
 
+  buyername() {
+    this.api.getknitwobuyers(this.factorynamevalue).subscribe((res) => {
+      this.buyer = res.buyers
+    })
+  }
+  getBuyerValue(index: any) {
+    // this.buyerName = event.target.value;
+    const formArray = this.load.get('data') as FormArray;
+    const row = formArray.at(index);
+    this.buyerName = row.get('buyer')?.value;
+    this.getorders()
+  }
 
+  getorders() {
+    this.api.getknitwoorders(this.factorynamevalue,this.buyerName).subscribe((res) => {
+      this.order = res.orders
+    })
+  }
+
+  getOrderValue(index: any) {
+    const formArray = this.load.get('data') as FormArray;
+    const row = formArray.at(index);
+    this.buyerName = row.get('buyer')?.value;
+    this.orderNo = row.get('orderNo')?.value;
+
+    this.getstyle()
+  }
+
+  getstyle() {
+    this.api.getknitwostyle(this.factorynamevalue,this.buyerName, this.orderNo).subscribe((res) => {
+      this.stylelist = res.styles;
+    })
+  }
+
+  getstylevalue(index: any) {
+
+    const formArray = this.load.get('data') as FormArray;
+    const row = formArray.at(index);
+    this.buyerName = row.get('buyer')?.value;
+    this.orderNo = row.get('orderNo')?.value;
+    this.style = row.get('style')?.value;
+    this.getcolor()
+    // this.style = event.target.value
+  }
+
+  getcolor() {
+    this.api.getknitwocolor(this.factorynamevalue,this.buyerName, this.orderNo, this.style).subscribe((res) => {
+      this.colorlist = res.colors;
+    })
+  }
+
+  getcolorvalue(index: any) {
+
+    const formArray = this.load.get('data') as FormArray;
+    const row = formArray.at(index);
+    this.buyerName = row.get('buyer')?.value;
+    this.orderNo = row.get('orderNo')?.value;
+    this.style = row.get('style')?.value;
+    this.color = row.get('color')?.value;
+    
+    // this.color = event.target.value
+    this.getsize()
+  }
+
+  getsize() {
+    this.api.getknitwosize(this.factorynamevalue,this.buyerName, this.orderNo, this.style, this.color).subscribe((res) => {
+      this.sizelist = res.sizes;
+      
+    })
+  }
+
+  getFactoryName(event:any){
+    this.factory = event.target.value;
+  }
+
+  getWoId(size: any, index: number) {
+    this.api.getwodetails(this.buyerName, this.orderNo, this.style, this.color, size).subscribe((res) => {
+      const woId = res.workorders[0].id;
+      const formArray = this.load.get('data') as FormArray;
+      const row = formArray.at(index);
+      row.get('woId')?.setValue(woId);
+      console.log(res)
+    });
+  }
+
+  getknitWoDetails(index:any){
+    const KnitEntryData = this.load.get('data') as FormArray;
+    const row = KnitEntryData.at(index);
+    const factory = this.factory
+    const buyer = row.get('buyer')?.value;
+    const orderNo = row.get('orderNo')?.value;
+    const style = row.get('style')?.value;
+    const color = row.get('color')?.value;
+    const size = row.get('size')?.value;
+
+    console.log(this.factorynamevalue,buyer,orderNo,style,color,size)
+    this.api.knitauth(this.factorynamevalue,buyer,orderNo,style,color,size).subscribe((res)=>{
+      this.knitDetails = res.knitWoDetails
+    })
+  }
 
   clearAll() {
     this.buyerName = ''
@@ -293,7 +401,9 @@ export class KnitReportComponent implements OnInit {
     // console.log(this.ktyid)
     this.api.getsingleknit_details(this.ktyid).subscribe((res) => {
       this.ktydata = res;
+      console.log(this.ktydata)
       this.ktydatalineData = res.lineData
+      this.factorynamevalue = this.ktydata.headerData[0].factory ,
       this.load.patchValue({
         date: this.datePipe.transform(this.ktydata.headerData[0].date, 'yyyy-MM-dd'),
         id: this.ktyid,
@@ -303,6 +413,8 @@ export class KnitReportComponent implements OnInit {
         floorLightingStatus: this.ktydata.headerData[0].floorLightingStatus,
         storageAreaStatus: this.ktydata.headerData[0].storageAreaStatus,
         allocatedDay: this.ktydata.headerData[0].allocatedDay,
+
+        status: this.ktydata.headerData[0].knitstatus,
       });
 
 
@@ -344,27 +456,22 @@ export class KnitReportComponent implements OnInit {
     });
   }
 
-  getknitWoDetails(index:any){
-    const KnitEntryData = this.load.get('data') as FormArray;
-    const row = KnitEntryData.at(index);
-    const factory = this.ktydata.headerData[0].factory;
-    const buyer = row.get('buyer')?.value;
-    const orderNo = row.get('orderNo')?.value;
-    const style = row.get('style')?.value;
-    const color = row.get('color')?.value;
-    const size = row.get('size')?.value;
-
-    console.log(factory,buyer,orderNo,style,color,size)
-    this.api.knitauth(factory,buyer,orderNo,style,color,size).subscribe((res)=>{
-      this.knitDetails = res.knitWoDetails
-    })
+  valid(value:any, i:any){
+    const inputValue = value;
+    const tolerance = (this.knitDetails[0].knitKg + (this.knitDetails[0].knitKg * 0.05) )
+    if(inputValue > tolerance ){
+      alert("Allowed value with 5% tolerance is : " + tolerance);
+      this.toleranceValid[i] = true
+    }
+    else{
+      this.toleranceValid[i] = false
+    }
+    this.validlity()
   }
 
-  valid(value:any){
-    const inputValue = value;
-    if(inputValue > (this.knitDetails[0].knitKg + (this.knitDetails[0].knitKg * 0.05) ) ){
+  validlity(){
+    if(this.toleranceValid.includes(true)){
       this.valueExceeded = true;
-      alert("Value exceeded");
     }
     else{
       this.valueExceeded = false;
@@ -416,12 +523,27 @@ export class KnitReportComponent implements OnInit {
     this.items.push(row);
   }
 
+  // save() {
+  //   this.api.updateKnitEntry(this.load.value).subscribe((res) => {
+  //     alert(res.message)
+  //     this.editpopup = false;
+  //   })
+  
+  // }
+
+
   save() {
-    this.api.updateKnitEntry(this.load.value).subscribe((res) => {
-      alert(res.message)
-      this.editpopup = false;
-    })
+    if (this.load.valid) {
+      this.api.knit_entry(this.load.value).subscribe((res) => {
+        alert(res.message)
+        this.editpopup = false;
+      })
+    } else {
+      alert('Please fill No.Rolls Produced fields and Date fields // Entry should more then 0.');
+    }
   }
+
+
   Report() {
     this.router.navigate(['/main/ReportEntry']);
   }

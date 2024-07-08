@@ -62,6 +62,8 @@
 
                 <th>Buyer</th>
                 <th>Order</th>
+                <th>color</th>
+
                 <th>Knit Kgs</th>
                 <th>Knit Value</th>
                 <th>Entry</th>
@@ -79,6 +81,14 @@
 
                 <td>{{data.buyer}}</td>
                 <td>{{data.orderNo}}</td>
+
+                <td >
+                    <!-- <ul *ngFor="let color of colorjson(detail.colors)" style="text-align: justify;"> -->
+                      <ul *ngFor="let color of data.colors" style="text-align: justify;">
+                      <li>{{color.color}}</li>
+                    </ul>
+                  </td>
+
                 <td>{{data.knitKg}}</td>
                 <td>{{data.knitValue}}</td>
                 <td><button class="btn btn-warning"(click)="Entry(data.id)"><mat-icon>content_paste</mat-icon></button></td>

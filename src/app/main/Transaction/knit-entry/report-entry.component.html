@@ -26,6 +26,22 @@
                 <div>
                     <button class="btn btn-primary" id="loadcls" (click)="add()">Load</button>
                 </div> -->
+
+                <!-- <p-dropdown [options]="[{ 'name': 'Open', 'id':'Open' }, { 'name': 'Close', 'id':'Close' }]"
+                placeholder="Status" formControlName="status" optionLabel="name" optionValue="id"></p-dropdown> -->
+
+
+                <div style="display: flex; justify-content: start;gap: 10px;">
+                    <div> <label>Status</label> </div>
+                    <div>
+                        <select name="cars" id="cars" class="form-control" style="width: 180px;" formControlName="status" required>
+                            <option class="form-control" value="Open">Open</option>
+                            <option class="form-control" value="Close">Close</option>
+                        </select>
+                    </div>
+                </div>
+
+
                 <div style="margin-left: 5px;">
                     <input type="date" class="form-control date" formControlName="date">
                 </div>
@@ -126,7 +142,6 @@
                     <th>(Y/N)</th>
                     <th>(Y/N)</th>
                     <th></th>
-
                 </tr>
             </thead>
             <tbody formArrayName="data">

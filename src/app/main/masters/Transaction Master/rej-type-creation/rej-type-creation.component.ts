@@ -120,8 +120,8 @@ export class RejTypeCreationComponent {
   edit(id: any) {
     this.api.rejtype_Master_SingleData(id).subscribe((res) => {
         this.rejtypeDta = res.rejtype;
-        this.rejtypeColorDta = JSON.parse(res.rejtype[0].colors).map((colorObj: any) => ({
-          // this.rejtypeColorDta = res.rejtype[0].colors.map((colorObj: any) => ({
+        // this.rejtypeColorDta = JSON.parse(res.rejtype[0].colors).map((colorObj: any) => ({
+          this.rejtypeColorDta = res.rejtype[0].colors.map((colorObj: any) => ({
             colorId: colorObj.colorId,
             color: colorObj.color,
             lineid: colorObj.lineid

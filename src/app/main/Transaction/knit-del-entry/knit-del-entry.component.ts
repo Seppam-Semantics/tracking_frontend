@@ -127,14 +127,17 @@ calculate(){
 }
 // <!------------------------------------------------------------>
 
-
 buyername(){
   this.api.getknit_Ety_wobuyers(this.factoryv).subscribe((res)=>{
     this.buyer = res.buyers
   })
 }
-getBuyerValue(event: any) {
-  this.buyerName = event.target.value;
+getBuyerValue(index: any) {
+  // this.buyerName = event.target.value;
+  const formArray = this.KnitDelivery.get('data') as FormArray;
+  const row = formArray.at(index);
+  this.buyerName = row.get('buyer')?.value;
+  this.getorders()
 }
 
 getorders() {
@@ -144,8 +147,13 @@ getorders() {
   })
 }
 
-getOrderValue(event:any){
-  this.orderNo = event.target.value
+getOrderValue(index:any){
+  // this.orderNo = event.target.value
+  const formArray = this.KnitDelivery.get('data') as FormArray;
+  const row = formArray.at(index);
+  this.buyerName = row.get('buyer')?.value;
+  this.orderNo = row.get('orderNo')?.value;
+  this.getstyle()
 }
 
 getstyle() {
@@ -154,8 +162,14 @@ getstyle() {
   })
 }
 
-getstylevalue(event:any){
-  this.style = event.target.value
+getstylevalue(index:any){
+  // this.style = event.target.value
+  const formArray = this.KnitDelivery.get('data') as FormArray;
+  const row = formArray.at(index);
+  this.buyerName = row.get('buyer')?.value;
+  this.orderNo = row.get('orderNo')?.value;
+  this.style = row.get('style')?.value;
+  this.getcolor()
 }
 
 getcolor() {
@@ -164,8 +178,16 @@ getcolor() {
   })
 }
 
-getcolorvalue(event:any){
-  this.color = event.target.value
+getcolorvalue(index:any){
+  // this.color = event.target.value
+  const formArray = this.KnitDelivery.get('data') as FormArray;
+  const row = formArray.at(index);
+  this.buyerName = row.get('buyer')?.value;
+  this.orderNo = row.get('orderNo')?.value;
+  this.style = row.get('style')?.value;
+  this.color = row.get('color')?.value;
+  this.getsize()
+  
 }
 
 getsize() {
@@ -175,11 +197,22 @@ getsize() {
 }
 
 getWoId(size: any, index: number) {
-  this.api.getwodetails(this.buyerName, this.orderNo, this.style, this.color, size ).subscribe((res) => {
-    const woId = res.workorders[0].id;
+
+  this.api.getKnitrateIddetails(this.buyerName, this.orderNo, this.style, this.color, size ).subscribe((res) => {
+    // const woId = res.workorders[0].id;
+    console.log(res)
     const formArray = this.KnitDelivery.get('data') as FormArray;
     const row = formArray.at(index);
-    row.get('woId')?.setValue(woId);
+    // row.get('woId')?.setValue(woId);
+  });
+
+
+
+  this.api.getknitproductiondetails(this.buyerName, this.orderNo, this.style, this.color, size ).subscribe((res) => {
+    console.log()
+    const formArray = this.KnitDelivery.get('data') as FormArray;
+    const row = formArray.at(index);
+    row.get('noOfRolls')?.setValue(res.knitProduction[0].noOfRolls);
   });
 }
 // <!------------------------------------------------------------>

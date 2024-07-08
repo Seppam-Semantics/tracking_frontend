@@ -10,8 +10,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  apiUrl = "https://tracker.seppam.com";
-  // apiUrl = "http://localhost:2000";
+  // apiUrl = "https://tracker.seppam.com";
+  apiUrl = "http://localhost:2000";
 
   token: any;
   profilenames: any;
@@ -107,6 +107,14 @@ export class ApiService {
 
   getwodetails(buyer: any, orderNo?: any, style?: any, color?: any, size?: any): Observable<any> {
     return this.http.get(this.getUrl() + `/workorderapi/workorders-filter?buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&size=${size}&`, this.getHeaders())
+  }
+
+  getknitproductiondetails(buyer: any, orderNo?: any, style?: any, color?: any, size?: any): Observable<any> {
+    return this.http.get(this.getUrl() + `/knitapi/knitwo-details?buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&size=${size}&`, this.getHeaders())
+  }
+
+  getKnitrateIddetails(buyer: any, orderNo?: any, style?: any, color?: any, size?: any): Observable<any> {
+    return this.http.get(this.getUrl() + `/knitapi/KnitrateId-details?buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&size=${size}&`, this.getHeaders())
   }
 
   getwolinedetails(orderNo: any, style?: any, color?: any, size?: any): Observable<any> {
@@ -224,8 +232,8 @@ export class ApiService {
   }
 
 
-  ftydetailsFilter(factory: any, date: any , Order:any): Observable<any> {
-    return this.http.get(this.getUrl() + `/knitapi/knit-filter?id=&factory=${factory}&date=${date}&buyer=&order=${Order}&style=&color=&size=`, this.getHeaders())
+  ftydetailsFilter(factory: any, date: any , Order:any , status:any ): Observable<any> {
+    return this.http.get(this.getUrl() + `/knitapi/knit-filter?id=&factory=${factory}&date=${date}&buyer=&order=${Order}&style=&color=&size=&status=${status}`, this.getHeaders())
   }
 
   knitDetailsFilter(buyer: any, orderNo: any, style: any, color: any, size: any): Observable<any> {

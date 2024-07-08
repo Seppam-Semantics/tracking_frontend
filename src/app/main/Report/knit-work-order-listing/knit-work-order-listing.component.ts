@@ -172,7 +172,9 @@ export class KnitWorkOrderListingComponent implements OnInit {
       this.KnitWorkOrderAllData = res.workorders
     })
   }
-
+  colorjson(data: any): any {
+    return JSON.parse(data);
+  }
   get items() {
     return this.KnitWorkOrderFrom.get("data") as FormArray
   }

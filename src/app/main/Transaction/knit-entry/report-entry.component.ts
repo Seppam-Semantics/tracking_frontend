@@ -42,6 +42,7 @@ export class ReportEntryComponent implements OnInit {
       gasElecAvailability: new FormControl(''),
       floorLightingStatus: new FormControl(''),
       storageAreaStatus: new FormControl(''),
+      status: new FormControl(''),
       allocatedDay: [''],
       data: this.fb.array([])
     });
