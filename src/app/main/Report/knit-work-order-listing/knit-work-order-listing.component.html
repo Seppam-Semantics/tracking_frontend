@@ -9,8 +9,8 @@
         <div style="display: flex; gap: 10px;">
 
             <p-dropdown [options]="ftyName" [(ngModel)]="KnitFtyFillter" placeholder="Factory" optionLabel="knitFty"
-            optionValue="knitFty" (onChange)="KnitWorkOrderFactoryFilter()" autoWidth="false"
-            [style]="{ minWidth: '20vh', minHeight:'2vh' }" [editable]="true" ></p-dropdown>
+            optionValue="knitFty" (onChange)="KnitWorkOrderFactoryFilter()" [editable]="true" ></p-dropdown>
+            
 
             <!-- <input class="form-control me-2" type="search" placeholder="Factory Search" aria-label="Search"
             [(ngModel)]="KnitFtyFillter" (change)="KnitWorkOrderFactoryFilter()" list="ftyList">
