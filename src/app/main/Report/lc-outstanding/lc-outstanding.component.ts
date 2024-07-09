@@ -20,12 +20,19 @@ export class LCOutstandingComponent implements OnInit{
   buyervalue:any
   ReceiptvalueTotal: any;
   PendingLCValueTotal: any;
+  spinfty: any;
+  ReceiptKgsValueTotal: any;
+  PendingReceiptKgsValueTotal: any;
   constructor(private api : ApiService){}
   ngOnInit(): void { 
     this.lcnoFilter()
   
     this.api.lcNoListData().subscribe((res)=>{
       this.lcnolist = res.lcNo
+    })
+
+        this.api.yarnSpinner().subscribe((res) => {
+      this.spinfty = res.spinners
     })
 
     this.api.StatusListData().subscribe((res)=>{
@@ -39,6 +46,8 @@ export class LCOutstandingComponent implements OnInit{
     this.api.LCOutstandingTotalData().subscribe((res)=>{
       this.ReceiptvalueTotal = res.LCOutstandingTotal[0].Receiptvalue
       this.PendingLCValueTotal = res.LCOutstandingTotal[0].PendingLCValue
+      this.PendingReceiptKgsValueTotal = res.LCOutstandingTotal[0].PendingReceiptKgs
+      this.ReceiptKgsValueTotal = res.LCOutstandingTotal[0].ReceiptKgs
     })
   }
 
@@ -51,6 +60,8 @@ lcnoFilter(){
   this.api.LCOutstandingTotalData(this.lcnoNumber).subscribe((res)=>{
     this.ReceiptvalueTotal = res.LCOutstandingTotal[0].Receiptvalue
     this.PendingLCValueTotal = res.LCOutstandingTotal[0].PendingLCValue
+    this.PendingReceiptKgsValueTotal = res.LCOutstandingTotal[0].PendingReceiptKgs
+    this.ReceiptKgsValueTotal = res.LCOutstandingTotal[0].ReceiptKgs
   })
 }
 statusFilter(){
@@ -61,6 +72,8 @@ statusFilter(){
   this.api.LCOutstandingTotalData('',this.yarnStatusvalue).subscribe((res)=>{
     this.ReceiptvalueTotal = res.LCOutstandingTotal[0].Receiptvalue
     this.PendingLCValueTotal = res.LCOutstandingTotal[0].PendingLCValue
+    this.PendingReceiptKgsValueTotal = res.LCOutstandingTotal[0].PendingReceiptKgs
+    this.ReceiptKgsValueTotal = res.LCOutstandingTotal[0].ReceiptKgs
   })
 }
 
@@ -73,6 +86,8 @@ console.log(this.buyervalue)
   this.api.LCOutstandingTotalData('','' ,this.buyervalue).subscribe((res)=>{
     this.ReceiptvalueTotal = res.LCOutstandingTotal[0].Receiptvalue
     this.PendingLCValueTotal = res.LCOutstandingTotal[0].PendingLCValue
+    this.PendingReceiptKgsValueTotal = res.LCOutstandingTotal[0].PendingReceiptKgs
+    this.ReceiptKgsValueTotal = res.LCOutstandingTotal[0].ReceiptKgs
   })
 
 }
@@ -146,7 +161,8 @@ exportexcel() {
 
        ]],
        body: data , 
-       ...options
+       ...options ,
+         theme: 'grid'
      });
      doc.save('Lc Report.pdf');
 

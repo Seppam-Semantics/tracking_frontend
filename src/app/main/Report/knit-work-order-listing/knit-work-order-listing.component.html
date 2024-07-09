@@ -9,7 +9,7 @@
         <div style="display: flex; gap: 10px;">
 
             <p-dropdown [options]="ftyName" [(ngModel)]="KnitFtyFillter" placeholder="Factory" optionLabel="knitFty"
-            optionValue="knitFty" (onChange)="KnitWorkOrderFactoryFilter()" [editable]="true" ></p-dropdown>
+            optionValue="knitFty" (onChange)="KnitWorkOrderFactoryFilter()"[editable]="true" ></p-dropdown>
             
 
             <!-- <input class="form-control me-2" type="search" placeholder="Factory Search" aria-label="Search"
@@ -51,7 +51,7 @@
     <button mat-button color="primary" (click)="new()">New</button>
     <button mat-button color="primary" (click)="exportexcel()"><mat-icon>download</mat-icon>Download</button>
 </mat-toolbar>
-<div>
+<div class="tablecss">
     <table class="table table-hover fl-table" id="table-data">
         <thead class="thead-dark">
             <tr>
@@ -83,8 +83,8 @@
                 <td>{{data.orderNo}}</td>
 
                 <td >
-                    <ul *ngFor="let color of colorjson(data.colors)" style="text-align: justify;">
-                      <!-- <ul *ngFor="let color of data.colors" style="text-align: justify;"> -->
+                    <!-- <ul *ngFor="let color of colorjson(data.colors)" style="text-align: justify;"> -->
+                      <ul *ngFor="let color of data.colors" style="text-align: justify;">
                       <li>{{color.color}}</li>
                     </ul>
                   </td>

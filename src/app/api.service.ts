@@ -1121,5 +1121,27 @@ export class ApiService {
   fabbooking(data:any ): Observable<any> {
     return this.http.post(this.getUrl() + `/workorderapi/fab-booking`, data,this.getHeaders())
   }
+
+  //--------------------------------------------------------------------------------------------------
   
+  
+  CuttingBuyer(): Observable<any> {
+    return this.http.get(this.getUrl() + `/garmentsapi/Cutting-Buyer` ,this.getHeaders())
+  }
+  
+  CuttingOrderNo(): Observable<any> {
+    return this.http.get(this.getUrl() + `/garmentsapi/Cutting-OrderNo` ,this.getHeaders())
+  }
+  
+  cuttingPost(data:any ): Observable<any> {
+    return this.http.post(this.getUrl() + `/garmentsapi/cutting`, data,this.getHeaders())
+  }
+ 
+  cutting(buyer:string='' , orderNo:string='' , fromDate:string='' , toDate:string=''):Observable<any>{
+    return this.http.get(this.getUrl() + `/garmentsapi/cutting?buyer=${buyer}&orderNo=${orderNo}&fromDate=${fromDate}&toDate=${toDate}&`, this.getHeaders())
+  }
+
+  cuttingId(id:any):Observable<any>{
+    return this.http.get(this.getUrl() + `/garmentsapi/cutting/${id}`, this.getHeaders())
+  }
 }

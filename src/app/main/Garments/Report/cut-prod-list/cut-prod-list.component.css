@@ -18,10 +18,6 @@ th,tr,td {
       border: 1px solid black;
   }
 
-  thead{
-    position: static;
-    top: 0;
-  }
   :host ::ng-deep .p-dropdown .p-dropdown-label.p-placeholder{
     color: #6b7280;
     padding: 6px;
@@ -31,4 +27,14 @@ th,tr,td {
     color: #6b7280;
     padding: 6px;
     margin-left: 2vh;
+}
+.tablecss{
+  overflow-x: scroll;
+  width: 100%;
+  height: 70vh;
+  scrollbar-width: none;
+}
+thead{
+  position: sticky;
+  top: 0;
 }

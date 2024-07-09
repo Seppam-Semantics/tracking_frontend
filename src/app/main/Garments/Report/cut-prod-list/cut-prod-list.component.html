@@ -21,14 +21,14 @@
     <div style="display: flex; gap: 10px;">
         <div style="display: flex; gap: 10px;">
 
-            <p-dropdown  placeholder="Buyer" optionLabel="buyer"
-            optionValue="buyer" ></p-dropdown>
+            <p-dropdown [options]="buyerslist" placeholder="Buyer" optionLabel="buyer" [(ngModel)]="buyervalue" (onChange)="buyer()"
+            optionValue="buyer" [editable]="true"  [style]="{ minWidth: '22vh', minHeight:'2vh' }"></p-dropdown>
 
         </div>
         <div style="display: flex; gap: 10px;">
            
-            <p-dropdown  placeholder="Order" optionLabel="orderNo"
-            optionValue="orderNo" ></p-dropdown>
+            <p-dropdown [options]="OrderNolist" placeholder="Order" optionLabel="orderNo" [(ngModel)]="orderNovalue" (onChange)="Order()"
+            optionValue="orderNo" [editable]="true"  [style]="{ minWidth: '22vh', minHeight:'2vh' }"></p-dropdown>
 
         </div>
     </div>
@@ -36,7 +36,7 @@
     <button mat-button color="primary" (click)="new()">New</button>
     <button mat-button color="primary" (click)="exportexcel()"><mat-icon>download</mat-icon>Download</button>
 </mat-toolbar>
-<div>
+<div class="tablecss">
     <table class="table table-hover fl-table" id="table-data">
         <thead class="thead-dark">
             <tr>
@@ -56,20 +56,20 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+            <tr *ngFor="let data of this.cuttinglist ; let i = index">
+                <td>{{i+1}}</td>
+                <td>{{data.cutDate}}</td>
+                <td>{{data.buyer}}</td>
+                <td>{{data.orderNo}}</td>
 
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{data.style}}</td>
+                <td>{{data.color}}</td>
+                <td>{{data.size}}</td>
+                <td>{{data.batch}}</td>
+                <td>{{data.rolls}}</td>
+                <td>{{data.cutPcs}}</td>
                 <!-- <td><button class="btn btn-warning"(click)="Entry()"><mat-icon>content_paste</mat-icon></button></td> -->
-                <td><button class="btn btn-primary" (click)="edit()"><mat-icon>edit</mat-icon></button></td>
+                <td><button class="btn btn-primary" (click)="edit(data.id)"><mat-icon>edit</mat-icon></button></td>
                 <!-- <td><button class="btn btn-danger" (click)="delete(data.id)"><mat-icon>delete</mat-icon></button></td> -->
             </tr>
         </tbody>
@@ -91,7 +91,7 @@
     
                 <div style="display: flex; gap: 10px;">
                     <label style="font-weight: normal; font-family: serif; margin-top: 5px;">Cut Date</label>
-                    <input type="date" class="form-control" style="margin-top: 2px;" formControlName="CutDate">
+                    <input type="text" class="form-control" style="margin-top: 2px;" formControlName="cutDate" readonly>
                 </div>
     
             </div>
@@ -102,7 +102,7 @@
             <table class="table table-hover">
                 <thead class="thead-dark">
                     <tr>
-                        <th><button class="btn btn-primary" (click)="CutProdEtyAddButton()">+</button></th>
+                        <!-- <th><button class="btn btn-primary" (click)="CutProdEtyAddButton()">+</button></th> -->
                         <th>S.No</th>
                         <th>Buyer</th>
                         <th>Order no</th>
@@ -112,50 +112,63 @@
                         <th>Batch</th>
                         <th>Rolls - nos</th>
                         <th>Cut Pcs</th>
-                        <th>Delete</th>
+                        <!-- <th>Delete</th> -->
                     </tr>
                 </thead>
                 <tbody formArrayName="data">
                     <tr *ngFor="let list of items.controls; let i=index" [formGroupName]="i">
-                        <td></td>
+                        <!-- <td></td> -->
                         <td>{{i+1}}</td>
                         <td>
-                            <input type="text" class="form-control" formControlName="Buyer" list="1">
+                            <input type="text" class="form-control" formControlName="buyer" list="1"
+                            (input)="getBuyerValue(i)" (change)="getorders()">
                             <datalist id="1">
-                                <option></option>
+                                <option *ngFor="let data of this.buyers" value="{{data.buyer}}">{{data.buyer}}</option>
                             </datalist>
                         </td>
     
                         <td>
-                            <input type="text" class="form-control" formControlName="Orderno" list="2" >
+                            <input type="text" class="form-control" formControlName="orderNo" list="2"
+                            (input)="ordervalue(i)"
+                            (mouseenter)="getBuyerValue(i)" (change)="orderdata()">
                             <datalist id="2">
-                                <option></option>
+                                <option *ngFor="let data of this.order" value="{{data.orderNO}}">{{data.orderNO}}</option>
                             </datalist>
                         </td>
     
                         <td>
-                            <input type="text" class="form-control" formControlName="Style" list="3">
+                            <input type="text" class="form-control" formControlName="style" list="3" 
+                            (input)="stylevalue(i)"
+                            (mouseenter)="ordervalue(i)" (change)="styledata()">
                             <datalist id="3">
-                                <option></option>
+                                <option *ngFor="let data of this.stylelist" value="{{data.style}}">{{data.style}}</option>
                             </datalist>
                         </td>
     
                         <td>
-                            <input class="form-control" type="text" formControlName="Color">
+                            <input style="width: 15vh;" formControlName="color" list="Color" (input)="colorvalue(i)"
+                            (change)="colordata()" class="form-control"
+                            (mouseenter)="stylevalue(i)">
+                          <datalist id="Color">
+                            <option *ngFor="let data of this.colorlist" value="{{data.color}}">{{data.color}}</option>
+                          </datalist>
                         </td>
                         <td>
-                            <input class="form-control" type="text" formControlName="GSize" >
-    
+                            <input class="form-control" type="text" formControlName="size" list="size" 
+                            (mouseenter)="colorvalue(i)" (input)="getwoId($event.target.value,i)">
+                            <datalist id="size">
+                                <option *ngFor="let data of this.sizelist" value="{{data.size}}">{{data.size}}</option>
+                              </datalist>
                         </td>
     
     
-                        <td><input class="form-control" type="text" formControlName="Batch" ></td>
+                        <td><input class="form-control" type="text" formControlName="batch" ></td>
     
-                        <td><input class="form-control" type="text" formControlName="Rollsnos" ></td>
+                        <td><input class="form-control" type="text" formControlName="rolls" ></td>
     
-                        <td><input class="form-control" type="text" formControlName="CutPcs"></td>
+                        <td><input class="form-control" type="text" formControlName="cutPcs"></td>
     
-                        <th><button class="btn-danger" (click)="delete(i)">x</button></th>
+                        <!-- <th><button class="btn-danger" (click)="delete(i)">x</button></th> -->
                     </tr>
                 </tbody>
             </table>

@@ -428,7 +428,8 @@ export class FabricRollData2Component implements OnInit {
          head: [["buyer","orderNo" , "style", "color","size","FSize","fabDia","fabGsm","knitSL",
            "yarnType","fabType","dyetype","spinFty","knitFty","dyeinFty","orderPcs","orderFOBRate","knitRate","dyeRate","yarnKg","greigeKg","finishKg"]],
          body: data , 
-         ...options
+         ...options ,
+         theme: 'grid'
        });
        doc.save('Fabricrolldata.pdf');
    

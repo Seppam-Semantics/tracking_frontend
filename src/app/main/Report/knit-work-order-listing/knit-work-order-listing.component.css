@@ -17,10 +17,10 @@ th,tr,td {
 }
 
 .tablecss{
-    /* overflow-x: scroll;
+    overflow-x: scroll;
     width: 100%;
-    height: 45vh;
-    scrollbar-width: none; */
+    height: 75vh;
+    scrollbar-width: none;
 }
 /* thead{
     position: sticky;

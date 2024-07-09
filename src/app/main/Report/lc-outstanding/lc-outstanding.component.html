@@ -8,8 +8,8 @@
     </div> -->
 <div style="display: flex; gap: 10px;">
 
-    <p-dropdown [options]="buyerlist"  [(ngModel)]="buyervalue" (onChange)="BuyerFilter()" placeholder="Buyer"
-    optionLabel="buyer" optionValue="buyer" autoWidth="false" 
+    <p-dropdown [options]="spinfty"  [(ngModel)]="buyervalue" (onChange)="BuyerFilter()" placeholder="spinner"
+    optionLabel="spinner" optionValue="spinner" autoWidth="false" 
     [editable]="true"></p-dropdown>
 
 
@@ -29,6 +29,7 @@
         <thead class="thead-dark">
             <tr>
                 <th>S.No</th>
+                <th>Spinner</th>
                 <th>LC no</th>
                 <th>LC Date</th>
                 
@@ -42,12 +43,16 @@
                 
                 <th>Allocated Kgs</th>
                 <th>Pending allocated Kgs</th>
-                <th>Receipt Kgs</th>
+                <th>Receipt Kgs
+                    <input value="{{this.ReceiptvalueTotal}}" style="width: 14vh;" readonly/>
+                </th>
                 
 
-                <th>Pending Receipt Kgs</th>
+                <th>Pending Receipt Kgs
+                    <input value="{{this.PendingReceiptKgsValueTotal}}" style="width: 14vh;" readonly/>
+                </th>
                 <th> Receipt value
-                    <input value="{{this.ReceiptvalueTotal}}" style="width: 14vh;" readonly/>
+                    <input value="{{this.ReceiptKgsValueTotal}}" style="width: 14vh;" readonly/>
                 </th>
                 <th>Pending LC Value
                     <input value="{{this.PendingLCValueTotal}}" style="width: 14vh;" readonly/>
@@ -58,7 +63,9 @@
         <tbody>
             <tr *ngFor="let data of this.LCOutstandingData; let i=index;">
                 <td>{{i+1}}</td>
+                <td>{{data.spinner}}</td>
                 <td>{{data.lcNo}}</td>
+
                 <td>{{data.lcDate}}</td>
 
                 <td>{{data.pi}}</td>

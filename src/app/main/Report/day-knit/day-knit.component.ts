@@ -111,7 +111,8 @@ export class DayKnitComponent  implements OnInit{
                 "Knit Pending"
          ]],
          body: data , 
-         ...options
+         ...options ,
+         theme: 'grid'
        });
        doc.save('Day Knit.pdf');
         Swal.fire({

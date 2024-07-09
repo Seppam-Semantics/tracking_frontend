@@ -42,7 +42,7 @@ token:any;
     this.router.navigate(['/main/FabricRollData']);
     Swal.fire({
       title: "Welcome to TeeTrack!",
-      text: "Click Ok To Continue Journey",
+      text: "Click Ok To Continue Your Journey",
       icon: "success"
     });
 
