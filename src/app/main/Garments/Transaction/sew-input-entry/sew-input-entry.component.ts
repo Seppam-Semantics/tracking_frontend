@@ -12,7 +12,7 @@ import * as XLSX from 'xlsx'
   templateUrl: './sew-input-entry.component.html',
   styleUrls: ['./sew-input-entry.component.css']
 })
-export class SewInputEntryComponent {
+export class SewInputEntryComponent implements OnInit{
 
   SewinputEty : FormGroup
   valueExceeded : boolean = false;
@@ -20,6 +20,24 @@ export class SewInputEntryComponent {
   editview : boolean = false; 
   filterDate1 : any
   filterDate2 : any
+
+  Buyer_Value: any;
+  buyersDta: any;
+  orderNoDta: any;
+  Order_Value: any;
+  styleDta: any;
+  style_Value: any;
+  colorDta: any;
+  color_Value: any;
+  sizeDta: any;
+  buyers: any;
+  order: any;
+  stylelist: any;
+  colorlist: any;
+  sizelist: any;
+  cutting: any;
+  cuttinglist: any;
+
 
   constructor(private fb: FormBuilder, private api: ApiService , private router : Router) { 
 
@@ -31,6 +49,95 @@ export class SewInputEntryComponent {
 
   }
 
+  ngOnInit(): void {
+    this.api.cut_buyers().subscribe((res) => {
+      this.buyers = res.buyers;
+    })
+  }
+//-------------------------------------------------------------------------------------------------------
+
+getBuyerValue(index: any) {
+  // this.buyerName = event.target.value;
+  const formArray = this.SewinputEty.get('data') as FormArray;
+  const row = formArray.at(index);
+  this.Buyer_Value = row.get('buyer')?.value;
+  this.getorders()
+}
+
+getorders() {
+  this.api.cut_buyersorders(this.Buyer_Value).subscribe((res) => {
+    this.order = res.orders
+  })
+}
+
+ordervalue(index: any) {
+  // this.Order_Value = event.target.value
+  const formArray = this.SewinputEty.get('data') as FormArray;
+  const row = formArray.at(index);
+  this.Buyer_Value =  row.get('buyer')?.value;
+  this.Order_Value =  row.get('orderNo')?.value;
+  this.orderdata()
+}
+
+orderdata() {
+  this.api.cut_ordersstyles(this.Buyer_Value, this.Order_Value).subscribe((res) => {
+    this.stylelist = res.styles;
+  })
+}
+stylevalue(index: any) {
+  const formArray = this.SewinputEty.get('data') as FormArray;
+  const row = formArray.at(index);
+  this.Buyer_Value = row.get('buyer')?.value;
+  this.Order_Value = row.get('orderNo')?.value;
+  this.style_Value = row.get('style')?.value;
+
+  this.styledata()
+}
+
+styledata() {
+  this.api.cut_stylescolors(this.Buyer_Value, this.Order_Value, this.style_Value).subscribe((res) => {
+    this.colorlist = res.colors;
+  })
+}
+
+colorvalue(index: any) {
+  const formArray = this.SewinputEty.get('data') as FormArray;
+  const row = formArray.at(index);
+  this.Buyer_Value = row.get('buyer')?.value;
+  this.Order_Value = row.get('orderNo')?.value;
+  this.style_Value = row.get('style')?.value;
+  this.color_Value = row.get('color')?.value;
+
+  this.colordata()
+
+}
+
+colordata() {
+  this.api.cut_colorssizes(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value).subscribe((res) => {
+    this.sizelist = res.sizes;
+  })
+}
+
+getwoId(size: any, index: number){
+  this.api.getwodetails(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, size).subscribe((res) => {
+    const woId = res.workorders[0].id;
+    console.log(res)
+    const formArray = this.SewinputEty.get('data') as FormArray;
+    const row = formArray.at(index);
+    row.get('woId')?.setValue(woId);
+  });
+
+  this.api.getcutdetails(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, size).subscribe((res) => {
+    const cuttingId = res.cutting[0].id;
+    console.log(res)
+    const formArray = this.SewinputEty.get('data') as FormArray;
+    const row = formArray.at(index);
+    row.get('woId')?.setValue(cuttingId);
+  });
+}
+
+//-------------------------------------------------------------------------------------------------------
+
 
   get items() {
     return this.SewinputEty.get("data") as FormArray
@@ -40,11 +147,11 @@ export class SewInputEntryComponent {
 
     const row = this.fb.group({
       "id": [''],
-      "Buyer": [''],
-      "Orderno": [''],
-      "Style": [''],
-      "Color": [''],
-      "GSize": [''],
+      "buyer": [''],
+      "orderNo": [''],
+      "style": [''],
+      "color": [''],
+      "size": [''],
       "GSizeId": ['',Validators.required],
       "LineNo": [''],
       "InputPcs": [''],

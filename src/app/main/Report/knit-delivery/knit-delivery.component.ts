@@ -35,8 +35,8 @@ export class KnitDeliveryComponent {
   size: any;
   knitDelAllData: any;
   knitheaderData: any;
-  knitlineData: any;
-  knitAllData: any;
+  knitlineData: any[]=[];
+  knitAllData: any[]=[];
   kintid: any;
   factoryname: any;
   knitdelFillter:any
@@ -238,22 +238,24 @@ getWoId(size: any, index: number) {
   edit(id: any) {
     this.KnitDeliveryNewPop = true;
     this.kintid = id
-    this.api.getSingleKnitDel(id).subscribe((res) => {
+    this.api.getSingleKnitDel(this.kintid).subscribe((res) => {
       this.knitAllData = res;
+      this.knitheaderData = res. headerData[0]
+      this.knitlineData = res. lineData
       this.KnitDelivery.patchValue({
         "id": this.kintid,
-        "date": this.knitAllData.headerData[0].date,
-        "factory": this.knitAllData.headerData[0].factory,
-        "RollsTotal": this.knitAllData.headerData[0].totalrolls,
-        "DeliveryTotal": this.knitAllData.headerData[0].totalKg,
-        "KnitTotal": this.knitAllData.headerData[0].knit_total,
+        "date": this.knitheaderData.date,
+        "factory": this.knitheaderData.factory,
+        "RollsTotal": this.knitheaderData.totalrolls,
+        "DeliveryTotal": this.knitheaderData.totalKg,
+        "KnitTotal": this.knitheaderData.knit_total,
       });
 
       const KnitEntryData = this.KnitDelivery.get('data') as FormArray;
       KnitEntryData.clear();
 
       const formControls: FormGroup[] = [];
-      this.knitAllData.lineData.forEach((dataItem: any) => {
+      this.knitlineData.forEach((dataItem: any) => {
         formControls.push(
           this.fb.group({
             "id": dataItem.id,
@@ -276,6 +278,7 @@ getWoId(size: any, index: number) {
       });
 
       this.KnitDelivery.setControl('data', this.fb.array(formControls));
+
     });
   }
 

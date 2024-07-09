@@ -1122,8 +1122,7 @@ export class ApiService {
     return this.http.post(this.getUrl() + `/workorderapi/fab-booking`, data,this.getHeaders())
   }
 
-  //--------------------------------------------------------------------------------------------------
-  
+  //--------------------------------------------Cutting [Start]------------------------------------------------------
   
   CuttingBuyer(): Observable<any> {
     return this.http.get(this.getUrl() + `/garmentsapi/Cutting-Buyer` ,this.getHeaders())
@@ -1144,4 +1143,81 @@ export class ApiService {
   cuttingId(id:any):Observable<any>{
     return this.http.get(this.getUrl() + `/garmentsapi/cutting/${id}`, this.getHeaders())
   }
+
+  cut_buyers(): Observable<any> {
+    return this.http.get(this.getUrl() + `/filtersapi/cut_buyers`, this.getHeaders())
+  }
+
+  cut_buyersorders(buyer: any): Observable<any> {
+    return this.http.get(this.getUrl() + `/filtersapi/cut_buyers-orders?buyer=${buyer}&`, this.getHeaders())
+  }
+
+  cut_ordersstyles(buyer: any, order: any): Observable<any> {
+    return this.http.get(this.getUrl() + `/filtersapi/cut_orders-styles?buyer=${buyer}&orderNo=${order}&`, this.getHeaders())
+  }
+
+  cut_stylescolors(buyer: any, order: any, style: any): Observable<any> {
+    return this.http.get(this.getUrl() + `/filtersapi/cut_styles-colors?buyer=${buyer}&orderNo=${order}&style=${style}&`, this.getHeaders())
+  }
+
+  cut_colorssizes(buyer: any, order: any, style: any, color: any): Observable<any> {
+    return this.http.get(this.getUrl() + `/filtersapi/cut_colors-sizes?buyer=${buyer}&orderNo=${order}&style=${style}&color=${color}&`, this.getHeaders())
+  }
+
+  getcutdetails(buyer: any, orderNo?: any, style?: any, color?: any, size?: any): Observable<any> {
+    return this.http.get(this.getUrl() + `/filtersapi/cutting-filter?buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&size=${size}&`, this.getHeaders())
+  }
+  //--------------------------------------------Cutting [End]------------------------------------------------------
+
+    //--------------------------------------------sewinput [Start]------------------------------------------------------
+   
+    sewingBuyer(): Observable<any> {
+      return this.http.get(this.getUrl() + `/garmentsapi/sewinginput-Buyer` ,this.getHeaders())
+    }
+    
+    sewingOrderNo(): Observable<any> {
+      return this.http.get(this.getUrl() + `/garmentsapi/sewinginput-OrderNo` ,this.getHeaders())
+    }
+    
+    sewingPost(data:any ): Observable<any> {
+      return this.http.post(this.getUrl() + `/garmentsapi/sewing-input`, data,this.getHeaders())
+    }
+   
+    sewing(buyer:string='' , orderNo:string='' , fromDate:string='' , toDate:string=''):Observable<any>{
+      return this.http.get(this.getUrl() + `/garmentsapi/sewing-input?buyer=${buyer}&orderNo=${orderNo}&fromDate=${fromDate}&toDate=${toDate}&`, this.getHeaders())
+    }
+  
+    sewingId(id:any):Observable<any>{
+      return this.http.get(this.getUrl() + `/garmentsapi/sewing-input/${id}`, this.getHeaders())
+    }
+   
+   
+   
+   
+    sewinput_buyers(): Observable<any> {
+      return this.http.get(this.getUrl() + `/filtersapi/sewinput_buyers`, this.getHeaders())
+    }
+  
+    sewinput_buyersorders(buyer: any): Observable<any> {
+      return this.http.get(this.getUrl() + `/filtersapi/sewinput_buyers-orders?buyer=${buyer}&`, this.getHeaders())
+    }
+  
+    sewinput_ordersstyles(buyer: any, order: any): Observable<any> {
+      return this.http.get(this.getUrl() + `/filtersapi/sewinput_orders-styles?buyer=${buyer}&orderNo=${order}&`, this.getHeaders())
+    }
+  
+    sewinput_stylescolors(buyer: any, order: any, style: any): Observable<any> {
+      return this.http.get(this.getUrl() + `/filtersapi/sewinput_styles-colors?buyer=${buyer}&orderNo=${order}&style=${style}&`, this.getHeaders())
+    }
+  
+    sewinput_colorssizes(buyer: any, order: any, style: any, color: any): Observable<any> {
+      return this.http.get(this.getUrl() + `/filtersapi/sewinput_colors-sizes?buyer=${buyer}&orderNo=${order}&style=${style}&color=${color}&`, this.getHeaders())
+    }
+  
+    getsewinputdetails(buyer: any, orderNo?: any, style?: any, color?: any, size?: any): Observable<any> {
+      return this.http.get(this.getUrl() + `/filtersapi/sewinput-filter?buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&size=${size}&`, this.getHeaders())
+    }
+
+        //--------------------------------------------sewinput [End]------------------------------------------------------
+
 }

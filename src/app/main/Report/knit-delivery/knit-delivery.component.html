@@ -2,12 +2,17 @@
         <mat-toolbar class="bg-dark text-white" style="display: flex; justify-content: center; height: auto;">Knit
                 Delivery</mat-toolbar>
             <mat-toolbar style="height: 7vh;">
-                <input class="form-control me-2" type="search" placeholder="knitFty Search" aria-label="Search"
+                <!-- <input class="form-control me-2" type="search" placeholder="knitFty Search" aria-label="Search"
                 [(ngModel)]="knitdelFillter" (input)="knitdelFilter()" list="orderList" >
         
               <datalist id="orderList">
-                <option *ngFor="let data of knitAllData;" [value]="data.factory">{{data.factory}}</option>
-              </datalist>
+                <option *ngFor="let ftyname of this.fty_name" value="{{ftyname.knitFty}}"></option>
+              </datalist> -->
+
+              <p-dropdown [options]="fty_name" (onChange)="knitdelFilter()" [(ngModel)]="knitdelFillter" placeholder="knitFty"
+              optionLabel="knitFty" optionValue="knitFty" autoWidth="false" [style]="{ minWidth: '22vh', minHeight:'2vh' }"
+              [editable]="true"></p-dropdown>
+              
                  <div style="flex: 1 1 auto;"></div>
                 <div style="display: flex;">
                     <button mat-button color="primary" (click)="exportexcel()">Download</button>

@@ -1,6 +1,3 @@
-:host ::ng-deep.p-dropdown-panel .p-dropdown-items {
-    margin-left:-27px
-}
 th,tr,td{
     font-weight: normal;
     text-align: center;
@@ -22,9 +19,7 @@ th,tr,td{
 :host ::ng-deep input, button, select, optgroup, textarea{
     width: 100px;
 }
-:host ::ng-deep .p-dropdown{
-    width: 130px;
-}
+
 .tablecss{
     overflow-x: scroll;
     width: 100%;
@@ -33,18 +28,6 @@ th,tr,td{
 }
 :host ::ng-deep .form-control{
     border: 1px solid black;
-}
-:host ::ng-deep .p-dropdown .p-dropdown-trigger{
-    display: none;
-}
-:host ::ng-deep .p-calendar{
-    max-height: 70%;
-    margin-top: 6%;
-}
-:host ::ng-deep [_nghost-ng-c203490092] .p-dropdown{
-    width: 140px;
-    height: 47px;
-    margin-top: 4%;
 }
 :host ::ng-deep .mat-mdc-text-field-wrapper{
     width: 100%;
@@ -138,3 +121,22 @@ thead{
         text-align: center;
     }
 }
+:host ::ng-deep .p-dropdown .p-dropdown-label.p-placeholder{
+    color: #6b7280;
+    padding: 6px;
+    margin-left: 2vh;
+  }
+  :host ::ng-deep .p-dropdown .p-dropdown-label{
+    color: #6b7280;
+    padding: 6px;
+    margin-left: 2vh;
+  }
+  
+  :host ::ng-deep .p-dropdown {
+   width: min-content;
+  }
+  
+  :host ::ng-deep.p-dropdown-panel .p-dropdown-items {
+    margin-left:-27px
+  }
+  

@@ -263,7 +263,7 @@ export class FabricRollData2Component implements OnInit {
           "Color": [dataItem.color],
           "Size": [dataItem.size],
           "FSize": [dataItem.FSize],
-          "SizeId": [dataItem.sizeid , Validators.required],
+          "SizeId": [dataItem.sizeid],
           "FabType": [dataItem.fabType],
           "fabricTypeId": [dataItem.fabricTypeId],
           "FabDia": [dataItem.fabDia],
@@ -585,33 +585,6 @@ export class FabricRollData2Component implements OnInit {
     return;
   }
 
-  woupdatesubmit() {
-    if (this.buyerorderform.valid) {
-        this.api.postworkorder(this.buyerorderform.value.data).subscribe((res) => {
-
-
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Your work has been Updated",
-            showConfirmButton: false,
-            timer: 1500
-          });
-
-
-            this.visible = false;
-            this.woByBuyer();
-            this.loadworkorder();
-        });
-    } else {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Missing SizeId",
-        });
-    }
-}
-
   delete(id: any) {
     Swal.fire({
       title: "Are you sure?",
@@ -932,7 +905,7 @@ export class FabricRollData2Component implements OnInit {
       "Color": [''],
       "Size": [''],
       "FSize": [''],
-      "SizeId": ['' , Validators.required],
+      "SizeId": ['' ],
       "FabType": [''],
       "fabricTypeId": [''],
       "FabDia": [''],
@@ -968,6 +941,33 @@ export class FabricRollData2Component implements OnInit {
       this.calculateDiff();
     });
   }
+
+
+  woupdatesubmit() {
+    console.log(this.buyerorderform.value)
+    if (this.buyerorderform.valid) {
+        this.api.postworkorder(this.buyerorderform.value).subscribe((res) => {
+
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: res.message,
+            showConfirmButton: false,
+            timer: 1500
+          });
+
+            this.visible = false;
+            this.woByBuyer();
+            this.loadworkorder();
+        });
+    } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Missing SizeId",
+        });
+    }
+}
 
   save() {
 
