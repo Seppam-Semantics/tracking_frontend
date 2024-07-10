@@ -48,6 +48,7 @@ export class CutProdListComponent implements OnInit{
   ngOnInit(): void {
     this.api.cutting().subscribe((res)=>{
       this.cuttinglist = res.cutting
+      console.log(this.cuttinglist)
     })
 
     this.api.getbuyers().subscribe((res) => {
@@ -281,7 +282,6 @@ Order(){
   edit(id:any){ 
     this.editview = true;
     this.api.cuttingId(id).subscribe((res)=>{
-      console.log(res)
       this.cuttinglistpath = res.cuttinga
       this.cuttingDate = res.cuttinga[0].cutDate
       this.CutProdEty.patchValue({       

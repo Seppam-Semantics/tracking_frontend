@@ -38,3 +38,6 @@ thead{
   position: sticky;
   top: 0;
 }
+:host ::ng-deep .p-dropdown {
+  width: 22vh;
+}

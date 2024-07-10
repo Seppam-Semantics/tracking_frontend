@@ -2,6 +2,16 @@
     <div style="width: 90%; display: flex; justify-content: center;">
         Dye Work Order Listing
     </div>
+
+    <p-dropdown [options]="this.BuyerAllData" (onChange)="dyeWorkOrderFactoryFilter()"  [(ngModel)]="BuyerFillter" placeholder="Buyer"
+    optionLabel="buyer" optionValue="buyer" autoWidth="false" [style]="{ minWidth: '22vh', minHeight:'2vh' }"
+    [editable]="true"></p-dropdown>
+
+
+    <p-dropdown [options]="this.orderNoAllData" (onChange)="dyeWorkOrderBuyerFilter()" [(ngModel)]="OrderFillter" placeholder="orderNo"
+    optionLabel="orderNo" optionValue="orderNo" autoWidth="false" [style]="{ minWidth: '22vh', minHeight:'2vh' }"
+    [editable]="true"></p-dropdown>
+
     <!-- <input class="form-control me-2" type="search" placeholder="Factory Search" aria-label="Search"
     [(ngModel)]="DyeFtyFillter" (change)="dyeWorkOrderFactoryFilter()" list="ftyList" style="width: 24vh;">
 
@@ -58,7 +68,10 @@
 
                 <th>Buyer</th>
                 <th>Order</th>
-                <th>Dye Kgs</th>
+                <th>Color</th>
+                <th>Dye Kgs <br/>
+                    <input type="number" readonly value="{{this.DyeWorkOrderTotalData}}">
+                </th>
                 <th>Dye Value</th>
 
                 <th>Edit</th>
@@ -75,6 +88,14 @@
 
                 <td>{{data.buyer}}</td>
                 <td>{{data.orderNo}}</td>
+
+                <td>
+                    <ul *ngFor="let color of colorjson(data.colors)" style="text-align: justify;">
+                        <!-- <ul *ngFor="let color of data.colors" style="text-align: justify;"> -->
+                        <li>{{color.color}}</li>
+                      </ul>
+                </td>
+
                 <td>{{data.dyeKgs}}</td>
                 <td>{{data.dyeValue}}</td>
 
@@ -202,10 +223,14 @@
     
                         <th>Color</th>
                         <th>PL %</th>
-                        <th>Griege Kgs</th>
+                        <th>Griege Kgs
+                            <input type="number" formControlName="GriegeKgsTotal">
+                        </th>
     
                         <th>Dye Rate</th>
-                        <th>Dye Value</th>
+                        <th>Dye Value
+                            <input type="number" formControlName="DyeValueTotal">
+                        </th>
                         <th>Remarks</th>
                     </tr>
                 </thead>
@@ -235,9 +260,9 @@
                         </td>
                         <td><input class="form-control" type="text" formControlName="pl"></td>
     
-                        <td><input class="form-control" type="text" formControlName="dyeKg"></td>
+                        <td><input class="form-control" type="text" formControlName="dyeKg" (click)="calculateGriegeTotal()"></td>
                         <td><input class="form-control" type="text" formControlName="dyeRate"></td>
-                        <td><input class="form-control" type="text" formControlName="dyeValue"></td>
+                        <td><input class="form-control" type="text" formControlName="dyeValue" (click)="calculateGriegeTotal()"></td>
                         <td><input class="form-control" type="text" formControlName="remarks"></td>
                     </tr>
                 </tbody>

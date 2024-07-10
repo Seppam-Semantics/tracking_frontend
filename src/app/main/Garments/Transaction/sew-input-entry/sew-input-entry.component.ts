@@ -168,7 +168,6 @@ getwoId(size: any, index: number){
 
   save(){
     // this.router.navigate(['main/SewInputList'])
-      console.log(this.SewinputEty.value)
     this.api.sewingPost(this.SewinputEty.value).subscribe((res)=>{
       if (this.SewinputEty.valid) {
         this.api.cuttingPost(this.SewinputEty.value).subscribe((res) => {

@@ -113,10 +113,14 @@
 
 
                     <th>PL %</th>
-                    <th>Griege Kgs</th>
+                    <th>Griege Kgs
+                        <input type="number" formControlName="GriegeKgsTotal">
+                    </th>
 
                     <th>Dye Rate</th>
-                    <th>Dye Value</th>
+                    <th>Dye Value
+                        <input type="number" formControlName="DyeValueTotal">
+                    </th>
                     <th>Remarks</th>
                 </tr>
             </thead>
@@ -161,7 +165,7 @@
 
                     <td><input class="form-control" type="text" formControlName="dyeKg"></td>
                     <td><input class="form-control" type="text" formControlName="dyeRate"></td>
-                    <td><input class="form-control" type="text" formControlName="dyeValue"></td>
+                    <td><input class="form-control" type="text" formControlName="dyeValue" readonly></td>
                     <td><input class="form-control" type="text" formControlName="remarks"></td>
                 </tr>
             </tbody>

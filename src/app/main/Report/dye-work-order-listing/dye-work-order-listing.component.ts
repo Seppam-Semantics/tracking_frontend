@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 
@@ -35,10 +35,24 @@ export class DyeWorkOrderListingComponent {
   DyeBuyerFillter: any
   BuyerFillter: string | undefined;
   orderNoAllData: any;
+  DyeWorkOrderTotalData: any;
+  OrderFillter: string | undefined;
   ngOnInit(): void {
     this.buyername(),
       this.factoryName()
-    this.AllData(),
+
+      this.api.dyeworkorder_fty_Fillter().subscribe((res) => {
+        this.DyeWorkOrderAllData = res.workorders
+        this.BuyerAllData = res.buyer
+      })
+
+
+      this.api.dyeworkorder_buyer_Fillter().subscribe((res) => {
+        this.DyeWorkOrderAllData = res.workorders
+        this.orderNoAllData = res.orderNo
+      })
+
+      this.AllData(),
       this.BuyerAllData = [{ buyer: 'No' }]
   }
   constructor(private fb: FormBuilder, private api: ApiService, private router: Router) {
@@ -54,6 +68,8 @@ export class DyeWorkOrderListingComponent {
       "woDate": new FormControl(''),
       "completedDate": new FormControl(''),
       "notes": new FormControl(''),
+      "GriegeKgsTotal": new FormControl(''),
+      "DyeValueTotal": new FormControl(''),
       data: this.fb.array([]),
     })
 
@@ -121,22 +137,29 @@ export class DyeWorkOrderListingComponent {
 
 
   dyeWorkOrderFactoryFilter() {
-    this.api.dyeworkorder_fty_Fillter(this.DyeFtyFillter).subscribe((res) => {
+
+    this.api.dyeworkorder_fty_Fillter(this.BuyerFillter).subscribe((res) => {
       this.DyeWorkOrderAllData = res.workorders
       this.BuyerAllData = res.buyer
+      this.DyeWorkOrderTotalData = res.Total[0].dyeKgs   
+      console.log(this.DyeWorkOrderTotalData)   
     })
   }
 
   dyeWorkOrderBuyerFilter() {
-    this.api.dyeworkorder_buyer_Fillter(this.DyeFtyFillter, this.BuyerFillter).subscribe((res) => {
+    this.api.dyeworkorder_buyer_Fillter(this.OrderFillter).subscribe((res) => {
       this.DyeWorkOrderAllData = res.workorders
       this.orderNoAllData = res.orderNo
+      this.DyeWorkOrderTotalData = res.Total[0].dyeKgs
+      
     })
   }
 
   AllData() {
     this.api.DyeWorkOrderAllData().subscribe((res) => {
       this.DyeWorkOrderAllData = res.workorders
+      this.DyeWorkOrderTotalData = res.Total[0].dyeKgs
+      console.log(res)
     })
   }
 
@@ -146,7 +169,9 @@ export class DyeWorkOrderListingComponent {
   }
 
 
-
+  colorjson(data: any): any {
+    return JSON.parse(data);
+  }
 
   DyeWorkOrderAddButton() {
 
@@ -166,6 +191,49 @@ export class DyeWorkOrderListingComponent {
       "remarks": new FormControl('')
     });
     this.items.push(row);
+
+    row.get('dyeKg')?.valueChanges.subscribe(() => {
+      this.calculateDiff();
+      this.calculateGriegeTotal();
+
+    });
+  
+    row.get('dyeRate')?.valueChanges.subscribe(() => {
+      this.calculateDiff();
+      this.calculateGriegeTotal();
+    });
+  }
+
+  calculateDiff() {
+    this.items.controls.forEach((control: AbstractControl) => {
+      const row = control as FormGroup;
+      if (row instanceof FormGroup) {
+        const dyeKgValue = parseFloat(row.get('dyeKg')?.value) || 0;
+        const dyeRateValue = parseFloat(row.get('dyeRate')?.value) || 0;
+        const dyeValue = dyeKgValue * dyeRateValue ;
+        const PLValue = dyeKgValue -  dyeValue / dyeKgValue * 100
+        const pl = parseFloat(PLValue.toFixed(2));
+        row.patchValue({ dyeValue , pl });
+      }
+    });
+  }
+  calculateGriegeTotal() {
+    let total1 = 0;
+    let total2 = 0;
+    this.items.controls.forEach((control: AbstractControl) => {
+      const row = control as FormGroup;
+      if (row instanceof FormGroup) {
+        const dyeValue = parseFloat(row.get('dyeValue')?.value) || 0;
+        total1 += dyeValue;
+  
+        const dyeKgTotal = parseFloat(row.get('dyeKg')?.value) || 0;
+        total2 += dyeKgTotal;
+
+      }
+    });
+    this.DyeWorkOrderFrom.get('DyeValueTotal')?.setValue(total1);
+    this.DyeWorkOrderFrom.get('GriegeKgsTotal')?.setValue(total2);
+
   }
 
 

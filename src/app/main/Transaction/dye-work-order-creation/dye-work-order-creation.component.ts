@@ -44,6 +44,8 @@ export class DyeWorkOrderCreationComponent {
       "woDate": new FormControl(''),
       "completedDate": new FormControl(''),
       "notes": new FormControl(''),
+      "GriegeKgsTotal" :new FormControl(''),
+      "DyeValueTotal" :new FormControl(''),
       data: this.fb.array([]),
     })
 
@@ -106,6 +108,7 @@ export class DyeWorkOrderCreationComponent {
       const fabDia = res.workorders[0].fabDia;
       const fabGsm = res.workorders[0].fabGsm;
       const fabType = res.workorders[0].fabType;
+      const greigeKg = res.workorders[0].greigeKg;
       console.log(res)
       const formArray = this.DyeWorkOrderFrom.get('data') as FormArray;
       const row = formArray.at(index);
@@ -113,6 +116,7 @@ export class DyeWorkOrderCreationComponent {
       row.get('fabGSM')?.setValue(fabGsm);
       row.get('fabDia')?.setValue(fabDia);
       row.get('fabType')?.setValue(fabType);
+      row.get('dyeKg')?.setValue(greigeKg);
     });
   }
 
@@ -151,12 +155,15 @@ export class DyeWorkOrderCreationComponent {
 
     row.get('dyeKg')?.valueChanges.subscribe(() => {
       this.calculateDiff();
+      this.calculateGriegeTotal();
 
     });
   
     row.get('dyeRate')?.valueChanges.subscribe(() => {
       this.calculateDiff();
+      this.calculateGriegeTotal();
     });
+
   }
   calculateDiff() {
     this.items.controls.forEach((control: AbstractControl) => {
@@ -170,6 +177,24 @@ export class DyeWorkOrderCreationComponent {
         row.patchValue({ dyeValue , pl });
       }
     });
+  }
+  calculateGriegeTotal() {
+    let total1 = 0;
+    let total2 = 0;
+    this.items.controls.forEach((control: AbstractControl) => {
+      const row = control as FormGroup;
+      if (row instanceof FormGroup) {
+        const dyeValue = parseFloat(row.get('dyeValue')?.value) || 0;
+        total1 += dyeValue;
+  
+        const dyeKgTotal = parseFloat(row.get('dyeKg')?.value) || 0;
+        total2 += dyeKgTotal;
+
+      }
+    });
+    this.DyeWorkOrderFrom.get('DyeValueTotal')?.setValue(total1);
+    this.DyeWorkOrderFrom.get('GriegeKgsTotal')?.setValue(total2);
+
   }
 
   save() {

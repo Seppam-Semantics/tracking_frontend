@@ -32,3 +32,6 @@ th,tr,td {
     padding: 6px;
     margin-left: 2vh;
 }
+:host ::ng-deep .p-dropdown {
+  width: 22vh;
+}
