@@ -42,14 +42,18 @@ export class DyeWorkOrderListingComponent {
       this.factoryName()
 
       this.api.dyeworkorder_fty_Fillter().subscribe((res) => {
-        this.DyeWorkOrderAllData = res.workorders
         this.BuyerAllData = res.buyer
+
       })
 
 
       this.api.dyeworkorder_buyer_Fillter().subscribe((res) => {
-        this.DyeWorkOrderAllData = res.workorders
         this.orderNoAllData = res.orderNo
+
+      })
+
+      this.api.DyeWorkOrderTotalData().subscribe((res) => {
+        this.DyeWorkOrderTotalData = res.workorders[0].dyeKgs
       })
 
       this.AllData(),
@@ -138,28 +142,28 @@ export class DyeWorkOrderListingComponent {
 
   dyeWorkOrderFactoryFilter() {
 
-    this.api.dyeworkorder_fty_Fillter(this.BuyerFillter).subscribe((res) => {
+    this.api.DyeWorkOrderAllData(this.BuyerFillter,'').subscribe((res) => {
       this.DyeWorkOrderAllData = res.workorders
-      this.BuyerAllData = res.buyer
-      this.DyeWorkOrderTotalData = res.Total[0].dyeKgs   
-      console.log(this.DyeWorkOrderTotalData)   
     })
+    this.api.DyeWorkOrderTotalData(this.BuyerFillter,'').subscribe((res) => {
+      this.DyeWorkOrderTotalData = res.workorders[0].dyeKgs
+    })
+
   }
 
   dyeWorkOrderBuyerFilter() {
-    this.api.dyeworkorder_buyer_Fillter(this.OrderFillter).subscribe((res) => {
+    this.api.DyeWorkOrderAllData('',this.OrderFillter).subscribe((res) => {
       this.DyeWorkOrderAllData = res.workorders
-      this.orderNoAllData = res.orderNo
-      this.DyeWorkOrderTotalData = res.Total[0].dyeKgs
-      
+    })
+  
+    this.api.DyeWorkOrderTotalData('',this.OrderFillter).subscribe((res) => {
+              this.DyeWorkOrderTotalData = res.workorders[0].dyeKgs
     })
   }
 
   AllData() {
     this.api.DyeWorkOrderAllData().subscribe((res) => {
       this.DyeWorkOrderAllData = res.workorders
-      this.DyeWorkOrderTotalData = res.Total[0].dyeKgs
-      console.log(res)
     })
   }
 

@@ -568,8 +568,11 @@ export class ApiService {
     return this.http.post(this.getUrl() + `/dyeapi/dyeworkorder`, data, this.getHeaders())
   }
 
-  DyeWorkOrderAllData(): Observable<any> {
-    return this.http.get(this.getUrl() + `/dyeapi/dyeworkorder`, this.getHeaders())
+  DyeWorkOrderAllData(buyer:string='' , order:string=''): Observable<any> {
+    return this.http.get(this.getUrl() + `/dyeapi/dyeworkorder?buyer=${buyer}&order=${order}&`, this.getHeaders())
+  }
+  DyeWorkOrderTotalData(buyer:string='' , order:string=''): Observable<any> {
+    return this.http.get(this.getUrl() + `/dyeapi/dyeworkorderTotal?buyer=${buyer}&order=${order}&`, this.getHeaders())
   }
 
   DyeWorkOrderSingleData(id: any): Observable<any> {
@@ -1034,11 +1037,11 @@ export class ApiService {
 
 
   dyeworkorder_fty_Fillter(buyer:string=''):Observable<any>{
-    return this.http.get(this.getUrl() + `/dyeapi/dyeworkorder_Fty_Fillter?buyer=${buyer}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/dyeapi/dyeworkorder_Fty_Fillter`, this.getHeaders())
   }
 
   dyeworkorder_buyer_Fillter(Order:string=''):Observable<any>{
-    return this.http.get(this.getUrl() + `/dyeapi/dyeworkorder_buyer_Fillter?order=${Order}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/dyeapi/dyeworkorder_buyer_Fillter`, this.getHeaders())
   }
   dyeworkorder_Order_Fillter(dyefty:string='',buyer:string='',order:string=''):Observable<any>{
     return this.http.get(this.getUrl() + `/dyeapi/dyeworkorder_order_Fillter?dyefty=${dyefty}&buyer=${buyer}&order=${order}`, this.getHeaders())
