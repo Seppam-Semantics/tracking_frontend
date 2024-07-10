@@ -281,6 +281,7 @@ Order(){
   edit(id:any){ 
     this.editview = true;
     this.api.cuttingId(id).subscribe((res)=>{
+      console.log(res)
       this.cuttinglistpath = res.cuttinga
       this.cuttingDate = res.cuttinga[0].cutDate
       this.CutProdEty.patchValue({       

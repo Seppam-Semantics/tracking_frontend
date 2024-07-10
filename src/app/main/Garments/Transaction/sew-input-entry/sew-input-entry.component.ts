@@ -43,7 +43,7 @@ export class SewInputEntryComponent implements OnInit{
 
 
     this.SewinputEty = new FormGroup({
-      InputDate : new FormControl('', Validators.required) ,
+      inputDate : new FormControl('', Validators.required) ,
       data: this.fb.array([]),
     })
 
@@ -132,7 +132,7 @@ getwoId(size: any, index: number){
     console.log(res)
     const formArray = this.SewinputEty.get('data') as FormArray;
     const row = formArray.at(index);
-    row.get('woId')?.setValue(cuttingId);
+    row.get('cutId')?.setValue(cuttingId);
   });
 }
 
@@ -147,15 +147,16 @@ getwoId(size: any, index: number){
 
     const row = this.fb.group({
       "id": [''],
+      "woId":['',Validators.required],
       "buyer": [''],
       "orderNo": [''],
       "style": [''],
       "color": [''],
       "size": [''],
-      "GSizeId": ['',Validators.required],
-      "LineNo": [''],
-      "InputPcs": [''],
-      "Bundleno": ['']
+      "cutId": ['',Validators.required],
+      "lineNo": [''],
+      "inputPcs": [''],
+      "bundleNo": ['']
     });
     this.items.push(row);
 
@@ -166,7 +167,33 @@ getwoId(size: any, index: number){
   }
 
   save(){
-    this.router.navigate(['main/SewInputList'])
+    // this.router.navigate(['main/SewInputList'])
+      console.log(this.SewinputEty.value)
+    this.api.sewingPost(this.SewinputEty.value).subscribe((res)=>{
+      if (this.SewinputEty.valid) {
+        this.api.cuttingPost(this.SewinputEty.value).subscribe((res) => {
+          if (res.success) {
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: res.message,
+              showConfirmButton: false,
+              timer: 1500
+            });
+            this.router.navigate(['main/SewInputList'])
+          }
+          else {
+            alert("Error while saving...!!!")
+          }
+        })
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "cutId and woId Missing"
+        });
+      }    
+    })
   }
 
 }

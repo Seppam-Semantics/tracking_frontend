@@ -8,7 +8,7 @@
 
             <div style="display: flex; gap: 10px;">
                 <label style="font-weight: normal; font-family: serif; margin-top: 5px;">Input Date</label>
-                <input type="date" class="form-control" style="margin-top: 2px;" formControlName="InputDate">
+                <input type="date" class="form-control" style="margin-top: 2px;" formControlName="inputDate">
             </div>
 
         </div>
@@ -77,11 +77,11 @@
                     </td>
 
 
-                    <td><input class="form-control" type="text" formControlName="LineNo"></td>
+                    <td><input class="form-control" type="number" formControlName="lineNo"></td>
 
-                    <td><input class="form-control" type="text" formControlName="InputPcs"></td>
+                    <td><input class="form-control" type="number" formControlName="inputPcs"></td>
 
-                    <td><input class="form-control" type="text" formControlName="Bundleno"></td>
+                    <td><input class="form-control" type="number" formControlName="bundleNo"></td>
 
                     <th><button class="btn-danger" (click)="delete(i)">x</button></th>
                 </tr>
