@@ -124,7 +124,8 @@ export class KnitWorkOrderCreationComponent implements OnInit {
 
     this.sizevalue = size
 
-    this.api.getwodetails(this.buyerName, this.orderNo, this.style, this.color, size).subscribe((res) => {
+    this.api.knitworkorderdyeworkorderdetails(this.buyerName, this.orderNo, this.style, this.color, size).subscribe((res) => {
+      console.log(res)
       const woId = res.workorders[0].id;
       const knitRate = res.workorders[0].knitRate ? res.workorders[0].knitRate : "0" ;
       this. yarnKg = res.workorders[0].yarnKg ? res.workorders[0].yarnKg : "0" ;

@@ -101,11 +101,18 @@ export class DyeWorkOrderCreationComponent {
   }
 
   getWoId(size: any, index: number) {
-    this.api.getwodetails(this.buyerName, this.orderNo, this.style, this.color, size).subscribe((res) => {
+    this.api.knitworkorderdyeworkorderdetails(this.buyerName, this.orderNo, this.style, this.color, size).subscribe((res) => {
       const woId = res.workorders[0].id;
+      const fabDia = res.workorders[0].fabDia;
+      const fabGsm = res.workorders[0].fabGsm;
+      const fabType = res.workorders[0].fabType;
+      console.log(res)
       const formArray = this.DyeWorkOrderFrom.get('data') as FormArray;
       const row = formArray.at(index);
       row.get('dyeWoId')?.setValue(woId);
+      row.get('fabGSM')?.setValue(fabGsm);
+      row.get('fabDia')?.setValue(fabDia);
+      row.get('fabType')?.setValue(fabType);
     });
   }
 

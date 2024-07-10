@@ -42,7 +42,7 @@ export class KnitDeliveryComponent {
   knitdelFillter:any
   ngOnInit(): void {
     this.buyername()
-    this.knitdelFilter()
+this.knitdelFilter()
   }
   constructor(private fb: FormBuilder, private router: Router, private api: ApiService) {
 
@@ -62,14 +62,21 @@ export class KnitDeliveryComponent {
       this.fty_name = res.factorys
     })
 
-    this.api.getKnitDelivery().subscribe((res) => {
-      this.knitDelAllData = res.knitDelivery
-    })
+    // this.api.getKnitDelivery().subscribe((res) => {
+    //   this.knitDelAllData = res.knitDelivery
+    // })
 
     this.api.dye_factory_name().subscribe((res)=>{
       this.factoryname=res.factorys
     })
     
+  }
+  
+  colorjson1(data: any): any {
+    return JSON.parse(data);
+  }
+  colorjson2(data: any): any {
+    return JSON.parse(data);
   }
 
   get items() {

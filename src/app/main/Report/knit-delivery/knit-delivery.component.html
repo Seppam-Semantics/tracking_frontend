@@ -26,6 +26,8 @@
                         <tr>
                             <th>S.No</th>
                             <th>Factory</th>
+                            <th>WoNo</th>
+                            <th>Color</th>
                             <th>Date</th>
                             <th>Total Rolls</th>
                             <th>Total Kg</th>
@@ -37,6 +39,18 @@
                         <tr *ngFor="let data of this.knitDelAllData; let i = index;" >
                             <td>{{i+1}}</td>
                             <td>{{data.factory}}</td>
+                            <td>
+                                <ul *ngFor="let color of colorjson1(data.orderNo)" style="text-align: justify;">
+                                    <!-- <ul *ngFor="let color of data.orderNo" style="text-align: justify;"> -->
+                                    <li>{{color.orderNo}}</li>
+                                  </ul>
+                            </td>
+                            <td>
+                                <ul *ngFor="let color of colorjson2(data.colors)" style="text-align: justify;">
+                                    <!-- <ul *ngFor="let color of data.colors" style="text-align: justify;"> -->
+                                    <li>{{color.color}}</li>
+                                  </ul>
+                            </td>
                             <td>{{data.date}}</td>
                             <td>{{data.totalrolls}}</td>
                             <td>{{data.totalKg}}</td>
