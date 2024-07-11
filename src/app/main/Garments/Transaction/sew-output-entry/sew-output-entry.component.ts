@@ -117,28 +117,28 @@ colordata() {
 }
 
 getwoId(size: any, index: number){
-  // this.api.getwodetails(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, size).subscribe((res) => {
-  //   const woId = res.workorders[0].id;
-  //   console.log(res)
-  //   const formArray = this.SewoutputEty.get('data') as FormArray;
-  //   const row = formArray.at(index);
-  //   row.get('woId')?.setValue(woId);
-  // });
-
-  // this.api.getcutdetails(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, size).subscribe((res) => {
-  //   const cuttingId = res.cutting[0].id;
-  //   console.log(res)
-  //   const formArray = this.SewoutputEty.get('data') as FormArray;
-  //   const row = formArray.at(index);
-  //   row.get('cutId')?.setValue(cuttingId);
-  // });
-
-  this.api.getsewinputfilterdetails(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, size).subscribe((res) => {
-    const cuttingId = res.cutting[0].id;
-    console.log(res)
+  this.api.getwodetails(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, size).subscribe((res) => {
+    const woId = res.workorders[0].id;
+    console.log(woId)
     const formArray = this.SewoutputEty.get('data') as FormArray;
     const row = formArray.at(index);
-    row.get('inputId')?.setValue(cuttingId);
+    row.get('woId')?.setValue(woId);
+  });
+
+  this.api.getcutdetails(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, size).subscribe((res) => {
+    const cuttingId = res.cutting[0].id;
+    console.log(cuttingId)
+    const formArray = this.SewoutputEty.get('data') as FormArray;
+    const row = formArray.at(index);
+    row.get('cutId')?.setValue(cuttingId);
+  });
+
+  this.api.getsewinputfilterdetails(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, size).subscribe((res) => {
+    const SewoutputEtyId = res.sewinginput[0].id;
+    console.log(SewoutputEtyId)
+    const formArray = this.SewoutputEty.get('data') as FormArray;
+    const row = formArray.at(index);
+    row.get('inputId')?.setValue(SewoutputEtyId);
   });
 }
 
@@ -153,7 +153,7 @@ getwoId(size: any, index: number){
   SewOutputEtyAddButton() {
 
     const row = this.fb.group({
-      "id": [''],
+      "id": [],
       "buyer": [''],
       "orderNo": [''],
       "style": [''],
@@ -180,6 +180,34 @@ getwoId(size: any, index: number){
   }
 
   save(){
-    this.router.navigate(['main/SewOutputList'])
+console.log(this.SewoutputEty.value)
+    // this.router.navigate(['main/SewOutputList'])
+    this.api.sewoutputPost(this.SewoutputEty.value).subscribe((res)=>{
+      if (this.SewoutputEty.valid) {
+        this.api.sewoutputPost(this.SewoutputEty.value).subscribe((res) => {
+          if (res.success) {
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: res.message,
+              showConfirmButton: false,
+              timer: 1500
+            });
+            this.router.navigate(['main/SewOutputList'])
+          }
+          else {
+            alert("Error while saving...!!!")
+          }
+        })
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "cutId and woId and InputId Missing"
+        });
+      }    
+    })
+
+
   }
 }
