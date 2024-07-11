@@ -8,7 +8,7 @@
 
             <div style="display: flex; gap: 10px;">
                 <label style="font-weight: normal; font-family: serif; margin-top: 5px;">Pack Date</label>
-                <input type="date" class="form-control" style="margin-top: 2px;" formControlName="PackDate">
+                <input type="date" class="form-control" style="margin-top: 2px;" formControlName="packDate">
             </div>
 
         </div>
@@ -41,45 +41,56 @@
                     <td></td>
                     <td>{{i+1}}</td>
                     <td>
-                        <input type="text" class="form-control" formControlName="Buyer" list="1">
+                        <input type="text" class="form-control" formControlName="buyer" list="1"
+                            (input)="getBuyerValue(i)" (change)="getorders()">
                         <datalist id="1">
-                            <option></option>
+                            <option *ngFor="let data of this.buyers" value="{{data.buyer}}">{{data.buyer}}</option>
                         </datalist>
                     </td>
 
                     <td>
-                        <input type="text" class="form-control" formControlName="Orderno" list="2" >
+                        <input type="text" class="form-control" formControlName="orderNo" list="2"
+                            (input)="ordervalue(i)" (mouseenter)="getBuyerValue(i)" (change)="orderdata()">
                         <datalist id="2">
-                            <option></option>
+                            <option *ngFor="let data of this.order" value="{{data.orderNo}}">{{data.orderNo}}</option>
                         </datalist>
                     </td>
 
                     <td>
-                        <input type="text" class="form-control" formControlName="Style" list="3">
+                        <input type="text" class="form-control" formControlName="style" list="3" (input)="stylevalue(i)"
+                            (mouseenter)="ordervalue(i)" (change)="styledata()">
                         <datalist id="3">
-                            <option></option>
+                            <option *ngFor="let data of this.stylelist" value="{{data.style}}">{{data.style}}</option>
                         </datalist>
                     </td>
 
                     <td>
-                        <input class="form-control" type="text" formControlName="Color">
+                        <input style="width: 15vh;" formControlName="color" list="Color" (input)="colorvalue(i)"
+                            (change)="colordata()" class="form-control" (mouseenter)="stylevalue(i)">
+                        <datalist id="Color">
+                            <option *ngFor="let data of this.colorlist" value="{{data.color}}">{{data.color}}</option>
+                        </datalist>
                     </td>
+
                     <td>
-                        <input class="form-control" type="text" formControlName="GSize" >
-
+                        <input class="form-control" type="text" formControlName="size" list="size"
+                            (mouseenter)="colorvalue(i)" (input)="getwoId($event.target.value,i)">
+                        <datalist id="size">
+                            <option *ngFor="let data of this.sizelist" value="{{data.size}}">{{data.size}}</option>
+                        </datalist>
                     </td>
 
 
-                    <td><input class="form-control" type="text" formControlName="LineNo" ></td>
+                    <td><input class="form-control" type="text" formControlName="lineNo" ></td>
 
-                    <td><input class="form-control" type="text" formControlName="MPUsed" ></td>
-                    <td><input class="form-control" type="text" formControlName="MCHrs" ></td>
-                    <td><input class="form-control" type="text" formControlName="Bundleno"></td>
-                    <td><input class="form-control" type="text" formControlName="TimePeriod" ></td>
+                    <td><input class="form-control" type="text" formControlName="mpUsed" ></td>
+                    <td><input class="form-control" type="text" formControlName="mcHrs" ></td>
+                    <td><input class="form-control" type="text" formControlName="bundleNo"></td>
+                    <td><input class="form-control" type="text" formControlName="timeperiod" ></td>
 
-                    <td><input class="form-control" type="text" formControlName="PackPcs" ></td>
+                    <td><input class="form-control" type="text" formControlName="packPcs" ></td>
 
-                    <td><input class="form-control" type="text" formControlName="CartonNos" ></td>
+                    <td><input class="form-control" type="text" formControlName="cartonbox" ></td>
 
                     <th><button class="btn-danger" (click)="delete(i)">x</button></th>
                 </tr>

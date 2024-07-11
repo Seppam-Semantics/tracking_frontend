@@ -134,11 +134,11 @@ getwoId(size: any, index: number){
   });
 
   this.api.getsewinputfilterdetails(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, size).subscribe((res) => {
-    const SewoutputEtyId = res.sewinginput[0].id;
-    console.log(SewoutputEtyId)
+    const SewinputEtyId = res.sewinginput[0].id;
+    console.log(SewinputEtyId)
     const formArray = this.SewoutputEty.get('data') as FormArray;
     const row = formArray.at(index);
-    row.get('inputId')?.setValue(SewoutputEtyId);
+    row.get('inputId')?.setValue(SewinputEtyId);
   });
 }
 

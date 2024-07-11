@@ -1,5 +1,5 @@
 <div [formGroup]="ShipEty">
-    <mat-toolbar style="height: auto;">
+    <mat-toolbar style="height: 7vh;">
         <div style="display: flex; gap: 15px; width: 100%; justify-content: center;">
             <span>Sewing Packing</span>
         </div>
@@ -7,16 +7,20 @@
         <div style="display: flex; gap: 10px;">
 
             <div style="display: flex; gap: 10px;">
-                <p-dropdown  placeholder="Buyer" optionLabel="buyer"
-                optionValue="buyer" ></p-dropdown>
+                <p-dropdown  placeholder="Buyer" optionLabel="buyer" [options]="this.buyers" (onChange)="getBuyerValue()"
+                optionValue="buyer" [editable]="true"  [style]="{ minWidth: '22vh', minHeight:'2vh' }" formControlName="buyer"></p-dropdown>
             </div>
 
 
             <div style="display: flex; gap: 10px;">
-                <p-dropdown  placeholder="OrderNo" optionLabel="OrderNo"
-                optionValue="OrderNo" ></p-dropdown>
+                <p-dropdown  placeholder="orderNo" optionLabel="orderNo" [options]="this.order" (onChange)="ordervalue()"
+                optionValue="orderNo" [editable]="true"  [style]="{ minWidth: '22vh', minHeight:'2vh' }" formControlName="orderNo"></p-dropdown>
             </div>
-                
+
+                <div style="display: flex; gap: 10px;">
+                    <label style="font-weight: normal; font-family: serif; margin-top: 5px;">Ship Date</label>
+                    <input type="date" class="form-control" style="margin-top: 2px;" formControlName="shipDate">
+                </div>    
         </div>
 
 
@@ -46,38 +50,51 @@
                     <td>{{i+1}}</td>
 
                     <td>
-                        <input type="text" class="form-control" formControlName="Style">
+                        <input type="text" class="form-control" formControlName="style" list="3" (input)="stylevalue(i)"
+                            (mouseenter)="ordervalue(i)" (change)="styledata()">
+                        <datalist id="3">
+                            <option *ngFor="let data of this.stylelist" value="{{data.style}}">{{data.style}}</option>
+                        </datalist>
                     </td>
 
                     <td>
-                        <input class="form-control" type="text" formControlName="Color">
-                    </td>
-                    <td>
-                        <input class="form-control" type="text" formControlName="GSize" >
-                    </td>
-
-                    <td>
-                        <input type="text" class="form-control" formControlName="FabType" >
+                        <input style="width: 15vh;" formControlName="color" list="Color" (input)="colorvalue(i)"
+                            (change)="colordata()" class="form-control" (mouseenter)="stylevalue(i)">
+                        <datalist id="Color">
+                            <option *ngFor="let data of this.colorlist" value="{{data.color}}">{{data.color}}</option>
+                        </datalist>
                     </td>
 
                     <td>
-                        <input type="text" class="form-control" formControlName="FabGSM" >
+                        <input class="form-control" type="text" formControlName="size" list="size"
+                            (mouseenter)="colorvalue(i)" (input)="getwoId($event.target.value,i)">
+                        <datalist id="size">
+                            <option *ngFor="let data of this.sizelist" value="{{data.size}}">{{data.size}}</option>
+                        </datalist>
+                    </td>
+
+                    <td>
+                        <input type="text" class="form-control" formControlName="fabtype" >
+                    </td>
+
+                    <td>
+                        <input type="text" class="form-control" formControlName="fabGSM" >
                     </td>
     
 
-                    <td><input class="form-control" type="text" formControlName="OrderPcs" ></td>
+                    <td><input class="form-control" type="text" formControlName="orderPcs" ></td>
 
-                    <td><input class="form-control" type="text" formControlName="ShipPcs" ></td>
-                    <td><input class="form-control" type="text" formControlName="Cartonnos" ></td>
-                    <td><input class="form-control" type="text" formControlName="PendingPcs"></td>
-                    <td><textarea class="form-control"  formControlName="SpecificRemarks" ></textarea></td>
+                    <td><input class="form-control" type="text" formControlName="shipPcs" ></td>
+                    <td><input class="form-control" type="text" formControlName="carton" ></td>
+                    <td><input class="form-control" type="text" formControlName="pendingPcs"></td>
+                    <td><textarea class="form-control"  formControlName="remarks" ></textarea></td>
 
                     <th><button class="btn-danger" (click)="delete(i)">x</button></th>
                 </tr>
             </tbody>
         </table>
     </div>
-    <div>
+    <div style="margin-top: -2vh;">
         <table class="table table-hover">
             <thead class="thead-dark">
                 <tr>

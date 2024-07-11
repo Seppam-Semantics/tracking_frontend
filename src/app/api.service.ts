@@ -10,8 +10,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  apiUrl = "https://tracker.seppam.com";
-  // apiUrl = "http://localhost:2000";
+  // apiUrl = "https://tracker.seppam.com";
+  apiUrl = "http://localhost:2000";
 
   token: any;
   profilenames: any;
@@ -1261,29 +1261,97 @@ export class ApiService {
        
        
         sewoutput_buyers(): Observable<any> {
-          return this.http.get(this.getUrl() + `/filtersapi/sewinput_buyers`, this.getHeaders())
+          return this.http.get(this.getUrl() + `/filtersapi/sewoutput_buyers`, this.getHeaders())
         }
       
         sewoutput_buyersorders(buyer: any): Observable<any> {
-          return this.http.get(this.getUrl() + `/filtersapi/sewinput_buyers-orders?buyer=${buyer}&`, this.getHeaders())
+          return this.http.get(this.getUrl() + `/filtersapi/sewoutput_buyers-orders?buyer=${buyer}&`, this.getHeaders())
         }
       
         sewoutput_ordersstyles(buyer: any, order: any): Observable<any> {
-          return this.http.get(this.getUrl() + `/filtersapi/sewinput_orders-styles?buyer=${buyer}&orderNo=${order}&`, this.getHeaders())
+          return this.http.get(this.getUrl() + `/filtersapi/sewoutput_orders-styles?buyer=${buyer}&orderNo=${order}&`, this.getHeaders())
         }
       
         sewoutput_stylescolors(buyer: any, order: any, style: any): Observable<any> {
-          return this.http.get(this.getUrl() + `/filtersapi/sewinput_styles-colors?buyer=${buyer}&orderNo=${order}&style=${style}&`, this.getHeaders())
+          return this.http.get(this.getUrl() + `/filtersapi/sewoutput_styles-colors?buyer=${buyer}&orderNo=${order}&style=${style}&`, this.getHeaders())
         }
       
         sewoutput_colorssizes(buyer: any, order: any, style: any, color: any): Observable<any> {
-          return this.http.get(this.getUrl() + `/filtersapi/sewinput_colors-sizes?buyer=${buyer}&orderNo=${order}&style=${style}&color=${color}&`, this.getHeaders())
+          return this.http.get(this.getUrl() + `/filtersapi/sewoutput_colors-sizes?buyer=${buyer}&orderNo=${order}&style=${style}&color=${color}&`, this.getHeaders())
         }
       
         getsewoutputdetails(buyer: any, orderNo?: any, style?: any, color?: any, size?: any): Observable<any> {
-          return this.http.get(this.getUrl() + `/filtersapi/sewinput-filter?buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&size=${size}&`, this.getHeaders())
+          return this.http.get(this.getUrl() + `/filtersapi/sewoutput-filter?buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&size=${size}&`, this.getHeaders())
         }
     
-            //--------------------------------------------sewoutput [End]------------------------------------------------------
+        //--------------------------------------------sewoutput [End]------------------------------------------------------
 
+        //--------------------------------------------Sewing Packing  [Start]------------------------------------------------------
+
+        sewingpackingBuyer(): Observable<any> {
+          return this.http.get(this.getUrl() + `/garmentsapi/sewingpacking-Buyer` ,this.getHeaders())
+        }
+        
+        sewingpackingOrderNo(): Observable<any> {
+          return this.http.get(this.getUrl() + `/garmentsapi/sewingpacking-OrderNo` ,this.getHeaders())
+        }
+        
+        sewingpackingPost(data:any ): Observable<any> {
+          return this.http.post(this.getUrl() + `/garmentsapi/sewing-packing`, data,this.getHeaders())
+        }
+       
+        sewingpacking(buyer:string='' , orderNo:string='' , fromDate:string='' , toDate:string=''):Observable<any>{
+          return this.http.get(this.getUrl() + `/garmentsapi/sewing-packing?buyer=${buyer}&orderNo=${orderNo}&fromDate=${fromDate}&toDate=${toDate}&`, this.getHeaders())
+        }
+      
+        sewingpackingId(id:any):Observable<any>{
+          return this.http.get(this.getUrl() + `/garmentsapi/sewing-packing/${id}`, this.getHeaders())
+        }
+
+
+
+
+
+        sewingpacking_buyers(): Observable<any> {
+          return this.http.get(this.getUrl() + `/filtersapi/packing_buyers`, this.getHeaders())
+        }
+      
+        sewingpacking_buyersorders(buyer: any): Observable<any> {
+          return this.http.get(this.getUrl() + `/filtersapi/packing_buyers-orders?buyer=${buyer}&`, this.getHeaders())
+        }
+      
+        sewingpacking_ordersstyles(buyer: any, order: any): Observable<any> {
+          return this.http.get(this.getUrl() + `/filtersapi/packing_orders-styles?buyer=${buyer}&orderNo=${order}&`, this.getHeaders())
+        }
+      
+        sewingpacking_stylescolors(buyer: any, order: any, style: any): Observable<any> {
+          return this.http.get(this.getUrl() + `/filtersapi/packing_styles-colors?buyer=${buyer}&orderNo=${order}&style=${style}&`, this.getHeaders())
+        }
+      
+        sewingpacking_colorssizes(buyer: any, order: any, style: any, color: any): Observable<any> {
+          return this.http.get(this.getUrl() + `/filtersapi/packing_colors-sizes?buyer=${buyer}&orderNo=${order}&style=${style}&color=${color}&`, this.getHeaders())
+        }
+      
+        getsewingpackingdetails(buyer: any, orderNo?: any, style?: any, color?: any, size?: any): Observable<any> {
+          return this.http.get(this.getUrl() + `/filtersapi/packing-filter?buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&size=${size}&`, this.getHeaders())
+        }
+
+        //--------------------------------------------Sewing Packing  [Ends]------------------------------------------------------
+
+
+        //--------------------------------------------Shipment  [Start]------------------------------------------------------
+         
+        shippingPost(data:any ): Observable<any> {
+          return this.http.post(this.getUrl() + `/garmentsapi/sewing-shipping`, data,this.getHeaders())
+        }
+       
+        shipping(buyer:string='' , orderNo:string='' , fromDate:string='' , toDate:string=''):Observable<any>{
+          return this.http.get(this.getUrl() + `/garmentsapi/sewing-shipping?buyer=${buyer}&orderNo=${orderNo}&fromDate=${fromDate}&toDate=${toDate}&`, this.getHeaders())
+        }
+      
+        shippingId(id:any):Observable<any>{
+          return this.http.get(this.getUrl() + `/garmentsapi/sewing-shipping/${id}`, this.getHeaders())
+        }    
+
+        //--------------------------------------------Shipment  [Ends]------------------------------------------------------
 }
