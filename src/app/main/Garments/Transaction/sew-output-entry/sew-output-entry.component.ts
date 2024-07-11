@@ -182,7 +182,7 @@ getwoId(size: any, index: number){
   save(){
 console.log(this.SewoutputEty.value)
     // this.router.navigate(['main/SewOutputList'])
-    this.api.sewoutputPost(this.SewoutputEty.value).subscribe((res)=>{
+
       if (this.SewoutputEty.valid) {
         this.api.sewoutputPost(this.SewoutputEty.value).subscribe((res) => {
           if (res.success) {
@@ -205,8 +205,7 @@ console.log(this.SewoutputEty.value)
           title: "Oops...",
           text: "cutId and woId and InputId Missing"
         });
-      }    
-    })
+      } 
 
 
   }
