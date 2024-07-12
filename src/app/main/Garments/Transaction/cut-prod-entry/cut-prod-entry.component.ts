@@ -148,6 +148,7 @@ export class CutProdEntryComponent implements OnInit{
 
 
   save(){
+    console.log(this.CutProdEty.value)
     if (this.CutProdEty.valid) {
       this.api.cuttingPost(this.CutProdEty.value).subscribe((res) => {
         if (res.success) {

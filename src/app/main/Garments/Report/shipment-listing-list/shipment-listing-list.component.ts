@@ -44,6 +44,7 @@ export class ShipmentListingListComponent {
   OrderNolist: any;
   buyervalue:any;
   orderNovalue:any;
+  shipDateDta: any;
 
   constructor(private fb: FormBuilder, private api: ApiService , private router : Router , private datePipe: DatePipe) { 
 
@@ -53,7 +54,7 @@ export class ShipmentListingListComponent {
       buyer: new FormControl(''),
       orderNo : new FormControl(''),
       notes : new FormControl(''),
-      shipDate : new FormControl(''),
+      shipDate : new FormControl(),
       data: this.fb.array([]),
     })
 
@@ -354,18 +355,15 @@ getwoId(size: any, index: number){
     this.editview = true;   
   this.api.shippingId(id).subscribe((res)=>{
    this.headerDta =res.shipping_head[0]
-   console.log(this.headerlineDta)
+   this.shipDateDta =res.shipping_head[0].shipDate
    this.headerlineDta =res.shipping_line
-   this.ShipEty.patchValue({       
-    shipDate : this.datePipe.transform(this.headerDta.shipDate, 'yyyy-dd-MM')
-  })
+  console.log( this.datePipe.transform(this.shipDateDta, 'yyyy-dd-MM'))
    this.ShipEty.patchValue({
     id : this.headerDta.id,
     buyer: this.headerDta.buyer,
     orderNo : this.headerDta.orderNo,
-    notes : this.headerDta.id
-    // shipDate : this.headerDta.shipDate,
-    
+    notes : this.headerDta.id,
+    // shipDate : this.datePipe.transform(this.headerDta.shipDate, 'yyyy-dd-MM')
    })
 
 

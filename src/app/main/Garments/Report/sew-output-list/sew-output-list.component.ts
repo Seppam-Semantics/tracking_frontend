@@ -262,8 +262,9 @@ export class SewOutputListComponent implements OnInit {
   edit(id: any) {
     this.editview = true;
     this.api.sewoutputId(id).subscribe((res) => {
-      this.Sewoutputlistpath = res.sewInput
-      this.SewoutputDate = res.sewInput[0].outputDate
+      console.log(res)
+      this.Sewoutputlistpath = res.sewOutput
+      this.SewoutputDate = res.sewOutput[0].outputDate
       this.SewoutputEty.patchValue({       
         outputDate : this.datePipe.transform(this.SewoutputDate, 'yyyy-dd-MM')
       })

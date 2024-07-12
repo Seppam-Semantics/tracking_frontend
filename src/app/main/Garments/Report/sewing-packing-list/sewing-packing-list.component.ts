@@ -327,7 +327,7 @@ getwoId(size: any, index: number){
     this.api.sewingpackingId(id).subscribe((res) => {
       this.Sewpackinglistpath = res.sewingPack
       this.SewpackingDate = res.sewingPack[0].packDate
-
+      console.log(res)
       this.SewPkEty.patchValue({       
         packDate : this.datePipe.transform(this.SewpackingDate, 'yyyy-dd-MM')
       })
