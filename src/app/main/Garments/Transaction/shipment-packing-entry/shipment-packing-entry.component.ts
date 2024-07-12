@@ -223,7 +223,7 @@ getwoId(size: any, index: number){
         const ShipPcsValue = parseFloat(row.get('shipPcs')?.value);
         const CartonnosValue = parseFloat(row.get('orderPcs')?.value);
   
-        const a = ShipPcsValue - CartonnosValue
+        const a =  CartonnosValue - ShipPcsValue
         const pendingPcs = parseFloat(a.toFixed(2));
   
         row.patchValue({ pendingPcs});

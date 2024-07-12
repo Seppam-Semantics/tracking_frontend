@@ -208,9 +208,8 @@ getwoId(size: any, index: number){
 
   update(){
     // this.router.navigate(['main/SewInputList'])
-    this.api.sewingPost(this.SewinputEty.value).subscribe((res)=>{
       if (this.SewinputEty.valid) {
-        this.api.cuttingPost(this.SewinputEty.value).subscribe((res) => {
+        this.api.sewingPost(this.SewinputEty.value).subscribe((res) => {
           if (res.success) {
             Swal.fire({
               position: "top-end",
@@ -235,7 +234,7 @@ getwoId(size: any, index: number){
           text: "cutId and woId Missing"
         });
       }    
-    })
+
   }
 
   edit(id:any){ 

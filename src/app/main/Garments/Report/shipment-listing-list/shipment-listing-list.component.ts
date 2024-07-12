@@ -44,7 +44,7 @@ export class ShipmentListingListComponent {
   OrderNolist: any;
   buyervalue:any;
   orderNovalue:any;
-  shipDateDta: any;
+  headerId: any;
 
   constructor(private fb: FormBuilder, private api: ApiService , private router : Router , private datePipe: DatePipe) { 
 
@@ -54,7 +54,7 @@ export class ShipmentListingListComponent {
       buyer: new FormControl(''),
       orderNo : new FormControl(''),
       notes : new FormControl(''),
-      shipDate : new FormControl(),
+      shipDate : new FormControl(''),
       data: this.fb.array([]),
     })
 
@@ -230,6 +230,7 @@ getwoId(size: any, index: number){
 
     const row = this.fb.group({
       "id": [''],
+      "headId": [this.headerId],
       "style": [''],
       "color": [''],
       "size": [''],
@@ -266,7 +267,7 @@ getwoId(size: any, index: number){
         const ShipPcsValue = parseFloat(row.get('shipPcs')?.value);
         const CartonnosValue = parseFloat(row.get('orderPcs')?.value);
   
-        const a = ShipPcsValue - CartonnosValue
+        const a = CartonnosValue - ShipPcsValue
         const pendingPcs = parseFloat(a.toFixed(2));
   
         row.patchValue({ pendingPcs});
@@ -353,17 +354,19 @@ getwoId(size: any, index: number){
   }
   edit(id:any){ 
     this.editview = true;   
+    this.headerId = id
   this.api.shippingId(id).subscribe((res)=>{
    this.headerDta =res.shipping_head[0]
-   this.shipDateDta =res.shipping_head[0].shipDate
+   console.log(this.headerlineDta)
    this.headerlineDta =res.shipping_line
-  console.log( this.datePipe.transform(this.shipDateDta, 'yyyy-dd-MM'))
+
    this.ShipEty.patchValue({
     id : this.headerDta.id,
     buyer: this.headerDta.buyer,
     orderNo : this.headerDta.orderNo,
     notes : this.headerDta.id,
-    // shipDate : this.datePipe.transform(this.headerDta.shipDate, 'yyyy-dd-MM')
+    shipDate : this.headerDta.shipDate,
+    
    })
 
 
@@ -416,6 +419,11 @@ getwoId(size: any, index: number){
           });
           this.router.navigate(['main/ShipmentListingList'])
           this.editview = false;
+          this.api.shipping().subscribe((res)=>{
+            this.shippinglist =  res.shipping
+            })
+        
+        
         }
         else {
           alert("Error while saving...!!!")

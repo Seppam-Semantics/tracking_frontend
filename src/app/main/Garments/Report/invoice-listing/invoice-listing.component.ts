@@ -45,6 +45,7 @@ export class InvoiceListingComponent {
   orderNovalue:any
   buyerslist: any;
   OrderNolist: any;
+  headerId: any;
 
   constructor(private fb: FormBuilder, private api: ApiService , private router : Router , private datePipe: DatePipe) { 
 
@@ -250,7 +251,7 @@ getwoId(size: any, index: number){
 
     const row = this.fb.group({
       "id" : [''],
-      "headId" : [''],
+      "headId" : [this.headerId],
       "fabtype" : [''],
       "fabGSM" : [''],
       "orderNo" : [''],
@@ -351,9 +352,11 @@ getwoId(size: any, index: number){
 
   edit(id:any){ 
     this.editview = true;
-  this.api.invoiceId(id).subscribe((res)=>{
+    this.headerId = id
+    this.api.invoiceId(id).subscribe((res)=>{
     console.log(res)
     this.invoicelinedata = res.invoice_line
+
     this.invoiceheaderdata = res.invoice_head[0]
     this.InvoiceEty.patchValue({       
       invoiceDate : this.datePipe.transform(this.invoiceheaderdata.invoiceDate, 'yyyy-dd-MM')
