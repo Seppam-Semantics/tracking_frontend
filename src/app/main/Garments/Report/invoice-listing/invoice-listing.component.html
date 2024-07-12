@@ -2,7 +2,7 @@
     <span>Invoice Listing</span>
 </mat-toolbar>
 <mat-toolbar style="display: flex; justify-content: center; height: 8vh;">
-    
+
     <div style="display: flex; gap: 25px;">
         <div style="display: flex; gap: 10px;">
             <label style="font-weight: normal; font-family: serif;">From</label>
@@ -21,14 +21,14 @@
     <div style="display: flex; gap: 10px;">
         <div style="display: flex; gap: 10px;">
 
-            <p-dropdown  placeholder="Buyer" optionLabel="buyer"
-            optionValue="buyer" ></p-dropdown>
+            <p-dropdown [options]="buyerslist" placeholder="Buyer" optionLabel="buyer" [(ngModel)]="buyervalue" (onChange)="buyer()"
+            optionValue="buyer" [editable]="true"  [style]="{ minWidth: '22vh', minHeight:'2vh' }"></p-dropdown>
 
         </div>
         <div style="display: flex; gap: 10px;">
            
-            <p-dropdown  placeholder="Invoice no" optionLabel="Invoiceno"
-            optionValue="Invoiceno" ></p-dropdown>
+            <p-dropdown [options]="OrderNolist" placeholder="Invoice" optionLabel="invoice" [(ngModel)]="orderNovalue" (onChange)="Order()"
+            optionValue="invoice" [editable]="true"  [style]="{ minWidth: '22vh', minHeight:'2vh' }"></p-dropdown>
 
         </div>
     </div>
@@ -47,24 +47,24 @@
                 <th>Buyer</th>
                 <th>Quantity Pcs</th>
                 <th>Value USD</th>
-                
+
                 <th>Edit</th>
                 <!-- <th>Delete</th> -->
 
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
+            <tr *ngFor="let data of this.invoicelist ; let i = index">
+                <td>{{i+1}}</td>
+                <td>{{data.invoiceDate}}</td>
+                <td>{{data.invoice}}</td>
 
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{data.buyer}}</td>
+                <td>{{data.totalshipPcs}}</td>
+                <td>{{data.totalvalue}}</td>
 
                 <!-- <td><button class="btn btn-warning"(click)="Entry()"><mat-icon>content_paste</mat-icon></button></td> -->
-                <td><button class="btn btn-primary" (click)="edit()"><mat-icon>edit</mat-icon></button></td>
+                <td><button class="btn btn-primary" (click)="edit(data.id)"><mat-icon>edit</mat-icon></button></td>
                 <!-- <td><button class="btn btn-danger" (click)="delete(data.id)"><mat-icon>delete</mat-icon></button></td> -->
             </tr>
         </tbody>
@@ -76,111 +76,141 @@
     [style]="{width: '100vw', height:'100vh'}" [formGroup]="InvoiceEty">
 
     <div>
-        <mat-toolbar style="height: auto;">
-            <div style="display: flex; gap: 15px; width: 100%; justify-content: center;">
-                <span>Invoice Creation</span>
-            </div>
-            <div style="flex: 1 1 auto;"></div>
-            <div style="display: flex; gap: 10px; margin-top: 1vh;">
-
+        <div>
+            <mat-toolbar style="height: auto;">
+                <div style="display: flex; gap: 15px; width: 100%; justify-content: center;">
+                    <span>Invoice Creation</span>
+                </div>
+                <div style="flex: 1 1 auto;"></div>
                 <div style="display: flex; gap: 10px;">
-                    <p-dropdown  placeholder="Buyer" optionLabel="buyer"
-                    optionValue="buyer" ></p-dropdown>
+
+                    <div style="display: flex; gap: 10px;">
+                        <!-- <p-dropdown placeholder="Buyer" optionLabel="buyer" [options]="this.buyers"
+                            (onChange)="getBuyerValue()" optionValue="buyer" [editable]="true"
+                            [style]="{ minWidth: '22vh', minHeight:'2vh' }" formControlName="buyer"></p-dropdown> -->
+                            <input type="text" class="form-control" style="margin-top: 4px; width: 25vh;"
+                            formControlName="buyer">
+                        </div>
+
+
+                    <!-- <div style="display: flex; gap: 10px;">
+                        <p-dropdown  placeholder="orderNo" optionLabel="orderNo" [options]="this.order" (onChange)="ordervalue()"
+                        optionValue="orderNo" [editable]="true"  [style]="{ minWidth: '22vh', minHeight:'2vh' }" formControlName="orderNo"></p-dropdown>
+                    </div> -->
+
+                    <div style="display: flex; gap: 10px;">
+                        <label style="font-weight: normal; font-family: serif; margin-top: 5px;">Invoice No</label>
+                        <input type="text" class="form-control" style="margin-top: 4px; width: 25vh;"
+                            formControlName="invoice">
+                    </div>
+
+                    <div style="display: flex; gap: 10px;">
+                        <label style="font-weight: normal; font-family: serif; margin-top: 5px;">Invoice Date</label>
+                        <input type="text" class="form-control" style="margin-top: 4px;width: 20vh;" formControlName="invoiceDate">
+                    </div>
                 </div>
 
 
-                <div style="display: flex; gap: 10px;">
-                    <p-dropdown  placeholder="Invoice No" optionLabel="Invoice No"
-                    optionValue="Invoice No" ></p-dropdown>
-                </div>
-                    
+            </mat-toolbar>
+            <div class="tablecss">
+                <table class="table table-hover">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th><button class="btn btn-primary" (click)="InvoiceEtyAddButton()">+</button></th>
+                            <th>S.No</th>
+                            <th>Order</th>
+                            <th>Style</th>
+                            <th>Color</th>
+                            <th>G.Size</th>
+                            <th>Fab Type</th>
+                            <th>Fab GSM</th>
+                            <th>Ship Pcs</th>
+                            <th>FOB Rate</th>
+                            <th>Value USD</th>
+                            <th>Specific Remarks</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody formArrayName="data">
+                        <tr *ngFor="let list of items.controls; let i=index" [formGroupName]="i">
+                            <td></td>
+                            <td>{{i+1}}</td>
+
+                            <td>
+                                <input type="text" class="form-control" formControlName="orderNo" list="2"
+                                    (input)="ordervalue(i)" (mouseenter)="getBuyerValue(i)" (change)="orderdata()">
+                                <datalist id="2">
+                                    <option *ngFor="let data of this.order" value="{{data.orderNo}}">{{data.orderNo}}
+                                    </option>
+                                </datalist>
+                            </td>
+
+                            <td>
+                                <input type="text" class="form-control" formControlName="style" list="3"
+                                    (input)="stylevalue(i)" (mouseenter)="ordervalue(i)" (change)="styledata()">
+                                <datalist id="3">
+                                    <option *ngFor="let data of this.stylelist" value="{{data.style}}">{{data.style}}
+                                    </option>
+                                </datalist>
+                            </td>
+
+                            <td>
+                                <input style="width: 15vh;" formControlName="color" list="Color" (input)="colorvalue(i)"
+                                    (change)="colordata()" class="form-control" (mouseenter)="stylevalue(i)">
+                                <datalist id="Color">
+                                    <option *ngFor="let data of this.colorlist" value="{{data.color}}">{{data.color}}
+                                    </option>
+                                </datalist>
+                            </td>
+
+                            <td>
+                                <input class="form-control" type="text" formControlName="size" list="size"
+                                    (mouseenter)="colorvalue(i)" (input)="getwoId($event.target.value,i)">
+                                <datalist id="size">
+                                    <option *ngFor="let data of this.sizelist" value="{{data.size}}">{{data.size}}
+                                    </option>
+                                </datalist>
+                            </td>
+
+                            <td>
+                                <input type="text" class="form-control" formControlName="fabtype">
+                            </td>
+
+                            <td>
+                                <input type="text" class="form-control" formControlName="fabGSM">
+                            </td>
+
+                            <td><input class="form-control" type="text" formControlName="shipPcs"></td>
+                            <td><input class="form-control" type="text" formControlName="fobRate"></td>
+                            <td><input class="form-control" type="text" formControlName="valueUSD"></td>
+                            <td><input class="form-control" type="text" formControlName="remarks"></td>
+
+                            <th><button class="btn-danger" (click)="delete(i)">x</button></th>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-    
-    
-        </mat-toolbar>
-        <div class="tablecss">
+        </div>
+        <div style="margin-top: -2vh;">
             <table class="table table-hover">
                 <thead class="thead-dark">
                     <tr>
-                        <th><button class="btn btn-primary" (click)="InvoiceEtyAddButton()">+</button></th>
-                        <th>S.No</th>
-                        <th>Order</th>
-                        <th>Style</th>
-                        <th>Color</th>
-                        <th>G.Size</th>
-                        <th>Fab Type</th>
-                        <th>Fab GSM</th>
-                        <th>Ship Pcs</th>
-                        <th>FOB Rate</th>
-                        <th>Value USD</th>
-                        <th>Specific Remarks</th>
-                        <th>Delete</th>
+                        <th></th>
+                        <th></th>
+                        <th><span>Notes for Invoice </span></th>
+                        <th colspan="4"><textarea class="form-control" style="height: 1px;"
+                                formControlName="notes"></textarea></th>
+
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
                     </tr>
                 </thead>
-                <tbody formArrayName="data">
-                    <tr *ngFor="let list of items.controls; let i=index" [formGroupName]="i">
-                        <td></td>
-                        <td>{{i+1}}</td>
-
-                        <td>
-                            <input type="text" class="form-control" formControlName="Orderno">
-                        </td>
-
-                        <td>
-                            <input type="text" class="form-control" formControlName="Style">
-                        </td>
-    
-                        <td>
-                            <input class="form-control" type="text" formControlName="Color">
-                        </td>
-                        <td>
-                            <input class="form-control" type="text" formControlName="GSize" >
-                        </td>
-
-                        <td>
-                            <input type="text" class="form-control" formControlName="FabType" >
-                        </td>
-    
-                        <td>
-                            <input type="text" class="form-control" formControlName="FabGSM" >
-                        </td>
-    
-                        <td><input class="form-control" type="text" formControlName="ShipPcs" ></td>
-                        <td><input class="form-control" type="text" formControlName="FOBRate" ></td>
-                        <td><input class="form-control" type="text" formControlName="ValueUSD"></td>
-                        <td><input class="form-control" type="text" formControlName="SpecificRemarks" ></td>
-    
-                        <th><button class="btn-danger" (click)="delete(i)">x</button></th>
-                    </tr>
-                </tbody>
             </table>
         </div>
-        <!-- <mat-toolbar style="height: auto; display: flex; width: 100%; justify-content: center;">
-            <button class="btn btn-primary" (click)="save()" *ngIf="!valueExceeded">Save</button>
-    
-            <button class="btn btn-primary" *ngIf="valueExceeded">Save</button>
-    
-        </mat-toolbar> -->
-    </div>
-    <div>
-        <table class="table table-hover">
-            <thead class="thead-dark">
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th><span>Notes for Invoice </span></th>
-                    <th colspan="4"><textarea class="form-control" style="height: 1px;"
-                            formControlName="notes"></textarea></th>
-
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-        </table>
     </div>
 
     <ng-template pTemplate="footer">
@@ -193,12 +223,13 @@
 
 <p-dialog [(visible)]="viewEntry" [modal]="true" header=" Knit Work Order Entry" [maximizable]="true"
     [style]="{width: '100vw', height:'100vh'}">
- 
+
 
     <ng-template pTemplate="footer">
         <div style="width: 100%; display: flex; justify-content: center;">
             <div>
-                <button mat-button color="primary" (click)="exportToPDF()"><mat-icon>download</mat-icon> Download </button>
+                <button mat-button color="primary" (click)="exportToPDF()"><mat-icon>download</mat-icon> Download
+                </button>
             </div>
         </div>
     </ng-template>

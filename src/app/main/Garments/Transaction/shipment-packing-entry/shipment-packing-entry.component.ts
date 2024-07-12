@@ -40,6 +40,7 @@ export class ShipmentPackingEntryComponent {
 
 
     this.ShipEty = new FormGroup({
+      id : new FormControl(0),
       buyer: new FormControl(''),
       orderNo : new FormControl(''),
       notes : new FormControl(''),
@@ -208,7 +209,7 @@ getwoId(size: any, index: number){
       this.calculateDiff()
     })
 
-    row.get('carton')?.valueChanges.subscribe(()=>{
+    row.get('orderPcs')?.valueChanges.subscribe(()=>{
       this.calculateDiff()
     })
     
@@ -220,7 +221,7 @@ getwoId(size: any, index: number){
 
       if (row instanceof FormGroup) {
         const ShipPcsValue = parseFloat(row.get('shipPcs')?.value);
-        const CartonnosValue = parseFloat(row.get('carton')?.value);
+        const CartonnosValue = parseFloat(row.get('orderPcs')?.value);
   
         const a = ShipPcsValue - CartonnosValue
         const pendingPcs = parseFloat(a.toFixed(2));
@@ -236,6 +237,7 @@ getwoId(size: any, index: number){
 
   save(){
     // this.router.navigate(['main/ShipmentListingList'])
+    console.log(this.ShipEty.value)
     if (this.ShipEty.valid) {
       this.api.shippingPost(this.ShipEty.value).subscribe((res) => {
         if (res.success) {

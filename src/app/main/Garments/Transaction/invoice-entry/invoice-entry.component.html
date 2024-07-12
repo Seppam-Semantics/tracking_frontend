@@ -5,19 +5,28 @@
             <span>Invoice Creation</span>
         </div>
         <div style="flex: 1 1 auto;"></div>
-        <div style="display: flex; gap: 10px; ">
+        <div style="display: flex; gap: 10px;">
 
             <div style="display: flex; gap: 10px;">
-                <p-dropdown  placeholder="Buyer" optionLabel="buyer"
-                optionValue="buyer" ></p-dropdown>
+                <p-dropdown  placeholder="Buyer" optionLabel="buyer" [options]="this.buyers" (onChange)="getBuyerValue()"
+                optionValue="buyer" [editable]="true"  [style]="{ minWidth: '22vh', minHeight:'2vh' }" formControlName="buyer"></p-dropdown>
             </div>
 
 
+            <!-- <div style="display: flex; gap: 10px;">
+                <p-dropdown  placeholder="orderNo" optionLabel="orderNo" [options]="this.order" (onChange)="ordervalue()"
+                optionValue="orderNo" [editable]="true"  [style]="{ minWidth: '22vh', minHeight:'2vh' }" formControlName="orderNo"></p-dropdown>
+            </div> -->
+
             <div style="display: flex; gap: 10px;">
-                <p-dropdown  placeholder="Invoice No" optionLabel="Invoice No"
-                optionValue="Invoice No" ></p-dropdown>
-            </div>
-                
+                <label style="font-weight: normal; font-family: serif; margin-top: 5px;">Invoice No</label>
+                <input type="text" class="form-control" style="margin-top: 4px; width: 25vh;" formControlName="invoice">
+            </div>    
+
+                <div style="display: flex; gap: 10px;">
+                    <label style="font-weight: normal; font-family: serif; margin-top: 5px;">Invoice Date</label>
+                    <input type="date" class="form-control" style="margin-top: 4px;" formControlName="invoiceDate">
+                </div>    
         </div>
 
 
@@ -47,32 +56,49 @@
                     <td>{{i+1}}</td>
 
                     <td>
-                        <input type="text" class="form-control" formControlName="Orderno">
+                        <input type="text" class="form-control" formControlName="orderNo" list="2"
+                            (input)="ordervalue(i)" (mouseenter)="getBuyerValue(i)" (change)="orderdata()">
+                        <datalist id="2">
+                            <option *ngFor="let data of this.order" value="{{data.orderNo}}">{{data.orderNo}}</option>
+                        </datalist>
                     </td>
 
                     <td>
-                        <input type="text" class="form-control" formControlName="Style">
+                        <input type="text" class="form-control" formControlName="style" list="3" (input)="stylevalue(i)"
+                            (mouseenter)="ordervalue(i)" (change)="styledata()">
+                        <datalist id="3">
+                            <option *ngFor="let data of this.stylelist" value="{{data.style}}">{{data.style}}</option>
+                        </datalist>
                     </td>
 
                     <td>
-                        <input class="form-control" type="text" formControlName="Color">
-                    </td>
-                    <td>
-                        <input class="form-control" type="text" formControlName="GSize" >
-                    </td>
-
-                    <td>
-                        <input type="text" class="form-control" formControlName="FabType" >
+                        <input style="width: 15vh;" formControlName="color" list="Color" (input)="colorvalue(i)"
+                            (change)="colordata()" class="form-control" (mouseenter)="stylevalue(i)">
+                        <datalist id="Color">
+                            <option *ngFor="let data of this.colorlist" value="{{data.color}}">{{data.color}}</option>
+                        </datalist>
                     </td>
 
                     <td>
-                        <input type="text" class="form-control" formControlName="FabGSM" >
+                        <input class="form-control" type="text" formControlName="size" list="size"
+                            (mouseenter)="colorvalue(i)" (input)="getwoId($event.target.value,i)">
+                        <datalist id="size">
+                            <option *ngFor="let data of this.sizelist" value="{{data.size}}">{{data.size}}</option>
+                        </datalist>
                     </td>
 
-                    <td><input class="form-control" type="text" formControlName="ShipPcs" ></td>
-                    <td><input class="form-control" type="text" formControlName="FOBRate" ></td>
-                    <td><input class="form-control" type="text" formControlName="ValueUSD"></td>
-                    <td><input class="form-control" type="text" formControlName="SpecificRemarks" ></td>
+                    <td>
+                        <input type="text" class="form-control" formControlName="fabtype" >
+                    </td>
+
+                    <td>
+                        <input type="text" class="form-control" formControlName="fabGSM" >
+                    </td>
+
+                    <td><input class="form-control" type="text" formControlName="shipPcs"></td>
+                    <td><input class="form-control" type="text" formControlName="fobRate" ></td>
+                    <td><input class="form-control" type="text" formControlName="valueUSD"></td>
+                    <td><input class="form-control" type="text" formControlName="remarks" ></td>
 
                     <th><button class="btn-danger" (click)="delete(i)">x</button></th>
                 </tr>
@@ -80,7 +106,7 @@
         </table>
     </div>
 </div>
-<div>
+<div style="margin-top: -2vh;">
     <table class="table table-hover">
         <thead class="thead-dark">
             <tr>

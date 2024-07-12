@@ -21,14 +21,14 @@
     <div style="display: flex; gap: 10px;">
         <div style="display: flex; gap: 10px;">
 
-            <p-dropdown  placeholder="Buyer" optionLabel="buyer"
-            optionValue="buyer" ></p-dropdown>
+            <p-dropdown [options]="buyerslist" placeholder="Buyer" optionLabel="buyer" [(ngModel)]="buyervalue" (onChange)="buyer()"
+            optionValue="buyer" [editable]="true"  [style]="{ minWidth: '22vh', minHeight:'2vh' }"></p-dropdown>
 
         </div>
         <div style="display: flex; gap: 10px;">
            
-            <p-dropdown  placeholder="Order" optionLabel="orderNo"
-            optionValue="orderNo" ></p-dropdown>
+            <p-dropdown [options]="OrderNolist" placeholder="Order" optionLabel="orderNo" [(ngModel)]="orderNovalue" (onChange)="Order()"
+            optionValue="orderNo" [editable]="true"  [style]="{ minWidth: '22vh', minHeight:'2vh' }"></p-dropdown>
 
         </div>
     </div>
@@ -54,17 +54,17 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
+            <tr *ngFor="let data of this.shippinglist ; let i = index;">
+                <td>{{i+1}}</td>
+                <td>{{data.shipDate}}</td>
+                <td>{{data.buyer}}</td>
 
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{data.orderNo}}</td>
+                <td>{{data.totalshipPcs}}</td>
+                <td>{{data.totalcarton}}</td>
 
                 <!-- <td><button class="btn btn-warning"(click)="Entry()"><mat-icon>content_paste</mat-icon></button></td> -->
-                <td><button class="btn btn-primary" (click)="edit()"><mat-icon>edit</mat-icon></button></td>
+                <td><button class="btn btn-primary" (click)="edit(data.id)"><mat-icon>edit</mat-icon></button></td>
                 <!-- <td><button class="btn btn-danger" (click)="delete(data.id)"><mat-icon>delete</mat-icon></button></td> -->
             </tr>
         </tbody>
@@ -76,24 +76,30 @@
     [style]="{width: '100vw', height:'100vh'}" [formGroup]="ShipEty">
 
     <div>
-        <mat-toolbar style="height: auto;">
+        <mat-toolbar style="height: 7vh;">
             <div style="display: flex; gap: 15px; width: 100%; justify-content: center;">
                 <span>Sewing Packing</span>
             </div>
             <div style="flex: 1 1 auto;"></div>
-            <div style="display: flex; gap: 10px; margin-top: 1vh;">
-
+            <div style="display: flex; gap: 10px;">
+    
                 <div style="display: flex; gap: 10px;">
-                    <p-dropdown  placeholder="Buyer" optionLabel="buyer"
-                    optionValue="buyer" ></p-dropdown>
+                    <!-- <p-dropdown  placeholder="Buyer" optionLabel="buyer" [options]="this.buyers" (onChange)="getBuyerValue()"
+                    optionValue="buyer" [editable]="true"  [style]="{ minWidth: '22vh', minHeight:'2vh' }" formControlName="buyer"></p-dropdown> -->
+                    <input class="form-control" type="text" formControlName="buyer">
                 </div>
-
-
+    
+    
                 <div style="display: flex; gap: 10px;">
-                    <p-dropdown  placeholder="OrderNo" optionLabel="OrderNo"
-                    optionValue="OrderNo" ></p-dropdown>
+                    <!-- <p-dropdown  placeholder="orderNo" optionLabel="orderNo" [options]="this.order" (onChange)="ordervalue()"
+                    optionValue="orderNo" [editable]="true"  [style]="{ minWidth: '22vh', minHeight:'2vh' }" formControlName="orderNo"></p-dropdown> -->
+                    <input class="form-control" type="text" formControlName="orderNo">
                 </div>
-                    
+    
+                    <div style="display: flex; gap: 10px;">
+                        <label style="font-weight: normal; font-family: serif; margin-top: 5px;">Ship Date</label>
+                        <input type="text" class="form-control" style="margin-top: 2px;" formControlName="shipDate">
+                    </div>    
             </div>
     
     
@@ -109,9 +115,9 @@
                         <th>G.Size</th>
                         <th>Fab Type</th>
                         <th>Fab GSM</th>
-                        <th>Order Pcs</th>
-                        <th>Ship Pcs (A)</th>
-                        <th>Carton nos (B)</th>
+                        <th>Order Pcs (A)</th>
+                        <th>Ship Pcs (B)</th>
+                        <th>Carton nos</th>
                         <th>Pending Pcs (A-B)</th>
                         <th>Specific Remarks</th>
                         <th>Delete</th>
@@ -121,65 +127,72 @@
                     <tr *ngFor="let list of items.controls; let i=index" [formGroupName]="i">
                         <td></td>
                         <td>{{i+1}}</td>
-
+    
                         <td>
-                            <input type="text" class="form-control" formControlName="Style">
+                            <input type="text" class="form-control" formControlName="style" list="3" (input)="stylevalue(i)"
+                                (mouseenter)="ordervalue(i)" (change)="styledata()">
+                            <datalist id="3">
+                                <option *ngFor="let data of this.stylelist" value="{{data.style}}">{{data.style}}</option>
+                            </datalist>
                         </td>
     
                         <td>
-                            <input class="form-control" type="text" formControlName="Color">
-                        </td>
-                        <td>
-                            <input class="form-control" type="text" formControlName="GSize" >
-                        </td>
-
-                        <td>
-                            <input type="text" class="form-control" formControlName="FabType" >
+                            <input style="width: 15vh;" formControlName="color" list="Color" (input)="colorvalue(i)"
+                                (change)="colordata()" class="form-control" (mouseenter)="stylevalue(i)">
+                            <datalist id="Color">
+                                <option *ngFor="let data of this.colorlist" value="{{data.color}}">{{data.color}}</option>
+                            </datalist>
                         </td>
     
                         <td>
-                            <input type="text" class="form-control" formControlName="FabGSM" >
+                            <input class="form-control" type="text" formControlName="size" list="size"
+                                (mouseenter)="colorvalue(i)" (input)="getwoId($event.target.value,i)">
+                            <datalist id="size">
+                                <option *ngFor="let data of this.sizelist" value="{{data.size}}">{{data.size}}</option>
+                            </datalist>
+                        </td>
+    
+                        <td>
+                            <input type="text" class="form-control" formControlName="fabtype" >
+                        </td>
+    
+                        <td>
+                            <input type="text" class="form-control" formControlName="fabGSM" >
                         </td>
         
-
-                        <td><input class="form-control" type="text" formControlName="OrderPcs" ></td>
     
-                        <td><input class="form-control" type="text" formControlName="ShipPcs" ></td>
-                        <td><input class="form-control" type="text" formControlName="Cartonnos" ></td>
-                        <td><input class="form-control" type="text" formControlName="PendingPcs"></td>
-                        <td><input class="form-control" type="text" formControlName="SpecificRemarks" ></td>
+                        <td><input class="form-control" type="text" formControlName="orderPcs" (click)="calculateDiff()"></td>
+    
+                        <td><input class="form-control" type="text" formControlName="shipPcs" (click)="calculateDiff()"></td>
+                        <td><input class="form-control" type="text" formControlName="carton" (click)="calculateDiff()"></td>
+                        <td><input class="form-control" type="text" formControlName="pendingPcs"(click)="calculateDiff()"></td>
+                        <td><textarea class="form-control"  formControlName="remarks" ></textarea></td>
     
                         <th><button class="btn-danger" (click)="delete(i)">x</button></th>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <!-- <mat-toolbar style="height: auto; display: flex; width: 100%; justify-content: center;">
-            <button class="btn btn-primary" (click)="save()" *ngIf="!valueExceeded">Save</button>
+        <div style="margin-top: -2vh;">
+            <table class="table table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th><span>Notes for Shipment </span></th>
+                        <th colspan="4"><textarea class="form-control" style="height: 1px;"
+                                formControlName="notes"></textarea></th>
     
-            <button class="btn btn-primary" *ngIf="valueExceeded">Save</button>
-    
-        </mat-toolbar> -->
-    </div>
-    <div>
-        <table class="table table-hover">
-            <thead class="thead-dark">
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th><span>Notes for Shipment </span></th>
-                    <th colspan="4"><textarea class="form-control" style="height: 1px;"
-                            formControlName="notes"></textarea></th>
-
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-        </table>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
     </div>
 
     <ng-template pTemplate="footer">

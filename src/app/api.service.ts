@@ -10,8 +10,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  // apiUrl = "https://tracker.seppam.com";
-  apiUrl = "http://localhost:2000";
+  apiUrl = "https://tracker.seppam.com";
+  // apiUrl = "http://localhost:2000";
 
   token: any;
   profilenames: any;
@@ -1341,6 +1341,14 @@ export class ApiService {
 
         //--------------------------------------------Shipment  [Start]------------------------------------------------------
          
+        shippingBuyer(): Observable<any> {
+          return this.http.get(this.getUrl() + `/garmentsapi/shipping-Buyer` ,this.getHeaders())
+        }
+        
+        shippingOrderNo(): Observable<any> {
+          return this.http.get(this.getUrl() + `/garmentsapi/shipping-OrderNo` ,this.getHeaders())
+        }
+
         shippingPost(data:any ): Observable<any> {
           return this.http.post(this.getUrl() + `/garmentsapi/sewing-shipping`, data,this.getHeaders())
         }
@@ -1353,5 +1361,58 @@ export class ApiService {
           return this.http.get(this.getUrl() + `/garmentsapi/sewing-shipping/${id}`, this.getHeaders())
         }    
 
+
+
+
+
+        shipping_buyers(): Observable<any> {
+          return this.http.get(this.getUrl() + `/filtersapi/shipping_buyers`, this.getHeaders())
+        }
+      
+        shipping_buyersorders(buyer: any): Observable<any> {
+          return this.http.get(this.getUrl() + `/filtersapi/shipping_buyers-orders?buyer=${buyer}&`, this.getHeaders())
+        }
+      
+        shipping_ordersstyles(buyer: any, order: any): Observable<any> {
+          return this.http.get(this.getUrl() + `/filtersapi/shipping_orders-styles?buyer=${buyer}&orderNo=${order}&`, this.getHeaders())
+        }
+      
+        shipping_stylescolors(buyer: any, order: any, style: any): Observable<any> {
+          return this.http.get(this.getUrl() + `/filtersapi/shipping_styles-colors?buyer=${buyer}&orderNo=${order}&style=${style}&`, this.getHeaders())
+        }
+      
+        shipping_colorssizes(buyer: any, order: any, style: any, color: any): Observable<any> {
+          return this.http.get(this.getUrl() + `/filtersapi/shipping_colors-sizes?buyer=${buyer}&orderNo=${order}&style=${style}&color=${color}&`, this.getHeaders())
+        }
+      
+        getshippingdetails(buyer: any, orderNo?: any, style?: any, color?: any, size?: any): Observable<any> {
+          return this.http.get(this.getUrl() + `/filtersapi/shipping-filter?buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&size=${size}&`, this.getHeaders())
+        }
+
+
         //--------------------------------------------Shipment  [Ends]------------------------------------------------------
+
+
+        //--------------------------------------------Invoice  [Start]------------------------------------------------------
+        invoiceBuyer(): Observable<any> {
+          return this.http.get(this.getUrl() + `/garmentsapi/Invoice-Buyer` ,this.getHeaders())
+        }
+        
+        invoiceOrderNo(): Observable<any> {
+          return this.http.get(this.getUrl() + `/garmentsapi/Invoice-invoiceno` ,this.getHeaders())
+        }
+        
+        invoicePost(data:any ): Observable<any> {
+          return this.http.post(this.getUrl() + `/garmentsapi/sewing-invoice`, data,this.getHeaders())
+        }
+       
+        invoice(buyer:string='' , orderNo:string='' , fromDate:string='' , toDate:string=''):Observable<any>{
+          return this.http.get(this.getUrl() + `/garmentsapi/sewing-invoice?buyer=${buyer}&orderNo=${orderNo}&fromDate=${fromDate}&toDate=${toDate}&`, this.getHeaders())
+        }
+      
+        invoiceId(id:any):Observable<any>{
+          return this.http.get(this.getUrl() + `/garmentsapi/sewing-invoice/${id}`, this.getHeaders())
+        }
+
+        //--------------------------------------------Invoice  [Ends]------------------------------------------------------
 }
