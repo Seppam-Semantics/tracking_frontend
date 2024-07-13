@@ -169,7 +169,7 @@ export class CutProdEntryComponent implements OnInit{
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Size Id Missing"
+        text: "woId (or) CutDate  Missing"
       });
     }
   

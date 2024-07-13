@@ -216,7 +216,7 @@ getwoId(size: any, index: number){
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "cutId and woId and InputId Missing"
+        text: "Check cutId , woId , InputId , OutputId and packDate Missing"
       });
     } 
 

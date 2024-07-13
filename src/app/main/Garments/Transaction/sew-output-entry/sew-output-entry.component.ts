@@ -203,7 +203,7 @@ console.log(this.SewoutputEty.value)
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: "cutId and woId and InputId Missing"
+          text: "Check cutId and woId and InputId and outputDate Missing"
         });
       } 
 

@@ -189,7 +189,7 @@ getwoId(size: any, index: number){
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: "cutId and woId Missing"
+        text: "check woId,cutId,InputDate Missing"
         });
       }    
    

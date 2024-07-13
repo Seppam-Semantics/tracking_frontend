@@ -45,7 +45,7 @@ export class InvoiceEntryComponent {
       "buyer" : new FormControl(''),
       "invoice"  : new FormControl(''),
       "notes" : new FormControl(''),
-      "invoiceDate" : new FormControl(''),
+      "invoiceDate" : new FormControl('',Validators.required),
       data: this.fb.array([]),
 
     })
@@ -214,12 +214,12 @@ getwoId(size: any, index: number){
       "style" : [''],
       "color" : [''],
       "size" : [''],
-      "woId" : [''],
-      "cutId" : [''],
-      "inputId" : [''],
-      "outputId" : [''],
-      "packId" : [''],
-      "shipId" : [''],
+      "woId" : ['',Validators.required],
+      "cutId" : ['',Validators.required],
+      "inputId" : ['',Validators.required],
+      "outputId" : ['',Validators.required],
+      "packId" : ['',Validators.required],
+      "shipId" : ['',Validators.required],
       "shipPcs" : [''],
       "fobRate" : [''],
       "valueUSD" : [''],
@@ -255,7 +255,7 @@ getwoId(size: any, index: number){
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "cutId and woId and InputId Missing"
+        text: "check woId , cutId,inputId,outputId,packId,shipId , Invoice Date , invoice Missing" 
       });
     }
   }
