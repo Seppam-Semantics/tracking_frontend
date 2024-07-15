@@ -10,8 +10,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  apiUrl = "https://tracker.seppam.com";
-  // apiUrl = "http://localhost:2000";
+  // apiUrl = "https://tracker.seppam.com";
+  apiUrl = "http://localhost:2000";
 
   token: any;
   profilenames: any;
@@ -873,7 +873,7 @@ export class ApiService {
   }
 
   fsize_master_filter(size:any):Observable<any>{
-    return this.http.get(this.getUrl() + `/mastersapi/fsize-master-filter?size=${size}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/mastersapi/fsize-master-filter?size=${size}&`, this.getHeaders())
   }
   // =================================== dyetype=============================================================================
 

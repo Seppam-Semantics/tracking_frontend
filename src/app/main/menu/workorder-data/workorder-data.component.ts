@@ -389,12 +389,7 @@ export class WorkorderDataComponent implements OnInit {
       const row = control as FormGroup;
       if (row instanceof FormGroup) {
         const OrderPcsValue = parseFloat(row.get('OrderPcs')?.value) || 0;
-        // console.log(OrderPcsValue)
-        // ( Fabric Consumption /  (100% -  Rej type% - PO Details Loss) )*Order Qty
-        // console.log("[finishfabConsumptionDta] = " + this.finishfabConsumptionDta + "[rejloss] = " + this.rejloss + "[LossValue] = " + this.PODetailsLossValue +"[OrderPcs] = " + OrderPcsValue)
-        const FinishKg1 = (( this.finishfabConsumptionDta  / ((100 - this.rejloss - this.PODetailsLossValue)/100)) * OrderPcsValue) ; ;
-        // console.log(FinishKg1)
-        // console.log("[FinishKg] = "+FinishKg1 + "[DyeLossValue] = " + this.DyeProcessLossValue + "[DyeTypeLossDta] = " + this.DyeTypeLossDta + "[fabTypeLossDta] = " + this.fabTypeLossDta)
+        const FinishKg1 = (( this.finishfabConsumptionDta  / ((100 - this.rejloss - this.PODetailsLossValue)/100)) * OrderPcsValue)/12;
         const FinishKg2 = FinishKg1 / ((100 - this.DyeProcessLossValue - this.fabTypeLossDta - this.DyeTypeLossDta )/100)
 
         const FinishKg = parseFloat(FinishKg1.toFixed(2));
