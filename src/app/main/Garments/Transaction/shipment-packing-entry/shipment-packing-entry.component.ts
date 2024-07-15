@@ -237,7 +237,7 @@ getwoId(size: any, index: number){
 
   save(){
     // this.router.navigate(['main/ShipmentListingList'])
-    console.log(this.ShipEty.value)
+    // console.log(this.ShipEty.value)
     if (this.ShipEty.valid) {
       this.api.shippingPost(this.ShipEty.value).subscribe((res) => {
         if (res.success) {

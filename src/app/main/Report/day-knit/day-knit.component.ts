@@ -146,8 +146,7 @@ export class DayKnitComponent  implements OnInit{
 
 
   date(){
-    console.log(this.filterDate1)
-    console.log(this.filterDate2)
+ 
     this.api.DayKnit(JSON.stringify(this.filterDate1),JSON.stringify(this.filterDate2)).subscribe((res)=>{
       this.DayKnitData = res.data
     })

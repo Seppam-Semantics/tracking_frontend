@@ -78,7 +78,9 @@ export class KnitReportComponent implements OnInit {
   factorynamevalue:any
   status = [{status:"open"},{status:"close"}]
   toleranceValid: boolean[] = [];
-
+  TotalValue: any;
+  colorlist2: any;
+  colorvalue:any
   onCheckboxChange11(event: any) {
     const ischecked = event.target.checked;
     this.load.controls['houseKeepingStatus'].setValue(ischecked ? 'active' : 'inactive');
@@ -119,6 +121,12 @@ export class KnitReportComponent implements OnInit {
     this.allknitDetails();
     this.knitDate()
     this.OrderName()
+    this.factory()
+    this.statusfun()
+
+    this.api.knit_color_list().subscribe((res)=>{
+      this.colorlist2 = res.color
+    })
   }
 
   knitDate() {
@@ -143,7 +151,6 @@ export class KnitReportComponent implements OnInit {
   allknitDetails() {
     this.api.getallfty_details().subscribe((res) => {
       this.data = res.workorders
-      // console.log(this.data)
     })
   }
 
@@ -152,7 +159,7 @@ export class KnitReportComponent implements OnInit {
   }
 
   factory() {
-    // console.log(this.ordervalue);
+;
 
     // if(this.factoryvalue != '' && this.knitdate == ''){
     //   this.loadknitdetails(this.factoryvalue)
@@ -164,21 +171,42 @@ export class KnitReportComponent implements OnInit {
     //   this.loadknitdetails('','',this.ordervalue)
     // }
     // if(this.factoryvalue && this.knitdate && this.ordervalue){
-    this.loadknitdetails('', '', JSON.stringify(this.ordervalue),'')
+    this.api.ftydetailsFilter(this.ordervalue,'').subscribe((res) => {
+      this.data = res.knit; 
+    });
+
+    this.api.knit_Total_filter(this.ordervalue,'').subscribe((res) => {
+      this.TotalValue = res.knitTotal[0].totalDayProductionKgs; 
+
+    });
     // }
   }
 
+  colorfilter(){
+    this.api.ftydetailsFilter('','',this.colorvalue).subscribe((res) => {
+      this.data = res.knit; 
+    });
 
-  loadknitdetails(factory: string = '', date: string = '', Order: any , status:any) {
-    this.api.ftydetailsFilter(factory, date, Order,status).subscribe((res) => {
-      this.data = res.knit;
-      // console.log(res)
+    this.api.knit_Total_filter('','',this.colorvalue).subscribe((res) => {
+      this.TotalValue = res.knitTotal[0].totalDayProductionKgs; 
+    
     });
   }
 
+  loadknitdetails(Order: string = '' , status: string = '') {
+ 
+  }
+
   statusfun(){
-    console.log(this.statusvalue)
-    this.loadknitdetails('', '', '',this.statusvalue)
+    this.api.ftydetailsFilter('',this.statusvalue).subscribe((res) => {
+      this.data = res.knit; 
+    });
+  
+    this.api.knit_Total_filter('',this.statusvalue).subscribe((res) => {
+      this.TotalValue = res.knitTotal[0].totalDayProductionKgs; 
+    
+    });
+  
   }
   // factory_date() {
   //   this.loadknitdetails(this.factoryvalue, this.knitdate)
@@ -294,7 +322,7 @@ export class KnitReportComponent implements OnInit {
       const formArray = this.load.get('data') as FormArray;
       const row = formArray.at(index);
       row.get('woId')?.setValue(woId);
-      console.log(res)
+
     });
   }
 
@@ -308,7 +336,6 @@ export class KnitReportComponent implements OnInit {
     const color = row.get('color')?.value;
     const size = row.get('size')?.value;
 
-    console.log(this.factorynamevalue,buyer,orderNo,style,color,size)
     this.api.knitauth(this.factorynamevalue,buyer,orderNo,style,color,size).subscribe((res)=>{
       this.knitDetails = res.knitWoDetails
     })
@@ -398,10 +425,10 @@ export class KnitReportComponent implements OnInit {
   edit(id: any) {
     this.editpopup = true;
     this.ktyid = id;
-    // console.log(this.ktyid)
+
     this.api.getsingleknit_details(this.ktyid).subscribe((res) => {
       this.ktydata = res;
-      console.log(this.ktydata)
+
       this.ktydatalineData = res.lineData
       this.factorynamevalue = this.ktydata.headerData[0].factory ,
       this.load.patchValue({
@@ -533,7 +560,7 @@ export class KnitReportComponent implements OnInit {
 
 
   save() {
-    console.log(this.load.value)
+
     if (this.load.valid) {
       this.api.knit_entry(this.load.value).subscribe((res) => {
         alert(res.message)

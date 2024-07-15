@@ -161,7 +161,7 @@ export class SewOutputListComponent implements OnInit {
   getwoId(size: any, index: number) {
     this.api.getwodetails(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, size).subscribe((res) => {
       const woId = res.workorders[0].id;
-      console.log(woId)
+
       const formArray = this.SewoutputEty.get('data') as FormArray;
       const row = formArray.at(index);
       row.get('woId')?.setValue(woId);
@@ -169,7 +169,7 @@ export class SewOutputListComponent implements OnInit {
 
     this.api.getcutdetails(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, size).subscribe((res) => {
       const cuttingId = res.cutting[0].id;
-      console.log(cuttingId)
+
       const formArray = this.SewoutputEty.get('data') as FormArray;
       const row = formArray.at(index);
       row.get('cutId')?.setValue(cuttingId);
@@ -177,7 +177,6 @@ export class SewOutputListComponent implements OnInit {
 
     this.api.getsewinputfilterdetails(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, size).subscribe((res) => {
       const SewoutputEtyId = res.sewinginput[0].id;
-      console.log(SewoutputEtyId)
       const formArray = this.SewoutputEty.get('data') as FormArray;
       const row = formArray.at(index);
       row.get('inputId')?.setValue(SewoutputEtyId);
@@ -221,7 +220,7 @@ export class SewOutputListComponent implements OnInit {
   }
 
   update() {
-    console.log(this.SewoutputEty.value)
+
     // this.router.navigate(['main/SewOutputList'])
 
     if (this.SewoutputEty.valid) {
@@ -262,7 +261,7 @@ export class SewOutputListComponent implements OnInit {
   edit(id: any) {
     this.editview = true;
     this.api.sewoutputId(id).subscribe((res) => {
-      console.log(res)
+
       this.Sewoutputlistpath = res.sewOutput
       this.SewoutputDate = res.sewOutput[0].outputDate
       this.SewoutputEty.patchValue({       

@@ -208,7 +208,7 @@ getWoId(size: any, index: number) {
 
 
   this.api.getknitproductiondetails(this.buyerName, this.orderNo, this.style, this.color, size ).subscribe((res) => {
-    console.log()
+    
     const formArray = this.KnitDelivery.get('data') as FormArray;
     const row = formArray.at(index);
     row.get('noOfRolls')?.setValue(res.knitProduction[0].noOfRolls);

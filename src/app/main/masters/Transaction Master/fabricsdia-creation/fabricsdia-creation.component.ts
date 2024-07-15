@@ -118,7 +118,7 @@ export class FabricsdiaCreationComponent {
   edit(id:any){
     this.api.fsize_master_SingleData(id).subscribe((res)=>{
       this.datalist = res.fsize
-      console.log(this.datalist)
+      // console.log(this.datalist)
       this.Fabricsdiaedit .patchValue({
         id : this.datalist[0].id , 
         styleName : this.datalist[0].style ,

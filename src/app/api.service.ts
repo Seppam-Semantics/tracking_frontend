@@ -243,8 +243,16 @@ export class ApiService {
   }
 
 
-  ftydetailsFilter(factory: any, date: any , Order:any , status:any ): Observable<any> {
-    return this.http.get(this.getUrl() + `/knitapi/knit-filter?id=&factory=${factory}&date=${date}&buyer=&order=${Order}&style=&color=&size=&status=${status}`, this.getHeaders())
+  ftydetailsFilter( Order: string = '' , status: string = '' ,color:string=''): Observable<any> {
+    return this.http.get(this.getUrl() + `/knitapi/knit-filter?id=&order=${Order}&status=${status}&color=${color}`, this.getHeaders())
+  }
+
+  knit_Total_filter( Order: string = '' , status: string = '' , color:string=''): Observable<any> {
+    return this.http.get(this.getUrl() + `/knitapi/knit_Total_filter?id=&order=${Order}&status=${status}&color=${color}`, this.getHeaders())
+  }
+  
+  knit_color_list( ): Observable<any> {
+    return this.http.get(this.getUrl() + `/knitapi/knit_color_list`, this.getHeaders())
   }
 
   knitDetailsFilter(buyer: any, orderNo: any, style: any, color: any, size: any): Observable<any> {
@@ -1028,10 +1036,26 @@ export class ApiService {
     return this.http.get(this.getUrl() + `/knitapi/knitworkorder_order_Fillter?knitfty=${knitfty}&buyer=${buyer}&order=${order}`, this.getHeaders())
   }
 
-  knitdelivery_fty_Fillter(knitfty:string=''):Observable<any>{
-    return this.http.get(this.getUrl() + `/knittodye/knit-delivery_Fillter?knitfty=${knitfty}`, this.getHeaders())
+  knitdelivery_fty_Fillter(buyer:string='',orderNo:string='',color:string=''):Observable<any>{
+    return this.http.get(this.getUrl() + `/knittodye/knit-delivery_Fillter?buyer=${buyer}&orderNo=${orderNo}&color=${color}`, this.getHeaders())
   }
 
+  knitdelivery_Total_Fillter(buyer:string='',orderNo:string='',color:string=''):Observable<any>{
+    return this.http.get(this.getUrl() + `/knittodye/knit-delivery_Total_Fillter?buyer=${buyer}&orderNo=${orderNo}&color=${color}&`, this.getHeaders())
+  }
+
+  knitdelivery_buyer_list():Observable<any>{
+    return this.http.get(this.getUrl() + `/knittodye/knit-delivery_buyer_list`, this.getHeaders())
+  }
+  knitdelivery_orderNo_list():Observable<any>{
+    return this.http.get(this.getUrl() + `/knittodye/knit-delivery_orderNo_list`, this.getHeaders())
+  }
+
+  knitdelivery_color_list():Observable<any>{
+    return this.http.get(this.getUrl() + `/knittodye/knit-delivery_color_list`, this.getHeaders())
+  }
+
+  
 
 
 

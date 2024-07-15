@@ -54,7 +54,7 @@ export class LCOutstandingComponent implements OnInit{
 lcnoFilter(){
   this.api.LCOutstandingData(this.lcnoNumber).subscribe((res)=>{
     this.LCOutstandingData = res.LCOutstanding
-    // console.log(this.LCOutstandingData)
+
   })  
 
   this.api.LCOutstandingTotalData(this.lcnoNumber).subscribe((res)=>{
@@ -78,7 +78,7 @@ statusFilter(){
 }
 
 BuyerFilter(){
-console.log(this.buyervalue)
+
   this.api.LCOutstandingData('','',this.buyervalue).subscribe((res)=>{
     this.LCOutstandingData = res.LCOutstanding
   })  

@@ -27,6 +27,10 @@
     optionLabel="status" optionValue="status" autoWidth="false" [style]="{ minWidth: '22vh', minHeight:'2vh' }"
     [editable]="true"></p-dropdown>
 
+    <p-dropdown [options]="colorlist2" (onChange)="colorfilter()" [(ngModel)]="colorvalue" placeholder="color"
+    optionLabel="color" optionValue="color" autoWidth="false" [style]="{ minWidth: '22vh', minHeight:'2vh' }"
+    [editable]="true"></p-dropdown>
+
   <!-- </div> -->
   <div style="flex: 1 1 auto;"></div>
   <div class="newlist1">
@@ -66,7 +70,9 @@
         <th>Factory</th>
         <th>Color</th>
         <th>Date</th>
-        <th>Total Day ProductionKgs</th>
+        <th>Total Day ProductionKgs <br/>
+          <input type="text" value="{{this.TotalValue}}">
+        </th>
         <th>Total NoOfRolls Produced</th>
         <th>Status</th>
         <th>Report</th>

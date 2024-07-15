@@ -48,7 +48,6 @@ export class CutProdListComponent implements OnInit{
   ngOnInit(): void {
     this.api.cutting().subscribe((res)=>{
       this.cuttinglist = res.cutting
-      console.log(this.cuttinglist)
     })
 
     this.api.getbuyers().subscribe((res) => {
@@ -186,7 +185,6 @@ Order(){
   getwoId(size: any, index: number){
     this.api.getwodetails(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, size).subscribe((res) => {
       const woId = res.workorders[0].id;
-      console.log(res)
       const formArray = this.CutProdEty.get('data') as FormArray;
       const row = formArray.at(index);
       row.get('woId')?.setValue(woId);
@@ -315,7 +313,7 @@ Order(){
    }
 
    update(){
-    console.log(this.CutProdEty.value)
+
     if (this.CutProdEty.valid) {
       this.api.cuttingPost(this.CutProdEty.value).subscribe((res) => {
         if (res.success) {

@@ -9,8 +9,16 @@
                 <option *ngFor="let ftyname of this.fty_name" value="{{ftyname.knitFty}}"></option>
               </datalist> -->
 
-              <p-dropdown [options]="fty_name" (onChange)="knitdelFilter()" [(ngModel)]="knitdelFillter" placeholder="knitFty"
-              optionLabel="knitFty" optionValue="knitFty" autoWidth="false" [style]="{ minWidth: '22vh', minHeight:'2vh' }"
+              <p-dropdown [options]="buyerlist" [(ngModel)]="buyerFillter" placeholder="Buyer" (onChange)="knitdelBuyerFilter()"
+              optionLabel="buyer" optionValue="buyer" autoWidth="false" [style]="{ minWidth: '22vh', minHeight:'2vh' }"
+              [editable]="true"></p-dropdown>
+
+              <p-dropdown [options]="orderNolist" [(ngModel)]="orderNoFillter" placeholder="orderNo" (onChange)="knitdelOrderFilter()"
+              optionLabel="orderNo" optionValue="orderNo" autoWidth="false" [style]="{ minWidth: '22vh', minHeight:'2vh' }"
+              [editable]="true"></p-dropdown>
+
+              <p-dropdown [options]="colorlist2" [(ngModel)]="colorFillter" placeholder="Color" (onChange)="knitdelColorFilter()"
+              optionLabel="color" optionValue="color" autoWidth="false" [style]="{ minWidth: '22vh', minHeight:'2vh' }"
               [editable]="true"></p-dropdown>
               
                  <div style="flex: 1 1 auto;"></div>
@@ -26,11 +34,14 @@
                         <tr>
                             <th>S.No</th>
                             <th>Factory</th>
+                            <th>Buyer</th>
                             <th>WoNo</th>
                             <th>Color</th>
                             <th>Date</th>
                             <th>Total Rolls</th>
-                            <th>Total Kg</th>
+                            <th>Total Kg <br/>
+                                <input type="text" value="{{this.TotalValue}}">
+                            </th>
                             <th>Edit</th>
                             <!-- <th>Delete</th> -->
                         </tr>
@@ -39,6 +50,14 @@
                         <tr *ngFor="let data of this.knitDelAllData; let i = index;" >
                             <td>{{i+1}}</td>
                             <td>{{data.factory}}</td>
+                            
+                            <td>
+                                <ul *ngFor="let color of colorjson1(data.buyer)" style="text-align: justify;">
+                                    <!-- <ul *ngFor="let color of data.buyer" style="text-align: justify;"> -->
+                                    <li>{{color.buyer}}</li>
+                                  </ul>
+                            </td>
+                            
                             <td>
                                 <ul *ngFor="let color of colorjson1(data.orderNo)" style="text-align: justify;">
                                     <!-- <ul *ngFor="let color of data.orderNo" style="text-align: justify;"> -->

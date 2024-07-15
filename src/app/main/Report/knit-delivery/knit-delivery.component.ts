@@ -40,9 +40,34 @@ export class KnitDeliveryComponent {
   kintid: any;
   factoryname: any;
   knitdelFillter:any
+  buyerlist: any;
+  orderNolist: any;
+  buyerFillter:any;
+  orderNoFillter:any
+  colorFillter:any
+  colorlist2:any
+  TotalValue: any;
   ngOnInit(): void {
     this.buyername()
-this.knitdelFilter()
+    this.knitdelBuyerFilter()
+    this.knitdelOrderFilter()
+
+    this.api.knitdelivery_buyer_list().subscribe((res)=>{
+      this.buyerlist = res.buyer
+    })
+
+    this.api.knitdelivery_orderNo_list().subscribe((res)=>{
+      this.orderNolist = res.orderNo
+    })
+
+    this.api.knitdelivery_color_list().subscribe((res)=>{
+      this.colorlist2 = res.color
+    })
+
+    this.api.knitdelivery_Total_Fillter().subscribe((res)=>{
+      this.TotalValue = res.knitDeliveryTotal[0].totalKg
+    })
+  
   }
   constructor(private fb: FormBuilder, private router: Router, private api: ApiService) {
 
@@ -82,11 +107,35 @@ this.knitdelFilter()
   get items() {
     return this.KnitDelivery.get("data") as FormArray;
   }
-  knitdelFilter(){
-    this.api.knitdelivery_fty_Fillter(this.knitdelFillter).subscribe((res)=>{
+  knitdelBuyerFilter(){
+    this.api.knitdelivery_fty_Fillter(this.buyerFillter  ,'').subscribe((res)=>{
+      this.knitDelAllData = res.knitDelivery    })
+
+      this.api.knitdelivery_Total_Fillter(this.buyerFillter  ,'').subscribe((res)=>{
+        this.TotalValue = res.knitDeliveryTotal[0].totalKg
+      })
+    }
+
+  knitdelOrderFilter(){
+    this.api.knitdelivery_fty_Fillter('',this.orderNoFillter).subscribe((res)=>{
       this.knitDelAllData = res.knitDelivery
-      this.knitAllData = res.knitDelivery
     })
+  
+    this.api.knitdelivery_Total_Fillter('',this.orderNoFillter).subscribe((res)=>{
+      this.TotalValue = res.knitDeliveryTotal[0].totalKg
+    })
+  
+  }
+
+  knitdelColorFilter(){
+    this.api.knitdelivery_fty_Fillter('','',this.colorFillter).subscribe((res)=>{
+      this.knitDelAllData = res.knitDelivery
+    })
+
+    this.api.knitdelivery_Total_Fillter('','',this.colorFillter).subscribe((res)=>{
+      this.TotalValue = res.knitDeliveryTotal[0].totalKg
+    })
+
   }
   
   fileName = "knitDeliveryReport.xlsx"

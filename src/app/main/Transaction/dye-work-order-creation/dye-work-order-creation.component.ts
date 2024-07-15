@@ -109,7 +109,6 @@ export class DyeWorkOrderCreationComponent {
       const fabGsm = res.workorders[0].fabGsm;
       const fabType = res.workorders[0].fabType;
       const greigeKg = res.workorders[0].greigeKg;
-      console.log(res)
       const formArray = this.DyeWorkOrderFrom.get('data') as FormArray;
       const row = formArray.at(index);
       row.get('dyeWoId')?.setValue(woId);

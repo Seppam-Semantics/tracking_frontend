@@ -143,7 +143,7 @@ export class ReportEntryComponent implements OnInit {
       const formArray = this.load.get('data') as FormArray;
       const row = formArray.at(index);
       row.get('woId')?.setValue(woId);
-      console.log(res)
+
     });
   }
 
@@ -157,7 +157,7 @@ export class ReportEntryComponent implements OnInit {
     const color = row.get('color')?.value;
     const size = row.get('size')?.value;
 
-    console.log(factory,buyer,orderNo,style,color,size)
+
     this.api.knitauth(factory,buyer,orderNo,style,color,size).subscribe((res)=>{
       this.knitDetails = res.knitWoDetails
     })

@@ -498,7 +498,7 @@ export class FabricRollData2Component implements OnInit {
     this.api.fabbooking(a).subscribe((res) => {
       this.headerData = res.head
       this.headerdatavalue = res.data
-      console.log(res)
+      // console.log(res)
     })
   }
 
@@ -944,7 +944,7 @@ export class FabricRollData2Component implements OnInit {
 
 
   woupdatesubmit() {
-    console.log(this.buyerorderform.value)
+    // console.log(this.buyerorderform.value)
     if (this.buyerorderform.valid) {
         this.api.postworkorder(this.buyerorderform.value).subscribe((res) => {
 
