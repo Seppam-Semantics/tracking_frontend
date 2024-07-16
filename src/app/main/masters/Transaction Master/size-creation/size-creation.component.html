@@ -3,9 +3,9 @@
         <div class="d-flex">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
                 [(ngModel)]="sizefilterdata" (input)="sizefilter()" list="sizeList">
-            <datalist id="sizeList">
+            <!-- <datalist id="sizeList">
                 <option *ngFor="let data of SizeData;" value="{{data.size}}">{{data.size}}</option>
-            </datalist>
+            </datalist> -->
         </div>
         <div style="flex: 1 1 auto;"></div>
         <span class="flex-spacer"></span>

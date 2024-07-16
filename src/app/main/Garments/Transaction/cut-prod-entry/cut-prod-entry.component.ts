@@ -135,7 +135,6 @@ export class CutProdEntryComponent implements OnInit{
   getwoId(size: any, index: number){
     this.api.getwodetails(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, size).subscribe((res) => {
       const woId = res.workorders[0].id;
-      console.log(res)
       const formArray = this.CutProdEty.get('data') as FormArray;
       const row = formArray.at(index);
       row.get('woId')?.setValue(woId);
@@ -148,7 +147,7 @@ export class CutProdEntryComponent implements OnInit{
 
 
   save(){
-    console.log(this.CutProdEty.value)
+
     if (this.CutProdEty.valid) {
       this.api.cuttingPost(this.CutProdEty.value).subscribe((res) => {
         if (res.success) {

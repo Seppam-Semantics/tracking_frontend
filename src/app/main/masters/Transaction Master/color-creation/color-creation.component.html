@@ -3,9 +3,9 @@
         <div class="d-flex">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
                 [(ngModel)]="colorfilterdata" (input)="colorfilter()" list="styleList">
-            <datalist id="styleList">
+            <!-- <datalist id="styleList">
                 <option *ngFor="let data of AllColor;" value="{{data.color}}">{{data.color}}</option>
-            </datalist>
+            </datalist> -->
         </div>
         <div style="flex: 1 1 auto;"></div>
         <span class="flex-spacer"></span>
