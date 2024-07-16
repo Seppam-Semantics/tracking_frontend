@@ -79,7 +79,8 @@
 
                     <td><input class="form-control" type="number" formControlName="lineNo"></td>
 
-                    <td><input class="form-control" type="number" formControlName="inputPcs"></td>
+                    <td><input class="form-control" type="number" formControlName="inputPcs"
+                        (input)="valid($event.target.value, i)" [ngClass]="{'is-invalid':this.toleranceValid[i]}"></td>
 
                     <td><input class="form-control" type="number" formControlName="bundleNo"></td>
 
