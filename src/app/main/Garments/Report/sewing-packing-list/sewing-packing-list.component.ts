@@ -46,6 +46,7 @@ export class SewingPackingListComponent {
   orderNovalue:any
   outputDetails: any;
   toleranceValid: any[] = [];
+  size_Value: any;
   constructor(private fb: FormBuilder, private api: ApiService , private router : Router , private datePipe: DatePipe) { 
 
 
@@ -330,9 +331,20 @@ getwoId(size: any, index: number){
       this.Sewpackinglistpath = res.sewingPack
       this.SewpackingDate = res.sewingPack[0].packDate
 
+      this.Buyer_Value = res.sewingPack[0].buyer
+      this.Order_Value = res.sewingPack[0].orderNo
+      this.style_Value = res.sewingPack[0].style
+      this.color_Value = res.sewingPack[0].color
+      this.size_Value = res.sewingPack[0].size
+
       this.SewPkEty.patchValue({       
         packDate : this.datePipe.transform(this.SewpackingDate, 'yyyy-dd-MM')
       })
+
+      this.api.getsewoutputdetails(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, this.size_Value).subscribe((res) => {
+        const SewoutputEtyId = res.sewingoutput[0].id;
+        this.outputDetails = res.sewingoutput[0].outputPcs
+      });
 
       const CutProdEty = this.SewPkEty.get('data') as FormArray;
       CutProdEty.clear();
@@ -386,6 +398,7 @@ getwoId(size: any, index: number){
       this.valueExceeded = false;
     }
   }
+
   update(){
     if (this.SewPkEty.valid) {
       this.api.sewingpackingPost(this.SewPkEty.value).subscribe((res) => {
