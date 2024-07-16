@@ -37,26 +37,31 @@
                 <th>PI date</th>
                 <th>Yarn Type</th>
                 
-                <th>Yarn Qty</th>
-                <th>Yarn Rate</th>
-                <th>Yarn Value</th>
+                <th>Yarn Qty [A] [H]</th>
+                <th>Yarn Rate [M]</th>
+                <th>Yarn Value [F]</th>
                 
-                <th>Allocated Kgs</th>
-                <th>Pending allocated Kgs</th>
-                <th>Receipt Kgs
-                    <input value="{{this.ReceiptvalueTotal}}" style="width: 14vh;" readonly/>
-                </th>
-                
-
-                <th>Pending Receipt Kgs
-                    <input value="{{this.PendingReceiptKgsValueTotal}}" style="width: 14vh;" readonly/>
-                </th>
-                <th> Receipt value
+                <th>Allocated Kgs [K]</th>
+                <th>Pending allocated Kgs <br/>[H-K]</th>
+                <th>Receipt Kgs <br/>
+                    [B] [N]
                     <input value="{{this.ReceiptKgsValueTotal}}" style="width: 14vh;" readonly/>
                 </th>
-                <th>Pending LC Value
+                
+                <th> Receipt value<br/>
+                     [M*N] [G]
+                    <input value="{{this.ReceiptvalueTotal}}" style="width: 14vh;" readonly/>
+                </th>
+                <th>Pending LC Value<br/> 
+                    [F-G]
                     <input value="{{this.PendingLCValueTotal}}" style="width: 14vh;" readonly/>
                 </th>
+                
+                <th>Pending Receipt Kgs<br/>
+                    [A-B]
+                   <input value="{{this.PendingReceiptKgsValueTotal}}" style="width: 14vh;" readonly/>
+               </th>
+
                 <th>Status</th>
             </tr>
         </thead>
@@ -79,9 +84,10 @@
                 <td>{{data.allocatedYarnKgs}}</td>
                 <td>{{data.PendingallocatedKgs}}</td>
                 <td>{{data.receiptYarnKgs}}</td>
-                <td>{{data.PendingReceiptKgs }}</td>
+
                 <td>{{data.Receiptvalue}}</td>
                 <td>{{data.PendingLCValue }}</td>
+                <td>{{data.PendingReceiptKgs }}</td>
                 <td>{{data.Status}}</td>
             </tr>
         </tbody>

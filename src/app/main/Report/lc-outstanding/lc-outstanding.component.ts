@@ -131,7 +131,7 @@ exportexcel() {
       (row.lcYarnKgs - row.allocatedYarnKgs).toFixed(2) ,
       row.receiptYarnKgs ,
       (row.lcYarnKgs - row.receiptYarnKgs).toFixed(2),
-      row.yarnRate * row.receiptYarnKgs,
+      (row.yarnRate * row.receiptYarnKgs).toFixed(2),
       (row.yarnValue - (row.yarnRate * row.receiptYarnKgs)).toFixed(2) ,
       row.Status
      ]);

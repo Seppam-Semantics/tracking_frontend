@@ -43,6 +43,7 @@ export class KnitWorkOrderListingComponent implements OnInit {
   ViewEtyKnitWorkOrderhederdata: any;
   ViewEtyKnitWorkOrderlineData1: any;
   download: any;
+  knitKgTotal: any;
 
   ngOnInit(): void {
     this.buyername(), this.factoryName()
@@ -148,8 +149,7 @@ export class KnitWorkOrderListingComponent implements OnInit {
     this.api.knitworkorder_fty_Fillter(this.KnitFtyFillter).subscribe((res) => {
       this.KnitWorkOrderAllData = res.workorders
       this.BuyerAllData = res.buyer
-
-
+      this.knitKgTotal = res.knitKgTotal[0].knitKgTotal
     })
   }
 
@@ -157,6 +157,7 @@ export class KnitWorkOrderListingComponent implements OnInit {
     this.api.knitworkorder_buyer_Fillter(this.KnitFtyFillter, this.BuyerFillter).subscribe((res) => {
       this.KnitWorkOrderAllData = res.workorders
       this.OrderAllData = res.orderNo
+      this.knitKgTotal = res.knitKgTotal[0].knitKgTotal
 
     })
   }
@@ -164,12 +165,14 @@ export class KnitWorkOrderListingComponent implements OnInit {
   KnitWorkOrderOrderFilter() {
     this.api.knitworkorder_order_Fillter(this.KnitFtyFillter, this.BuyerFillter, this.OrderFillter).subscribe((res) => {
       this.KnitWorkOrderAllData = res.workorders
+      this.knitKgTotal = res.knitKgTotal[0].knitKgTotal
     })
   }
 
   alldata() {
     this.api.KnitWorkOrderAllData().subscribe((res) => {
       this.KnitWorkOrderAllData = res.workorders
+      this.knitKgTotal = res.knitKgTotal[0].knitKgTotal
     })
   }
   colorjson(data: any): any {
