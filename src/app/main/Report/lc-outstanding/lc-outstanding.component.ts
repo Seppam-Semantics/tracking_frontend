@@ -155,8 +155,8 @@ exportexcel() {
                 
 
                 "Pending Receipt Kgs",
-                "Receipt value"+"=" +[this.ReceiptvalueTotal],
-                "Pending LC Value"+ "=" +[this.PendingLCValueTotal],
+                "Receipt value"+"=" +"["+[this.ReceiptvalueTotal]+"]",
+                "Pending LC Value"+ "=" +"["+[this.PendingLCValueTotal]+"]",
                 "Status"
 
        ]],
