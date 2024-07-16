@@ -36,6 +36,8 @@ export class InvoiceEntryComponent {
   cutting: any;
   cuttinglist: any;
   sewingPacklist: any;
+  shipDetails: any;
+  toleranceValid: any[] = [];
 
   constructor(private fb: FormBuilder, private api: ApiService , private router : Router) { 
 
@@ -185,6 +187,7 @@ getwoId(size: any, index: number){
     const fabGsm = res.shipping[0].fabGSM;
     const fabType = res.shipping[0].fabtype;
     const shipPcs = res.shipping[0].shipPcs;
+    this.shipDetails = res.shipping[0].shipPcs;
     console.log(shippingEtyId)
     const formArray = this.InvoiceEty.get('data') as FormArray;
     const row = formArray.at(index);
@@ -231,6 +234,29 @@ getwoId(size: any, index: number){
   delete(index:any){
     this.items.removeAt(index)
   }
+
+  valid(value:any, i:any){
+    const inputValue = value;
+    const tolerance = (this.shipDetails)
+    if(inputValue > tolerance ){
+      alert("Allowed value with 5% tolerance is : " + tolerance);
+      this.toleranceValid[i] = true
+    }
+    else{
+      this.toleranceValid[i] = false
+    }
+    this.validlity()
+  }
+
+  validlity(){
+    if(this.toleranceValid.includes(true)){
+      this.valueExceeded = true;
+    }
+    else{
+      this.valueExceeded = false;
+    }
+  }
+
 
   save(){
     // this.router.navigate(['/main/InvoiceListing'])

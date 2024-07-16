@@ -95,7 +95,8 @@
                         <input type="text" class="form-control" formControlName="fabGSM" >
                     </td>
 
-                    <td><input class="form-control" type="text" formControlName="shipPcs"></td>
+                    <td><input class="form-control" type="text" formControlName="shipPcs"
+                        (input)="valid($event.target.value, i)" [ngClass]="{'is-invalid':this.toleranceValid[i]}"></td>
                     <td><input class="form-control" type="text" formControlName="fobRate" ></td>
                     <td><input class="form-control" type="text" formControlName="valueUSD"></td>
                     <td><input class="form-control" type="text" formControlName="remarks" ></td>
