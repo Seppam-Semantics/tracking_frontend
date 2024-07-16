@@ -86,7 +86,8 @@
                     <td><input class="form-control" type="text" formControlName="mcUsed" ></td>
                     <td><input class="form-control" type="text" formControlName="mpUsed" ></td>
                     <td><input class="form-control" type="text" formControlName="mcHrs" ></td>
-                    <td><input class="form-control" type="number" formControlName="outputPcs" ></td>
+                    <td><input class="form-control" type="number" formControlName="outputPcs" 
+                        (input)="valid($event.target.value, i)" [ngClass]="{'is-invalid':this.toleranceValid[i]}"></td>
                     <td><input class="form-control" type="text" formControlName="timeperiod" ></td>
 
 

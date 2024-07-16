@@ -35,6 +35,8 @@ export class SewOutputEntryComponent implements OnInit{
   sizelist: any;
   cutting: any;
   cuttinglist: any;
+  inputDetails: any;
+  toleranceValid: any[] = [];
 
   constructor(private fb: FormBuilder, private api: ApiService , private router : Router) { 
 
@@ -135,6 +137,7 @@ getwoId(size: any, index: number){
 
   this.api.getsewinputfilterdetails(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, size).subscribe((res) => {
     const SewinputEtyId = res.sewinginput[0].id;
+    this.inputDetails = res.sewinginput[0].inputPcs;
     console.log(SewinputEtyId)
     const formArray = this.SewoutputEty.get('data') as FormArray;
     const row = formArray.at(index);
@@ -177,6 +180,28 @@ getwoId(size: any, index: number){
 
   delete(index:any){
     this.items.removeAt(index)
+  }
+
+  valid(value:any, i:any){
+    const inputValue = value;
+    const tolerance = (this.inputDetails)
+    if(inputValue > tolerance ){
+      alert("Allowed value with 5% tolerance is : " + tolerance);
+      this.toleranceValid[i] = true
+    }
+    else{
+      this.toleranceValid[i] = false
+    }
+    this.validlity()
+  }
+
+  validlity(){
+    if(this.toleranceValid.includes(true)){
+      this.valueExceeded = true;
+    }
+    else{
+      this.valueExceeded = false;
+    }
   }
 
   save(){
