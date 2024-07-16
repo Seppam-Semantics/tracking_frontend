@@ -2,15 +2,17 @@
     <span>Shipment Listing</span>
 </mat-toolbar>
 <mat-toolbar style="display: flex; justify-content: center; height: 8vh;">
-    
+
     <div style="display: flex; gap: 25px;">
         <div style="display: flex; gap: 10px;">
             <label style="font-weight: normal; font-family: serif;">From</label>
-            <input type="date" class="form-control" style="margin-top: 2px;" [(ngModel)]="filterDate1" (change)="date()">
+            <input type="date" class="form-control" style="margin-top: 2px;" [(ngModel)]="filterDate1"
+                (change)="date()">
         </div>
         <div style="display: flex; gap: 10px;">
             <label style="font-weight: normal; font-family: serif;">To</label>
-            <input type="date" class="form-control" style="margin-top: 2px;" [(ngModel)]="filterDate2" (change)="date()">
+            <input type="date" class="form-control" style="margin-top: 2px;" [(ngModel)]="filterDate2"
+                (change)="date()">
         </div>
 
     </div>
@@ -21,14 +23,16 @@
     <div style="display: flex; gap: 10px;">
         <div style="display: flex; gap: 10px;">
 
-            <p-dropdown [options]="buyerslist" placeholder="Buyer" optionLabel="buyer" [(ngModel)]="buyervalue" (onChange)="buyer()"
-            optionValue="buyer" [editable]="true"  [style]="{ minWidth: '22vh', minHeight:'2vh' }"></p-dropdown>
+            <p-dropdown [options]="buyerslist" placeholder="Buyer" optionLabel="buyer" [(ngModel)]="buyervalue"
+                (onChange)="buyer()" optionValue="buyer" [editable]="true"
+                [style]="{ minWidth: '22vh', minHeight:'2vh' }"></p-dropdown>
 
         </div>
         <div style="display: flex; gap: 10px;">
-           
-            <p-dropdown [options]="OrderNolist" placeholder="Order" optionLabel="orderNo" [(ngModel)]="orderNovalue" (onChange)="Order()"
-            optionValue="orderNo" [editable]="true"  [style]="{ minWidth: '22vh', minHeight:'2vh' }"></p-dropdown>
+
+            <p-dropdown [options]="OrderNolist" placeholder="Order" optionLabel="orderNo" [(ngModel)]="orderNovalue"
+                (onChange)="Order()" optionValue="orderNo" [editable]="true"
+                [style]="{ minWidth: '22vh', minHeight:'2vh' }"></p-dropdown>
 
         </div>
     </div>
@@ -47,7 +51,7 @@
                 <th>Order no</th>
                 <th>Ship Pcs</th>
                 <th>Carton nos</th>
-                
+
                 <th>Edit</th>
                 <!-- <th>Delete</th> -->
 
@@ -72,37 +76,38 @@
 </div>
 
 
-<p-dialog [(visible)]="editview" [modal]="true" header="Edit Cutting Production" [maximizable]="true"
+<p-dialog [(visible)]="editview" [modal]="true" header="Edit Shipment  Production" [maximizable]="true"
     [style]="{width: '100vw', height:'100vh'}" [formGroup]="ShipEty">
 
     <div>
         <mat-toolbar style="height: 7vh;">
             <div style="display: flex; gap: 15px; width: 100%; justify-content: center;">
-                <span>Sewing Packing</span>
+                <span>Shipment Edit</span>
             </div>
             <div style="flex: 1 1 auto;"></div>
             <div style="display: flex; gap: 10px;">
-    
+
                 <div style="display: flex; gap: 10px;">
                     <!-- <p-dropdown  placeholder="Buyer" optionLabel="buyer" [options]="this.buyers" (onChange)="getBuyerValue()"
                     optionValue="buyer" [editable]="true"  [style]="{ minWidth: '22vh', minHeight:'2vh' }" formControlName="buyer"></p-dropdown> -->
                     <input class="form-control" type="text" formControlName="buyer">
                 </div>
-    
-    
+
+
                 <div style="display: flex; gap: 10px;">
                     <!-- <p-dropdown  placeholder="orderNo" optionLabel="orderNo" [options]="this.order" (onChange)="ordervalue()"
                     optionValue="orderNo" [editable]="true"  [style]="{ minWidth: '22vh', minHeight:'2vh' }" formControlName="orderNo"></p-dropdown> -->
                     <input class="form-control" type="text" formControlName="orderNo">
                 </div>
-    
-                    <div style="display: flex; gap: 10px;">
-                        <label style="font-weight: normal; font-family: serif; margin-top: 5px;">Ship Date</label>
-                        <input type="date" class="form-control" style="margin-top: 2px;" formControlName="shipDate" readonly>
-                    </div>    
+
+                <div style="display: flex; gap: 10px;">
+                    <label style="font-weight: normal; font-family: serif; margin-top: 5px;">Ship Date</label>
+                    <input type="date" class="form-control" style="margin-top: 2px;" formControlName="shipDate"
+                        readonly>
+                </div>
             </div>
-    
-    
+
+
         </mat-toolbar>
         <div class="tablecss">
             <table class="table table-hover">
@@ -127,23 +132,25 @@
                     <tr *ngFor="let list of items.controls; let i=index" [formGroupName]="i">
                         <td></td>
                         <td>{{i+1}}</td>
-    
+
                         <td>
-                            <input type="text" class="form-control" formControlName="style" list="3" (input)="stylevalue(i)"
-                                (mouseenter)="ordervalue(i)" (change)="styledata()">
+                            <input type="text" class="form-control" formControlName="style" list="3"
+                                (input)="stylevalue(i)" (mouseenter)="ordervalue(i)" (change)="styledata()">
                             <datalist id="3">
-                                <option *ngFor="let data of this.stylelist" value="{{data.style}}">{{data.style}}</option>
+                                <option *ngFor="let data of this.stylelist" value="{{data.style}}">{{data.style}}
+                                </option>
                             </datalist>
                         </td>
-    
+
                         <td>
                             <input style="width: 15vh;" formControlName="color" list="Color" (input)="colorvalue(i)"
                                 (change)="colordata()" class="form-control" (mouseenter)="stylevalue(i)">
                             <datalist id="Color">
-                                <option *ngFor="let data of this.colorlist" value="{{data.color}}">{{data.color}}</option>
+                                <option *ngFor="let data of this.colorlist" value="{{data.color}}">{{data.color}}
+                                </option>
                             </datalist>
                         </td>
-    
+
                         <td>
                             <input class="form-control" type="text" formControlName="size" list="size"
                                 (mouseenter)="colorvalue(i)" (input)="getwoId($event.target.value,i)">
@@ -151,23 +158,29 @@
                                 <option *ngFor="let data of this.sizelist" value="{{data.size}}">{{data.size}}</option>
                             </datalist>
                         </td>
-    
+
                         <td>
-                            <input type="text" class="form-control" formControlName="fabtype" >
+                            <input type="text" class="form-control" formControlName="fabtype">
                         </td>
-    
+
                         <td>
-                            <input type="text" class="form-control" formControlName="fabGSM" >
+                            <input type="text" class="form-control" formControlName="fabGSM">
                         </td>
-        
-    
-                        <td><input class="form-control" type="text" formControlName="orderPcs" (click)="calculateDiff()"></td>
-    
-                        <td><input class="form-control" type="text" formControlName="shipPcs" (click)="calculateDiff()"></td>
-                        <td><input class="form-control" type="text" formControlName="carton" (click)="calculateDiff()"></td>
-                        <td><input class="form-control" type="text" formControlName="pendingPcs"(click)="calculateDiff()"></td>
-                        <td><textarea class="form-control"  formControlName="remarks" ></textarea></td>
-    
+
+
+                        <td><input class="form-control" type="text" formControlName="orderPcs"
+                                (click)="calculateDiff()"></td>
+
+                        <td><input class="form-control" type="text" formControlName="shipPcs" (click)="calculateDiff()"
+                                (input)="valid($event.target.value, i)"
+                                [ngClass]="{'is-invalid':this.toleranceValid[i]}"></td>
+
+                        <td><input class="form-control" type="text" formControlName="carton" (click)="calculateDiff()">
+                        </td>
+                        <td><input class="form-control" type="text" formControlName="pendingPcs"
+                                (click)="calculateDiff()"></td>
+                        <td><textarea class="form-control" formControlName="remarks"></textarea></td>
+
                         <th><button class="btn-danger" (click)="delete(i)">x</button></th>
                     </tr>
                 </tbody>
@@ -182,7 +195,7 @@
                         <th><span>Notes for Shipment </span></th>
                         <th colspan="4"><textarea class="form-control" style="height: 1px;"
                                 formControlName="notes"></textarea></th>
-    
+
                         <th></th>
                         <th></th>
                         <th></th>
@@ -205,12 +218,13 @@
 
 <p-dialog [(visible)]="viewEntry" [modal]="true" header=" Knit Work Order Entry" [maximizable]="true"
     [style]="{width: '100vw', height:'100vh'}">
- 
+
 
     <ng-template pTemplate="footer">
         <div style="width: 100%; display: flex; justify-content: center;">
             <div>
-                <button mat-button color="primary" (click)="exportToPDF()"><mat-icon>download</mat-icon> Download </button>
+                <button mat-button color="primary" (click)="exportToPDF()"><mat-icon>download</mat-icon> Download
+                </button>
             </div>
         </div>
     </ng-template>

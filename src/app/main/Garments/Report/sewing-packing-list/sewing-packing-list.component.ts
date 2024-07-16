@@ -44,7 +44,8 @@ export class SewingPackingListComponent {
   OrderNolist: any;
   buyervalue:any
   orderNovalue:any
-
+  outputDetails: any;
+  toleranceValid: any[] = [];
   constructor(private fb: FormBuilder, private api: ApiService , private router : Router , private datePipe: DatePipe) { 
 
 
@@ -187,6 +188,7 @@ getwoId(size: any, index: number){
 
   this.api.getsewoutputdetails(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, size).subscribe((res) => {
     const SewoutputEtyId = res.sewingoutput[0].id;
+    this.outputDetails = res.sewingoutput[0].outputPcs
     console.log("SewoutputId" + SewoutputEtyId)
     const formArray = this.SewPkEty.get('data') as FormArray;
     const row = formArray.at(index);
@@ -363,7 +365,27 @@ getwoId(size: any, index: number){
 
    }
   Entry(){ }
+  valid(value:any, i:any){
+    const inputValue = value;
+    const tolerance = (this.outputDetails)
+    if(inputValue > tolerance ){
+      alert("Allowed value with 5% tolerance is : " + tolerance);
+      this.toleranceValid[i] = true
+    }
+    else{
+      this.toleranceValid[i] = false
+    }
+    this.validlity()
+  }
 
+  validlity(){
+    if(this.toleranceValid.includes(true)){
+      this.valueExceeded = true;
+    }
+    else{
+      this.valueExceeded = false;
+    }
+  }
   update(){
     if (this.SewPkEty.valid) {
       this.api.sewingpackingPost(this.SewPkEty.value).subscribe((res) => {

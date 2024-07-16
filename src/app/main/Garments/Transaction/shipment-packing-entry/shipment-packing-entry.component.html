@@ -1,7 +1,7 @@
 <div [formGroup]="ShipEty">
     <mat-toolbar style="height: 7vh;">
         <div style="display: flex; gap: 15px; width: 100%; justify-content: center;">
-            <span>Sewing Packing</span>
+            <span>Shipment</span>
         </div>
         <div style="flex: 1 1 auto;"></div>
         <div style="display: flex; gap: 10px;">
@@ -84,9 +84,10 @@
 
                     <td><input class="form-control" type="text" formControlName="orderPcs" ></td>
 
-                    <td><input class="form-control" type="text" formControlName="shipPcs" ></td>
+                    <td><input class="form-control" type="text" formControlName="shipPcs" 
+                        (input)="valid($event.target.value, i)" [ngClass]="{'is-invalid':this.toleranceValid[i]}"></td>
                     <td><input class="form-control" type="text" formControlName="carton" ></td>
-                    <td><input class="form-control" type="text" formControlName="pendingPcs"></td>
+                    <td><input class="form-control" type="text" formControlName="pendingPcs" readonly ></td>
                     <td><textarea class="form-control"  formControlName="remarks" ></textarea></td>
 
                     <th><button class="btn-danger" (click)="delete(i)">x</button></th>
