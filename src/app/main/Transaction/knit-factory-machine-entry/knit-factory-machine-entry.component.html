@@ -92,9 +92,9 @@
                     </td>
 
                     <td><input class="form-control" type="text" formControlName="allocated"></td>
-                    <td><input class="form-control" type="date" formControlName="startDate"></td>
-                    <td><input class="form-control" type="text" formControlName="daysrequired"></td>
-                    <td><input class="form-control" type="date" formControlName="endDate"></td>
+                    <td><input class="form-control" type="date" formControlName="startDate" (change)="calculateEndDate(i)"></td>
+                    <td><input class="form-control" type="number" formControlName="daysrequired" (input)="calculateEndDate(i)"></td>
+                    <td><input class="form-control" type="date" formControlName="endDate" disabled></td>
 
                     <th><button class="btn-danger" (click)="delete(i)">x</button></th>
                 </tr>

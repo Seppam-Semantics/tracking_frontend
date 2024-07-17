@@ -155,23 +155,37 @@ get items() {
 }
 
 knitFtyMachineAddButton() {
+  // Ensure this.items is not null and has a length greater than 0
+  const previousEndDate = this.items && this.items.length > 0 ? this.items.at(this.items.length - 1).get('enddate')?.value : null;
 
   const row = this.fb.group({
-    "id": [''],
-    "style": [''],
-    "color": [''],
-    "size": [''],
-    "woId": ['',Validators.required],
-    "greigeKg": [''],
-    "machineDia": [''],
-    "knitFty": [''],
-    "allocated": [''],
-    "startDate": [''],
-    "daysrequired": [''],
-    "endDate": [''],
+    id: [''],
+    style: [''],
+    color: [''],
+    size: [''],
+    woId: ['', Validators.required],
+    greigeKg: [''],
+    machineDia: [''],
+    knitFty: [''],
+    allocated: [''],
+    startDate: [previousEndDate ? new Date(previousEndDate) : ''],
+    daysrequired: [''],
+    endDate: [''],
   });
-  this.items.push(row);
 
+  this.items.push(row);
+}
+
+calculateEndDate(index: number) {
+  const row = this.items.at(index);
+  const startDate = new Date(row.get('startDate')?.value);
+  const daysReq = +row.get('daysrequired')?.value; // Convert daysreq to number
+
+  if (startDate && !isNaN(daysReq)) {
+    const endDate = new Date(startDate);
+    endDate.setDate(startDate.getDate() + daysReq);
+    row.get('endDate')?.setValue(endDate.toISOString().substring(0, 10)); // Set enddate in yyyy-MM-dd format
+  }
 }
 
 delete(index:any){

@@ -10,8 +10,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  // apiUrl = "https://tracker.seppam.com";
-  apiUrl = "http://localhost:2000";
+  apiUrl = "https://tracker.seppam.com";
+  // apiUrl = "http://localhost:2000";
 
   token: any;
   profilenames: any;
@@ -162,7 +162,7 @@ export class ApiService {
   }
 
   getcodeData(factory: any, buyer: any, order: any, style: any, color: any): Observable<any> {
-    return this.http.get(this.getUrl() + `/dyeapi/DyecodeFilter?dyeFactory=${factory}&buyer=${buyer}&orderNo=${order}&style=${style}&color=${color}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/dyeapi/DyecodeFilter?dyeFactory=${factory}&buyer=${buyer}&orderNo=${order}&style=${style}&color=${color}&`, this.getHeaders())
   }
 
   postsinglewodetails(data: any): Observable<any> {
@@ -248,11 +248,11 @@ export class ApiService {
 
 
   ftydetailsFilter( Order: string = '' , status: string = '' ,color:string=''): Observable<any> {
-    return this.http.get(this.getUrl() + `/knitapi/knit-filter?id=&order=${Order}&status=${status}&color=${color}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/knitapi/knit-filter?id=&order=${Order}&status=${status}&color=${color}&`, this.getHeaders())
   }
 
   knit_Total_filter( Order: string = '' , status: string = '' , color:string=''): Observable<any> {
-    return this.http.get(this.getUrl() + `/knitapi/knit_Total_filter?id=&order=${Order}&status=${status}&color=${color}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/knitapi/knit_Total_filter?id=&order=${Order}&status=${status}&color=${color}&`, this.getHeaders())
   }
   
   knit_color_list( ): Observable<any> {
@@ -260,7 +260,7 @@ export class ApiService {
   }
 
   knitDetailsFilter(buyer: any, orderNo: any, style: any, color: any, size: any): Observable<any> {
-    return this.http.get(this.getUrl() + `/knitapi/knit-filter?id=&factory=&date=&buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&size=${size}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/knitapi/knit-filter?id=&factory=&date=&buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&size=${size}&`, this.getHeaders())
   }
   getallfty_details(): Observable<any> {
     return this.http.get(this.getUrl() + `/knitapi/knit`, this.getHeaders())
@@ -277,7 +277,7 @@ export class ApiService {
   }
 
   knitauth(factory: any, buyer: any, orderNo: any, style: any, color: any, size: any): Observable<any> {
-    return this.http.get(this.getUrl() + `/knitapi/knitauth?factory=${factory}&buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&size=${size}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/knitapi/knitauth?factory=${factory}&buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&size=${size}&`, this.getHeaders())
   }
 
 
@@ -313,28 +313,28 @@ export class ApiService {
 
 
   DyeBuyerfilter(dyeFactory: any): Observable<any> {
-    return this.http.get(this.getUrl() + `/dyeapi/DyeBuyerFilter?dyeFactory=${dyeFactory}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/dyeapi/DyeBuyerFilter?dyeFactory=${dyeFactory}&`, this.getHeaders())
   }
 
 
   DyeOrderNofilter(dyeFactory: any, buyer: any,): Observable<any> {
-    return this.http.get(this.getUrl() + `/dyeapi/DyeOrderNoFilter?dyeFactory=${dyeFactory}&buyer=${buyer}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/dyeapi/DyeOrderNoFilter?dyeFactory=${dyeFactory}&buyer=${buyer}&`, this.getHeaders())
   }
 
   DyeStylefilter(dyeFactory: any, buyer: any, order: any): Observable<any> {
-    return this.http.get(this.getUrl() + `/dyeapi/DyeStyleFilter?dyeFactory=${dyeFactory}&buyer=${buyer}&orderNo=${order}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/dyeapi/DyeStyleFilter?dyeFactory=${dyeFactory}&buyer=${buyer}&orderNo=${order}&`, this.getHeaders())
   }
 
   DyeColorfilter(dyeFactory: any, buyer: any, order: any, style: any): Observable<any> {
-    return this.http.get(this.getUrl() + `/dyeapi/DyeColorFilter?dyeFactory=${dyeFactory}&buyer=${buyer}&orderNo=${order}&style=${style}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/dyeapi/DyeColorFilter?dyeFactory=${dyeFactory}&buyer=${buyer}&orderNo=${order}&style=${style}&`, this.getHeaders())
   }
 
   DyeCodefilter(dyeFactory: any, buyer: any, order: any, style: any, color: any): Observable<any> {
-    return this.http.get(this.getUrl() + `/dyeapi/DyecodeFilter?dyeFactory=${dyeFactory}&buyer=${buyer}&orderNo=${order}&style=${style}&color=${color}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/dyeapi/DyecodeFilter?dyeFactory=${dyeFactory}&buyer=${buyer}&orderNo=${order}&style=${style}&color=${color}&`, this.getHeaders())
   }
 
   DyeFilter(DyeFactory: any, buyer?: any, orderNo?: any, style?: any, color?: any, batchNo?: any): Observable<any> {
-    return this.http.get(this.getUrl() + `/dyeapi/dye-filter?dyeFactory=${DyeFactory}&buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&batchNo=${batchNo}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/dyeapi/dye-filter?dyeFactory=${DyeFactory}&buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&batchNo=${batchNo}&`, this.getHeaders())
   }
   // <!----------------->
 
@@ -396,7 +396,7 @@ export class ApiService {
   }
 
   yarnFilter(spinner: any = '', lcNo: any = '', lcValue: any = '', yarnStatus: any = '', pi: any = ''): Observable<any> {
-    return this.http.get(this.getUrl() + `/yarnapi/yarn-filter?id=&spinner=${spinner}&lcNo=${lcNo}&lcValue=${lcValue}&yarnStatus=${yarnStatus}&pi=${pi}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/yarnapi/yarn-filter?id=&spinner=${spinner}&lcNo=${lcNo}&lcValue=${lcValue}&yarnStatus=${yarnStatus}&pi=${pi}&`, this.getHeaders())
   }
 
   receiptDetailsForQc(id: any, receiptId: any): Observable<any> {
@@ -526,12 +526,12 @@ postAllocation(data:any):Observable<any>{
 
 
   LCOutstandingData(lcno: string = '' , status:string = '' , buyer:string = ''): Observable<any> {
-    return this.http.get(this.getUrl() + `/yarnapi/LC-Outstanding?lcno=${lcno}&status=${status}&buyer=${buyer}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/yarnapi/LC-Outstanding?lcno=${lcno}&status=${status}&buyer=${buyer}&`, this.getHeaders())
   }
   
   
   LCOutstandingTotalData(lcno: string = '' , status:string = '' , buyer:string = ''): Observable<any> {
-    return this.http.get(this.getUrl() + `/yarnapi/LCOutstandingTotal?lcno=${lcno}&status=${status}&buyer=${buyer}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/yarnapi/LCOutstandingTotal?lcno=${lcno}&status=${status}&buyer=${buyer}&`, this.getHeaders())
   }
   
   BuyerListData(): Observable<any> {
@@ -564,7 +564,7 @@ postAllocation(data:any):Observable<any>{
   }
 
   FabricsTransferAllData(buyer: string = '', order: string = '', fromDate: string = '', toDate: string = ''): Observable<any> {
-    return this.http.get(this.getUrl() + `/fabricrollapi/allFabEntrys?Buyer=${buyer}&Order=${order}&fromDate=${fromDate}&toDate=${toDate}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/fabricrollapi/allFabEntrys?Buyer=${buyer}&Order=${order}&fromDate=${fromDate}&toDate=${toDate}&`, this.getHeaders())
   }
 
 
@@ -613,7 +613,7 @@ postAllocation(data:any):Observable<any>{
 
 
   DayKnit(date1:string='' ,date2:string='' , order: string = '' , status: string = '' ): Observable<any> {
-    return this.http.get(this.getUrl() + `/knitapi/Dayknitfilter?date1=${date1}&date2=${date2}&order=${order}&status=${status}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/knitapi/Dayknitfilter?date1=${date1}&date2=${date2}&order=${order}&status=${status}&`, this.getHeaders())
   }
 
 
@@ -638,15 +638,15 @@ postAllocation(data:any):Observable<any>{
 
 
   getknitwoorders(knitfty: any, buyer: any): Observable<any> {
-    return this.http.get(this.getUrl() + `/filtersapi/woorderNo?knitfty=${knitfty}&buyer=${buyer}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/filtersapi/woorderNo?knitfty=${knitfty}&buyer=${buyer}&`, this.getHeaders())
   }
 
   getknitwostyle(knitfty: any, buyer: any, order: any): Observable<any> {
-    return this.http.get(this.getUrl() + `/filtersapi/wostyle?knitfty=${knitfty}&buyer=${buyer}&orderNo=${order}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/filtersapi/wostyle?knitfty=${knitfty}&buyer=${buyer}&orderNo=${order}&`, this.getHeaders())
   }
 
   getknitwocolor(knitfty: any, buyer: any, order: any, style: any): Observable<any> {
-    return this.http.get(this.getUrl() + `/filtersapi/wocolor?knitfty=${knitfty}&buyer=${buyer}&orderNo=${order}&style=${style}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/filtersapi/wocolor?knitfty=${knitfty}&buyer=${buyer}&orderNo=${order}&style=${style}&`, this.getHeaders())
   }
 
   getknitwosize(knitfty: any, buyer: any, order: any, style: any, color: any): Observable<any> {
@@ -668,19 +668,19 @@ postAllocation(data:any):Observable<any>{
 
 
   getknit_Ety_woorders(knitfty: any, buyer: any): Observable<any> {
-    return this.http.get(this.getUrl() + `/filtersapi/knitentry_woorderNo?knitfty=${knitfty}&buyer=${buyer}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/filtersapi/knitentry_woorderNo?knitfty=${knitfty}&buyer=${buyer}&`, this.getHeaders())
   }
 
   getknit_Ety_wostyle(knitfty: any, buyer: any, order: any): Observable<any> {
-    return this.http.get(this.getUrl() + `/filtersapi/knitentry_wostyle?knitfty=${knitfty}&buyer=${buyer}&orderNo=${order}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/filtersapi/knitentry_wostyle?knitfty=${knitfty}&buyer=${buyer}&orderNo=${order}&`, this.getHeaders())
   }
 
   getknit_Ety_wocolor(knitfty: any, buyer: any, order: any, style: any): Observable<any> {
-    return this.http.get(this.getUrl() + `/filtersapi/knitentry_wocolor?knitfty=${knitfty}&buyer=${buyer}&orderNo=${order}&style=${style}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/filtersapi/knitentry_wocolor?knitfty=${knitfty}&buyer=${buyer}&orderNo=${order}&style=${style}&`, this.getHeaders())
   }
 
   getknit_Ety_wosize(knitfty: any, buyer: any, order: any, style: any, color: any): Observable<any> {
-    return this.http.get(this.getUrl() + `/filtersapi/knitentry_wosize?knitfty=${knitfty}&buyer=${buyer}&orderNo=${order}&style=${style}&color=${color}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/filtersapi/knitentry_wosize?knitfty=${knitfty}&buyer=${buyer}&orderNo=${order}&style=${style}&color=${color}&`, this.getHeaders())
   }
 
 
@@ -694,23 +694,23 @@ postAllocation(data:any):Observable<any>{
   }
 
   getdyewobuyers(dyefty: any): Observable<any> {
-    return this.http.get(this.getUrl() + `/filtersapi/dyewobuyer?dyefty=${dyefty}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/filtersapi/dyewobuyer?dyefty=${dyefty}&`, this.getHeaders())
   }
 
   getdyewoorders(dyefty: any, buyer: any): Observable<any> {
-    return this.http.get(this.getUrl() + `/filtersapi/dyewoorderNo?dyefty=${dyefty}&buyer=${buyer}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/filtersapi/dyewoorderNo?dyefty=${dyefty}&buyer=${buyer}&`, this.getHeaders())
   }
 
   getdyewostyle(dyefty: any, buyer: any, order: any): Observable<any> {
-    return this.http.get(this.getUrl() + `/filtersapi/dyewostyle?dyefty=${dyefty}&buyer=${buyer}&orderNo=${order}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/filtersapi/dyewostyle?dyefty=${dyefty}&buyer=${buyer}&orderNo=${order}&`, this.getHeaders())
   }
 
   getdyewocolor(dyefty: any, buyer: any, order: any, style: any): Observable<any> {
-    return this.http.get(this.getUrl() + `/filtersapi/dyewocolor?dyefty=${dyefty}&buyer=${buyer}&orderNo=${order}&style=${style}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/filtersapi/dyewocolor?dyefty=${dyefty}&buyer=${buyer}&orderNo=${order}&style=${style}&`, this.getHeaders())
   }
 
   getdyewosize(dyefty: any, buyer: any, order: any, style: any, color: any): Observable<any> {
-    return this.http.get(this.getUrl() + `/filtersapi/dyewosize?dyefty=${dyefty}&buyer=${buyer}&orderNo=${order}&style=${style}&color=${color}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/filtersapi/dyewosize?dyefty=${dyefty}&buyer=${buyer}&orderNo=${order}&style=${style}&color=${color}&`, this.getHeaders())
   }
 
   // ========================================================== buyer Master ======================================================
@@ -1046,18 +1046,18 @@ postAllocation(data:any):Observable<any>{
 
 
   knitworkorder_fty_Fillter(knitfty:string=''):Observable<any>{
-    return this.http.get(this.getUrl() + `/knitapi/knitworkorder_Fty_Fillter?knitfty=${knitfty}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/knitapi/knitworkorder_Fty_Fillter?knitfty=${knitfty}&`, this.getHeaders())
   }
 
   knitworkorder_buyer_Fillter(knitfty:string='',buyer:string=''):Observable<any>{
-    return this.http.get(this.getUrl() + `/knitapi/knitworkorder_buyer_Fillter?knitfty=${knitfty}&buyer=${buyer}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/knitapi/knitworkorder_buyer_Fillter?knitfty=${knitfty}&buyer=${buyer}&`, this.getHeaders())
   }
   knitworkorder_order_Fillter(knitfty:string='',buyer:string='',order:string=''):Observable<any>{
-    return this.http.get(this.getUrl() + `/knitapi/knitworkorder_order_Fillter?knitfty=${knitfty}&buyer=${buyer}&order=${order}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/knitapi/knitworkorder_order_Fillter?knitfty=${knitfty}&buyer=${buyer}&order=${order}&`, this.getHeaders())
   }
 
   knitdelivery_fty_Fillter(buyer:string='',orderNo:string='',color:string=''):Observable<any>{
-    return this.http.get(this.getUrl() + `/knittodye/knit-delivery_Fillter?buyer=${buyer}&orderNo=${orderNo}&color=${color}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/knittodye/knit-delivery_Fillter?buyer=${buyer}&orderNo=${orderNo}&color=${color}&`, this.getHeaders())
   }
 
   knitdelivery_Total_Fillter(buyer:string='',orderNo:string='',color:string=''):Observable<any>{
@@ -1088,7 +1088,7 @@ postAllocation(data:any):Observable<any>{
     return this.http.get(this.getUrl() + `/dyeapi/dyeworkorder_buyer_Fillter`, this.getHeaders())
   }
   dyeworkorder_Order_Fillter(dyefty:string='',buyer:string='',order:string=''):Observable<any>{
-    return this.http.get(this.getUrl() + `/dyeapi/dyeworkorder_order_Fillter?dyefty=${dyefty}&buyer=${buyer}&order=${order}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/dyeapi/dyeworkorder_order_Fillter?dyefty=${dyefty}&buyer=${buyer}&order=${order}&`, this.getHeaders())
   }
 
   dyedelivery_fty_Fillter(knitfty:string=''):Observable<any>{
@@ -1099,15 +1099,15 @@ postAllocation(data:any):Observable<any>{
 
   // <!-----------------------BUYER TO ORDER------------------------------------------------------------------>
   Buyer_to_order(buyer:string=''):Observable<any>{
-    return this.http.get(this.getUrl() + `/workorderapi/buyer_order_BO?buyer=${buyer}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/workorderapi/buyer_order_BO?buyer=${buyer}&`, this.getHeaders())
   }
 
   order_to_style(buyer:string='' , order : string = ''):Observable<any>{
-    return this.http.get(this.getUrl() + `/workorderapi/order_style_BO?buyer=${buyer}&order=${order}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/workorderapi/order_style_BO?buyer=${buyer}&order=${order}&`, this.getHeaders())
   }
 
   style_to_color(buyer:string='' , order : string = '' , style:string = ''):Observable<any>{
-    return this.http.get(this.getUrl() + `/workorderapi/style_Color_BO?buyer=${buyer}&order=${order}&style=${style}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/workorderapi/style_Color_BO?buyer=${buyer}&order=${order}&style=${style}&`, this.getHeaders())
   }
 
   color_to_size(buyer:string='' , order : string = '' , style:string = '',color:string=''):Observable<any>{
@@ -1120,7 +1120,7 @@ postAllocation(data:any):Observable<any>{
 
   
   size_to_id(buyer:string='' , order : string = '' , style:string = '',color:string='', size:string=''):Observable<any>{
-    return this.http.get(this.getUrl() + `/workorderapi/size_id_BO?buyer=${buyer}&order=${order}&style=${style}&color=${color}&size=${size}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/workorderapi/size_id_BO?buyer=${buyer}&order=${order}&style=${style}&color=${color}&size=${size}&`, this.getHeaders())
   }
 
   f_size_BO(style:string = '', size:string=''):Observable<any>{
@@ -1155,7 +1155,7 @@ postAllocation(data:any):Observable<any>{
   }
 
   PODetailsLoss_BO(buyer:string='' , order : string = '' , style:string = '',color:string='', size:string=''):Observable<any>{
-    return this.http.get(this.getUrl() + `/workorderapi/PODetailsLoss_BO?buyer=${buyer}&order=${order}&style=${style}&color=${color}&size=${size}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/workorderapi/PODetailsLoss_BO?buyer=${buyer}&order=${order}&style=${style}&color=${color}&size=${size}&`, this.getHeaders())
   }
 
   ColorLoss_BO(color:string=''):Observable<any>{
