@@ -46,6 +46,7 @@ export class KnitFactoryMachineComponent {
   orderNovalue:any
   knitFtyMachineForm:FormGroup
   ftyName: any;
+  machine: any;
 
 
   ngOnInit(): void {
@@ -55,6 +56,11 @@ export class KnitFactoryMachineComponent {
   
     this.api.knitfty_name().subscribe((res) => {
       this.ftyName = res.factorys
+    })
+
+    this.api.getAllocation().subscribe((res)=>{
+      console.log(res)
+      this.machine = res.data
     })
   }
 
@@ -186,7 +192,10 @@ export class KnitFactoryMachineComponent {
 
   
   exportexcel() { }
-  edit(){ 
+
+
+  edit(id:any){
+    console.log(id); 
     this.editview = true
   }
 

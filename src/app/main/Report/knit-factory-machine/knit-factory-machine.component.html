@@ -42,30 +42,20 @@
         <thead class="thead-dark">
             <tr>
                 <th>S.No</th>
-                <th>Knit Fty</th>
-                <th>Machine Dia</th>
-
-                <th>Brand</th>
-                <th>Exist MC Nos</th>
-                <th>Prod Day</th>
-                
+                <th>Buyer</th>
+                <th>OrderNo</th>
                 <th>Edit</th>
-                <!-- <th>Delete</th> -->
 
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>2</td>
-                <td>3</td>
-                
-                <td>4</td>
-                <td>5</td>
-                <td>6</td>
+            <tr *ngFor="let data of this.machine; let i = index;">
+                <td>{{i+1}}</td>
+                <td>{{data.buyer}}</td>
+                <td>{{data.orderNo}}</td>
   
                 <!-- <td><button class="btn btn-warning"(click)="Entry()"><mat-icon>content_paste</mat-icon></button></td> -->
-                <td><button class="btn btn-primary" (click)="edit()"><mat-icon>edit</mat-icon></button></td>
+                <td><button class="btn btn-primary" (click)="edit(data.id)"><mat-icon>edit</mat-icon></button></td>
                 <!-- <td><button class="btn btn-danger" (click)="delete(data.id)"><mat-icon>delete</mat-icon></button></td> -->
             </tr>
         </tbody>
