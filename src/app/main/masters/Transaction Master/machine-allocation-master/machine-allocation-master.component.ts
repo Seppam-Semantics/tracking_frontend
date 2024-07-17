@@ -24,9 +24,13 @@ export class MachineAllocationMasterComponent {
   machineAlloc: any;
   all: any;
   fty_name: any;
+  machineDia: any;
 
   ngOnInit(): void {
     this.machineFilter()
+    this.api.getallmachineDiadetails().subscribe((res)=>{
+      this.machineDia = res.data
+    })
   }
   factoryName(){
     this.api.getknitwofty().subscribe((res) => {

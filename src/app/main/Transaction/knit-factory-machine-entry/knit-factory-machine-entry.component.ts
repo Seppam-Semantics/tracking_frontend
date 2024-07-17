@@ -135,7 +135,7 @@ ngOnInit(): void {
 
       const formArray = this.knitFtyMachineForm.get('data') as FormArray;
       const row = formArray.at(index);
-      row.get('machinedia')?.setValue(machineDia);
+      row.get('machineDia')?.setValue(machineDia);
 
     })
     this.api.getwodetails(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, size).subscribe((res) => {

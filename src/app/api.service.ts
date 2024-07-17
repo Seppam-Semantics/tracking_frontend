@@ -113,6 +113,10 @@ export class ApiService {
     return this.http.get(this.getUrl() + `/filtersapi/machineDia?style=${style}&size=${size}&`, this.getHeaders())
   }
 
+  getallmachineDiadetails(style: string='', size: string=''): Observable<any> {
+    return this.http.get(this.getUrl() + `/filtersapi/allmachineDia`, this.getHeaders())
+  }
+
   knitworkorderdyeworkorderdetails(buyer: any, orderNo?: any, style?: any, color?: any, size?: any): Observable<any> {
     return this.http.get(this.getUrl() + `/workorderapi/knitworkorderdyeworkorder-filter?buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&size=${size}&`, this.getHeaders())
   }
