@@ -4,9 +4,9 @@
       <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
         [(ngModel)]="buyerNameFillter" (input)="buyerFilter()" list="buyerList">
 
-      <datalist id="buyerList">
+      <!-- <datalist id="buyerList">
         <option *ngFor="let data of all;" [value]="data.buyer">{{data.buyer}}</option>
-      </datalist>
+      </datalist> -->
     </div>
     <div style="flex: 1 1 auto;"></div>
     <span class="flex-spacer"></span>

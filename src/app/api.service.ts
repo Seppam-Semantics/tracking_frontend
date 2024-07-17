@@ -109,6 +109,10 @@ export class ApiService {
     return this.http.get(this.getUrl() + `/workorderapi/workorders-filter?buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&size=${size}&`, this.getHeaders())
   }
 
+  getmachineDiadetails(style: string='', size: string=''): Observable<any> {
+    return this.http.get(this.getUrl() + `/filtersapi/machineDia?style=${style}&size=${size}&`, this.getHeaders())
+  }
+
   knitworkorderdyeworkorderdetails(buyer: any, orderNo?: any, style?: any, color?: any, size?: any): Observable<any> {
     return this.http.get(this.getUrl() + `/workorderapi/knitworkorderdyeworkorder-filter?buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&size=${size}&`, this.getHeaders())
   }
@@ -646,7 +650,7 @@ postAllocation(data:any):Observable<any>{
   }
 
   getknitwosize(knitfty: any, buyer: any, order: any, style: any, color: any): Observable<any> {
-    return this.http.get(this.getUrl() + `/filtersapi/wosize?knitfty=${knitfty}&buyer=${buyer}&orderNo=${order}&style=${style}&color=${color}`, this.getHeaders())
+    return this.http.get(this.getUrl() + `/filtersapi/wosize?knitfty=${knitfty}&buyer=${buyer}&orderNo=${order}&style=${style}&color=${color}&`, this.getHeaders())
   }
 
 

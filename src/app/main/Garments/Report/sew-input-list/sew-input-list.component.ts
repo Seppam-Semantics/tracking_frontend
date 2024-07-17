@@ -43,6 +43,9 @@ export class SewInputListComponent implements OnInit{
   OrderNolist: any;
   buyervalue:any
   orderNovalue: string | undefined;
+  size_Value: any;
+  cutDetails: any;
+  toleranceValid: any[] = [];
 
 
   ngOnInit(): void {
@@ -160,7 +163,6 @@ colordata() {
 getwoId(size: any, index: number){
   this.api.getwodetails(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, size).subscribe((res) => {
     const woId = res.workorders[0].id;
-
     const formArray = this.SewinputEty.get('data') as FormArray;
     const row = formArray.at(index);
     row.get('woId')?.setValue(woId);
@@ -204,7 +206,27 @@ getwoId(size: any, index: number){
   delete(index:any){
     this.items.removeAt(index)
   }
+  valid(value:any, i:any){
+    const inputValue = value;
+    const tolerance = (this.cutDetails)
+    if(inputValue > tolerance ){
+      alert("Allowed value with 5% tolerance is : " + tolerance);
+      this.toleranceValid[i] = true
+    }
+    else{
+      this.toleranceValid[i] = false
+    }
+    this.validlity()
+  }
 
+  validlity(){
+    if(this.toleranceValid.includes(true)){
+      this.valueExceeded = true;
+    }
+    else{
+      this.valueExceeded = false;
+    }
+  }
 
   update(){
     // this.router.navigate(['main/SewInputList'])
@@ -240,9 +262,27 @@ getwoId(size: any, index: number){
   edit(id:any){ 
     this.editview = true;
     this.api.sewingId(id).subscribe((res)=>{
-
       this.Sewinputlistpath = res.sewInput
       this.SewinputDate = res.sewInput[0].inputDate
+      
+      this.Buyer_Value = res.sewInput[0].buyer
+      this.Order_Value = res.sewInput[0].orderNo
+      this.style_Value = res.sewInput[0].style
+      this.color_Value = res.sewInput[0].color
+      this.size_Value = res.sewInput[0].size
+
+      
+      this.api.getwodetails(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, this.size_Value).subscribe((res) => {
+        const woId = res.workorders[0].id;
+      });
+    
+      this.api.getcutdetails(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, this.size_Value).subscribe((res) => {
+        const cuttingId = res.cutting[0].id;
+        this.cutDetails = res.cutting[0].cutPcs
+
+      });
+
+
       this.SewinputEty.patchValue({       
         inputDate : this.datePipe.transform(this.SewinputDate, 'yyyy-MM-dd')
       })

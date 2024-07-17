@@ -121,7 +121,7 @@ colordata() {
 getwoId(size: any, index: number){
   this.api.getwodetails(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, size).subscribe((res) => {
     const woId = res.workorders[0].id;
-    console.log(woId)
+
     const formArray = this.SewoutputEty.get('data') as FormArray;
     const row = formArray.at(index);
     row.get('woId')?.setValue(woId);
@@ -129,7 +129,7 @@ getwoId(size: any, index: number){
 
   this.api.getcutdetails(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, size).subscribe((res) => {
     const cuttingId = res.cutting[0].id;
-    console.log(cuttingId)
+
     const formArray = this.SewoutputEty.get('data') as FormArray;
     const row = formArray.at(index);
     row.get('cutId')?.setValue(cuttingId);
@@ -138,7 +138,7 @@ getwoId(size: any, index: number){
   this.api.getsewinputfilterdetails(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, size).subscribe((res) => {
     const SewinputEtyId = res.sewinginput[0].id;
     this.inputDetails = res.sewinginput[0].inputPcs;
-    console.log(SewinputEtyId)
+
     const formArray = this.SewoutputEty.get('data') as FormArray;
     const row = formArray.at(index);
     row.get('inputId')?.setValue(SewinputEtyId);
@@ -205,7 +205,7 @@ getwoId(size: any, index: number){
   }
 
   save(){
-console.log(this.SewoutputEty.value)
+
     // this.router.navigate(['main/SewOutputList'])
 
       if (this.SewoutputEty.valid) {

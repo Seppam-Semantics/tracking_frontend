@@ -44,7 +44,9 @@ export class SewingPackingListComponent {
   OrderNolist: any;
   buyervalue:any
   orderNovalue:any
-
+  outputDetails: any;
+  toleranceValid: any[] = [];
+  size_Value: any;
   constructor(private fb: FormBuilder, private api: ApiService , private router : Router , private datePipe: DatePipe) { 
 
 
@@ -163,7 +165,7 @@ colordata() {
 getwoId(size: any, index: number){
   this.api.getwodetails(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, size).subscribe((res) => {
     const woId = res.workorders[0].id;
-    console.log("WOid" + woId)
+
     const formArray = this.SewPkEty.get('data') as FormArray;
     const row = formArray.at(index);
     row.get('woId')?.setValue(woId);
@@ -171,7 +173,7 @@ getwoId(size: any, index: number){
 
   this.api.getcutdetails(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, size).subscribe((res) => {
     const cuttingId = res.cutting[0].id;
-    console.log( "cuttingId" + cuttingId)
+
     const formArray = this.SewPkEty.get('data') as FormArray;
     const row = formArray.at(index);
     row.get('cutId')?.setValue(cuttingId);
@@ -179,7 +181,7 @@ getwoId(size: any, index: number){
 
   this.api.getsewinputfilterdetails(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, size).subscribe((res) => {
     const SewinputEtyId = res.sewinginput[0].id;
-    console.log( "SewinputId" + SewinputEtyId)
+
     const formArray = this.SewPkEty.get('data') as FormArray;
     const row = formArray.at(index);
     row.get('inputId')?.setValue(SewinputEtyId);
@@ -187,7 +189,8 @@ getwoId(size: any, index: number){
 
   this.api.getsewoutputdetails(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, size).subscribe((res) => {
     const SewoutputEtyId = res.sewingoutput[0].id;
-    console.log("SewoutputId" + SewoutputEtyId)
+    this.outputDetails = res.sewingoutput[0].outputPcs
+
     const formArray = this.SewPkEty.get('data') as FormArray;
     const row = formArray.at(index);
     row.get('outputId')?.setValue(SewoutputEtyId);
@@ -328,9 +331,20 @@ getwoId(size: any, index: number){
       this.Sewpackinglistpath = res.sewingPack
       this.SewpackingDate = res.sewingPack[0].packDate
 
+      this.Buyer_Value = res.sewingPack[0].buyer
+      this.Order_Value = res.sewingPack[0].orderNo
+      this.style_Value = res.sewingPack[0].style
+      this.color_Value = res.sewingPack[0].color
+      this.size_Value = res.sewingPack[0].size
+
       this.SewPkEty.patchValue({       
         packDate : this.datePipe.transform(this.SewpackingDate, 'yyyy-dd-MM')
       })
+
+      this.api.getsewoutputdetails(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, this.size_Value).subscribe((res) => {
+        const SewoutputEtyId = res.sewingoutput[0].id;
+        this.outputDetails = res.sewingoutput[0].outputPcs
+      });
 
       const CutProdEty = this.SewPkEty.get('data') as FormArray;
       CutProdEty.clear();
@@ -363,6 +377,27 @@ getwoId(size: any, index: number){
 
    }
   Entry(){ }
+  valid(value:any, i:any){
+    const inputValue = value;
+    const tolerance = (this.outputDetails)
+    if(inputValue > tolerance ){
+      alert("Allowed value with 5% tolerance is : " + tolerance);
+      this.toleranceValid[i] = true
+    }
+    else{
+      this.toleranceValid[i] = false
+    }
+    this.validlity()
+  }
+
+  validlity(){
+    if(this.toleranceValid.includes(true)){
+      this.valueExceeded = true;
+    }
+    else{
+      this.valueExceeded = false;
+    }
+  }
 
   update(){
     if (this.SewPkEty.valid) {

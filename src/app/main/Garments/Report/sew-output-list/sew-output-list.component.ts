@@ -43,6 +43,9 @@ export class SewOutputListComponent implements OnInit {
   OrderNolist: any;
   buyervalue : any
   orderNovalue:any
+  inputDetails: any;
+  toleranceValid: any[] = [];
+  size_Value: any;
 
   constructor(private fb: FormBuilder, private api: ApiService, private router: Router , private datePipe: DatePipe) {
 
@@ -219,6 +222,29 @@ export class SewOutputListComponent implements OnInit {
     this.items.removeAt(index)
   }
 
+
+  valid(value:any, i:any){
+    const inputValue = value;
+    const tolerance = (this.inputDetails)
+    if(inputValue > tolerance ){
+      alert("Allowed value with 5% tolerance is : " + tolerance);
+      this.toleranceValid[i] = true
+    }
+    else{
+      this.toleranceValid[i] = false
+    }
+    this.validlity()
+  }
+
+  validlity(){
+    if(this.toleranceValid.includes(true)){
+      this.valueExceeded = true;
+    }
+    else{
+      this.valueExceeded = false;
+    }
+  }
+
   update() {
 
     // this.router.navigate(['main/SewOutputList'])
@@ -264,9 +290,21 @@ export class SewOutputListComponent implements OnInit {
 
       this.Sewoutputlistpath = res.sewOutput
       this.SewoutputDate = res.sewOutput[0].outputDate
+      
+      this.Buyer_Value = res.sewOutput[0].buyer
+      this.Order_Value = res.sewOutput[0].orderNo
+      this.style_Value = res.sewOutput[0].style
+      this.color_Value = res.sewOutput[0].color
+      this.size_Value = res.sewOutput[0].size
+      
       this.SewoutputEty.patchValue({       
         outputDate : this.datePipe.transform(this.SewoutputDate, 'yyyy-dd-MM')
       })
+
+      this.api.getsewinputfilterdetails(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, this.size_Value).subscribe((res) => {
+        const SewinputEtyId = res.sewinginput[0].id;
+        this.inputDetails = res.sewinginput[0].inputPcs;
+      });
 
       const CutProdEty = this.SewoutputEty.get('data') as FormArray;
       CutProdEty.clear();
