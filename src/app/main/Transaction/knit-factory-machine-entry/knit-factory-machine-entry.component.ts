@@ -210,15 +210,13 @@ check(index:any){
     const size = this.values[i]?.size;
     const color = this.values[i]?.color;
   
-    if ((currentStyle === (style ?? "") || currentStyle === undefined) &&
-        (currentColor === (color ?? "") || currentColor === undefined) &&
-        (currentSize === (size ?? "") || currentSize === undefined)) {
+    if (currentStyle === style===undefined?"":style && currentColor === color===undefined?"":color && currentSize === size===undefined?"":size ) {
       
       const endDate = this.values[i]?.endDate;
-        console.log(endDate)
+      console.log(endDate)
         const formArray = this.knitFtyMachineForm.get('data') as FormArray;
         const row = formArray.at(index);
-        row.get('startDate')?.setValue(Date); // Set formatted date into form control
+        row.get('startDate')?.setValue(endDate); // Set formatted date into form control
       }
     }
   }
