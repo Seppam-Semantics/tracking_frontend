@@ -136,33 +136,33 @@
                         </td>
     
                         <td>
-                            <input class="form-control" type="text" formControlName="fsize" list="size" 
+                            <input class="form-control" type="text" formControlName="size" list="sizes" 
                             (mouseenter)="colorvalue(i)" (input)="getwoId($event.target.value,i)">
-                            <datalist id="size">
+                            <datalist id="sizes">
                                 <option *ngFor="let data of this.sizelist" value="{{data.size}}">{{data.size}}</option>
                               </datalist>
                         </td>
     
                         <td>
-                            <input type="text" class="form-control" formControlName="greigekgs" >
+                            <input type="text" class="form-control" formControlName="greigeKg" >
                         </td>
     
                         <td>
-                            <input type="text" class="form-control" formControlName="machinedia" >
+                            <input type="text" class="form-control" formControlName="machineDia" >
                         </td>
         
     
-                        <td><input class="form-control" type="text" formControlName="knitfty" list="fty">
+                        <td><input class="form-control" type="text" formControlName="knitFty" list="fty">
                             <datalist id="fty">
                                 <option *ngFor="let ftyName of this.ftyName"
                                 value="{{ftyName.knitFty}}">{{ftyName.knitFty}}</option>
                             </datalist>
                         </td>
     
-                        <td><input class="form-control" type="text" formControlName="allocmcnos"></td>
-                        <td><input class="form-control" type="date" formControlName="startdate"></td>
-                        <td><input class="form-control" type="text" formControlName="daysreq"></td>
-                        <td><input class="form-control" type="date" formControlName="enddate"></td>
+                        <td><input class="form-control" type="text" formControlName="allocated"></td>
+                        <td><input class="form-control" type="date" formControlName="startDate"></td>
+                        <td><input class="form-control" type="text" formControlName="daysrequired"></td>
+                        <td><input class="form-control" type="date" formControlName="endDate"></td>
     
                         <th><button class="btn-danger" (click)="delete(i)">x</button></th>
                     </tr>
