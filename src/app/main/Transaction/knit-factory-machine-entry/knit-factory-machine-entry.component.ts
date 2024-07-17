@@ -196,9 +196,11 @@ knitFtyMachineAddButton() {
 
 }
 
-check(index:any){
+check(index: any) {
   const formArray = this.knitFtyMachineForm.get('data') as FormArray;
   const row = formArray.at(index);
+
+  // Get current values from the form row
   const currentStyle = row.get('style')?.value;
   const currentColor = row.get('color')?.value;
   const currentSize = row.get('size')?.value;
@@ -207,19 +209,23 @@ check(index:any){
 
   for (let i = 0; i < this.values.length; i++) {
     const style = this.values[i]?.style;
-    const size = this.values[i]?.size;
     const color = this.values[i]?.color;
-  
-    if (currentStyle === style===undefined?"":style && currentColor === color===undefined?"":color && currentSize === size===undefined?"":size ) {
+    const size = this.values[i]?.size;
+    const endDate = this.values[i]?.endDate;
+
+
+    if ((currentStyle === (style )) &&
+        (currentColor === (color )) &&
+        (currentSize === (size) )) {
       
-      const endDate = this.values[i]?.endDate;
-      console.log(endDate)
-        const formArray = this.knitFtyMachineForm.get('data') as FormArray;
-        const row = formArray.at(index);
-        row.get('startDate')?.setValue(endDate); // Set formatted date into form control
-      }
+
+      const previousEndDate = this.values[i]?.endDate;
+      row.get('startDate')?.setValue(previousEndDate);
+      break;
     }
   }
+}
+
 
 calculateEndDate(index: number) {
   const row = this.items.at(index);
