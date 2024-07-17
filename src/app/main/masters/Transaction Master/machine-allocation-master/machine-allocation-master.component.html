@@ -62,7 +62,10 @@
         <div>
           <mat-form-field appearance="outline">
             <mat-label>MachineDia</mat-label>
-            <input matInput formControlName="machineDia">
+            <input matInput formControlName="machineDia" list="dia">
+            <datalist id="dia">
+              <option *ngFor="let dia of this.machineDia">{{dia.machineDia}}</option>
+            </datalist>
           </mat-form-field>
         </div>
       </div>
