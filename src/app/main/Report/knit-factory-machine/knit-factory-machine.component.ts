@@ -59,13 +59,13 @@ export class KnitFactoryMachineComponent {
     })
 
     this.api.getAllocation().subscribe((res)=>{
-      console.log(res)
       this.machine = res.data
     })
   }
 
   constructor(private fb: FormBuilder, private api: ApiService , private router : Router , private datePipe: DatePipe) { 
     this.knitFtyMachineForm = new FormGroup({
+      id:new FormControl('',Validators.required),
       buyer : new FormControl('', Validators.required) ,
       orderNo : new FormControl('',Validators.required),
       data: this.fb.array([]),
@@ -142,7 +142,7 @@ export class KnitFactoryMachineComponent {
   
         const formArray = this.knitFtyMachineForm.get('data') as FormArray;
         const row = formArray.at(index);
-        row.get('machinedia')?.setValue(machineDia);
+        row.get('machineDia')?.setValue(machineDia);
   
       })
       this.api.getwodetails(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, size).subscribe((res) => {
@@ -152,7 +152,7 @@ export class KnitFactoryMachineComponent {
         const formArray = this.knitFtyMachineForm.get('data') as FormArray;
         const row = formArray.at(index);
         row.get('woId')?.setValue(woId);
-        row.get('greigekgs')?.setValue(greigeKg);
+        row.get('greigeKg')?.setValue(greigeKg);
       });
   
   }
@@ -167,6 +167,7 @@ export class KnitFactoryMachineComponent {
   
     const row = this.fb.group({
       "id": [''],
+      "headId":[''],
       "style": [''],
       "color": [''],
       "fsize": [''],
@@ -195,10 +196,42 @@ export class KnitFactoryMachineComponent {
 
 
   edit(id:any){
-    console.log(id); 
-    this.editview = true
-  }
+    this.editview = true;
+    this.api.getSingleAllocation(id).subscribe((res)=>{
+      this.knitFtyMachineForm.get("id")?.setValue(id);
+      this.knitFtyMachineForm.get("buyer")?.setValue(res.data[0].buyer);
+      this.knitFtyMachineForm.get("orderNo")?.setValue(res.data[0].orderNo);
 
-   update(){ }
+      const EntryData = this.knitFtyMachineForm.get('data') as FormArray;
+      EntryData.clear();
+      res.data.forEach((dataItem: any) => {
+        const Details = this.fb.group({
+            "id": [dataItem.id],
+            "headId":[dataItem.headId],
+            "style": [dataItem.style],
+            "color": [dataItem.color],
+            "size": [dataItem.size],
+            "woId": [dataItem.woId],
+            "greigeKg": [dataItem.greigeKg],
+            "machineDia": [dataItem.machineDia],
+            "knitFty": [dataItem.knitFty],
+            "allocated": [dataItem.allocated],
+            "startDate": [dataItem.startDate],
+            "daysrequired": [dataItem.daysrequired],
+            "endDate": [dataItem.endDate]
+        })
+        EntryData.push(Details);
+    })
+  })
+}
+
+   update(){
+    if(this.knitFtyMachineForm.valid){
+      this.api.postAllocation(this.knitFtyMachineForm.value).subscribe((res)=>{
+        alert(res.message);
+        window.location.reload();
+      })
+    }
+    }
   Entry(){ }
 }
