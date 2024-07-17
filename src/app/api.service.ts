@@ -487,6 +487,22 @@ export class ApiService {
   deleteKnitDelivery(id: any): Observable<any> {
     return this.http.delete(this.getUrl() + `/knittodye/knit-delivery/${id}`, this.getHeaders())
   }
+
+
+// =============================================== Knit Machine Allocation =======================================================================
+
+getAllocation(orderNo : string = ''):Observable<any>{
+  return this.http.get(this.getUrl() + `/knitapi/machine-allocation-entry?orderNo=${orderNo}&`, this.getHeaders())
+}
+
+getSingleAllocation(id:any):Observable<any>{
+  return this.http.get(this.getUrl() + `/knitapi/machine-allocation-entry/${id}`, this.getHeaders())
+}
+
+postAllocation(data:any):Observable<any>{
+  return this.http.post(this.getUrl() + `/knitapi/machine-allocation-entry`, data, this.getHeaders())
+}
+
   // ============================================= Dye Delivery ===================================================================================
 
   addUpdateDyeDelivery(data: any): Observable<any> {
@@ -1158,6 +1174,20 @@ export class ApiService {
 
   fabbooking(data:any ): Observable<any> {
     return this.http.post(this.getUrl() + `/workorderapi/fab-booking`, data,this.getHeaders())
+  }
+
+  // ================================= Machine Allocation Master =================================================================================================
+
+  getAllocationMaster(machineDia:any):Observable<any>{
+    return this.http.get(this.getUrl() + `/mastersapi/machine-list?machineDia=${machineDia}&`, this.getHeaders())
+  }
+
+  getSingleAllocationMaster(id:any):Observable<any>{
+    return this.http.get(this.getUrl() + `/mastersapi/machine-list/${id}`, this.getHeaders())
+  }
+
+  postAllocationMaster(data:any):Observable<any>{
+    return this.http.post(this.getUrl() + `/mastersapi/machine-list`, data, this.getHeaders())
   }
 
   //--------------------------------------------Cutting [Start]------------------------------------------------------
