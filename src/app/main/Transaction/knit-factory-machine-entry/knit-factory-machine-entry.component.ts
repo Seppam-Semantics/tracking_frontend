@@ -44,6 +44,8 @@ export class KnitFactoryMachineEntryComponent implements OnInit{
   orderNovalue:any
   knitFtyMachineForm:FormGroup
   ftyName: any;
+  values: any=[];
+  previousRow: any;
   constructor(private fb: FormBuilder, private api: ApiService , private router : Router , private datePipe: DatePipe) { 
      
     this.knitFtyMachineForm = new FormGroup({
@@ -131,10 +133,10 @@ ngOnInit(): void {
   getwoId(size: any, index: number){
     this.api.getmachineDiadetails(this.style_Value , size).subscribe((res)=>{
       const machineDia = res.machineDia[0].machineDia
-
+      console.log(res)
       const formArray = this.knitFtyMachineForm.get('data') as FormArray;
       const row = formArray.at(index);
-      row.get('machinedia')?.setValue(machineDia);
+      row.get('machineDia')?.setValue(machineDia);
 
     })
     this.api.getwodetails(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, size).subscribe((res) => {
@@ -155,9 +157,10 @@ get items() {
 }
 
 knitFtyMachineAddButton() {
-  // Ensure this.items is not null and has a length greater than 0
-  const previousEndDate = this.items && this.items.length > 0 ? this.items.at(this.items.length - 1).get('enddate')?.value : null;
 
+  const previousEndDate = this.items && this.items.length > 0 ? this.items.at(this.items.length - 1).get('enddate')?.value : null;
+  this.previousRow = this.items.length > 0 ? this.items.at(this.items.length) : null;
+   
   const row = this.fb.group({
     id: [''],
     style: [''],
@@ -173,8 +176,41 @@ knitFtyMachineAddButton() {
     endDate: [''],
   });
 
-  this.items.push(row);
+ 
+   this.items.push(row);
+
+  //  this.values = this.items.getRawValue();
+
 }
+
+check(index:any){
+  const formArray = this.knitFtyMachineForm.get('data') as FormArray;
+  const row = formArray.at(index);
+  const currentStyle = row.get('style')?.value;
+  const currentColor = row.get('color')?.value;
+  const currentSize = row.get('size')?.value;
+
+  this.values = this.items.getRawValue();
+
+  for (let i = 0; i < this.values.length; i++) {
+    const style = this.values[i]?.style;
+    const size = this.values[i]?.size;
+    const color = this.values[i]?.color;
+  
+    if ((currentStyle === (style ?? "") || currentStyle === undefined) &&
+        (currentColor === (color ?? "") || currentColor === undefined) &&
+        (currentSize === (size ?? "") || currentSize === undefined)) {
+      
+      const endDate = this.values[i]?.endDate;
+
+        const Date = this.datePipe.transform(endDate, 'MM-dd-yyyy')
+        console.log(Date)
+        const formArray = this.knitFtyMachineForm.get('data') as FormArray;
+        const row = formArray.at(index);
+        row.get('startDate')?.setValue(Date); // Set formatted date into form control
+      }
+    }
+  }
 
 calculateEndDate(index: number) {
   const row = this.items.at(index);
