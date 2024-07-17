@@ -133,7 +133,7 @@ ngOnInit(): void {
   getwoId(size: any, index: number){
     this.api.getmachineDiadetails(this.style_Value , size).subscribe((res)=>{
       const machineDia = res.machineDia[0].machineDia
-      console.log(res)
+
       const formArray = this.knitFtyMachineForm.get('data') as FormArray;
       const row = formArray.at(index);
       row.get('machineDia')?.setValue(machineDia);
@@ -202,9 +202,7 @@ check(index:any){
         (currentSize === (size ?? "") || currentSize === undefined)) {
       
       const endDate = this.values[i]?.endDate;
-
-        const Date = this.datePipe.transform(endDate, 'MM-dd-yyyy')
-        console.log(Date)
+        console.log(endDate)
         const formArray = this.knitFtyMachineForm.get('data') as FormArray;
         const row = formArray.at(index);
         row.get('startDate')?.setValue(Date); // Set formatted date into form control
