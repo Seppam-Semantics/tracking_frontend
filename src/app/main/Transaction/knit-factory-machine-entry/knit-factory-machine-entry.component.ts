@@ -47,6 +47,7 @@ export class KnitFactoryMachineEntryComponent implements OnInit{
   constructor(private fb: FormBuilder, private api: ApiService , private router : Router , private datePipe: DatePipe) { 
      
     this.knitFtyMachineForm = new FormGroup({
+      id : new FormControl(0),
       buyer : new FormControl('', Validators.required) ,
       orderNo : new FormControl('',Validators.required),
       data: this.fb.array([]),
@@ -143,7 +144,7 @@ ngOnInit(): void {
       const formArray = this.knitFtyMachineForm.get('data') as FormArray;
       const row = formArray.at(index);
       row.get('woId')?.setValue(woId);
-      row.get('greigekgs')?.setValue(greigeKg);
+      row.get('greigeKg')?.setValue(greigeKg);
     });
 
 }
@@ -159,15 +160,15 @@ knitFtyMachineAddButton() {
     "id": [''],
     "style": [''],
     "color": [''],
-    "fsize": [''],
+    "size": [''],
     "woId": ['',Validators.required],
-    "greigekgs": [''],
-    "machinedia": [''],
-    "knitfty": [''],
-    "allocmcnos": [''],
-    "startdate": [''],
-    "daysreq": [''],
-    "enddate": [''],
+    "greigeKg": [''],
+    "machineDia": [''],
+    "knitFty": [''],
+    "allocated": [''],
+    "startDate": [''],
+    "daysrequired": [''],
+    "endDate": [''],
   });
   this.items.push(row);
 
@@ -175,6 +176,18 @@ knitFtyMachineAddButton() {
 
 delete(index:any){
   this.items.removeAt(index)
+}
+
+save(){
+if(this.knitFtyMachineForm.valid){
+  this.api.postAllocation(this.knitFtyMachineForm.value).subscribe((res)=>{
+    alert(res.message);
+    window.location.reload()
+  })
+}
+else{
+  alert("Please Choose the correct value from the WorkOrder")
+}
 }
 
 }
