@@ -1,0 +1,210 @@
+<!-- <mat-toolbar style="display: flex; justify-content: center; height: auto;">
+    <span>Knit Factory - Machine List</span>
+</mat-toolbar> -->
+<mat-toolbar style="display: flex; justify-content: center; height: auto;">
+    
+    <!-- <div style="display: flex; gap: 25px;">
+        <div style="display: flex; gap: 10px;">
+            <label style="font-weight: normal; font-family: serif;">From</label>
+            <input type="date" class="form-control" style="margin-top: 2px;" [(ngModel)]="filterDate1" (change)="date()">
+        </div>
+        <div style="display: flex; gap: 10px;">
+            <label style="font-weight: normal; font-family: serif;">To</label>
+            <input type="date" class="form-control" style="margin-top: 2px;" [(ngModel)]="filterDate2" (change)="date()">
+        </div>
+
+    </div> -->
+    <div style="display: flex; justify-content: center; width: 100%;">
+    <span>Knit Factory - Machine List</span>
+</div>
+    <div style="flex: 1 1 auto;"></div>
+
+    <!-- <div style="display: flex; gap: 10px;">
+        <div style="display: flex; gap: 10px;">
+
+            <p-dropdown [options]="buyerslist" placeholder="Buyer" optionLabel="buyer" [(ngModel)]="buyervalue" (onChange)="buyer()"
+            optionValue="buyer" [editable]="true"  [style]="{ minWidth: '22vh', minHeight:'2vh' }"></p-dropdown>
+
+        </div>
+        <div style="display: flex; gap: 10px;">
+           
+            <p-dropdown [options]="OrderNolist" placeholder="Order" optionLabel="orderNo" [(ngModel)]="orderNovalue" (onChange)="Order()"
+            optionValue="orderNo" [editable]="true"  [style]="{ minWidth: '22vh', minHeight:'2vh' }"></p-dropdown>
+
+        </div>
+    </div> -->
+
+    <button mat-button color="primary" (click)="new()">New</button>
+    <button mat-button color="primary" (click)="exportexcel()">Download</button>
+</mat-toolbar>
+<div class="tablecss">
+    <table class="table table-hover fl-table" id="table-data">
+        <thead class="thead-dark">
+            <tr>
+                <th>S.No</th>
+                <th>Knit Fty</th>
+                <th>Machine Dia</th>
+
+                <th>Brand</th>
+                <th>Exist MC Nos</th>
+                <th>Prod Day</th>
+                
+                <th>Edit</th>
+                <!-- <th>Delete</th> -->
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+  
+                <!-- <td><button class="btn btn-warning"(click)="Entry()"><mat-icon>content_paste</mat-icon></button></td> -->
+                <td><button class="btn btn-primary" (click)="edit()"><mat-icon>edit</mat-icon></button></td>
+                <!-- <td><button class="btn btn-danger" (click)="delete(data.id)"><mat-icon>delete</mat-icon></button></td> -->
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<p-dialog [(visible)]="editview" [modal]="true" header="Edit Knit Factory - Machine List" [maximizable]="true"
+    [style]="{width: '100vw', height:'100vh'}">
+
+    <div [formGroup]="knitFtyMachineForm">
+        <mat-toolbar style="height: 7vh;">
+            <div style="display: flex; gap: 15px; width: 100%; justify-content: center;">
+                <span>Knit Factory - Machine Allocation</span>
+            </div>
+            <div style="flex: 1 1 auto;"></div>
+            <div style="display: flex; gap: 10px;">
+    
+                <div style="display: flex; gap: 10px;">
+                    <p-dropdown  placeholder="Buyer" optionLabel="buyer" [options]="this.buyers" (onChange)="getBuyerValue()"
+                    optionValue="buyer" [editable]="true"  [style]="{ minWidth: '22vh', minHeight:'2vh' }" formControlName="buyer"></p-dropdown>
+                </div>
+    
+    
+                <div style="display: flex; gap: 10px;">
+                    <p-dropdown  placeholder="orderNo" optionLabel="orderNO" [options]="this.order" (onChange)="ordervalue()"
+                    optionValue="orderNO" [editable]="true"  [style]="{ minWidth: '22vh', minHeight:'2vh' }" formControlName="orderNo"></p-dropdown>
+                </div>
+    
+                    <!-- <div style="display: flex; gap: 10px;">
+                        <label style="font-weight: normal; font-family: serif; margin-top: 5px;">Ship Date</label>
+                        <input type="date" class="form-control" style="margin-top: 2px;" formControlName="shipDate">
+                    </div>     -->
+            </div>
+    
+    
+        </mat-toolbar>
+        <div class="tablecss">
+            <table class="table table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th><button class="btn btn-primary" (click)="knitFtyMachineAddButton()">+</button></th>
+                        <th>S.No</th>
+                        <th>Style</th>
+                        <th>Color</th>
+                        <th>F.Size</th>
+                        <th>Greige-Kgs</th>
+                        <th>Mechine Dia</th>
+                        <th>Knit Fty</th>
+                        <th>Alloc MC Nos</th>
+                        <th>Alloc Start Date</th>
+                        <th>Days Reqd</th>
+                        <th>Alloc End Date</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody formArrayName="data">
+                    <tr *ngFor="let list of items.controls; let i=index" [formGroupName]="i">
+                        <td></td>
+                        <td>{{i+1}}</td>
+    
+                        <td>
+                            <input type="text" class="form-control" formControlName="style" list="3" 
+                            (input)="stylevalue(i)"
+                            (mouseenter)="ordervalue(i)" (change)="styledata()">
+                            <datalist id="3">
+                                <option *ngFor="let data of this.stylelist" value="{{data.style}}">{{data.style}}</option>
+                            </datalist>
+                        </td>
+    
+                        <td>
+                            <input style="width: 15vh;" formControlName="color" list="Color" (input)="colorvalue(i)"
+                            (change)="colordata()" class="form-control"
+                            (mouseenter)="stylevalue(i)">
+                          <datalist id="Color">
+                            <option *ngFor="let data of this.colorlist" value="{{data.color}}">{{data.color}}</option>
+                          </datalist>
+                        </td>
+    
+                        <td>
+                            <input class="form-control" type="text" formControlName="fsize" list="size" 
+                            (mouseenter)="colorvalue(i)" (input)="getwoId($event.target.value,i)">
+                            <datalist id="size">
+                                <option *ngFor="let data of this.sizelist" value="{{data.size}}">{{data.size}}</option>
+                              </datalist>
+                        </td>
+    
+                        <td>
+                            <input type="text" class="form-control" formControlName="greigekgs" >
+                        </td>
+    
+                        <td>
+                            <input type="text" class="form-control" formControlName="machinedia" >
+                        </td>
+        
+    
+                        <td><input class="form-control" type="text" formControlName="knitfty" list="fty">
+                            <datalist id="fty">
+                                <option *ngFor="let ftyName of this.ftyName"
+                                value="{{ftyName.knitFty}}">{{ftyName.knitFty}}</option>
+                            </datalist>
+                        </td>
+    
+                        <td><input class="form-control" type="text" formControlName="allocmcnos"></td>
+                        <td><input class="form-control" type="date" formControlName="startdate"></td>
+                        <td><input class="form-control" type="text" formControlName="daysreq"></td>
+                        <td><input class="form-control" type="date" formControlName="enddate"></td>
+    
+                        <th><button class="btn-danger" (click)="delete(i)">x</button></th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- <mat-toolbar style="height: auto; display: flex; width: 100%; justify-content: center;">
+            <button class="btn btn-primary" (click)="save()" *ngIf="!valueExceeded">Save</button>
+    
+            <button class="btn btn-primary" *ngIf="valueExceeded">Save</button>
+    
+        </mat-toolbar> -->
+    </div>
+
+    <ng-template pTemplate="footer">
+        <div style="width: 100%; display: flex; justify-content: center;">
+            <button class="btn btn-primary" (click)="update()">Update</button>
+        </div>
+    </ng-template>
+</p-dialog>
+
+
+<p-dialog [(visible)]="viewEntry" [modal]="true" header=" Knit Work Order Entry" [maximizable]="true"
+    [style]="{width: '100vw', height:'100vh'}">
+ 
+
+    <ng-template pTemplate="footer">
+        <div style="width: 100%; display: flex; justify-content: center;">
+            <div>
+                <button mat-button color="primary" (click)="exportToPDF()"><mat-icon>download</mat-icon> Download </button>
+            </div>
+        </div>
+    </ng-template>
+
+</p-dialog>

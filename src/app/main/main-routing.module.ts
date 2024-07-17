@@ -58,7 +58,8 @@ import { ShipmentPackingEntryComponent } from './Garments/Transaction/shipment-p
 import { ShipmentListingListComponent } from './Garments/Report/shipment-listing-list/shipment-listing-list.component';
 import { InvoiceEntryComponent } from './Garments/Transaction/invoice-entry/invoice-entry.component';
 import { InvoiceListingComponent } from './Garments/Report/invoice-listing/invoice-listing.component';
-
+import { KnitFactoryMachineComponent } from './Report/knit-factory-machine/knit-factory-machine.component';
+import { KnitFactoryMachineEntryComponent } from './Transaction/knit-factory-machine-entry/knit-factory-machine-entry.component';
 
 const routes: Routes = [
   {path:'', component: AppComponent},
@@ -126,6 +127,9 @@ const routes: Routes = [
 
   {path:"InvoiceEntry" , component : InvoiceEntryComponent} ,
   {path:"InvoiceListing" , component : InvoiceListingComponent} ,
+
+  {path:"KnitFactoryMachine" , component : KnitFactoryMachineComponent} ,
+  {path:"KnitFactoryMachineEntry" , component : KnitFactoryMachineEntryComponent} ,
  
 ];
 

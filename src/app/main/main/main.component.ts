@@ -11,14 +11,14 @@ import { MainRoutingModule } from '../main-routing.module';
 })
 export class MainComponent implements OnInit {
   isActive = false;
-  logo:boolean = true
+  logo: boolean = true
   userName: string | null = sessionStorage.getItem('name');
   OrgName: any;
   orgData: any;
 
 
-  constructor(private api:ApiService, private router:Router , private route : MainRoutingModule){
-    
+  constructor(private api: ApiService, private router: Router, private route: MainRoutingModule) {
+
   }
 
 
@@ -27,89 +27,92 @@ export class MainComponent implements OnInit {
     this.CompanyName()
   }
 
-  CompanyName(){
-    this.api.getorg().subscribe((res:any)=>{
+  CompanyName() {
+    this.api.getorg().subscribe((res: any) => {
       this.orgData = res.org;
-  })
+    })
   }
-  
+
   workorder() {
     this.logo = false;
   }
 
-  logout(){
+  logout() {
     this.router.navigate(['login']);
     window.sessionStorage.clear();
   }
-  home(){
-    this.router.navigate(['/main/FabricRollData'])  
+  home() {
+    this.router.navigate(['/main/FabricRollData'])
   }
-  
-    knite() {
-      this.router.navigate(['/main/Knit-Report'])
-    }
-    Dye() {
-      this.router.navigate(['/main/Dye-Report'])
-    }
-    yarn() {
-      this.router.navigate(['/main/Yarn-Report'])
-    }
-    fabricEntry() {
-      this.router.navigate(['/main/fabricroll1'])
-    }
-    workorder1() {
-      this.router.navigate(['/main/WorkorderData'])
-    }
-    dyedelivery(){
-      this.router.navigate(['/main/dye-delivery'])
-    }
-    knitdelivery(){
-      this.router.navigate(['/main/knit-delivery'])
-    }
-    FabricsTransferCutListReportComponent(){
-      this.router.navigate(['/main/FabricsTransferCutListReport'])
-    }
 
-    knitwo(){
-      this.router.navigate(['/main/KnitWorkOrderListing'])
-    }
-
-    ST1(){
-      this.router.navigate(['/main/fabricroll1'])
-    }
-    dyeWO(){
-      this.router.navigate(['/main/DyeWorkOrderListing'])
-    }
-    OCR(){
-      this.router.navigate(['/main/OCR'])
-    }
-    TransactionMaster(){
-      this.router.navigate(['/main/TransactionMaster'])
-    }
-
-    PODetails(){
-      this.router.navigate(['/main/POMaster'])
-    }
-    cutprodlist(){
-      this.router.navigate(['/main/CutProdList'])
-    }
-    SewInput(){
-      this.router.navigate(['main/SewInputList'])
-    }
- 
-    SewOutput(){
-      this.router.navigate(['main/SewOutputList'])
-    }
-
-    PackProd(){
-      this.router.navigate(['main/SewingPackingList'])
-    }
-
-    ShipmentListingList(){
-      this.router.navigate(['main/ShipmentListingList'])
-    }
-
-    InvoiceListing(){
-      this.router.navigate(['main/InvoiceListing'])
-    }
+  knite() {
+    this.router.navigate(['/main/Knit-Report'])
   }
+  Dye() {
+    this.router.navigate(['/main/Dye-Report'])
+  }
+  yarn() {
+    this.router.navigate(['/main/Yarn-Report'])
+  }
+  fabricEntry() {
+    this.router.navigate(['/main/fabricroll1'])
+  }
+  workorder1() {
+    this.router.navigate(['/main/WorkorderData'])
+  }
+  dyedelivery() {
+    this.router.navigate(['/main/dye-delivery'])
+  }
+  knitdelivery() {
+    this.router.navigate(['/main/knit-delivery'])
+  }
+  FabricsTransferCutListReportComponent() {
+    this.router.navigate(['/main/FabricsTransferCutListReport'])
+  }
+
+  knitwo() {
+    this.router.navigate(['/main/KnitWorkOrderListing'])
+  }
+
+  ST1() {
+    this.router.navigate(['/main/fabricroll1'])
+  }
+  dyeWO() {
+    this.router.navigate(['/main/DyeWorkOrderListing'])
+  }
+  OCR() {
+    this.router.navigate(['/main/OCR'])
+  }
+  TransactionMaster() {
+    this.router.navigate(['/main/TransactionMaster'])
+  }
+
+  PODetails() {
+    this.router.navigate(['/main/POMaster'])
+  }
+  cutprodlist() {
+    this.router.navigate(['/main/CutProdList'])
+  }
+  SewInput() {
+    this.router.navigate(['main/SewInputList'])
+  }
+
+  SewOutput() {
+    this.router.navigate(['main/SewOutputList'])
+  }
+
+  PackProd() {
+    this.router.navigate(['main/SewingPackingList'])
+  }
+
+  ShipmentListingList() {
+    this.router.navigate(['main/ShipmentListingList'])
+  }
+
+  InvoiceListing() {
+    this.router.navigate(['main/InvoiceListing'])
+  }
+  KnitFactoryMachine(){
+    this.router.navigate(['main/KnitFactoryMachine'])
+  }
+}

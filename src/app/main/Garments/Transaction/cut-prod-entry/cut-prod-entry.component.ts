@@ -128,7 +128,7 @@ export class CutProdEntryComponent implements OnInit{
 
   colordata() {
     this.api.getsize(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value).subscribe((res) => {
-      this.sizelist = res.sizes;
+      this.sizelist = res.gsize;
     })
   }
 
