@@ -84,7 +84,7 @@
                     </td>
     
 
-                    <td><input class="form-control" type="text" formControlName="knitFty" list="fty">
+                    <td><input class="form-control" type="text" formControlName="knitFty" list="fty" (input)="production_days($event.target.value, i)">
                         <datalist id="fty">
                             <option *ngFor="let ftyName of this.ftyName"
                             value="{{ftyName.knitFty}}">{{ftyName.knitFty}}</option>

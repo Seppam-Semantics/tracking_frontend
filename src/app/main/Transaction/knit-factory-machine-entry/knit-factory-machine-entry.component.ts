@@ -44,6 +44,7 @@ export class KnitFactoryMachineEntryComponent implements OnInit{
   orderNovalue:any
   knitFtyMachineForm:FormGroup
   ftyName: any;
+  dayprod: any;
   constructor(private fb: FormBuilder, private api: ApiService , private router : Router , private datePipe: DatePipe) { 
      
     this.knitFtyMachineForm = new FormGroup({
@@ -148,6 +149,18 @@ ngOnInit(): void {
     });
 
 }
+
+production_days(factory : any, index:any){
+  const formArray = this.knitFtyMachineForm.get('data') as FormArray;
+  const row = formArray.at(index);
+  const knitFty = factory
+  const machineDia = row.get('machineDia')?.value;
+  this.api.getProductionDays(knitFty, machineDia).subscribe((res)=>{
+    this.dayprod = res.data[0].prodDay
+    row.get('daysrequired')?.setValue(this.dayprod)
+  })
+}
+
 //--------------------------------------------------------------------------------------------------------
 
 get items() {
@@ -175,6 +188,8 @@ knitFtyMachineAddButton() {
 
   this.items.push(row);
 }
+
+
 
 calculateEndDate(index: number) {
   const row = this.items.at(index);

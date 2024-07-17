@@ -507,6 +507,9 @@ postAllocation(data:any):Observable<any>{
   return this.http.post(this.getUrl() + `/knitapi/machine-allocation-entry`, data, this.getHeaders())
 }
 
+getProductionDays(knitFty:string = '', machineDia : string = ''):Observable<any>{
+  return this.http.get(this.getUrl() + `/knitapi/productionDays?knitFty=${knitFty}&machineDia=${machineDia}`, this.getHeaders())
+}
   // ============================================= Dye Delivery ===================================================================================
 
   addUpdateDyeDelivery(data: any): Observable<any> {
