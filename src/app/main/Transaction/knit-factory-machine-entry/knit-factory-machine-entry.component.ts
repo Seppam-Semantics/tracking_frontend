@@ -246,11 +246,15 @@ check(index: number) {
 
     if (currentStyle === style && currentColor === color && currentSize === size) {
 
-      currentRow.get('startDate')?.setValue(endDate);
-      break;
+      const nextDay = new Date(endDate);
+      nextDay.setDate(nextDay.getDate() + 1);
+
+      currentRow.get('startDate')?.setValue(nextDay.toISOString().substring(0, 10)); // Format as yyyy-MM-dd
+      break; // Assuming you want to update only the first matching row's startDate
     }
   }
 }
+
 
 
 
