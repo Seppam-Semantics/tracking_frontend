@@ -69,14 +69,16 @@
 
                     <td>
                         <input class="form-control" type="text" formControlName="size" list="sizes" 
-                        (mouseenter)="colorvalue(i)" (input)="getwoId($event.target.value,i)" (change)="check(i)" (mouseenter)="check(i)" (mouseenter)="calculateEndDate(i)">
+                        (mouseenter)="colorvalue(i)" (input)="getwoId($event.target.value,i)" (change)="check(i)" (mouseenter)="check(i)" 
+                        (mouseenter)="calculateEndDate(i)" (mouseenter)="greigevalidation(i)">
                         <datalist id="sizes">
                             <option *ngFor="let data of this.sizelist" value="{{data.size}}">{{data.size}}</option>
                           </datalist>
                     </td>
 
                     <td>
-                        <input type="text" class="form-control" formControlName="greigeKg"  (click)="check(i)" (mouseenter)="check(i)" (mouseenter)="calculateEndDate(i)">
+                        <input type="text" class="form-control" formControlName="greigeKg"  (input)="Addcheck(i)" (input)="valid($event.target.value,i)" (mouseenter)="check(i)" 
+                        (mouseenter)="calculateEndDate(i)" (mouseenter)="greigevalidation(i)" [ngClass]="{'is-invalid':this.toleranceValid[i]}">
                     </td>
 
                     <td>

@@ -49,6 +49,10 @@ export class KnitFactoryMachineComponent {
   values: any=[];
   previousRow:any;
   machine: any;
+  size_Value: any;
+  greigeKgTotal: any;
+  toleranceValid: any[] = [];
+  totalGreigeKg: number = 0;
 
 
   ngOnInit(): void {
@@ -171,9 +175,47 @@ export class KnitFactoryMachineComponent {
         row.get('woId')?.setValue(woId);
         row.get('greigeKg')?.setValue(greigeKg);
       });
+      
+  }
+
+  greigevalidation(index:any){
+    const formArray = this.knitFtyMachineForm.get('data') as FormArray;
+    const row = formArray.at(index);
+    this.Buyer_Value = this.knitFtyMachineForm.get('buyer')?.value;
+    this.Order_Value =  this.knitFtyMachineForm.get('orderNo')?.value;
+    this.style_Value = row.get('style')?.value;
+    this.color_Value = row.get('color')?.value;
+    this.size_Value = row.get('size')?.value;
   
+    this.api.getwodetails(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, this.size_Value).subscribe((res) => {
+      const woId = res.workorders[0].id;
+      this.greigeKgTotal = res.workorders[0].greigeKg;
+    })
+  }
+
+  valid(value:any, i:any){
+    const inputValue = value;
+    const tolerance = (this.greigeKgTotal)
+    if(inputValue > tolerance ){
+      alert("Allowed value is : " + tolerance);
+      this.toleranceValid[i] = true
+    }
+    else{
+      this.toleranceValid[i] = false
+    }
+    this.validlity()
   }
   
+  validlity(){
+    if(this.toleranceValid.includes(true)){
+      this.valueExceeded = true;
+    }
+    else{
+      this.valueExceeded = false;
+    }
+  }
+  
+
   production_days(factory : any, index:any){
     const formArray = this.knitFtyMachineForm.get('data') as FormArray;
     const row = formArray.at(index);
@@ -272,6 +314,46 @@ calculateEndDate() {
   });
 }
   
+
+Addcheck(index: number) {
+  const formArray = this.knitFtyMachineForm.get('data') as FormArray;
+  const currentRow = formArray.at(index);
+
+  const currentStyle = currentRow.get('style')?.value;
+  const currentColor = currentRow.get('color')?.value;
+  const currentSize = currentRow.get('size')?.value;
+  const currentGreigeKg = parseFloat(currentRow.get('greigeKg')?.value) || 0;
+  console.log(currentGreigeKg)  
+  this.totalGreigeKg = currentGreigeKg;
+
+  for (let i = 0; i < formArray.length; i++) {
+    if (i !== index) {
+      const row = formArray.at(i);
+      const style = row.get('style')?.value;
+      const color = row.get('color')?.value;
+      const size = row.get('size')?.value;
+      const greigeKg = parseFloat(row.get('greigeKg')?.value) || 0;
+
+      if (currentStyle === style && currentColor === color && currentSize === size) {
+        this.totalGreigeKg += greigeKg;
+        const inputValue = this.totalGreigeKg;
+        const tolerance = (this.greigeKgTotal)
+        if(inputValue > tolerance ){
+          alert("Allowed value is : " + this.greigeKgTotal);
+          this.toleranceValid[i] = true
+        }
+        else{
+          this.toleranceValid[i] = false
+        }
+        this.validlity()
+
+        console.log(this.totalGreigeKg)
+      }
+    }
+  }
+}
+
+
   delete(index:any){
     this.items.removeAt(index)
   }
