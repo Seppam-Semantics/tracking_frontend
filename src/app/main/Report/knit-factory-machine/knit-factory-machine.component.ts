@@ -15,7 +15,6 @@ import * as XLSX from 'xlsx'
   styleUrls: ['./knit-factory-machine.component.css']
 })
 export class KnitFactoryMachineComponent {
-
   valueExceeded : boolean = false;
   viewEntry : boolean = false;
   editview : boolean = false; 
@@ -46,6 +45,9 @@ export class KnitFactoryMachineComponent {
   orderNovalue:any
   knitFtyMachineForm:FormGroup
   ftyName: any;
+  dayprod: any;
+  values: any=[];
+  previousRow:any;
   machine: any;
 
 
@@ -61,6 +63,21 @@ export class KnitFactoryMachineComponent {
     this.api.getAllocation().subscribe((res)=>{
       this.machine = res.data
     })
+    this.calculateEndDate();
+
+    this.items.controls.forEach((control: AbstractControl) => {
+      const row = control as FormGroup;
+      if (row instanceof FormGroup) {
+          row.get('daysrequired')?.valueChanges.subscribe(() => {
+              this.calculateEndDate();
+          });
+
+          row.get('startDate')?.valueChanges.subscribe(() => {
+              this.calculateEndDate();
+          });
+      }
+  });
+
   }
 
   constructor(private fb: FormBuilder, private api: ApiService , private router : Router , private datePipe: DatePipe) { 
@@ -156,6 +173,18 @@ export class KnitFactoryMachineComponent {
       });
   
   }
+  
+  production_days(factory : any, index:any){
+    const formArray = this.knitFtyMachineForm.get('data') as FormArray;
+    const row = formArray.at(index);
+    const knitFty = factory
+    const machineDia = row.get('machineDia')?.value;
+    this.api.getProductionDays(knitFty, machineDia).subscribe((res)=>{
+      this.dayprod = res.data[0].prodDay
+      const daysReq = ((row.get('greigeKg')?.value)/this.dayprod).toFixed()
+      row.get('daysrequired')?.setValue(daysReq)
+    })
+  }
   //--------------------------------------------------------------------------------------------------------
 
   
@@ -165,24 +194,83 @@ export class KnitFactoryMachineComponent {
   
   knitFtyMachineAddButton() {
   
+    const previousEndDate = this.items && this.items.length > 0 ? this.items.at(this.items.length - 1).get('enddate')?.value : null;
+    this.previousRow = this.items.length > 0 ? this.items.at(this.items.length) : null;
+    
     const row = this.fb.group({
       "id": [''],
       "headId":[''],
       "style": [''],
       "color": [''],
-      "fsize": [''],
+      "size": [''],
       "woId": ['',Validators.required],
-      "greigekgs": [''],
-      "machinedia": [''],
-      "knitfty": [''],
-      "allocmcnos": [''],
-      "startdate": [''],
-      "daysreq": [''],
-      "enddate": [''],
+      "greigeKg": [''],
+      "machineDia": [''],
+      "knitFty": [''],
+      "allocated": [''],
+      "startDate": [previousEndDate ? new Date(previousEndDate) : ''],
+      "daysrequired": [''],
+      "endDate": [''],
     });
     this.items.push(row);
   
+    row.get('daysrequired')?.valueChanges.subscribe(() => {
+      this.calculateEndDate();
+    });
   }
+
+
+
+  check(index: number) {
+    const formArray = this.knitFtyMachineForm.get('data') as FormArray;
+    const currentRow = formArray.at(index);
+  
+    const currentStyle = currentRow.get('style')?.value;
+    const currentColor = currentRow.get('color')?.value;
+    const currentSize = currentRow.get('size')?.value;
+  
+    for (let i = 0; i < index; i++) {
+      const row = formArray.at(i);
+      const style = row.get('style')?.value;
+      const color = row.get('color')?.value;
+      const size = row.get('size')?.value;
+      const endDate = row.get('endDate')?.value;
+  
+      if (currentStyle === style && currentColor === color && currentSize === size) {
+  
+        const nextDay = new Date(endDate);
+        nextDay.setDate(nextDay.getDate() + 1);
+  
+        currentRow.get('startDate')?.setValue(nextDay.toISOString().substring(0, 10)); // Format as yyyy-MM-dd
+        break; // Assuming you want to update only the first matching row's startDate
+      }
+    }
+  }
+
+  
+
+  
+calculateEndDate() {
+
+
+  this.items.controls.forEach((control: AbstractControl) => {
+    const row = control as FormGroup;
+    if (row instanceof FormGroup) {
+      const daysReq = parseFloat(row.get('daysrequired')?.value) || 0;
+  
+      const startDate = new Date(row.get('startDate')?.value);
+      // const daysReq = +row.get('daysrequired')?.value; // Convert daysreq to number
+    
+      if (startDate && !isNaN(daysReq)) {
+        const endDate = new Date(startDate);
+        endDate.setDate(startDate.getDate() + daysReq);
+        row.get('endDate')?.setValue(endDate.toISOString().substring(0, 10)); // Set enddate in yyyy-MM-dd format
+      }     
+
+    
+    }
+  });
+}
   
   delete(index:any){
     this.items.removeAt(index)
@@ -220,7 +308,11 @@ export class KnitFactoryMachineComponent {
             "daysrequired": [dataItem.daysrequired],
             "endDate": [dataItem.endDate]
         })
+
         EntryData.push(Details);
+        Details.get('daysrequired')?.valueChanges.subscribe(() => {
+          this.calculateEndDate();
+        });
     })
   })
 }

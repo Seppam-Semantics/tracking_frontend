@@ -120,7 +120,7 @@
                         <td>
                             <input type="text" class="form-control" formControlName="style" list="3" 
                             (input)="stylevalue(i)"
-                            (mouseenter)="ordervalue(i)" (change)="styledata()">
+                            (mouseenter)="ordervalue(i)" (change)="styledata()" (change)="check(i)" (mouseenter)="check(i)">
                             <datalist id="3">
                                 <option *ngFor="let data of this.stylelist" value="{{data.style}}">{{data.style}}</option>
                             </datalist>
@@ -129,7 +129,7 @@
                         <td>
                             <input style="width: 15vh;" formControlName="color" list="Color" (input)="colorvalue(i)"
                             (change)="colordata()" class="form-control"
-                            (mouseenter)="stylevalue(i)">
+                            (mouseenter)="stylevalue(i)" (change)="check(i)"  (click)="check(i)" (mouseenter)="check(i)">
                           <datalist id="Color">
                             <option *ngFor="let data of this.colorlist" value="{{data.color}}">{{data.color}}</option>
                           </datalist>
@@ -137,32 +137,32 @@
     
                         <td>
                             <input class="form-control" type="text" formControlName="size" list="sizes" 
-                            (mouseenter)="colorvalue(i)" (input)="getwoId($event.target.value,i)">
+                            (mouseenter)="colorvalue(i)" (input)="getwoId($event.target.value,i)" (change)="check(i)" (mouseenter)="check(i)">
                             <datalist id="sizes">
                                 <option *ngFor="let data of this.sizelist" value="{{data.size}}">{{data.size}}</option>
                               </datalist>
                         </td>
     
                         <td>
-                            <input type="text" class="form-control" formControlName="greigeKg" >
+                            <input type="text" class="form-control" formControlName="greigeKg"  (click)="check(i)" (mouseenter)="check(i)">
                         </td>
     
                         <td>
-                            <input type="text" class="form-control" formControlName="machineDia" >
+                            <input type="text" class="form-control" formControlName="machineDia" (click)="check(i)" (mouseenter)="check(i)">
                         </td>
         
     
-                        <td><input class="form-control" type="text" formControlName="knitFty" list="fty">
+                        <td><input class="form-control" type="text" formControlName="knitFty" list="fty" (input)="production_days($event.target.value, i)" (click)="check(i)" (mouseenter)="check(i)">
                             <datalist id="fty">
                                 <option *ngFor="let ftyName of this.ftyName"
                                 value="{{ftyName.knitFty}}">{{ftyName.knitFty}}</option>
                             </datalist>
                         </td>
     
-                        <td><input class="form-control" type="text" formControlName="allocated"></td>
-                        <td><input class="form-control" type="date" formControlName="startDate"></td>
-                        <td><input class="form-control" type="text" formControlName="daysrequired"></td>
-                        <td><input class="form-control" type="date" formControlName="endDate"></td>
+                        <td><input class="form-control" type="text" formControlName="allocated" (mouseenter)="check(i)"></td>
+                        <td><input class="form-control" type="date" formControlName="startDate" (change)="calculateEndDate(i)"(click)="check(i)" (mouseenter)="check(i)"></td>
+                        <td><input class="form-control" type="number" formControlName="daysrequired" (click)="calculateEndDate(i)" (click)="check(i)" (mouseenter)="check(i)"></td>
+                        <td><input class="form-control" type="date" formControlName="endDate" readonly></td>
     
                         <th><button class="btn-danger" (click)="delete(i)">x</button></th>
                     </tr>
