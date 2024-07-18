@@ -52,7 +52,7 @@
                     <td>
                         <input type="text" class="form-control" formControlName="style" list="3" 
                         (input)="stylevalue(i)"
-                        (mouseenter)="ordervalue(i)" (change)="styledata()">
+                        (mouseenter)="ordervalue(i)" (change)="styledata()" (change)="check(i)" (input)="check(i)">
                         <datalist id="3">
                             <option *ngFor="let data of this.stylelist" value="{{data.style}}">{{data.style}}</option>
                         </datalist>
@@ -61,7 +61,7 @@
                     <td>
                         <input style="width: 15vh;" formControlName="color" list="Color" (input)="colorvalue(i)"
                         (change)="colordata()" class="form-control"
-                        (mouseenter)="stylevalue(i)">
+                        (mouseenter)="stylevalue(i)" (change)="check(i)" (input)="check(i)">
                       <datalist id="Color">
                         <option *ngFor="let data of this.colorlist" value="{{data.color}}">{{data.color}}</option>
                       </datalist>
@@ -69,7 +69,7 @@
 
                     <td>
                         <input class="form-control" type="text" formControlName="size" list="sizes" 
-                        (mouseenter)="colorvalue(i)" (input)="getwoId($event.target.value,i)">
+                        (mouseenter)="colorvalue(i)" (input)="getwoId($event.target.value,i)" (change)="check(i)" (input)="check(i)">
                         <datalist id="sizes">
                             <option *ngFor="let data of this.sizelist" value="{{data.size}}">{{data.size}}</option>
                           </datalist>

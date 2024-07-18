@@ -45,6 +45,8 @@ export class KnitFactoryMachineEntryComponent implements OnInit{
   knitFtyMachineForm:FormGroup
   ftyName: any;
   dayprod: any;
+  values: any=[];
+  previousRow:any;
   constructor(private fb: FormBuilder, private api: ApiService , private router : Router , private datePipe: DatePipe) { 
      
     this.knitFtyMachineForm = new FormGroup({
@@ -169,9 +171,10 @@ get items() {
 }
 
 knitFtyMachineAddButton() {
-  // Ensure this.items is not null and has a length greater than 0
-  const previousEndDate = this.items && this.items.length > 0 ? this.items.at(this.items.length - 1).get('enddate')?.value : null;
 
+  const previousEndDate = this.items && this.items.length > 0 ? this.items.at(this.items.length - 1).get('enddate')?.value : null;
+  this.previousRow = this.items.length > 0 ? this.items.at(this.items.length) : null;
+   
   const row = this.fb.group({
     id: [''],
     style: [''],
@@ -187,9 +190,42 @@ knitFtyMachineAddButton() {
     endDate: [''],
   });
 
-  this.items.push(row);
+ 
+   this.items.push(row);
+
+  //  this.values = this.items.getRawValue();
+
 }
 
+check(index: any) {
+  const formArray = this.knitFtyMachineForm.get('data') as FormArray;
+  const row = formArray.at(index);
+
+  // Get current values from the form row
+  const currentStyle = row.get('style')?.value;
+  const currentColor = row.get('color')?.value;
+  const currentSize = row.get('size')?.value;
+
+  this.values = this.items.getRawValue();
+
+  for (let i = 0; i < this.values.length; i++) {
+    const style = this.values[i]?.style;
+    const color = this.values[i]?.color;
+    const size = this.values[i]?.size;
+    const endDate = this.values[i]?.endDate;
+
+
+    if ((currentStyle === (style )) &&
+        (currentColor === (color )) &&
+        (currentSize === (size) )) {
+      
+
+      const previousEndDate = this.values[i]?.endDate;
+      row.get('startDate')?.setValue(previousEndDate);
+      break;
+    }
+  }
+}
 
 
 calculateEndDate(index: number) {
