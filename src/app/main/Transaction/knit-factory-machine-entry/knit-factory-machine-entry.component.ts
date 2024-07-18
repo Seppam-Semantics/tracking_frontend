@@ -159,7 +159,7 @@ production_days(factory : any, index:any){
   const machineDia = row.get('machineDia')?.value;
   this.api.getProductionDays(knitFty, machineDia).subscribe((res)=>{
     this.dayprod = res.data[0].prodDay
-    const daysReq = this.dayprod/(row.get('greigeKg')?.value);
+    const daysReq = ((row.get('greigeKg')?.value)/this.dayprod).toFixed()
     row.get('daysrequired')?.setValue(daysReq)
   })
 }
