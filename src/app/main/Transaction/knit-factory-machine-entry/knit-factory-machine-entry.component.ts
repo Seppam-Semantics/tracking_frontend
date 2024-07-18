@@ -159,7 +159,7 @@ production_days(factory : any, index:any){
   const machineDia = row.get('machineDia')?.value;
   this.api.getProductionDays(knitFty, machineDia).subscribe((res)=>{
     this.dayprod = res.data[0].prodDay
-    const daysReq = this.dayprod/(row.get('greigeKg')?.value);
+    const daysReq = ((row.get('greigeKg')?.value)/this.dayprod).toFixed();
     row.get('daysrequired')?.setValue(daysReq)
   })
 }
@@ -190,54 +190,94 @@ knitFtyMachineAddButton() {
     endDate: [''],
   });
 
- 
+  row.get('daysrequired')?.valueChanges.subscribe(() => {
+    this.calculateEndDate();
+  });
+  
    this.items.push(row);
 
   //  this.values = this.items.getRawValue();
 
 }
 
-check(index: any) {
-  const formArray = this.knitFtyMachineForm.get('data') as FormArray;
-  const row = formArray.at(index);
+// check(index: any) {
+//   const formArray = this.knitFtyMachineForm.get('data') as FormArray;
+//   const row = formArray.at(index);
 
-  // Get current values from the form row
-  const currentStyle = row.get('style')?.value;
-  const currentColor = row.get('color')?.value;
-  const currentSize = row.get('size')?.value;
+//   const currentStyle = row.get('style')?.value;
+//   const currentColor = row.get('color')?.value;
+//   const currentSize = row.get('size')?.value;
 
-  this.values = this.items.getRawValue();
+//   this.values = this.items.getRawValue();
 
-  for (let i = 0; i < this.values.length; i++) {
-    const style = this.values[i]?.style;
-    const color = this.values[i]?.color;
-    const size = this.values[i]?.size;
-    const endDate = this.values[i]?.endDate;
+//   for (let i = 0; i < this.values.length; i++) {
+//     const style = this.values[i]?.style;
+//     const color = this.values[i]?.color;
+//     const size = this.values[i]?.size;
+//     const endDate = this.values[i]?.endDate;
 
 
-    if ((currentStyle === (style )) &&
-        (currentColor === (color )) &&
-        (currentSize === (size) )) {
+//     if ((currentStyle === (style )) &&
+//         (currentColor === (color )) &&
+//         (currentSize === (size) )) {
       
 
-      const previousEndDate = this.values[i]?.endDate;
-      row.get('startDate')?.setValue(previousEndDate);
+//       const previousEndDate = this.values[i]?.endDate;
+//       row.get('startDate')?.setValue(previousEndDate);
+//       break;
+//     }
+//   }
+// }
+
+check(index: number) {
+  const formArray = this.knitFtyMachineForm.get('data') as FormArray;
+  const currentRow = formArray.at(index);
+
+  const currentStyle = currentRow.get('style')?.value;
+  const currentColor = currentRow.get('color')?.value;
+  const currentSize = currentRow.get('size')?.value;
+
+  for (let i = 0; i < index; i++) {
+    const row = formArray.at(i);
+    const style = row.get('style')?.value;
+    const color = row.get('color')?.value;
+    const size = row.get('size')?.value;
+    const endDate = row.get('endDate')?.value;
+
+    if (currentStyle === style && currentColor === color && currentSize === size) {
+
+      currentRow.get('startDate')?.setValue(endDate);
       break;
     }
   }
 }
 
 
-calculateEndDate(index: number) {
-  const row = this.items.at(index);
-  const startDate = new Date(row.get('startDate')?.value);
-  const daysReq = +row.get('daysrequired')?.value; // Convert daysreq to number
 
-  if (startDate && !isNaN(daysReq)) {
-    const endDate = new Date(startDate);
-    endDate.setDate(startDate.getDate() + daysReq);
-    row.get('endDate')?.setValue(endDate.toISOString().substring(0, 10)); // Set enddate in yyyy-MM-dd format
-  }
+calculateEndDate() {
+
+
+  this.items.controls.forEach((control: AbstractControl) => {
+    const row = control as FormGroup;
+    if (row instanceof FormGroup) {
+      const daysReq = parseFloat(row.get('daysrequired')?.value) || 0;
+  
+      const startDate = new Date(row.get('startDate')?.value);
+      // const daysReq = +row.get('daysrequired')?.value; // Convert daysreq to number
+    
+      if (startDate && !isNaN(daysReq)) {
+        const endDate = new Date(startDate);
+        endDate.setDate(startDate.getDate() + daysReq);
+        row.get('endDate')?.setValue(endDate.toISOString().substring(0, 10)); // Set enddate in yyyy-MM-dd format
+      }     
+
+    
+    }
+  });
+
+
+
+
 }
 
 delete(index:any){
