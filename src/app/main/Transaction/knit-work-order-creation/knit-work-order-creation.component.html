@@ -126,14 +126,21 @@
                         <datalist id="3">
                             <option *ngFor="let style of this.stylelist" [value]="style.style">
                         </datalist>
+                        <!-- <p-dropdown [options]="stylelist" optionLabel="style" optionValue="style"
+                            (onChange)="getstylevalue(i)" (change)="getcolor()" placeholder="Style"
+                            formControlName="style" [editable]="true" /> -->
+
                     </td>
 
                     <td>
-                        <input type="text" class="form-control" formControlName="color" list="4"
-                            (input)="getsize(i)" (mouseenter)="getstylevalue(i)" >
+                        <input type="text" class="form-control" formControlName="color" list="4" (input)="getsize(i)"
+                            (mouseenter)="getstylevalue(i)">
                         <datalist id="4">
                             <option *ngFor="let color of this.colorlist" [value]="color.color">
                         </datalist>
+                        <!-- <p-dropdown [options]="colorlist" optionLabel="color" optionValue="color"
+                            (onChange)="getsize(i)" (change)="getstylevalue()" placeholder="Color"
+                            formControlName="color" [editable]="true" (mouseenter)="getstylevalue(i)" /> -->
                     </td>
 
                     <td>
@@ -142,6 +149,9 @@
                         <datalist id="5">
                             <option *ngFor="let size of this.sizelist" [value]="size.size">
                         </datalist>
+                        <!-- <p-dropdown [options]="sizelist" optionLabel="size" optionValue="size" 
+                            placeholder="Size" formControlName="machDia" [editable]="true" 
+                            (onChange)="getWoId(i)" (click)="calculateDiff5()" (mouseenter)="getsize(i)"/> -->
                     </td>
 
                     <td>

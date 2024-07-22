@@ -136,8 +136,13 @@ ngOnInit(): void {
     })
   }
 
-  getwoId(size: any, index: number){
 
+  // getwoId(size: any, index: number){
+  getwoId(index: number){
+    const formArray = this.knitFtyMachineForm.get('data') as FormArray;
+    const row = formArray.at(index);
+
+    const size  = row.get('size')?.value;
     this.api.getmachineDiadetails(this.style_Value , size).subscribe((res)=>{
       const machineDia = res.machineDia[0].machineDia
 

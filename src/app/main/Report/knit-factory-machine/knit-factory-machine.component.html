@@ -118,35 +118,49 @@
                         <td>{{i+1}}</td>
     
                         <td>
-                            <input type="text" class="form-control" formControlName="style" list="3" 
+                            <!-- <input type="text" class="form-control" formControlName="style" list="3" 
                             (input)="stylevalue(i)"
                             (mouseenter)="ordervalue(i)" (change)="styledata()" (change)="check(i)" (mouseenter)="check(i)">
                             <datalist id="3">
                                 <option *ngFor="let data of this.stylelist" value="{{data.style}}">{{data.style}}</option>
-                            </datalist>
+                            </datalist> -->
+                            <p-dropdown [options]="stylelist" optionLabel="style" optionValue="style" placeholder="style"
+                            formControlName="style" [editable]="true" (onChange)="stylevalue(i)"
+                            (mouseenter)="ordervalue(i)" (onChange)="styledata()" (onChange)="check(i)"
+                            (mouseenter)="check(i)" (mouseenter)="calculateEndDate(i)" />
                         </td>
     
                         <td>
-                            <input style="width: 15vh;" formControlName="color" list="Color" (input)="colorvalue(i)"
+                            <!-- <input style="width: 15vh;" formControlName="color" list="Color" (input)="colorvalue(i)"
                             (change)="colordata()" class="form-control"
                             (mouseenter)="stylevalue(i)" (change)="check(i)"  (click)="check(i)" (mouseenter)="check(i)">
                           <datalist id="Color">
                             <option *ngFor="let data of this.colorlist" value="{{data.color}}">{{data.color}}</option>
-                          </datalist>
+                          </datalist> -->
+                          <p-dropdown [options]="colorlist" optionLabel="color" optionValue="color" placeholder="color"
+                          formControlName="color" [editable]="true" (onChange)="colorvalue(i)"
+                          (onChange)="colordata()" (mouseenter)="stylevalue(i)" (onChange)="check(i)"
+                          (click)="check(i)" (mouseenter)="check(i)" (mouseenter)="calculateEndDate(i)" />
                         </td>
     
                         <td>
-                            <input class="form-control" type="text" formControlName="size" list="sizes" 
+                            <!-- <input class="form-control" type="text" formControlName="size" list="sizes" 
                             (mouseenter)="colorvalue(i)" (input)="getwoId($event.target.value,i)" (change)="check(i)" (mouseenter)="check(i)" 
                             (mouseenter)="calculateEndDate(i)" (mouseenter)="greigevalidation(i)">
                             <datalist id="sizes">
                                 <option *ngFor="let data of this.sizelist" value="{{data.size}}">{{data.size}}</option>
-                              </datalist>
+                              </datalist> -->
+                              <p-dropdown [options]="sizelist" optionLabel="size" optionValue="size" placeholder="size"
+                              formControlName="size" [editable]="true" (mouseenter)="colorvalue(i)"
+                              (onChange)="getwoId(i)" (onChange)="check(i)" (mouseenter)="check(i)"
+                              (mouseenter)="calculateEndDate(i)" (mouseenter)="greigevalidation(i)" />
                         </td>
     
                         <td>
-                            <input type="text" class="form-control" formControlName="greigeKg"  (input)="Addcheck(i)" (input)="valid($event.target.value,i)" (mouseenter)="check(i)" 
-                            (mouseenter)="calculateEndDate(i)" (mouseenter)="greigevalidation(i)" [ngClass]="{'is-invalid':this.toleranceValid[i]}">
+                            <input type="text" class="form-control" formControlName="greigeKg" (input)="Addcheck(i)"
+                            (input)="valid($event.target.value,i)" (mouseenter)="check(i)"
+                            (mouseenter)="calculateEndDate(i)" (mouseenter)="greigevalidation(i)"
+                            [ngClass]="{'is-invalid':this.toleranceValid[i]}">
                         </td>
     
                         <td>

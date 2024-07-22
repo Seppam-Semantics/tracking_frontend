@@ -93,31 +93,34 @@
             </datalist>
           </td> -->
 
-            <td><input style="width: 15vh;" formControlName="Style" list="Style" (input)="stylevalue(i)"
-                (change)="styledata()" class="form-control" (mouseenter)="ordervalue(i)"></td>
-            <datalist id="Style">
-              <option *ngFor="let data of this.styleDta" value="{{data.style}}">{{data.style}}</option>
-            </datalist>
+            <td>
+              <input style="width: 15vh;" formControlName="Style" list="Style" (input)="stylevalue(i)"
+                (change)="styledata()" class="form-control" (mouseenter)="ordervalue(i)">
+                <datalist id="Style">
+                  <option *ngFor="let data of this.styleDta" value="{{data.style}}">{{data.style}}</option>
+                </datalist>
+              <!-- <p-dropdown [options]="styleDta" optionLabel="style" optionValue="style" placeholder="style"
+                formControlName="Style" [editable]="true" (mouseenter)="stylevalue(i)" overlay="true"
+                (onChange)="styledata()" (mouseenter)="ordervalue(i)" appendTo="body" /> -->
+            </td>
 
             <td><input style="width: 15vh;" formControlName="Color" list="Color" (input)="colorvalue(i)"
-                (change)="colordata()" class="form-control"
-                (mouseenter)="stylevalue(i)">
+                (change)="colordata()" class="form-control" (mouseenter)="stylevalue(i)">
               <datalist id="Color">
                 <option *ngFor="let data of this.colorDta" value="{{data.color}}">{{data.color}}</option>
               </datalist>
             </td>
 
-            <td><input style="width: 15vh;" formControlName="FSize" list="FSize" 
-              (change)="fsizedata(i , $event)" class="form-control" (click)="calculateDiff()"></td>
-          <datalist id="FSize">
-            <option *ngFor="let data of this.concatSizeDta" value="{{data.concatSize}}">{{data.concatSize}}</option>
-          </datalist>
+            <td><input style="width: 15vh;" formControlName="FSize" list="FSize" (change)="fsizedata(i , $event)"
+                class="form-control" (click)="calculateDiff()"></td>
+            <datalist id="FSize">
+              <option *ngFor="let data of this.concatSizeDta" value="{{data.concatSize}}">{{data.concatSize}}</option>
+            </datalist>
 
 
 
             <td><input style="width: 15vh;" formControlName="Size" list="GSize" (input)="sizevalue(i)"
-                 class="form-control" 
-                readonly>
+                class="form-control" readonly>
             </td>
 
 

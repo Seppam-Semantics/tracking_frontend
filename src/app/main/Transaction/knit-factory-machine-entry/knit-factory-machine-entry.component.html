@@ -7,17 +7,19 @@
         <div style="display: flex; gap: 10px;">
 
             <div style="display: flex; gap: 10px;">
-                <p-dropdown  placeholder="Buyer" optionLabel="buyer" [options]="this.buyers" (onChange)="getBuyerValue()"
-                optionValue="buyer" [editable]="true"  [style]="{ minWidth: '22vh', minHeight:'2vh' }" formControlName="buyer"></p-dropdown>
+                <p-dropdown placeholder="Buyer" optionLabel="buyer" [options]="this.buyers" (onChange)="getBuyerValue()"
+                    optionValue="buyer" [editable]="true" [style]="{ minWidth: '22vh', minHeight:'2vh' }"
+                    formControlName="buyer"></p-dropdown>
             </div>
 
 
             <div style="display: flex; gap: 10px;">
-                <p-dropdown  placeholder="orderNo" optionLabel="orderNO" [options]="this.order" (onChange)="ordervalue()"
-                optionValue="orderNO" [editable]="true"  [style]="{ minWidth: '22vh', minHeight:'2vh' }" formControlName="orderNo"></p-dropdown>
+                <p-dropdown placeholder="orderNo" optionLabel="orderNO" [options]="this.order" (onChange)="ordervalue()"
+                    optionValue="orderNO" [editable]="true" [style]="{ minWidth: '22vh', minHeight:'2vh' }"
+                    formControlName="orderNo"></p-dropdown>
             </div>
 
-                <!-- <div style="display: flex; gap: 10px;">
+            <!-- <div style="display: flex; gap: 10px;">
                     <label style="font-weight: normal; font-family: serif; margin-top: 5px;">Ship Date</label>
                     <input type="date" class="form-control" style="margin-top: 2px;" formControlName="shipDate">
                 </div>     -->
@@ -50,54 +52,73 @@
                     <td>{{i+1}}</td>
 
                     <td>
-                        <input type="text" class="form-control" formControlName="style" list="3" 
-                        (input)="stylevalue(i)"
-                        (mouseenter)="ordervalue(i)" (change)="styledata()" (change)="check(i)" (mouseenter)="check(i)" (mouseenter)="calculateEndDate(i)">
+                        <!-- <input type="text" class="form-control" formControlName="style" list="3" (input)="stylevalue(i)"
+                            (mouseenter)="ordervalue(i)" (change)="styledata()" (change)="check(i)" (mouseenter)="check(i)" (mouseenter)="calculateEndDate(i)">
                         <datalist id="3">
                             <option *ngFor="let data of this.stylelist" value="{{data.style}}">{{data.style}}</option>
-                        </datalist>
+                        </datalist> -->
+                        <p-dropdown [options]="stylelist" optionLabel="style" optionValue="style" placeholder="style"
+                            formControlName="style" [editable]="true" (onChange)="stylevalue(i)"
+                            (mouseenter)="ordervalue(i)" (onChange)="styledata()" (onChange)="check(i)"
+                            (mouseenter)="check(i)" (mouseenter)="calculateEndDate(i)" />
                     </td>
 
                     <td>
-                        <input style="width: 15vh;" formControlName="color" list="Color" (input)="colorvalue(i)"
-                        (change)="colordata()" class="form-control"
-                        (mouseenter)="stylevalue(i)" (change)="check(i)"  (click)="check(i)" (mouseenter)="check(i)" (mouseenter)="calculateEndDate(i)">
-                      <datalist id="Color">
-                        <option *ngFor="let data of this.colorlist" value="{{data.color}}">{{data.color}}</option>
-                      </datalist>
+                        <!-- <input style="width: 15vh;" formControlName="color" list="Color" (input)="colorvalue(i)"
+                            (change)="colordata()" class="form-control" (mouseenter)="stylevalue(i)" (change)="check(i)"
+                            (click)="check(i)" (mouseenter)="check(i)" (mouseenter)="calculateEndDate(i)">
+                        <datalist id="Color">
+                            <option *ngFor="let data of this.colorlist" value="{{data.color}}">{{data.color}}</option>
+                        </datalist> -->
+                        <p-dropdown [options]="colorlist" optionLabel="color" optionValue="color" placeholder="color"
+                            formControlName="color" [editable]="true" (onChange)="colorvalue(i)"
+                            (onChange)="colordata()" (mouseenter)="stylevalue(i)" (onChange)="check(i)"
+                            (click)="check(i)" (mouseenter)="check(i)" (mouseenter)="calculateEndDate(i)" />
                     </td>
 
                     <td>
-                        <input class="form-control" type="text" formControlName="size" list="sizes" 
-                        (mouseenter)="colorvalue(i)" (input)="getwoId($event.target.value,i)" (change)="check(i)" (mouseenter)="check(i)" 
-                        (mouseenter)="calculateEndDate(i)" (mouseenter)="greigevalidation(i)">
+                        <!-- <input class="form-control" type="text" formControlName="size" list="sizes"
+                            (mouseenter)="colorvalue(i)" (input)="getwoId($event.target.value,i)" (change)="check(i)"
+                            (mouseenter)="check(i)" (mouseenter)="calculateEndDate(i)"
+                            (mouseenter)="greigevalidation(i)">
                         <datalist id="sizes">
                             <option *ngFor="let data of this.sizelist" value="{{data.size}}">{{data.size}}</option>
-                          </datalist>
+                        </datalist> -->
+                        <p-dropdown [options]="sizelist" optionLabel="size" optionValue="size" placeholder="size"
+                            formControlName="size" [editable]="true" (mouseenter)="colorvalue(i)"
+                            (onChange)="getwoId(i)" (onChange)="check(i)" (mouseenter)="check(i)"
+                            (mouseenter)="calculateEndDate(i)" (mouseenter)="greigevalidation(i)" />
                     </td>
 
                     <td>
-                        <input type="text" class="form-control" formControlName="greigeKg"  (input)="Addcheck(i)" (input)="valid($event.target.value,i)" (mouseenter)="check(i)" 
-                        (mouseenter)="calculateEndDate(i)" (mouseenter)="greigevalidation(i)" [ngClass]="{'is-invalid':this.toleranceValid[i]}">
+                        <input type="text" class="form-control" formControlName="greigeKg" (input)="Addcheck(i)"
+                            (input)="valid($event.target.value,i)" (mouseenter)="check(i)"
+                            (mouseenter)="calculateEndDate(i)" (mouseenter)="greigevalidation(i)"
+                            [ngClass]="{'is-invalid':this.toleranceValid[i]}">
                     </td>
 
                     <td>
-                        <input type="text" class="form-control" formControlName="machineDia" (click)="check(i)" (mouseenter)="check(i)" (mouseenter)="calculateEndDate(i)">
+                        <input type="text" class="form-control" formControlName="machineDia" (click)="check(i)"
+                            (mouseenter)="check(i)" (mouseenter)="calculateEndDate(i)">
                     </td>
-    
 
-                    <td><input class="form-control" type="text" formControlName="knitFty" list="fty" (input)="production_days($event.target.value, i)" (click)="check(i)" (mouseenter)="check(i)"
-                        (mouseenter)="calculateEndDate(i)" >
+
+                    <td><input class="form-control" type="text" formControlName="knitFty" list="fty"
+                            (input)="production_days($event.target.value, i)" (click)="check(i)" (mouseenter)="check(i)"
+                            (mouseenter)="calculateEndDate(i)">
                         <datalist id="fty">
-                            <option *ngFor="let ftyName of this.ftyName"
-                            value="{{ftyName.knitFty}}">{{ftyName.knitFty}}</option>
+                            <option *ngFor="let ftyName of this.ftyName" value="{{ftyName.knitFty}}">{{ftyName.knitFty}}
+                            </option>
                         </datalist>
                     </td>
 
-                    <td><input class="form-control" type="text" formControlName="allocated" (mouseenter)="check(i)"></td>
-                    <td><input class="form-control" type="date" formControlName="startDate" (change)="calculateEndDate(i)"(click)="check(i)" (mouseenter)="check(i)"></td>
-                    <td><input class="form-control" type="number" formControlName="daysrequired" (click)="calculateEndDate(i)" (click)="check(i)" 
-                        (mouseenter)="check(i)"(mouseenter)="calculateEndDate(i)"></td>
+                    <td><input class="form-control" type="text" formControlName="allocated" (mouseenter)="check(i)">
+                    </td>
+                    <td><input class="form-control" type="date" formControlName="startDate"
+                            (change)="calculateEndDate(i)" (click)="check(i)" (mouseenter)="check(i)"></td>
+                    <td><input class="form-control" type="number" formControlName="daysrequired"
+                            (click)="calculateEndDate(i)" (click)="check(i)" (mouseenter)="check(i)"
+                            (mouseenter)="calculateEndDate(i)"></td>
                     <td><input class="form-control" type="date" formControlName="endDate" readonly></td>
 
                     <th><button class="btn-danger" (click)="delete(i)">x</button></th>
