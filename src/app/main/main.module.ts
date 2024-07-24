@@ -126,7 +126,7 @@ import { InvoiceEntryComponent } from './Garments/Transaction/invoice-entry/invo
 import { KnitFactoryMachineComponent } from './Report/knit-factory-machine/knit-factory-machine.component';
 import { KnitFactoryMachineEntryComponent } from './Transaction/knit-factory-machine-entry/knit-factory-machine-entry.component';
 import { MachineAllocationMasterComponent } from './masters/Transaction Master/machine-allocation-master/machine-allocation-master.component';
-
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -254,7 +254,8 @@ import { MachineAllocationMasterComponent } from './masters/Transaction Master/m
     FieldsetModule,
     InputNumberModule,
     MultiSelectModule,
-  
+    TableModule,
+    DragDropModule
     // DxDataGridModule
   ]
 })

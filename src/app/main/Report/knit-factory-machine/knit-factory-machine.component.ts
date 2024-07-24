@@ -7,7 +7,7 @@ import jsPDF from 'jspdf';
 import { ApiService } from 'src/app/api.service';
 import Swal from 'sweetalert2';
 import * as XLSX from 'xlsx'
-
+import {CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-knit-factory-machine',
@@ -81,8 +81,13 @@ export class KnitFactoryMachineComponent {
           });
       }
   });
-
   }
+
+  dataSource = [
+    { id: 1, name: "Angular", price: "45.00" },
+    { id: 2, name: "React Js", price: "30.00" },
+    { id: 3, name: "Vue Js", price: "20.00" }
+  ];
 
   constructor(private fb: FormBuilder, private api: ApiService , private router : Router , private datePipe: DatePipe) { 
     this.knitFtyMachineForm = new FormGroup({
@@ -93,7 +98,9 @@ export class KnitFactoryMachineComponent {
     })
   }
 
-
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.machine, event.previousIndex, event.currentIndex);
+  }
     //--------------------------------------------------------------------------------------------------------
     getBuyerValue() {
       // this.buyerName = event.target.value;
@@ -407,5 +414,15 @@ Addcheck(index: number) {
       })
     }
     }
-  Entry(){ }
+  Save(){
+    const processedData = this.machine.map((item:any) => {
+    return {
+      's.no': this.machine.indexOf(item) + 1,
+      'buyer': item.buyer,
+      'orderNo': item.orderNo,
+      'oldid': item.id,
+    };
+  });
+  console.log(processedData)
+}
 }

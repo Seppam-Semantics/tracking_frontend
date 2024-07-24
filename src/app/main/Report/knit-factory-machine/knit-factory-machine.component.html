@@ -38,7 +38,7 @@
     <button mat-button color="primary" (click)="exportexcel()">Download</button>
 </mat-toolbar>
 <div class="tablecss">
-    <table class="table table-hover fl-table" id="table-data">
+    <!-- <table class="table table-hover fl-table" id="table-data">
         <thead class="thead-dark">
             <tr>
                 <th>S.No</th>
@@ -53,13 +53,39 @@
                 <td>{{i+1}}</td>
                 <td>{{data.buyer}}</td>
                 <td>{{data.orderNo}}</td>
-  
-                <!-- <td><button class="btn btn-warning"(click)="Entry()"><mat-icon>content_paste</mat-icon></button></td> -->
                 <td><button class="btn btn-primary" (click)="edit(data.id)"><mat-icon>edit</mat-icon></button></td>
-                <!-- <td><button class="btn btn-danger" (click)="delete(data.id)"><mat-icon>delete</mat-icon></button></td> -->
+            </tr>
+        </tbody>
+    </table> -->
+    <table class="table table-sm table-bordered table-striped text-center">
+        <thead class="thead-dark">
+            <tr>
+                <th>S.No</th>
+                <th>Buyer</th>
+                <th>Order No</th>
+                <th>Old Id</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody cdkDropList (cdkDropListDropped)="drop($event)">
+            <tr cdkDrag cdkDragLockAxis="y" *ngFor="let data of this.machine; let i = index;">
+                <td cdkDragHandle >{{i+1}}</td>
+                <td  >{{data.buyer}}</td>
+                <td  >{{data.orderNo}}</td>
+                <td  >{{data.id}}</td>
+                <td><button class="btn btn-primary" (click)="edit(data.id)"><mat-icon>edit</mat-icon></button></td>
+                <!-- Preview -->
+                <div *cdkDragPreview matchSize="true" class="container dragdrop-placeholder">
+                    {{data.orderNo + "[ ---> " + data.buyer + " <--- ]"}}
+                </div>
             </tr>
         </tbody>
     </table>
+    <div>
+        <div style="display: flex; width: 100%; justify-content: center;">
+            <button class="btn btn-primary" (click)="Save()">Save</button>
+        </div>
+    </div>
 </div>
 
 

@@ -130,9 +130,9 @@
           <td>{{data.lcDate}}</td>
           <td>{{data.lcNo}}</td>
           <td>{{data.pi}}</td>
-          <td>{{data.piDate}}</td>
+          <td>{{data.piDate | date }}</td>
           <td>{{data.lcYarnTotal}}</td>
-          <td>{{data.lcValue}}</td>
+          <td>{{data.lcValue | number}}</td>
           <td>{{data.yarnStatus}}</td>
           <td><button class="btn btn-primary" (click)="EditAllData(data.id)"><mat-icon>edit</mat-icon></button></td>
           <!-- <td><button class="btn btn-danger" (click)="delete(data.id)"><mat-icon>delete</mat-icon></button></td> -->

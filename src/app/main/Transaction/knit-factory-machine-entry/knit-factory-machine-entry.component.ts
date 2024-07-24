@@ -287,21 +287,27 @@ check(index: number) {
   const currentColor = currentRow.get('color')?.value;
   const currentSize = currentRow.get('size')?.value;
 
+  let latestEndDate: Date | null = null;
+
   for (let i = 0; i < index; i++) {
     const row = formArray.at(i);
     const style = row.get('style')?.value;
     const color = row.get('color')?.value;
     const size = row.get('size')?.value;
     const endDate = row.get('endDate')?.value;
-
+    
     if (currentStyle === style && currentColor === color && currentSize === size) {
-
-      const nextDay = new Date(endDate);
-      nextDay.setDate(nextDay.getDate() + 1);
-
-      currentRow.get('startDate')?.setValue(nextDay.toISOString().substring(0, 10)); // Format as yyyy-MM-dd
-      break; // Assuming you want to update only the first matching row's startDate
+      const endDateObj = new Date(endDate);
+      if (!latestEndDate || endDateObj > latestEndDate) {
+        latestEndDate = endDateObj;
+      }
     }
+  }
+
+  if (latestEndDate) {
+    const nextDay = new Date(latestEndDate);
+    nextDay.setDate(nextDay.getDate() + 1);
+    currentRow.get('startDate')?.setValue(nextDay.toISOString().substring(0, 10)); // Format as yyyy-MM-dd
   }
 }
 
