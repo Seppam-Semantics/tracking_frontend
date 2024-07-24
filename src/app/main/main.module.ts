@@ -209,7 +209,6 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     KnitFactoryMachineComponent,
     KnitFactoryMachineEntryComponent,
     MachineAllocationMasterComponent,
-    KnitFactoryWiseComponent,
 
   ],
   imports: [
