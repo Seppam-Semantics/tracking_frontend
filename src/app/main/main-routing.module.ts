@@ -60,6 +60,8 @@ import { InvoiceEntryComponent } from './Garments/Transaction/invoice-entry/invo
 import { InvoiceListingComponent } from './Garments/Report/invoice-listing/invoice-listing.component';
 import { KnitFactoryMachineComponent } from './Report/knit-factory-machine/knit-factory-machine.component';
 import { KnitFactoryMachineEntryComponent } from './Transaction/knit-factory-machine-entry/knit-factory-machine-entry.component';
+import { KnitFactoryMainComponent } from './Report/knit-factory-main/knit-factory-main.component';
+import { KnitFactoryWiseComponent } from './Report/knit-factory-wise/knit-factory-wise.component';
 
 const routes: Routes = [
   {path:'', component: AppComponent},
@@ -129,7 +131,9 @@ const routes: Routes = [
   {path:"InvoiceListing" , component : InvoiceListingComponent} ,
 
   {path:"KnitFactoryMachine" , component : KnitFactoryMachineComponent} ,
-  {path:"KnitFactoryMachineEntry" , component : KnitFactoryMachineEntryComponent} ,
+  {path:"KnitFactoryMachineEntry" , component : KnitFactoryMachineEntryComponent},
+  {path: "knitFactoryMain", component:KnitFactoryMainComponent},
+  {path: "knitwise", component:KnitFactoryWiseComponent }
  
 ];
 

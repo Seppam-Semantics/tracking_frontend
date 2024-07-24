@@ -414,15 +414,5 @@ Addcheck(index: number) {
       })
     }
     }
-  Save(){
-    const processedData = this.machine.map((item:any) => {
-    return {
-      's.no': this.machine.indexOf(item) + 1,
-      'buyer': item.buyer,
-      'orderNo': item.orderNo,
-      'oldid': item.id,
-    };
-  });
-  console.log(processedData)
-}
+  Entry(){ }
 }
