@@ -113,6 +113,7 @@ export class MainComponent implements OnInit {
     this.router.navigate(['main/InvoiceListing'])
   }
   KnitFactoryMachine(){
-    this.router.navigate(['main/KnitFactoryMachine'])
+    this.router.navigate(['main/knitFactoryMain'])
   }
+  
 }

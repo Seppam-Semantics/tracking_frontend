@@ -126,6 +126,7 @@ import { InvoiceEntryComponent } from './Garments/Transaction/invoice-entry/invo
 import { KnitFactoryMachineComponent } from './Report/knit-factory-machine/knit-factory-machine.component';
 import { KnitFactoryMachineEntryComponent } from './Transaction/knit-factory-machine-entry/knit-factory-machine-entry.component';
 import { MachineAllocationMasterComponent } from './masters/Transaction Master/machine-allocation-master/machine-allocation-master.component';
+import { KnitFactoryWiseComponent } from './Report/knit-factory-wise/knit-factory-wise.component';
 
 
 @NgModule({
@@ -209,6 +210,7 @@ import { MachineAllocationMasterComponent } from './masters/Transaction Master/m
     KnitFactoryMachineComponent,
     KnitFactoryMachineEntryComponent,
     MachineAllocationMasterComponent,
+    KnitFactoryWiseComponent,
 
   ],
   imports: [
