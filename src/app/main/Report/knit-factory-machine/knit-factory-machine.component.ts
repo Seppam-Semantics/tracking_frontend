@@ -408,4 +408,8 @@ Addcheck(index: number) {
     }
     }
   Entry(){ }
+
+  back(){
+    this.router.navigate(['main/knitFactoryMain'])
+  }
 }
