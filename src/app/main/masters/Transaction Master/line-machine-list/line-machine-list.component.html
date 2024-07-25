@@ -51,8 +51,10 @@
         <div style="display: flex; gap: 10vh;">
             <div>
                 <mat-form-field appearance="outline">
-                    <mat-label>Style</mat-label>
-                    <input matInput formControlName="style">
+                    <mat-label> Style Name</mat-label>
+                    <mat-select formControlName="style" [(ngModel)]="Stylenamevalue" (selectionChange)="getstyleId()">
+                        <mat-option *ngFor="let style of this.styleDropdata" value="{{style.style}}">{{style.style}}</mat-option>
+                    </mat-select>
                 </mat-form-field>
             </div>
 
@@ -64,17 +66,20 @@
             </div>
 
             <div>
-                <mat-form-field appearance="outline">
+                <!-- <mat-form-field appearance="outline">
                     <mat-label>Line</mat-label>
                     <input matInput formControlName="line">
-                </mat-form-field>
+                </mat-form-field> -->
+                 <p-multiSelect [options]="linealldata" placeholder="line"
+                 optionLabel="line"  optionValue="id" appendTo="body" formControlName="line"  
+                 (onChange)="getSelectedColors()" />
             </div>
 
         </div>
     </div>
     <ng-template pTemplate="footer">
         <div style="width: 100%; display: flex; justify-content: center;">
-            <button class="btn btn-success" (click)="saveButton()">Save</button>
+            <button class="btn btn-success" (click)="save()">Save</button>
         </div>
     </ng-template>
 </p-dialog>

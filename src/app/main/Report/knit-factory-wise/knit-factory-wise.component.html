@@ -37,8 +37,8 @@
                 <th>Old Id</th>
             </tr>
         </thead>
-        <tbody formArrayName="data">
-            <tr *ngFor="let list of items.controls; let i=index" [formGroupName]="i" cdkDrag>
+        <tbody formArrayName="data" >
+            <tr *ngFor="let list of items.controls; let i=index" [formGroupName]="i" cdkDrag (mouseenter)="calculateEndDate(i)">
                 
                 <td cdkDragHandle>{{i+1}}</td>
 

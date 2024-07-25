@@ -28,3 +28,11 @@ thead{
   scrollbar-width: none;
   height:90%
 }
+
+::ng-deep .p-multiselect-panel{
+  width: 40vh;
+}
+::ng-deep .p-multiselect{
+  width: 40vh;
+  padding: 1vh;
+}
