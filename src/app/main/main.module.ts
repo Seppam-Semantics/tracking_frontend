@@ -127,7 +127,10 @@ import { KnitFactoryMachineComponent } from './Report/knit-factory-machine/knit-
 import { KnitFactoryMachineEntryComponent } from './Transaction/knit-factory-machine-entry/knit-factory-machine-entry.component';
 import { MachineAllocationMasterComponent } from './masters/Transaction Master/machine-allocation-master/machine-allocation-master.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-
+import { KnitFactoryWiseComponent } from './Report/knit-factory-wise/knit-factory-wise.component';
+import { LineMasterComponent } from './masters/Transaction Master/line-master/line-master.component';
+import { LineMachineListComponent } from './masters/Transaction Master/line-machine-list/line-machine-list.component';
+import { WorkingDayComponent } from './masters/Transaction Master/working-day/working-day.component';
 @NgModule({
   declarations: [
     MainComponent,
@@ -209,7 +212,10 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     KnitFactoryMachineComponent,
     KnitFactoryMachineEntryComponent,
     MachineAllocationMasterComponent,
-
+    KnitFactoryWiseComponent,
+    LineMasterComponent,
+    LineMachineListComponent,
+    WorkingDayComponent
   ],
   imports: [
     CommonModule,

@@ -83,12 +83,6 @@ export class KnitFactoryMachineComponent {
   });
   }
 
-  dataSource = [
-    { id: 1, name: "Angular", price: "45.00" },
-    { id: 2, name: "React Js", price: "30.00" },
-    { id: 3, name: "Vue Js", price: "20.00" }
-  ];
-
   constructor(private fb: FormBuilder, private api: ApiService , private router : Router , private datePipe: DatePipe) { 
     this.knitFtyMachineForm = new FormGroup({
       id:new FormControl('',Validators.required),
@@ -204,7 +198,6 @@ export class KnitFactoryMachineComponent {
     const inputValue = value;
     const tolerance = (this.greigeKgTotal)
     if(inputValue > tolerance ){
-      alert("Allowed value is : " + tolerance);
       this.toleranceValid[i] = true
     }
     else{
@@ -321,7 +314,9 @@ calculateEndDate() {
   });
 }
   
+back(){
 
+}
 Addcheck(index: number) {
   const formArray = this.knitFtyMachineForm.get('data') as FormArray;
   const currentRow = formArray.at(index);
@@ -346,7 +341,6 @@ Addcheck(index: number) {
         const inputValue = this.totalGreigeKg;
         const tolerance = (this.greigeKgTotal)
         if(inputValue > tolerance ){
-          alert("Allowed value is : " + this.greigeKgTotal);
           this.toleranceValid[i] = true
         }
         else{
@@ -368,6 +362,9 @@ Addcheck(index: number) {
 
   new(){ this.router.navigate(['main/KnitFactoryMachineEntry'])}
 
+  Save(){
+    
+  }
   
   exportexcel() { }
 

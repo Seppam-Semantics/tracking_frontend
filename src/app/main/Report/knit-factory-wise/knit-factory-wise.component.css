@@ -1,0 +1,58 @@
+th,tr,td { 
+    text-align: center;
+    font-weight: normal;
+  }
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  /* Firefox */
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+  
+  ::ng-deep .form-control{
+      border: none;
+  }
+  
+  thead{
+    position: static;
+    top: 0;
+  }
+  :host ::ng-deep .p-dropdown .p-dropdown-label.p-placeholder{
+    color: #6b7280;
+    padding: 6px;
+    margin-left: 2vh;
+  }
+  :host ::ng-deep .p-dropdown .p-dropdown-label{
+    color: #6b7280;
+    padding: 6px;
+    margin-left: 2vh;
+  }
+  :host ::ng-deep.p-dropdown-panel .p-dropdown-items {
+  margin-left:-27px
+  }
+  .is-invalid {
+  border: 1px solid red;
+  box-shadow: 0 0 5px red;
+  }
+  .cdk-drag-preview {
+    box-sizing: border-box;
+    border-radius: 4px;
+    font-size: 1.5em;
+    text-align: center;
+    opacity: 0.8;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+      0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  }
+  
+  .dragdrop-placeholder {
+    background: #ccc;
+    border: dotted 3px #999;
+    min-height: 30px;
+    transition: transform 100ms cubic-bezier(0, 0, 0.2, 1);
+  }
+  

@@ -182,7 +182,7 @@ valid(value:any, i:any){
   const inputValue = value;
   const tolerance = (this.greigeKgTotal)
   if(inputValue > tolerance ){
-    alert("Allowed value is : " + tolerance);
+
     this.toleranceValid[i] = true
   }
   else{
@@ -335,7 +335,7 @@ Addcheck(index: number) {
         const inputValue = this.totalGreigeKg;
         const tolerance = (this.greigeKgTotal)
         if(inputValue > tolerance ){
-          alert("Allowed value is : " + this.greigeKgTotal);
+
           this.toleranceValid[i] = true
         }
         else{
@@ -376,6 +376,9 @@ calculateEndDate() {
 
 
 }
+
+
+
 
 delete(index:any){
   this.items.removeAt(index)

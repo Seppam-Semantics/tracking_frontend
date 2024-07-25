@@ -503,8 +503,8 @@ getAllocation(orderNo : string = ''):Observable<any>{
   return this.http.get(this.getUrl() + `/knitapi/machine-allocation-entry?orderNo=${orderNo}&`, this.getHeaders())
 }
 
-getSingleAllocation(id:any):Observable<any>{
-  return this.http.get(this.getUrl() + `/knitapi/machine-allocation-entry/${id}`, this.getHeaders())
+getSingleAllocation(id:string = '', knitFty:String = '', machineDia:String = ''):Observable<any>{
+  return this.http.get(this.getUrl() + `/knitapi/machine-allocation-entry-filter?id=${id}&knitFty=${knitFty}&machineDia=${machineDia}`, this.getHeaders())
 }
 
 postAllocation(data:any):Observable<any>{
