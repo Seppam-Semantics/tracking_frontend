@@ -1,6 +1,6 @@
 <mat-toolbar style="display: flex; justify-content: center; height: auto;">
-    <button mat-button (click)="back()" color="primary">Back</button>
-    <div style="display: flex; justify-content: center; width: 100%;">
+    <button class="btn btn-danger" (click)="back()" color="primary">Back</button>
+    <div style="display: flex; justify-content: center; width: 100%; margin-top: 1%;">
         <span>Knit Factory wise List</span>
     </div>
     <div style="flex: 1 1 auto;"></div>
@@ -26,7 +26,7 @@
                 <th>F.Size</th>
 
                 <th>Greige-Kgs</th>
-                <th>Mechine Dia </th>
+                <th>Machine Dia </th>
                 <th>Knit Fty</th>
 
                 <th>AllocMCNos</th>
@@ -99,7 +99,7 @@
                 <td cdkDragHandle><input class="form-control" type="number" formControlName="daysrequired" readonly
                         (click)="calculateEndDate(i)" (click)="check(i)" (mouseenter)="check(i)"></td>
                 <td cdkDragHandle><input class="form-control" type="date" formControlName="endDate" readonly></td>
-                <td cdkDragHandle><input formControlName="id" class="form-control" readonly/></td>
+                <td cdkDragHandle><input formControlName="oldId" class="form-control" readonly/></td>
 
                 <div *cdkDragPreview matchSize="true" class="container dragdrop-placeholder">
                     <span>Moving</span>
@@ -109,7 +109,7 @@
     </table>
 <div style="display: flex; width: 100%; justify-content: center;">
     <div>
-        <button class="btn btn-success">Save</button>
+        <button class="btn btn-success" (click)="save()">Save</button>
     </div>
 </div>
 </div>

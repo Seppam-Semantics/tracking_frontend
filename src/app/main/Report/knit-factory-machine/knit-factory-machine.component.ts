@@ -314,9 +314,6 @@ calculateEndDate() {
   });
 }
   
-back(){
-
-}
 Addcheck(index: number) {
   const formArray = this.knitFtyMachineForm.get('data') as FormArray;
   const currentRow = formArray.at(index);
@@ -412,4 +409,8 @@ Addcheck(index: number) {
     }
     }
   Entry(){ }
+
+    back(){
+      this.router.navigate(['/main/knitFactoryMain'])
+    }
 }

@@ -18,31 +18,6 @@ export class KnitFactoryWiseComponent implements OnInit {
   valueExceeded: boolean = false;
   viewEntry: boolean = false;
   editview: boolean = false;
-  filterDate1: any
-  filterDate2: any
-  cuttinglist: any;
-  Buyer_Value: any;
-  buyersDta: any;
-  orderNoDta: any;
-  Order_Value: any;
-  styleDta: any;
-  style_Value: any;
-  colorDta: any;
-  color_Value: any;
-  sizeDta: any;
-  buyers: any;
-  order: any;
-  stylelist: any;
-  colorlist: any;
-  sizelist: any;
-  cutting: any;
-  cuttinglistpath: any;
-  cuttingDate: any;
-  cutDate: any;
-  buyerslist: any;
-  OrderNolist: any;
-  buyervalue: any
-  orderNovalue: any
   knitFtyMachineForm: FormGroup
   ftyName: any;
   dayprod: any;
@@ -58,6 +33,15 @@ export class KnitFactoryWiseComponent implements OnInit {
   knitfty:any
   machineDia:any
   AllIddata: any;
+  buyers: any;
+  Buyer_Value: any;
+  order: any;
+  Order_Value: any;
+  stylelist: any;
+  style_Value: any;
+  colorlist: any;
+  color_Value: any;
+  sizelist: any;
   constructor(private fb: FormBuilder, private api: ApiService, private router: Router, private datePipe: DatePipe) {
 
     this.knitFtyMachineForm = new FormGroup({
@@ -117,10 +101,11 @@ export class KnitFactoryWiseComponent implements OnInit {
 
       const EntryData = this.knitFtyMachineForm.get('data') as FormArray;
       EntryData.clear();
-      this.AllIddata.forEach((dataItem: any) => {
+      this.AllIddata.forEach((dataItem: any, i:any) => {
         const Details = this.fb.group({
             "id": [dataItem.id],
-            "headId":[dataItem.headId],
+            "headId":[parseInt(dataItem.headId)],
+            "seqId" : [i+1],
             "buyer":[dataItem.buyer],
             "orderNo":[dataItem.orderNo],
             "style": [dataItem.style],
@@ -133,7 +118,8 @@ export class KnitFactoryWiseComponent implements OnInit {
             "allocated": [dataItem.allocated],
             "startDate": [dataItem.startDate],
             "daysrequired": [dataItem.daysrequired],
-            "endDate": [dataItem.endDate]
+            "endDate": [dataItem.endDate],
+            "oldId" : [dataItem.oldId ? dataItem.oldId : dataItem.id]
         })
 
         EntryData.push(Details);
@@ -298,6 +284,8 @@ knitFtyMachineAddButton() {
   
   const row = this.fb.group({
     "id": [''],
+    "seqId" : [],
+    "headId" : [],
     "buyer": [''],
     "orderNo": [''],
     "style": [''],
@@ -319,7 +307,6 @@ knitFtyMachineAddButton() {
     this.calculateEndDate();
   });
 }
-
 
 
 check(index: number) {
@@ -417,7 +404,9 @@ for (let i = 0; i < formArray.length; i++) {
   }
 
 save(){
-  
+  this.api.updateAllocation(this.knitFtyMachineForm.value).subscribe((res)=>{
+    alert(res.message);
+  })
 }
 
 }
