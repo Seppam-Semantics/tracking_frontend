@@ -6,18 +6,18 @@
         <div style="flex: 1 1 auto;"></div>
         <div style="display: flex; gap: 10px;">
 
-            <div style="display: flex; gap: 10px;">
-                <p-dropdown placeholder="Buyer" optionLabel="buyer" [options]="this.buyers" (onChange)="getBuyerValue()"
+            <!-- <div style="display: flex; gap: 10px;">
+                <p-dropdown #buyer placeholder="Buyer" optionLabel="buyer" [options]="this.buyers" (onChange)="getBuyerValue()"
                     optionValue="buyer" [editable]="true" [style]="{ minWidth: '22vh', minHeight:'2vh' }"
-                    formControlName="buyer"></p-dropdown>
+                    formControlName="buyer" (click)="buyerlist(i)"></p-dropdown>
             </div>
 
 
             <div style="display: flex; gap: 10px;">
-                <p-dropdown placeholder="orderNo" optionLabel="orderNO" [options]="this.order" (onChange)="ordervalue()"
+                <p-dropdown #orders placeholder="orderNo" optionLabel="orderNO" [options]="this.order" (onChange)="ordervalue()"
                     optionValue="orderNO" [editable]="true" [style]="{ minWidth: '22vh', minHeight:'2vh' }"
-                    formControlName="orderNo"></p-dropdown>
-            </div>
+                    formControlName="orderNo" (click)="orderlist(i)"></p-dropdown>
+            </div> -->
         </div>
 
 
@@ -28,6 +28,8 @@
                 <tr>
                     <th><button class="btn btn-primary" (click)="knitFtyMachineAddButton()">+</button></th>
                     <th>S.No</th>
+                    <th>Buyer</th>
+                    <th>Order No.</th>
                     <th>Style</th>
                     <th>Color</th>
                     <th>F.Size</th>
@@ -45,26 +47,44 @@
                 <tr *ngFor="let list of items.controls; let i=index" [formGroupName]="i">
                     <td></td>
                     <td>{{i+1}}</td>
-
                     <td>
-                        <p-dropdown [options]="stylelist" optionLabel="style" optionValue="style" placeholder="style"
-                            formControlName="style" [editable]="true" (onChange)="stylevalue(i)"
-                            (mouseenter)="ordervalue(i)" (onChange)="styledata()" (onChange)="check(i)"
-                            (mouseenter)="check(i)" (mouseenter)="calculateEndDate(i)" />
+                        <p-dropdown #buyername placeholder="Buyer" optionLabel="buyer" [options]="buyers" 
+                            optionValue="buyer" [editable]="true" formControlName="buyer" 
+                            (onChange)="getBuyerValue(i)" (mouseenter)="getBuyerValue(i)" 
+                            (onChange)="getorders()" (onChange)="check(i)"
+                            (mouseenter)="check(i)" (mouseenter)="calculateEndDate(i)" 
+                            (click)="buyerlist(i)">
+                        </p-dropdown>
                     </td>
 
                     <td>
-                        <p-dropdown [options]="colorlist" optionLabel="color" optionValue="color" placeholder="color"
+                        <p-dropdown #orders [options]="this.order" optionLabel="orderNO" optionValue="orderNO" placeholder="orderNo"
+                        (onChange)="ordervalue(i)" (mouseenter)="ordervalue(i)" (mouseenter)="getBuyerValue(i)" (onChange)="orderdata()" (onChange)="check(i)"
+                        (mouseenter)="check(i)" (mouseenter)="calculateEndDate(i)" [editable]="true"
+                        formControlName="orderNo" (click)="orderlist(i)">
+                        </p-dropdown>
+                    </td>
+
+                    <td>
+                        <p-dropdown #styles [options]="stylelist" optionLabel="style" optionValue="style" placeholder="style"
+                        (onChange)="stylevalue(i)" (mouseenter)="ordervalue(i)" (onChange)="styledata()" (onChange)="check(i)" 
+                        (mouseenter)="check(i)" (mouseenter)="calculateEndDate(i)" [editable]="true"
+                        formControlName="style" (click)="styleslist(i)" >
+                        </p-dropdown>
+                    </td>
+
+                    <td>
+                        <p-dropdown #colors [options]="colorlist" optionLabel="color" optionValue="color" placeholder="color"
                             formControlName="color" [editable]="true" (onChange)="colorvalue(i)"
                             (onChange)="colordata()" (mouseenter)="stylevalue(i)" (onChange)="check(i)"
-                            (click)="check(i)" (mouseenter)="check(i)" (mouseenter)="calculateEndDate(i)" />
+                            (click)="check(i)" (mouseenter)="check(i)" (mouseenter)="calculateEndDate(i)" (click)="colorslist(i)"/>
                     </td>
 
                     <td>
-                        <p-dropdown [options]="sizelist" optionLabel="size" optionValue="size" placeholder="size"
+                        <p-dropdown #sizes [options]="sizelist" optionLabel="size" optionValue="size" placeholder="size"
                             formControlName="size" [editable]="true" (mouseenter)="colorvalue(i)"
                             (onChange)="getwoId(i)" (onChange)="check(i)" (mouseenter)="check(i)"
-                            (mouseenter)="calculateEndDate(i)" (mouseenter)="greigevalidation(i)" />
+                            (mouseenter)="calculateEndDate(i)" (mouseenter)="greigevalidation(i)" (click)="sizeslist(i)"/>
                     </td>
 
                     <td>

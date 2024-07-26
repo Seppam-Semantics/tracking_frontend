@@ -40,3 +40,6 @@ th,tr,td {
   box-shadow: 0 0 5px red;
 }
 
+:host ::ng-deep .p-dropdown .p-dropdown-trigger {
+  display: none;
+}

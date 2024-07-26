@@ -1,9 +1,10 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import { Dropdown } from 'primeng/dropdown';
 import { ApiService } from 'src/app/api.service';
 import Swal from 'sweetalert2';
 import * as XLSX from 'xlsx'
@@ -74,11 +75,13 @@ ngOnInit(): void {
 }
 
   //--------------------------------------------------------------------------------------------------------
-  getBuyerValue() {
+  getBuyerValue(index:any) {
     // this.buyerName = event.target.value;
     // const formArray = this.knitFtyMachineForm.get('data') as FormArray;
     // const row = formArray.at(index);
-    this.Buyer_Value = this.knitFtyMachineForm.get('buyer')?.value;
+    const formArray = this.knitFtyMachineForm.get('data') as FormArray;
+    const row = formArray.at(index);
+    this.Buyer_Value = row.get('buyer')?.value;
     this.getorders()
   }
 
@@ -88,12 +91,14 @@ ngOnInit(): void {
     })
   }
 
-  ordervalue() {
+  ordervalue(index:any) {
     // this.Order_Value = event.target.value
     // const formArray = this.knitFtyMachineForm.get('data') as FormArray;
-    // const row = formArray.at(index);
-    this.Buyer_Value = this.knitFtyMachineForm.get('buyer')?.value;
-    this.Order_Value =  this.knitFtyMachineForm.get('orderNo')?.value;
+    // const row = formArray.at(index)
+    const formArray = this.knitFtyMachineForm.get('data') as FormArray;
+    const row = formArray.at(index);
+    this.Buyer_Value = row.get('buyer')?.value;
+    this.Order_Value =  row.get('orderNo')?.value;
     this.orderdata()
   }
 
@@ -105,8 +110,8 @@ ngOnInit(): void {
   stylevalue(index: any) {
     const formArray = this.knitFtyMachineForm.get('data') as FormArray;
     const row = formArray.at(index);
-    this.Buyer_Value = this.knitFtyMachineForm.get('buyer')?.value;
-    this.Order_Value =  this.knitFtyMachineForm.get('orderNo')?.value;
+    this.Buyer_Value = row.get('buyer')?.value;
+    this.Order_Value =  row.get('orderNo')?.value;
     this.style_Value = row.get('style')?.value;
 
     this.styledata()
@@ -121,8 +126,8 @@ ngOnInit(): void {
   colorvalue(index: any) {
     const formArray = this.knitFtyMachineForm.get('data') as FormArray;
     const row = formArray.at(index);
-    this.Buyer_Value = this.knitFtyMachineForm.get('buyer')?.value;
-    this.Order_Value =  this.knitFtyMachineForm.get('orderNo')?.value;
+    this.Buyer_Value = row.get('buyer')?.value;
+    this.Order_Value = row.get('orderNo')?.value;
     this.style_Value = row.get('style')?.value;
     this.color_Value = row.get('color')?.value;
 
@@ -165,8 +170,8 @@ ngOnInit(): void {
 greigevalidation(index:any){
   const formArray = this.knitFtyMachineForm.get('data') as FormArray;
   const row = formArray.at(index);
-  this.Buyer_Value = this.knitFtyMachineForm.get('buyer')?.value;
-  this.Order_Value =  this.knitFtyMachineForm.get('orderNo')?.value;
+  this.Buyer_Value = row.get('buyer')?.value;
+  this.Order_Value =  row.get('orderNo')?.value;
   this.style_Value = row.get('style')?.value;
   this.color_Value = row.get('color')?.value;
   this.size_Value = row.get('size')?.value;
@@ -227,6 +232,8 @@ knitFtyMachineAddButton() {
    
   const row = this.fb.group({
     id: [''],
+    buyer:[''],
+    orderNo:[''],
     style: [''],
     color: [''],
     size: [''],
@@ -371,14 +378,7 @@ calculateEndDate() {
     
     }
   });
-
-
-
-
 }
-
-
-
 
 delete(index:any){
   this.items.removeAt(index)
@@ -396,4 +396,64 @@ else{
 }
 }
 
+
+@ViewChildren('buyername') buyername!: QueryList<Dropdown>;
+buyerlist(index: any) {
+  if (this.buyername) {
+    const dropdownArray = this.buyername.toArray();
+    if (dropdownArray[index]) {
+      dropdownArray[index].show();
+    }
+  } else {
+    console.error('buyername is not defined');
+  }
+}
+
+@ViewChildren('orders') orders!: QueryList<Dropdown>;
+orderlist(index:any) {
+  if (this.orders) {
+    const orders = this.orders.toArray();
+    if (orders[index]) {
+      orders[index].show();
+    }
+  } else {
+    console.error('orders is not defined');
+  }
+}
+
+@ViewChildren('styles') styles!: QueryList<Dropdown>;
+styleslist(index:any) {
+  if (this.styles) {
+    const styles = this.styles.toArray();
+    if (styles[index]) {
+      styles[index].show();
+    }
+  } else {
+    console.error('styles is not defined');
+  }
+}
+
+@ViewChildren('colors') colors!: QueryList<Dropdown>;
+colorslist(index:any) {
+  if (this.colors) {
+    const colors = this.colors.toArray();
+    if (colors[index]) {
+      colors[index].show();
+    }
+  } else {
+    console.error('colors is not defined');
+  }
+}
+
+@ViewChildren('sizes') sizes!: QueryList<Dropdown>;
+sizeslist(index:any) {
+  if (this.sizes) {
+    const sizes = this.sizes.toArray();
+    if (sizes[index]) {
+      sizes[index].show();
+    }
+  } else {
+    console.error('sizes is not defined');
+  }
+}
 }
