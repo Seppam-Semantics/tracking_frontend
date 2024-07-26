@@ -10,8 +10,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  // apiUrl = "https://tracker.seppam.com";
-  apiUrl = "http://localhost:2000";
+  apiUrl = "https://tracker.seppam.com";
+  // apiUrl = "http://localhost:2000";
 
   token: any;
   profilenames: any;
@@ -1484,4 +1484,55 @@ getProductionDays(knitFty:string = '', machineDia : string = ''):Observable<any>
         }
 
         //--------------------------------------------Invoice  [Ends]------------------------------------------------------
-}
+
+
+        //--------------------------------------------Line [Start]------------------------------------------------------
+        linePost(data:any ): Observable<any> {
+          return this.http.post(this.getUrl() + `/mastersapi/line-list`, data,this.getHeaders())
+        }
+
+        line(): Observable<any> {
+          return this.http.get(this.getUrl() + `/mastersapi/line-list` ,this.getHeaders())
+        }
+
+        lineid(id:any):Observable<any>{
+          return this.http.get(this.getUrl() + `/mastersapi/line/${id}`, this.getHeaders())
+        }
+
+        //--------------------------------------------Line [End]------------------------------------------------------
+
+        //-------------------------------------------- Line - Machine list Master [Start]------------------------------------------------------
+
+        Machinelist(): Observable<any> {
+          return this.http.get(this.getUrl() + `/mastersapi/lineName-list` ,this.getHeaders())
+        }
+
+        MachinelistPost(data:any ): Observable<any> {
+          return this.http.post(this.getUrl() + `/mastersapi/linemachinelist-master`, data,this.getHeaders())
+        }
+
+        Machinelinelist( ): Observable<any> {
+          return this.http.get(this.getUrl() + `/mastersapi/linemachinelist-list`,this.getHeaders())
+        }
+
+        Machinelistid(id:any):Observable<any>{
+          return this.http.get(this.getUrl() + `/mastersapi/linemachinelist/${id}`, this.getHeaders())
+        }
+        //-------------------------------------------- Line - Machine list Master [End]------------------------------------------------------
+        //-------------------------------------------- Working Day Master [Start]------------------------------------------------------
+
+        workingdaylist(): Observable<any> {
+          return this.http.get(this.getUrl() + `/mastersapi/workingday_master_list` ,this.getHeaders())
+        }
+
+        workingdaylistPost(data:any ): Observable<any> {
+          return this.http.post(this.getUrl() + `/mastersapi/workingday_master`, data,this.getHeaders())
+        }
+
+        workingdaylistid(id:any):Observable<any>{
+          return this.http.get(this.getUrl() + `/mastersapi/workingday_master_id/${id}`, this.getHeaders())
+        }
+
+        //-------------------------------------------- Working Day Master [End]------------------------------------------------------
+
+      }
