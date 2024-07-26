@@ -10,8 +10,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  // apiUrl = "https://tracker.seppam.com";
-  apiUrl = "http://localhost:2000";
+  apiUrl = "https://tracker.seppam.com";
+  // apiUrl = "http://localhost:2000";
 
   token: any;
   profilenames: any;
@@ -1518,5 +1518,21 @@ getProductionDays(knitFty:string = '', machineDia : string = ''):Observable<any>
         Machinelistid(id:any):Observable<any>{
           return this.http.get(this.getUrl() + `/mastersapi/linemachinelist/${id}`, this.getHeaders())
         }
-        //-------------------------------------------- Line - Machine list Master [Start]------------------------------------------------------
+        //-------------------------------------------- Line - Machine list Master [End]------------------------------------------------------
+        //-------------------------------------------- Working Day Master [Start]------------------------------------------------------
+
+        workingdaylist(): Observable<any> {
+          return this.http.get(this.getUrl() + `/mastersapi/workingday_master_list` ,this.getHeaders())
+        }
+
+        workingdaylistPost(data:any ): Observable<any> {
+          return this.http.post(this.getUrl() + `/mastersapi/workingday_master`, data,this.getHeaders())
+        }
+
+        workingdaylistid(id:any):Observable<any>{
+          return this.http.get(this.getUrl() + `/mastersapi/workingday_master_id/${id}`, this.getHeaders())
+        }
+
+        //-------------------------------------------- Working Day Master [End]------------------------------------------------------
+
       }

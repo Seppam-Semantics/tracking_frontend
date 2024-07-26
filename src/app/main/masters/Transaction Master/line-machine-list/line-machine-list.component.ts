@@ -18,14 +18,22 @@ export class LineMachineListComponent implements OnInit{
   styleid: any;
   linealldata: any;
   selectedline: any;
+  allData: any;
+  lineDta: any;
+  selectedlist1: any;
+  selectedlist2: any;
   ngOnInit(): void {
     this.api.Drop_Style_master().subscribe((res)=>{
       this.styleDropdata = res.style
     })
 
-    this.api.Machinelinelist().subscribe((res)=>{
+    this.api.Machinelist().subscribe((res)=>{
       this.linealldata = res.line
     }) 
+
+    this.api.Machinelinelist().subscribe((res)=>{
+     this.allData = res.line
+    })
   }
   constructor(private fb : FormBuilder, private api : ApiService){
 
@@ -33,7 +41,7 @@ export class LineMachineListComponent implements OnInit{
       id : new FormControl('') , 
       style : new FormControl('') ,
       styleId : new FormControl('') ,
-      prodHr : new FormControl('') ,
+      prodhr : new FormControl('') ,
       line: new FormControl(''),
       data : new FormControl('')
 
@@ -44,7 +52,7 @@ export class LineMachineListComponent implements OnInit{
       id : new FormControl('') , 
       style : new FormControl('') ,
       styleId : new FormControl('') ,
-      prodHr : new FormControl('') ,
+      prodhr : new FormControl('') ,
       line: new FormControl(''),
       data : new FormControl('')
     })
@@ -70,7 +78,6 @@ export class LineMachineListComponent implements OnInit{
       return { ...line, headid: 0 };
 
     });
-    console.log(this.selectedline)
     this.LineMachinelistcreate.patchValue({
       data: this.selectedline
     });
@@ -78,7 +85,6 @@ export class LineMachineListComponent implements OnInit{
   
 
   save(){
-    console.log(this.LineMachinelistcreate.value)
     this.api.MachinelistPost(this.LineMachinelistcreate.value).subscribe((res)=>{
       Swal.fire({
         position: "top-end",
@@ -96,8 +102,60 @@ export class LineMachineListComponent implements OnInit{
     this.LineMachinelistcreationpopup = true
   }
 
-  LineMachinecreateOpen2(){
-    this.LineMachinelistupdatepopup = true
-  }
+  edit(id: any) {
+    this.LineMachinelistupdatepopup = true;
+    this.api.Machinelistid(id).subscribe((res) => {
 
+        this.lineDta = res.line[0].line.map((line: any) => ({
+            lineid: line.lineId,
+            headid: line.hederid,
+            line: line.line
+        }));
+
+        const lineArray = this.lineDta.map((line: any) => line.lineid);
+        this.LineMachinelistupdate.patchValue({
+            id: res.line[0].id,
+            style: res.line[0].style,
+            styleId: res.line[0].styleid,
+            prodhr: res.line[0].prodhr,
+            line: lineArray
+        });
+        this.getSelectedLines();
+    });
+}
+
+getSelectedLines() {
+    const selectedLineIds = this.LineMachinelistupdate.get('line')?.value || [];
+
+    this.selectedline = this.linealldata.filter((line: any) => selectedLineIds.includes(line.id));
+
+    this.selectedline = this.selectedline.map((line: any) => {
+        const lineWithHeadId = this.lineDta.find((lineObj: any) => lineObj.lineid === line.id);
+        return {
+            ...line,
+            headid: lineWithHeadId ? lineWithHeadId.headid : 0
+        };
+    });
+
+    this.LineMachinelistupdate.patchValue({
+        data: this.selectedline
+    });
+}
+
+  update(){
+    this.api.MachinelistPost(this.LineMachinelistupdate.value).subscribe((res)=>{
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: res.message,
+        showConfirmButton: false,
+        timer: 1500
+      });
+      this.LineMachinelistupdatepopup = false;      
+      // this.LineMachinelistcreate.reset()
+      this.api.Machinelinelist().subscribe((res)=>{
+        this.allData = res.line
+       })
+    })
+  }
 }
