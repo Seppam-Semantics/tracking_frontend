@@ -475,4 +475,9 @@ sizeslist(index:any) {
     console.error('sizes is not defined');
   }
 }
+
+back(){
+  this.router.navigate(['/main/KnitFactoryMachine'])
+}
+
 }
