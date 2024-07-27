@@ -56,9 +56,6 @@ export class KnitFactoryMachineEntryComponent implements OnInit, AfterViewInit{
   constructor(private fb: FormBuilder, private api: ApiService , private router : Router , private datePipe: DatePipe, private cdr: ChangeDetectorRef) { 
      
     this.knitFtyMachineForm = new FormGroup({
-      id : new FormControl(0),
-      buyer : new FormControl('', Validators.required) ,
-      orderNo : new FormControl('',Validators.required),
       data: this.fb.array([]),
     })
 
@@ -228,13 +225,13 @@ knitFtyMachineAddButton() {
   this.previousRow = this.items.length > 0 ? this.items.at(this.items.length) : null;
    
   const row = this.fb.group({
-    id: [''],
+    id: [],
     buyer:[''],
     orderNo:[''],
     style: [''],
     color: [''],
     size: [''],
-    woId: ['', Validators.required],
+    woId: [''],
     greigeKg: [''],
     machineDia: [''],
     knitFty: [''],
@@ -366,6 +363,7 @@ delete(index:any){
 }
 
 save(){
+  console.log(this.knitFtyMachineForm.value)
 if(this.knitFtyMachineForm.valid){
   this.api.postAllocation(this.knitFtyMachineForm.value).subscribe((res)=>{
     alert(res.message);
@@ -447,4 +445,9 @@ sizeslist(index:any) {
     console.error('sizes is not defined');
   }
 }
+
+back(){
+  this.router.navigate(['/main/KnitFactoryMachine'])
+}
+
 }
