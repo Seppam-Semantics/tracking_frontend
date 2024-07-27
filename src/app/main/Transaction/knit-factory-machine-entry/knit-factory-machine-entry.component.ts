@@ -82,9 +82,6 @@ ngAfterViewInit(){
 
   //--------------------------------------------------------------------------------------------------------
   getBuyerValue(index:any) {
-    // this.buyerName = event.target.value;
-    // const formArray = this.knitFtyMachineForm.get('data') as FormArray;
-    // const row = formArray.at(index);
     const formArray = this.knitFtyMachineForm.get('data') as FormArray;
     const row = formArray.at(index);
     this.Buyer_Value = row.get('buyer')?.value;
@@ -98,9 +95,6 @@ ngAfterViewInit(){
   }
 
   ordervalue(index:any) {
-    // this.Order_Value = event.target.value
-    // const formArray = this.knitFtyMachineForm.get('data') as FormArray;
-    // const row = formArray.at(index)
     const formArray = this.knitFtyMachineForm.get('data') as FormArray;
     const row = formArray.at(index);
     this.Buyer_Value = row.get('buyer')?.value;
@@ -148,7 +142,6 @@ ngAfterViewInit(){
   }
 
 
-  // getwoId(size: any, index: number){
   getwoId(index: number){
     const formArray = this.knitFtyMachineForm.get('data') as FormArray;
     const row = formArray.at(index);
@@ -164,8 +157,6 @@ ngAfterViewInit(){
     })
     this.api.getwodetails(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, size).subscribe((res) => {
       const woId = res.workorders[0].id;
-      // this.greigeKgTotal = res.workorders[0].greigeKg;
-
       const formArray = this.knitFtyMachineForm.get('data') as FormArray;
       const row = formArray.at(index);
       row.get('woId')?.setValue(woId);
@@ -259,44 +250,44 @@ knitFtyMachineAddButton() {
   
    this.items.push(row);
 
-  //  this.values = this.items.getRawValue();
-
 }
 
-// check(index: any) {
-//   const formArray = this.knitFtyMachineForm.get('data') as FormArray;
-//   const row = formArray.at(index);
+/*check(index: any) {
+  const formArray = this.knitFtyMachineForm.get('data') as FormArray;
+  const row = formArray.at(index);
 
-//   const currentStyle = row.get('style')?.value;
-//   const currentColor = row.get('color')?.value;
-//   const currentSize = row.get('size')?.value;
+  const currentStyle = row.get('style')?.value;
+  const currentColor = row.get('color')?.value;
+  const currentSize = row.get('size')?.value;
 
-//   this.values = this.items.getRawValue();
+  this.values = this.items.getRawValue();
 
-//   for (let i = 0; i < this.values.length; i++) {
-//     const style = this.values[i]?.style;
-//     const color = this.values[i]?.color;
-//     const size = this.values[i]?.size;
-//     const endDate = this.values[i]?.endDate;
+  for (let i = 0; i < this.values.length; i++) {
+    const style = this.values[i]?.style;
+    const color = this.values[i]?.color;
+    const size = this.values[i]?.size;
+    const endDate = this.values[i]?.endDate;
 
 
-//     if ((currentStyle === (style )) &&
-//         (currentColor === (color )) &&
-//         (currentSize === (size) )) {
+    if ((currentStyle === (style )) &&
+        (currentColor === (color )) &&
+        (currentSize === (size) )) {
       
 
-//       const previousEndDate = this.values[i]?.endDate;
-//       row.get('startDate')?.setValue(previousEndDate);
-//       break;
-//     }
-//   }
-// }
+      const previousEndDate = this.values[i]?.endDate;
+      row.get('startDate')?.setValue(previousEndDate);
+      break;
+    }
+  }
+}*/
 
-check(index: number) {
+
+check() {
   try{
   const formArray = this.knitFtyMachineForm.get('data') as FormArray;
-  const currentRow = formArray.at(index);
+    for(let index = formArray.length -1; index >= 0; index--) {
 
+  const currentRow = formArray.at(index);
   const currentStyle = currentRow.get('style')?.value;
   const currentColor = currentRow.get('color')?.value;
   const currentSize = currentRow.get('size')?.value;
@@ -321,13 +312,13 @@ check(index: number) {
   if (latestEndDate) {
     const nextDay = new Date(latestEndDate);
     nextDay.setDate(nextDay.getDate() + 1);
-    currentRow.get('startDate')?.setValue(nextDay.toISOString().substring(0, 10)); // Format as yyyy-MM-dd
+    currentRow.get('startDate')?.setValue(nextDay.toISOString().substring(0, 10));
   }
 }
-catch{
+}
+catch{}
+}
 
-}
-}
 
 Addcheck(index: number) {
   try{
