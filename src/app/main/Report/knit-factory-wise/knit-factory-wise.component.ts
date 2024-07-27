@@ -7,7 +7,9 @@ import jsPDF from 'jspdf';
 import { ApiService } from 'src/app/api.service';
 import Swal from 'sweetalert2';
 import * as XLSX from 'xlsx'
-import { CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray } from '@angular/cdk/drag-drop';;
+import { CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray } from '@angular/cdk/drag-drop';
+import { AfterViewInit, ChangeDetectorRef ,QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Dropdown } from 'primeng/dropdown';
 
 @Component({
   selector: 'app-knit-factory-wise',
@@ -30,8 +32,8 @@ export class KnitFactoryWiseComponent implements OnInit {
   totalGreigeKg: number = 0;
   machineDiadrop: any;
   fty_name: any;
-  knitfty:any
-  machineDia:any
+  knitfty: any
+  machineDia: any
   AllIddata: any;
   buyers: any;
   Buyer_Value: any;
@@ -54,16 +56,16 @@ export class KnitFactoryWiseComponent implements OnInit {
     this.api.getbuyers().subscribe((res) => {
       this.buyers = res.buyers;
     })
-  
+
     this.api.knitfty_name().subscribe((res) => {
       this.ftyName = res.factorys
     })
 
-    this.api.getAllocation().subscribe((res)=>{
+    this.api.getAllocation().subscribe((res) => {
       this.machine = res.data
     })
 
-    this.api.getallmachineDiadetails().subscribe((res)=>{
+    this.api.getallmachineDiadetails().subscribe((res) => {
       this.machineDiadrop = res.data
     })
 
@@ -76,57 +78,57 @@ export class KnitFactoryWiseComponent implements OnInit {
     this.items.controls.forEach((control: AbstractControl) => {
       const row = control as FormGroup;
       if (row instanceof FormGroup) {
-          row.get('daysrequired')?.valueChanges.subscribe(() => {
-              this.calculateEndDate();
-          });
+        row.get('daysrequired')?.valueChanges.subscribe(() => {
+          this.calculateEndDate();
+        });
 
-          row.get('startDate')?.valueChanges.subscribe(() => {
-              this.calculateEndDate();
-          });
+        row.get('startDate')?.valueChanges.subscribe(() => {
+          this.calculateEndDate();
+        });
       }
-  });
+    });
 
   }
 
   knitftyValue() {
     console.log(this.knitfty)
-    this.api.getSingleAllocation('',this.knitfty,'').subscribe((res)=>{
+    this.api.getSingleAllocation('', this.knitfty, '').subscribe((res) => {
       console.log(res)
     })
   }
 
   machineDiaValue() {
-    this.api.getSingleAllocation('',this.knitfty,this.machineDia).subscribe((res)=>{
+    this.api.getSingleAllocation('', this.knitfty, this.machineDia).subscribe((res) => {
       this.AllIddata = res.data
 
       const EntryData = this.knitFtyMachineForm.get('data') as FormArray;
       EntryData.clear();
-      this.AllIddata.forEach((dataItem: any, i:any) => {
+      this.AllIddata.forEach((dataItem: any, i: any) => {
         const Details = this.fb.group({
-            "id": [dataItem.id],
-            "headId":[parseInt(dataItem.headId)],
-            "seqId" : [i+1],
-            "buyer":[dataItem.buyer],
-            "orderNo":[dataItem.orderNo],
-            "style": [dataItem.style],
-            "color": [dataItem.color],
-            "size": [dataItem.size],
-            "woId": [dataItem.woId],
-            "greigeKg": [dataItem.greigeKg],
-            "machineDia": [dataItem.machineDia],
-            "knitFty": [dataItem.knitFty],
-            "allocated": [dataItem.allocated],
-            "startDate": [dataItem.startDate],
-            "daysrequired": [dataItem.daysrequired],
-            "endDate": [dataItem.endDate],
-            "oldId" : [dataItem.oldId ? dataItem.oldId : dataItem.id]
+          "id": [dataItem.id],
+          "headId": [parseInt(dataItem.headId)],
+          "seqId": [i + 1],
+          "buyer": [dataItem.buyer],
+          "orderNo": [dataItem.orderNo],
+          "style": [dataItem.style],
+          "color": [dataItem.color],
+          "size": [dataItem.size],
+          "woId": [dataItem.woId],
+          "greigeKg": [dataItem.greigeKg],
+          "machineDia": [dataItem.machineDia],
+          "knitFty": [dataItem.knitFty],
+          "allocated": [dataItem.allocated],
+          "startDate": [dataItem.startDate],
+          "daysrequired": [dataItem.daysrequired],
+          "endDate": [dataItem.endDate],
+          "oldId": [dataItem.oldId ? dataItem.oldId : dataItem.id]
         })
 
         EntryData.push(Details);
         Details.get('daysrequired')?.valueChanges.subscribe(() => {
           this.calculateEndDate();
         });
-    })
+      })
     })
   }
 
@@ -158,7 +160,7 @@ export class KnitFactoryWiseComponent implements OnInit {
     // const formArray = this.knitFtyMachineForm.get('data') as FormArray;
     // const row = formArray.at(index);
     this.Buyer_Value = this.knitFtyMachineForm.get('buyer')?.value;
-    this.Order_Value =  this.knitFtyMachineForm.get('orderNo')?.value;
+    this.Order_Value = this.knitFtyMachineForm.get('orderNo')?.value;
     this.orderdata()
   }
 
@@ -171,7 +173,7 @@ export class KnitFactoryWiseComponent implements OnInit {
     const formArray = this.knitFtyMachineForm.get('data') as FormArray;
     const row = formArray.at(index);
     this.Buyer_Value = this.knitFtyMachineForm.get('buyer')?.value;
-    this.Order_Value =  this.knitFtyMachineForm.get('orderNo')?.value;
+    this.Order_Value = this.knitFtyMachineForm.get('orderNo')?.value;
     this.style_Value = row.get('style')?.value;
 
     this.styledata()
@@ -187,7 +189,7 @@ export class KnitFactoryWiseComponent implements OnInit {
     const formArray = this.knitFtyMachineForm.get('data') as FormArray;
     const row = formArray.at(index);
     this.Buyer_Value = this.knitFtyMachineForm.get('buyer')?.value;
-    this.Order_Value =  this.knitFtyMachineForm.get('orderNo')?.value;
+    this.Order_Value = this.knitFtyMachineForm.get('orderNo')?.value;
     this.style_Value = row.get('style')?.value;
     this.color_Value = row.get('color')?.value;
 
@@ -201,8 +203,8 @@ export class KnitFactoryWiseComponent implements OnInit {
     })
   }
 
-  getwoId(size: any, index: number){
-    this.api.getmachineDiadetails(this.style_Value , size).subscribe((res)=>{
+  getwoId(size: any, index: number) {
+    this.api.getmachineDiadetails(this.style_Value, size).subscribe((res) => {
       const machineDia = res.machineDia[0].machineDia
 
       const formArray = this.knitFtyMachineForm.get('data') as FormArray;
@@ -219,194 +221,284 @@ export class KnitFactoryWiseComponent implements OnInit {
       row.get('woId')?.setValue(woId);
       row.get('greigeKg')?.setValue(greigeKg);
     });
-    
-}
 
-greigevalidation(index:any){
-  const formArray = this.knitFtyMachineForm.get('data') as FormArray;
-  const row = formArray.at(index);
-  this.Buyer_Value = this.knitFtyMachineForm.get('buyer')?.value;
-  this.Order_Value =  this.knitFtyMachineForm.get('orderNo')?.value;
-  this.style_Value = row.get('style')?.value;
-  this.color_Value = row.get('color')?.value;
-  this.size_Value = row.get('size')?.value;
-
-  this.api.getwodetails(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, this.size_Value).subscribe((res) => {
-    const woId = res.workorders[0].id;
-    this.greigeKgTotal = res.workorders[0].greigeKg;
-  })
-}
-
-valid(value:any, i:any){
-  const inputValue = value;
-  const tolerance = (this.greigeKgTotal)
-  if(inputValue > tolerance ){
-    alert("Allowed value is : " + tolerance);
-    this.toleranceValid[i] = true
   }
-  else{
-    this.toleranceValid[i] = false
+
+  greigevalidation(index: any) {
+    const formArray = this.knitFtyMachineForm.get('data') as FormArray;
+    const row = formArray.at(index);
+    this.Buyer_Value = this.knitFtyMachineForm.get('buyer')?.value;
+    this.Order_Value = this.knitFtyMachineForm.get('orderNo')?.value;
+    this.style_Value = row.get('style')?.value;
+    this.color_Value = row.get('color')?.value;
+    this.size_Value = row.get('size')?.value;
+
+    this.api.getwodetails(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, this.size_Value).subscribe((res) => {
+      const woId = res.workorders[0].id;
+      this.greigeKgTotal = res.workorders[0].greigeKg;
+    })
   }
-  this.validlity()
-}
 
-validlity(){
-  if(this.toleranceValid.includes(true)){
-    this.valueExceeded = true;
+  valid(value: any, i: any) {
+    const inputValue = value;
+    const tolerance = (this.greigeKgTotal)
+    if (inputValue > tolerance) {
+      alert("Allowed value is : " + tolerance);
+      this.toleranceValid[i] = true
+    }
+    else {
+      this.toleranceValid[i] = false
+    }
+    this.validlity()
   }
-  else{
-    this.valueExceeded = false;
+
+  validlity() {
+    if (this.toleranceValid.includes(true)) {
+      this.valueExceeded = true;
+    }
+    else {
+      this.valueExceeded = false;
+    }
   }
-}
 
 
-production_days(factory : any, index:any){
-  const formArray = this.knitFtyMachineForm.get('data') as FormArray;
-  const row = formArray.at(index);
-  const knitFty = factory
-  const machineDia = row.get('machineDia')?.value;
-  this.api.getProductionDays(knitFty, machineDia).subscribe((res)=>{
-    this.dayprod = res.data[0].prodDay
-    const daysReq = ((row.get('greigeKg')?.value)/this.dayprod).toFixed()
-    row.get('daysrequired')?.setValue(daysReq)
-  })
-}
-//--------------------------------------------------------------------------------------------------------
+  production_days(factory: any, index: any) {
+    const formArray = this.knitFtyMachineForm.get('data') as FormArray;
+    const row = formArray.at(index);
+    const knitFty = factory
+    const machineDia = row.get('machineDia')?.value;
+    this.api.getProductionDays(knitFty, machineDia).subscribe((res) => {
+      this.dayprod = res.data[0].prodDay
+      const daysReq = ((row.get('greigeKg')?.value) / this.dayprod).toFixed()
+      row.get('daysrequired')?.setValue(daysReq)
+    })
+  }
+  //--------------------------------------------------------------------------------------------------------
 
-get items() {
-  return this.knitFtyMachineForm.get("data") as FormArray
-}
+  get items() {
+    return this.knitFtyMachineForm.get("data") as FormArray
+  }
 
-knitFtyMachineAddButton() {
+  knitFtyMachineAddButton() {
 
-  const previousEndDate = this.items && this.items.length > 0 ? this.items.at(this.items.length - 1).get('enddate')?.value : null;
-  this.previousRow = this.items.length > 0 ? this.items.at(this.items.length) : null;
+    const previousEndDate = this.items && this.items.length > 0 ? this.items.at(this.items.length - 1).get('enddate')?.value : null;
+    this.previousRow = this.items.length > 0 ? this.items.at(this.items.length) : null;
+
+    const row = this.fb.group({
+      "id": [''],
+      "seqId": [],
+      "headId": [],
+      "buyer": [''],
+      "orderNo": [''],
+      "style": [''],
+      "color": [''],
+      "size": [''],
+      "woId": ['', Validators.required],
+      "greigeKg": [''],
+      "machineDia": [''],
+      "knitFty": [''],
+      "allocated": [''],
+      "startDate": [previousEndDate ? new Date(previousEndDate) : ''],
+      "daysrequired": [''],
+      "endDate": [''],
+      "oldId": ['']
+    });
+    this.items.push(row);
+
+    row.get('daysrequired')?.valueChanges.subscribe(() => {
+      this.calculateEndDate();
+    });
+  }
+
+
+  check() {
+    try{
+    const formArray = this.knitFtyMachineForm.get('data') as FormArray;
+      for(let index = formArray.length -1; index >= 0; index--) {
   
-  const row = this.fb.group({
-    "id": [''],
-    "seqId" : [],
-    "headId" : [],
-    "buyer": [''],
-    "orderNo": [''],
-    "style": [''],
-    "color": [''],
-    "size": [''],
-    "woId": ['',Validators.required],
-    "greigeKg": [''],
-    "machineDia": [''],
-    "knitFty": [''],
-    "allocated": [''],
-    "startDate": [previousEndDate ? new Date(previousEndDate) : ''],
-    "daysrequired": [''],
-    "endDate": [''],
-    "oldId":['']
-  });
-  this.items.push(row);
-
-  row.get('daysrequired')?.valueChanges.subscribe(() => {
-    this.calculateEndDate();
-  });
-}
-
-
-check(index: number) {
-  const formArray = this.knitFtyMachineForm.get('data') as FormArray;
-  const currentRow = formArray.at(index);
-
-  const currentStyle = currentRow.get('style')?.value;
-  const currentColor = currentRow.get('color')?.value;
-  const currentSize = currentRow.get('size')?.value;
-
-  for (let i = 0; i < index; i++) {
-    const row = formArray.at(i);
-    const style = row.get('style')?.value;
-    const color = row.get('color')?.value;
-    const size = row.get('size')?.value;
-    const endDate = row.get('endDate')?.value;
-
-    if (currentStyle === style && currentColor === color && currentSize === size) {
-
-      const nextDay = new Date(endDate);
+    const currentRow = formArray.at(index);
+  
+    const currentSize = currentRow.get('size')?.value;
+    const currentmachineDia = currentRow.get('machineDia')?.value;
+    const currentknitFty = currentRow.get('knitFty')?.value;
+  
+    let latestEndDate: Date | null = null;
+  
+    for (let i = 0; i < index; i++) {
+      const row = formArray.at(i);
+      const machineDia = row.get('machineDia')?.value;
+      const knitFty = row.get('knitFty')?.value;
+      const size = row.get('size')?.value;
+      const endDate = row.get('endDate')?.value;
+      
+      if (currentknitFty === knitFty && currentmachineDia === machineDia && currentSize === size) {
+        const endDateObj = new Date(endDate);
+        if (!latestEndDate || endDateObj > latestEndDate) {
+          latestEndDate = endDateObj;
+        }
+      }
+    }
+  
+    if (latestEndDate) {
+      const nextDay = new Date(latestEndDate);
       nextDay.setDate(nextDay.getDate() + 1);
-
-      currentRow.get('startDate')?.setValue(nextDay.toISOString().substring(0, 10)); // Format as yyyy-MM-dd
-      break; // Assuming you want to update only the first matching row's startDate
+      currentRow.get('startDate')?.setValue(nextDay.toISOString().substring(0, 10));
     }
   }
-}
-
-
-
-
-calculateEndDate() {
-
-
-this.items.controls.forEach((control: AbstractControl) => {
-  const row = control as FormGroup;
-  if (row instanceof FormGroup) {
-    const daysReq = parseFloat(row.get('daysrequired')?.value) || 0;
-
-    const startDate = new Date(row.get('startDate')?.value);
-    // const daysReq = +row.get('daysrequired')?.value; // Convert daysreq to number
-  
-    if (startDate && !isNaN(daysReq)) {
-      const endDate = new Date(startDate);
-      endDate.setDate(startDate.getDate() + daysReq);
-      row.get('endDate')?.setValue(endDate.toISOString().substring(0, 10)); // Set enddate in yyyy-MM-dd format
-    }     
-
-  
   }
-});
-}
+  catch{}
+  }
 
-Addcheck(index: number) {
-const formArray = this.knitFtyMachineForm.get('data') as FormArray;
-const currentRow = formArray.at(index);
 
-const currentStyle = currentRow.get('style')?.value;
-const currentColor = currentRow.get('color')?.value;
-const currentSize = currentRow.get('size')?.value;
-const currentGreigeKg = parseFloat(currentRow.get('greigeKg')?.value) || 0;
-console.log(currentGreigeKg)  
-this.totalGreigeKg = currentGreigeKg;
 
-for (let i = 0; i < formArray.length; i++) {
-  if (i !== index) {
-    const row = formArray.at(i);
-    const style = row.get('style')?.value;
-    const color = row.get('color')?.value;
-    const size = row.get('size')?.value;
-    const greigeKg = parseFloat(row.get('greigeKg')?.value) || 0;
 
-    if (currentStyle === style && currentColor === color && currentSize === size) {
-      this.totalGreigeKg += greigeKg;
-      const inputValue = this.totalGreigeKg;
-      const tolerance = (this.greigeKgTotal)
-      if(inputValue > tolerance ){
-        alert("Allowed value is : " + this.greigeKgTotal);
-        this.toleranceValid[i] = true
+  Addcheck(index: number) {
+    try{
+    const formArray = this.knitFtyMachineForm.get('data') as FormArray;
+    const currentRow = formArray.at(index);
+  
+    const currentSize = currentRow.get('size')?.value;
+    const currentmachineDia = currentRow.get('machineDia')?.value;
+    const currentknitFty = currentRow.get('knitFty')?.value;
+    const currentGreigeKg = parseFloat(currentRow.get('greigeKg')?.value) || 0;
+    console.log(currentGreigeKg)  
+    this.totalGreigeKg = currentGreigeKg;
+  
+    for (let i = 0; i < formArray.length; i++) {
+      if (i !== index) {
+        const row = formArray.at(i);
+        const machineDia = row.get('machineDia')?.value;
+        const knitFty = row.get('knitFty')?.value;
+        const size = row.get('size')?.value;
+  
+        const greigeKg = parseFloat(row.get('greigeKg')?.value) || 0;
+  
+        if (currentknitFty === knitFty && currentmachineDia === machineDia && currentSize === size) {
+          this.totalGreigeKg += greigeKg;
+          const inputValue = this.totalGreigeKg;
+          const tolerance = (this.greigeKgTotal)
+          if(inputValue > tolerance ){
+  
+            this.toleranceValid[i] = true
+          }
+          else{
+            this.toleranceValid[i] = false
+          }
+          this.validlity()
+  
+          console.log(this.totalGreigeKg)
+        }
       }
-      else{
-        this.toleranceValid[i] = false
-      }
-      this.validlity()
-
-      console.log(this.totalGreigeKg)
     }
   }
-}
+  catch{ }
+  }
+  
+  
+  
+  calculateEndDate() {
+  
+  try{
+    this.items.controls.forEach((control: AbstractControl) => {
+      const row = control as FormGroup;
+      if (row instanceof FormGroup) {
+        const daysReq = parseFloat(row.get('daysrequired')?.value) || 0;
+    
+        const startDate = new Date(row.get('startDate')?.value);
+        // const daysReq = +row.get('daysrequired')?.value; // Convert daysreq to number
+      
+        if (startDate && !isNaN(daysReq)) {
+          const endDate = new Date(startDate);
+          endDate.setDate(startDate.getDate() + daysReq);
+          row.get('endDate')?.setValue(endDate.toISOString().substring(0, 10)); // Set enddate in yyyy-MM-dd format
+        }     
+  
+      
+      }
+    });
+  }
+  catch{}
+  }
+
+  @ViewChildren('buyername') buyername!: QueryList<Dropdown>;
+buyerlist(index: any) {
+  if (this.buyername) {
+    setTimeout(() => {
+      const dropdownArray = this.buyername.toArray();
+      if (dropdownArray[index]) {
+        dropdownArray[index].show();
+      }
+    });
+  } else {
+    console.error('buyername is not defined');
+  }
 }
 
+@ViewChildren('orders') orders!: QueryList<Dropdown>;
+orderlist(index:any) {
+  if (this.orders) {
+    setTimeout(() => {
+    const orders = this.orders.toArray();
+    if (orders[index]) {
+      orders[index].show();
+    }
+  });
+  } else {
+    console.error('orders is not defined');
+  }
+}
+
+@ViewChildren('styles') styles!: QueryList<Dropdown>;
+styleslist(index:any) {
+  if (this.styles) {
+    setTimeout(() => {
+    const styles = this.styles.toArray();
+    if (styles[index]) {
+      styles[index].show();
+    }
+  })
+  } else {
+    console.error('styles is not defined');
+  }
+}
+
+@ViewChildren('colors') colors!: QueryList<Dropdown>;
+colorslist(index:any) {
+  if (this.colors) {
+    setTimeout(() => {
+    const colors = this.colors.toArray();
+    if (colors[index]) {
+      colors[index].show();
+    }
+  })
+  } else {
+    console.error('colors is not defined');
+  }
+}
+
+@ViewChildren('sizes') sizes!: QueryList<Dropdown>;
+sizeslist(index:any) {
+  if (this.sizes) {
+    setTimeout(() => {
+    const sizes = this.sizes.toArray();
+    if (sizes[index]) {
+      sizes[index].show();
+    }
+  })
+  } else {
+    console.error('sizes is not defined');
+  }
+}
 
   back() {
     this.router.navigate(['main/knitFactoryMain'])
   }
 
-save(){
-  this.api.updateAllocation(this.knitFtyMachineForm.value).subscribe((res)=>{
-    alert(res.message);
-  })
-}
+  save() {
+    // this.api.updateAllocation(this.knitFtyMachineForm.value).subscribe((res) => {
+    //   alert(res.message);
+    // })
+    console.log(this.knitFtyMachineForm.value)
+  }
 
 }

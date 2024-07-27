@@ -252,56 +252,27 @@ knitFtyMachineAddButton() {
 
 }
 
-/*check(index: any) {
-  const formArray = this.knitFtyMachineForm.get('data') as FormArray;
-  const row = formArray.at(index);
-
-  const currentStyle = row.get('style')?.value;
-  const currentColor = row.get('color')?.value;
-  const currentSize = row.get('size')?.value;
-
-  this.values = this.items.getRawValue();
-
-  for (let i = 0; i < this.values.length; i++) {
-    const style = this.values[i]?.style;
-    const color = this.values[i]?.color;
-    const size = this.values[i]?.size;
-    const endDate = this.values[i]?.endDate;
-
-
-    if ((currentStyle === (style )) &&
-        (currentColor === (color )) &&
-        (currentSize === (size) )) {
-      
-
-      const previousEndDate = this.values[i]?.endDate;
-      row.get('startDate')?.setValue(previousEndDate);
-      break;
-    }
-  }
-}*/
-
-
 check() {
   try{
   const formArray = this.knitFtyMachineForm.get('data') as FormArray;
     for(let index = formArray.length -1; index >= 0; index--) {
 
   const currentRow = formArray.at(index);
-  const currentStyle = currentRow.get('style')?.value;
-  const currentColor = currentRow.get('color')?.value;
+
   const currentSize = currentRow.get('size')?.value;
+  const currentmachineDia = currentRow.get('machineDia')?.value;
+  const currentknitFty = currentRow.get('knitFty')?.value;
 
   let latestEndDate: Date | null = null;
 
   for (let i = 0; i < index; i++) {
     const row = formArray.at(i);
-    const style = row.get('style')?.value;
-    const color = row.get('color')?.value;
+    const machineDia = row.get('machineDia')?.value;
+    const knitFty = row.get('knitFty')?.value;
     const size = row.get('size')?.value;
     const endDate = row.get('endDate')?.value;
     
-    if (currentStyle === style && currentColor === color && currentSize === size) {
+    if (currentknitFty === knitFty && currentmachineDia === machineDia && currentSize === size) {
       const endDateObj = new Date(endDate);
       if (!latestEndDate || endDateObj > latestEndDate) {
         latestEndDate = endDateObj;
@@ -325,9 +296,9 @@ Addcheck(index: number) {
   const formArray = this.knitFtyMachineForm.get('data') as FormArray;
   const currentRow = formArray.at(index);
 
-  const currentStyle = currentRow.get('style')?.value;
-  const currentColor = currentRow.get('color')?.value;
   const currentSize = currentRow.get('size')?.value;
+  const currentmachineDia = currentRow.get('machineDia')?.value;
+  const currentknitFty = currentRow.get('knitFty')?.value;
   const currentGreigeKg = parseFloat(currentRow.get('greigeKg')?.value) || 0;
   console.log(currentGreigeKg)  
   this.totalGreigeKg = currentGreigeKg;
@@ -335,12 +306,13 @@ Addcheck(index: number) {
   for (let i = 0; i < formArray.length; i++) {
     if (i !== index) {
       const row = formArray.at(i);
-      const style = row.get('style')?.value;
-      const color = row.get('color')?.value;
+      const machineDia = row.get('machineDia')?.value;
+      const knitFty = row.get('knitFty')?.value;
       const size = row.get('size')?.value;
+
       const greigeKg = parseFloat(row.get('greigeKg')?.value) || 0;
 
-      if (currentStyle === style && currentColor === color && currentSize === size) {
+      if (currentknitFty === knitFty && currentmachineDia === machineDia && currentSize === size) {
         this.totalGreigeKg += greigeKg;
         const inputValue = this.totalGreigeKg;
         const tolerance = (this.greigeKgTotal)

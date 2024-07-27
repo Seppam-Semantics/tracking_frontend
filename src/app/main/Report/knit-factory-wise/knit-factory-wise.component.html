@@ -5,11 +5,11 @@
     </div>
     <div style="flex: 1 1 auto;"></div>
 
-    <p-dropdown [options]="fty_name" placeholder="KnitFty" [editable]="true" optionValue="knitfty"
-     optionLabel="knitfty" [(ngModel)]="knitfty"></p-dropdown>
+    <p-dropdown [options]="fty_name" placeholder="KnitFty" [editable]="true" optionValue="knitfty" optionLabel="knitfty"
+        [(ngModel)]="knitfty"></p-dropdown>
 
-    <p-dropdown [options]="machineDiadrop" placeholder="Machine Dia" [editable]="true" optionValue="machineDia" optionLabel="machineDia"
-    [(ngModel)]="machineDia" (onChange)="machineDiaValue()"></p-dropdown>
+    <p-dropdown [options]="machineDiadrop" placeholder="Machine Dia" [editable]="true" optionValue="machineDia"
+        optionLabel="machineDia" [(ngModel)]="machineDia" (onChange)="machineDiaValue()"></p-dropdown>
 
 </mat-toolbar>
 <div class="tablecss" [formGroup]="knitFtyMachineForm">
@@ -37,79 +37,107 @@
                 <th>Old Id</th>
             </tr>
         </thead>
-        <tbody formArrayName="data" >
-            <tr *ngFor="let list of items.controls; let i=index" [formGroupName]="i" cdkDrag (mouseenter)="calculateEndDate(i)">
-                
+        <tbody formArrayName="data">
+            <tr *ngFor="let list of items.controls; let i=index" [formGroupName]="i" cdkDrag
+                (mouseenter)="calculateEndDate(i)">
+
                 <td cdkDragHandle>{{i+1}}</td>
 
                 <td cdkDragHandle>
-                    <input type="text" class="form-control" formControlName="buyer" 
-                    (mouseenter)="check(i)" (mouseenter)="calculateEndDate(i)" readonly>
-                </td>
-                <td cdkDragHandle>
-                    <input type="text" class="form-control" formControlName="orderNo" 
-                    (mouseenter)="check(i)" (mouseenter)="calculateEndDate(i)" readonly>
-                </td>
-                <td cdkDragHandle>
-                        <input type="text" class="form-control" formControlName="style" (onChange)="stylevalue(i)"
-                        (mouseenter)="ordervalue(i)" (onChange)="styledata()" (onChange)="check(i)"
-                        (mouseenter)="check(i)" (mouseenter)="calculateEndDate(i)" readonly>
+                    <!-- <p-dropdown #buyername placeholder="Buyer" optionLabel="buyer" [options]="buyers" 
+                        optionValue="buyer" [editable]="true" formControlName="buyer" 
+                        (onChange)="getBuyerValue(i)" (mouseenter)="getBuyerValue(i)" 
+                        (onChange)="getorders()" (mouseenter)="calculateEndDate(i)" 
+                        (click)="buyerlist(i)" >
+                    </p-dropdown> -->
+                    <input type="text" class="form-control" formControlName="buyer" (onChange)="getBuyerValue(i)"
+                        (mouseenter)="getBuyerValue(i)" (onChange)="getorders()" (mouseenter)="calculateEndDate(i)"
+                        (click)="buyerlist(i)" readonly>
                 </td>
 
                 <td cdkDragHandle>
-                        <input type="text" class="form-control" formControlName="color" 
-                        (onChange)="colorvalue(i)" (onChange)="colordata()"
-                        (mouseenter)="stylevalue(i)" (onChange)="check(i)" (click)="check(i)" (mouseenter)="check(i)"
-                        (mouseenter)="calculateEndDate(i)" readonly>
+                    <!-- <p-dropdown #orders [options]="this.order" optionLabel="orderNO" optionValue="orderNO" placeholder="orderNo"
+                    (onChange)="ordervalue(i)" (mouseenter)="ordervalue(i)" (mouseenter)="getBuyerValue(i)" (onChange)="orderdata()"
+                    (mouseenter)="calculateEndDate(i)" [editable]="true"
+                    formControlName="orderNo" (click)="orderlist(i)">
+                    </p-dropdown> -->
+
+                    <input type="text" class="form-control" formControlName="buyer" (onChange)="ordervalue(i)"
+                        (mouseenter)="ordervalue(i)" (mouseenter)="getBuyerValue(i)" (onChange)="orderdata()"
+                        (mouseenter)="calculateEndDate(i)" [editable]="true" formControlName="orderNo"
+                        (click)="orderlist(i)" readonly>
                 </td>
 
                 <td cdkDragHandle>
-                      <input type="text" class="form-control" formControlName="size" (mouseenter)="colorvalue(i)" (onChange)="getwoId(i)"
-                      (onChange)="check(i)" (mouseenter)="check(i)" (mouseenter)="calculateEndDate(i)"
-                      (mouseenter)="greigevalidation(i)" readonly>
-                    </td>
+                    <!-- <p-dropdown #styles [options]="stylelist" optionLabel="style" optionValue="style"
+                        placeholder="style" (onChange)="stylevalue(i)" (mouseenter)="ordervalue(i)"
+                        (onChange)="styledata()" (mouseenter)="calculateEndDate(i)" [editable]="true"
+                        formControlName="style" (click)="styleslist(i)">
+                    </p-dropdown> -->
+                    <input type="text" class="form-control" (onChange)="stylevalue(i)" (mouseenter)="ordervalue(i)"
+                        (onChange)="styledata()" (mouseenter)="calculateEndDate(i)" [editable]="true"
+                        formControlName="style" (click)="styleslist(i)" readonly>
+                </td>
+
+                <td cdkDragHandle>
+                    <!-- <p-dropdown #colors [options]="colorlist" optionLabel="color" optionValue="color"
+                        placeholder="color" formControlName="color" [editable]="true" (onChange)="colorvalue(i)"
+                        (onChange)="colordata()" (mouseenter)="stylevalue(i)" (mouseenter)="calculateEndDate(i)"
+                        (click)="colorslist(i)" /> -->
+                    <input type="text" class="form-control" formControlName="color" (onChange)="colorvalue(i)"
+                        (onChange)="colordata()" (mouseenter)="stylevalue(i)" (mouseenter)="calculateEndDate(i)"
+                        (click)="colorslist(i)" readonly>
+                </td>
+
+                <td cdkDragHandle>
+                    <!-- <p-dropdown #sizes [options]="sizelist" optionLabel="size" optionValue="size" placeholder="size"
+                        formControlName="size" [editable]="true" (mouseenter)="colorvalue(i)" (onChange)="getwoId(i)"
+                        (mouseenter)="calculateEndDate(i)" (mouseenter)="greigevalidation(i)" (click)="sizeslist(i)" /> -->
+                    <input type="text" class="form-control" formControlName="size" [editable]="true"
+                        (mouseenter)="colorvalue(i)" (onChange)="getwoId(i)" (mouseenter)="calculateEndDate(i)"
+                        (mouseenter)="greigevalidation(i)" (click)="sizeslist(i)" readonly>
+                </td>
 
                 <td cdkDragHandle>
                     <input type="text" class="form-control" formControlName="greigeKg" (input)="Addcheck(i)"
-                        (input)="valid($event.target.value,i)" (mouseenter)="check(i)"
-                        (mouseenter)="calculateEndDate(i)" (mouseenter)="greigevalidation(i)"
-                        [ngClass]="{'is-invalid':this.toleranceValid[i]}" readonly>
+                        (input)="valid($event.target.value,i)" (mouseenter)="calculateEndDate(i)"
+                        (mouseenter)="greigevalidation(i)" [ngClass]="{'is-invalid':this.toleranceValid[i]}">
                 </td>
 
                 <td cdkDragHandle>
-                    <input type="text" class="form-control" formControlName="machineDia" (click)="check(i)"
-                        (mouseenter)="check(i)" readonly>
+                    <input type="text" class="form-control" formControlName="machineDia"
+                        (mouseenter)="calculateEndDate(i)">
                 </td>
 
 
-                <td cdkDragHandle>
-                    <input class="form-control" type="text" formControlName="knitFty" list="fty"
-                        (input)="production_days($event.target.value, i)" readonly (click)="check(i)" (mouseenter)="check(i)">
+                <td cdkDragHandle><input class="form-control" type="text" formControlName="knitFty" list="fty"
+                        (input)="check()" (input)="production_days($event.target.value, i)"
+                        (mouseenter)="calculateEndDate(i)">
                     <datalist id="fty">
                         <option *ngFor="let ftyName of this.ftyName" value="{{ftyName.knitFty}}">{{ftyName.knitFty}}
                         </option>
                     </datalist>
                 </td>
 
-                <td cdkDragHandle> 
-                    <input class="form-control" type="text" readonly formControlName="allocated" (mouseenter)="check(i)"></td>
-                <td cdkDragHandle> 
-                    <input class="form-control" type="date" formControlName="startDate" readonly (change)="calculateEndDate(i)"
-                        (click)="check(i)" (mouseenter)="check(i)"></td>
-                <td cdkDragHandle><input class="form-control" type="number" formControlName="daysrequired" readonly
-                        (click)="calculateEndDate(i)" (click)="check(i)" (mouseenter)="check(i)"></td>
+                <td cdkDragHandle><input class="form-control" type="text" formControlName="allocated">
+                </td>
+                <td cdkDragHandle><input class="form-control" type="date" formControlName="startDate"
+                        (change)="calculateEndDate(i)" (input)="check()" (mouseenter)="check()"></td>
+                <td cdkDragHandle><input class="form-control" type="number" formControlName="daysrequired"
+                        (input)="check()" (mouseenter)="check()" (click)="calculateEndDate(i)"
+                        (mouseenter)="calculateEndDate(i)"></td>
                 <td cdkDragHandle><input class="form-control" type="date" formControlName="endDate" readonly></td>
-                <td cdkDragHandle><input formControlName="oldId" class="form-control" readonly/></td>
 
+                <td cdkDragHandle><input class="form-control" type="text" formControlName="oldId" readonly></td>
                 <div *cdkDragPreview matchSize="true" class="container dragdrop-placeholder">
                     <span>Moving</span>
                 </div>
             </tr>
         </tbody>
     </table>
-<div style="display: flex; width: 100%; justify-content: center;">
-    <div>
-        <button class="btn btn-success" (click)="save()">Save</button>
+    <div style="display: flex; width: 100%; justify-content: center;">
+        <div>
+            <button class="btn btn-success" (click)="save()">Save</button>
+        </div>
     </div>
-</div>
 </div>
