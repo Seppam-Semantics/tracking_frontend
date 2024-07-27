@@ -27,7 +27,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr cdkDrag cdkDragLockAxis="y" *ngFor="let data of this.machine; let i = index;">
+            <tr *ngFor="let data of this.machine; let i = index;">
                 <td>{{i+1}}</td>
                 <td>{{data.buyer}}</td>
                 <td>{{data.orderNo}}</td>
