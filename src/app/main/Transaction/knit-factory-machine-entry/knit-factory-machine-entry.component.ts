@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import html2canvas from 'html2canvas';
@@ -14,7 +14,7 @@ import * as XLSX from 'xlsx'
   templateUrl: './knit-factory-machine-entry.component.html',
   styleUrls: ['./knit-factory-machine-entry.component.css']
 })
-export class KnitFactoryMachineEntryComponent implements OnInit{
+export class KnitFactoryMachineEntryComponent implements OnInit, AfterViewInit{
   valueExceeded : boolean = false;
   viewEntry : boolean = false;
   editview : boolean = false; 
@@ -53,7 +53,7 @@ export class KnitFactoryMachineEntryComponent implements OnInit{
   greigeKgTotal: any;
   size_Value: any;
 
-  constructor(private fb: FormBuilder, private api: ApiService , private router : Router , private datePipe: DatePipe) { 
+  constructor(private fb: FormBuilder, private api: ApiService , private router : Router , private datePipe: DatePipe, private cdr: ChangeDetectorRef) { 
      
     this.knitFtyMachineForm = new FormGroup({
       id : new FormControl(0),
@@ -72,6 +72,12 @@ ngOnInit(): void {
   this.api.knitfty_name().subscribe((res) => {
     this.ftyName = res.factorys
   })
+}
+
+ngAfterViewInit(){
+  setTimeout(() => {
+    this.cdr.detectChanges();
+  }); 
 }
 
   //--------------------------------------------------------------------------------------------------------
@@ -287,6 +293,7 @@ knitFtyMachineAddButton() {
 // }
 
 check(index: number) {
+  try{
   const formArray = this.knitFtyMachineForm.get('data') as FormArray;
   const currentRow = formArray.at(index);
 
@@ -317,8 +324,13 @@ check(index: number) {
     currentRow.get('startDate')?.setValue(nextDay.toISOString().substring(0, 10)); // Format as yyyy-MM-dd
   }
 }
+catch{
+
+}
+}
 
 Addcheck(index: number) {
+  try{
   const formArray = this.knitFtyMachineForm.get('data') as FormArray;
   const currentRow = formArray.at(index);
 
@@ -355,12 +367,16 @@ Addcheck(index: number) {
     }
   }
 }
+catch{
+
+}
+}
 
 
 
 calculateEndDate() {
 
-
+try{
   this.items.controls.forEach((control: AbstractControl) => {
     const row = control as FormGroup;
     if (row instanceof FormGroup) {
@@ -378,6 +394,8 @@ calculateEndDate() {
     
     }
   });
+}
+catch{}
 }
 
 delete(index:any){
@@ -400,10 +418,12 @@ else{
 @ViewChildren('buyername') buyername!: QueryList<Dropdown>;
 buyerlist(index: any) {
   if (this.buyername) {
-    const dropdownArray = this.buyername.toArray();
-    if (dropdownArray[index]) {
-      dropdownArray[index].show();
-    }
+    setTimeout(() => {
+      const dropdownArray = this.buyername.toArray();
+      if (dropdownArray[index]) {
+        dropdownArray[index].show();
+      }
+    });
   } else {
     console.error('buyername is not defined');
   }
@@ -412,10 +432,12 @@ buyerlist(index: any) {
 @ViewChildren('orders') orders!: QueryList<Dropdown>;
 orderlist(index:any) {
   if (this.orders) {
+    setTimeout(() => {
     const orders = this.orders.toArray();
     if (orders[index]) {
       orders[index].show();
     }
+  });
   } else {
     console.error('orders is not defined');
   }
@@ -424,10 +446,12 @@ orderlist(index:any) {
 @ViewChildren('styles') styles!: QueryList<Dropdown>;
 styleslist(index:any) {
   if (this.styles) {
+    setTimeout(() => {
     const styles = this.styles.toArray();
     if (styles[index]) {
       styles[index].show();
     }
+  })
   } else {
     console.error('styles is not defined');
   }
@@ -436,10 +460,12 @@ styleslist(index:any) {
 @ViewChildren('colors') colors!: QueryList<Dropdown>;
 colorslist(index:any) {
   if (this.colors) {
+    setTimeout(() => {
     const colors = this.colors.toArray();
     if (colors[index]) {
       colors[index].show();
     }
+  })
   } else {
     console.error('colors is not defined');
   }
@@ -448,10 +474,12 @@ colorslist(index:any) {
 @ViewChildren('sizes') sizes!: QueryList<Dropdown>;
 sizeslist(index:any) {
   if (this.sizes) {
+    setTimeout(() => {
     const sizes = this.sizes.toArray();
     if (sizes[index]) {
       sizes[index].show();
     }
+  })
   } else {
     console.error('sizes is not defined');
   }
