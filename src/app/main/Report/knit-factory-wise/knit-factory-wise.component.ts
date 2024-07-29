@@ -91,9 +91,8 @@ export class KnitFactoryWiseComponent implements OnInit {
   }
 
   knitftyValue() {
-    console.log(this.knitfty)
+
     this.api.getSingleAllocation('', this.knitfty, '').subscribe((res) => {
-      console.log(res)
     })
   }
 
@@ -212,6 +211,7 @@ export class KnitFactoryWiseComponent implements OnInit {
       row.get('machineDia')?.setValue(machineDia);
 
     })
+    try{
     this.api.getwodetails(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, size).subscribe((res) => {
       const woId = res.workorders[0].id;
       const greigeKg = res.workorders[0].greigeKg;
@@ -220,8 +220,8 @@ export class KnitFactoryWiseComponent implements OnInit {
       const row = formArray.at(index);
       row.get('woId')?.setValue(woId);
       row.get('greigeKg')?.setValue(greigeKg);
-    });
-
+    })
+  }catch{}
   }
 
   greigevalidation(index: any) {
@@ -361,7 +361,7 @@ export class KnitFactoryWiseComponent implements OnInit {
     const currentmachineDia = currentRow.get('machineDia')?.value;
     const currentknitFty = currentRow.get('knitFty')?.value;
     const currentGreigeKg = parseFloat(currentRow.get('greigeKg')?.value) || 0;
-    console.log(currentGreigeKg)  
+    
     this.totalGreigeKg = currentGreigeKg;
   
     for (let i = 0; i < formArray.length; i++) {
@@ -385,9 +385,7 @@ export class KnitFactoryWiseComponent implements OnInit {
             this.toleranceValid[i] = false
           }
           this.validlity()
-  
-          console.log(this.totalGreigeKg)
-        }
+          }
       }
     }
   }
@@ -495,10 +493,9 @@ sizeslist(index:any) {
   }
 
   save() {
-    // this.api.updateAllocation(this.knitFtyMachineForm.value).subscribe((res) => {
-    //   alert(res.message);
-    // })
-    console.log(this.knitFtyMachineForm.value)
+    this.api.updateAllocation(this.knitFtyMachineForm.value).subscribe((res) => {
+      alert(res.message);
+    })
   }
 
 }

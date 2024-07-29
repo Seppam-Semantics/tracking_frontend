@@ -322,7 +322,6 @@ Addcheck(index: number) {
   const currentColor = currentRow.get('color')?.value;
   const currentSize = currentRow.get('size')?.value;
   const currentGreigeKg = parseFloat(currentRow.get('greigeKg')?.value) || 0;
-  console.log(currentGreigeKg)  
   this.totalGreigeKg = currentGreigeKg;
 
   for (let i = 0; i < formArray.length; i++) {
@@ -345,7 +344,6 @@ Addcheck(index: number) {
         }
         this.validlity()
 
-        console.log(this.totalGreigeKg)
       }
     }
   }

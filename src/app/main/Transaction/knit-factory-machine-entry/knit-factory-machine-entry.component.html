@@ -49,58 +49,56 @@
                     <td></td>
                     <td>{{i+1}}</td>
                     <td>
-                        <p-dropdown #buyername placeholder="Buyer" optionLabel="buyer" [options]="buyers" 
-                            optionValue="buyer" [editable]="true" formControlName="buyer" 
-                            (onChange)="getBuyerValue(i)" (mouseenter)="getBuyerValue(i)" 
-                            (onChange)="getorders()" (mouseenter)="calculateEndDate(i)" 
+                        <p-dropdown #buyername placeholder="Buyer" optionLabel="buyer" [options]="buyers"
+                            optionValue="buyer" [editable]="true" formControlName="buyer" (onChange)="getBuyerValue(i)"
+                            (mouseenter)="getBuyerValue(i)" (onChange)="getorders()" (mouseenter)="calculateEndDate(i)"
                             (click)="buyerlist(i)">
                         </p-dropdown>
                     </td>
 
                     <td>
-                        <p-dropdown #orders [options]="this.order" optionLabel="orderNO" optionValue="orderNO" placeholder="orderNo"
-                        (onChange)="ordervalue(i)" (mouseenter)="ordervalue(i)" (mouseenter)="getBuyerValue(i)" (onChange)="orderdata()"
-                        (mouseenter)="calculateEndDate(i)" [editable]="true"
-                        formControlName="orderNo" (click)="orderlist(i)">
+                        <p-dropdown #orders [options]="this.order" optionLabel="orderNO" optionValue="orderNO"
+                            placeholder="orderNo" (onChange)="ordervalue(i)" (mouseenter)="ordervalue(i)"
+                            (mouseenter)="getBuyerValue(i)" (onChange)="orderdata()" (mouseenter)="calculateEndDate(i)"
+                            [editable]="true" formControlName="orderNo" (click)="orderlist(i)">
                         </p-dropdown>
                     </td>
 
                     <td>
-                        <p-dropdown #styles [options]="stylelist" optionLabel="style" optionValue="style" placeholder="style"
-                        (onChange)="stylevalue(i)" (mouseenter)="ordervalue(i)" (onChange)="styledata()" 
-                        (mouseenter)="calculateEndDate(i)" [editable]="true"
-                        formControlName="style" (click)="styleslist(i)" >
+                        <p-dropdown #styles [options]="stylelist" optionLabel="style" optionValue="style"
+                            placeholder="style" (onChange)="stylevalue(i)" (mouseenter)="ordervalue(i)"
+                            (onChange)="styledata()" (mouseenter)="calculateEndDate(i)" [editable]="true"
+                            formControlName="style" (click)="styleslist(i)">
                         </p-dropdown>
                     </td>
 
                     <td>
-                        <p-dropdown #colors [options]="colorlist" optionLabel="color" optionValue="color" placeholder="color"
-                            formControlName="color" [editable]="true" (onChange)="colorvalue(i)"
-                            (onChange)="colordata()" (mouseenter)="stylevalue(i)"
-                            (mouseenter)="calculateEndDate(i)" (click)="colorslist(i)"/>
+                        <p-dropdown #colors [options]="colorlist" optionLabel="color" optionValue="color"
+                            placeholder="color" formControlName="color" [editable]="true" (onChange)="colorvalue(i)"
+                            (onChange)="colordata()" (mouseenter)="stylevalue(i)" (mouseenter)="calculateEndDate(i)"
+                            (click)="colorslist(i)" />
                     </td>
 
                     <td>
                         <p-dropdown #sizes [options]="sizelist" optionLabel="size" optionValue="size" placeholder="size"
                             formControlName="size" [editable]="true" (mouseenter)="colorvalue(i)"
-                            (onChange)="getwoId(i)"
-                            (mouseenter)="calculateEndDate(i)" (mouseenter)="greigevalidation(i)" (click)="sizeslist(i)"/>
+                            (onChange)="getwoId(i)" (mouseenter)="calculateEndDate(i)"
+                            (mouseenter)="greigevalidation(i)" (click)="sizeslist(i)" />
                     </td>
 
                     <td>
                         <input type="text" class="form-control" formControlName="greigeKg" (input)="Addcheck(i)"
-                            (input)="valid($event.target.value,i)"
-                            (mouseenter)="calculateEndDate(i)" (mouseenter)="greigevalidation(i)"
-                            [ngClass]="{'is-invalid':this.toleranceValid[i]}">
+                            (input)="valid($event.target.value,i)" (mouseenter)="calculateEndDate(i)"
+                            (mouseenter)="greigevalidation(i)" [ngClass]="{'is-invalid':this.toleranceValid[i]}">
                     </td>
 
                     <td>
-                        <input type="text" class="form-control" formControlName="machineDia" (mouseenter)="calculateEndDate(i)">
+                        <input type="text" class="form-control" formControlName="machineDia"
+                            (mouseenter)="calculateEndDate(i)">
                     </td>
 
 
                     <td><input class="form-control" type="text" formControlName="knitFty" list="fty" (input)="check()"
-                            (input)="production_days($event.target.value, i)"
                             (mouseenter)="calculateEndDate(i)">
                         <datalist id="fty">
                             <option *ngFor="let ftyName of this.ftyName" value="{{ftyName.knitFty}}">{{ftyName.knitFty}}
@@ -108,13 +106,14 @@
                         </datalist>
                     </td>
 
-                    <td><input class="form-control" type="text" formControlName="allocated">
+                    <td><input class="form-control" type="text" formControlName="allocated" (input)="Addcheck(i)"
+                            [ngClass]="{'is-invalid2':this.toleranceValid2[i]}" (input)="production_days($event.target.value, i)" 
+                            (input)="valid2($event.target.value,i)">
                     </td>
                     <td><input class="form-control" type="date" formControlName="startDate"
                             (change)="calculateEndDate(i)"></td>
                     <td><input class="form-control" type="number" formControlName="daysrequired" (input)="check()"
-                            (click)="calculateEndDate(i)"
-                            (mouseenter)="calculateEndDate(i)"></td>
+                            (click)="calculateEndDate(i)" (mouseenter)="calculateEndDate(i)"></td>
                     <td><input class="form-control" type="date" formControlName="endDate" readonly></td>
 
                     <th><button class="btn-danger" (click)="delete(i)">x</button></th>

@@ -129,7 +129,6 @@ export class ReportEntryComponent implements OnInit {
   getsize() {
     this.api.getknitwosize(this.factorynamevalue,this.buyerName, this.orderNo, this.style, this.color).subscribe((res) => {
       this.sizelist = res.sizes;
-      console.log(res)
     })
   }
 

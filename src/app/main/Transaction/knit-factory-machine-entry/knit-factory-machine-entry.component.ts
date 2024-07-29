@@ -50,8 +50,11 @@ export class KnitFactoryMachineEntryComponent implements OnInit, AfterViewInit{
   previousRow:any;
   totalGreigeKg:number = 0;
   toleranceValid: any[] = [];
+  toleranceValid2: any[] = [];
   greigeKgTotal: any;
   size_Value: any;
+  machineNosDta: any;
+  totalMCNos: any;
 
   constructor(private fb: FormBuilder, private api: ApiService , private router : Router , private datePipe: DatePipe, private cdr: ChangeDetectorRef) { 
      
@@ -190,6 +193,19 @@ valid(value:any, i:any){
   this.validlity()
 }
 
+valid2(value:any, i:any){
+  const inputValue = value;
+  const tolerance = (this.machineNosDta)
+  if(inputValue > tolerance ){
+
+    this.toleranceValid2[i] = true
+  }
+  else{
+    this.toleranceValid2[i] = false
+  }
+  this.validlity2()
+}
+
 validlity(){
   if(this.toleranceValid.includes(true)){
     this.valueExceeded = true;
@@ -199,16 +215,30 @@ validlity(){
   }
 }
 
-production_days(factory : any, index:any){
+validlity2(){
+  if(this.toleranceValid2.includes(true)){
+    this.valueExceeded = true;
+  }
+  else{
+    this.valueExceeded = false;
+  }
+}
+
+
+production_days(event:any,index:any){
   const formArray = this.knitFtyMachineForm.get('data') as FormArray;
   const row = formArray.at(index);
-  const knitFty = factory
+  const knitFty = row.get('knitFty')?.value
   const machineDia = row.get('machineDia')?.value;
+  const allocated = event;
+  const greige = row.get('greigeKg')?.value;
   this.api.getProductionDays(knitFty, machineDia).subscribe((res)=>{
     this.dayprod = res.data[0].prodDay
-    const daysReq = ((row.get('greigeKg')?.value)/this.dayprod).toFixed()
+    this.machineNosDta = res.data[0].machineNos
+
+    const daysReq = (greige/(this.dayprod*allocated))
     row.get('daysrequired')?.setValue(daysReq)
-  })
+  })
 }
 
 
@@ -297,8 +327,9 @@ Addcheck(index: number) {
   const currentmachineDia = currentRow.get('machineDia')?.value;
   const currentknitFty = currentRow.get('knitFty')?.value;
   const currentGreigeKg = parseFloat(currentRow.get('greigeKg')?.value) || 0;
-  console.log(currentGreigeKg)  
+  const currentMCNos = parseFloat(currentRow.get('allocated')?.value) || 0;
   this.totalGreigeKg = currentGreigeKg;
+  this.totalMCNos = currentMCNos;
 
   for (let i = 0; i < formArray.length; i++) {
     if (i !== index) {
@@ -309,10 +340,15 @@ Addcheck(index: number) {
 
       const greigeKg = parseFloat(row.get('greigeKg')?.value) || 0;
 
+      const allocated = parseFloat(row.get('allocated')?.value) || 0;
+
       if (currentknitFty === knitFty && currentmachineDia === machineDia && currentSize === size) {
         this.totalGreigeKg += greigeKg;
+        this.totalMCNos += allocated
         const inputValue = this.totalGreigeKg;
+        const inputValue2 = this.totalMCNos;
         const tolerance = (this.greigeKgTotal)
+        const tolerance2 = (this.machineNosDta)
         if(inputValue > tolerance ){
 
           this.toleranceValid[i] = true
@@ -321,8 +357,12 @@ Addcheck(index: number) {
           this.toleranceValid[i] = false
         }
         this.validlity()
-
-        console.log(this.totalGreigeKg)
+        if(inputValue2>tolerance2){
+          this.toleranceValid2[i] = true
+        }else{
+          this.toleranceValid2[i] = false
+        }
+        this.validlity2()
       }
     }
   }
@@ -363,7 +403,6 @@ delete(index:any){
 }
 
 save(){
-  console.log(this.knitFtyMachineForm.value)
 if(this.knitFtyMachineForm.valid){
   this.api.postAllocation(this.knitFtyMachineForm.value).subscribe((res)=>{
     alert(res.message);
@@ -385,9 +424,7 @@ buyerlist(index: any) {
         dropdownArray[index].show();
       }
     });
-  } else {
-    console.error('buyername is not defined');
-  }
+  } else { }
 }
 
 @ViewChildren('orders') orders!: QueryList<Dropdown>;
@@ -399,9 +436,7 @@ orderlist(index:any) {
       orders[index].show();
     }
   });
-  } else {
-    console.error('orders is not defined');
-  }
+  } else { }
 }
 
 @ViewChildren('styles') styles!: QueryList<Dropdown>;
@@ -413,9 +448,7 @@ styleslist(index:any) {
       styles[index].show();
     }
   })
-  } else {
-    console.error('styles is not defined');
-  }
+  } else { }
 }
 
 @ViewChildren('colors') colors!: QueryList<Dropdown>;
@@ -427,9 +460,7 @@ colorslist(index:any) {
       colors[index].show();
     }
   })
-  } else {
-    console.error('colors is not defined');
-  }
+  } else { }
 }
 
 @ViewChildren('sizes') sizes!: QueryList<Dropdown>;
@@ -441,9 +472,7 @@ sizeslist(index:any) {
       sizes[index].show();
     }
   })
-  } else {
-    console.error('sizes is not defined');
-  }
+  } else { }
 }
 
 back(){
