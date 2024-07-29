@@ -102,6 +102,7 @@ export class KnitFactoryWiseComponent implements OnInit {
 
       const EntryData = this.knitFtyMachineForm.get('data') as FormArray;
       EntryData.clear();
+      console.log(this.AllIddata)
       this.AllIddata.forEach((dataItem: any, i: any) => {
         const Details = this.fb.group({
           "id": [dataItem.id],
@@ -493,6 +494,7 @@ sizeslist(index:any) {
   }
 
   save() {
+    // console.log(this.knitFtyMachineForm.value)
     this.api.updateAllocation(this.knitFtyMachineForm.value).subscribe((res) => {
       alert(res.message);
     })

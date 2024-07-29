@@ -62,7 +62,7 @@
                     formControlName="orderNo" (click)="orderlist(i)">
                     </p-dropdown> -->
 
-                    <input type="text" class="form-control" formControlName="buyer" (onChange)="ordervalue(i)"
+                    <input type="text" class="form-control" (onChange)="ordervalue(i)"
                         (mouseenter)="ordervalue(i)" (mouseenter)="getBuyerValue(i)" (onChange)="orderdata()"
                         (mouseenter)="calculateEndDate(i)" [editable]="true" formControlName="orderNo"
                         (click)="orderlist(i)" readonly>

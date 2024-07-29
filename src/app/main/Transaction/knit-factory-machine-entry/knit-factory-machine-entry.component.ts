@@ -236,7 +236,7 @@ production_days(event:any,index:any){
     this.dayprod = res.data[0].prodDay
     this.machineNosDta = res.data[0].machineNos
 
-    const daysReq = (greige/(this.dayprod*allocated))
+    const daysReq = ((greige/(this.dayprod*allocated))).toFixed()
     row.get('daysrequired')?.setValue(daysReq)
   })
 }
