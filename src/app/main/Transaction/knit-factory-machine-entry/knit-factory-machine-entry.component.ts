@@ -199,14 +199,16 @@ validlity(){
   }
 }
 
-production_days(factory : any, index:any){
+production_days(event:any,index:any){
   const formArray = this.knitFtyMachineForm.get('data') as FormArray;
   const row = formArray.at(index);
-  const knitFty = factory
+  const knitFty = row.get('knitFty')?.value
   const machineDia = row.get('machineDia')?.value;
+  const allocated = event;
+  const greige = row.get('greigeKg')?.value;
   this.api.getProductionDays(knitFty, machineDia).subscribe((res)=>{
     this.dayprod = res.data[0].prodDay
-    const daysReq = ((row.get('greigeKg')?.value)/this.dayprod).toFixed()
+    const daysReq = (greige/(this.dayprod*allocated))
     row.get('daysrequired')?.setValue(daysReq)
   })
 }

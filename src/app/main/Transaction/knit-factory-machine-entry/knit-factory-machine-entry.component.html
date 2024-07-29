@@ -100,7 +100,6 @@
 
 
                     <td><input class="form-control" type="text" formControlName="knitFty" list="fty" (input)="check()"
-                            (input)="production_days($event.target.value, i)"
                             (mouseenter)="calculateEndDate(i)">
                         <datalist id="fty">
                             <option *ngFor="let ftyName of this.ftyName" value="{{ftyName.knitFty}}">{{ftyName.knitFty}}
@@ -108,7 +107,7 @@
                         </datalist>
                     </td>
 
-                    <td><input class="form-control" type="text" formControlName="allocated">
+                    <td><input class="form-control" type="text" formControlName="allocated" (input)="production_days($event.target.value,i)">
                     </td>
                     <td><input class="form-control" type="date" formControlName="startDate"
                             (change)="calculateEndDate(i)"></td>
