@@ -515,6 +515,10 @@ getProductionDays(knitFty:string = '', machineDia : string = ''):Observable<any>
   return this.http.get(this.getUrl() + `/knitapi/productionDays?knitFty=${knitFty}&machineDia=${machineDia}`, this.getHeaders())
 }
 
+getStartDate(knitFty:string = '', machineDia : string = ''):Observable<any>{
+  return this.http.get(this.getUrl() + `/knitapi/startDate?knitFty=${knitFty}&machineDia=${machineDia}`, this.getHeaders())
+}
+
   updateAllocation(data:any):Observable<any>{
     return this.http.put(this.getUrl() + `/knitapi/machine-allocation-update`, data,this.getHeaders())
   }

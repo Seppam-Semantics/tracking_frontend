@@ -235,10 +235,16 @@ production_days(event:any,index:any){
   this.api.getProductionDays(knitFty, machineDia).subscribe((res)=>{
     this.dayprod = res.data[0].prodDay
     this.machineNosDta = res.data[0].machineNos
-
     const daysReq = ((greige/(this.dayprod*allocated))).toFixed()
     row.get('daysrequired')?.setValue(daysReq)
   })
+  this.api.getStartDate(knitFty, machineDia).subscribe((res)=>{
+    console.log(res.data[0].endDate)
+    const formArray = this.knitFtyMachineForm.get('data') as FormArray;
+    const daterow = formArray.at(0);
+    daterow.get('startDate')?.setValue(res.data[0].endDate)
+  })
+
 }
 
 
