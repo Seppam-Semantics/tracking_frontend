@@ -115,5 +115,7 @@ export class MainComponent implements OnInit {
   KnitFactoryMachine(){
     this.router.navigate(['main/knitFactoryMain'])
   }
-  
+  lineallocationentry(){
+    this.router.navigate(['main/lineAllocationEntry'])
+  }
 }
