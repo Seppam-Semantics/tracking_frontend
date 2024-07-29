@@ -94,7 +94,7 @@
                     </td>
 
                     <td><input class="form-control" type="text" formControlName="allocated" (input)="Addcheck(i)"
-                            [ngClass]="{'is-invalid2':this.toleranceValid2[i]}"
+                            [ngClass]="{'is-invalid2':this.toleranceValid2[i]}" (input)="check()"
                             (input)="production_days($event.target.value, i)" (input)="valid2($event.target.value,i)">
 
                     <td><input class="form-control" type="date" formControlName="startDate"
