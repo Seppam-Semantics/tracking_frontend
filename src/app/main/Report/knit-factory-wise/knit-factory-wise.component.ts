@@ -102,7 +102,7 @@ export class KnitFactoryWiseComponent implements OnInit {
 
       const EntryData = this.knitFtyMachineForm.get('data') as FormArray;
       EntryData.clear();
-      console.log(this.AllIddata)
+
       this.AllIddata.forEach((dataItem: any, i: any) => {
         const Details = this.fb.group({
           "id": [dataItem.id],
@@ -132,12 +132,25 @@ export class KnitFactoryWiseComponent implements OnInit {
     })
   }
 
+
+
   drop(event: CdkDragDrop<any[]>) {
+
     moveItemInArray(this.AllIddata, event.previousIndex, event.currentIndex);
+  
+
     const entryData = this.knitFtyMachineForm.get('data') as FormArray;
     const movedItem = entryData.at(event.previousIndex);
     entryData.removeAt(event.previousIndex);
     entryData.insert(event.currentIndex, movedItem);
+    this.updateSequenceIds();
+  }
+  
+  updateSequenceIds() {
+    const entryData = this.knitFtyMachineForm.get('data') as FormArray;
+    entryData.controls.forEach((control, index) => {
+      control.get('seqId')?.setValue(index + 1);
+    });
   }
 
   //--------------------------------------------------------------------------------------------------------
@@ -493,9 +506,12 @@ sizeslist(index:any) {
     this.router.navigate(['main/knitFactoryMain'])
   }
 
+  getSerialNumber(index: number): number {
+    return index + 1;
+  }
+
   save() {
-    // console.log(this.knitFtyMachineForm.value)
-    this.api.updateAllocation(this.knitFtyMachineForm.value).subscribe((res) => {
+    this.api.postAllocation(this.knitFtyMachineForm.value).subscribe((res) => {
       alert(res.message);
     })
   }
