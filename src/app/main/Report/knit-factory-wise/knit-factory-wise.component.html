@@ -17,23 +17,20 @@
         <thead class="thead-dark">
             <tr>
                 <!-- <th><button class="btn btn-danger" (click)="knitFtyMachineAddButton()">+</button></th> -->
-                <th>S.No</th>
+                <th>Prior id</th>
                 <th>Buyer</th>
                 <th>OrderNo</th>
-
                 <th>Style</th>
                 <th>Color</th>
                 <th>F.Size</th>
-
                 <th>Greige-Kgs</th>
                 <th>Machine Dia </th>
                 <th>Knit Fty</th>
-
                 <th>AllocMCNos</th>
                 <th>StartDate</th>
                 <th>DaysReqd</th>
-
                 <th>EndDate</th>
+                <th>Next Id</th>
                 <th>Old Id</th>
             </tr>
         </thead>
@@ -62,10 +59,9 @@
                     formControlName="orderNo" (click)="orderlist(i)">
                     </p-dropdown> -->
 
-                    <input type="text" class="form-control" (onChange)="ordervalue(i)"
-                        (mouseenter)="ordervalue(i)" (mouseenter)="getBuyerValue(i)" (onChange)="orderdata()"
-                        (mouseenter)="calculateEndDate(i)" [editable]="true" formControlName="orderNo"
-                        (click)="orderlist(i)" readonly>
+                    <input type="text" class="form-control" (onChange)="ordervalue(i)" (mouseenter)="ordervalue(i)"
+                        (mouseenter)="getBuyerValue(i)" (onChange)="orderdata()" (mouseenter)="calculateEndDate(i)"
+                        [editable]="true" formControlName="orderNo" (click)="orderlist(i)" readonly>
                 </td>
 
                 <td cdkDragHandle>
@@ -127,11 +123,14 @@
                         (input)="check()" (mouseenter)="check()" (click)="calculateEndDate(i)"
                         (mouseenter)="calculateEndDate(i)"></td>
                 <td cdkDragHandle><input class="form-control" type="date" formControlName="endDate" readonly></td>
-
+                <td cdkDragHandle><input class="form-control" type="text" formControlName="nextid" readonly></td>
                 <td cdkDragHandle><input class="form-control" type="text" formControlName="oldId" readonly></td>
+
+
                 <div *cdkDragPreview matchSize="true" class="container dragdrop-placeholder">
                     <span>Moving</span>
                 </div>
+
             </tr>
         </tbody>
     </table>

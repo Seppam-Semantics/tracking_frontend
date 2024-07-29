@@ -121,6 +121,7 @@ export class KnitFactoryWiseComponent implements OnInit {
           "startDate": [dataItem.startDate],
           "daysrequired": [dataItem.daysrequired],
           "endDate": [dataItem.endDate],
+          "nextid": [i+2],
           "oldId": [dataItem.oldId ? dataItem.oldId : dataItem.id]
         })
 
@@ -315,7 +316,8 @@ export class KnitFactoryWiseComponent implements OnInit {
       "startDate": [previousEndDate ? new Date(previousEndDate) : ''],
       "daysrequired": [''],
       "endDate": [''],
-      "oldId": ['']
+      "oldId": [''],
+      "nextid":['']
     });
     this.items.push(row);
 
@@ -512,7 +514,13 @@ sizeslist(index:any) {
 
   save() {
     this.api.postAllocation(this.knitFtyMachineForm.value).subscribe((res) => {
-      alert(res.message);
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: res.message,
+        showConfirmButton: false,
+        timer: 1500
+      });
     })
   }
 
