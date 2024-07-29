@@ -6,21 +6,7 @@
         </div>
         <div style="flex: 1 1 auto;"></div>
         <div style="display: flex; gap: 10px;">
-
-            <!-- <div style="display: flex; gap: 10px;">
-                <p-dropdown #buyer placeholder="Buyer" optionLabel="buyer" [options]="this.buyers" (onChange)="getBuyerValue()"
-                    optionValue="buyer" [editable]="true" [style]="{ minWidth: '22vh', minHeight:'2vh' }"
-                    formControlName="buyer" (click)="buyerlist(i)"></p-dropdown>
-            </div>
-
-
-            <div style="display: flex; gap: 10px;">
-                <p-dropdown #orders placeholder="orderNo" optionLabel="orderNO" [options]="this.order" (onChange)="ordervalue()"
-                    optionValue="orderNO" [editable]="true" [style]="{ minWidth: '22vh', minHeight:'2vh' }"
-                    formControlName="orderNo" (click)="orderlist(i)"></p-dropdown>
-            </div> -->
         </div>
-
 
     </mat-toolbar>
     <div class="tablecss">
@@ -109,6 +95,7 @@
                     <td><input class="form-control" type="text" formControlName="allocated" (input)="Addcheck(i)"
                             [ngClass]="{'is-invalid2':this.toleranceValid2[i]}" (input)="production_days($event.target.value, i)" 
                             (input)="valid2($event.target.value,i)">
+                    <td><input class="form-control" type="text" formControlName="allocated" (input)="production_days($event.target.value,i)">
                     </td>
                     <td><input class="form-control" type="date" formControlName="startDate"
                             (change)="calculateEndDate(i)"></td>
