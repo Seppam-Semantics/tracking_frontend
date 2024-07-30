@@ -16,18 +16,17 @@
                     <th>Prior id</th>
                     <th>Buyer</th>
                     <th>Order</th>
-                     <th>Style</th>
+                    <th>Style</th>
                     <th>Color</th>
                     <th>PO Ship Date</th>
                     <th>FRI Date</th>
-                    
+
                     <th>Order Pcs</th>
                     <th>Plan Qty</th>
                     <th>Line</th>
                     <th>Alloc Start Date</th>
                     <th>Days Reqd</th>
                     <th>Alloc End Date</th>
-                    <th>Next id</th>
                 </tr>
             </thead>
             <tbody formArrayName="data">
@@ -37,40 +36,50 @@
                     <td>
                         <p-dropdown #buyername [options]="buyers" placeholder="Buyer" optionLabel="buyer"
                             (onChange)="getBuyerValue(i)" optionValue="buyer" [editable]="true"
-                            [style]="{ minWidth: '8vh', minHeight:'2vh' }" formControlName="buyer" 
+                            [style]="{ minWidth: '8vh', minHeight:'2vh' }" formControlName="buyer"
                             (mouseenter)="getBuyerValue(i)" (click)="buyerlist(i)"></p-dropdown>
                     </td>
                     <td>
                         <p-dropdown #orders [options]="order" placeholder="orderNO" optionLabel="orderNo"
                             (onChange)="ordervalue(i)" optionValue="orderNo" [editable]="true"
                             [style]="{ minWidth: '8vh', minHeight:'2vh' }" formControlName="orderno"
-                            (mouseenter)="getBuyerValue(i)" (mouseenter)="ordervalue(i)" 
-                            (click)="orderlist(i)" (onChange)="ShipDate(i)"></p-dropdown>
+                            (mouseenter)="getBuyerValue(i)" (mouseenter)="ordervalue(i)" (click)="orderlist(i)"
+                            (onChange)="ShipDate(i)"></p-dropdown>
                     </td>
-                     <td>
+                    <td>
                         <p-dropdown #styles [options]="stylelist" placeholder="Style" optionLabel="style"
                             (onChange)="stylevalue(i)" optionValue="style" [editable]="true"
                             [style]="{ minWidth: '8vh', minHeight:'2vh' }" formControlName="style"
-                            (mouseenter)="ordervalue(i)" (mouseenter)="stylevalue(i)" (click)="styleslist(i)"></p-dropdown>
-                     </td>
+                            (mouseenter)="ordervalue(i)" (mouseenter)="stylevalue(i)" (onChange)="lineData(i)"
+                            (click)="styleslist(i)"></p-dropdown>
+                    </td>
                     <td>
                         <p-dropdown #colors [options]="colorlist" placeholder="color" optionLabel="color"
-                            (onChange)="colorvalue(i)" optionValue="color" [editable]="true"
-                            [style]="{ minWidth: '8vh', minHeight:'2vh' }" formControlName="color"
-                            (mouseenter)="stylevalue(i)" (mouseenter)="colorvalue(i)" (click)="colorslist(i)"
-                            (onChange)="OrderPcsData(i)" (mouseenter)="OrderPcsData(i)"></p-dropdown>
+                            optionValue="color" [editable]="true" [style]="{ minWidth: '8vh', minHeight:'2vh' }"
+                            formControlName="color" (mouseenter)="stylevalue(i)" (click)="colorslist(i)"
+                            (onChange)="OrderPcsData(i)" (mouseenter)="OrderPcsData(i)" (input)="check()"
+                            (mouseenter)="check()" (onChange)="check()"></p-dropdown>
                     </td>
                     <td><input type="date" class="form-control" formControlName="shipdate" style="width: 20vh;"></td>
                     <td><input type="date" class="form-control" formControlName="fridate" style="width: 20vh;"></td>
-                    <td><input type="text" class="form-control" formControlName="orderpcs"></td>
-                    <td><input type="text" class="form-control" formControlName="planqty"></td>
-                    <td><input type="text" class="form-control" formControlName="line"></td>
+                    <td><input type="number" class="form-control" formControlName="orderpcs"></td>
+                    <td><input type="number" class="form-control" formControlName="planqty"></td>
+                    <td><input type="text" class="form-control" formControlName="line" list="list">
+                        <datalist id="list">
+                            <option *ngFor="let data of this.linedropdata" [value]="data.line">{{data.line}}</option>
+                        </datalist>
+                    </td>
                     <td><input type="date" class="form-control" formControlName="startdate" style="width: 20vh;"></td>
-                    <td><input type="text" class="form-control" formControlName="daysreqd"></td>
-                    <td><input type="date" class="form-control" formControlName="enddate" style="width: 20vh;"></td>
-                    <td><input type="number" class="form-control" formControlName="nextid"></td>
+                    <td><input type="number" class="form-control" formControlName="daysreqd"></td>
+                    <td><input type="date" class="form-control" formControlName="enddate" style="width: 20vh;" readonly>
+                    </td>
                 </tr>
             </tbody>
         </table>
+        <div style="display: flex;">
+            <div style="display: flex; justify-content: center; width: 100%;">
+            <button class="btn btn-primary" (click)="save()">Save</button>
+        </div>
+        </div>
     </div>
 </div>

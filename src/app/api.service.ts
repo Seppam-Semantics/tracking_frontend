@@ -10,8 +10,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  // apiUrl = "https://tracker.seppam.com";
-  apiUrl = "http://localhost:2000";
+  apiUrl = "https://tracker.seppam.com";
+  // apiUrl = "http://localhost:2000";
 
   token: any;
   profilenames: any;
@@ -1556,7 +1556,14 @@ getStartDate(knitFty:string = '', machineDia : string = ''):Observable<any>{
         lineallocationOrderPcs(buyer:string='' , orderNo:string='', style:string='', color:string='' ):Observable<any>{
           return this.http.get(this.getUrl() + `/garmentsapi/lineallocation-OrderPcs?buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&`, this.getHeaders())
         }
+
+        lineallocationLine(style:string=''):Observable<any>{
+          return this.http.get(this.getUrl() + `/garmentsapi/lineallocation-line?style=${style}&`, this.getHeaders())
+        }
       
+        lineallocationPost(data:any ): Observable<any> {
+          return this.http.post(this.getUrl() + `/garmentsapi/line_allocation`, data,this.getHeaders())
+        }
         //-------------------------------------------- Line Allocation Master [End]------------------------------------------------------
 
       }
