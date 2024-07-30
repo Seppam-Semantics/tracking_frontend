@@ -526,6 +526,10 @@ getStartDate(knitFty:string = '', machineDia : string = ''):Observable<any>{
   updateAllocation(data:any):Observable<any>{
     return this.http.put(this.getUrl() + `/knitapi/machine-allocation-update`, data,this.getHeaders())
   }
+
+  knitfactoryforentry(machineDia : any):Observable<any>{
+    return this.http.get(this.getUrl() + `/knitapi/machineDiatoKnitFactory?machineDia=${machineDia}`,this.getHeaders())
+  }
   // ============================================= Dye Delivery ===================================================================================
 
   addUpdateDyeDelivery(data: any): Observable<any> {
