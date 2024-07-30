@@ -41,8 +41,8 @@
                             (mouseenter)="getBuyerValue(i)" (click)="buyerlist(i)"></p-dropdown>
                     </td>
                     <td>
-                        <p-dropdown #orders [options]="order" placeholder="orderNO" optionLabel="orderNO"
-                            (onChange)="ordervalue(i)" optionValue="orderNO" [editable]="true"
+                        <p-dropdown #orders [options]="order" placeholder="orderNO" optionLabel="orderNo"
+                            (onChange)="ordervalue(i)" optionValue="orderNo" [editable]="true"
                             [style]="{ minWidth: '8vh', minHeight:'2vh' }" formControlName="orderno"
                             (mouseenter)="getBuyerValue(i)" (mouseenter)="ordervalue(i)" 
                             (click)="orderlist(i)" (onChange)="ShipDate(i)"></p-dropdown>

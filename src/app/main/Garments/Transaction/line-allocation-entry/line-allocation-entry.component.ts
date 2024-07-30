@@ -54,8 +54,8 @@ export class LineAllocationEntryComponent implements OnInit{
   }
 
   getorders() {
-    this.api.getordersData(this.Buyer_Value).subscribe((res) => {
-      this.order = res.orders
+    this.api.Buyer_to_order(this.Buyer_Value).subscribe((res) => {
+      this.order = res.orderNo
     })
   }
 
@@ -65,13 +65,12 @@ export class LineAllocationEntryComponent implements OnInit{
     const row = formArray.at(index);
     this.Buyer_Value =  row.get('buyer')?.value;
     this.Order_Value =  row.get('orderno')?.value;
-    console.log(this.Order_Value)
     this.orderdata()
   }
 
   orderdata() {
-    this.api.getstyleData(this.Order_Value).subscribe((res) => {
-      this.stylelist = res.styles;
+    this.api.order_to_style(this.Buyer_Value, this.Order_Value).subscribe((res) => {
+      this.stylelist = res.style;
     })
   }
   stylevalue(index: any) {
@@ -84,37 +83,10 @@ export class LineAllocationEntryComponent implements OnInit{
   }
 
   styledata() {
-    this.api.getcolorData(this.Buyer_Value, this.Order_Value, this.style_Value).subscribe((res) => {
-      this.colorlist = res.colors;
+    this.api.style_to_color(this.Buyer_Value, this.Order_Value, this.style_Value).subscribe((res) => {
+      this.colorlist = res.color;
     })
   }
-
-  colorvalue(index: any) {
-    const formArray = this.LineAllocationForm.get('data') as FormArray;
-    const row = formArray.at(index);
-    this.Buyer_Value = row.get('buyer')?.value;
-    this.Order_Value = row.get('orderno')?.value;
-    this.style_Value = row.get('style')?.value;
-    this.color_Value = row.get('color')?.value;
-
-    this.colordata()
-
-  }
-
-  colordata() {
-    this.api.getsize(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value).subscribe((res) => {
-      this.sizelist = res.gsize;
-    })
-  }
-
-  getwoId(size: any, index: number){
-    this.api.getwodetails(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, size).subscribe((res) => {
-      const woId = res.workorders[0].id;
-      const formArray = this.LineAllocationForm.get('data') as FormArray;
-      const row = formArray.at(index);
-      row.get('woId')?.setValue(woId);
-    });
-}
 
 
   //---------------------------------------------------------------------------------------------------
