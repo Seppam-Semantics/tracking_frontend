@@ -131,6 +131,7 @@ import { KnitFactoryWiseComponent } from './Report/knit-factory-wise/knit-factor
 import { LineMasterComponent } from './masters/Transaction Master/line-master/line-master.component';
 import { LineMachineListComponent } from './masters/Transaction Master/line-machine-list/line-machine-list.component';
 import { WorkingDayComponent } from './masters/Transaction Master/working-day/working-day.component';
+import { LineAllocationEntryComponent } from './Garments/Transaction/line-allocation-entry/line-allocation-entry.component';
 @NgModule({
   declarations: [
     MainComponent,
@@ -215,7 +216,8 @@ import { WorkingDayComponent } from './masters/Transaction Master/working-day/wo
     KnitFactoryWiseComponent,
     LineMasterComponent,
     LineMachineListComponent,
-    WorkingDayComponent
+    WorkingDayComponent,
+    LineAllocationEntryComponent
   ],
   imports: [
     CommonModule,
