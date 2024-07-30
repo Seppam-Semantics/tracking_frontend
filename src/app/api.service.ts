@@ -10,8 +10,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  apiUrl = "https://tracker.seppam.com";
-  // apiUrl = "http://localhost:2000";
+  // apiUrl = "https://tracker.seppam.com";
+  apiUrl = "http://localhost:2000";
 
   token: any;
   profilenames: any;
@@ -521,6 +521,10 @@ getStartDate(knitFty:string = '', machineDia : string = ''):Observable<any>{
 
   updateAllocation(data:any):Observable<any>{
     return this.http.put(this.getUrl() + `/knitapi/machine-allocation-update`, data,this.getHeaders())
+  }
+
+  knitfactoryforentry(machineDia : any):Observable<any>{
+    return this.http.get(this.getUrl() + `/knitapi/machineDiatoKnitFactory?machineDia=${machineDia}`,this.getHeaders())
   }
   // ============================================= Dye Delivery ===================================================================================
 

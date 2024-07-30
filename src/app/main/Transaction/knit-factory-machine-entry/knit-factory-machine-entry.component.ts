@@ -55,6 +55,7 @@ export class KnitFactoryMachineEntryComponent implements OnInit, AfterViewInit{
   size_Value: any;
   machineNosDta: any;
   totalMCNos: any;
+  machineDia: any;
 
   constructor(private fb: FormBuilder, private api: ApiService , private router : Router , private datePipe: DatePipe, private cdr: ChangeDetectorRef) { 
      
@@ -67,10 +68,6 @@ export class KnitFactoryMachineEntryComponent implements OnInit, AfterViewInit{
 ngOnInit(): void {
   this.api.getbuyers().subscribe((res) => {
     this.buyers = res.buyers;
-  })
-
-  this.api.knitfty_name().subscribe((res) => {
-    this.ftyName = res.factorys
   })
 }
 
@@ -148,20 +145,27 @@ ngAfterViewInit(){
 
     const size  = row.get('size')?.value;
     this.api.getmachineDiadetails(this.style_Value , size).subscribe((res)=>{
-      const machineDia = res.machineDia[0].machineDia
+      this.machineDia = res.machineDia[0].machineDia
 
       const formArray = this.knitFtyMachineForm.get('data') as FormArray;
       const row = formArray.at(index);
-      row.get('machineDia')?.setValue(machineDia);
-
+      row.get('machineDia')?.setValue(this.machineDia);
     })
     this.api.getwodetails(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, size).subscribe((res) => {
       const woId = res.workorders[0].id;
       const formArray = this.knitFtyMachineForm.get('data') as FormArray;
       const row = formArray.at(index);
       row.get('woId')?.setValue(woId);
-
     });
+}
+
+knitFactory(event:any){
+  try{
+  this.api.knitfactoryforentry(event).subscribe((res)=>{
+    this.ftyName = res.data
+  })
+}
+catch{}
 }
 
 greigevalidation(index:any){
