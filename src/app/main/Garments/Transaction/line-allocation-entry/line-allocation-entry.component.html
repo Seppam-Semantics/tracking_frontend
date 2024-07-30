@@ -1,58 +1,76 @@
-<div [formGroup]="">
-    <div>
-        <mat-toolbar style="height: auto;">
-            <div style="display: flex; gap: 15px; width: 100%; justify-content: center;">
-                <span>Invoice Creation</span>
-            </div>
-            <div style="flex: 1 1 auto;"></div>
-    
-        </mat-toolbar>
-        <div class="tablecss">
-            <table class="table table-hover">
-                <thead class="thead-dark">
-                    <tr>
-                        <th>Prior id</th>
-                        <th>Order</th>
-                        <th>Style</th>
-                        <th>Color</th>
-                        <th>PO Ship Date</th>
-                        <th>FRI Date</th>
-                        <th>Order Pcs</th>
-                        <th>Plan Qty</th>
-                        <th>Line</th>
-                        <th>Alloc Start Date</th>
-                        <th>Days Reqd</th>
-                        <th>Alloc End Date</th>
-                        <th>Next id</th>
-                    </tr>
-                </thead>
-                <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                    </tr>
-                </tbody>
-            </table>
+<div [formGroup]="LineAllocationForm">
+    <mat-toolbar style="height: auto;">
+        <div style="display: flex; gap: 15px; width: 100%; justify-content: center;">
+            <span>Line Allocation Creation</span>
         </div>
-    </div>
+        <div style="flex: 1 1 auto;"></div>
+    </mat-toolbar>
 
-        <mat-toolbar style="height: auto; display: flex; width: 100%; justify-content: center;">
-            <button class="btn btn-primary" (click)="save()" *ngIf="!valueExceeded">Save</button>
-    
-            <button class="btn btn-primary" *ngIf="valueExceeded">Save</button>
-    
-        </mat-toolbar>]
-    
-    
+
+
+    <div class="tablecss">
+        <table class="table table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th><button class="btn btn-primary" (click)="LineAllocationfun()">+</button></th>
+                    <th>Prior id</th>
+                    <th>Buyer</th>
+                    <th>Order</th>
+                     <th>Style</th>
+                    <th>Color</th>
+                    <th>PO Ship Date</th>
+                    <th>FRI Date</th>
+                    
+                    <th>Order Pcs</th>
+                    <th>Plan Qty</th>
+                    <th>Line</th>
+                    <th>Alloc Start Date</th>
+                    <th>Days Reqd</th>
+                    <th>Alloc End Date</th>
+                    <th>Next id</th>
+                </tr>
+            </thead>
+            <tbody formArrayName="data">
+                <tr *ngFor="let list of items.controls; let i=index" [formGroupName]="i">
+                    <td></td>
+                    <td>{{i+1}}</td>
+                    <td>
+                        <p-dropdown #buyername [options]="buyers" placeholder="Buyer" optionLabel="buyer"
+                            (onChange)="getBuyerValue(i)" optionValue="buyer" [editable]="true"
+                            [style]="{ minWidth: '8vh', minHeight:'2vh' }" formControlName="buyer" 
+                            (mouseenter)="getBuyerValue(i)" (click)="buyerlist(i)"></p-dropdown>
+                    </td>
+                    <td>
+                        <p-dropdown #orders [options]="order" placeholder="orderNO" optionLabel="orderNO"
+                            (onChange)="ordervalue(i)" optionValue="orderNO" [editable]="true"
+                            [style]="{ minWidth: '8vh', minHeight:'2vh' }" formControlName="orderno"
+                            (mouseenter)="getBuyerValue(i)" (mouseenter)="ordervalue(i)" 
+                            (click)="orderlist(i)" (onChange)="ShipDate(i)"></p-dropdown>
+                    </td>
+                     <td>
+                        <p-dropdown #styles [options]="stylelist" placeholder="Style" optionLabel="style"
+                            (onChange)="stylevalue(i)" optionValue="style" [editable]="true"
+                            [style]="{ minWidth: '8vh', minHeight:'2vh' }" formControlName="style"
+                            (mouseenter)="ordervalue(i)" (mouseenter)="stylevalue(i)" (click)="styleslist(i)"></p-dropdown>
+                     </td>
+                    <td>
+                        <p-dropdown #colors [options]="colorlist" placeholder="color" optionLabel="color"
+                            (onChange)="colorvalue(i)" optionValue="color" [editable]="true"
+                            [style]="{ minWidth: '8vh', minHeight:'2vh' }" formControlName="color"
+                            (mouseenter)="stylevalue(i)" (mouseenter)="colorvalue(i)" (click)="colorslist(i)"
+                            (onChange)="OrderPcsData(i)" (mouseenter)="OrderPcsData(i)"></p-dropdown>
+                    </td>
+                    <td><input type="date" class="form-control" formControlName="shipdate" style="width: 20vh;"></td>
+                    <td><input type="date" class="form-control" formControlName="fridate" style="width: 20vh;"></td>
+                    <td><input type="text" class="form-control" formControlName="orderpcs"></td>
+                    <td><input type="text" class="form-control" formControlName="planqty"></td>
+                    <td><input type="text" class="form-control" formControlName="line"></td>
+                    <td><input type="date" class="form-control" formControlName="startdate" style="width: 20vh;"></td>
+                    <td><input type="text" class="form-control" formControlName="daysreqd"></td>
+                    <td><input type="date" class="form-control" formControlName="enddate" style="width: 20vh;"></td>
+                    <td><input type="number" class="form-control" formControlName="nextid"></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
+</div>

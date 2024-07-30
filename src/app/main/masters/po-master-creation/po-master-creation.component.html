@@ -28,12 +28,12 @@
                 <td>{{i+1}}</td>
                 <td>{{data.buyer}}</td>
                 <td>{{data.orderNo}}</td>
-                <td>{{data.poDate}}</td>
+                <td>{{data.poDate | date :'longDate'}}</td>
 
 
                 <td>{{data.poQuantity}}</td>
                 <td>{{data.poValue}}</td>
-                <td>{{data.shipDate}}</td>
+                <td>{{data.shipDate | date :'longDate'}}</td>
 
                 <td><button class="btn btn-success" (click)="linedata(data.id)"><mat-icon>insert_drive_file</mat-icon></button></td>
 

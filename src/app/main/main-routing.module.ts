@@ -63,6 +63,7 @@ import { KnitFactoryMachineEntryComponent } from './Transaction/knit-factory-mac
 import { KnitFactoryMainComponent } from './Report/knit-factory-main/knit-factory-main.component';
 import { KnitFactoryWiseComponent } from './Report/knit-factory-wise/knit-factory-wise.component';
 import { LineAllocationEntryComponent } from './Garments/Transaction/line-allocation-entry/line-allocation-entry.component';
+import { LineAllocationListComponent } from './Garments/Report/line-allocation-list/line-allocation-list.component';
 
 const routes: Routes = [
   {path:'', component: AppComponent},
@@ -135,7 +136,8 @@ const routes: Routes = [
   {path:"KnitFactoryMachineEntry" , component : KnitFactoryMachineEntryComponent},
   {path: "knitFactoryMain", component:KnitFactoryMainComponent},
   {path: "knitwise", component:KnitFactoryWiseComponent },
-  {path:"lineAllocationEntry",component:LineAllocationEntryComponent}
+  {path:"lineAllocationReport",component:LineAllocationEntryComponent},
+  {path:"LineAllocationList",component:LineAllocationListComponent},
  
 ];
 

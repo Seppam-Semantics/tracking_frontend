@@ -132,6 +132,7 @@ import { LineMasterComponent } from './masters/Transaction Master/line-master/li
 import { LineMachineListComponent } from './masters/Transaction Master/line-machine-list/line-machine-list.component';
 import { WorkingDayComponent } from './masters/Transaction Master/working-day/working-day.component';
 import { LineAllocationEntryComponent } from './Garments/Transaction/line-allocation-entry/line-allocation-entry.component';
+import { LineAllocationListComponent } from './Garments/Report/line-allocation-list/line-allocation-list.component';
 @NgModule({
   declarations: [
     MainComponent,
@@ -217,7 +218,8 @@ import { LineAllocationEntryComponent } from './Garments/Transaction/line-alloca
     LineMasterComponent,
     LineMachineListComponent,
     WorkingDayComponent,
-    LineAllocationEntryComponent
+    LineAllocationEntryComponent,
+    LineAllocationListComponent
   ],
   imports: [
     CommonModule,

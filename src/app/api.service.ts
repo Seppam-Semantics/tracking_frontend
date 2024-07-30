@@ -10,8 +10,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  apiUrl = "https://tracker.seppam.com";
-  // apiUrl = "http://localhost:2000";
+  // apiUrl = "https://tracker.seppam.com";
+  apiUrl = "http://localhost:2000";
 
   token: any;
   profilenames: any;
@@ -155,6 +155,10 @@ export class ApiService {
 
   getstyleData(order: string): Observable<any> {
     return this.http.get(this.getUrl() + `/filtersapi/orders-styles_data?orderNo=${order}&`, this.getHeaders())
+  }
+
+  getstyleData2(buyer:string,order: string): Observable<any> {
+    return this.http.get(this.getUrl() + `/filtersapi/orders-styles_data?buyer=${buyer}&orderNo=${order}&`, this.getHeaders())
   }
 
   getcolorData(buyer: string, order: string, style: string): Observable<any> {
@@ -1538,5 +1542,17 @@ getStartDate(knitFty:string = '', machineDia : string = ''):Observable<any>{
         }
 
         //-------------------------------------------- Working Day Master [End]------------------------------------------------------
+
+        //-------------------------------------------- Line Allocation Master [Start]------------------------------------------------------
+      
+        lineallocationshipDate(buyer:string='' , orderNo:string='' ):Observable<any>{
+          return this.http.get(this.getUrl() + `/garmentsapi/lineallocation-shipDate?buyer=${buyer}&orderNo=${orderNo}&`, this.getHeaders())
+        }
+
+        lineallocationOrderPcs(buyer:string='' , orderNo:string='', style:string='', color:string='' ):Observable<any>{
+          return this.http.get(this.getUrl() + `/garmentsapi/lineallocation-OrderPcs?buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&`, this.getHeaders())
+        }
+      
+        //-------------------------------------------- Line Allocation Master [End]------------------------------------------------------
 
       }
