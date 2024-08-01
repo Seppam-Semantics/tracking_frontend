@@ -1537,12 +1537,20 @@ getStartDate(knitFty:string = '', machineDia : string = ''):Observable<any>{
           return this.http.get(this.getUrl() + `/mastersapi/workingday_master_list` ,this.getHeaders())
         }
 
+        monthlist(): Observable<any> {
+          return this.http.get(this.getUrl() + `/mastersapi/month_list` ,this.getHeaders())
+        }
+
         workingdaylistPost(data:any ): Observable<any> {
           return this.http.post(this.getUrl() + `/mastersapi/workingday_master`, data,this.getHeaders())
         }
 
         workingdaylistid(id:any):Observable<any>{
           return this.http.get(this.getUrl() + `/mastersapi/workingday_master_id/${id}`, this.getHeaders())
+        }
+
+        workingdaymonth(month:string=''):Observable<any>{
+          return this.http.get(this.getUrl() + `/mastersapi/workingday_month?month=${month}&`, this.getHeaders())
         }
 
         //-------------------------------------------- Working Day Master [End]------------------------------------------------------
@@ -1563,6 +1571,18 @@ getStartDate(knitFty:string = '', machineDia : string = ''):Observable<any>{
       
         lineallocationPost(data:any ): Observable<any> {
           return this.http.post(this.getUrl() + `/garmentsapi/line_allocation`, data,this.getHeaders())
+        }
+
+        lineallocationAllData( ): Observable<any> {
+          return this.http.get(this.getUrl() + `/garmentsapi/line_allocation`,this.getHeaders())
+        }
+
+        lineallocationstatDate(buyer:string='' , orderNo:string='', style:string='', color:string='' ):Observable<any>{
+          return this.http.get(this.getUrl() + `/garmentsapi/lineallocation-statDate?buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&`, this.getHeaders())
+        }
+
+        lineallocationworkhrs(date:string=''):Observable<any>{
+          return this.http.get(this.getUrl() + `/garmentsapi/lineallocation-workhrs?date=${date}&`, this.getHeaders())
         }
         //-------------------------------------------- Line Allocation Master [End]------------------------------------------------------
 

@@ -31,6 +31,7 @@ export class LineAllocationEntryComponent implements OnInit {
   orderpcsvalue: any;
   linedropdata: any;
   prodhrdata: any;
+  startdate_Value: any;
 
 
   ngOnInit(): void {
@@ -138,6 +139,10 @@ export class LineAllocationEntryComponent implements OnInit {
     });
   }
 
+  delete(i:any){
+    this.items.removeAt(i)
+  }
+
   @ViewChildren('buyername') buyername!: QueryList<Dropdown>;
   buyerlist(index: any) {
     if (this.buyername) {
@@ -224,10 +229,36 @@ export class LineAllocationEntryComponent implements OnInit {
     this.api.lineallocationLine(this.style_Value).subscribe((res) => {
       this.linedropdata = res.data
       this.prodhrdata = parseFloat(res.data[0].prodhr)
-      
+
     })
   }
 
+  getstartdate(index:any){
+    const formArray = this.LineAllocationForm.get('data') as FormArray;
+    const row = formArray.at(index);
+    this.Buyer_Value = row.get('buyer')?.value;
+    this.Order_Value = row.get('orderno')?.value;
+    this.style_Value = row.get('style')?.value;
+    this.color_Value = row.get('color')?.value;
+
+    this.api.lineallocationstatDate(this.Buyer_Value,this.Order_Value,this.style_Value,this.color_Value).subscribe((res)=>{
+      console.log(res.date[0].endDate)
+      const formArray = this.LineAllocationForm.get('data') as FormArray;
+      const daterow = formArray.at(0);
+      daterow.get('startdate')?.setValue(res.date[0].endDate)
+    })
+  }
+
+
+  dateworkhrs(index:any){
+    const formArray = this.LineAllocationForm.get('data') as FormArray;
+    const row = formArray.at(index);
+    this.startdate_Value = row.get('startdate')?.value;
+    this.api.lineallocationworkhrs(this.startdate_Value).subscribe((res)=>{
+      console.log(res)
+    })
+  }
+  
   calculateEndDate1() {
 
     try {

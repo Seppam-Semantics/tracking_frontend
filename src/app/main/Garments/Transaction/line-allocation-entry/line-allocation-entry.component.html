@@ -27,6 +27,7 @@
                     <th>Alloc Start Date</th>
                     <th>Days Reqd</th>
                     <th>Alloc End Date</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody formArrayName="data">
@@ -57,28 +58,30 @@
                         <p-dropdown #colors [options]="colorlist" placeholder="color" optionLabel="color"
                             optionValue="color" [editable]="true" [style]="{ minWidth: '8vh', minHeight:'2vh' }"
                             formControlName="color" (mouseenter)="stylevalue(i)" (click)="colorslist(i)"
-                            (onChange)="OrderPcsData(i)" (mouseenter)="OrderPcsData(i)" (input)="check()"
-                            (mouseenter)="check()" (onChange)="check()"></p-dropdown>
+                            (onChange)="OrderPcsData(i)" (input)="check()" (onChange)="getstartdate(i)"
+                             (onChange)="check()"></p-dropdown>
                     </td>
-                    <td><input type="date" class="form-control" formControlName="shipdate" style="width: 20vh;"></td>
-                    <td><input type="date" class="form-control" formControlName="fridate" style="width: 20vh;"></td>
-                    <td><input type="number" class="form-control" formControlName="orderpcs"></td>
-                    <td><input type="number" class="form-control" formControlName="planqty"></td>
-                    <td><input type="text" class="form-control" formControlName="line" list="list">
+                    <td><input type="date" class="form-control" formControlName="shipdate" style="width: 20vh;" (mouseenter)="check()"></td>
+                    <td><input type="date" class="form-control" formControlName="fridate" style="width: 20vh;" (mouseenter)="check()"></td>
+                    <td><input type="number" class="form-control" formControlName="orderpcs" (mouseenter)="check()"></td>
+                    <td><input type="number" class="form-control" formControlName="planqty" (mouseenter)="check()"></td>
+                    <td><input type="text" class="form-control" formControlName="line" list="list" (mouseenter)="check()">
                         <datalist id="list">
                             <option *ngFor="let data of this.linedropdata" [value]="data.line">{{data.line}}</option>
                         </datalist>
                     </td>
-                    <td><input type="date" class="form-control" formControlName="startdate" style="width: 20vh;"></td>
-                    <td><input type="number" class="form-control" formControlName="daysreqd"></td>
-                    <td><input type="date" class="form-control" formControlName="enddate" style="width: 20vh;" readonly>
+                    <td><input type="date" class="form-control" formControlName="startdate" style="width: 20vh;" (mouseenter)="check()"
+                        (input)="dateworkhrs(i)"></td>
+                    <td><input type="number" class="form-control" formControlName="daysreqd" (mouseenter)="check()"></td>
+                    <td><input type="date" class="form-control" formControlName="enddate" style="width: 20vh;" readonly (mouseenter)="check()">
                     </td>
+                    <td><button style="background-color: red; color: white;" (click)="delete(i)">x</button></td>
                 </tr>
             </tbody>
         </table>
         <div style="display: flex;">
             <div style="display: flex; justify-content: center; width: 100%;">
-            <button class="btn btn-primary" (click)="save()">Save</button>
+            <button class="btn btn-success" (click)="save()">Save</button>
         </div>
         </div>
     </div>

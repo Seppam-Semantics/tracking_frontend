@@ -8,7 +8,7 @@
 
   .table-container
 {
-height: 62vh;
+height: 55vh;
  overflow-y: scroll;
 }
 
@@ -28,3 +28,41 @@ thead{
   scrollbar-width: none;
   height:90%
 }
+td{
+}
+div::-webkit-scrollbar
+{
+height:7px;
+width: 10px;
+}
+div::-webkit-scrollbar-track
+{
+    border-radius: 10px;
+    webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+div::-webkit-scrollbar-thumb
+{
+    background-color: grey;
+    border-radius: 10px;
+    webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+
+:host ::ng-deep .p-dropdown .p-dropdown-label.p-placeholder{
+  color: #6b7280;
+  padding: 6px;
+  margin-left: 2vh;
+}
+:host ::ng-deep .p-dropdown .p-dropdown-label{
+  color: #6b7280;
+  padding: 6px;
+  margin-left: 2vh;
+}
+
+:host ::ng-deep .p-dropdown {
+ width: min-content;
+}
+
+:host ::ng-deep.p-dropdown-panel .p-dropdown-items {
+  margin-left:-27px
+}
+ 
