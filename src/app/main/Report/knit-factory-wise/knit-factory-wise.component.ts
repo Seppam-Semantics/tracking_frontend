@@ -57,9 +57,10 @@ export class KnitFactoryWiseComponent implements OnInit {
       this.buyers = res.buyers;
     })
 
-    this.api.knitfty_name().subscribe((res) => {
-      this.ftyName = res.factorys
-    })
+    // this.api.knitforDrag().subscribe((res) => {
+    //   this.ftyName = res
+    //   console.log(res)
+    // })
 
     this.api.getAllocation().subscribe((res) => {
       this.machine = res.data
