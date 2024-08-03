@@ -133,6 +133,10 @@ import { LineMachineListComponent } from './masters/Transaction Master/line-mach
 import { WorkingDayComponent } from './masters/Transaction Master/working-day/working-day.component';
 import { LineAllocationEntryComponent } from './Garments/Transaction/line-allocation-entry/line-allocation-entry.component';
 import { LineAllocationListComponent } from './Garments/Report/line-allocation-list/line-allocation-list.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+
+
+
 @NgModule({
   declarations: [
     MainComponent,
@@ -265,8 +269,8 @@ import { LineAllocationListComponent } from './Garments/Report/line-allocation-l
     InputNumberModule,
     MultiSelectModule,
     TableModule,
-    DragDropModule
-    // DxDataGridModule
+    DragDropModule,
+    MatSlideToggleModule
   ]
 })
 export class MainModule { }

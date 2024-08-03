@@ -24,6 +24,7 @@ import { NgxSpinner, NgxSpinnerModule } from "ngx-spinner";
 import { FormsModule } from '@angular/forms';
 
 import { DatePipe } from '@angular/common';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import { DatePipe } from '@angular/common';
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
+    MatSlideToggleModule
 
 
   ],

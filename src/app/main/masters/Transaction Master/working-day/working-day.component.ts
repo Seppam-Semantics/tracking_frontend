@@ -19,6 +19,7 @@ export class WorkingDayComponent implements OnInit {
   dates: { date: string, day: string }[] = [];
   monthlist: any;
   dates2: any;
+  leavevalid : boolean[] = []
 
   ngOnInit(): void {
     this.api.workingdaylist().subscribe((res) => {
@@ -81,6 +82,7 @@ export class WorkingDayComponent implements OnInit {
           id:[dataItem.id],
           workhrs: [dataItem.workhrs],
           day: [dataItem.Day],
+          isleave : [dataItem.isleave],
           Remarks: [dataItem.remarks]
         });  
         EntryData.push(Details);
@@ -92,16 +94,30 @@ export class WorkingDayComponent implements OnInit {
         date: [this.datePipe.transform(dataItem.date, 'yyyy-MM-dd')],
         workhrs: [],
         day: [dataItem.day],
+        isleave : [],
         Remarks: []
       });
 
       EntryData.push(Details);
     });
       }
-      
-
     })
   }
+
+  isleaveValid(i: number): void {
+    const entryData = this.WorkingDaycreate.get('data') as FormArray;
+    const row = entryData.at(i);
+    const leave = row.get('isleave')?.value;
+
+    if (leave) {
+        this.leavevalid[i] = false;
+        row.get('workhrs')?.setValue(0);
+        row.get('workhrs')?.disable();
+    } else {
+        this.leavevalid[i] = true;
+        row.get('workhrs')?.enable();
+    }
+}
 
 
 
@@ -114,6 +130,7 @@ export class WorkingDayComponent implements OnInit {
     const row = this.fb.group({
       id:new FormControl(''),
       date: new FormControl(''),
+      isleave : new FormControl(''),
       workhrs: new FormControl(''),
       day: new FormControl(''),
       Remarks: new FormControl('')
