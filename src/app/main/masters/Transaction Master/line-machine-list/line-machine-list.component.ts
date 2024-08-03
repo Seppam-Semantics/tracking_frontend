@@ -102,10 +102,14 @@ export class LineMachineListComponent implements OnInit{
     this.LineMachinelistcreationpopup = true
   }
 
+  linejson(data: any): any {
+    return JSON.parse(data);
+  }
+
   edit(id: any) {
     this.LineMachinelistupdatepopup = true;
     this.api.Machinelistid(id).subscribe((res) => {
-
+        console.log(res)
         this.lineDta = res.line[0].line.map((line: any) => ({
             lineid: line.lineId,
             headid: line.hederid,

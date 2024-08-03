@@ -12,14 +12,14 @@ import Swal from 'sweetalert2';
 export class WorkingDayComponent implements OnInit {
   WorkingDaycreationpopup: boolean = false
   WorkingDayupdatepopup: boolean = false
-  WorkingDaycreate: FormGroup
+  WorkingDaycreate: FormGroup;
   allData: any;
   workingdayAlldata: any;
-  selectedMonth: string | null = null;
-  dates: { date: string, day: string }[] = [];
+  selectedMonth : string | null = null;
+  dates: any = [];
   monthlist: any;
   dates2: any;
-  leavevalid : boolean[] = []
+  leavevalid : boolean[] = [];
 
   ngOnInit(): void {
     this.api.workingdaylist().subscribe((res) => {
@@ -89,7 +89,7 @@ export class WorkingDayComponent implements OnInit {
       });
 
       }else{
-            this.dates.forEach((dataItem) => {
+            this.dates.forEach((dataItem:any) => {
       const Details = this.fb.group({
         date: [this.datePipe.transform(dataItem.date, 'yyyy-MM-dd')],
         workhrs: [],

@@ -31,14 +31,14 @@
                 <th>DaysReqd</th>
                 <th>EndDate</th>
                 <th>Next Id</th>
-                <th>Old Id</th>
+                <th>Record Id</th>
             </tr>
         </thead>
         <tbody formArrayName="data">
             <tr *ngFor="let list of items.controls; let i=index" [formGroupName]="i" cdkDrag
                 (mouseenter)="calculateEndDate(i)">
 
-                <td cdkDragHandle>{{i+1}}</td>
+                <td cdkDragHandle>{{ i }}</td>
 
                 <td cdkDragHandle>
                     <!-- <p-dropdown #buyername placeholder="Buyer" optionLabel="buyer" [options]="buyers" 

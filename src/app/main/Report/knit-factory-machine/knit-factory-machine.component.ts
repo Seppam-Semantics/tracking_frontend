@@ -360,6 +360,9 @@ Addcheck(index: number) {
   Save(){
     
   }
+  updateOpen(){
+    this.router.navigate(['main/knitwise'])
+  }
   
   exportexcel() { }
 
