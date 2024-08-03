@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Dropdown } from 'primeng/dropdown';
@@ -32,6 +33,14 @@ export class LineAllocationEntryComponent implements OnInit {
   linedropdata: any;
   prodhrdata: any;
   startdate_Value: any;
+  dateMonth: any;
+  line_Value: any;
+  prodhr_value: any;
+  AllWorkhrs: any;
+  accumulatedHours: any;
+  daysreqd: any;
+  addvalue: any;
+
 
 
   ngOnInit(): void {
@@ -41,7 +50,7 @@ export class LineAllocationEntryComponent implements OnInit {
 
   }
 
-  constructor(private api: ApiService, private fb: FormBuilder) {
+  constructor(private api: ApiService, private fb: FormBuilder , private datePipe : DatePipe) {
 
     this.LineAllocationForm = new FormGroup({
       data: this.fb.array([])
@@ -200,7 +209,6 @@ export class LineAllocationEntryComponent implements OnInit {
     this.Order_Value = row.get('orderno')?.value;
     this.api.lineallocationshipDate(this.Buyer_Value, this.Order_Value).subscribe((res) => {
       this.shipDatevalue = res.shipDate[0].shipDate
-      console.log(this.shipDatevalue)
       row.get('shipdate')?.setValue(this.shipDatevalue);
     })
   }
@@ -242,7 +250,7 @@ export class LineAllocationEntryComponent implements OnInit {
     this.color_Value = row.get('color')?.value;
 
     this.api.lineallocationstatDate(this.Buyer_Value,this.Order_Value,this.style_Value,this.color_Value).subscribe((res)=>{
-      console.log(res.date[0].endDate)
+      
       const formArray = this.LineAllocationForm.get('data') as FormArray;
       const daterow = formArray.at(0);
       daterow.get('startdate')?.setValue(res.date[0].endDate)
@@ -254,9 +262,23 @@ export class LineAllocationEntryComponent implements OnInit {
     const formArray = this.LineAllocationForm.get('data') as FormArray;
     const row = formArray.at(index);
     this.startdate_Value = row.get('startdate')?.value;
-    this.api.lineallocationworkhrs(this.startdate_Value).subscribe((res)=>{
-      console.log(res)
+    console.log(this.startdate_Value)
+    this.dateMonth = this.datePipe.transform(row.get('startdate')?.value, 'MM')
+    this.api.lineallocationworkhrs(this.startdate_Value , this.dateMonth ).subscribe((res)=>{
+      this.AllWorkhrs = res.date
     })
+  }
+
+  dataprodhr(index:any){
+    const formArray = this.LineAllocationForm.get('data') as FormArray;
+    const row = formArray.at(index);
+    this.style_Value = row.get('style')?.value;
+    this.line_Value = row.get('line')?.value;
+    this.api.lineallocationprodhr(this.line_Value , this.style_Value ).subscribe((res)=>{
+     this.prodhr_value = res.data[0].prodhr
+    })
+    this.dateworkhrs(index)
+  
   }
   
   calculateEndDate1() {
@@ -294,7 +316,7 @@ export class LineAllocationEntryComponent implements OnInit {
         
             const endDate = new Date(startDate);
             endDate.setDate(startDate.getDate() + daysreqdValue);
-            row.get('enddate')?.setValue(endDate.toISOString().substring(0, 10)); // Set enddate in yyyy-MM-dd format
+            // row.get('enddate')?.setValue(endDate.toISOString().substring(0, 10)); // Set enddate in yyyy-MM-dd format
           }
 
         }
@@ -312,6 +334,7 @@ export class LineAllocationEntryComponent implements OnInit {
 
           const orderpcsValue = row.get('orderpcs')?.value;
           const orderpcscalauction = orderpcsValue * 1.05
+          
           row.get('planqty')?.setValue(orderpcscalauction);
         }
       });
@@ -319,20 +342,47 @@ export class LineAllocationEntryComponent implements OnInit {
     catch { }
   }
 
-  calculateEndDate4(){
+  calculateEndDate4() {
     try {
       this.items.controls.forEach((control: AbstractControl) => {
         const row = control as FormGroup;
         if (row instanceof FormGroup) {
-
           const planqtyValue = row.get('planqty')?.value;
-          const daysreqd = (planqtyValue / (this.prodhrdata/24)).toFixed()
-          row.get('daysreqd')?.setValue(daysreqd);
+          const totalHoursRequired = planqtyValue / this.prodhr_value;
+          let accumulatedHours = null;
+          let daysCount = 0;
+  
+          for (let i = 0; i < this.AllWorkhrs.length; i++) {
+            const workhrs = this.AllWorkhrs[i].workhrs;
+  
+            if (workhrs > 0) {
+              if (accumulatedHours + workhrs >= totalHoursRequired) {
+                if(accumulatedHours == null)
+                daysCount++;
+                break;
+              } else if (accumulatedHours + workhrs > 0) {
+                accumulatedHours += workhrs;
+                daysCount++;
+              }
+            }
+  
+            console.log(`Accumulated Hours: ${accumulatedHours}`);
+            console.log(`totalHoursRequired: ${totalHoursRequired}`);
+          }
+  
+          row.get('daysreqd')?.setValue(daysCount);
         }
       });
+    } catch (error) {
+      console.error('Error calculating end date:', error);
     }
-    catch { }
   }
+  
+  
+  
+  
+  
+  
   //-----------------------------------------------------------------------
 
   check() {

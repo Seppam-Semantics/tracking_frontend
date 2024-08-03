@@ -43,3 +43,6 @@ th,tr,td {
 :host ::ng-deep .p-dropdown .p-dropdown-trigger {
   display: none;
 }
+::ng-deep .form-control{
+  border: 1px solid black;
+}
