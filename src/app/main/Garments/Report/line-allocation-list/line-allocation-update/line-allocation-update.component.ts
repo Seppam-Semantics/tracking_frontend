@@ -40,8 +40,17 @@ export class LineAllocationUpdateComponent {
 
 
 constructor(private router : Router , private api: ApiService , private fb : FormBuilder){
+  this.LineAllocationForm = new FormGroup({
+    data: this.fb.array([])
+  })
 
-  this.api.lineallocationAllData().subscribe((res)=>{
+}
+ngOnInit(): void {
+  this.lineData()
+}
+
+edit(line:any){
+  this.api.lineWiseGet(line).subscribe((res)=>{
     this.AllData = res.data
     const EntryData = this.LineAllocationForm.get('data') as FormArray;
     EntryData.clear();
@@ -85,16 +94,7 @@ constructor(private router : Router , private api: ApiService , private fb : For
       });
     })
   })
-
-  this.LineAllocationForm = new FormGroup({
-    data: this.fb.array([])
-  })
-
 }
-ngOnInit(): void {
-
-}
-
 
   //---------------------------------------------------------------------------------------------------
 
@@ -216,18 +216,13 @@ ngOnInit(): void {
       })
     }
   
-    lineData(index:any){
-    
+    lineData(index:any = ''){
       const formArray = this.LineAllocationForm.get('data') as FormArray;
       const row = formArray.at(index);
-      this.Buyer_Value = row.get('buyer')?.value;
-      this.Order_Value = row.get('orderno')?.value;
       this.style_Value = row.get('style')?.value;
-      this.color_Value = row.get('color')?.value;
       this.api.lineallocationLine(this.style_Value).subscribe((res) => {
         this.linedropdata = res.data
         this.prodhrdata = parseFloat(res.data[0].prodhr)
-        
       })
     }
   

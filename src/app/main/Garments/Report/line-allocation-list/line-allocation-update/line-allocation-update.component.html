@@ -8,10 +8,11 @@
                 <span>Line Allocation Listing</span>
             </div>
             <div style="flex: 1 1 auto;"></div>
-            
+
             <div>
-                <button mat-button color="primary" (click)="new()">New</button>
-            
+                 <p-dropdown [options]="this.linedropdata" placeholder="Line" optionLabel="line"
+                                (onChange)="edit($event.target.value)" optionValue="line" [editable]="true" (input)="edit($event.target.value)"
+                                [style]="{ minWidth: '8vh', minHeight:'2vh' }"></p-dropdown>
             </div>
 
         </mat-toolbar>
