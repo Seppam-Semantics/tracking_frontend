@@ -127,7 +127,7 @@
         <tr *ngFor="let data of this.AllData;let i = index">
           <td>{{i+1}}</td>
           <td>{{data.spinner}}</td>
-          <td>{{data.lcDate}}</td>
+          <td>{{data.lcDate | date}}</td>
           <td>{{data.lcNo}}</td>
           <td>{{data.pi}}</td>
           <td>{{data.piDate | date }}</td>

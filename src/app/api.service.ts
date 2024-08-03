@@ -1581,8 +1581,12 @@ getStartDate(knitFty:string = '', machineDia : string = ''):Observable<any>{
           return this.http.get(this.getUrl() + `/garmentsapi/lineallocation-statDate?buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&`, this.getHeaders())
         }
 
-        lineallocationworkhrs(date:string=''):Observable<any>{
-          return this.http.get(this.getUrl() + `/garmentsapi/lineallocation-workhrs?date=${date}&`, this.getHeaders())
+        lineallocationworkhrs(date:string='', month:string=''):Observable<any>{
+          return this.http.get(this.getUrl() + `/garmentsapi/lineallocation-workhrs?date=${date}&month=${month}`, this.getHeaders())
+        }
+
+        lineallocationprodhr(line:string='', style:string=''):Observable<any>{
+          return this.http.get(this.getUrl() + `/garmentsapi/lineallocation-prodhr?line=${line}&style=${style}`, this.getHeaders())
         }
         //-------------------------------------------- Line Allocation Master [End]------------------------------------------------------
 
