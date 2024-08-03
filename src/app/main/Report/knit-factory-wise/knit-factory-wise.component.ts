@@ -122,7 +122,7 @@ export class KnitFactoryWiseComponent implements OnInit {
           "startDate": [dataItem.startDate],
           "daysrequired": [dataItem.daysrequired],
           "endDate": [dataItem.endDate],
-          "nextid": [i+2],
+          "nextid": [i == (this.AllIddata.length-1) ? null : i+2],
           "oldId": [dataItem.oldId ? dataItem.oldId : dataItem.id]
         })
 

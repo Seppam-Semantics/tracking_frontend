@@ -46,7 +46,9 @@ constructor(private router : Router , private api: ApiService , private fb : For
 
 }
 ngOnInit(): void {
-  this.lineData()
+  this.api.lineallocationLine().subscribe((res) => {
+    this.linedropdata = res.data
+  })
 }
 
 edit(line:any){
@@ -216,7 +218,7 @@ edit(line:any){
       })
     }
   
-    lineData(index:any = ''){
+    lineData(index:any){
       const formArray = this.LineAllocationForm.get('data') as FormArray;
       const row = formArray.at(index);
       this.style_Value = row.get('style')?.value;
