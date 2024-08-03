@@ -250,10 +250,9 @@ export class LineAllocationEntryComponent implements OnInit {
     this.color_Value = row.get('color')?.value;
 
     this.api.lineallocationstatDate(this.Buyer_Value,this.Order_Value,this.style_Value,this.color_Value).subscribe((res)=>{
-      
       const formArray = this.LineAllocationForm.get('data') as FormArray;
-      const daterow = formArray.at(0);
-      daterow.get('startdate')?.setValue(res.date[0].endDate)
+      const row = formArray.at(index);
+      row.get('startdate')?.setValue(res.date[0].endDate)
     })
   }
 
@@ -316,7 +315,7 @@ export class LineAllocationEntryComponent implements OnInit {
         
             const endDate = new Date(startDate);
             endDate.setDate(startDate.getDate() + daysreqdValue);
-            // row.get('enddate')?.setValue(endDate.toISOString().substring(0, 10)); // Set enddate in yyyy-MM-dd format
+            row.get('enddate')?.setValue(endDate.toISOString().substring(0, 10));
           }
 
         }
@@ -349,28 +348,30 @@ export class LineAllocationEntryComponent implements OnInit {
         if (row instanceof FormGroup) {
           const planqtyValue = row.get('planqty')?.value;
           const totalHoursRequired = planqtyValue / this.prodhr_value;
-          let accumulatedHours = null;
+          let accumulatedHours = 0;
           let daysCount = 0;
-  
-          for (let i = 0; i < this.AllWorkhrs.length; i++) {
+          let lastDate: string | null = null;
+
+          for (let i = 0; i < this.AllWorkhrs.length; i++) {  
+            try{
             const workhrs = this.AllWorkhrs[i].workhrs;
-  
-            if (workhrs > 0) {
-              if (accumulatedHours + workhrs >= totalHoursRequired) {
-                if(accumulatedHours == null)
+            const date = this.AllWorkhrs[i].date;
+            
+            if (workhrs > 0 ) {
+              if (accumulatedHours + workhrs >= totalHoursRequired ) {
                 daysCount++;
+                lastDate = date;
+
                 break;
-              } else if (accumulatedHours + workhrs > 0) {
+              } else if (accumulatedHours + workhrs > 0 ) {
                 accumulatedHours += workhrs;
                 daysCount++;
+                lastDate = date; 
               }
             }
-  
-            console.log(`Accumulated Hours: ${accumulatedHours}`);
-            console.log(`totalHoursRequired: ${totalHoursRequired}`);
+          }catch{}
           }
-  
-          row.get('daysreqd')?.setValue(daysCount);
+          row.get('daysreqd')?.setValue(daysCount - 1);
         }
       });
     } catch (error) {
