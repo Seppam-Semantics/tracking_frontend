@@ -506,7 +506,7 @@ sizeslist(index:any) {
 }
 
   back() {
-    this.router.navigate(['main/knitFactoryMain'])
+    this.router.navigate(['main/KnitFactoryMachine'])
   }
 
   getSerialNumber(index: number): number {

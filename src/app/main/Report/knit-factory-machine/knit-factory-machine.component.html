@@ -1,11 +1,12 @@
 <mat-toolbar style="display: flex; justify-content: center; height: auto;">
-    <button class="btn btn-danger" (click)="back()">Back</button>
     <div style="display: flex; justify-content: center; width: 100%;">
     <span>Knit Factory - Machine List</span>
 </div>
     <div style="flex: 1 1 auto;"></div>
     <button mat-button color="primary" (click)="new()">New</button>
-    <button mat-button color="primary" (click)="exportexcel()">Download</button>
+    <button mat-button color="primary" (click)="updateOpen()">Update</button>
+    <!-- <button mat-button color="primary" (click)="exportexcel()">Download</button> -->
+
 </mat-toolbar>
 <div class="tablecss">
     <table class="table table-sm table-bordered table-striped text-center">

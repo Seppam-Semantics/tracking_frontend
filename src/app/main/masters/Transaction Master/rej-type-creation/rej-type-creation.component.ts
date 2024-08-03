@@ -161,7 +161,7 @@ getSelectedColors1() {
 }
 
   update() {
-    // console.log(this.rejTypeedit.value)
+
     this.api.rejtype_Master(this.rejTypeedit.value).subscribe((res) => {
       alert(res.message)
       this.RejTypeFillterData()
@@ -170,7 +170,6 @@ getSelectedColors1() {
   }
 
   saveButton() {
-    // console.log(this.rejTypecreate.value)
     this.api.rejtype_Master(this.rejTypecreate.value).subscribe((res) => {
       alert(res.message)
       this.RejTypeFillterData()
