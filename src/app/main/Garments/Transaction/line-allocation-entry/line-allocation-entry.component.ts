@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Dropdown } from 'primeng/dropdown';
 import { ApiService } from 'src/app/api.service';
@@ -51,7 +51,7 @@ export class LineAllocationEntryComponent implements OnInit {
 
   }
 
-  constructor(private api: ApiService, private fb: FormBuilder , private datePipe : DatePipe, private router : Router) {
+  constructor(private api: ApiService, private fb: FormBuilder, private datePipe: DatePipe, private router: Router) {
 
     this.LineAllocationForm = new FormGroup({
       data: this.fb.array([])
@@ -114,21 +114,21 @@ export class LineAllocationEntryComponent implements OnInit {
   LineAllocationfun() {
     const row = this.fb.group({
       "id": [''],
-      "buyer": [''],
-      "orderno": [''],
-      "style": [''],
-      "color": [''],
-      "shipdate": [''],
-      "fridate": [''],
-      "orderpcs": [''],
-      "planqty": [''],
-      "line": [''],
-      "startdate": [''],
-      "daysreqd": [''],
-      "enddate": [''],
+      "buyer": ['', Validators.required],
+      "orderno": ['', Validators.required],
+      "style": ['', Validators.required],
+      "color": ['', Validators.required],
+      "shipdate": ['', Validators.required],
+      "fridate": ['', Validators.required],
+      "orderpcs": ['', Validators.required],
+      "planqty": ['', Validators.required],
+      "line": ['', Validators.required],
+      "startdate": ['', Validators.required],
+      "daysreqd": ['', Validators.required],
+      "enddate": ['', Validators.required],
       "nextid": [],
       "seqId": [],
-      "oldid":[]
+      "oldid": []
     });
 
     this.items.push(row)
@@ -149,7 +149,7 @@ export class LineAllocationEntryComponent implements OnInit {
     });
   }
 
-  delete(i:any){
+  delete(i: any) {
     this.items.removeAt(i)
   }
 
@@ -227,8 +227,8 @@ export class LineAllocationEntryComponent implements OnInit {
     })
   }
 
-  lineData(index:any){
-  
+  lineData(index: any) {
+
     const formArray = this.LineAllocationForm.get('data') as FormArray;
     const row = formArray.at(index);
     this.Buyer_Value = row.get('buyer')?.value;
@@ -242,7 +242,7 @@ export class LineAllocationEntryComponent implements OnInit {
     })
   }
 
-  getstartdate(index:any){
+  getstartdate(index: any) {
     const formArray = this.LineAllocationForm.get('data') as FormArray;
     const row = formArray.at(index);
     this.Buyer_Value = row.get('buyer')?.value;
@@ -250,7 +250,7 @@ export class LineAllocationEntryComponent implements OnInit {
     this.style_Value = row.get('style')?.value;
     this.color_Value = row.get('color')?.value;
 
-    this.api.lineallocationstatDate(this.Buyer_Value,this.Order_Value,this.style_Value,this.color_Value).subscribe((res)=>{
+    this.api.lineallocationstatDate(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value).subscribe((res) => {
       const formArray = this.LineAllocationForm.get('data') as FormArray;
       const row = formArray.at(index);
       row.get('startdate')?.setValue(res.date[0].endDate)
@@ -258,29 +258,29 @@ export class LineAllocationEntryComponent implements OnInit {
   }
 
 
-  dateworkhrs(index:any){
+  dateworkhrs(index: any) {
     const formArray = this.LineAllocationForm.get('data') as FormArray;
     const row = formArray.at(index);
     this.startdate_Value = row.get('startdate')?.value;
     console.log(this.startdate_Value)
     this.dateMonth = this.datePipe.transform(row.get('startdate')?.value, 'MM')
-    this.api.lineallocationworkhrs(this.startdate_Value , this.dateMonth ).subscribe((res)=>{
+    this.api.lineallocationworkhrs(this.startdate_Value, this.dateMonth).subscribe((res) => {
       this.AllWorkhrs = res.date
     })
   }
 
-  dataprodhr(index:any){
+  dataprodhr(index: any) {
     const formArray = this.LineAllocationForm.get('data') as FormArray;
     const row = formArray.at(index);
     this.style_Value = row.get('style')?.value;
     this.line_Value = row.get('line')?.value;
-    this.api.lineallocationprodhr(this.line_Value , this.style_Value ).subscribe((res)=>{
-     this.prodhr_value = res.data[0].prodhr
+    this.api.lineallocationprodhr(this.line_Value, this.style_Value).subscribe((res) => {
+      this.prodhr_value = res.data[0].prodhr
     })
     this.dateworkhrs(index)
-  
+
   }
-  
+
   calculateEndDate1() {
 
     try {
@@ -311,9 +311,9 @@ export class LineAllocationEntryComponent implements OnInit {
 
           const daysreqdValue = parseFloat(row.get('daysreqd')?.value) || 0;
           const startDate = new Date(row.get('startdate')?.value);
-        
+
           if (startDate && !isNaN(daysreqdValue)) {
-        
+
             const endDate = new Date(startDate);
             endDate.setDate(startDate.getDate() + daysreqdValue);
             row.get('enddate')?.setValue(endDate.toISOString().substring(0, 10));
@@ -334,7 +334,7 @@ export class LineAllocationEntryComponent implements OnInit {
 
           const orderpcsValue = row.get('orderpcs')?.value;
           const orderpcscalauction = orderpcsValue * 1.05
-          
+
           row.get('planqty')?.setValue(orderpcscalauction);
         }
       });
@@ -353,24 +353,24 @@ export class LineAllocationEntryComponent implements OnInit {
           let daysCount = 0;
           let lastDate: string | null = null;
 
-          for (let i = 0; i < this.AllWorkhrs.length; i++) {  
-            try{
-            const workhrs = this.AllWorkhrs[i].workhrs;
-            const date = this.AllWorkhrs[i].date;
-            
-            if (workhrs > 0 ) {
-              if (accumulatedHours + workhrs >= totalHoursRequired ) {
-                daysCount++;
-                lastDate = date;
+          for (let i = 0; i < this.AllWorkhrs.length; i++) {
+            try {
+              const workhrs = this.AllWorkhrs[i].workhrs;
+              const date = this.AllWorkhrs[i].date;
 
-                break;
-              } else if (accumulatedHours + workhrs > 0 ) {
-                accumulatedHours += workhrs;
-                daysCount++;
-                lastDate = date; 
+              if (workhrs > 0) {
+                if (accumulatedHours + workhrs >= totalHoursRequired) {
+                  daysCount++;
+                  lastDate = date;
+
+                  break;
+                } else if (accumulatedHours + workhrs > 0) {
+                  accumulatedHours += workhrs;
+                  daysCount++;
+                  lastDate = date;
+                }
               }
-            }
-          }catch{}
+            } catch { }
           }
           row.get('daysreqd')?.setValue(daysCount - 1);
         }
@@ -379,12 +379,12 @@ export class LineAllocationEntryComponent implements OnInit {
       console.error('Error calculating end date:', error);
     }
   }
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
   //-----------------------------------------------------------------------
 
   check() {
@@ -427,21 +427,30 @@ export class LineAllocationEntryComponent implements OnInit {
     catch { }
   }
 
-//-------------------------------------------------------------------------------------------
+  //-------------------------------------------------------------------------------------------
 
-save(){
-  console.log(this.LineAllocationForm.value)
-  this.api.lineallocationPost(this.LineAllocationForm.value).subscribe((res)=>{
-    Swal.fire({
-      position: "top-end",
-      icon: "success",
-      title: res.message,
-      showConfirmButton: false,
-      timer: 1500
-    });
-  })
-}
-back() {
-  this.router.navigate(['main/LineAllocationList'])
-}
+  save() {
+    this.valueExceeded = true
+    if ( this.LineAllocationForm.valid ) {
+      this.valueExceeded = false
+      this.api.lineallocationPost(this.LineAllocationForm.value).subscribe((res) => {
+        Swal.fire({
+          position: "top-end" ,
+          icon: "success" ,
+          title: res.message ,
+          showConfirmButton: false ,
+          timer: 1500
+        });
+      })
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Fill All Required datas"
+      });
+    }
+  }
+  back() {
+    this.router.navigate(['main/LineAllocationList'])
+  }
 }

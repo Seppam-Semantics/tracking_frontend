@@ -2,9 +2,16 @@
     <div>
         <mat-toolbar style="height: fit-content; padding: 10px;">
             <div class="d-flex">
+
+                <p-dropdown [options]="yearlist" optionLabel="year" optionValue="year" placeholder="Year"
+                (onChange)="onYearChange()" (onChange)="onMonthChange()" [style]="{ minWidth: '22vh', minHeight:'2vh' }" [editable]="true"
+                autoWidth="false" formControlName="year"/>
+                
                 <p-dropdown [options]="monthlist" optionLabel="month" optionValue="month" placeholder="Months"
-                    (onChange)="onMonthChange()" [style]="{ minWidth: '22vh', minHeight:'2vh' }" [editable]="true"
+                    (onChange)="onMonthChange()" (onChange)="onYearChange()" [style]="{ minWidth: '22vh', minHeight:'2vh' }" [editable]="true"
                     autoWidth="false" formControlName="month" />
+
+
             </div>
             <div style="flex: 1 1 auto;"></div>
             <span class="flex-spacer"></span>

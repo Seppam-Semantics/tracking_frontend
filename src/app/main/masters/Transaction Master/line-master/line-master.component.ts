@@ -49,6 +49,9 @@ export class LineMasterComponent implements OnInit{
       this.linecreationpopup = false;      
       this.linecreate.reset()
     })
+    this.api.line().subscribe((res)=>{
+      this.AllData = res.line
+    })
   }
 
 

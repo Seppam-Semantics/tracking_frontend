@@ -20,6 +20,7 @@ export class WorkingDayComponent implements OnInit {
   monthlist: any;
   dates2: any;
   leavevalid : boolean[] = [];
+  selectedYear: any;
 
   ngOnInit(): void {
     this.api.workingdaylist().subscribe((res) => {
@@ -35,32 +36,48 @@ export class WorkingDayComponent implements OnInit {
     this.WorkingDaycreate = this.fb.group({
       id: new FormControl(''),
       data: this.fb.array([]),
-      month: new FormControl('')
+      month: new FormControl(''),
+      year: new FormControl('')
     })
   }
 
+  yearlist = Array.from({length: 10}, (_, i) => {
+    const year = new Date().getFullYear() + i;
+    return { year: year };
+  });
+  
   onMonthChange(): void {
-
-    this.selectedMonth = this.WorkingDaycreate.get('month')?.value
-
-    if (this.WorkingDaycreate.get('month')?.value) {
-      const year = new Date().getFullYear();
-      const monthIndex = this.monthlist.findIndex((month:any) => month.month === this.selectedMonth) + 1;
+    this.selectedMonth = this.WorkingDaycreate.get('month')?.value;
+    this.selectedYear = this.WorkingDaycreate.get('year')?.value;
+  
+    if (this.selectedMonth && this.selectedYear) {
+      const monthIndex = this.monthlist.findIndex((month: any) => month.month === this.selectedMonth) + 1;
       if (monthIndex > 0) {
-        this.generateDatesForMonth(year, monthIndex);
+        this.generateDatesForMonth(this.selectedYear, monthIndex);
       }
     }
   }
-
-
+  
+  onYearChange(): void {
+    this.selectedMonth = this.WorkingDaycreate.get('month')?.value;
+    this.selectedYear = this.WorkingDaycreate.get('year')?.value;
+    
+    if (this.selectedMonth && this.selectedYear) {
+      const monthIndex = this.monthlist.findIndex((month: any) => month.month === this.selectedMonth) + 1;
+      if (monthIndex > 0) {
+        this.generateDatesForMonth(this.selectedYear, monthIndex);
+      }
+    }
+  }
+  
   generateDatesForMonth(year: number, month: number): void {
     this.dates = [];
     const date = new Date(year, month - 1, 1);
     const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-
+  
     const EntryData = this.WorkingDaycreate.get('data') as FormArray;
     EntryData.clear();
-
+  
     while (date.getMonth() === month - 1) {
       this.dates.push({
         date: date.toDateString(),
@@ -68,56 +85,52 @@ export class WorkingDayComponent implements OnInit {
       });
       date.setDate(date.getDate() + 1);
     }
-
-    this.api.workingdaymonth(this.WorkingDaycreate.get('month')?.value).subscribe((res)=>{
-      this.dates2 = res.workingday
-      if(this.dates2 && this.dates2.length > 0){
-      const EntryData = this.WorkingDaycreate.get('data') as FormArray;
+  
+    this.api.workingdaymonth(this.WorkingDaycreate.get('month')?.value).subscribe((res) => {
+      this.dates2 = res.workingday;
       EntryData.clear();
-
-      this.dates2.forEach((dataItem:any) => {
-
-        const Details = this.fb.group({
-          date: [this.datePipe.transform(dataItem.date, 'yyyy-MM-dd')],
-          id:[dataItem.id],
-          workhrs: [dataItem.workhrs],
-          day: [dataItem.Day],
-          isleave : [dataItem.isleave],
-          Remarks: [dataItem.remarks]
-        });  
-        EntryData.push(Details);
-      });
-
-      }else{
-            this.dates.forEach((dataItem:any) => {
-      const Details = this.fb.group({
-        date: [this.datePipe.transform(dataItem.date, 'yyyy-MM-dd')],
-        workhrs: [],
-        day: [dataItem.day],
-        isleave : [],
-        Remarks: []
-      });
-
-      EntryData.push(Details);
-    });
+  
+      if (this.dates2 && this.dates2.length > 0) {
+        this.dates2.forEach((dataItem: any) => {
+          const Details = this.fb.group({
+            date: [this.datePipe.transform(dataItem.date, 'yyyy-MM-dd')],
+            id: [dataItem.id],
+            workhrs: [dataItem.workhrs],
+            day: [dataItem.Day],
+            isleave: [dataItem.isleave],
+            Remarks: [dataItem.remarks]
+          });
+          EntryData.push(Details);
+        });
+      } else {
+        this.dates.forEach((dataItem: any) => {
+          const Details = this.fb.group({
+            date: [this.datePipe.transform(dataItem.date, 'yyyy-MM-dd')],
+            workhrs: [],
+            day: [dataItem.day],
+            isleave: [],
+            Remarks: []
+          });
+          EntryData.push(Details);
+        });
       }
-    })
+    });
   }
-
+  
   isleaveValid(i: number): void {
     const entryData = this.WorkingDaycreate.get('data') as FormArray;
     const row = entryData.at(i);
     const leave = row.get('isleave')?.value;
-
+  
     if (leave) {
-        this.leavevalid[i] = false;
-        row.get('workhrs')?.setValue(0);
-        row.get('workhrs')?.disable();
+      this.leavevalid[i] = false;
+      row.get('workhrs')?.setValue(0);
+      row.get('workhrs')?.disable();
     } else {
-        this.leavevalid[i] = true;
-        row.get('workhrs')?.enable();
+      this.leavevalid[i] = true;
+      row.get('workhrs')?.enable();
     }
-}
+  }
 
 
 

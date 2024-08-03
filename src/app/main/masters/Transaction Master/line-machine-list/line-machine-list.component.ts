@@ -96,6 +96,9 @@ export class LineMachineListComponent implements OnInit{
       this.LineMachinelistcreationpopup = false;      
       this.LineMachinelistcreate.reset()
     })
+    this.api.Machinelinelist().subscribe((res)=>{
+      this.allData = res.line
+     })
   }
 
   LineMachinecreateOpen1(){
@@ -109,8 +112,7 @@ export class LineMachineListComponent implements OnInit{
   edit(id: any) {
     this.LineMachinelistupdatepopup = true;
     this.api.Machinelistid(id).subscribe((res) => {
-        console.log(res)
-        this.lineDta = res.line[0].line.map((line: any) => ({
+        this.lineDta = JSON.parse(res.line[0].line).map((line: any) => ({
             lineid: line.lineId,
             headid: line.hederid,
             line: line.line

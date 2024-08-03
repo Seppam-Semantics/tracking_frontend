@@ -265,19 +265,19 @@ knitFtyMachineAddButton() {
    
   const row = this.fb.group({
     id: [],
-    buyer:[''],
-    orderNo:[''],
-    style: [''],
-    color: [''],
-    size: [''],
-    woId: [''],
-    greigeKg: [''],
+    buyer:['',Validators.required],
+    orderNo:['' ,Validators.required],
+    style: ['' ,Validators.required],
+    color: ['' ,Validators.required],
+    size: ['' ,Validators.required],
+    woId: ['' ],
+    greigeKg: ['' ,Validators.required],
     machineDia: ['',Validators.required],
     knitFty: ['',Validators.required],
-    allocated: [''],
-    startDate: [previousEndDate ? new Date(previousEndDate) : ''],
-    daysrequired: [''],
-    endDate: [''],
+    allocated: ['' ,Validators.required],
+    startDate: [previousEndDate ? new Date(previousEndDate) : '' ,Validators.required],
+    daysrequired: ['' ,Validators.required],
+    endDate: ['' ,Validators.required],
   });
 
   row.get('daysrequired')?.valueChanges.subscribe(() => {
@@ -419,7 +419,11 @@ if(this.knitFtyMachineForm.valid){
   })
 }
 else{
-  alert("Please Choose the correct value from the WorkOrder")
+  Swal.fire({
+    icon: "error",
+    title: "Oops...",
+    text: "Fill All Required datas"
+  });
 }
 }
 

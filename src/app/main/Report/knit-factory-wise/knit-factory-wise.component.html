@@ -136,7 +136,9 @@
     </table>
     <div style="display: flex; width: 100%; justify-content: center;">
         <div>
-            <button class="btn btn-success" (click)="save()">Save</button>
+            <!-- <button class="btn btn-success" (click)="save()">Save</button> -->
+            <button class="btn btn-success" (click)="save()" *ngIf="!valueExceeded">Save</button>
+            <button class="btn btn-success" *ngIf="valueExceeded">Loading !!! </button>
         </div>
     </div>
 </div>

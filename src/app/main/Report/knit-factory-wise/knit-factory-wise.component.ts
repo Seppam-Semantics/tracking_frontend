@@ -304,19 +304,19 @@ export class KnitFactoryWiseComponent implements OnInit {
       "id": [''],
       "seqId": [],
       "headId": [],
-      "buyer": [''],
-      "orderNo": [''],
-      "style": [''],
-      "color": [''],
-      "size": [''],
-      "woId": ['', Validators.required],
-      "greigeKg": [''],
-      "machineDia": [''],
-      "knitFty": [''],
-      "allocated": [''],
-      "startDate": [previousEndDate ? new Date(previousEndDate) : ''],
-      "daysrequired": [''],
-      "endDate": [''],
+      "buyer": ['', Validators.required],
+      "orderNo": ['', Validators.required],
+      "style": ['', Validators.required],
+      "color": ['', Validators.required],
+      "size": ['', Validators.required],
+      "woId": [''],
+      "greigeKg": ['', Validators.required],
+      "machineDia": ['', Validators.required],
+      "knitFty": ['', Validators.required],
+      "allocated": ['', Validators.required],
+      "startDate": [previousEndDate ? new Date(previousEndDate) : '' , Validators.required],
+      "daysrequired": ['', Validators.required],
+      "endDate": ['', Validators.required],
       "oldId": [''],
       "nextid":['']
     });
@@ -514,6 +514,7 @@ sizeslist(index:any) {
   }
 
   save() {
+    if(this.knitFtyMachineForm.valid){
     this.api.postAllocation(this.knitFtyMachineForm.value).subscribe((res) => {
       Swal.fire({
         position: "top-end",
@@ -523,6 +524,13 @@ sizeslist(index:any) {
         timer: 1500
       });
     })
+  }else{
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Fill All Required datas"
+    });
   }
+}
 
 }
