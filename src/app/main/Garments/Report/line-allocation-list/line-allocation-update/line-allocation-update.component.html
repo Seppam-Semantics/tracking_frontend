@@ -1,0 +1,103 @@
+<div [formGroup]="LineAllocationForm">
+    <div>
+        <mat-toolbar style="height: auto;">
+            <div>
+                <button class="btn btn-danger" (click)="back()">Back</button>
+            </div>
+            <div style="display: flex; gap: 15px; width: 100%; justify-content: center;">
+                <span>Line Allocation Listing</span>
+            </div>
+            <div style="flex: 1 1 auto;"></div>
+            
+            <div>
+                <button mat-button color="primary" (click)="new()">New</button>
+            
+            </div>
+
+        </mat-toolbar>
+        <div class="tablecss">
+            <table class="table table-hover" cdkDropList (cdkDropListDropped)="drop($event)">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Prior id</th>
+                        <th>Buyer</th>
+                        <th>Order</th>
+                        <th>Style</th>
+                        <th>Color</th>
+                        <th>PO Ship Date</th>
+                        <th>FRI Date</th>
+    
+                        <th>Order Pcs</th>
+                        <th>Plan Qty</th>
+                        <th>Line</th>
+                        <th>Alloc Start Date</th>
+                        <th>Days Reqd</th>
+                        <th>Alloc End Date</th>
+                        <th>Old Id</th>
+                        <th>Next Id</th>
+                    </tr>
+                </thead>
+                <tbody formArrayName="data">
+                    <tr *ngFor="let list of items.controls; let i=index" [formGroupName]="i" cdkDrag>
+                        <td cdkDragHandle>{{i+1}}</td>
+                        <td cdkDragHandle>
+                            <!-- <p-dropdown #buyername [options]="buyers" placeholder="Buyer" optionLabel="buyer"
+                                (onChange)="getBuyerValue(i)" optionValue="buyer" [editable]="true"
+                                [style]="{ minWidth: '8vh', minHeight:'2vh' }" formControlName="buyer"
+                                (mouseenter)="getBuyerValue(i)" (click)="buyerlist(i)"></p-dropdown> -->
+                                <input type="text" class="form-control" formControlName="buyer" readonly (mouseenter)="check()">
+                        </td>
+                        <td cdkDragHandle>
+                            <!-- <p-dropdown #orders [options]="order" placeholder="orderNO" optionLabel="orderNo"
+                                (onChange)="ordervalue(i)" optionValue="orderNo" [editable]="true"
+                                [style]="{ minWidth: '8vh', minHeight:'2vh' }" formControlName="orderno"
+                                (mouseenter)="getBuyerValue(i)" (mouseenter)="ordervalue(i)" (click)="orderlist(i)"
+                                (onChange)="ShipDate(i)"></p-dropdown> -->
+                                <input type="text" class="form-control" formControlName="orderno" readonly (mouseenter)="check()">
+                        </td>
+                        <td cdkDragHandle>
+                            <!-- <p-dropdown #styles [options]="stylelist" placeholder="Style" optionLabel="style"
+                                (onChange)="stylevalue(i)" optionValue="style" [editable]="true"
+                                [style]="{ minWidth: '8vh', minHeight:'2vh' }" formControlName="style"
+                                (mouseenter)="ordervalue(i)" (mouseenter)="stylevalue(i)" (onChange)="lineData(i)"
+                                (click)="styleslist(i)"></p-dropdown> -->
+                                <input type="text" class="form-control" formControlName="style" readonly (mouseenter)="check()">
+                        </td>
+                        <td cdkDragHandle>
+                            <!-- <p-dropdown #colors [options]="colorlist" placeholder="color" optionLabel="color"
+                                optionValue="color" [editable]="true" [style]="{ minWidth: '8vh', minHeight:'2vh' }"
+                                formControlName="color" (mouseenter)="stylevalue(i)" (click)="colorslist(i)"
+                                (onChange)="OrderPcsData(i)" (mouseenter)="OrderPcsData(i)" (input)="check()"
+                                (mouseenter)="check()" (onChange)="check()"></p-dropdown> -->
+                                <input type="text" class="form-control" formControlName="color" readonly (mouseenter)="check()">
+                        </td>
+                        <td cdkDragHandle><input type="date" class="form-control" formControlName="shipdate" style="width: 20vh;" (mouseenter)="check()"></td>
+                        <td cdkDragHandle><input type="date" class="form-control" formControlName="fridate" style="width: 20vh;" (mouseenter)="check()"></td>
+                        <td cdkDragHandle><input type="number" class="form-control" formControlName="orderpcs" (mouseenter)="check()"></td>
+                        <td cdkDragHandle><input type="number" class="form-control" formControlName="planqty" (mouseenter)="check()"></td>
+                        <td cdkDragHandle><input type="text" class="form-control" formControlName="line" list="list" (mouseenter)="check()">
+                            <datalist id="list">
+                                <option *ngFor="let data of this.linedropdata" [value]="data.line">{{data.line}}</option>
+                            </datalist>
+                        </td>
+                        <td cdkDragHandle><input type="date" class="form-control" formControlName="startdate" style="width: 20vh;" (mouseenter)="check()"></td>
+                        <td cdkDragHandle><input type="number" class="form-control" formControlName="daysreqd" (mouseenter)="check()"></td>
+                        <td cdkDragHandle><input type="date" class="form-control" formControlName="enddate" style="width: 20vh;" readonly (mouseenter)="check()">
+                        <td cdkDragHandle><input type="number" class="form-control" formControlName="oldid" style="width: 6vh;" readonly (mouseenter)="check()">
+                        <td cdkDragHandle><input type="number" class="form-control" formControlName="nextid" style="width: 6vh;" readonly (mouseenter)="check()">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+        <mat-toolbar style="height: auto; display: flex; width: 100%; justify-content: center;">
+            <button class="btn btn-success" (click)="save()" *ngIf="!valueExceeded">Save</button>
+    
+            <button class="btn btn-success" *ngIf="valueExceeded">Loading !!!</button>
+    
+        </mat-toolbar>]
+    
+    
+    </div>

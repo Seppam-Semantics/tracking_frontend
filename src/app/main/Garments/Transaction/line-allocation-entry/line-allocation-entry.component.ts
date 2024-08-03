@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Dropdown } from 'primeng/dropdown';
 import { ApiService } from 'src/app/api.service';
 import Swal from 'sweetalert2';
@@ -50,7 +51,7 @@ export class LineAllocationEntryComponent implements OnInit {
 
   }
 
-  constructor(private api: ApiService, private fb: FormBuilder , private datePipe : DatePipe) {
+  constructor(private api: ApiService, private fb: FormBuilder , private datePipe : DatePipe, private router : Router) {
 
     this.LineAllocationForm = new FormGroup({
       data: this.fb.array([])
@@ -439,5 +440,7 @@ save(){
     });
   })
 }
-
+back() {
+  this.router.navigate(['main/LineAllocationList'])
+}
 }

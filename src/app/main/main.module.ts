@@ -134,6 +134,7 @@ import { WorkingDayComponent } from './masters/Transaction Master/working-day/wo
 import { LineAllocationEntryComponent } from './Garments/Transaction/line-allocation-entry/line-allocation-entry.component';
 import { LineAllocationListComponent } from './Garments/Report/line-allocation-list/line-allocation-list.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { LineAllocationUpdateComponent } from './Garments/Report/line-allocation-list/line-allocation-update/line-allocation-update.component';
 
 
 
@@ -223,7 +224,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     LineMachineListComponent,
     WorkingDayComponent,
     LineAllocationEntryComponent,
-    LineAllocationListComponent
+    LineAllocationListComponent,
+    LineAllocationUpdateComponent
   ],
   imports: [
     CommonModule,
