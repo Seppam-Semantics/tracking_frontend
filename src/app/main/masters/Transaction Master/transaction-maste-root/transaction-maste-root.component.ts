@@ -64,10 +64,10 @@ export class TransactionMasteRootComponent implements OnInit {
           break;
 
         case 'Fabricsdia':
-          // this.api.fsize_master_filter().subscribe((res)=>{
-          //   this.fsizedata = res.fsize
+          this.api.fsize_master_filter().subscribe((res)=>{
+            this.fsizedata = res.fsize
       
-          // })
+          })
           break;
         
         case 'Yarn Type':
@@ -113,9 +113,9 @@ export class TransactionMasteRootComponent implements OnInit {
           break;
 
         case 'Machine Allocation':
-          // this.api.getAllocationMaster().subscribe((res) => {
-          //   this.allmachine = res.data
-          // })
+          this.api.getAllocationMaster().subscribe((res) => {
+            this.allmachine = res.data
+          })
           break;
 
         case 'Line Master':

@@ -915,7 +915,7 @@ getStartDate(knitFty:string = '', machineDia : string = ''):Observable<any>{
     return this.http.delete(this.getUrl() + `/mastersapi/fsize-master/${id}`, this.getHeaders())
   }
 
-  fsize_master_filter(size:any):Observable<any>{
+  fsize_master_filter(size:any = ''):Observable<any>{
     return this.http.get(this.getUrl() + `/mastersapi/fsize-master-filter?size=${size}&`, this.getHeaders())
   }
   // =================================== dyetype=============================================================================
@@ -1205,7 +1205,7 @@ getStartDate(knitFty:string = '', machineDia : string = ''):Observable<any>{
 
   // ================================= Machine Allocation Master =================================================================================================
 
-  getAllocationMaster(machineDia:any):Observable<any>{
+  getAllocationMaster(machineDia:any = ''):Observable<any>{
     return this.http.get(this.getUrl() + `/mastersapi/machine-list?machineDia=${machineDia}&`, this.getHeaders())
   }
 
