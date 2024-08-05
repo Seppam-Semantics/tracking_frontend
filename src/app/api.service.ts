@@ -1549,8 +1549,8 @@ getStartDate(knitFty:string = '', machineDia : string = ''):Observable<any>{
           return this.http.get(this.getUrl() + `/mastersapi/workingday_master_id/${id}`, this.getHeaders())
         }
 
-        workingdaymonth(month:string=''):Observable<any>{
-          return this.http.get(this.getUrl() + `/mastersapi/workingday_month?month=${month}&`, this.getHeaders())
+        workingdaymonth(month:string='',year:string=''):Observable<any>{
+          return this.http.get(this.getUrl() + `/mastersapi/workingday_month?month=${month}&year=${year}`, this.getHeaders())
         }
 
         //-------------------------------------------- Working Day Master [End]------------------------------------------------------
