@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ApiService } from 'src/app/api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-dye-fty-creation',
@@ -77,15 +78,35 @@ delete(id:any){
 update(){
 
   this.api.dyeFty_Master(this.dyeFtyedit.value).subscribe((res)=>{
-    alert(res.message)
-    window.location.reload()
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: res.message,
+      showConfirmButton: false,
+      timer: 1500
+    });
+    this.dyeFtyediting = false
+    this.dyeftyfillter()
+    this.api.dyeFty_Master_AllData().subscribe((res)=>{
+      this.all = res.dyeFty
+    })
   })
 }
 
 saveButton(){
   this.api.dyeFty_Master(this.dyeFtycreate.value).subscribe((res)=>{
-    alert(res.message)
-    window.location.reload()
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: res.message,
+      showConfirmButton: false,
+      timer: 1500
+    });
+    this.dyeFtycreation = false
+    this.dyeftyfillter()
+    this.api.dyeFty_Master_AllData().subscribe((res)=>{
+      this.all = res.dyeFty
+    })
   })
 }
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ApiService } from 'src/app/api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-size-creation',
@@ -57,8 +58,18 @@ export class SizeCreationComponent {
 
 update(){
   this.api.size_master(this.Sizeedit.value).subscribe((res)=>{
-    alert(res.message)
-    window.location.reload()
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: res.message,
+      showConfirmButton: false,
+      timer: 1500
+    });
+    this.Sizeediting = false;
+    this.sizefilter()
+    this.api.size_master_AllData().subscribe((res)=>{
+      this.SizeData = res.sizes
+    })
   })
 }
 
@@ -71,8 +82,19 @@ delete(id:any){
 
   saveButton(){
     this.api.size_master(this.Sizecreate.value).subscribe((res)=>{
-      alert(res.message)
-      window.location.reload()
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: res.message,
+        showConfirmButton: false,
+        timer: 1500
+      });
+      this.Sizecreation = false;
+      this.sizefilter()
+      this.api.size_master_AllData().subscribe((res)=>{
+        this.SizeData = res.sizes
+      })
+  
     })
   }
 }

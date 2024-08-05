@@ -46,12 +46,15 @@ export class LineMasterComponent implements OnInit{
         showConfirmButton: false,
         timer: 1500
       });
+
+      this.api.line().subscribe((res)=>{
+        this.AllData = res.line
+      })
+
       this.linecreationpopup = false;      
       this.linecreate.reset()
     })
-    this.api.line().subscribe((res)=>{
-      this.AllData = res.line
-    })
+
   }
 
 

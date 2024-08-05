@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ApiService } from 'src/app/api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-knit-fty-creation',
@@ -77,15 +78,35 @@ delete(id:any){
 update(){
 
   this.api.KnitFty_Master(this.knitFtyedit.value).subscribe((res)=>{
-    alert(res.message)
-    window.location.reload()
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: res.message,
+      showConfirmButton: false,
+      timer: 1500
+    });
+    this.FillterData()
+    this.knitFtyediting = false
+    this.api.KnitFty_Master_AllData().subscribe((res)=>{
+      this.all = res.knitFty
+    })
   })
 }
 
 saveButton(){
   this.api.KnitFty_Master(this.knitFtycreate.value).subscribe((res)=>{
-    alert(res.message)
-    window.location.reload()
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: res.message,
+      showConfirmButton: false,
+      timer: 1500
+    });
+    this.FillterData()
+    this.knitFtycreation = false
+    this.api.KnitFty_Master_AllData().subscribe((res)=>{
+      this.all = res.knitFty
+    })
   })
 }
   

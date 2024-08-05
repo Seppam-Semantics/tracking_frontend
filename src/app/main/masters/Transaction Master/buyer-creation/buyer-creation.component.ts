@@ -86,7 +86,9 @@ update(){
       icon: "success"
     });
   this.Buyerediting = false;
-
+  this.api.Buyer_master_AllData().subscribe((res) => {
+    this.all = res.buyers
+  })
   this.buyerFilter()
   })
 }
@@ -101,6 +103,9 @@ update(){
     this.Buyercreation = false;
     this.Buyercreate.reset()
     this.buyerFilter()
+    this.api.Buyer_master_AllData().subscribe((res) => {
+      this.all = res.buyers
+    })
   })
   }
 
