@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-fabricsdia-creation',
@@ -161,11 +162,24 @@ export class FabricsdiaCreationComponent {
 
   update(){
     this.api.fsize_master(this.Fabricsdiaedit.value).subscribe((res)=>{
-      alert(res.message)
-      window.location.reload()
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: res.message,
+        showConfirmButton: false,
+        timer: 1500
+      });
+      
       this.api.fsize_master_AllData().subscribe((res)=>{
         this.fsizedata = res.fsize
       })
+      this.api.Drop_Style_master().subscribe((res)=>{
+        this.styleDropdata = res.style
+      })
+      this.api.Drop_Size_master().subscribe((res)=>{
+        this.sizeDropdata = res.sizes
+      })
+      this.Fabricsdiaediting = false
     })
   }
   
@@ -180,9 +194,22 @@ export class FabricsdiaCreationComponent {
 
   saveButton(){
     this.api.fsize_master(this.Fabricsdiacreate.value).subscribe((res)=>{
-      alert(res.message)
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: res.message,
+        showConfirmButton: false,
+        timer: 1500
+      });
+      this.Fabricsdiacreation = false
       this.api.fsize_master_AllData().subscribe((res)=>{
         this.fsizedata = res.fsize
+      })
+      this.api.Drop_Style_master().subscribe((res)=>{
+        this.styleDropdata = res.style
+      })
+      this.api.Drop_Size_master().subscribe((res)=>{
+        this.sizeDropdata = res.sizes
       })
       this.Fabricsdiacreate.reset()
     })

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ApiService } from 'src/app/api.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -75,15 +76,35 @@ export class YarnTypeCreationComponent {
   update(){
 
     this.api.yarnType_master(this.yarnTypeedit.value).subscribe((res)=>{
-      alert(res.message)
-      window.location.reload()
+      this.api.yarnType_master_AllData().subscribe((res)=>{
+        this.all = res.yarnType
+      })
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: res.message,
+        showConfirmButton: false,
+        timer: 1500
+      });
+      this.yarntypefillter()
+      this.yarnTypeediting = false;
     })
   }
   
   saveButton(){
     this.api.yarnType_master(this.yarnTypecreate.value).subscribe((res)=>{
-      alert(res.message)
-      window.location.reload()
+      this.api.yarnType_master_AllData().subscribe((res)=>{
+        this.all = res.yarnType
+      })
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: res.message,
+        showConfirmButton: false,
+        timer: 1500
+      });
+      this.yarntypefillter()
+      this.yarnTypecreation = false;
     })
   }
 }

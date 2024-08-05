@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ApiService } from 'src/app/api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-spin-fty-creation',
@@ -77,15 +78,31 @@ delete(id:any){
 update(){
 
   this.api.spinFty_Master(this.spinFtyedit.value).subscribe((res)=>{
-    alert(res.message)
-    window.location.reload()
+    this.api.spinFty_Master_AllData().subscribe((res)=>{
+      this.all = res.spinFty
+    })
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: res.message,
+      showConfirmButton: false,
+      timer: 1500
+    });
   })
 }
   
   saveButton(){
     this.api.spinFty_Master(this.spinFtycreate.value).subscribe((res)=>{
-      alert(res.message)
-      window.location.reload()
+      this.api.spinFty_Master_AllData().subscribe((res)=>{
+        this.all = res.spinFty
+      })
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: res.message,
+        showConfirmButton: false,
+        timer: 1500
+      });
     })
   }
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ApiService } from 'src/app/api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-dye-type-creation',
@@ -68,24 +69,54 @@ export class DyeTypeCreationComponent {
   }
 
   delete(id: any) {
-    this.api.delete_dyetype_master(id).subscribe((res) => {
-      alert(res.message)
-      window.location.reload()
+    this.api.delete_dyetype_master(id).subscribe((res) => {      
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: res.message,
+        showConfirmButton: false,
+        timer: 1500
+      });
+      this.dyetypefillterData()
+      this.api.dyetype_master_AllData().subscribe((res) => {
+        this.all = res.DyeType
+      })
     })
   }
 
   update() {
 
     this.api.dyetype_master(this.dyeTypeedit.value).subscribe((res) => {
-      alert(res.message)
-      window.location.reload()
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: res.message,
+        showConfirmButton: false,
+        timer: 1500
+      });
+      this.dyeTypeediting = false;
+      this.dyetypefillterData()
+      this.api.dyetype_master_AllData().subscribe((res) => {
+        this.all = res.DyeType
+      })
     })
   }
 
   saveButton() {
     this.api.dyetype_master(this.dyeTypecreate.value).subscribe((res) => {
-      alert(res.message)
-      window.location.reload()
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: res.message,
+        showConfirmButton: false,
+        timer: 1500
+      });
+      this.dyeTypecreation = false;
+      this.dyetypefillterData()
+      this.api.dyetype_master_AllData().subscribe((res) => {
+        this.all = res.DyeType
+      })
+
     })
   }
 }

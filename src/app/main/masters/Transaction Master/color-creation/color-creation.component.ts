@@ -102,6 +102,9 @@ update(){
   this.Colorediting = false
   this.Colorcreate.reset()
   this.Coloredit.reset()
+  this.api.Color_master_AllData().subscribe((res)=>{
+    this.AllColor = res.colors
+  })
 }
 
 delete(id:any){
@@ -129,8 +132,12 @@ getbuyerId() {
         icon: "success"
       });
       this.colorfilter()
+      this.api.Color_master_AllData().subscribe((res)=>{
+        this.AllColor = res.colors
+      })
+      this.Colorcreation = false
+      this.Colorcreate.reset()
     })
-    this.Colorcreation = false
-    this.Colorcreate.reset()
+
   }
 }
