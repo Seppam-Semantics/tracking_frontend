@@ -9,6 +9,16 @@
     "test": "ng test"
   },
   "private": true,
+  "author": "SEPPAM SEMANTICS PRIVATE LIMITED",
+  "contributors": [
+    {
+      "name": "ABISHEK R",
+      "email": "abiragu001@gmail.com"
+    },
+    {
+      "name": "GOPIKRISHNAN B",
+      "email": "gopibalu248@gmail.com"
+    }],
   "dependencies": {
     "@angular/animations": "^16.2.0",
     "@angular/cdk": "^16.2.12",
