@@ -81,6 +81,8 @@ update(){
     this.api.spinFty_Master_AllData().subscribe((res)=>{
       this.all = res.spinFty
     })
+    this.spinFtyediting = false;
+    this.SpinFtyFillterData()
     Swal.fire({
       position: "top-end",
       icon: "success",
@@ -96,6 +98,8 @@ update(){
       this.api.spinFty_Master_AllData().subscribe((res)=>{
         this.all = res.spinFty
       })
+      this.spinFtycreation = false;
+      this.SpinFtyFillterData()
       Swal.fire({
         position: "top-end",
         icon: "success",

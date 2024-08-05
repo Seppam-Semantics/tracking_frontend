@@ -85,6 +85,8 @@ update(){
       showConfirmButton: false,
       timer: 1500
     });
+    this.dyeFtyediting = false
+    this.dyeftyfillter()
     this.api.dyeFty_Master_AllData().subscribe((res)=>{
       this.all = res.dyeFty
     })
@@ -100,6 +102,8 @@ saveButton(){
       showConfirmButton: false,
       timer: 1500
     });
+    this.dyeFtycreation = false
+    this.dyeftyfillter()
     this.api.dyeFty_Master_AllData().subscribe((res)=>{
       this.all = res.dyeFty
     })

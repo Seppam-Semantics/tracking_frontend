@@ -85,6 +85,8 @@ update(){
       showConfirmButton: false,
       timer: 1500
     });
+    this.FillterData()
+    this.knitFtyediting = false
     this.api.KnitFty_Master_AllData().subscribe((res)=>{
       this.all = res.knitFty
     })
@@ -100,6 +102,8 @@ saveButton(){
       showConfirmButton: false,
       timer: 1500
     });
+    this.FillterData()
+    this.knitFtycreation = false
     this.api.KnitFty_Master_AllData().subscribe((res)=>{
       this.all = res.knitFty
     })
