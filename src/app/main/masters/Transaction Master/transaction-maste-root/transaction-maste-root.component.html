@@ -1,5 +1,5 @@
 <div style="position: sticky; top: 0;">
-  <mat-tab-group #tab>
+  <mat-tab-group #tab (selectedTabChange)="changetab($event)">
 
     <mat-tab label="Buyer">
       <div style="overflow-x: auto; overflow-y: visible; height: 75vh;">
