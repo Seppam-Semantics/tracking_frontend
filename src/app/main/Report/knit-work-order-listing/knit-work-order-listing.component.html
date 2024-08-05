@@ -83,12 +83,21 @@
                 <td>{{data.buyer}}</td>
                 <td>{{data.orderNo}}</td>
 
-                <td >
-                    <ul *ngFor="let color of colorjson(data.colors)" style="text-align: justify;">
-                      <!-- <ul *ngFor="let color of data.colors" style="text-align: justify;"> -->
-                      <li>{{color.color}}</li>
-                    </ul>
-                  </td>
+                <td>
+                    <details style="color: green;">
+                        <summary style="color: red;">
+                            Color
+                        </summary>
+                        <ul style="text-align: justify;">
+                            <div class="colors">
+                                <li *ngFor="let color of colorjson(data.colors)">
+                                    {{color.color}}
+                                </li>
+                            </div>
+                        </ul>
+                    </details>
+                </td>
+                
 
                 <td>{{data.knitKg}}</td>
                 <td>{{data.knitValue}}</td>

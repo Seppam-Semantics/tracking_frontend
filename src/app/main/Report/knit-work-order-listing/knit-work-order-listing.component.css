@@ -114,3 +114,6 @@ th,tr,td {
         text-align: center;
     }
 }
+.colors{
+    column-count: 5;
+}

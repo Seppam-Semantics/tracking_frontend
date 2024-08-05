@@ -4,16 +4,21 @@
             <div class="d-flex">
 
                 <p-dropdown [options]="yearlist" optionLabel="year" optionValue="year" placeholder="Year"
-                (onChange)="onYearChange()" (onChange)="onMonthChange()" [style]="{ minWidth: '22vh', minHeight:'2vh' }" [editable]="true"
+                [style]="{ minWidth: '22vh', minHeight:'2vh' }" [editable]="true"
                 autoWidth="false" formControlName="year"/>
                 
                 <p-dropdown [options]="monthlist" optionLabel="month" optionValue="month" placeholder="Months"
-                    (onChange)="onMonthChange()" (onChange)="onYearChange()" [style]="{ minWidth: '22vh', minHeight:'2vh' }" [editable]="true"
+                 (onChange)="loadsavevalue()" [style]="{ minWidth: '22vh', minHeight:'2vh' }" [editable]="true"
                     autoWidth="false" formControlName="month" />
 
 
             </div>
             <div style="flex: 1 1 auto;"></div>
+
+            <div>
+                <!-- <button mat-button color="primary" (click)="WorkingDaycreateOpen1()">New Entry</button> -->
+            </div>
+
             <span class="flex-spacer"></span>
         </mat-toolbar>
     </div>
@@ -59,3 +64,67 @@
         </div>
     </div>
 </div>
+<!-- //------------------------------------------------------------------------------------------------------------>
+<p-dialog 
+    header="Header" 
+    [modal]="true"
+    [(visible)]="WorkingDaycreationpopup" 
+    [style]="{ width: '80rem' }" 
+    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" 
+    [maximizable]="true" [formGroup]="WorkingDayUpdate">
+    <div class="d-flex">
+
+        <p-dropdown [options]="yearlist" optionLabel="year" optionValue="year" placeholder="Year"
+        (onChange)="onYearChange()" (onChange)="onMonthChange()" [style]="{ minWidth: '22vh', minHeight:'2vh' }" [editable]="true"
+        autoWidth="false" formControlName="year"/>
+        
+        <p-dropdown [options]="monthlist" optionLabel="month" optionValue="month" placeholder="Months"
+            (onChange)="onMonthChange()" (onChange)="onYearChange()" [style]="{ minWidth: '22vh', minHeight:'2vh' }" [editable]="true"
+            autoWidth="false" formControlName="month" />
+
+
+    </div>
+    <br/>
+    <div class="table-container">
+        <table class="table table-striped table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>S.No</th>
+                    <th>Date</th>
+                    <th>Day</th>
+                    <th>Leave</th>
+                    <th>Working Hours</th>
+                    <th>Remarks</th>
+                </tr>
+            </thead>
+            <tbody formArrayName="data">
+                <tr *ngFor="let list of items2.controls; let i=index; " [formGroupName]="i">
+                    <td>{{i+1}}</td>
+                    <td><input type="date" formControlName="date" class="form-control"
+                            style="width: 25vh; border: none;" readonly></td>
+                    <td><input type="datetime" formControlName="day" class="form-control"
+                            style="width: 20vh; border: none;" readonly></td>
+                    <td><mat-slide-toggle formControlName="isleave" (click)="isleaveValid(i)"></mat-slide-toggle></td>
+                    <td>
+                        <div style="display: flex; justify-content: center;">
+                            <input type="number" class="form-control" formControlName="workhrs">
+                        </div>
+
+                    </td>
+                    <td>
+                        <div style="display: flex; justify-content: center;"><textarea class="form-control"
+                                formControlName="Remarks"></textarea>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <ng-template pTemplate="footer">
+        <div style="display: flex; justify-content: center; width: 100%;">
+            <button class="btn btn-primary" (click)="Newsave()">Save</button>
+        </div>
+    </ng-template>
+</p-dialog>
