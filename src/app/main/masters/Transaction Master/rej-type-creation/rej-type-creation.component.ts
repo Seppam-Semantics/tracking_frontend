@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatSelect } from '@angular/material/select';
 import { ApiService } from 'src/app/api.service';
+import { MasterService } from '../master.service';
 
 @Component({
   selector: 'app-rej-type-creation',
@@ -53,7 +54,7 @@ export class RejTypeCreationComponent {
     return JSON.parse(data);
   }
 
-  constructor(private fb: FormBuilder, private api: ApiService) {
+  constructor(private fb: FormBuilder, private api: ApiService , public masters : MasterService) {
 
     this.rejTypecreate = this.fb.group({
       id: new FormControl(0),
@@ -113,7 +114,7 @@ export class RejTypeCreationComponent {
 
   RejTypeFillterData() {
     this.api.rejtype_master_Fillter_Data(this.FillterData).subscribe((res) => {
-      this.rejtypeData = res.rejtype
+      this.masters.rejTypeData = res.rejtype
     })
   }
 

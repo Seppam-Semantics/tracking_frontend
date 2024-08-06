@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ApiService } from 'src/app/api.service';
 import Swal from 'sweetalert2';
+import { MasterService } from '../master.service';
 
 @Component({
   selector: 'app-dye-type-creation',
@@ -29,7 +30,7 @@ export class DyeTypeCreationComponent {
 
     this.dyetypefillterData()
   }
-  constructor(private fb: FormBuilder, private api: ApiService) {
+  constructor(private fb: FormBuilder, private api: ApiService , public masters : MasterService) {
 
     this.dyeTypecreate = this.fb.group({
       id: new FormControl(''),
@@ -51,7 +52,7 @@ export class DyeTypeCreationComponent {
 
   dyetypefillterData() {
     this.api.dyetype_master_Fillter_Data(this.dyetypeFillterdata).subscribe((res) => {
-      this.dyeingdata = res.DyeType
+      this.masters.dyeTypeData = res.DyeType
     })
   }
   edit(id: any) {

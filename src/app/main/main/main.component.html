@@ -267,42 +267,36 @@
             </div>
           </a>
         </mat-nav-list>
-
-        <!-- 
-        <mat-nav-list>
-          <a mat-list-item [routerLink]="'Yarn-Report'" (click)="snav.toggle()">
-            <div class="text">
-              Yarn Entry
-            </div>
-          </a>
-        </mat-nav-list>
-
-        <mat-nav-list>
-          <a mat-list-item [routerLink]="'ReportEntry'" (click)="snav.toggle()">
-            <div class="text">
-              Knit Report Entry
-            </div>
-          </a>
-        </mat-nav-list>
-
-        <mat-nav-list>
-          <a mat-list-item [routerLink]="'DyeBatchEntry'" (click)="snav.toggle()">
-            <div class="text">
-              Dye Batch Report Entry
-            </div>
-          </a>
-        </mat-nav-list>
-
-        <mat-nav-list>
-          <a mat-list-item [routerLink]="'fabricroll1'" (click)="snav.toggle()">
-            <div class="text">
-              Fabric Roll Entry
-            </div>
-          </a>
-        </mat-nav-list> -->
-
       </mat-expansion-panel>
 
+
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon class="nav-icon">group_add</mat-icon>
+              Event Masters
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+
+        <mat-nav-list>
+          <a mat-list-item [routerLink]="'EventMasterRoot'" (click)="snav.toggle()">
+            <div class="text">
+             Event Master Creation
+            </div>
+          </a>
+        </mat-nav-list>
+
+
+        <mat-nav-list>
+          <a mat-list-item (click)="snav.toggle()">
+            <div class="text">
+              Transaction Entry
+            </div>
+          </a>
+        </mat-nav-list>
+      </mat-expansion-panel>
 
       <!-- <mat-expansion-panel>
         <mat-expansion-panel-header>

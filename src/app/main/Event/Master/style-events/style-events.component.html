@@ -1,0 +1,85 @@
+<mat-toolbar style="display: flex; justify-content: center; height: 7vh;">
+    <div class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+    </div>
+    <div style="flex: 1 1 auto;"></div>
+    <button mat-button color="primary" (click)="new()">New</button>
+</mat-toolbar>
+<table class="table table-sm text-center">
+    <thead class="thead-dark">
+        <tr>
+            <th>S.No</th>
+            <th>Style</th>
+            <th>Events</th>
+            <th>Series no</th>
+            <th>Edit</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>01</td>
+            <td>Style</td>
+            <td>Event</td>
+            <td>Series no</td>
+            <td><button class="btn btn-primary" (click)="edit()"> <mat-icon>edit</mat-icon> </button></td>
+        </tr>
+    </tbody>
+</table>
+
+<!----------------------------------------------New [Start]--------------------------------------------------->
+<p-dialog header="New Event Master" [modal]="true" [(visible)]="styleeventmasternew" [style]="{ width: '50rem' }"
+    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [formGroup]="StyleEventsNewForm">
+    <div style="display: flex; gap: 10px; flex-wrap: wrap; ">
+        <mat-form-field appearance="outline">
+            <mat-label>style</mat-label>
+            <mat-select formControlName="style" [(ngModel)]="Stylenamevalue" (selectionChange)="getstyleId()">
+                <mat-option *ngFor="let style of this.styleDropdata" value="{{style.style}}">{{style.style}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Series no</mat-label>
+            <input matInput type="text" formControlName="seriesNo">
+        </mat-form-field>
+
+        <p-multiSelect [options]="DummyData" placeholder="Event"
+        optionLabel="Entry"  optionValue="id" appendTo="body"  
+        formControlName="eventname" (onChange)="getSelectedEvent()"/>
+
+    </div>
+    <ng-template pTemplate="footer">
+        <div style="display: flex; width: 100%; justify-content: center;">
+            <button class="btn btn-success" (click)="save()">Save</button>
+        </div>
+    </ng-template>
+</p-dialog>
+<!----------------------------------------------New [End]--------------------------------------------------->
+
+<!----------------------------------------------Edit [Start]--------------------------------------------------->
+<p-dialog header="Edit Event Master" [modal]="true" [(visible)]="styleeventmasteredit" [style]="{ width: '50rem' }"
+    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"[formGroup]="StyleEventsEditForm" >
+    <div style="display: flex; gap: 10px; flex-wrap: wrap; ">
+        <mat-form-field appearance="outline">
+            <mat-label>style</mat-label>
+            <mat-select formControlName="style" [(ngModel)]="Stylenamevalue" (selectionChange)="getstyleId()">
+                <mat-option *ngFor="let style of this.styleDropdata" value="{{style.style}}">{{style.style}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Series no</mat-label>
+            <input matInput type="text" formControlName="seriesNo">
+        </mat-form-field>
+
+        <p-multiSelect [options]="DummyData" placeholder="Event"
+        optionLabel="Entry"  optionValue="id" appendTo="body"  
+        formControlName="eventname" />
+
+    </div>
+    <ng-template pTemplate="footer">
+        <div style="display: flex; width: 100%; justify-content: center;">
+            <button class="btn btn-success" (click)="update()">Update</button>
+        </div>
+    </ng-template>
+</p-dialog>
+<!----------------------------------------------Edit [End]--------------------------------------------------->

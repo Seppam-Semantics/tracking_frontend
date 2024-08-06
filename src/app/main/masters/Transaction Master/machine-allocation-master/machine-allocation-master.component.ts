@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ApiService } from 'src/app/api.service';
 import Swal from 'sweetalert2';
+import { MasterService } from '../master.service';
 
 
 @Component({
@@ -27,10 +28,10 @@ export class MachineAllocationMasterComponent {
   machineDia: any;
 
   ngOnInit(): void {
-    this.machineFilter()
-    this.api.getallmachineDiadetails().subscribe((res)=>{
-      this.machineDia = res.data
-    })
+    // this.machineFilter()
+    // this.api.getallmachineDiadetails().subscribe((res)=>{
+    //   this.machineDia = res.data
+    // })
   }
   factoryName(){
     this.api.getknitwofty().subscribe((res) => {
@@ -40,12 +41,12 @@ export class MachineAllocationMasterComponent {
 
   machineFilter(machineDia : string = ''){
     this.api.getAllocationMaster(machineDia).subscribe((res) => {
-      this.all = res.data
+      this.masters.machineAllocationData = res.data
     })
   }
 
 
-  constructor(private fb: FormBuilder, private api: ApiService) {
+  constructor(private fb: FormBuilder, private api: ApiService , public masters : MasterService) {
 
     this.machinecreate = this.fb.group({
       id: new FormControl(''),

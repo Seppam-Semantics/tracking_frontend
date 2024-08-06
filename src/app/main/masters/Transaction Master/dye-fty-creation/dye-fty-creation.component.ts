@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ApiService } from 'src/app/api.service';
 import Swal from 'sweetalert2';
+import { MasterService } from '../master.service';
 
 @Component({
   selector: 'app-dye-fty-creation',
@@ -23,12 +24,12 @@ export class DyeFtyCreationComponent {
   all: any;
   
   ngOnInit(): void {
-    this.api.dyeFty_Master_AllData().subscribe((res)=>{
-      this.all = res.dyeFty
-    })
-    this.dyeftyfillter()
+    // this.api.dyeFty_Master_AllData().subscribe((res)=>{
+    //   this.all = res.dyeFty
+    // })
+    // this.dyeftyfillter()
   }
-  constructor(private fb : FormBuilder, private api : ApiService){
+  constructor(private fb : FormBuilder, private api : ApiService , public masters : MasterService){
   
     this.dyeFtycreate = this.fb.group({
       id : new FormControl('') , 
@@ -50,7 +51,7 @@ export class DyeFtyCreationComponent {
   
   dyeftyfillter(){
     this.api.dyeFty_master_Fillter_Data(this.dyeftyfillterdata).subscribe((res)=>{
-      this.dyeFtydata= res.dyeFty
+      this.masters.dyeFtyData= res.dyeFty
     })
   }
 

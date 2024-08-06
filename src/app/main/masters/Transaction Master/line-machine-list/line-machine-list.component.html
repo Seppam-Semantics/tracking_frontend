@@ -27,7 +27,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let data of allData ; let i = index;">
+            <tr *ngFor="let data of  this.masters.lineMachineData ; let i = index;">
                 <td>{{i+1}}</td>
                 <td>{{data.style}}</td>
                 <td>{{data.prodhr}}</td>
