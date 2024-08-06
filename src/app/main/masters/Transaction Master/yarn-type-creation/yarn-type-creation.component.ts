@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ApiService } from 'src/app/api.service';
 import Swal from 'sweetalert2';
+import { MasterService } from '../master.service';
 
 
 @Component({
@@ -24,13 +25,13 @@ export class YarnTypeCreationComponent {
   
   ngOnInit(): void {
     
-    this.api.yarnType_master_AllData().subscribe((res)=>{
-      this.all = res.yarnType
-    })
+  //   this.api.yarnType_master_AllData().subscribe((res)=>{
+  //     this.all = res.yarnType
+  //   })
   
-  this.yarntypefillter()
+  // this.yarntypefillter()
   }
-  constructor(private fb : FormBuilder , private api : ApiService){
+  constructor(private fb : FormBuilder , private api : ApiService, public masters : MasterService){
   
     this.yarnTypecreate = this.fb.group({
       id : new FormControl('') , 
@@ -48,7 +49,7 @@ export class YarnTypeCreationComponent {
 
   yarntypefillter(){
     this.api.yarnType_master_Fillter_Data(this.yarntypefillterdata).subscribe((res)=>{
-      this.yarntypedata= res.yarnType
+      this.masters.yarnTypeData = res.yarnType
     })
   }
 
