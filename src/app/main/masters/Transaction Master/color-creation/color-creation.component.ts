@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ApiService } from 'src/app/api.service';
 import Swal from 'sweetalert2';
+import { MasterService } from '../master.service';
 
 @Component({
   selector: 'app-color-creation',
@@ -25,19 +26,19 @@ export class ColorCreationComponent {
   Buyernamevalue: any;
   buyerid: any;
   colorfilterdata: any;
-  AllColor: any;
+  AllColor = this.masters.colorData;
   
   ngOnInit(): void {
 
-    this.api.Color_master_AllData().subscribe((res)=>{
-      this.AllColor = res.colors
-    })
+    // this.api.Color_master_AllData().subscribe((res)=>{
+    //   this.AllColor = res.colors
+    // })
     
-    this.colorfilter()
+    // this.colorfilter()
 
     this.Drop_Buyer_master()
   }
-  constructor(private fb : FormBuilder , private api : ApiService){
+  constructor(private fb : FormBuilder , private api : ApiService, public masters : MasterService){
   
     this.Colorcreate = this.fb.group({
       id : new FormControl('') , 
@@ -59,6 +60,7 @@ export class ColorCreationComponent {
       dyeprocessloss : new FormControl(''),
       buyerId : new FormControl('') 
     })
+    
   }
 
   Drop_Buyer_master(){
@@ -70,7 +72,7 @@ export class ColorCreationComponent {
 
   colorfilter(){
     this.api.Color_master_Fillter_Data(this.colorfilterdata).subscribe((res)=>{
-      this.ColorData = res.colors
+      this.masters.colorData = res.colors
     })
   }
   

@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatTabGroup } from '@angular/material/tabs';
 import { ApiService } from 'src/app/api.service';
 import Swal from 'sweetalert2';
+import { MasterService } from '../master.service';
 
 @Component({
   selector: 'app-style-creation',
@@ -41,49 +42,21 @@ export class StyleCreationComponent implements OnInit {
   dyeTypeid: any;
   fabricstypeid: any;
   yarnTypeid: any;
+
   ngOnInit(): void {
 
-    this.Drop_Buyer_master()
-    this.api.style_master_AllData().subscribe((res) => {
-      this.all = res.style
-    })
+    // this.Drop_Buyer_master()
+    // this.api.style_master_AllData().subscribe((res) => {
+    //   this.all = res.style
+    // })
+
     this.stylefilter()
     this.dyetype_master_AllData()
     this.fabrictype_master_AllData()
     this.yarnType_master_AllData()
   }
 
-  Drop_Buyer_master() {
-    this.api.Drop_Buyer_master().subscribe((res) => {
-      this.buyerDrop = res.buyer;
-    })
-  }
-
-  dyetype_master_AllData() {
-    this.api.dyetype_master_AllData().subscribe((res) => {
-      this.alldyeType = res.DyeType
-    })
-  }
-
-  fabrictype_master_AllData() {
-    this.api.fabrictype_master_AllData().subscribe((res) => {
-      this.allfabricType = res.fabricType
-    })
-  }
-
-  yarnType_master_AllData() {
-    this.api.yarnType_master_AllData().subscribe((res) => {
-      this.allyarnType = res.yarnType
-    })
-  }
-
-  stylefilter() {
-    this.api.style_master_Fillter_Data(this.styleFillterData).subscribe((res) => {
-      this.allData2 = res.styles
-
-    })
-  }
-  constructor(private fb: FormBuilder, private api: ApiService) {
+  constructor(private fb: FormBuilder, private api: ApiService, public masters : MasterService) {
 
     this.Stylecreate = this.fb.group({
       id: new FormControl(''),
@@ -126,6 +99,37 @@ export class StyleCreationComponent implements OnInit {
       fabricGSM: new FormControl(''),
     })
   }
+
+  Drop_Buyer_master() {
+    this.api.Drop_Buyer_master().subscribe((res) => {
+      this.buyerDrop = res.buyer;
+    })
+  }
+
+  dyetype_master_AllData() {
+    this.api.dyetype_master_AllData().subscribe((res) => {
+      this.alldyeType = res.DyeType
+    })
+  }
+
+  fabrictype_master_AllData() {
+    this.api.fabrictype_master_AllData().subscribe((res) => {
+      this.allfabricType = res.fabricType
+    })
+  }
+
+  yarnType_master_AllData() {
+    this.api.yarnType_master_AllData().subscribe((res) => {
+      this.allyarnType = res.yarnType
+    })
+  }
+
+  stylefilter() {
+    this.api.style_master_Fillter_Data(this.styleFillterData).subscribe((res) => {
+      this.masters.styleData = res.styles
+    })
+  }
+
   @ViewChild('tabGroup') tabGroup!: MatTabGroup;
 
 

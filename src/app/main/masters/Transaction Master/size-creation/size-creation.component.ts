@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ApiService } from 'src/app/api.service';
 import Swal from 'sweetalert2';
+import { MasterService } from '../master.service';
 
 @Component({
   selector: 'app-size-creation',
@@ -21,24 +22,26 @@ export class SizeCreationComponent {
   allData: any;
   
   ngOnInit(): void {
-    this.api.size_master_AllData().subscribe((res)=>{
-      this.SizeData = res.sizes
-    })
-    this.sizefilter()
+    // this.api.size_master_AllData().subscribe((res)=>{
+    //   this.SizeData = res.sizes
+    // })
+    // this.sizefilter()
   }
+
+
   sizefilter(){
     this.api.size_master_Fillter_Data(this.sizefilterdata).subscribe((res)=>{
-      this.allData = res.sizes
+      this.masters.sizeData = res.sizes
       
     })
   }
-  constructor(private fb : FormBuilder , private api : ApiService){
+
+  constructor(private fb : FormBuilder , private api : ApiService, public masters : MasterService){
   
     this.Sizecreate = this.fb.group({
       id : new FormControl('') , 
       size : new FormControl('') 
     })
-  
   
     this.Sizeedit = this.fb.group({
       id : new FormControl('') , 

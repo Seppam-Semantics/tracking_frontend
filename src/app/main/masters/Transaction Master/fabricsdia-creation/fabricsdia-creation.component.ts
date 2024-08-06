@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/api.service';
 import Swal from 'sweetalert2';
+import { MasterService } from '../master.service';
 
 @Component({
   selector: 'app-fabricsdia-creation',
@@ -26,7 +27,7 @@ export class FabricsdiaCreationComponent {
   datalist: any;
 
 
-  constructor(private fb : FormBuilder, private api : ApiService){
+  constructor(private fb : FormBuilder, private api : ApiService, public masters : MasterService){
   
     this.Fabricsdiacreate = this.fb.group({
       id : new FormControl('') , 
@@ -75,9 +76,9 @@ export class FabricsdiaCreationComponent {
   }
   
   ngOnInit(): void {
-    this.api.fsize_master_AllData().subscribe((res)=>{
-      this.fsizedata = res.fsize
-    })
+    // this.api.fsize_master_AllData().subscribe((res)=>{
+    //   this.fsizedata = res.fsize
+    // })
     this.api.Drop_Style_master().subscribe((res)=>{
       this.styleDropdata = res.style
     })
@@ -111,7 +112,7 @@ export class FabricsdiaCreationComponent {
   fsize_filter(event:any){
     const size = event.target.value
     this.api.fsize_master_filter(size).subscribe((res)=>{
-      this.fsizedata = res.fsize
+      this.masters.fabricDiaData = res.fsize
 
     })
   }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { ApiService } from 'src/app/api.service';
+import { MasterService } from '../master.service';
 
 @Component({
   selector: 'app-transaction-maste-root',
@@ -27,7 +28,7 @@ export class TransactionMasteRootComponent implements OnInit {
   allmonthData: any;
   monthlist: any;
 
-  constructor(private api : ApiService){
+  constructor(private api : ApiService, private masters : MasterService){
 
   }
   ngOnInit(): void {
@@ -41,92 +42,92 @@ export class TransactionMasteRootComponent implements OnInit {
       switch (this.tabLabel) {
         case 'Buyer':
           this.api.Buyer_master_AllData().subscribe((res) => {
-            this.all = res.buyers
+            this.masters.buyerData = res.buyers
           })
           break;
 
         case 'Style':
           this.api.style_master_Fillter_Data().subscribe((res) => {
-            this.styleData = res.styles
+            this.masters.styleData = res.styles
           })
           break;
 
         case 'Color':
           this.api.Color_master_Fillter_Data().subscribe((res)=>{
-            this.ColorData = res.colors
+            this.masters.colorData = res.colors
           })
           break;
 
         case 'Size':
           this.api.size_master_Fillter_Data().subscribe((res)=>{
-            this.sizeData = res.sizes
+            this.masters.sizeData = res.sizes
           })
           break;
 
         case 'Fabricsdia':
           this.api.fsize_master_filter().subscribe((res)=>{
-            this.fsizedata = res.fsize
+            this.masters.fabricDiaData = res.fsize
       
           })
           break;
         
         case 'Yarn Type':
           this.api.yarnType_master_Fillter_Data().subscribe((res)=>{
-            this.yarntypedata= res.yarnType
+            this.masters.yarnTypeData= res.yarnType
           })
           break;
 
         case 'Fabric Type':
           this.api.fabrictype_master_Fillter_Data().subscribe((res)=>{
-            this.fabricstypedata= res.fabricType
+            this.masters.fabricDiaData= res.fabricType
           })
           break;
 
         case 'Dye Type':
           this.api.dyetype_master_Fillter_Data().subscribe((res) => {
-            this.dyeingdata = res.DyeType
+            this.masters.dyeTypeData = res.DyeType
           })
           break;
 
         case 'Rej Type':
           this.api.rejtype_master_Fillter_Data().subscribe((res) => {
-            this.rejtypeData = res.rejtype
+            this.masters.rejTypeData = res.rejtype
           })
           break;
 
         case 'Spin Fty':
           this.api.spinFty_master_Fillter_Data().subscribe((res)=>{
-            this.spinFtydata = res.spinFty
+            this.masters.spinFtyData = res.spinFty
           })
           break;
 
         case 'Knit Fty':
           this.api.KnitFty_master_Fillter_Data().subscribe((res)=>{
-            this.KnitFtydata = res.knitFty
+            this.masters.knitFtyData = res.knitFty
           })
           break;
 
         case 'Dye Fty':
           this.api.dyeFty_master_Fillter_Data().subscribe((res)=>{
-            this.dyeFtydata= res.dyeFty
+            this.masters.dyeFtyData= res.dyeFty
           })
           break;
 
         case 'Machine Allocation':
           this.api.getAllocationMaster().subscribe((res) => {
-            this.allmachine = res.data
+            this.masters.machineAllocationData = res.data
           })
           break;
 
         case 'Line Master':
           this.api.line().subscribe((res)=>{
-            this.AlllineData = res.line
+            this.masters.lineData = res.line
           })
           break;
 
         case 'Line - Machine list Master':
           this.api.Machinelinelist().subscribe((res)=>{
-            this.alllinemachineData = res.line
+            this.masters.lineMachineData = res.line
            })
           break;
 
@@ -135,14 +136,14 @@ export class TransactionMasteRootComponent implements OnInit {
             this.allmonthData = res.workingday
           })
           this.api.monthlist().subscribe((res) => {
-            this.monthlist = res.month
+            this.masters.workingData = res.month
           })
           break;
 
         default:
           break;
       }
-    }, 1000);
+    },0);
   }
 
 }

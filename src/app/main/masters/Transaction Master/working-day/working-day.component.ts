@@ -131,6 +131,7 @@ export class WorkingDayComponent implements OnInit {
   }
 
   isleaveValid(i: number): void {
+    try{
     const entryData = this.WorkingDaycreate.get('data') as FormArray;
     const row = entryData.at(i);
     const leave = row.get('isleave')?.value;
@@ -143,6 +144,8 @@ export class WorkingDayComponent implements OnInit {
       this.leavevalid[i] = true;
       row.get('workhrs')?.enable();
     }
+  }
+  catch{}
   }
 
 
