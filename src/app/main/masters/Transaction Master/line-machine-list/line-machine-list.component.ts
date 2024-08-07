@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ApiService } from 'src/app/api.service';
 import Swal from 'sweetalert2';
+import { MasterService } from '../master.service';
 
 @Component({
   selector: 'app-line-machine-list',
@@ -32,10 +33,10 @@ export class LineMachineListComponent implements OnInit{
     }) 
 
     this.api.Machinelinelist().subscribe((res)=>{
-     this.allData = res.line
+     this.masters.lineMachineData = res.line
     })
   }
-  constructor(private fb : FormBuilder, private api : ApiService){
+  constructor(private fb : FormBuilder, private api : ApiService , public masters : MasterService){
 
     this.LineMachinelistcreate = this.fb.group({
       id : new FormControl('') , 
@@ -97,7 +98,7 @@ export class LineMachineListComponent implements OnInit{
       this.LineMachinelistcreate.reset()
     })
     this.api.Machinelinelist().subscribe((res)=>{
-      this.allData = res.line
+      this.masters.lineMachineData = res.line
      })
   }
 
@@ -161,7 +162,7 @@ getSelectedLines() {
       this.LineMachinelistupdatepopup = false;      
       // this.LineMachinelistcreate.reset()
       this.api.Machinelinelist().subscribe((res)=>{
-        this.allData = res.line
+        this.masters.lineMachineData = res.line
        })
     })
   }

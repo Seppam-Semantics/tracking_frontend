@@ -79,7 +79,7 @@ export class TransactionMasteRootComponent implements OnInit {
 
         case 'Fabric Type':
           this.api.fabrictype_master_Fillter_Data().subscribe((res)=>{
-            this.masters.fabricDiaData= res.fabricType
+            this.masters.fabricTypeData= res.fabricType
           })
           break;
 

@@ -135,6 +135,10 @@ import { LineAllocationEntryComponent } from './Garments/Transaction/line-alloca
 import { LineAllocationListComponent } from './Garments/Report/line-allocation-list/line-allocation-list.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { LineAllocationUpdateComponent } from './Garments/Report/line-allocation-list/line-allocation-update/line-allocation-update.component';
+import { EventMasterRootComponent } from './Event/Master/event-master-root/event-master-root.component';
+import { EventMasterComponent } from './Event/Master/event-master/event-master.component';
+import { StyleEventsComponent } from './Event/Master/style-events/style-events.component';
+import { StyleBudgetDaysComponent } from './Event/Master/style-budget-days/style-budget-days.component';
 
 
 
@@ -225,7 +229,11 @@ import { LineAllocationUpdateComponent } from './Garments/Report/line-allocation
     WorkingDayComponent,
     LineAllocationEntryComponent,
     LineAllocationListComponent,
-    LineAllocationUpdateComponent
+    LineAllocationUpdateComponent,
+    EventMasterRootComponent,
+    EventMasterComponent,
+    StyleEventsComponent,
+    StyleBudgetDaysComponent
   ],
   imports: [
     CommonModule,

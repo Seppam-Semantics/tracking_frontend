@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ApiService } from 'src/app/api.service';
 import Swal from 'sweetalert2';
+import { MasterService } from '../master.service';
 
 @Component({
   selector: 'app-knit-fty-creation',
@@ -23,12 +24,12 @@ export class KnitFtyCreationComponent {
   all: any;
   
   ngOnInit(): void {
-    this.api.KnitFty_Master_AllData().subscribe((res)=>{
-      this.all = res.knitFty
-    })
-  this.FillterData()
+  //   this.api.KnitFty_Master_AllData().subscribe((res)=>{
+  //     this.all = res.knitFty
+  //   })
+  // this.FillterData()
   }
-  constructor(private fb : FormBuilder, private api : ApiService){
+  constructor(private fb : FormBuilder, private api : ApiService , public masters : MasterService){
   
     this.knitFtycreate = this.fb.group({
       id : new FormControl('') , 
@@ -50,7 +51,7 @@ export class KnitFtyCreationComponent {
 
   FillterData(){ 
     this.api.KnitFty_master_Fillter_Data(this.knitFillterData).subscribe((res)=>{
-      this.KnitFtydata = res.knitFty
+      this.masters.knitFtyData = res.knitFty
     })
   }
 

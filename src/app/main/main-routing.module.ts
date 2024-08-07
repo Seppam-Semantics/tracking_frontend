@@ -65,6 +65,7 @@ import { KnitFactoryWiseComponent } from './Report/knit-factory-wise/knit-factor
 import { LineAllocationEntryComponent } from './Garments/Transaction/line-allocation-entry/line-allocation-entry.component';
 import { LineAllocationListComponent } from './Garments/Report/line-allocation-list/line-allocation-list.component';
 import { LineAllocationUpdateComponent } from './Garments/Report/line-allocation-list/line-allocation-update/line-allocation-update.component';
+import { EventMasterRootComponent } from './Event/Master/event-master-root/event-master-root.component';
 
 const routes: Routes = [
   {path:'', component: AppComponent},
@@ -139,7 +140,8 @@ const routes: Routes = [
   {path: "knitwise", component:KnitFactoryWiseComponent },
   {path:"lineAllocationReport",component:LineAllocationEntryComponent},
   {path:"LineAllocationList",component:LineAllocationListComponent},
-  {path : "lineallocationupdate", component: LineAllocationUpdateComponent}
+  {path : "lineallocationupdate", component: LineAllocationUpdateComponent},
+  {path : "EventMasterRoot", component: EventMasterRootComponent},
  
 ];
 

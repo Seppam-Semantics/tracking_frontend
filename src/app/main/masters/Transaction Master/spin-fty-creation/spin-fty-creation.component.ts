@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ApiService } from 'src/app/api.service';
 import Swal from 'sweetalert2';
+import { MasterService } from '../master.service';
 
 @Component({
   selector: 'app-spin-fty-creation',
@@ -22,12 +23,12 @@ export class SpinFtyCreationComponent {
   FillterData:any;
   
   ngOnInit(): void {
-    this.api.spinFty_Master_AllData().subscribe((res)=>{
-      this.all = res.spinFty
-    })
-    this.SpinFtyFillterData()
+    // this.api.spinFty_Master_AllData().subscribe((res)=>{
+    //   this.all = res.spinFty
+    // })
+    // this.SpinFtyFillterData()
   }
-  constructor(private fb : FormBuilder, private api : ApiService){
+  constructor(private fb : FormBuilder, private api : ApiService , public masters : MasterService){
   
     this.spinFtycreate = this.fb.group({
       id : new FormControl('') , 
@@ -49,7 +50,7 @@ export class SpinFtyCreationComponent {
 
   SpinFtyFillterData(){
     this.api.spinFty_master_Fillter_Data(this.FillterData).subscribe((res)=>{
-      this.spinFtydata = res.spinFty
+      this.masters.spinFtyData = res.spinFty
     })
   }
 

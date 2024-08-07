@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 import { ApiService } from 'src/app/api.service';
 import Swal from 'sweetalert2';
+import { MasterService } from '../master.service';
 
 @Component({
   selector: 'app-fabrics-type-creation',
@@ -24,12 +25,12 @@ export class FabricsTypeCreationComponent {
   
   ngOnInit(): void {
     
-    this.api.fabrictype_master_AllData().subscribe((res)=>{
-      this.all = res.fabricType
-    })
-this.fabricstypefillter()
+//     this.api.fabrictype_master_AllData().subscribe((res)=>{
+//       this.all = res.fabricType
+//     })
+// this.fabricstypefillter()
   }
-  constructor(private fb : FormBuilder , private api : ApiService){
+  constructor(private fb : FormBuilder , private api : ApiService , public masters : MasterService){
   
     this.fabricsTypecreate = this.fb.group({
       id : new FormControl('') , 
@@ -49,7 +50,7 @@ this.fabricstypefillter()
 
   fabricstypefillter(){
     this.api.fabrictype_master_Fillter_Data(this.fabricstypefillterdata).subscribe((res)=>{
-      this.fabricstypedata= res.fabricType
+      this.masters.fabricTypeData= res.fabricType
     })
   }
 

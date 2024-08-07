@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ApiService } from 'src/app/api.service';
 import Swal from 'sweetalert2';
+import { MasterService } from '../master.service';
 
 @Component({
   selector: 'app-line-master',
@@ -17,11 +18,11 @@ export class LineMasterComponent implements OnInit{
   lineData: any;
   ngOnInit(): void {
     this.api.line().subscribe((res)=>{
-      this.AllData = res.line
+      this.masters.lineData = res.line
     })
   }
 
-  constructor(private fb : FormBuilder , private api : ApiService){
+  constructor(private fb : FormBuilder , private api : ApiService , public masters : MasterService){
 
     this.linecreate = this.fb.group({
       id : new FormControl('') , 
@@ -48,7 +49,7 @@ export class LineMasterComponent implements OnInit{
       });
 
       this.api.line().subscribe((res)=>{
-        this.AllData = res.line
+        this.masters.lineData = res.line
       })
 
       this.linecreationpopup = false;      
@@ -69,7 +70,7 @@ export class LineMasterComponent implements OnInit{
       });
       this.lineupdatepopup = false;
       this.api.line().subscribe((res)=>{
-        this.AllData = res.line
+        this.masters.lineData = res.line
       })
   
     })
