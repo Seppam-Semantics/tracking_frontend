@@ -39,7 +39,7 @@ export class ApiService {
     let url: String = environment.URL;
     return url;
   }
-  
+
   // ========================================================================================================================================================
 
   getorg() {
@@ -126,12 +126,9 @@ export class ApiService {
     return this.http.get(this.getUrl() + `/workorderapi/knitproduction-filter?buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&size=${size}&`, this.getHeaders())
   }
 
-
   getknitproductiondetails(buyer: any, orderNo?: any, style?: any, color?: any, size?: any): Observable<any> {
     return this.http.get(this.getUrl() + `/knitapi/knitwo-details?buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&size=${size}&`, this.getHeaders())
   }
-
-
 
   getKnitrateIddetails(buyer: any, orderNo?: any, style?: any, color?: any, size?: any): Observable<any> {
     return this.http.get(this.getUrl() + `/knitapi/KnitrateId-details?buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&size=${size}&`, this.getHeaders())
@@ -140,11 +137,6 @@ export class ApiService {
   getwolinedetails(orderNo: any, style?: any, color?: any, size?: any): Observable<any> {
     return this.http.get(this.getUrl() + `/workorderapi/workorders-details-filter?orderNo=${orderNo}&style=${style}&color=${color}&size=${size}&`, this.getHeaders())
   }
-
-  // getknitwodetails(buyer: any, orderNo?: any, style?: any, color?: any, size?: any): Observable<any> {
-  //   return this.http.get(this.getUrl() + `/workorderapi/workorders-filter?buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&size=${size}`, this.getHeaders())
-  // }
-
 
   getbuyersData(): Observable<any> {
     return this.http.get(this.getUrl() + `/filtersapi/buyers_data`, this.getHeaders())
