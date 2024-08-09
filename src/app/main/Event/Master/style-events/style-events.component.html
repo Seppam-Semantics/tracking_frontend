@@ -10,18 +10,29 @@
         <tr>
             <th>S.No</th>
             <th>Style</th>
-            <th>Events</th>
             <th>Series no</th>
+            <th>Events</th>
             <th>Edit</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>01</td>
-            <td>Style</td>
-            <td>Event</td>
-            <td>Series no</td>
-            <td><button class="btn btn-primary" (click)="edit()"> <mat-icon>edit</mat-icon> </button></td>
+        <tr *ngFor="let data of this.styleEventData; let i=index;">
+            <td>{{i+1}}</td>
+            <td>{{data.style}}</td>
+            <td>{{data.serialNo}}</td>
+            <td>
+                <details>
+                    <summary>Events</summary>
+                    <ul style="text-align: justify;">
+                        <div class="events">
+                            <li *ngFor="let event of dataJson(data.events)">
+                                {{event.events}}
+                            </li>
+                        </div>
+                    </ul>
+                </details>
+            </td>
+            <td><button class="btn btn-primary" (click)="edit(data.id)"> <mat-icon>edit</mat-icon> </button></td>
         </tr>
     </tbody>
 </table>
@@ -39,12 +50,12 @@
 
         <mat-form-field appearance="outline">
             <mat-label>Series no</mat-label>
-            <input matInput type="text" formControlName="seriesNo">
+            <input matInput type="text" formControlName="serialNo">
         </mat-form-field>
 
         <p-multiSelect [options]="DummyData" placeholder="Event"
-        optionLabel="Entry"  optionValue="id" appendTo="body"  
-        formControlName="eventname" (onChange)="getSelectedEvent()"/>
+        optionLabel="events"  optionValue="id" appendTo="body"  
+        formControlName="eventname" (onChange)="getSelectedEvents()"/>
 
     </div>
     <ng-template pTemplate="footer">
@@ -68,12 +79,12 @@
 
         <mat-form-field appearance="outline">
             <mat-label>Series no</mat-label>
-            <input matInput type="text" formControlName="seriesNo">
+            <input matInput type="text" formControlName="serialNo">
         </mat-form-field>
 
         <p-multiSelect [options]="DummyData" placeholder="Event"
-        optionLabel="Entry"  optionValue="id" appendTo="body"  
-        formControlName="eventname" />
+        optionLabel="events"  optionValue="id" appendTo="body"  
+        formControlName="eventname" (onChange)="getSelectedEventDetails()"/>
 
     </div>
     <ng-template pTemplate="footer">

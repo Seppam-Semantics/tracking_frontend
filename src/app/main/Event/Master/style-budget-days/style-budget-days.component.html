@@ -42,14 +42,14 @@
         <mat-form-field appearance="outline">
             <mat-label>From Event</mat-label>
             <mat-select formControlName="fromEvent">
-                <mat-option></mat-option>
+                <mat-option *ngFor="let from of this.styleEvents" value="{{from.events}}">{{from.events}}</mat-option>
             </mat-select>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
             <mat-label>To Event</mat-label>
             <mat-select formControlName="toEvent">
-                <mat-option></mat-option>
+                <mat-option *ngFor="let to of this.styleEvents" value="{{to.events}}">{{to.events}}</mat-option>
             </mat-select>
         </mat-form-field>
 

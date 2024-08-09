@@ -121,3 +121,8 @@ div::-webkit-scrollbar-thumb
   width: 40vh;
   padding: 1vh;
 }
+
+
+.events{
+  column-count: 4;
+}

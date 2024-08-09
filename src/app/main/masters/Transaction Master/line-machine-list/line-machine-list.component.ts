@@ -23,6 +23,7 @@ export class LineMachineListComponent implements OnInit{
   lineDta: any;
   selectedlist1: any;
   selectedlist2: any;
+  gotLine: any;
   ngOnInit(): void {
     this.api.Drop_Style_master().subscribe((res)=>{
       this.styleDropdata = res.style
@@ -30,6 +31,7 @@ export class LineMachineListComponent implements OnInit{
 
     this.api.Machinelist().subscribe((res)=>{
       this.linealldata = res.line
+      // console.log(res)
     }) 
 
     this.api.Machinelinelist().subscribe((res)=>{
@@ -75,10 +77,12 @@ export class LineMachineListComponent implements OnInit{
     this.selectedline = this.linealldata
       .filter((line: { id: number; line: string }) => selectedColorIds.includes(line.id));
 
-    this.selectedline = this.selectedline.map((line: any) => {
-      return { ...line, headid: 0 };
+    this.selectedline = this.selectedline.map((line: any) => ({
+      "id" : 0,
+      "line" : line.line,
+      "linemasterId" : line.id
+    }));
 
-    });
     this.LineMachinelistcreate.patchValue({
       data: this.selectedline
     });
@@ -113,8 +117,9 @@ export class LineMachineListComponent implements OnInit{
   edit(id: any) {
     this.LineMachinelistupdatepopup = true;
     this.api.Machinelistid(id).subscribe((res) => {
+      this.gotLine = JSON.parse(res.line[0].line);
+      // console.log(this.gotLine)
         this.lineDta = JSON.parse(res.line[0].line).map((line: any) => ({
-          // this.lineDta = res.line[0].line.map((line: any) => ({
             lineid: line.lineId,
             headid: line.hederid,
             line: line.line
@@ -133,24 +138,26 @@ export class LineMachineListComponent implements OnInit{
 }
 
 getSelectedLines() {
+  // console.log(this.gotLine);
     const selectedLineIds = this.LineMachinelistupdate.get('line')?.value || [];
 
     this.selectedline = this.linealldata.filter((line: any) => selectedLineIds.includes(line.id));
+    // console.log(this.selectedline)
 
-    this.selectedline = this.selectedline.map((line: any) => {
-        const lineWithHeadId = this.lineDta.find((lineObj: any) => lineObj.lineid === line.id);
-        return {
-            ...line,
-            headid: lineWithHeadId ? lineWithHeadId.headid : 0
-        };
-    });
+    this.selectedline = this.selectedline.map((line: any) => ({
+        "id" : this.gotLine.find((e: any) => e.lineId === line.id)?.id || 0,
+        "line" : line.line,
+        "linemasterId" : line.id
+    }));
 
+    console.log(this.selectedline)
     this.LineMachinelistupdate.patchValue({
         data: this.selectedline
     });
 }
 
   update(){
+    console.log(this.LineMachinelistupdate.value);
     this.api.MachinelistPost(this.LineMachinelistupdate.value).subscribe((res)=>{
       Swal.fire({
         position: "top-end",

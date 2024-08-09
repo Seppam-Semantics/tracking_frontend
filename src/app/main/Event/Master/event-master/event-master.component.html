@@ -15,11 +15,11 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>01</td>
-            <td>EVENT</td>
-            <td>ApiLink</td>
-            <td><button class="btn btn-primary" (click)="edit()"> <mat-icon>edit</mat-icon> </button></td>
+        <tr *ngFor="let data of this.eventsData; let i = index;">
+            <td>{{i+1}}</td>
+            <td>{{data.events}}</td>
+            <td>{{data.links}}</td>
+            <td><button class="btn btn-primary" (click)="edit(data.id)"> <mat-icon>edit</mat-icon> </button></td>
         </tr>
     </tbody>
 </table>
