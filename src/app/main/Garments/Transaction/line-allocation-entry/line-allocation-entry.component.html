@@ -68,8 +68,8 @@
                     <td><input type="date" class="form-control" formControlName="fridate" style="width: 20vh;" (mouseenter)="check()"></td>
                     <td><input type="number" class="form-control" formControlName="orderpcs" (mouseenter)="check()"></td>
                     <td><input type="number" class="form-control" formControlName="planqty" (mouseenter)="check()"></td>
-                    <td><input type="text" class="form-control" formControlName="line" list="list" (mouseenter)="check()" (onChange)="dataprodhr(i)" (input)="dataprodhr(i)"
-                        (Change)="calculateEndDate4()" (mouseenter)="calculateEndDate4()">
+                    <td><input type="text" class="form-control" formControlName="line" list="list" (mouseenter)="check()" (onChange)="calculateEndDate4(i)" (input)="calculateEndDate4(i)"
+                        (Change)="calculateEndDate4(i)" (mouseenter)="calculateEndDate4(i)">
                         <datalist id="list">
                             <option *ngFor="let data of this.linedropdata" [value]="data.line">{{data.line}}</option>
                         </datalist>

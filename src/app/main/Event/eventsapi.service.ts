@@ -81,4 +81,17 @@ stylesforbudget():Observable<any>{
 eventsbystyle(style:any):Observable<any>{
   return this.http.get(this.getUrl() + `/eventsapi/styles_from_to_events?style=${style}`, this.getHeaders())
 }
+
+getAllStyleBudgetDays(style:string = ''):Observable<any>{
+  return this.http.get(this.getUrl() + `/eventsapi/budget-days-master?style=${style}`, this.getHeaders())
+}
+
+postbudgetDays(data:any):Observable<any>{
+  return this.http.post(this.getUrl() + `/eventsapi/budgetDaysmaster`, data,this.getHeaders())
+}
+
+singleStyleBudgetDays(id:any):Observable<any>{
+  return this.http.get(this.getUrl() + `/eventsapi/budget-days-master/${id}`, this.getHeaders())
+}
+
 }

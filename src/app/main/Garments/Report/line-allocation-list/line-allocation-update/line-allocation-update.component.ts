@@ -36,6 +36,7 @@ export class LineAllocationUpdateComponent {
   orderpcsvalue: any;
   linedropdata: any;
   prodhrdata: any;
+  linefilterdata: any;
 
 
 
@@ -46,14 +47,15 @@ export class LineAllocationUpdateComponent {
 
   }
   ngOnInit(): void {
-    this.api.lineallocationLine().subscribe((res) => {
-      this.linedropdata = res.data
+    this.api.lineallocationfilterLine().subscribe((res) => {
+      this.linefilterdata = res.data
     })
   }
 
   edit(line: any) {
     this.api.lineWiseGet(line).subscribe((res) => {
-      this.AllData = res.data
+      this.AllData = res.shipping
+      console.log(res)
       const EntryData = this.LineAllocationForm.get('data') as FormArray;
       EntryData.clear();
 

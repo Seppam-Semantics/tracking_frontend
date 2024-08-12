@@ -1,6 +1,20 @@
 <mat-toolbar style="display: flex; justify-content: center; height: auto;">
-    <div style="display: flex; justify-content: center; width: 100%;">
+    <div style="display: flex; justify-content: center; width: 100%;gap: 200px;">
     <span>Knit Factory - Machine List</span>
+    <div style="display: flex; justify-content: center; align-items: center;">
+        <mat-form-field appearance="outline">
+            <mat-label>Order No.</mat-label>
+            <mat-select (selectionChange)="orderFilter()">
+                <mat-option *ngFor="let order of this.filterOrderNo" value="{{order.orderNo}}">{{order.orderNo}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Start Date</mat-label>
+          <input matInput [matDatepicker]="picker">
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </div>
 </div>
     <div style="flex: 1 1 auto;"></div>
     <button mat-button color="primary" (click)="new()">New</button>

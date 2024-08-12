@@ -145,7 +145,7 @@ export class LineAllocationEntryComponent implements OnInit {
     });
 
     row.get('planqty')?.valueChanges.subscribe(() => {
-      this.calculateEndDate4();
+      // this.calculateEndDate4();
     });
   }
 
@@ -262,7 +262,6 @@ export class LineAllocationEntryComponent implements OnInit {
     const formArray = this.LineAllocationForm.get('data') as FormArray;
     const row = formArray.at(index);
     this.startdate_Value = row.get('startdate')?.value;
-    console.log(this.startdate_Value)
     this.dateMonth = this.datePipe.transform(row.get('startdate')?.value, 'MM')
     this.api.lineallocationworkhrs(this.startdate_Value, this.dateMonth).subscribe((res) => {
       this.AllWorkhrs = res.date
@@ -342,8 +341,15 @@ export class LineAllocationEntryComponent implements OnInit {
     catch { }
   }
 
-  calculateEndDate4() {
+  calculateEndDate4(index:number) {
     try {
+      const formArray = this.LineAllocationForm.get('data') as FormArray;
+    const row = formArray.at(index);
+    this.style_Value = row.get('style')?.value;
+    this.line_Value = row.get('line')?.value;
+    this.api.lineallocationprodhr(this.line_Value, this.style_Value).subscribe((res) => {
+      this.prodhr_value = res.data[0].prodhr
+
       this.items.controls.forEach((control: AbstractControl) => {
         const row = control as FormGroup;
         if (row instanceof FormGroup) {
@@ -375,9 +381,8 @@ export class LineAllocationEntryComponent implements OnInit {
           row.get('daysreqd')?.setValue(daysCount - 1);
         }
       });
-    } catch (error) {
-      console.error('Error calculating end date:', error);
-    }
+    })
+    this.dateworkhrs(index) } catch {    }
   }
 
 

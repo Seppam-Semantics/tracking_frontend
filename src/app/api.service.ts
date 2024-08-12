@@ -496,8 +496,8 @@ export class ApiService {
 
 // =============================================== Knit Machine Allocation =======================================================================
 
-getAllocation(orderNo : string = ''):Observable<any>{
-  return this.http.get(this.getUrl() + `/knitapi/machine-allocation-entry?orderNo=${orderNo}&`, this.getHeaders())
+getAllocation(orderNo : string = '', startDate : string = ''):Observable<any>{
+  return this.http.get(this.getUrl() + `/knitapi/machine-allocation-entry?orderNo=${orderNo}&startDate=${startDate}&`, this.getHeaders())
 }
 
 getSingleAllocation(id:string = '', knitFty:String = '', machineDia:String = ''):Observable<any>{
@@ -523,6 +523,11 @@ getStartDate(knitFty:string = '', machineDia : string = ''):Observable<any>{
   knitfactoryforentry(machineDia : any):Observable<any>{
     return this.http.get(this.getUrl() + `/knitapi/machineDiatoKnitFactory?machineDia=${machineDia}`,this.getHeaders())
   }
+
+  orderNo():Observable<any>{
+    return this.http.get(this.getUrl() +  `/knitapi/KnitMachineorderNoFilter`, this.getHeaders())
+  }
+
   // ============================================= Dye Delivery ===================================================================================
 
   addUpdateDyeDelivery(data: any): Observable<any> {
@@ -1562,6 +1567,10 @@ getStartDate(knitFty:string = '', machineDia : string = ''):Observable<any>{
           return this.http.get(this.getUrl() + `/garmentsapi/lineallocation-line?style=${style}&`, this.getHeaders())
         }
       
+        lineallocationfilterLine():Observable<any>{
+          return this.http.get(this.getUrl() + `/garmentsapi/lineallocation-filter-line`, this.getHeaders())
+        }
+
         lineallocationPost(data:any ): Observable<any> {
           return this.http.post(this.getUrl() + `/garmentsapi/line_allocation`, data,this.getHeaders())
         }
@@ -1582,8 +1591,8 @@ getStartDate(knitFty:string = '', machineDia : string = ''):Observable<any>{
           return this.http.get(this.getUrl() + `/garmentsapi/lineallocation-prodhr?line=${line}&style=${style}`, this.getHeaders())
         }
 
-        lineWiseGet(line:any):Observable<any>{
-          return this.http.get(this.getUrl() + `/garmentsapi/line-allocation-linewise?line=${line}`, this.getHeaders())
+        lineWiseGet(line:string):Observable<any>{
+          return this.http.get(this.getUrl() + `/garmentsapi/line-allocation-linewise?line=${line}&`, this.getHeaders())
         }
         //-------------------------------------------- Line Allocation Master [End]------------------------------------------------------
 

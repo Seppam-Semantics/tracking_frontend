@@ -53,6 +53,9 @@ export class KnitFactoryMachineComponent {
   greigeKgTotal: any;
   toleranceValid: any[] = [];
   totalGreigeKg: number = 0;
+  filterOrderNo: any;
+  orderNOfilter: string = '';
+  startDateFilter: string ='';
 
 
   ngOnInit(): void {
@@ -81,6 +84,10 @@ export class KnitFactoryMachineComponent {
           });
       }
   });
+
+  this.api.orderNo().subscribe((res)=>{
+    this.filterOrderNo = res.data
+  })
   }
 
   constructor(private fb: FormBuilder, private api: ApiService , private router : Router , private datePipe: DatePipe) { 
@@ -91,6 +98,13 @@ export class KnitFactoryMachineComponent {
       data: this.fb.array([]),
     })
   }
+
+  orderFilter(){
+    this.api.getAllocation(this.orderNOfilter, this.startDateFilter).subscribe((res)=>{
+      this.machine = res.data
+    })
+  }
+
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.machine, event.previousIndex, event.currentIndex);
