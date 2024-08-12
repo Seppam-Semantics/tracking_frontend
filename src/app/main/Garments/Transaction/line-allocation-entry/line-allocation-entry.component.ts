@@ -242,7 +242,7 @@ export class LineAllocationEntryComponent implements OnInit {
     })
   }
 
-  getstartdate(index: any) {
+  getstartdate(index: any, line:any) {
     const formArray = this.LineAllocationForm.get('data') as FormArray;
     const row = formArray.at(index);
     this.Buyer_Value = row.get('buyer')?.value;
@@ -250,10 +250,11 @@ export class LineAllocationEntryComponent implements OnInit {
     this.style_Value = row.get('style')?.value;
     this.color_Value = row.get('color')?.value;
 
-    this.api.lineallocationstatDate(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value).subscribe((res) => {
+    this.api.lineallocationstatDate(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, line).subscribe((res) => {
       const formArray = this.LineAllocationForm.get('data') as FormArray;
       const row = formArray.at(index);
       row.get('startdate')?.setValue(res.date[0].endDate)
+      console.log(res.date[0].endDate)
     })
   }
 

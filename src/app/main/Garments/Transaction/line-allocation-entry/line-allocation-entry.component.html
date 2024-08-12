@@ -61,7 +61,7 @@
                         <p-dropdown #colors [options]="colorlist" placeholder="color" optionLabel="color"
                             optionValue="color" [editable]="true" [style]="{ minWidth: '8vh', minHeight:'2vh' }"
                             formControlName="color" (mouseenter)="stylevalue(i)" (click)="colorslist(i)"
-                            (onChange)="OrderPcsData(i)" (input)="check()" (onChange)="getstartdate(i)"
+                            (onChange)="OrderPcsData(i)" (input)="check()"
                              (onChange)="check()" (onChange)="dateworkhrs(i)"></p-dropdown>
                     </td>
                     <td><input type="date" class="form-control" formControlName="shipdate" style="width: 20vh;" (mouseenter)="check()"></td>
@@ -69,7 +69,7 @@
                     <td><input type="number" class="form-control" formControlName="orderpcs" (mouseenter)="check()"></td>
                     <td><input type="number" class="form-control" formControlName="planqty" (mouseenter)="check()"></td>
                     <td><input type="text" class="form-control" formControlName="line" list="list" (mouseenter)="check()" (onChange)="calculateEndDate4(i)" (input)="calculateEndDate4(i)"
-                        (Change)="calculateEndDate4(i)" (mouseenter)="calculateEndDate4(i)">
+                        (Change)="calculateEndDate4(i)" (mouseenter)="calculateEndDate4(i)" (onChange)="getstartdate(i, $event.value)" (input)="getstartdate(i, $event.target.value)">
                         <datalist id="list">
                             <option *ngFor="let data of this.linedropdata" [value]="data.line">{{data.line}}</option>
                         </datalist>

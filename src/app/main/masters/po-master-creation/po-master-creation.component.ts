@@ -84,15 +84,23 @@ export class POMasterCreationComponent {
       this.sizeDropdata = res.sizes
     })
 
-    this.api.Drop_Color_master().subscribe((res) => {
-      this.colorDropdata = res.color
-    })
+    // this.api.Drop_Color_master().subscribe((res) => {
+    //   this.colorDropdata = res.color
+    // })
 
     this.api.PO_Master_AllData().subscribe((res) => {
       this.poAlldata = res.po
     })
 
   }
+
+  colourValue(){
+    this.api.Drop_Color_master1(this.Buyernamevalue).subscribe((res) => {
+      this.colorDropdata = res.color
+    })
+  }
+
+
 
   get items() {
     return this.poDetailscreate.get("data") as FormArray;
@@ -158,6 +166,7 @@ export class POMasterCreationComponent {
         buyerId: this.buyerid
       })
     })
+    this.colourValue()
   }
 
   getstylevalue(event: any) {
@@ -238,7 +247,10 @@ export class POMasterCreationComponent {
     this.pofile = true
     this.api.get_PO_Master_line(id).subscribe((res) => {
       this.editdata = res.po
-
+      const buyer = res.pomaster[0].buyer
+      this.api.Drop_Color_master1(buyer).subscribe((res) => {
+        this.colorDropdata = res.color
+      })
       this.line_OrderNo = res.pomaster[0].orderNo
 
       const EntryData = this.poDetailscreate.get('data') as FormArray;

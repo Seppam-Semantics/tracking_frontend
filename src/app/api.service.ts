@@ -796,6 +796,9 @@ getStartDate(knitFty:string = '', machineDia : string = ''):Observable<any>{
   Drop_Color_master(): Observable<any> {
     return this.http.get(this.getUrl() + `/mastersapi/drop-color-Master`, this.getHeaders())
   }
+  Drop_Color_master1(buyer:string): Observable<any> {
+    return this.http.get(this.getUrl() + `/mastersapi/drop-color-Master1?buyer=${buyer}`, this.getHeaders())
+  }
 
   ColorId(color: any): Observable<any> {
     return this.http.get(this.getUrl() + `/mastersapi/drop-colorId-Master?color=${color}&`, this.getHeaders())
@@ -1579,8 +1582,8 @@ getStartDate(knitFty:string = '', machineDia : string = ''):Observable<any>{
           return this.http.get(this.getUrl() + `/garmentsapi/line_allocation`,this.getHeaders())
         }
 
-        lineallocationstatDate(buyer:string='' , orderNo:string='', style:string='', color:string='' ):Observable<any>{
-          return this.http.get(this.getUrl() + `/garmentsapi/lineallocation-statDate?buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&`, this.getHeaders())
+        lineallocationstatDate(buyer:string='' , orderNo:string='', style:string='', color:string='', line:string = '' ):Observable<any>{
+          return this.http.get(this.getUrl() + `/garmentsapi/lineallocation-statDate?buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&line=${line}`, this.getHeaders())
         }
 
         lineallocationworkhrs(date:string='', month:string=''):Observable<any>{
@@ -1594,6 +1597,7 @@ getStartDate(knitFty:string = '', machineDia : string = ''):Observable<any>{
         lineWiseGet(line:string):Observable<any>{
           return this.http.get(this.getUrl() + `/garmentsapi/line-allocation-linewise?line=${line}&`, this.getHeaders())
         }
+
         //-------------------------------------------- Line Allocation Master [End]------------------------------------------------------
 
       }
