@@ -55,7 +55,7 @@ export class LineAllocationUpdateComponent {
   edit(line: any) {
     this.api.lineWiseGet(line).subscribe((res) => {
       this.AllData = res.shipping
-      console.log(res)
+      // console.log(res)
       const EntryData = this.LineAllocationForm.get('data') as FormArray;
       EntryData.clear();
 
@@ -97,6 +97,7 @@ export class LineAllocationUpdateComponent {
           this.calculateEndDate4();
         });
       })
+      this.calculateEndDate2()
     })
   }
 

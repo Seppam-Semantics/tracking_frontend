@@ -945,28 +945,42 @@ export class FabricRollData2Component implements OnInit {
 
   woupdatesubmit() {
     // console.log(this.buyerorderform.value)
-    if (this.buyerorderform.valid) {
-        this.api.postworkorder(this.buyerorderform.value).subscribe((res) => {
+    this.api.postworkorder(this.buyerorderform.value).subscribe((res) => {
 
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: res.message,
-            showConfirmButton: false,
-            timer: 1500
-          });
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: res.message,
+        showConfirmButton: false,
+        timer: 1500
+      });
 
-            this.visible = false;
-            this.woByBuyer();
-            this.loadworkorder();
-        });
-    } else {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Missing SizeId",
-        });
-    }
+        this.visible = false;
+        this.woByBuyer();
+        this.loadworkorder();
+    });
+    // if (this.buyerorderform.valid) {
+    //     this.api.postworkorder(this.buyerorderform.value).subscribe((res) => {
+
+    //       Swal.fire({
+    //         position: "top-end",
+    //         icon: "success",
+    //         title: res.message,
+    //         showConfirmButton: false,
+    //         timer: 1500
+    //       });
+
+    //         this.visible = false;
+    //         this.woByBuyer();
+    //         this.loadworkorder();
+    //     });
+    // } else {
+    //     Swal.fire({
+    //       icon: "error",
+    //       title: "Oops...",
+    //       text: "Missing SizeId",
+    //     });
+    // }
 }
 
   save() {

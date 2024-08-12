@@ -262,20 +262,23 @@ export class WorkorderDataComponent implements OnInit {
 
 
   fsizedata(index: any , event:any) {
+    try{
     this.fsize_Value = event.target.value
-
     this.api.Fsize_to_Gsize(this.style_Value,this.fsize_Value).subscribe((res) => {
       this.sizeDta = res.Gsize[0]?.size;
+      this.finishDiaFBCId = res.Gsize[0]?.id
       const formArray = this.buyerorderform.get('data') as FormArray;
       const row = formArray.at(index);
       row.get('Size')?.setValue(this.sizeDta);
       this.fsizevalue(index, this.sizeDta)
     })
-
+  }
+  catch{}
   }
 
 
   fsizevalue(index: any, size : any) {
+    try{
     // this.fsize_Value = event.target.value
     const formArray = this.buyerorderform.get('data') as FormArray;
     const row = formArray.at(index);
@@ -286,7 +289,8 @@ export class WorkorderDataComponent implements OnInit {
     this.size_Value = size
     this.sizedata(index)
     this.PODetailsLoss(index)
-
+    }
+    catch{}
   }
 
   sizevalue(index: any) {
@@ -295,14 +299,14 @@ export class WorkorderDataComponent implements OnInit {
   }
 
   sizedata(index : any) {
-
+if(this.Buyer_Value && this.Order_Value && this.style_Value && this.color_Value && this.size_Value){
     this.api.size_to_id(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, this.size_Value).subscribe((res) => {
       this.OrderFOBRate	 = res.sizeId[0]?.poRate ? res.sizeId[0]?.poRate : ''  
       this.OrderPcs	 = res.sizeId[0]?.quantity ? res.sizeId[0]?.quantity : ''  
       this.polineId = res.sizeId[0]?.id ? res.sizeId[0]?.id : ''  
       this.poid = res.sizeId[0]?.orderId ? res.sizeId[0]?.orderId : ''
       this.FSizeFBC = res.sizeId[0]?.concatSize ? res.sizeId[0]?.concatSize : ''
-      this.FSizeFBCId = res.sizeId[0]?.concatSizeId
+      this.FSizeFBCId = res.sizeId[0]?.sizeId
       this.fabricTypeFBC = res.sizeId[0]?.fabricType ? res.sizeId[0]?.fabricType : ''
       this.fabricTypeFBCId = res.sizeId[0]?.fabricTypeId ? res.sizeId[0]?.fabricTypeId : ''
       this.fabricGSMFBC = res.sizeId[0]?.fabricGSM ? res.sizeId[0]?.fabricGSM : ''
@@ -310,7 +314,7 @@ export class WorkorderDataComponent implements OnInit {
       this.yarnTypeFBC = res.sizeId[0]?.yarnType ? res.sizeId[0]?.yarnType : ''
       this.yarnTypeFBCId = res.sizeId[0]?.yarnTypeId ? res.sizeId[0]?.yarnTypeId : ''
       this.finishDiaFBC = res.sizeId[0]?.finishDia ? res.sizeId[0]?.finishDia : ''
-      this.finishDiaFBCId = res.sizeId[0]?.finishDiaId ? res.sizeId[0]?.finishDiaId : ''
+      // this.finishDiaFBCId = res.sizeId[0]?.finishDiaId ? res.sizeId[0]?.finishDiaId : ''
       this.styleIdDta = res.sizeId[0]?.styleId ? res.sizeId[0]?.styleId : ''
       this.dyeTypeFBC = res.sizeId[0]?.dyeType ? res.sizeId[0]?.dyeType : ''
       this.dyeTypeFBCId = res.sizeId[0]?.dyeTypeId ? res.sizeId[0]?.dyeTypeId : ''
@@ -362,17 +366,18 @@ export class WorkorderDataComponent implements OnInit {
 
     })
 
+  if(this.style_Value && this.size_Value){
     this.api.f_size_BO(this.style_Value, this.size_Value).subscribe((res) => {
-      this.fsizeDta = res.fsize
+      this.fsizeDta = res.fsize ? res.fsize : ''
       this.fabdiaDta = res.FabDia
       this.fabGsmDta = res.FabGsm
-
-      this.finishfabConsumptionDta = res.finishfabConsumption[0].finishfabConsumption ? res.finishfabConsumption[0].finishfabConsumption : ''
+      this.finishfabConsumptionDta = res.finishfabConsumption[0].finishfabConsumption ? res.finishfabConsumption[0].finishfabConsumption : 0
       const formArray = this.buyerorderform.get('data') as FormArray;
       const row = formArray.at(index);
       row.get('FabricConsumption')?.setValue(this.finishfabConsumptionDta);
     })
-
+  }
+}
   }
 
 
@@ -455,6 +460,7 @@ export class WorkorderDataComponent implements OnInit {
   }
 
   save() {
+    console.log(this.buyerorderform.value)
     if (this.buyerorderform.valid) {
       this.api.postworkorder(this.buyerorderform.value).subscribe((res) => {
         if (res.success) {
@@ -475,7 +481,7 @@ export class WorkorderDataComponent implements OnInit {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Size Id Missing"
+        text: "Kindly Choose the data from the dropdown....."
       });
     }
   }

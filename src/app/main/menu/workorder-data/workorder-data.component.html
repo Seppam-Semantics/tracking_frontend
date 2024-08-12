@@ -74,7 +74,7 @@
           </tr>
         </thead>
         <tbody formArrayName="data">
-          <tr *ngFor="let process of items.controls; let i=index" [formGroupName]="i">
+          <tr *ngFor="let process of items.controls; let i=index" [formGroupName]="i" (mouseover)="sizedata(i)">
             <td></td>
 
             <td>{{i+1}}</td>
