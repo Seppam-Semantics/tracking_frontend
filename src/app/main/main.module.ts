@@ -139,6 +139,9 @@ import { EventMasterRootComponent } from './Event/Master/event-master-root/event
 import { EventMasterComponent } from './Event/Master/event-master/event-master.component';
 import { StyleEventsComponent } from './Event/Master/style-events/style-events.component';
 import { StyleBudgetDaysComponent } from './Event/Master/style-budget-days/style-budget-days.component';
+import { TnaEventsComponent } from './Event/Transcation/tna-events/tna-events.component';
+import { TnaEventUpdateComponent } from './Event/Update/tna-event-update/tna-event-update.component';
+import { TnaListsComponent } from './Event/Report/tna-lists/tna-lists.component';
 
 
 
@@ -233,7 +236,10 @@ import { StyleBudgetDaysComponent } from './Event/Master/style-budget-days/style
     EventMasterRootComponent,
     EventMasterComponent,
     StyleEventsComponent,
-    StyleBudgetDaysComponent
+    StyleBudgetDaysComponent,
+    TnaEventsComponent,
+    TnaEventUpdateComponent,
+    TnaListsComponent
   ],
   imports: [
     CommonModule,

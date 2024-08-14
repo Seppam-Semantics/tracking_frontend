@@ -10,8 +10,8 @@ export class EventsapiService {
 
   constructor(private http: HttpClient) { }
 
-  apiUrl = "https://tracker.seppam.com";
-  // apiUrl = "http://localhost:2000";
+  // apiUrl = "https://tracker.seppam.com";
+  apiUrl = "http://localhost:2000";
 
   token: any;
   profilenames: any;
@@ -93,5 +93,13 @@ postbudgetDays(data:any):Observable<any>{
 singleStyleBudgetDays(id:any):Observable<any>{
   return this.http.get(this.getUrl() + `/eventsapi/budget-days-master/${id}`, this.getHeaders())
 }
+
+// ====================================================================================================================
+// ================= TNA Events ======================================================================================
+
+getAllTNA():Observable<any>{
+  return this.http.get(this.getUrl() + `/eventsapi/tna-listing`, this.getHeaders())
+}
+
 
 }

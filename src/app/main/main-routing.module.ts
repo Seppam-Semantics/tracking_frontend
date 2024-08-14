@@ -66,6 +66,9 @@ import { LineAllocationEntryComponent } from './Garments/Transaction/line-alloca
 import { LineAllocationListComponent } from './Garments/Report/line-allocation-list/line-allocation-list.component';
 import { LineAllocationUpdateComponent } from './Garments/Report/line-allocation-list/line-allocation-update/line-allocation-update.component';
 import { EventMasterRootComponent } from './Event/Master/event-master-root/event-master-root.component';
+import { TnaEventUpdateComponent } from './Event/Update/tna-event-update/tna-event-update.component';
+import { TnaEventsComponent } from './Event/Transcation/tna-events/tna-events.component';
+import { TnaListsComponent } from './Event/Report/tna-lists/tna-lists.component';
 
 const routes: Routes = [
   {path:'', component: AppComponent},
@@ -142,7 +145,9 @@ const routes: Routes = [
   {path:"LineAllocationList",component:LineAllocationListComponent},
   {path : "lineallocationupdate", component: LineAllocationUpdateComponent},
   {path : "EventMasterRoot", component: EventMasterRootComponent},
- 
+  {path : "EventList", component: TnaListsComponent},
+  {path : "EventUpdate", component: TnaEventUpdateComponent},
+  {path : "EventTranscation", component: TnaEventsComponent}
 ];
 
 @NgModule({

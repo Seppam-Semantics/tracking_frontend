@@ -1,0 +1,48 @@
+<div>
+    <mat-toolbar style="height: auto;">
+        <div style="display: flex; gap: 15px; width: 100%; justify-content: center;">
+                <span>TNA Events</span>
+        </div>
+        <div style="flex: 1 1 auto;"></div>
+            
+        <div>
+            <button mat-button color="primary" (click)="newwindow()">New</button>
+            <button mat-button color="primary" (click)="updatewindow()">Update</button>
+        </div>
+        </mat-toolbar>
+
+        <div class="tablecss">
+            <table class="table table-sm table-bordered table-striped text-center">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>S.No</th>
+                        <th>Buyer</th>
+                        <th>Order</th>
+                        <th>Style</th>
+                        <th>Color</th>
+                        <th>Plan</th>
+                        <th>Events</th>
+                        <th>Plan Date</th>
+                        <th>Actual Date</th>
+                        <th>Remarks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of this.tnalists; let i = index;">
+                        <td>{{i+1}}</td>
+                        <td>{{data.buyer}}</td>
+                        <td>{{data.orderNo}}</td>
+                        <td>{{data.style}}</td>
+                        <td>{{data.color}}</td>
+                        <td>{{data.plans}}</td>
+                        <td>{{data.events}}</td>
+                        <td>{{data.planDate}}</td>
+                        <td>{{data.actualDate}}</td>
+                        <td>{{data.remarks}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+</div>

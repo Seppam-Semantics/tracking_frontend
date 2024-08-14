@@ -302,11 +302,11 @@ export class WorkorderDataComponent implements OnInit {
 if(this.Buyer_Value && this.Order_Value && this.style_Value && this.color_Value && this.size_Value){
     this.api.size_to_id(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, this.size_Value).subscribe((res) => {
       this.OrderFOBRate	 = res.sizeId[0]?.poRate ? res.sizeId[0]?.poRate : ''  
-      this.OrderPcs	 = res.sizeId[0]?.quantity ? res.sizeId[0]?.quantity : ''  
+      this.OrderPcs	 = res.sizeId[0]?.quantity ? res.sizeId[0]?.quantity : ''
       this.polineId = res.sizeId[0]?.id ? res.sizeId[0]?.id : ''  
       this.poid = res.sizeId[0]?.orderId ? res.sizeId[0]?.orderId : ''
       this.FSizeFBC = res.sizeId[0]?.concatSize ? res.sizeId[0]?.concatSize : ''
-      this.FSizeFBCId = res.sizeId[0]?.sizeId
+      this.FSizeFBCId = res.sizeId[0]?.sizeId ? res.sizeId[0]?.sizeId : ''
       this.fabricTypeFBC = res.sizeId[0]?.fabricType ? res.sizeId[0]?.fabricType : ''
       this.fabricTypeFBCId = res.sizeId[0]?.fabricTypeId ? res.sizeId[0]?.fabricTypeId : ''
       this.fabricGSMFBC = res.sizeId[0]?.fabricGSM ? res.sizeId[0]?.fabricGSM : ''
