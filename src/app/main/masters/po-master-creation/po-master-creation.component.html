@@ -19,6 +19,7 @@
                 <th>Quantity</th>
                 <th>Value</th>
                 <th>PO Ship Date</th>
+                <th>Status</th>
                 <th>PO Details</th>
                 <th>Action</th>
             </tr>
@@ -34,6 +35,7 @@
                 <td>{{data.poQuantity}}</td>
                 <td>{{data.poValue}}</td>
                 <td>{{data.shipDate | date :'longDate'}}</td>
+                <td>{{data.po_status}}</td>
 
                 <td><button class="btn btn-success" (click)="linedata(data.id)"><mat-icon>insert_drive_file</mat-icon></button></td>
 
@@ -120,20 +122,30 @@
                 </mat-form-field>
             </div>
 
-            <!-- <div>
+            <div>
                 <mat-form-field appearance="outline">
                     <mat-label>Buyer PO Date</mat-label>
                     <input matInput type="date" formControlName="poDate">
                 </mat-form-field>
-            </div> -->
+            </div>
         </div>
         <div style="display: flex; gap: 10vh; justify-content: center;">
-            <!-- <div>
+            <div>
                 <mat-form-field appearance="outline">
                     <mat-label>Buyer PO Ship Date</mat-label>
                     <input matInput type="date" formControlName="shipDate">
                 </mat-form-field>
-            </div> -->
+            </div>
+            <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Status</mat-label>
+                    <mat-select formControlName="poStatus" >
+                          <mat-option value="open">Open</mat-option>
+                          <mat-option value="running">Running</mat-option>
+                          <mat-option value="close">Close</mat-option>
+                      </mat-select>
+                </mat-form-field>
+            </div>
         </div>
     </div>
     <ng-template pTemplate="footer">

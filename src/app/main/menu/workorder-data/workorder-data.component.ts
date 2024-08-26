@@ -299,6 +299,14 @@ export class WorkorderDataComponent implements OnInit {
   }
 
   sizedata(index : any) {
+    const Array = this.buyerorderform.get('data') as FormArray;
+    const row1 = Array.at(index);
+    this.Buyer_Value = this.buyerorderform.get('Buyer')?.value;
+    this.Order_Value = this.buyerorderform.get('OrderNo')?.value;
+    this.style_Value = row1.get('Style')?.value;
+    this.color_Value = row1.get('Color')?.value;
+    this.size_Value = row1.get('Size')?.value;
+
 if(this.Buyer_Value && this.Order_Value && this.style_Value && this.color_Value && this.size_Value){
     this.api.size_to_id(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, this.size_Value).subscribe((res) => {
       this.OrderFOBRate	 = res.sizeId[0]?.poRate ? res.sizeId[0]?.poRate : ''  
@@ -418,34 +426,34 @@ if(this.Buyer_Value && this.Order_Value && this.style_Value && this.color_Value 
       "id": [''],
       "poid": [''],
       "polineId": [''],
-      "Style": [''],
-      "Color": [''],
-      "Size": [''],
-      "FSize": [''],
+      "Style": ['', Validators.required],
+      "Color": ['', Validators.required],
+      "Size": ['', Validators.required],
+      "FSize": ['', Validators.required],
       "SizeId": ['', Validators.required],
       "FabType": [''],
       "fabricTypeId": [''],
       "FabDia": [''],
-      "FabDiaId": ['', Validators.required],
+      "FabDiaId": [''],
       "FabGsm": [''],
-      "FabGsmId": [0],
+      "FabGsmId": [],
       "YarnKg": [''],
       "GreigeKg": [''],
       "YarnType": [''],
-      "YarnTypeId": ['', Validators.required],
+      "YarnTypeId": [''],
       "FinishKg": [''],
       "KnitSL": [''],
       "SpinFty": [''],
-      "SpinFtyId": ['', Validators.required],
+      "SpinFtyId": [],
       "KnitFty": [''],
-      "KnitFtyId": ['', Validators.required],
+      "KnitFtyId": [],
       "DyeinFty": [''],
-      "DyeinFtyId": ['', Validators.required],
+      "DyeinFtyId": [],
 
       "dyetype": [''],
-      "dyeTypeId": ['', Validators.required],
+      "dyeTypeId": [],
 
-      "OrderPcs": [''],
+      "OrderPcs": [],
       "OrderFOBRate": [''],
       "KnitRate": [''],
       "DyeRate": [''],
@@ -460,7 +468,7 @@ if(this.Buyer_Value && this.Order_Value && this.style_Value && this.color_Value 
   }
 
   save() {
-    console.log(this.buyerorderform.value)
+    // console.log(this.buyerorderform.value)
     if (this.buyerorderform.valid) {
       this.api.postworkorder(this.buyerorderform.value).subscribe((res) => {
         if (res.success) {
@@ -481,10 +489,11 @@ if(this.Buyer_Value && this.Order_Value && this.style_Value && this.color_Value 
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Kindly Choose the data from the dropdown....."
+        text: "The required fields are Style, Color, Fsize, Size. Kindly fill them all...!!!"
       });
     }
   }
+
   FBReport() {
     this.router.navigate(['/main/FBReport'])
   }

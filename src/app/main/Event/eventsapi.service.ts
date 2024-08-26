@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -12,6 +13,7 @@ export class EventsapiService {
 
   // apiUrl = "https://tracker.seppam.com";
   apiUrl = "http://localhost:2000";
+  // apiUrl= "http://20.244.3.174:3000";
 
   token: any;
   profilenames: any;
@@ -101,5 +103,12 @@ getAllTNA():Observable<any>{
   return this.http.get(this.getUrl() + `/eventsapi/tna-listing`, this.getHeaders())
 }
 
+postTnaEvents(data : any):Observable<any>{
+  return this.http.post(this.getUrl() + `/eventsapi/tna-posting`, data, this.getHeaders())
+}
+
+getTNAEvent(style : any):Observable<any>{
+  return this.http.get(this.getUrl() + `/eventsapi/getTNA?style=${style}&`, this.getHeaders())
+}
 
 }

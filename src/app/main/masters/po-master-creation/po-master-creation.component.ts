@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, QueryList, ViewChildren } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Dropdown } from 'primeng/dropdown';
 import { ApiService } from 'src/app/api.service';
 
 @Component({
@@ -37,6 +38,7 @@ export class POMasterCreationComponent {
   line_OrderNo: any;
   line_id: any;
   order_id: any;
+  statusField : boolean = true;
 
   constructor(private fb: FormBuilder, private api: ApiService, private datePipe: DatePipe) {
 
@@ -46,7 +48,8 @@ export class POMasterCreationComponent {
       buyerId: new FormControl(''),
       orderNo: new FormControl(''),
       poDate: new FormControl(''),
-      shipDate: new FormControl('')
+      shipDate: new FormControl(''),
+      poStatus : new FormControl('open')
     })
 
     this.poedit = this.fb.group({
@@ -55,7 +58,8 @@ export class POMasterCreationComponent {
       buyerId: new FormControl(''),
       orderNo: new FormControl(''),
       poDate: new FormControl(''),
-      shipDate: new FormControl('')
+      shipDate: new FormControl(''),
+      poStatus : new FormControl('')
     })
 
 
@@ -235,7 +239,8 @@ export class POMasterCreationComponent {
         buyerId: this.editdata[0].buyerId,
         orderNo: this.editdata[0].orderNo,
         poDate: this.editdata[0].poDate,
-        shipDate: this.editdata[0].shipDate
+        shipDate: this.editdata[0].shipDate,
+        poStatus : this.editdata[0].po_status
       })
     })
   }
@@ -310,5 +315,15 @@ export class POMasterCreationComponent {
     //   window.location.reload()
     // })
   }
+
+  @ViewChildren('status') status!: QueryList<Dropdown>;
+statuslist() {
+  if (this.status) {
+    setTimeout(() => {
+    const status = this.status.toArray();
+      status[0].show();
+  })
+  }
+}
 
 }

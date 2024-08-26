@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, NgZone, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ApiService } from 'src/app/api.service';
 import { EventsapiService } from '../../eventsapi.service';
+import { Dropdown } from 'primeng/dropdown';
 
 @Component({
   selector: 'app-style-events',
@@ -17,28 +18,26 @@ export class StyleEventsComponent implements OnInit{
   StyleEventsEditForm:FormGroup
   styleDropdata: any;
   DummyData:any;
-  selectedEvent: any;
+  selectedEvent: any[] = [];
   styleEventData: any;
   gotEvents: any;
+  valueExceeded : boolean = false
+  changes : boolean[] = [];
 
 
-  constructor(private api : ApiService , private fb : FormBuilder, private api1 : EventsapiService){
+  constructor(private api : ApiService , private fb : FormBuilder, private api1 : EventsapiService, private cdr: ChangeDetectorRef, private ngZone: NgZone){
     this.StyleEventsNewForm = new FormGroup({
       id :  new FormControl(),
       style :  new FormControl(),
       styleId : new FormControl(),
-      serialNo :  new FormControl(),
-      eventname : new FormControl(),
-      data : new FormControl()
+      data : this.fb.array([])
     })
 
     this.StyleEventsEditForm = new FormGroup({
       id :  new FormControl(),
       style :  new FormControl(),
       styleId : new FormControl(),
-      serialNo :  new FormControl(),
-      eventname : new FormControl(),
-      data : new FormControl()
+      data : this.fb.array([])
     })
   }
 
@@ -50,7 +49,24 @@ ngOnInit(): void {
   this.api1.eventmaster().subscribe((res)=>{
     this.DummyData = res.data
   })
+}
 
+get rows(): FormArray {
+  return this.StyleEventsNewForm.get('data') as FormArray;
+}
+
+get rowsupdate(): FormArray {
+  return this.StyleEventsEditForm.get('data') as FormArray;
+}
+
+addRow(){
+  const details = this.fb.group({
+    id: [0],
+    serialNo: [],
+    eventname: [],
+    eventId : []
+  });
+  this.rows.push(details);
 }
 
 getstyleId() {
@@ -78,8 +94,9 @@ edit(id: any) {
     this.gotEvents = JSON.parse(res.data[0].events)
     this.selectedEvent = JSON.parse(res.data[0].events).map((event: any) => ({
       id: event.id,
-      events: event.events,
-      eventId: event.eventId
+      // serialNo : event.serialNo,
+      // eventname: event.events,
+      // eventId: event.eventId
     }));
 
     const eventArray = this.selectedEvent.map((event: any) => event.eventId);
@@ -87,9 +104,7 @@ edit(id: any) {
     this.StyleEventsEditForm.patchValue({
       id: res.data[0].id,
       style: res.data[0].style,
-      styleId: res.data[0].styleId,
-      serialNo: res.data[0].serialNo,
-      eventname: eventArray
+      styleId: res.data[0].styleId
     });
 
     this.getSelectedEventDetails();
@@ -104,7 +119,8 @@ getSelectedEventDetails() {
 
   this.selectedEvent = filteredEvents.map((event: any) => ({
     id: this.gotEvents.find((e: any) => e.eventId === event.id)?.id || 0, 
-    events: event.events,
+    serialNo : event.serialNo,
+    eventname: event.events,
     eventId: event.id
   }));
     this.StyleEventsEditForm.patchValue({
@@ -113,18 +129,20 @@ getSelectedEventDetails() {
 }
 
 
-getSelectedEvents() {
-  const selectedEventIds = this.StyleEventsNewForm.get('eventname')?.value || [];
-
+getSelectedEvents(index : any) {
+  const formArray = this.StyleEventsNewForm.get('data') as FormArray;
+  const row = formArray.at(index);
+  const selectedEventIds = row.get('eventname')?.value;
   const filteredEvents = this.DummyData
-    .filter((event: { id: number }) => selectedEventIds.includes(event.id));
+    .filter((event: { id: number }) => selectedEventIds == event.id);
 
-  this.selectedEvent = filteredEvents.map((event: any) => ({
-    id: 0,
-    events: event.events,
-    eventId: event.id
-  }));
-  console.log('DummyData:', this.DummyData);
+    
+const patch = filteredEvents.map((event: any) => ({
+  id: 0,
+  eventname: event.events,
+  eventId: event.id
+}));
+  this.selectedEvent.push(patch[0])
 
   this.StyleEventsNewForm.patchValue({
     data: this.selectedEvent
@@ -135,6 +153,29 @@ getSelectedEvents() {
 dataJson(data:any){
   return JSON.parse(data);
 }
+
+
+
+@ViewChildren('events') events!: QueryList<Dropdown>;
+eventslist(i: number): void {
+  try{
+  if (this.events) {
+    setTimeout(() => {
+      this.ngZone.run(() => {
+        const events = this.events.toArray();
+        if (events[i]) {
+          events[i].show();
+        }
+        this.cdr.detectChanges();
+      });
+    }, 0);
+  }
+} catch{
+
+}
+}
+
+
 
 save(){
   console.log(this.StyleEventsNewForm.value)
@@ -149,14 +190,14 @@ save(){
 }
 update(){
   console.log(this.StyleEventsEditForm.value)
-  this.api1.postStyleEventMaster(this.StyleEventsEditForm.value).subscribe((res)=>{
-    alert(res.message);
-    if(res.success == true){
-      this.filterset()
-      this.StyleEventsEditForm.reset()
-      this.styleeventmasteredit = false
-    }
-  })
+  // this.api1.postStyleEventMaster(this.StyleEventsEditForm.value).subscribe((res)=>{
+  //   alert(res.message);
+  //   if(res.success == true){
+  //     this.filterset()
+  //     this.StyleEventsEditForm.reset()
+  //     this.styleeventmasteredit = false
+  //   }
+  // })
 }
 
 }
