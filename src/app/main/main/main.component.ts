@@ -10,6 +10,7 @@ import { MainRoutingModule } from '../main-routing.module';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
+
   isActive = false;
   logo: boolean = true
   userName: string | null = sessionStorage.getItem('name');
@@ -20,7 +21,6 @@ export class MainComponent implements OnInit {
   constructor(private api: ApiService, private router: Router, private route: MainRoutingModule) {
 
   }
-
 
   ngOnInit(): void {
 

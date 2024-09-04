@@ -11,8 +11,8 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   // apiUrl = "https://tracker.seppam.com";
-  apiUrl = "http://localhost:2000";
-  // apiUrl= "http://20.244.3.174:3000";
+  // apiUrl = "http://localhost:2000";
+  apiUrl= "http://20.244.3.174:3000";
 
   
   token: any;
@@ -1176,6 +1176,10 @@ getStartDate(knitFty:string = '', machineDia : string = ''):Observable<any>{
     return this.http.get(this.getUrl() + `/workorderapi/yarn_type_BO`, this.getHeaders())
   }
 
+  getcolorId(color : any , buyer : any):Observable<any>{
+    return this.http.get(this.getUrl() + `/workorderapi/colorId?color=${color}&buyer=${buyer}&`, this.getHeaders())
+  }
+
   RejTypeLoss_BO(color:string =''):Observable<any>{
     return this.http.get(this.getUrl() + `/workorderapi/RejTypeLoss_BO?color=${color}`, this.getHeaders())
   }
@@ -1187,9 +1191,17 @@ getStartDate(knitFty:string = '', machineDia : string = ''):Observable<any>{
   ColorLoss_BO(color:string=''):Observable<any>{
     return this.http.get(this.getUrl() + `/workorderapi/ColorLoss_BO?color=${color}`, this.getHeaders())
   }
+
+  ColorLosses_BO(color:string, buyer : string):Observable<any>{
+    return this.http.get(this.getUrl() + `/workorderapi/ColorLosses_BO?color=${color}&buyer=${buyer}&`, this.getHeaders())
+  }
   
   DyeTypeMaster_BO(StyleId:string='' , dyeTypeId:string='' ):Observable<any>{
     return this.http.get(this.getUrl() + `/workorderapi/DyeTypeMaster_BO?StyleId=${StyleId}&dyeTypeId=${dyeTypeId}`, this.getHeaders())
+  }
+
+  getStyleId(style:any, buyer : any):Observable<any>{
+    return this.http.get(this.getUrl() + `/workorderapi/styleId?style=${style}&buyer=${buyer}`, this.getHeaders())
   }
 
   fabricType_BO(StyleId:string='' , fabTypeId:string=''):Observable<any>{

@@ -51,20 +51,19 @@
             <th>GSize</th>
             <th>FabDia</th>
             <th>FabGsm</th>
-            <th>KnitSL</th>
 
             <th>Yarn Type</th>
             <th>FabType</th>
             <th>Dye Type</th>
-
+<!-- 
             <th>SpinFty</th>
             <th>KnitFty</th>
-            <th>DyeinFty</th>
+            <th>DyeinFty</th> -->
 
             <th>OrderPcs</th>
             <th>OrderFOBRate</th>
-            <th>KnitRate</th>
-            <th>DyeRate</th>
+            <!-- <th>KnitRate</th>
+            <th>DyeRate</th> -->
 
             <th>YarnKg</th>
             <th>GreigeKg</th>
@@ -74,7 +73,7 @@
           </tr>
         </thead>
         <tbody formArrayName="data">
-          <tr *ngFor="let process of items.controls; let i=index" [formGroupName]="i" (mouseover)="sizedata(i)">
+          <tr *ngFor="let process of items.controls; let i=index" [formGroupName]="i">
             <td></td>
 
             <td>{{i+1}}</td>
@@ -112,7 +111,7 @@
             </td>
 
             <td><input style="width: 15vh;" formControlName="FSize" list="FSize" (change)="fsizedata(i , $event)"
-                class="form-control" (click)="calculateDiff()"></td>
+                class="form-control" (click)="calculateDiff(i)"></td>
             <datalist id="FSize">
               <option *ngFor="let data of this.concatSizeDta" value="{{data.concatSize}}">{{data.concatSize}}</option>
             </datalist>
@@ -138,8 +137,6 @@
               </datalist>
             </td>
 
-            <td><input style="width: 15vh;" formControlName="KnitSL" type="number" class="form-control"></td>
-
             <td><input style="width: 15vh;" formControlName="YarnType" list="YarnType" readonly class="form-control">
               <datalist id="YarnType">
                 <option *ngFor="let data of this.yarntypedta" value="{{data.yarntype}}">{{data.yarntype}}</option>
@@ -160,7 +157,7 @@
             </td>
 
 
-            <td><input style="width: 15vh;" formControlName="SpinFty" list="SpinFty" (input)="SpinFtyIdvalue($event,i)"
+            <!-- <td><input style="width: 15vh;" formControlName="SpinFty" list="SpinFty" (input)="SpinFtyIdvalue($event,i)"
                 class="form-control">
               <datalist id="SpinFty">
                 <option *ngFor="let data of this.spinftydta" value="{{data.SpinFtyName}}">{{data.SpinFtyName}}</option>
@@ -179,15 +176,15 @@
               <datalist id="dyeFty">
                 <option *ngFor="let data of this.dyeFtydta" value="{{data.dyeFty}}">{{data.dyeFty}}</option>
               </datalist>
-            </td>
+            </td> -->
 
-            <td><input style="width: 15vh;" formControlName="OrderPcs" class="form-control" (click)="sizedata(i)"></td>
+            <td><input style="width: 15vh;" formControlName="OrderPcs" class="form-control" (click)="sizedata(i)" (input)="sizedata(i)"></td>
 
             <td><input style="width: 15vh;" formControlName="OrderFOBRate" class="form-control"></td>
 
-            <td><input style="width: 15vh;" formControlName="KnitRate" class="form-control"></td>
+            <!-- <td><input style="width: 15vh;" formControlName="KnitRate" class="form-control"></td>
 
-            <td><input style="width: 15vh;" formControlName="DyeRate" class="form-control"></td>
+            <td><input style="width: 15vh;" formControlName="DyeRate" class="form-control"></td> -->
 
             <td><input style="width: 15vh;" formControlName="YarnKg" readonly class="form-control"></td>
 

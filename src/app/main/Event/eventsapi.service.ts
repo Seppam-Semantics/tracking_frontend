@@ -12,8 +12,8 @@ export class EventsapiService {
   constructor(private http: HttpClient) { }
 
   // apiUrl = "https://tracker.seppam.com";
-  apiUrl = "http://localhost:2000";
-  // apiUrl= "http://20.244.3.174:3000";
+  // apiUrl = "http://localhost:2000";
+  apiUrl= "http://20.244.3.174:3000";
 
   token: any;
   profilenames: any;

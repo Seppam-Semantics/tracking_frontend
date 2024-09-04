@@ -154,6 +154,7 @@ export class FabricRollData2Component implements OnInit {
   DyeinFty_Name: any;
   DyeinFtyId_Value: any;
   buyerorderform : FormGroup
+  colorId: string | undefined;
   // <!------------------------------------------------------------>
 
   constructor(private api: ApiService, private router: Router, private fb: FormBuilder) { 
@@ -249,20 +250,19 @@ export class FabricRollData2Component implements OnInit {
       this.woBuyervalue2 = res.workorders[0].buyer
       this.woorderNovalue2 = res.workorders[0].orderNo
 
-
       const EntryData = this.buyerorderform.get('data') as FormArray;
       EntryData.clear();
-      this.data3.forEach((dataItem: any) => {
+      this.data3.forEach((dataItem: any, index : any) => {
         const Details = this.fb.group({
           "id": [dataItem.id],
           "poid": [dataItem.poid],
           "polineId": [dataItem.polineId],
-          "Buyer": [dataItem.buyer],
-          "OrderNo": [dataItem.orderNo],
-          "Style": [dataItem.style],
-          "Color": [dataItem.color],
-          "Size": [dataItem.size],
-          "FSize": [dataItem.FSize],
+          "Buyer": [dataItem.buyer, Validators.required],
+          "OrderNo": [dataItem.orderNo, Validators.required],
+          "Style": [dataItem.style, Validators.required],
+          "Color": [dataItem.color, Validators.required],
+          "Size": [dataItem.size, Validators.required],
+          "FSize": [dataItem.FSize, Validators.required],
           "SizeId": [dataItem.sizeid],
           "FabType": [dataItem.fabType],
           "fabricTypeId": [dataItem.fabricTypeId],
@@ -270,11 +270,11 @@ export class FabricRollData2Component implements OnInit {
           "FabDiaId": [dataItem.fabdiaId],
           "FabGsm": [dataItem.fabGsm],
           "FabGsmId": [0],
-          "YarnKg": [dataItem.yarnKg],
-          "GreigeKg": [dataItem.greigeKg],
+          "YarnKg": [],
+          "GreigeKg": [],
           "YarnType": [dataItem.yarnType],
           "YarnTypeId": [dataItem.yarnTypeId],
-          "FinishKg": [dataItem.finishKg],
+          "FinishKg": [],
           "KnitSL": [dataItem.knitSL],
           "SpinFty": [dataItem.spinFty],
           "SpinFtyId": [dataItem.spinFtyId],
@@ -293,12 +293,109 @@ export class FabricRollData2Component implements OnInit {
           "status": [dataItem.status],
         });
         EntryData.push(Details);
+
+        this.syncfunction(index);
       });
-
-
-
-
     });
+  }
+
+  async syncfunction(index: any) {
+    // Fetch size-related data
+    const sizeData = await this.sizedata(index);
+    // Fetch fabric consumption data
+    const fabData = await this.fabConsumption(index);
+    // Calculate differences based on fetched data
+    await this.calculateDiff(index, fabData);
+  }
+async sizedata(index: any) {
+    const formArray1 = this.buyerorderform.get('data') as FormArray;
+    const row1 = formArray1.at(index);
+    this.Buyer_Value = row1.get('Buyer')?.value;
+    this.Order_Value = row1.get('OrderNo')?.value;
+    this.style_Value = row1.get('Style')?.value;
+    this.color_Value = row1.get('Color')?.value;
+    this.size_Value = row1.get('Size')?.value;
+
+
+    this.api.size_to_id(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, this.size_Value).subscribe((res) => {
+
+      this.polineId = res.sizeId[0]?.id
+
+      this.poid = res.sizeId[0]?.orderId
+      // this.FSizeFBC = res.sizeId[0]?.concatSize
+      this.FSizeFBCId = res.sizeId[0]?.concatSizeId
+      this.fabricTypeFBC = res.sizeId[0]?.fabricType
+      this.fabricTypeFBCId = res.sizeId[0]?.fabricTypeId
+      this.fabricGSMFBC = res.sizeId[0]?.fabricGSM
+      this.fabricGSMFBCId = res.sizeId[0]?.fabricGSMId
+      this.yarnTypeFBC = res.sizeId[0]?.yarnType
+      this.yarnTypeFBCId = res.sizeId[0]?.yarnTypeId
+      this.finishDiaFBC = res.sizeId[0]?.finishDia
+      this.finishDiaFBCId = res.sizeId[0]?.finishDiaId
+      this.styleIdDta = res.sizeId[0]?.styleId
+      this.dyeTypeFBC = res.sizeId[0]?.dyeType
+      this.dyeTypeFBCId = res.sizeId[0]?.dyeTypeId
+      this.colorId = res.sizeId[0]?.colorId ? res.sizeId[0]?.colorId : ''
+    })
+    await new Promise(resolve => setTimeout(resolve, 0));
+  }
+
+  async fabConsumption(index: any) {
+    const formArray1 = this.buyerorderform.get('data') as FormArray;
+    const row1 = formArray1.at(index);
+    this.style_Value = row1.get('Style')?.value;
+    this.size_Value = row1.get('Size')?.value;
+  
+    return new Promise(resolve => {
+      this.api.f_size_BO(this.style_Value, this.size_Value).subscribe((res) => {
+        const finishfabConsumptionDta = res.finishfabConsumption[0]?.finishfabConsumption || 0;
+  
+        this.api.DyeTypeMaster_BO(this.styleIdDta, this.dyeTypeFBCId).subscribe((dyeRes) => {
+          const DyeTypeLossDta = dyeRes.DyeTypeLoss[0]?.dyepl;
+  
+          this.api.fabricType_BO(this.styleIdDta, this.fabricTypeFBCId).subscribe((fabRes) => {
+            const fabTypeLossDta = fabRes.FabricTypeLoss[0]?.fabpl;
+  
+            this.api.RejTypeLoss_BO(this.colorId).subscribe((rejRes) => {
+              const rejloss = rejRes.Colorlosses[0]?.losses;
+  
+              this.api.PODetailsLoss_BO(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, this.size_Value).subscribe((poRes) => {
+                const PODetailsLossValue = poRes.Colorlosses[0]?.popl;
+
+                this.api.ColorLosses_BO(this.color_Value, this.Buyer_Value).subscribe((res) => {
+                  const DyeProcessLossValue = res.DyeProcessLoss[0].dye_process_loss
+                  
+                resolve({
+                  finishfabConsumptionDta,
+                  DyeTypeLossDta,
+                  fabTypeLossDta,
+                  rejloss,
+                  PODetailsLossValue,
+                  DyeProcessLossValue
+                });
+              });
+            });
+            });
+          });
+        });
+      });
+    });
+  }
+  
+  async calculateDiff(index: any, fabData: any) {
+    const formArray = this.buyerorderform.get('data') as FormArray;
+    const row = formArray.at(index);
+    const OrderPcsValue = parseFloat(row.get('OrderPcs')?.value) || 0;
+  
+    const FinishKg1 = ((fabData.finishfabConsumptionDta * OrderPcsValue) / 12 ) * ((100 + fabData.rejloss + fabData.PODetailsLossValue) / 100) ;
+    const FinishKg2 = FinishKg1 * ((100 + fabData.DyeProcessLossValue + fabData.fabTypeLossDta + fabData.DyeTypeLossDta) / 100);
+  
+    console.log(fabData.DyeProcessLossValue, fabData.fabTypeLossDta, fabData.DyeTypeLossDta)
+
+    const FinishKg = parseFloat(FinishKg1.toFixed(2));
+    const GreigeKg = parseFloat(FinishKg2.toFixed(2));
+    const YarnKg = parseFloat(FinishKg2.toFixed(2));
+    row.patchValue({ FinishKg, GreigeKg, YarnKg });
   }
 
   woByBuyer() {
@@ -585,6 +682,21 @@ export class FabricRollData2Component implements OnInit {
     return;
   }
 
+sizeOrderWise(size : any[]){
+const standardOrder = ['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL', '4XL', 'All'];
+const alternateOrder = ['1/2', '3/4', '5/6', '7/8', '9/10'];
+
+let data = size
+
+const containsAlternateSizes = data.some((item : any) => alternateOrder.includes(item.size));
+const orderToUse = containsAlternateSizes ? alternateOrder : standardOrder;
+
+data.sort((a : any, b : any) => {
+  return orderToUse.indexOf(a.size) - orderToUse.indexOf(b.size);
+});
+return data ;
+}
+
   delete(id: any) {
     Swal.fire({
       title: "Are you sure?",
@@ -608,29 +720,7 @@ export class FabricRollData2Component implements OnInit {
       }
     });
   }
-  knite() {
-    this.router.navigate(['/main/Knit-Report'])
-  }
-  Dye() {
-    this.router.navigate(['/main/Dye-Report'])
-  }
-  yarn() {
-    this.router.navigate(['/main/Yarn-Report'])
-  }
-  fabricEntry() {
-    this.router.navigate(['/main/WorkorderData'])
-  }
 
-  FBReport() {
-    this.router.navigate(['/main/FBReport'])
-  }
-
-  workorder() {
-    this.router.navigate(['/main/WorkorderData'])
-  }
-  Upload() {
-    this.router.navigate(['/main/WorkorderData'])
-  }
 
   fabricreport(data: any) {
     sessionStorage.setItem('FabricEntrybuyer', data.buyer)
@@ -701,8 +791,8 @@ export class FabricRollData2Component implements OnInit {
 
     this.colordata()
     // this.color_Value = event.target.value
-    this.RejTypeLoss(index)
-    this.colorprocessloss(index)
+    // this.RejTypeLoss(index)
+    // this.colorprocessloss(index)
   }
 
   colordata() {
@@ -722,8 +812,8 @@ export class FabricRollData2Component implements OnInit {
     this.size_Value = row.get('Size')?.value;
 
     // this.size_Value = event.target.value
-    this.sizedata(index)
-    this.PODetailsLoss(index)
+    // this.sizedata(index)
+    // this.PODetailsLoss(index)
   }
 
   SpinFtyIdvalue(event: any, index: any) {
@@ -774,7 +864,6 @@ export class FabricRollData2Component implements OnInit {
   RejTypeLoss(index: any) {
     this.api.RejTypeLoss_BO(this.color_Value).subscribe((res) => {
       this.rejloss = res.Colorlosses[0].losses
-
       const formArray = this.buyerorderform.get('data') as FormArray;
       const row = formArray.at(index);
       row.get('rejlosses')?.setValue(this.rejloss);
@@ -798,66 +887,9 @@ export class FabricRollData2Component implements OnInit {
     })
   }
 
-  sizedata(index: any) {
-    this.api.size_to_id(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, this.size_Value).subscribe((res) => {
 
-      this.polineId = res.sizeId[0]?.id
-
-      this.poid = res.sizeId[0]?.orderId
-      this.FSizeFBC = res.sizeId[0]?.concatSize
-      this.FSizeFBCId = res.sizeId[0]?.concatSizeId
-      this.fabricTypeFBC = res.sizeId[0]?.fabricType
-      this.fabricTypeFBCId = res.sizeId[0]?.fabricTypeId
-      this.fabricGSMFBC = res.sizeId[0]?.fabricGSM
-      this.fabricGSMFBCId = res.sizeId[0]?.fabricGSMId
-      this.yarnTypeFBC = res.sizeId[0]?.yarnType
-      this.yarnTypeFBCId = res.sizeId[0]?.yarnTypeId
-      this.finishDiaFBC = res.sizeId[0]?.finishDia
-      this.finishDiaFBCId = res.sizeId[0]?.finishDiaId
-      this.styleIdDta = res.sizeId[0]?.styleId
-      this.dyeTypeFBC = res.sizeId[0]?.dyeType
-      this.dyeTypeFBCId = res.sizeId[0]?.dyeTypeId
-
-
-
-      this.api.DyeTypeMaster_BO(this.styleIdDta, this.dyeTypeFBCId).subscribe((res) => {
-        this.DyeTypeLossDta = res.DyeTypeLoss[0].dyepl
-      })
-
-      this.api.fabricType_BO(this.styleIdDta, this.fabricTypeFBCId).subscribe((res) => {
-        this.fabTypeLossDta = res.FabricTypeLoss[0].fabpl
-      })
-
-      const formArray = this.buyerorderform.get('data') as FormArray;
-      const row = formArray.at(index);
-      row.get('polineId')?.setValue(this.polineId);
-      row.get('poid')?.setValue(this.poid);
-      row.get('FSize')?.setValue(this.FSizeFBC);
-      row.get('FabType')?.setValue(this.fabricTypeFBC);
-      row.get('fabricTypeId')?.setValue(this.fabricTypeFBCId)
-      row.get('FabGsm')?.setValue(this.fabricGSMFBC);
-      row.get('YarnType')?.setValue(this.yarnTypeFBC);
-      row.get('YarnTypeId')?.setValue(this.yarnTypeFBCId)
-      row.get('FabDia')?.setValue(this.finishDiaFBC);
-      row.get('dyetype')?.setValue(this.dyeTypeFBC);
-      row.get('dyeTypeId')?.setValue(this.fabricTypeFBCId)
-      row.get('DyeTypeMaster')?.setValue(this.DyeTypeLossDta);
-      row.get('fabricType')?.setValue(this.fabTypeLossDta);
-      row.get('SizeId')?.setValue(this.FSizeFBCId);
-      row.get('FabDiaId')?.setValue(this.finishDiaFBCId);
-
-    })
-
-    this.api.f_size_BO(this.style_Value, this.size_Value).subscribe((res) => {
-      this.fsizeDta = res.fsize
-      this.fabdiaDta = res.FabDia
-      this.fabGsmDta = res.FabGsm
-
-      this.finishfabConsumptionDta = res.finishfabConsumption[0].finishfabConsumption
-      const formArray = this.buyerorderform.get('data') as FormArray;
-      const row = formArray.at(index);
-      row.get('FabricConsumption')?.setValue(this.finishfabConsumptionDta);
-    })
+  get items() {
+    return this.buyerorderform.get("data") as FormArray;
   }
 
   fsizevalue(event: any) {
@@ -872,133 +904,52 @@ export class FabricRollData2Component implements OnInit {
     this.FabGsm_Value = event.target.value
   }
 
-  calculateDiff() {
-    this.items.controls.forEach((control: AbstractControl) => {
-      const row = control as FormGroup;
-      if (row instanceof FormGroup) {
-        const OrderPcsValue = parseFloat(row.get('OrderPcs')?.value) || 0;
-
-
-        const FinishKg1 = (this.finishDiaFBC - this.finishfabConsumptionDta) * OrderPcsValue / (100 - (this.rejloss) - (this.PODetailsLossValue));
-        const FinishKg2 = FinishKg1 / (100 - this.DyeProcessLossValue - this.DyeTypeLossDta - this.fabTypeLossDta)
-
-        const FinishKg = parseFloat(FinishKg1.toFixed(2));
-        const GreigeKg = parseFloat(FinishKg2.toFixed(2));
-        const YarnKg = parseFloat(FinishKg2.toFixed(2));
-        row.patchValue({ FinishKg, GreigeKg, YarnKg });
-      }
-    });
-  }
-
-
-  get items() {
-    return this.buyerorderform.get("data") as FormArray;
-  }
-  add1button() {
-    const row = this.fb.group({
-      "id": [''],
-      "poid": [''],
-      "polineId": [''],
-      "Buyer": [''],
-      "OrderNo": [''],
-      "Style": [''],
-      "Color": [''],
-      "Size": [''],
-      "FSize": [''],
-      "SizeId": ['' ],
-      "FabType": [''],
-      "fabricTypeId": [''],
-      "FabDia": [''],
-      "FabDiaId": [''],
-      "FabGsm": [''],
-      "FabGsmId": [''],
-      "YarnKg": [''],
-      "GreigeKg": [''],
-      "YarnType": [''],
-      "YarnTypeId": [''],
-      "FinishKg": [''],
-      "KnitSL": [''],
-      "SpinFty": [''],
-      "SpinFtyId": [''],
-      "KnitFty": [''],
-      "KnitFtyId": [''],
-      "DyeinFty": [''],
-      "DyeinFtyId": [''],
-
-      "dyetype": [''],
-      "dyeTypeId": [''],
-
-      "OrderPcs": [''],
-      "OrderFOBRate":[''],
-      "KnitRate": [''],
-      "DyeRate": ['']
-
-
-    });
-    this.items.push(row);
-
-    row.get('OrderPcs')?.valueChanges.subscribe(() => {
-      this.calculateDiff();
-    });
-  }
-
 
   woupdatesubmit() {
-    // console.log(this.buyerorderform.value)
-    this.api.postworkorder(this.buyerorderform.value).subscribe((res) => {
-
-      Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: res.message,
-        showConfirmButton: false,
-        timer: 1500
-      });
-
+    console.log(this.buyerorderform.value)
+    if (this.buyerorderform.valid) {
+      this.api.postworkorder(this.buyerorderform.value).subscribe((res) => {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: res.message,
+          showConfirmButton: false,
+          timer: 1500
+        });
         this.visible = false;
         this.woByBuyer();
         this.loadworkorder();
-    });
-    // if (this.buyerorderform.valid) {
-    //     this.api.postworkorder(this.buyerorderform.value).subscribe((res) => {
-
-    //       Swal.fire({
-    //         position: "top-end",
-    //         icon: "success",
-    //         title: res.message,
-    //         showConfirmButton: false,
-    //         timer: 1500
-    //       });
-
-    //         this.visible = false;
-    //         this.woByBuyer();
-    //         this.loadworkorder();
-    //     });
-    // } else {
-    //     Swal.fire({
-    //       icon: "error",
-    //       title: "Oops...",
-    //       text: "Missing SizeId",
-    //     });
-    // }
-}
-
-  save() {
-
-    this.api.postworkorder(this.buyerorderform.value.data).subscribe((res) => {
-      if (res.success) {
-        alert("Your work order details have been saved....!!!!")
-        window.location.reload();
-      }
-      else {
-        alert("Error while saving...!!!")
-      }
-    })
+      });
+    } else {
+      alert("Some details missing....!!!")
+    }
   }
 
   Delete(index: number) {
     this.items.removeAt(index);
   }
 
+  knite() {
+    this.router.navigate(['/main/Knit-Report'])
+  }
+  Dye() {
+    this.router.navigate(['/main/Dye-Report'])
+  }
+  yarn() {
+    this.router.navigate(['/main/Yarn-Report'])
+  }
+  fabricEntry() {
+    this.router.navigate(['/main/WorkorderData'])
+  }
 
+  FBReport() {
+    this.router.navigate(['/main/FBReport'])
+  }
+
+  workorder() {
+    this.router.navigate(['/main/WorkorderData'])
+  }
+  Upload() {
+    this.router.navigate(['/main/WorkorderData'])
+  }
 }
