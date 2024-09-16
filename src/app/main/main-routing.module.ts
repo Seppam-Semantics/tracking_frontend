@@ -68,6 +68,7 @@ import { LineAllocationUpdateComponent } from './Garments/Report/line-allocation
 import { EventMasterRootComponent } from './Event/Master/event-master-root/event-master-root.component';
 import { TnaEventUpdateComponent } from './Event/Update/tna-event-update/tna-event-update.component';
 import { TnaListsComponent } from './Event/Report/tna-lists/tna-lists.component';
+import { YarnReceiptComponent } from './Transaction/yarn-entry/yarn-receipt/yarn-receipt/yarn-receipt.component';
 
 const routes: Routes = [
   {path:'', component: AppComponent},
@@ -97,6 +98,7 @@ const routes: Routes = [
   {path:"Yarn-Report" , component:YarnReportComponent},
   {path:"yarn-header", component:YarnHeaderComponent},
   {path:"yarn-transcation", component:YarnTranscationComponent},
+  {path : "yarn-receipt", component : YarnReceiptComponent},
   {path:"dye-delivery" , component:DyeDeliveryComponent},
   {path:"knit-delivery" , component:KnitDeliveryComponent},
   {path:"Dye-DelEntry" , component:DyeDelEntryComponent},

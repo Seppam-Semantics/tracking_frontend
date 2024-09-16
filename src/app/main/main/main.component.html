@@ -14,9 +14,13 @@
       Home
     </button>
 
-    <button mat-button class="menu" (click)="yarn()">
-      YarnEntry
+    <button mat-button class="menu" [matMenuTriggerFor]="yarnmenu">
+      Yarn Entry
     </button>
+    <mat-menu #yarnmenu="matMenu">
+      <button mat-menu-item (click)="yarn()">Yarn Entry</button>
+      <button mat-menu-item (click)="yarnReceipt()">Yarn Receipt</button>
+    </mat-menu>
 
 
     <button mat-button class="menu" [matMenuTriggerFor]="menu2">

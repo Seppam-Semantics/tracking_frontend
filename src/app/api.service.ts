@@ -80,6 +80,10 @@ export class ApiService {
     return this.http.post(this.getUrl() + `/workorderapi/workorder`, data, this.getHeaders())
   }
 
+  getYarnKg(buyer : any, orderNo : any, style : any, color : any): Observable<any> {
+    return this.http.get(this.getUrl() + `/workorderapi/get-yarnKg?buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&`, this.getHeaders())
+  }
+
   getfabricdetails(id: any, entry: any): Observable<any> {
     return this.http.get(this.getUrl() + `/fabricrollapi/fabric-entrys?id=${id}&entry=${entry}&buyer=&orderNo=&style=&color=&size=`, this.getHeaders());
   }
@@ -420,6 +424,42 @@ export class ApiService {
 
   getSingleYarnData(id: any): Observable<any> {
     return this.http.get(this.getUrl() + `/yarnapi/yarn/${id}`, this.getHeaders())
+  }
+
+  getYarnFactory(): Observable<any> {
+    return this.http.get(this.getUrl() + `/yarnapi/yarn-factory`, this.getHeaders())
+  }
+
+  get_LcNo(factory : any):Observable<any>{
+    return this.http.get(this.getUrl() + `/yarnapi/yarn-factory-lcNo?factory=${factory}&`, this.getHeaders())
+  }
+  
+  get_yarnType(factory : any, lcNo : any):Observable<any>{
+    return this.http.get(this.getUrl() + `/yarnapi/yarn-factory-yarnType?factory=${factory}&lcNo=${lcNo}`, this.getHeaders())
+  }
+  
+  get_yarn_buyer(factory : any, lcNo : any, yarnType : any):Observable<any>{
+    return this.http.get(this.getUrl() + `/yarnapi/yarn-factory-buyer?factory=${factory}&lcNo=${lcNo}&yarnType=${yarnType}&`, this.getHeaders())
+  }
+
+  get_yarn_order(factory : any, lcNo : any, yarnType : any, buyer : any):Observable<any>{
+    return this.http.get(this.getUrl() + `/yarnapi/yarn-factory-order?factory=${factory}&lcNo=${lcNo}&yarnType=${yarnType}&buyer=${buyer}&`, this.getHeaders())
+  }
+
+  get_yarn_style(factory : any, lcNo : any, yarnType : any, buyer : any, orderNo : any):Observable<any>{
+    return this.http.get(this.getUrl() + `/yarnapi/yarn-factory-style?factory=${factory}&lcNo=${lcNo}&yarnType=${yarnType}&buyer=${buyer}&orderNo=${orderNo}&`, this.getHeaders())
+  }
+
+  get_yarn_color(factory : any, lcNo : any, yarnType : any, buyer : any, orderNo : any, style:any):Observable<any>{
+    return this.http.get(this.getUrl() + `/yarnapi/yarn-factory-color?factory=${factory}&lcNo=${lcNo}&yarnType=${yarnType}&buyer=${buyer}&orderNo=${orderNo}&style=${style}`, this.getHeaders())
+  }
+
+  get_yarn_lotNo(factory : any, lcNo : any, yarnType : any, buyer : any, orderNo : any, style:any, color : any):Observable<any>{
+    return this.http.get(this.getUrl() + `/yarnapi/yarn-factory-lotNo?factory=${factory}&lcNo=${lcNo}&yarnType=${yarnType}&buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}`, this.getHeaders())
+  }
+
+  getYarnReceipt(factory:any, lcNo : any, yarntype : any, buyer : any, orderNo : any, style : any , color : any, lotNo : any):Observable<any>{
+    return this.http.get(this.getUrl() + `/yarnapi/yarnreceipt?factory=${factory}&lcNo=${lcNo}&yarnType=${yarntype}&buyer=${buyer}&orderNo=${orderNo}&style=${style}&color=${color}&lotNo=${lotNo}`, this.getHeaders())
   }
   //-------------------------------------------------------------------
 
@@ -1614,4 +1654,7 @@ getStartDate(knitFty:string = '', machineDia : string = ''):Observable<any>{
 
         //-------------------------------------------- Line Allocation Master [End]------------------------------------------------------
 
+        getManPower():Observable<any>{
+          return this.http.get(`http://20.244.3.174:4000/api/getOrder`)
+        }
       }

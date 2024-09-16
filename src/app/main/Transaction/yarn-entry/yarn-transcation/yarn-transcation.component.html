@@ -161,10 +161,10 @@
             [(visible)]="orderAllocationModal" [style]="{width: '90vw'}" [contentStyle]="{height: '90vh'}">
             <div>
                 <mat-toolbar style="display: contents;">
-                    <div style="display: flex; justify-content: center; background-color: darkgray;" *ngIf="!loading3">
+                    <div style="display: flex; justify-content: center; background-color: darkgray;" *ngIf="loading3">
                         <button class="btn btn-primary" (click)="OrderAllocationSave()">Update</button>
                     </div>
-                    <div style="display: flex; justify-content: center;" *ngIf="loading3">
+                    <div style="display: flex; justify-content: center;" *ngIf="!loading3">
                         <button mat-raised-button color="primary" style="margin-top: 3%;">
                             <div class="loader"></div>
                         </button>
@@ -222,7 +222,7 @@
                                     </datalist>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" formControlName="colour" list="color">
+                                    <input type="text" class="form-control" formControlName="colour" list="color" (input)="getYarnTotalKg(i)">
                                     <datalist id="color">
                                         <option *ngFor="let color of this.colorlist" value="{{color.color}}">
                                             {{color.color}}</option>
@@ -236,7 +236,8 @@
                                     </datalist>
                                 </td>
 
-                                <td><input type="number" class="form-control" formControlName="allocatedYarnKgs"></td>
+                                <td><input type="number" class="form-control" formControlName="allocatedYarnKgs" (input)="getYarnTotalKg(i)"
+                                    [ngClass]="{'is-invalid':this.toleranceValid[i]}"></td>
                                 <td><input type="text" class="form-control" formControlName="unallocatedYarnKgs"
                                         readonly></td>
                                 <td><button class="btn btn-danger" (click)="OrderAllocationDelete(i)">Delete</button>
@@ -309,7 +310,7 @@
                             <th>Lot No</th>
                             <th>Allocated Yarn Kgs</th>
                             <th>Unallocated Yarn Kgs</th>
-                            <th>Receipt</th>
+                            <!-- <th>Receipt</th> -->
                         </tr>
                     </thead>
 
@@ -324,8 +325,8 @@
                             <td>{{order.lotNo}}</td>
                             <td>{{order.allocatedYarnKgs}}</td>
                             <td>{{order.unallocatedYarnKgs}}</td>
-                            <td><button class="btn btn-primary" data-toggle="modal" data-target="#receiptModal"
-                                    (click)="orderId(i)">Receipt</button></td>
+                            <!-- <td><button class="btn btn-primary" data-toggle="modal" data-target="#receiptModal"
+                                    (click)="orderId(i)">Receipt</button></td> -->
                         </tr>
                     </tbody>
                 </table>

@@ -37,11 +37,16 @@ export class KnitWorkOrderCreationComponent implements OnInit {
   knitValue: any;
   yarnKg: any;
   valueExceeded : boolean = false;
-  ngOnInit(): void { this.buyername(), this.factoryName() }
+
+
+  ngOnInit(): void { 
+    this.buyername(), 
+    this.factoryName() 
+  }
+  
   constructor(private fb: FormBuilder, private api: ApiService , private router : Router) {
 
-    this.KnitWorkOrderFrom = new FormGroup({
-     
+    this.KnitWorkOrderFrom = new FormGroup({     
       "buyer": new FormControl(''),
       "orderNo": new FormControl(''),
       "knitfty": new FormControl(''),
@@ -63,9 +68,13 @@ export class KnitWorkOrderCreationComponent implements OnInit {
   }
 
   factoryName() {
-    this.api.knitfty_name().subscribe((res) => {
-      this.ftyName = res.factorys
+    this.api.KnitFty_master_Fillter_Data().subscribe((res)=>{
+      this.ftyName = res.knitFty
+      console.log(res)
     })
+    // this.api.knitfty_name().subscribe((res) => {
+    //   this.ftyName = res.factorys
+    // })
   }
   getBuyerValue(event: any) {
     this.buyerName = event.target.value;

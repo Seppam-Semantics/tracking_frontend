@@ -49,9 +49,14 @@ export class YarnHeaderComponent implements OnInit{
 
   ngOnInit(): void {
 
-    this.api.getallSpinfty().subscribe((res)=>{
-      this.spinfty = res.buyers
+    this.api.spinFty_master_Fillter_Data().subscribe((res)=>{
+      this.spinfty = res.spinFty
+      console.log(res)
     })
+
+    // this.api.getallSpinfty().subscribe((res)=>{
+    //   this.spinfty = res.buyers
+    // })
 
    this.api.getAllYarn().subscribe((res)=>{
     this.allYarn = res.yarn

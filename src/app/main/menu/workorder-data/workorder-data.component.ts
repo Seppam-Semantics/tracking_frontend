@@ -16,7 +16,7 @@ export class WorkorderDataComponent implements OnInit {
   Buyer_Value: any;
   buyersDta: any;
   orderNoDta: any;
-  Order_Value: any;
+  Order_Value: string = '';
   styleDta: any;
   style_Value: any;
   colorDta: any;
@@ -112,19 +112,14 @@ export class WorkorderDataComponent implements OnInit {
   constructor(private api: ApiService, private router: Router, private fb: FormBuilder) { }
 
   buyervalue() {
-    // const formArray = this.buyerorderform.get('data') as FormArray;
-    // const row = formArray.at(index);
-    // this.Buyer_Value = row.get('Buyer')?.value;
-
     this.buyerdata()
-
   }
+
   ordervalue(index: any) {
-    // this.Order_Value = event.target.value
     const formArray = this.buyerorderform.get('data') as FormArray;
     const row = formArray.at(index);
     this.Buyer_Value = this.buyerorderform.get('Buyer')?.value;
-    this.Order_Value = this.buyerorderform.get('OrderNo')?.value;
+    this.Order_Value = this.buyerorderform.get('OrderNo')?.value ?? '';
     this.orderdata()
   }
 
@@ -137,9 +132,8 @@ export class WorkorderDataComponent implements OnInit {
   }
 
   orderdata() {
-
     this.Buyer_Value = this.buyerorderform.get('Buyer')?.value;
-    this.Order_Value = this.buyerorderform.get('OrderNo')?.value;
+    this.Order_Value = this.buyerorderform.get('OrderNo')?.value ?? '';
     this.api.order_to_style(this.Buyer_Value, this.Order_Value).subscribe((res) => {
       this.styleDta = res.style
     })
@@ -149,9 +143,8 @@ export class WorkorderDataComponent implements OnInit {
     const formArray = this.buyerorderform.get('data') as FormArray;
     const row = formArray.at(index);
     this.Buyer_Value = this.buyerorderform.get('Buyer')?.value;
-    this.Order_Value = this.buyerorderform.get('OrderNo')?.value;
+    this.Order_Value = this.buyerorderform.get('OrderNo')?.value ?? '';
     this.style_Value = row.get('Style')?.value;
-
     this.styledata()
   }
 
@@ -161,7 +154,6 @@ export class WorkorderDataComponent implements OnInit {
     })
     this.api.Gsize_BO(this.style_Value).subscribe((res) => {
       this.concatSizeDta = res.Gsize
-      // console.log(this.concatSizeDta)
     })
   }
 
@@ -169,23 +161,11 @@ export class WorkorderDataComponent implements OnInit {
     const formArray = this.buyerorderform.get('data') as FormArray;
     const row = formArray.at(index);
     this.Buyer_Value = this.buyerorderform.get('Buyer')?.value;
-    this.Order_Value = this.buyerorderform.get('OrderNo')?.value;
+    this.Order_Value = this.buyerorderform.get('OrderNo')?.value ?? '';
     this.style_Value = row.get('Style')?.value;
     this.color_Value = row.get('Color')?.value;
+ }
 
-    this.colordata()
-    // this.color_Value = event.target.value
-    // this.RejTypeLoss(index)
-    this.colorprocessloss(index)
-  }
-
-
-  colordata() {
-    // this.api.color_to_size(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value).subscribe((res) => {
-    //   this.sizeDta = res.size
-    // })
-
-  }
 
   SpinFtyIdvalue(event: any, index: any) {
     this.SpinFty_Name = event.target.value
@@ -232,45 +212,6 @@ export class WorkorderDataComponent implements OnInit {
     }
   }
 
-  RejTypeLoss(index: any) {
-    this.api.RejTypeLoss_BO(this.colorId).subscribe((res) => {
-
-      this.rejloss = res.Colorlosses[0].losses ? res.Colorlosses[0].losses : 0
-
-      const formArray = this.buyerorderform.get('data') as FormArray;
-      const row = formArray.at(index);
-      row.get('rejlosses')?.setValue(this.rejloss);
-    })
-  }
-
-  PODetailsLoss(index: any) {
-    const Array = this.buyerorderform.get('data') as FormArray;
-    const row1 = Array.at(index);
-    this.Buyer_Value = this.buyerorderform.get('Buyer')?.value;
-    this.Order_Value = this.buyerorderform.get('OrderNo')?.value;
-    this.style_Value = row1.get('Style')?.value;
-    this.color_Value = row1.get('Color')?.value;
-    this.size_Value = row1.get('Size')?.value;
-
-    this.api.PODetailsLoss_BO(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, this.sizeDta).subscribe((res) => {
-      if(res.success){
-      this.PODetailsLossValue = res.Colorlosses[0].popl ? res.Colorlosses[0].popl : 0
-      const formArray = this.buyerorderform.get('data') as FormArray;
-      const row = formArray.at(index);
-      row.get('PODetailsLoss')?.setValue(this.PODetailsLossValue);
-      }
-      else{
-        this.PODetailsLossValue = 0
-      }
-    })
-  }
-
-  colorprocessloss(index: any) {
-    this.api.ColorLoss_BO(this.colorId).subscribe((res) => {
-      this.DyeProcessLossValue = res.DyeProcessLoss[0].DyeProcessLoss ? res.DyeProcessLoss[0].DyeProcessLoss : 0
-    })
-  }
-
 
   fsizedata(index: any , event:any) {
     try{
@@ -294,12 +235,12 @@ export class WorkorderDataComponent implements OnInit {
     const formArray = this.buyerorderform.get('data') as FormArray;
     const row = formArray.at(index);
     this.Buyer_Value = this.buyerorderform.get('Buyer')?.value;
-    this.Order_Value = this.buyerorderform.get('OrderNo')?.value;
+    this.Order_Value = this.buyerorderform.get('OrderNo')?.value ?? '';
     this.style_Value = row.get('Style')?.value;
     this.color_Value = row.get('Color')?.value;
     this.size_Value = size
     this.sizedata(index)
-    this.PODetailsLoss(index)
+    // this.PODetailsLoss(index)
     }
     catch{}
   }
@@ -313,14 +254,41 @@ export class WorkorderDataComponent implements OnInit {
     const Array = this.buyerorderform.get('data') as FormArray;
     const row1 = Array.at(index);
     this.Buyer_Value = this.buyerorderform.get('Buyer')?.value;
-    this.Order_Value = this.buyerorderform.get('OrderNo')?.value;
+    this.Order_Value = JSON.stringify(this.buyerorderform.get('OrderNo')?.value ?? '');
     this.style_Value = row1.get('Style')?.value;
     this.color_Value = row1.get('Color')?.value;
     this.size_Value = row1.get('Size')?.value;
 
+    // console.log(this.Buyer_Value , this.Order_Value , this.style_Value , this.color_Value , this.size_Value)
+
 if(this.Buyer_Value && this.Order_Value && this.style_Value && this.color_Value && this.size_Value){
 
     this.api.size_to_id(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, this.size_Value).subscribe((res) => {
+      console.log(res);
+      try{
+        this.DyeTypeLossDta = res.DyeTypeLoss[0].dyepl ? res.DyeTypeLoss[0].dyepl : 0
+      }catch{}
+      try{
+        this.DyeProcessLossValue = res.DyeProcessLoss[0].dye_process_loss ? res.DyeProcessLoss[0].dye_process_loss : 0
+      }catch{}
+      try{
+        this.fabTypeLossDta = res.FabricTypeLoss[0].fabpl ? res.FabricTypeLoss[0].fabpl : 0
+      }catch{}
+      try{
+        this.finishfabConsumptionDta = res.finishfabConsumption[0].finishfabConsumption ? res.finishfabConsumption[0].finishfabConsumption : 0;
+      }catch{}
+      try{
+        this.PODetailsLossValue = res.podetailsLoss[0].popl ? res.podetailsLoss[0].popl : 0;
+      }catch{}
+      try{
+        this.rejloss = res.Colorlosses[0].losses ? res.Colorlosses[0].losses : 0
+      }catch{}
+      
+      try{
+        this.colorId = res.colorId[0].id
+      }catch{}
+      
+
       if(res.success){
       this.OrderFOBRate	 = res.sizeId[0]?.poRate ? res.sizeId[0]?.poRate : ''  
       this.OrderPcs	 = res.sizeId[0]?.quantity ? res.sizeId[0]?.quantity : ''
@@ -339,19 +307,6 @@ if(this.Buyer_Value && this.Order_Value && this.style_Value && this.color_Value 
       this.styleIdDta = res.sizeId[0]?.styleId ? res.sizeId[0]?.styleId : ''
       this.dyeTypeFBC = res.sizeId[0]?.dyeType ? res.sizeId[0]?.dyeType : ''
       this.dyeTypeFBCId = res.sizeId[0]?.dyeTypeId ? res.sizeId[0]?.dyeTypeId : ''
-
-      this.api.ColorLosses_BO(this.color_Value, this.Buyer_Value).subscribe((res) => {
-        this.DyeProcessLossValue = res.DyeProcessLoss[0].dye_process_loss ? res.DyeProcessLoss[0].dye_process_loss : 0
-        row1.get('DyeProcessLoss')?.setValue(this.DyeProcessLossValue)
-      })
-      this.api.DyeTypeMaster_BO(this.styleIdDta, this.dyeTypeFBCId).subscribe((res) => {
-        this.DyeTypeLossDta = res.DyeTypeLoss[0].dyepl ? res.DyeTypeLoss[0].dyepl : 0
-      })
-
-      this.api.fabricType_BO(this.styleIdDta, this.fabricTypeFBCId).subscribe((res) => {
-        this.fabTypeLossDta = res.FabricTypeLoss[0].fabpl ? res.FabricTypeLoss[0].fabpl : 0
-      })
-
 
       const formArray = this.buyerorderform.get('data') as FormArray;
       const row = formArray.at(index);
@@ -373,43 +328,21 @@ if(this.Buyer_Value && this.Order_Value && this.style_Value && this.color_Value 
 
       row.get('OrderPcs')?.setValue(this.OrderPcs);
       row.get('OrderFOBRate')?.setValue(this.OrderFOBRate);
+      const OrderPcsValue = parseFloat(row.get('OrderPcs')?.value) || 0;
+        const FinishKg1 = (( (this.finishfabConsumptionDta * OrderPcsValue) /12) * ((100 + this.rejloss + this.PODetailsLossValue)/100))
+
+        // console.log(this.DyeProcessLossValue,   this.fabTypeLossDta, this.DyeTypeLossDta)
+        const FinishKg2 = FinishKg1 * ((100 + this.DyeProcessLossValue + parseInt(this.fabTypeLossDta) + this.DyeTypeLossDta )/100)
+        const FinishKg = parseFloat(FinishKg1.toFixed(2));
+        const GreigeKg = parseFloat(FinishKg2.toFixed(2));
+        const YarnKg = parseFloat(FinishKg2.toFixed(2));
+        // row.patchValue({ FinishKg, GreigeKg, YarnKg });
+        row.get('FinishKg')?.setValue(FinishKg);
+        row.get('GreigeKg')?.setValue(GreigeKg);
+        row.get('YarnKg')?.setValue(YarnKg);
     }
     })
-  if(this.style_Value && this.size_Value){
-    this.api.f_size_BO(this.style_Value, this.size_Value).subscribe((res) => {
-      this.fsizeDta = res.fsize ? res.fsize : ''
-      this.fabdiaDta = res.FabDia
-      this.fabGsmDta = res.FabGsm
-      this.finishfabConsumptionDta = res.finishfabConsumption[0].finishfabConsumption ? res.finishfabConsumption[0].finishfabConsumption : 0
-      const formArray = this.buyerorderform.get('data') as FormArray;
-      const row = formArray.at(index);
-      row.get('FabricConsumption')?.setValue(this.finishfabConsumptionDta);
-    })
-  }
 }
-this.api.ColorLosses_BO(this.color_Value, this.Buyer_Value).subscribe((res) => {
-  this.DyeProcessLossValue = res.DyeProcessLoss[0].dye_process_loss ? res.DyeProcessLoss[0].dye_process_loss : 0
-  row1.get('DyeProcessLoss')?.setValue(this.DyeProcessLossValue)
-})
-this.api.getcolorId(this.color_Value, this.Buyer_Value).subscribe((res)=>{
-  this.colorId = res.Colorlosses[0].id
-})
-this.api.getStyleId(this.style_Value, this.Buyer_Value).subscribe((res)=>{
-  this.styleIdDta = res.styleId[0].id
-  this.fabricTypeFBCId = res.styleId[0].fabricTypeId
-  this.dyeTypeFBCId = res.styleId[0].dyeTypeId
-  this.api.fabricType_BO(this.styleIdDta, this.fabricTypeFBCId).subscribe((res) => {
-    this.fabTypeLossDta = res.FabricTypeLoss[0].fabpl ? res.FabricTypeLoss[0].fabpl : 0
-    row1.get('FabricTypeLoss')?.setValue(this.fabTypeLossDta)
-  })
-  this.api.DyeTypeMaster_BO(this.styleIdDta, this.dyeTypeFBCId).subscribe((res) => {
-    this.DyeTypeLossDta = res.DyeTypeLoss[0].dyepl ? res.DyeTypeLoss[0].dyepl : 0
-    row1.get('DyeTypeLoss')?.setValue(this.DyeTypeLossDta)
-  })
-})
-this.RejTypeLoss(index);
-this.PODetailsLoss(index);
-this.calculateDiff(index)
   }
 
 
@@ -422,25 +355,45 @@ this.calculateDiff(index)
   }
 
   calculateDiff(index : any) {
-    const formArray = this.buyerorderform.get('data') as FormArray;
-    const row = formArray.at(index);
-        const OrderPcsValue = parseFloat(row.get('OrderPcs')?.value) || 0;
-        const FinishKg1 = (( (this.finishfabConsumptionDta * OrderPcsValue) /12) * ((100 + this.rejloss + this.PODetailsLossValue)/100))
+  const Array = this.buyerorderform.get('data') as FormArray;
+  const row = Array.at(index);
+  this.Buyer_Value = this.buyerorderform.get('Buyer')?.value;
+  this.Order_Value = this.buyerorderform.get('OrderNo')?.value ?? '';
+  this.style_Value = row.get('Style')?.value;
+  this.color_Value = row.get('Color')?.value;
+  this.size_Value = row.get('Size')?.value;
 
-        this.DyeProcessLossValue = row.get('DyeProcessLoss')?.value
-        this.fabTypeLossDta = row.get('FabricTypeLoss')?.value
-        this.DyeTypeLossDta = row.get('DyeTypeLoss')?.value
+  this.api.size_to_id(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, this.size_Value).subscribe((res) => {
+    try{
+      this.DyeTypeLossDta = res.DyeTypeLoss[0].dyepl ? res.DyeTypeLoss[0].dyepl : 0
+    }
+    catch{
+      this.DyeTypeLossDta = 0
+    }
+    this.DyeProcessLossValue = res.DyeProcessLoss[0].dye_process_loss ? res.DyeProcessLoss[0].dye_process_loss : 0
+    this.fabTypeLossDta = res.FabricTypeLoss[0].fabpl ? res.FabricTypeLoss[0].fabpl : 0
+    this.finishfabConsumptionDta = res.finishfabConsumption[0].finishfabConsumption ? res.finishfabConsumption[0].finishfabConsumption : 0;
+    try{
+      this.PODetailsLossValue = res.podetailsLoss[0].popl ? res.podetailsLoss[0].popl : 0;
+    }catch{
+      this.PODetailsLossValue = 0
+    }
+    
+    this.rejloss = res.Colorlosses[0].losses ? res.Colorlosses[0].losses : 0
+    const OrderPcsValue = parseFloat(row.get('OrderPcs')?.value) || 0;
+      const FinishKg1 = (( (this.finishfabConsumptionDta * OrderPcsValue) /12) * ((100 + this.rejloss + this.PODetailsLossValue)/100))
 
-        // console.log(this.DyeProcessLossValue,   this.fabTypeLossDta, this.DyeTypeLossDta)
-        const FinishKg2 = FinishKg1 * ((100 + this.DyeProcessLossValue + this.fabTypeLossDta + this.DyeTypeLossDta )/100)
-        const FinishKg = parseFloat(FinishKg1.toFixed(2));
-        const GreigeKg = parseFloat(FinishKg2.toFixed(2));
-        const YarnKg = parseFloat(FinishKg2.toFixed(2));
-        // row.patchValue({ FinishKg, GreigeKg, YarnKg });
-        row.get('FinishKg')?.setValue(FinishKg);
-        row.get('GreigeKg')?.setValue(GreigeKg);
-        row.get('YarnKg')?.setValue(YarnKg);
-  }
+      // console.log(this.DyeProcessLossValue,   this.fabTypeLossDta, this.DyeTypeLossDta)
+      const FinishKg2 = FinishKg1 * ((100 + this.DyeProcessLossValue + parseInt(this.fabTypeLossDta) + this.DyeTypeLossDta )/100)
+      const FinishKg = parseFloat(FinishKg1.toFixed(2));
+      const GreigeKg = parseFloat(FinishKg2.toFixed(2));
+      const YarnKg = parseFloat(FinishKg2.toFixed(2));
+      row.get('FinishKg')?.setValue(FinishKg);
+      row.get('GreigeKg')?.setValue(GreigeKg);
+      row.get('YarnKg')?.setValue(YarnKg);
+    })
+}
+
 
   buyerorderform = new FormGroup({
     data: this.fb.array([]),

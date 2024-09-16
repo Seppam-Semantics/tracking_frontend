@@ -28,10 +28,9 @@
                 <tbody>
                     <tr>
                         <td>
-                            <input type="text" class="form-control" formControlName="spinner" list="spin">
-                            <datalist id="spin">
-                                <option *ngFor="let spin of this.spinfty" value="{{spin.spinfty}}"></option>
-                            </datalist>
+                            <select class="form-control" formControlName="spinner">
+                                <option *ngFor="let spin of this.spinfty" value="{{spin.SpinFtyName}}">{{spin.SpinFtyName}}</option>
+                            </select>
                         </td>
                         <td><input type="date" class="form-control" formControlName="lcDate"></td>
                         <td><input type="text" class="form-control" formControlName="lcNo"></td>
@@ -55,8 +54,7 @@
             <table class="table table-hover">
                 <thead class="thead-dark">
                     <tr>
-                        <th><button class="btn btn-danger" (click)="add1button()" style="font-size:inherit">Add
-                                lines</button></th>
+                        <th><button class="btn btn-danger" (click)="add1button()" style="font-size:inherit">Add lines</button></th>
                         <th>Yarn Type</th>
                         <th>LC Yarn Kgs</th>
                         <th>Yarn Rate</th>

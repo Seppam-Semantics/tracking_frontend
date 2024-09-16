@@ -23,7 +23,9 @@ export class LCOutstandingComponent implements OnInit{
   spinfty: any;
   ReceiptKgsValueTotal: any;
   PendingReceiptKgsValueTotal: any;
+
   constructor(private api : ApiService){}
+  
   ngOnInit(): void { 
     this.lcnoFilter()
   

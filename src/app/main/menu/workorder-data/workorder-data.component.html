@@ -104,21 +104,21 @@
             </td>
 
             <td><input style="width: 15vh;" formControlName="Color" list="Color" (input)="colorvalue(i)"
-                (change)="colordata()" class="form-control" (mouseenter)="stylevalue(i)">
+                class="form-control" (mouseenter)="stylevalue(i)">
               <datalist id="Color">
                 <option *ngFor="let data of this.colorDta" value="{{data.color}}">{{data.color}}</option>
               </datalist>
             </td>
 
             <td><input style="width: 15vh;" formControlName="FSize" list="FSize" (change)="fsizedata(i , $event)"
-                class="form-control" (click)="calculateDiff(i)"></td>
+                class="form-control"></td>
             <datalist id="FSize">
               <option *ngFor="let data of this.concatSizeDta" value="{{data.concatSize}}">{{data.concatSize}}</option>
             </datalist>
 
 
 
-            <td><input style="width: 15vh;" formControlName="Size" list="GSize" (input)="sizevalue(i)"
+            <td><input style="width: 15vh;" formControlName="Size" list="GSize" (input)="sizevalue(i)" (change)="sizedata(i)"
                 class="form-control" readonly>
             </td>
 
@@ -178,7 +178,7 @@
               </datalist>
             </td> -->
 
-            <td><input style="width: 15vh;" formControlName="OrderPcs" class="form-control" (click)="sizedata(i)" (input)="sizedata(i)"></td>
+            <td><input style="width: 15vh;" formControlName="OrderPcs" class="form-control" (click)="calculateDiff(i)" (input)="calculateDiff(i)"></td>
 
             <td><input style="width: 15vh;" formControlName="OrderFOBRate" class="form-control"></td>
 

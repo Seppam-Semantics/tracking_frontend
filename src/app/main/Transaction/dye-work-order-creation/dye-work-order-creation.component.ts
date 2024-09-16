@@ -26,11 +26,10 @@ export class DyeWorkOrderCreationComponent {
   ftyName: any;
   ftyname: any
   DyeWorkOrderAllData: any;
-  ngOnInit(): void { 
-    this.buyername(), 
-    this.factoryName() 
-    this.AllData()
-  }
+
+
+
+  
   constructor(private fb: FormBuilder, private api: ApiService , private router : Router) {
 
     this.DyeWorkOrderFrom = new FormGroup({
@@ -48,9 +47,14 @@ export class DyeWorkOrderCreationComponent {
       "DyeValueTotal" :new FormControl(''),
       data: this.fb.array([]),
     })
-
   }
 
+  ngOnInit(): void { 
+    this.buyername(), 
+    this.factoryName() 
+    this.AllData()
+  }
+  
   buyername() {
     this.api.getbuyers().subscribe((res) => {
       this.buyer = res.buyers
@@ -58,9 +62,13 @@ export class DyeWorkOrderCreationComponent {
   }
 
   factoryName() {
-    this.api.dye_factory_name().subscribe((res)=>{
-      this.factoryname=res.factorys
+    this.api.dyeFty_master_Fillter_Data().subscribe((res)=>{
+      this.factoryname = res.dyeFty
+      console.log(res)
     })
+    // this.api.dye_factory_name().subscribe((res)=>{
+    //   this.factoryname = res.factorys
+    // })
   }
   getBuyerValue(event: any) {
     this.buyerName = event.target.value;

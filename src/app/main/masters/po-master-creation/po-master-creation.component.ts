@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, QueryList, ViewChildren } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Dropdown } from 'primeng/dropdown';
 import { ApiService } from 'src/app/api.service';
 
@@ -43,23 +43,23 @@ export class POMasterCreationComponent {
   constructor(private fb: FormBuilder, private api: ApiService, private datePipe: DatePipe) {
 
     this.pocreate = this.fb.group({
-      id: new FormControl(''),
-      buyer: new FormControl(''),
-      buyerId: new FormControl(''),
-      orderNo: new FormControl(''),
-      poDate: new FormControl(''),
-      shipDate: new FormControl(''),
+      id: new FormControl(),
+      buyer: new FormControl('', Validators.required),
+      buyerId: new FormControl('', Validators.required),
+      orderNo: new FormControl('', Validators.required),
+      poDate: new FormControl('', Validators.required),
+      shipDate: new FormControl('', Validators.required),
       poStatus : new FormControl('open')
     })
 
     this.poedit = this.fb.group({
       id: new FormControl(''),
-      buyer: new FormControl(''),
-      buyerId: new FormControl(''),
-      orderNo: new FormControl(''),
-      poDate: new FormControl(''),
-      shipDate: new FormControl(''),
-      poStatus : new FormControl('')
+      buyer: new FormControl('', Validators.required),
+      buyerId: new FormControl('', Validators.required),
+      orderNo: new FormControl('', Validators.required),
+      poDate: new FormControl('', Validators.required),
+      shipDate: new FormControl('', Validators.required),
+      poStatus : new FormControl('', Validators.required)
     })
 
 
@@ -224,10 +224,15 @@ export class POMasterCreationComponent {
   }
 
   update() {
-    this.api.PO_Master(this.poedit.value).subscribe((res) => {
-      alert(res.message)
-      window.location.reload()
-    })
+    if(this.poedit.valid){
+      this.api.PO_Master(this.poedit.value).subscribe((res) => {
+        alert(res.message)
+        window.location.reload()
+      })
+    }
+    else{
+      alert("Please fill all the details ... !!!")
+    }
   }
 
   edit(id: any) {
@@ -287,11 +292,16 @@ export class POMasterCreationComponent {
   }
 
   saveButton() {
-
-    this.api.PO_Master(this.pocreate.value).subscribe((res) => {
-      alert(res.message)
-      window.location.reload()
-    })
+    if(this.pocreate.valid){
+      this.api.PO_Master(this.pocreate.value).subscribe((res) => {
+        this.api.getManPower()
+        alert(res.message)
+        window.location.reload()
+      })
+    }
+    else{
+      alert("Fill all the details...!!!")
+    }
   }
 
   PoDetailssave() {

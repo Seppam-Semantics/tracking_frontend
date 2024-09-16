@@ -47,28 +47,9 @@ export class KnitDeliveryComponent {
   colorFillter:any
   colorlist2:any
   TotalValue: any;
-  ngOnInit(): void {
-    this.buyername()
-    this.knitdelBuyerFilter()
-    this.knitdelOrderFilter()
 
-    this.api.knitdelivery_buyer_list().subscribe((res)=>{
-      this.buyerlist = res.buyer
-    })
 
-    this.api.knitdelivery_orderNo_list().subscribe((res)=>{
-      this.orderNolist = res.orderNo
-    })
 
-    this.api.knitdelivery_color_list().subscribe((res)=>{
-      this.colorlist2 = res.color
-    })
-
-    this.api.knitdelivery_Total_Fillter().subscribe((res)=>{
-      this.TotalValue = res.knitDeliveryTotal[0].totalKg
-    })
-  
-  }
   constructor(private fb: FormBuilder, private router: Router, private api: ApiService) {
 
     this.KnitDelivery = new FormGroup({
@@ -87,16 +68,38 @@ export class KnitDeliveryComponent {
       this.fty_name = res.factorys
     })
 
-    // this.api.getKnitDelivery().subscribe((res) => {
-    //   this.knitDelAllData = res.knitDelivery
-    // })
-
     this.api.dye_factory_name().subscribe((res)=>{
       this.factoryname=res.factorys
     })
     
   }
   
+  ngOnInit(): void {
+    this.buyername()
+
+    this.api.knitdelivery_fty_Fillter().subscribe((res)=>{
+      this.knitDelAllData = res.knitDelivery
+    })
+
+    this.api.knitdelivery_buyer_list().subscribe((res)=>{
+      this.buyerlist = res.buyer
+    })
+
+    this.api.knitdelivery_orderNo_list().subscribe((res)=>{
+      this.orderNolist = res.orderNo
+    })
+
+    this.api.knitdelivery_color_list().subscribe((res)=>{
+      this.colorlist2 = res.color
+    })
+
+    this.api.knitdelivery_Total_Fillter().subscribe((res)=>{
+      this.TotalValue = res.knitDeliveryTotal[0].totalKgs
+    })
+  
+  }
+
+
   colorjson1(data: any): any {
     return JSON.parse(data);
   }
@@ -107,38 +110,37 @@ export class KnitDeliveryComponent {
   get items() {
     return this.KnitDelivery.get("data") as FormArray;
   }
-  knitdelBuyerFilter(){
-    this.api.knitdelivery_fty_Fillter(this.buyerFillter  ,'').subscribe((res)=>{
-      this.knitDelAllData = res.knitDelivery    })
 
+  knitdelBuyerFilter(){
+    if(this.buyerFillter){
+      this.api.knitdelivery_fty_Fillter(this.buyerFillter  ,'').subscribe((res)=>{
+        this.knitDelAllData = res.knitDelivery
+      })
       this.api.knitdelivery_Total_Fillter(this.buyerFillter  ,'').subscribe((res)=>{
-        this.TotalValue = res.knitDeliveryTotal[0].totalKg
+        this.TotalValue = res.knitDeliveryTotal[0].totalKgs
       })
     }
+    if(this.buyerFillter && this.orderNoFillter){
+      this.api.knitdelivery_fty_Fillter(this.buyerFillter, this.orderNoFillter).subscribe((res)=>{
+        this.knitDelAllData = res.knitDelivery
+      })
+      this.api.knitdelivery_Total_Fillter(this.buyerFillter, this.orderNoFillter).subscribe((res)=>{
+        this.TotalValue = res.knitDeliveryTotal[0].totalKgs
+      })
+    }
+    if(this.buyerFillter && this.orderNoFillter && this.colorFillter){
+      this.api.knitdelivery_fty_Fillter(this.buyerFillter, this.orderNoFillter, this.colorFillter).subscribe((res)=>{
+        this.knitDelAllData = res.knitDelivery
+      })  
+      this.api.knitdelivery_Total_Fillter(this.buyerFillter, this.orderNoFillter, this.colorFillter).subscribe((res)=>{
+        this.TotalValue = res.knitDeliveryTotal[0].totalKgs
+      })
+    }
+    }
 
-  knitdelOrderFilter(){
-    this.api.knitdelivery_fty_Fillter('',this.orderNoFillter).subscribe((res)=>{
-      this.knitDelAllData = res.knitDelivery
-    })
-  
-    this.api.knitdelivery_Total_Fillter('',this.orderNoFillter).subscribe((res)=>{
-      this.TotalValue = res.knitDeliveryTotal[0].totalKg
-    })
-  
-  }
-
-  knitdelColorFilter(){
-    this.api.knitdelivery_fty_Fillter('','',this.colorFillter).subscribe((res)=>{
-      this.knitDelAllData = res.knitDelivery
-    })
-
-    this.api.knitdelivery_Total_Fillter('','',this.colorFillter).subscribe((res)=>{
-      this.TotalValue = res.knitDeliveryTotal[0].totalKg
-    })
-
-  }
-  
+    
   fileName = "knitDeliveryReport.xlsx"
+
 exportexcel() {
 
     Swal.fire({

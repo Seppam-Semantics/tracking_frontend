@@ -62,6 +62,8 @@ export class YarnTranscationComponent implements OnInit {
   lotlineDetails: any;
   colorlist: any;
   orderNumber: any;
+  styleName : any;
+  colorName : any;
   yarnId: any;
   yarnKg: any;
   orderDetails: any;
@@ -76,11 +78,20 @@ export class YarnTranscationComponent implements OnInit {
   ReceipReceivedDataId: any;
   loading1 : boolean =false;
   loading2 : boolean =false;
-  loading3 : boolean =false;
+  loading3 : boolean =true;
   loading4 : boolean =false;
   loading5 : boolean =false;
+  toleranceValid : any[] = [];
+  update : boolean = true
+  
   @ViewChild('tabGroup') tabGroup!: MatTabGroup;
-  constructor(private fb: FormBuilder, private api: ApiService, private datePipe: DatePipe) { }
+
+
+  constructor(
+              private fb: FormBuilder, 
+              private api: ApiService, 
+              private datePipe: DatePipe
+            ) { }
 
 
   ngOnInit(): void {
@@ -447,6 +458,40 @@ export class YarnTranscationComponent implements OnInit {
   getcolor(style: any) {
     this.api.getcolor(this.buyerName, this.orderNumber, style).subscribe((res) => {
       this.colorlist = res.colors;
+    })
+  }
+
+  getYarnTotalKg(index : any){
+    const formArray = this.OrderAllocation.get('data') as FormArray;
+    const row = formArray.at(index);
+
+    this.buyerName = row.get('buyer')?.value
+    this.orderNumber = row.get('utilisationOrderNo')?.value;
+    this.styleName = row.get('style')?.value;
+    this.colorName = row.get('colour')?.value;
+
+    this.api.getYarnKg(this.buyerName, this.orderNumber, this.styleName, this.colorName).subscribe((res)=>{
+      const totalyarnKg = res.yarnKg[0].totalKg;
+      const formArray = this.OrderAllocation.get('data') as FormArray;
+      formArray.controls.forEach((ele, i) => {
+        const row = formArray.at(i);
+          const buyerName = row.get('buyer')?.value
+          const orderNumber = row.get('utilisationOrderNo')?.value;
+          const styleName = row.get('style')?.value;
+          const colorName = row.get('colour')?.value;
+          const yarnKg = row.get('allocatedYarnKgs')?.value;
+        if(buyerName == this.buyerName && orderNumber == this.orderNumber && styleName == this.styleName && colorName == this.colorName){
+          const sumKg =+ yarnKg
+          if(sumKg > totalyarnKg){
+            this.toleranceValid[index] = true
+            this.loading3 = false;
+          }
+          else{
+            this.toleranceValid[index] = false;
+            this.loading3 = true;
+          }
+        }
+      });
     })
   }
 

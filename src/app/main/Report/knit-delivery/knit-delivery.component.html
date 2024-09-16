@@ -13,11 +13,11 @@
               optionLabel="buyer" optionValue="buyer" autoWidth="false" [style]="{ minWidth: '22vh', minHeight:'2vh' }"
               [editable]="true"></p-dropdown>
 
-              <p-dropdown [options]="orderNolist" [(ngModel)]="orderNoFillter" placeholder="orderNo" (onChange)="knitdelOrderFilter()"
+              <p-dropdown [options]="orderNolist" [(ngModel)]="orderNoFillter" placeholder="orderNo" (onChange)="knitdelBuyerFilter()"
               optionLabel="orderNo" optionValue="orderNo" autoWidth="false" [style]="{ minWidth: '22vh', minHeight:'2vh' }"
               [editable]="true"></p-dropdown>
 
-              <p-dropdown [options]="colorlist2" [(ngModel)]="colorFillter" placeholder="Color" (onChange)="knitdelColorFilter()"
+              <p-dropdown [options]="colorlist2" [(ngModel)]="colorFillter" placeholder="Color" (onChange)="knitdelBuyerFilter()"
               optionLabel="color" optionValue="color" autoWidth="false" [style]="{ minWidth: '22vh', minHeight:'2vh' }"
               [editable]="true"></p-dropdown>
               
@@ -51,28 +51,13 @@
                             <td>{{i+1}}</td>
                             <td>{{data.factory}}</td>
                             
-                            <td>
-                                <ul *ngFor="let color of colorjson1(data.buyer)" style="text-align: justify;">
-                                    <!-- <ul *ngFor="let color of data.buyer" style="text-align: justify;"> -->
-                                    <li>{{color.buyer}}</li>
-                                  </ul>
-                            </td>
+                            <td>{{data.buyer}}</td>
                             
-                            <td>
-                                <ul *ngFor="let color of colorjson1(data.orderNo)" style="text-align: justify;">
-                                    <!-- <ul *ngFor="let color of data.orderNo" style="text-align: justify;"> -->
-                                    <li>{{color.orderNo}}</li>
-                                  </ul>
-                            </td>
-                            <td>
-                                <ul *ngFor="let color of colorjson2(data.colors)" style="text-align: justify;">
-                                    <!-- <ul *ngFor="let color of data.colors" style="text-align: justify;"> -->
-                                    <li>{{color.color}}</li>
-                                  </ul>
-                            </td>
-                            <td>{{data.date}}</td>
-                            <td>{{data.totalrolls}}</td>
-                            <td>{{data.totalKg}}</td>
+                            <td>{{data.orderNo}}</td>
+                            <td>{{data.color}}</td>
+                            <td>{{data.delivery_date}}</td>
+                            <td>{{data.total_rolls}}</td>
+                            <td>{{data.total_kgs}}</td>
                             <td><button class="btn btn-primary" (click)="edit(data.id)" style="width:auto"><mat-icon>edit</mat-icon></button></td>
                             <!-- <td><button class="btn btn-danger" style="width:auto" (click)="delete(data.id)"><mat-icon>delete</mat-icon></button></td> -->
                         </tr>
