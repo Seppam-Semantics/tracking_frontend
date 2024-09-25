@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ApiService } from 'src/app/api.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -19,47 +19,63 @@ export class LocalService {
 
   update:boolean = false;
 
+
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
+      'Content-Type': 'application/json',
+    }),
+  }
+
+  public getHeaders() {
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'x-access-token': 'Bearer ' + sessionStorage.getItem('token'),
+        'Content-Type': 'application/json',
+      }),
+    }
+    return httpOptions;
+  }
+
+  public getUrl(): String {
+    let url: String = environment.URL;
+    return url;
+  }
+
+
+
 profile(profiletoken:any):Observable<any>{
-  const headers = new HttpHeaders().set('x-access-token', profiletoken);
-  return this.http.get(`${this.apiUrl}/profileapi/profile`,  { headers })
+  return this.http.get(this.getUrl() + `/profileapi/profile`,  this.getHeaders())
 }
 
 profileid(id:any, profiletoken:any):Observable<any>{
-  const headers = new HttpHeaders().set('x-access-token', profiletoken);
-  return this.http.get(`${this.apiUrl}/profileapi/profile/${id}`,  { headers })
+  return this.http.get(this.getUrl() + `/profileapi/profile/${id}`,  this.getHeaders())
 }
 
 profileadd(data:any, profiletoken:any):Observable<any>{
-  const headers = new HttpHeaders().set('x-access-token', profiletoken);
-  return this.http.post(`${this.apiUrl}/profileapi/profile`, data,  { headers })
+  return this.http.post(this.getUrl() + `/profileapi/profile`, data,  this.getHeaders())
 }
 
 rolesadd(data:any, profiletoken:any):Observable<any>{
-  const headers = new HttpHeaders().set('x-access-token', profiletoken);
-  return this.http.post(`${this.apiUrl}/roleapi/roles`,data, { headers });
+  return this.http.post(this.getUrl() + `/roleapi/roles`,data, this.getHeaders());
 }
 deleterole(id:any, profiletoken:any):Observable<any>{
-  const headers = new HttpHeaders().set('x-access-token', profiletoken);
-  return this.http.delete(`${this.apiUrl}/roleapi/roles/${id}`, {headers})
+  return this.http.delete(this.getUrl() + `/roleapi/roles/${id}`, this.getHeaders())
 }
 
 getemployee(profiletoken:any):Observable<any>{
-  const headers = new HttpHeaders().set('x-access-token', profiletoken);
-  return this.http.get(`${this.apiUrl}/employeeapi/employee`, { headers })
+  return this.http.get(this.getUrl() + `/employeeapi/employee`, this.getHeaders())
 }
 
 addemployee(data:any, profiletoken:any):Observable<any>{
-  const headers = new HttpHeaders().set('x-access-token', profiletoken);
-  return this.http.post(`${this.apiUrl}/employeeapi/employee`, data, {headers})
+  return this.http.post(this.getUrl() + `/employeeapi/employee`, data, this.getHeaders())
 }
 
 getsingleemployee(id:any, profiletoken:any):Observable<any>{
-  const headers = new HttpHeaders().set('x-access-token', profiletoken);
-return this.http.get(`${this.apiUrl}/employeeapi/employee/${id}`, {headers})
+return this.http.get(this.getUrl() + `/employeeapi/employee/${id}`, this.getHeaders())
 }
 
 deleteemp(id:any, profiletoken:any):Observable<any>{
-  const headers = new HttpHeaders().set('x-access-token', profiletoken);
-  return this.http.delete(`${this.apiUrl}/employeeapi/employee/${id}`,{headers})
+  return this.http.delete(this.getUrl() + `/employeeapi/employee/${id}`,this.getHeaders())
 }
 }

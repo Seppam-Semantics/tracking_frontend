@@ -1,6 +1,8 @@
 import { DatePipe, DatePipeConfig } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Dropdown } from 'primeng/dropdown';
 import { ApiService } from 'src/app/api.service';
 
 @Component({
@@ -40,9 +42,13 @@ export class YarnReceiptComponent implements OnInit{
   styleslist: any;
   colorslist: any;
   lotNoslist: any;
+  ftyName: any;
+  spinChallan : any;
+  scandexChallan : any;
+  receiptDate : any;
 
 
-  constructor(private api : ApiService, private fb : FormBuilder, private datePipe: DatePipe){}
+  constructor(private api : ApiService, private fb : FormBuilder, private datePipe: DatePipe, private router : Router){}
 
   ngOnInit(): void {
     this.api.getAllYarn().subscribe((res) => {
@@ -50,6 +56,15 @@ export class YarnReceiptComponent implements OnInit{
     })
     this.api.getYarnFactory().subscribe((res)=>{
       this.factorylist = res.yarnFactory
+    })
+
+    this.factoryName()
+  }
+
+
+  factoryName() {
+    this.api.KnitFty_master_Fillter_Data().subscribe((res)=>{
+      this.ftyName = res.knitFty
     })
   }
 
@@ -65,71 +80,131 @@ export class YarnReceiptComponent implements OnInit{
     })
   }
 
-  getyarnBuyers(){
-    this.api.get_yarn_buyer(this.factory, this.lcNo, this.yarnType).subscribe((res)=>{
+  getyarnBuyers(index : any){
+    const formArray = this.receiptForm.get('data') as FormArray;
+    const currentRow = formArray.at(index);
+    const yarn = currentRow.get('yarnType')?.value
+    this.api.get_yarn_buyer(this.factory, this.lcNo, yarn).subscribe((res)=>{
       this.buyerslist=res.buyers
     })
   }
 
-  getyarnorders(){
-    this.api.get_yarn_order(this.factory, this.lcNo, this.yarnType, this.buyer).subscribe((res)=>{
+  getyarnorders(index : any){
+    const formArray = this.receiptForm.get('data') as FormArray;
+    const currentRow = formArray.at(index);
+    const yarn = currentRow.get('yarnType')?.value;
+    const buyer = currentRow.get('buyer')?.value;
+    this.api.get_yarn_order(this.factory, this.lcNo, yarn, buyer).subscribe((res)=>{
       this.orderslist=res.orderNo
     })
+
+    // this.api.orderForReceipt(this.factory, this.lcNo, yarn, buyer).subscribe((res)=>{
+    //   this.orderslist=res.orderNo
+    // })
   }
 
-  getyarnstyles(){
-    this.api.get_yarn_style(this.factory, this.lcNo, this.yarnType, this.buyer, this.orderNo).subscribe((res)=>{
+  getyarnstyles(index : any){
+    const formArray = this.receiptForm.get('data') as FormArray;
+    const currentRow = formArray.at(index);
+    const yarn = currentRow.get('yarnType')?.value;
+    const buyer = currentRow.get('buyer')?.value;
+    const order = currentRow.get('orderNo')?.value;
+    this.api.get_yarn_style(this.factory, this.lcNo, yarn, buyer, order).subscribe((res)=>{
       this.styleslist=res.styles
     })
   }
 
-  getyarncolors(){
-    this.api.get_yarn_color(this.factory, this.lcNo, this.yarnType, this.buyer, this.orderNo, this.style).subscribe((res)=>{
+  getyarncolors(index : any){
+    const formArray = this.receiptForm.get('data') as FormArray;
+    const currentRow = formArray.at(index);
+    const yarn = currentRow.get('yarnType')?.value;
+    const buyer = currentRow.get('buyer')?.value;
+    const order = currentRow.get('orderNo')?.value;
+    const style = currentRow.get('style')?.value;
+    this.api.get_yarn_color(this.factory, this.lcNo, yarn, buyer, order, style).subscribe((res)=>{
       this.colorslist=res.colors
     })
   }
 
-  getyarnlotNos(){
-    this.api.get_yarn_lotNo(this.factory, this.lcNo, this.yarnType, this.buyer, this.orderNo, this.style, this.color).subscribe((res)=>{
+  getyarnlotNos(index : any){
+    const formArray = this.receiptForm.get('data') as FormArray;
+    const currentRow = formArray.at(index);
+    const yarn = currentRow.get('yarnType')?.value;
+    const buyer = currentRow.get('buyer')?.value;
+    const order = currentRow.get('orderNo')?.value;
+    const style = currentRow.get('style')?.value;
+    const color = currentRow.get('color')?.value;
+    this.api.get_yarn_lotNo(this.factory, this.lcNo, yarn, buyer, order, style, color).subscribe((res)=>{
       this.lotNoslist=res.lotNos
     })
   }
 
 
-  orderId() {
-    this.api.getYarnReceipt(this.factory, this.lcNo, this.yarnType, this.buyer, this.orderNo, this.style, this.color, this.lotNo).subscribe((res)=>{
-      // console.log(res)
-      this.yarn = res.yarnId
+  orderId(index : any) {
+    const formArray = this.receiptForm.get('data') as FormArray;
+    const currentRow = formArray.at(index);
+    const yarn = currentRow.get('yarnType')?.value;
+    const buyer = currentRow.get('buyer')?.value;
+    const order = currentRow.get('orderNo')?.value;
+    const style = currentRow.get('style')?.value;
+    const color = currentRow.get('color')?.value;
+    const lotNo = currentRow.get('lotNo')?.value;
 
-    this.yarnOrderId = res.yarn_order[0].id
-    this.Receipttest = res.yarn_order[0].allocatedYarnKgs
+    this.api.getYarnReceipt(this.factory, this.lcNo, yarn, buyer, order, style, color, lotNo).subscribe((res)=>{
+    this.yarn = res.yarnId;
+    this.yarnOrderId = res.yarn_order[0].id;
+    this.Receipttest = res.yarn_order[0].allocatedYarnKgs;
     this.receiptForm.controls['yarnId'].setValue(this.yarn[0].id);
-    const yarnDataId = this.yarn[0].id
+    const yarnDataId = this.yarn[0].id;
+
     this.api.lcDetailsForReceipt(yarnDataId, this.yarnOrderId).subscribe((res) => {
       const receivedData = res.lcData;
       this.ReceivedDataReceipt = res.lcData;
 
-      const yarnEntryData = this.receiptForm.get('data') as FormArray;
-      yarnEntryData.clear();
-
-      receivedData.forEach((dataItem: any) => {
-        const Row3 = this.fb.group({
-          id: dataItem.id,
+        currentRow.patchValue({
+          id: receivedData[0]?.id ?? 0,
           yarnOrderId: this.yarnOrderId,
-          spinningChallan: dataItem.spinningChallan,
-          scandexChallan: dataItem.scandexChallan,
-          receiptDt: this.datePipe.transform(dataItem.receiptDt, 'yyyy-MM-dd'),
-          knitFactory: dataItem.knitFactory,
-          BagsCtnNos: dataItem.BagsCtnNos,
-          receiptYarnKgs: dataItem.receiptYarnKgs,
-          pendingReceiptKgs: dataItem.pendingReceiptKgs ? dataItem.pendingReceiptKgs : this.Receipttest - dataItem.receiptYarnKgs
+          yarnType : yarn,
+          buyer : buyer,
+          orderNo : order,
+          style : style,
+          color : color,
+          lotNo : lotNo,
+          allocatedKg : this.Receipttest,
+          knitFactory: receivedData[0]?.knitFactory ?? '',
+          BagsCtnNos: receivedData[0]?.BagsCtnNos ?? 0, 
+          receiptYarnKgs: receivedData[0]?.receiptYarnKgs ?? 0,
+          pendingReceiptKgs: receivedData[0]?.pendingReceiptKgs ? receivedData[0]?.pendingReceiptKgs : this.Receipttest - (receivedData[0]?.receiptYarnKgs ?? 0),
+          spinningChallan : this.spinChallan,
+          scandexChallan : this.scandexChallan,
+          receiptDt : this.receiptDate
         });
-        yarnEntryData.push(Row3);
-      });
     })
-    this.receiptModal = true
   })
   }
+
+  pendingKg(index : any){
+    const formArray = this.receiptForm.get('data') as FormArray;
+    const currentRow = formArray.at(index);
+    const yarn = currentRow.get('yarnType')?.value;
+    const buyer = currentRow.get('buyer')?.value;
+    const order = currentRow.get('orderNo')?.value;
+    const style = currentRow.get('style')?.value;
+    const color = currentRow.get('color')?.value;
+    const lotNo = currentRow.get('lotNo')?.value;
+
+    this.api.getYarnReceipt(this.factory, this.lcNo, yarn, buyer, order, style, color, lotNo).subscribe((res)=>{
+    this.yarn = res.yarnId;
+    this.yarnOrderId = res.yarn_order[0].id;
+    this.Receipttest = res.yarn_order[0].allocatedYarnKgs;
+    this.receiptForm.controls['yarnId'].setValue(this.yarn[0].id);
+    const yarnDataId = this.yarn[0].id;
+
+    const difference = this.Receipttest - (currentRow.get('receiptYarnKgs')?.value)
+    currentRow.get('pendingReceiptKgs')?.setValue(difference)
+  })
+  }
+  
 
   receiptForm = this.fb.group({
     yarnId: [],
@@ -144,13 +219,20 @@ export class YarnReceiptComponent implements OnInit{
     const Row3 = this.fb.group({
       id: new FormControl(),
       yarnOrderId: new FormControl(this.yarnOrderId),
-      spinningChallan: new FormControl(''),
-      scandexChallan: new FormControl(''),
-      receiptDt: new FormControl(''),
-      knitFactory: new FormControl(''),
-      BagsCtnNos: new FormControl(''),
-      receiptYarnKgs: new FormControl(''),
-      pendingReceiptKgs: new FormControl(''),
+      yarnType : new FormControl(''),
+      buyer : new FormControl(''),
+      orderNo : new FormControl(''),
+      style : new FormControl(''),
+      color : new FormControl(''),
+      lotNo : new FormControl(''),
+      allocatedKg : new FormControl(''),
+      knitFactory : new FormControl(''),
+      BagsCtnNos : new FormControl(''),
+      receiptYarnKgs : new FormControl(''),
+      pendingReceiptKgs : new FormControl(''),
+      receiptDt : new FormControl(''),
+      spinningChallan : new FormControl(''),
+      scandexChallan : new FormControl('')
     });
 
     this.items3.push(Row3);
@@ -159,6 +241,7 @@ export class YarnReceiptComponent implements OnInit{
       this.calculateDiff3();
     });
   }
+
   calculateDiff3() {
     let lastPendingReceipts: number[] = [this.Receipttest];
     let lastAllocatedYarnKgsControl: number[] = [];
@@ -182,7 +265,6 @@ export class YarnReceiptComponent implements OnInit{
         }
         lastPendingReceipts.push(lastUnallocatedYarnKg);
         lastAllocatedYarnKgsControl.push(AllocatedYarnKgsvalue);
-
 
         const lastunallocatedYarnKgs = lastPendingReceipts[lastPendingReceipts.length - 2];
         const lastallocatedYarnKgs = lastAllocatedYarnKgsControl[lastAllocatedYarnKgsControl.length - 1];
@@ -214,11 +296,17 @@ export class YarnReceiptComponent implements OnInit{
   }
 
   receiptSave() {
+    // console.log(this.receiptForm.value)
     this.loading4=true;
     this.api.addUpdateYarnreceipt(this.receiptForm.value).subscribe((res) => {
-      alert(res.message)
+      if(res.success){
+        alert(res.message)
       this.loading4=false;
       window.location.reload()
+      }
+      else{
+        alert(res.message)
+      }
     })
   }
 
@@ -302,5 +390,95 @@ export class YarnReceiptComponent implements OnInit{
       window.location.reload()
     })
   }
+
+
+  @ViewChildren('yarn_type') yarn_type!: QueryList<Dropdown>;
+  yarnlist(index: any) {
+    if (this.yarn_type) {
+      setTimeout(() => {
+        const dropdownArray = this.yarn_type.toArray();
+        if (dropdownArray[index]) {
+          dropdownArray[index].show();
+        }
+      });
+    } else { }
+  }
+
+
+  @ViewChildren('buyername') buyername!: QueryList<Dropdown>;
+buyerlist(index: any) {
+  if (this.buyername) {
+    setTimeout(() => {
+      const dropdownArray = this.buyername.toArray();
+      if (dropdownArray[index]) {
+        dropdownArray[index].show();
+      }
+    });
+  } else { }
+}
+
+@ViewChildren('ordernumber') ordernumber!: QueryList<Dropdown>;
+orderNoslist(index: any) {
+  if (this.ordernumber) {
+    setTimeout(() => {
+      const dropdownArray = this.ordernumber.toArray();
+      if (dropdownArray[index]) {
+        dropdownArray[index].show();
+      }
+    });
+  } else { }
+}
+
+@ViewChildren('styles') styles!: QueryList<Dropdown>;
+stylelist(index: any) {
+  if (this.styles) {
+    setTimeout(() => {
+      const dropdownArray = this.styles.toArray();
+      if (dropdownArray[index]) {
+        dropdownArray[index].show();
+      }
+    });
+  } else { }
+}
+
+@ViewChildren('colors') colors!: QueryList<Dropdown>;
+colorlist(index: any) {
+  if (this.colors) {
+    setTimeout(() => {
+      const dropdownArray = this.colors.toArray();
+      if (dropdownArray[index]) {
+        dropdownArray[index].show();
+      }
+    });
+  } else { }
+}
+
+@ViewChildren('lotNos') lotNos!: QueryList<Dropdown>;
+lotNolist(index: any) {
+  if (this.lotNos) {
+    setTimeout(() => {
+      const dropdownArray = this.lotNos.toArray();
+      if (dropdownArray[index]) {
+        dropdownArray[index].show();
+      }
+    });
+  } else { }
+}
+
+@ViewChildren('knitFact') knitFact!: QueryList<Dropdown>;
+knitFactorylist(index: any) {
+  if (this.knitFact) {
+    setTimeout(() => {
+      const dropdownArray = this.knitFact.toArray();
+      if (dropdownArray[index]) {
+        dropdownArray[index].show();
+      }
+    });
+  } else { }
+}
+
+back(){
+  this.router.navigate(['/main/yarnReceiptReport']);
+}
 
 }

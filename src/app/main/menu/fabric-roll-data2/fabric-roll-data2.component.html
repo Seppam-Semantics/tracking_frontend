@@ -1,37 +1,22 @@
-<mat-toolbar style="display: flex; justify-content: center; height: 10vh;">
+<mat-toolbar style="display: flex; justify-content: space-between; height: 10vh;">
 
-  <div style="flex: 1 1 auto;"></div>
-  <div style="display: flex; gap: 10px; ">
     <div style="display: flex; gap: 10px; ">
-
-      <!-- <input class="form-control me-2" type="search" placeholder="Buyer Search" aria-label="Search"
-        [(ngModel)]="buyerName" (change)="woByBuyer()" list="BuyerSearch">
-      <datalist id="BuyerSearch">
-        <option *ngFor="let data of buyers;" [value]="data.buyer">{{data.buyer}}</option>
-      </datalist> -->
-
       <p-dropdown [options]="buyers" [(ngModel)]="buyerName" placeholder="Buyer" optionLabel="buyer"
       optionValue="buyer" (onChange)="woByBuyer()" autoWidth="false"
       [style]="{ minWidth: '22vh', minHeight:'2vh' }" [editable]="true" ></p-dropdown>
-
-      <!-- <input class="form-control me-2" type="search" placeholder="Order Search" aria-label="Search"
-        [(ngModel)]="ordernumbers" (change)="wobyOrder()" list="Order">
-      <datalist id="Order">
-        <option *ngFor="let data of this.order;" [value]="data.orderNO">{{data.orderNO}}</option>
-      </datalist> -->
 
       <p-dropdown [options]="order" [(ngModel)]="ordernumbers" placeholder="OrderNo" optionLabel="orderNO"
       optionValue="orderNO" (onChange)="wobyOrder()" autoWidth="false"
       [style]="{ minWidth: '22vh', minHeight:'2vh' }" [editable]="true" ></p-dropdown>
 
+      <button  class='btn btn-primary' (click)="fabricEntry()">New Entry</button>
+
     </div>
 
-  </div>
+    <h2 style="font-family: Georgia, 'Times New Roman', Times, serif; font-weight: bolder;">Fabric Booking</h2>
 
-  <button mat-button color='primary' (click)="exportexcel2()"><mat-icon>download</mat-icon>
-    Download</button>
-  <button mat-button color='primary' (click)="fabricEntry()">New</button>
-
+  <button mat-button color='primary' (click)="exportexcel2()"><mat-icon>download</mat-icon>Download</button>
+  
 </mat-toolbar>
 
 <!---===========================================================================================================-->
@@ -108,26 +93,28 @@
 
             <th>FSize</th>
             <th>FabDia</th>
-            <th>FabGsm</th>
-
-            <th>KnitSL</th>
-            <th>Yarn Type</th>
-            <th>FabType</th>
-
-            <th>Dye Type</th>
-            <th>SpinFty</th>
-            <th>KnitFty</th>
-
-            <th>DyeinFty</th>
             <th>OrderPcs</th>
-            <th>OrderFOBRate</th>
-
-            <th>KnitRate</th>
-            <th>DyeRate</th>
             <th>YarnKg</th>
 
             <th>GreigeKg</th>
             <th>FinishKg</th>
+            <th>FabGsm</th>
+
+            <!-- <th>KnitSL</th> -->
+            <th>Yarn Type</th>
+            <th>FabType</th>
+
+            <th>Dye Type</th>
+            <!-- <th>SpinFty</th>
+            <th>KnitFty</th>
+
+            <th>DyeinFty</th> -->
+
+            <!-- <th>OrderFOBRate</th> -->
+
+            <!-- <th>KnitRate</th>
+            <th>DyeRate</th> -->
+
 
             <th>Fabric Report</th>
           </tr>
@@ -142,27 +129,29 @@
 
             <td>{{data.FSize}}</td>
             <td>{{data.fabDia}}</td>
-            <td>{{data.fabGsm}}</td>
-
-            <td>{{data.knitSL}}</td>
-            <td>{{data.yarnType}}</td>
-            <td>{{data.fabType}}</td>
-
-            <td>{{data.dyetype}}</td>
-            <td>{{data.spinFty}}</td>
-            <td>{{data.knitFty}}</td>
-
-            <td>{{data.dyeinFty}}</td>
             <td>{{data.orderPcs}}</td>
-            <td>{{data.orderFOBRate}}</td>
-
-            <td>{{data.knitRate}}</td>
-            <td>{{data.dyeRate}}</td>
             <td>{{data.yarnKg}}</td>
 
             <td>{{data.greigeKg}}</td>
             <td>{{data.finishKg}}</td>
 
+            <td>{{data.fabGsm}}</td>
+
+            <!-- <td>{{data.knitSL}}</td> -->
+            <td>{{data.yarnType}}</td>
+            <td>{{data.fabType}}</td>
+
+            <td>{{data.dyetype}}</td>
+            <!-- <td>{{data.spinFty}}</td>
+            <td>{{data.knitFty}}</td>
+
+            <td>{{data.dyeinFty}}</td> -->
+
+            <!-- <td>{{data.orderFOBRate}}</td> -->
+
+            <!-- <td>{{data.knitRate}}</td> -->
+            <!-- <td>{{data.dyeRate}}</td> -->
+           
             <td><button class="btn btn-success"
                 (click)="fabricreport(data)"><mat-icon>insert_drive_file</mat-icon></button></td>
 
@@ -198,8 +187,12 @@
 
             <th>FSize</th>
             <th>FabDia</th>
+            <th>OrderPcs</th>
+            <th>YarnKg</th>
+            <th>GreigeKg</th>
+            <th>FinishKg</th>
             <th>FabGsm</th>
-            <th>KnitSL</th>
+            <!-- <th>KnitSL</th> -->
 
             <th>Yarn Type</th>
             <th>FabType</th>
@@ -209,14 +202,12 @@
             <th>KnitFty</th>
             <th>DyeinFty</th> -->
 
-            <th>OrderPcs</th>
-            <th>OrderFOBRate</th>
+            
+            <!-- <th>OrderFOBRate</th> -->
             <!-- <th>KnitRate</th>
             <th>DyeRate</th> -->
 
-            <th>YarnKg</th>
-            <th>GreigeKg</th>
-            <th>FinishKg</th>
+           
 
             <th>Status</th>
             <th>Remove</th>
@@ -271,6 +262,13 @@
                 <option *ngFor="let data of this.fabdiaDta" value="{{data.FabDia}}">{{data.FabDia}}</option>
               </datalist>
             </td>
+            <td><input style="width: 15vh;" formControlName="OrderPcs" class="form-control" (input)="calculateDiff2(i)" (click)="calculateDiff2(i)"></td>
+
+            <td><input style="width: 15vh;" formControlName="YarnKg" class="form-control"></td>
+  
+            <td><input style="width: 15vh;" formControlName="GreigeKg" class="form-control"></td>
+  
+            <td><input style="width: 15vh;" formControlName="FinishKg" class="form-control"></td>
   
             <td><input style="width: 15vh;" formControlName="FabGsm" list="FabGsm" (input)="fabdiavalue($event)" class="form-control">
               <datalist id="FabGsm">
@@ -278,7 +276,7 @@
               </datalist>
             </td>
   
-            <td><input style="width: 15vh;" formControlName="KnitSL" type="number" class="form-control"></td>
+            <!-- <td><input style="width: 15vh;" formControlName="KnitSL" type="number" class="form-control"></td> -->
   
             <td><input style="width: 15vh;" formControlName="YarnType" list="YarnType" class="form-control">
               <datalist id="YarnType">
@@ -316,19 +314,15 @@
               </datalist>
             </td> -->
   
-            <td><input style="width: 15vh;" formControlName="OrderPcs" class="form-control" (input)="syncfunction(i)" (click)="syncfunction(i)"></td>
+            
   
-            <td><input style="width: 15vh;" formControlName="OrderFOBRate" class="form-control"></td>
+            <!-- <td><input style="width: 15vh;" formControlName="OrderFOBRate" class="form-control"></td> -->
   
             <!-- <td><input style="width: 15vh;" formControlName="KnitRate" class="form-control"></td>
   
             <td><input style="width: 15vh;" formControlName="DyeRate" class="form-control"></td> -->
   
-            <td><input style="width: 15vh;" formControlName="YarnKg" class="form-control"></td>
-  
-            <td><input style="width: 15vh;" formControlName="GreigeKg" class="form-control"></td>
-  
-            <td><input style="width: 15vh;" formControlName="FinishKg" class="form-control"></td>
+           
 
             <td> <p-dropdown [options]="[{ 'name': 'True', 'id':1 }, { 'name': 'False', 'id': 0 }]"
                 placeholder="Select a Status" formControlName="status" optionLabel="name" optionValue="id"></p-dropdown>

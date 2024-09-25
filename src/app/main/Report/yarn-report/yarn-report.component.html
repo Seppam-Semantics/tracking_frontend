@@ -10,22 +10,14 @@
           optionLabel="spinner" optionValue="spinner" autoWidth="false" [style]="{ minWidth: '22vh', minHeight:'2vh' }"
           [editable]="true"></p-dropdown>
 
-        <!-- <input type="search" class="form-control" list="spinner" (input)="yarnlcNo($event)" style="width: 23vh;" placeholder="spinner search">
-    <datalist id="spinner"><option *ngFor="let spin of this.spinfty" value="{{spin.spinner}}">{{spin.spinner}}</option></datalist> -->
-
         <p-dropdown [options]="AllData" (onChange)="yarnStatus()" [(ngModel)]="spinLcNo" placeholder="LCno"
           optionLabel="lcNo" optionValue="lcNo" autoWidth="false" [style]="{ minWidth: '22vh', minHeight:'2vh' }"
           [editable]="true"></p-dropdown>
-
-        <!-- <input type="search" class="form-control" list="lcno" (input)="yarnStatus($event)" style="width: 23vh;" placeholder="LCno search">
-    <datalist id="lcno"><option *ngFor="let data of this.AllData;"value="{{data.lcNo}}">{{data.lcNo}}</option></datalist> -->
 
         <p-dropdown [options]="someStatus" (onChange)="yarnDatawithStatus()" [(ngModel)]="spinStatus"
           placeholder="Status" optionLabel="yarnStatus" optionValue="yarnStatus" autoWidth="false"
           [style]="{ minWidth: '22vh', minHeight:'2vh' }" [editable]="true"></p-dropdown>
 
-        <!-- <input type="search" class="form-control" list="yarnStatus" (input)="yarnDatawithStatus($event)" style="width: 23vh;"  placeholder="Status search">
-    <datalist id="yarnStatus"><option *ngFor="let spin of this.someStatus" value="{{spin.yarnStatus}}">{{spin.yarnStatus}}</option></datalist> -->
       </div>
       <div style="flex: 1 1 auto;"></div>
 
@@ -42,9 +34,6 @@
         Report
       </button>
       <mat-menu #menu="matMenu">
-        <!-- <button mat-menu-item (click)="yarnHead()">
-        <span>New Header</span>
-      </button> -->
         <button mat-menu-item (click)="outstanding()">
           <span>LC Outstanding</span>
         </button>
@@ -55,56 +44,7 @@
 
     </mat-toolbar>
   </div>
-  <!-- <div style="display: flex; align-items: center; justify-content: space-between;">
-    <div style="display: flex; align-items: center; justify-content: center; width: 70%; gap: 20px; margin-top: 1%;">
-      <mat-form-field appearance="outline">
-        <mat-label>Spin Fty</mat-label>
-        <mat-select [(ngModel)]="spinfactory" (selectionChange)="yarnlcNo()">
-          <mat-option></mat-option>
-          <mat-option *ngFor="let spin of this.spinfty" value="{{spin.spinner}}">{{spin.spinner}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Lc No.</mat-label>
-        <mat-select >
-          <mat-option></mat-option>
-          <mat-option  value="{{data.lcNo}}">{{data.lcNo}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Status</mat-label>
-        <mat-select [(ngModel)]="spinStatus" (selectionChange)="yarnDatawithStatus()">
-          <mat-option></mat-option>
-          <mat-option *ngFor="let spin of this.someStatus" value="{{spin.yarnStatus}}">{{spin.yarnStatus}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <div style="flex: 1 1 auto;"></div>
-
-    <div>
-      <button mat-button color="primary" (click)="yarnHead()">New Header</button>
-    </div>
-
-    <div>
-      <button mat-button color="primary" (click)="exportexcel()"><mat-icon>download</mat-icon>Download</button>
-    </div>
-
-
-    <button mat-button color="primary" [matMenuTriggerFor]="menu">
-      Report
-    </button>
-    <mat-menu #menu="matMenu">
-
-      <button mat-menu-item (click)="outstanding()">
-        <span>LC Outstanding</span>
-      </button>
-      <button mat-menu-item (click)="reconciliation()">
-        <span>Reconciliation</span>
-      </button>
-    </mat-menu>
-
-  </div> -->
+ 
   <div class="YarnReportScrol">
     <table class="table table-hover fl-table" id="table-data">
       <thead class="thead-dark">

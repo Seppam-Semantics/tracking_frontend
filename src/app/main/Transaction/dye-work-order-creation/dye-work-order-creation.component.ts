@@ -64,7 +64,7 @@ export class DyeWorkOrderCreationComponent {
   factoryName() {
     this.api.dyeFty_master_Fillter_Data().subscribe((res)=>{
       this.factoryname = res.dyeFty
-      console.log(res)
+      // console.log(res)
     })
     // this.api.dye_factory_name().subscribe((res)=>{
     //   this.factoryname = res.factorys

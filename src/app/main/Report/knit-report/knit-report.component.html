@@ -5,33 +5,25 @@
 <!---===========================================================================================================-->
 
 <mat-toolbar style="height: 8vh;">
-  <!-- <div style="display: flex; justify-content: center; width: 80%; gap: 2%;margin-top: 1.5%;"> -->
-  <!-- <mat-form-field appearance="outline">
-        <mat-label>Factory</mat-label>
-        <mat-select [(ngModel)]="factoryvalue" (selectionChange)="factory()">
-          <mat-option *ngFor="let ftyname of this.ftyName" [value]="ftyname.knitFty">{{ftyname.knitFty}}</mat-option>
-        </mat-select>
-      </mat-form-field>
+  <div style="display: flex; gap: 2%;margin-top: 1.5%;">
 
-      <mat-form-field appearance="outline">
-        <mat-label>Date</mat-label>
-        <mat-select [(ngModel)]="knitdate" (selectionChange)="factory()">
-          <mat-option *ngFor="let date of this.date" [value]="date.date">{{date.date}}</mat-option>
-        </mat-select>
-      </mat-form-field> -->
-  <p-dropdown [options]="orderName" (onChange)="factory()" [(ngModel)]="ordervalue" placeholder="Order No"
+    <p-dropdown [options]="buyer" (onChange)="factory()" [(ngModel)]="buyerKnit" placeholder="Buyers" (onChange)="OrderName()"
+    optionLabel="buyer" optionValue="buyer" autoWidth="false" [style]="{ minWidth: '22vh', minHeight:'2vh' }"
+    [editable]="true"></p-dropdown>
+
+    <p-dropdown [options]="orderName" (onChange)="factory()" [(ngModel)]="ordervalue" placeholder="Order No" (onChange)="colorName()"
     optionLabel="orderNo" optionValue="orderNo" autoWidth="false" [style]="{ minWidth: '22vh', minHeight:'2vh' }"
     [editable]="true"></p-dropdown>
 
-    <p-dropdown [options]="status" (onChange)="statusfun()" [(ngModel)]="statusvalue" placeholder="status"
-    optionLabel="status" optionValue="status" autoWidth="false" [style]="{ minWidth: '22vh', minHeight:'2vh' }"
-    [editable]="true"></p-dropdown>
-
-    <p-dropdown [options]="colorlist2" (onChange)="colorfilter()" [(ngModel)]="colorvalue" placeholder="color"
+    <p-dropdown [options]="colorlist2" (onChange)="factory()" [(ngModel)]="colorvalue" placeholder="color"
     optionLabel="color" optionValue="color" autoWidth="false" [style]="{ minWidth: '22vh', minHeight:'2vh' }"
     [editable]="true"></p-dropdown>
 
-  <!-- </div> -->
+    <p-dropdown [options]="status" (onChange)="factory()" [(ngModel)]="statusvalue" placeholder="status"
+    optionLabel="status" optionValue="status" autoWidth="false" [style]="{ minWidth: '22vh', minHeight:'2vh' }"
+    [editable]="true"></p-dropdown>
+
+  </div>
   <div style="flex: 1 1 auto;"></div>
   <div class="newlist1">
     <button mat-button color='primary' (click)="Report()">New </button>
@@ -61,17 +53,18 @@
     <button mat-button color='primary' (click)="exportexcel2()">Download</button>
   </div>
 </mat-toolbar>
-<div class="fixTableHead">
+<div class="fixTableHead" style="margin-top: 0.5%;">
   <table id="table-data2 fl-table" class="table table-hover">
     <thead class="thead-dark">
       <tr>
         <th> Sl.no </th>
-        <th>Order</th>
         <th>Factory</th>
+        <th>Buyer</th>
+        <th>Order</th>
         <th>Color</th>
         <th>Date</th>
         <th>Total Day ProductionKgs <br/>
-          <input type="text" value="{{this.TotalValue}}">
+          <input type="text" value="{{this.TotalValue}}" readonly>
         </th>
         <th>Total NoOfRolls Produced</th>
         <th>Status</th>
@@ -83,8 +76,9 @@
     <tbody>
       <tr *ngFor="let detail of this.data; let i= index ;">
         <td >{{i+1}}</td>
-        <td >{{detail.orderNo}}</td>
         <td >{{detail.factory}}</td>
+        <td >{{detail.buyer}}</td>
+        <td >{{detail.orderNo}}</td>
         <td >
           <ul *ngFor="let color of colorjson(detail.colors)" style="text-align: justify;">
             <!-- <ul *ngFor="let color of detail.colors" style="text-align: justify;"> -->

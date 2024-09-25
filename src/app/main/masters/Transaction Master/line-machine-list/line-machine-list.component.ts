@@ -150,14 +150,14 @@ getSelectedLines() {
         "linemasterId" : line.id
     }));
 
-    console.log(this.selectedline)
+    // console.log(this.selectedline)
     this.LineMachinelistupdate.patchValue({
         data: this.selectedline
     });
 }
 
   update(){
-    console.log(this.LineMachinelistupdate.value);
+    // console.log(this.LineMachinelistupdate.value);
     this.api.MachinelistPost(this.LineMachinelistupdate.value).subscribe((res)=>{
       Swal.fire({
         position: "top-end",

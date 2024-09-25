@@ -85,20 +85,25 @@ export class KnitDeliveryComponent {
       this.buyerlist = res.buyer
     })
 
-    this.api.knitdelivery_orderNo_list().subscribe((res)=>{
-      this.orderNolist = res.orderNo
-    })
-
-    this.api.knitdelivery_color_list().subscribe((res)=>{
-      this.colorlist2 = res.color
-    })
-
     this.api.knitdelivery_Total_Fillter().subscribe((res)=>{
       this.TotalValue = res.knitDeliveryTotal[0].totalKgs
     })
   
   }
 
+
+  orderNumber(){
+    this.api.knitdelivery_orderNo_list(this.buyerFillter).subscribe((res)=>{
+      this.orderNolist = res.orderNo
+      // console.log(res)
+    })
+  }
+
+  colorName(){
+    this.api.knitdelivery_color_list(this.orderNoFillter).subscribe((res)=>{
+      this.colorlist2 = res.color
+    })
+  }
 
   colorjson1(data: any): any {
     return JSON.parse(data);
@@ -111,33 +116,21 @@ export class KnitDeliveryComponent {
     return this.KnitDelivery.get("data") as FormArray;
   }
 
-  knitdelBuyerFilter(){
-    if(this.buyerFillter){
-      this.api.knitdelivery_fty_Fillter(this.buyerFillter  ,'').subscribe((res)=>{
-        this.knitDelAllData = res.knitDelivery
-      })
-      this.api.knitdelivery_Total_Fillter(this.buyerFillter  ,'').subscribe((res)=>{
-        this.TotalValue = res.knitDeliveryTotal[0].totalKgs
-      })
-    }
-    if(this.buyerFillter && this.orderNoFillter){
-      this.api.knitdelivery_fty_Fillter(this.buyerFillter, this.orderNoFillter).subscribe((res)=>{
-        this.knitDelAllData = res.knitDelivery
-      })
-      this.api.knitdelivery_Total_Fillter(this.buyerFillter, this.orderNoFillter).subscribe((res)=>{
-        this.TotalValue = res.knitDeliveryTotal[0].totalKgs
-      })
-    }
-    if(this.buyerFillter && this.orderNoFillter && this.colorFillter){
-      this.api.knitdelivery_fty_Fillter(this.buyerFillter, this.orderNoFillter, this.colorFillter).subscribe((res)=>{
-        this.knitDelAllData = res.knitDelivery
-      })  
-      this.api.knitdelivery_Total_Fillter(this.buyerFillter, this.orderNoFillter, this.colorFillter).subscribe((res)=>{
-        this.TotalValue = res.knitDeliveryTotal[0].totalKgs
-      })
-    }
-    }
 
+  knitdelBuyerFilter() {
+    const { buyerFillter, orderNoFillter, colorFillter } = this;
+  
+    if (buyerFillter) {
+      // Filter with only buyer filter
+      this.api.knitdelivery_fty_Fillter(buyerFillter, orderNoFillter, colorFillter).subscribe((res) => {
+        this.knitDelAllData = res.knitDelivery;
+      });
+      this.api.knitdelivery_Total_Fillter(buyerFillter, orderNoFillter, colorFillter).subscribe((res) => {
+        this.TotalValue = res.knitDeliveryTotal[0].totalKgs;
+      });
+    }
+  }
+  
     
   fileName = "knitDeliveryReport.xlsx"
 

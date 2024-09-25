@@ -9,11 +9,11 @@
                 <option *ngFor="let ftyname of this.fty_name" value="{{ftyname.knitFty}}"></option>
               </datalist> -->
 
-              <p-dropdown [options]="buyerlist" [(ngModel)]="buyerFillter" placeholder="Buyer" (onChange)="knitdelBuyerFilter()"
+              <p-dropdown [options]="buyerlist" [(ngModel)]="buyerFillter" placeholder="Buyer" (onChange)="knitdelBuyerFilter()" (onChange)="orderNumber()"
               optionLabel="buyer" optionValue="buyer" autoWidth="false" [style]="{ minWidth: '22vh', minHeight:'2vh' }"
               [editable]="true"></p-dropdown>
 
-              <p-dropdown [options]="orderNolist" [(ngModel)]="orderNoFillter" placeholder="orderNo" (onChange)="knitdelBuyerFilter()"
+              <p-dropdown [options]="orderNolist" [(ngModel)]="orderNoFillter" placeholder="orderNo" (onChange)="knitdelBuyerFilter()" (onChange)="colorName()"
               optionLabel="orderNo" optionValue="orderNo" autoWidth="false" [style]="{ minWidth: '22vh', minHeight:'2vh' }"
               [editable]="true"></p-dropdown>
 

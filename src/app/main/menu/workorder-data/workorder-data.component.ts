@@ -16,7 +16,7 @@ export class WorkorderDataComponent implements OnInit {
   Buyer_Value: any;
   buyersDta: any;
   orderNoDta: any;
-  Order_Value: string = '';
+  Order_Value: any;
   styleDta: any;
   style_Value: any;
   colorDta: any;
@@ -119,7 +119,7 @@ export class WorkorderDataComponent implements OnInit {
     const formArray = this.buyerorderform.get('data') as FormArray;
     const row = formArray.at(index);
     this.Buyer_Value = this.buyerorderform.get('Buyer')?.value;
-    this.Order_Value = this.buyerorderform.get('OrderNo')?.value ?? '';
+    this.Order_Value = this.buyerorderform.get('OrderNo')?.value;
     this.orderdata()
   }
 
@@ -133,7 +133,7 @@ export class WorkorderDataComponent implements OnInit {
 
   orderdata() {
     this.Buyer_Value = this.buyerorderform.get('Buyer')?.value;
-    this.Order_Value = this.buyerorderform.get('OrderNo')?.value ?? '';
+    this.Order_Value = this.buyerorderform.get('OrderNo')?.value;
     this.api.order_to_style(this.Buyer_Value, this.Order_Value).subscribe((res) => {
       this.styleDta = res.style
     })
@@ -143,7 +143,7 @@ export class WorkorderDataComponent implements OnInit {
     const formArray = this.buyerorderform.get('data') as FormArray;
     const row = formArray.at(index);
     this.Buyer_Value = this.buyerorderform.get('Buyer')?.value;
-    this.Order_Value = this.buyerorderform.get('OrderNo')?.value ?? '';
+    this.Order_Value = this.buyerorderform.get('OrderNo')?.value;
     this.style_Value = row.get('Style')?.value;
     this.styledata()
   }
@@ -161,7 +161,7 @@ export class WorkorderDataComponent implements OnInit {
     const formArray = this.buyerorderform.get('data') as FormArray;
     const row = formArray.at(index);
     this.Buyer_Value = this.buyerorderform.get('Buyer')?.value;
-    this.Order_Value = this.buyerorderform.get('OrderNo')?.value ?? '';
+    this.Order_Value = this.buyerorderform.get('OrderNo')?.value;
     this.style_Value = row.get('Style')?.value;
     this.color_Value = row.get('Color')?.value;
  }
@@ -235,7 +235,7 @@ export class WorkorderDataComponent implements OnInit {
     const formArray = this.buyerorderform.get('data') as FormArray;
     const row = formArray.at(index);
     this.Buyer_Value = this.buyerorderform.get('Buyer')?.value;
-    this.Order_Value = this.buyerorderform.get('OrderNo')?.value ?? '';
+    this.Order_Value = this.buyerorderform.get('OrderNo')?.value;
     this.style_Value = row.get('Style')?.value;
     this.color_Value = row.get('Color')?.value;
     this.size_Value = size
@@ -254,7 +254,7 @@ export class WorkorderDataComponent implements OnInit {
     const Array = this.buyerorderform.get('data') as FormArray;
     const row1 = Array.at(index);
     this.Buyer_Value = this.buyerorderform.get('Buyer')?.value;
-    this.Order_Value = JSON.stringify(this.buyerorderform.get('OrderNo')?.value ?? '');
+    this.Order_Value = this.buyerorderform.get('OrderNo')?.value;
     this.style_Value = row1.get('Style')?.value;
     this.color_Value = row1.get('Color')?.value;
     this.size_Value = row1.get('Size')?.value;
@@ -264,7 +264,7 @@ export class WorkorderDataComponent implements OnInit {
 if(this.Buyer_Value && this.Order_Value && this.style_Value && this.color_Value && this.size_Value){
 
     this.api.size_to_id(this.Buyer_Value, this.Order_Value, this.style_Value, this.color_Value, this.size_Value).subscribe((res) => {
-      console.log(res);
+      // console.log(res);
       try{
         this.DyeTypeLossDta = res.DyeTypeLoss[0].dyepl ? res.DyeTypeLoss[0].dyepl : 0
       }catch{}
@@ -292,21 +292,21 @@ if(this.Buyer_Value && this.Order_Value && this.style_Value && this.color_Value 
       if(res.success){
       this.OrderFOBRate	 = res.sizeId[0]?.poRate ? res.sizeId[0]?.poRate : ''  
       this.OrderPcs	 = res.sizeId[0]?.quantity ? res.sizeId[0]?.quantity : ''
-      this.polineId = res.sizeId[0]?.id ? res.sizeId[0]?.id : ''  
-      this.poid = res.sizeId[0]?.orderId ? res.sizeId[0]?.orderId : ''
+      this.polineId = res.sizeId[0]?.id ? res.sizeId[0]?.id : null  
+      this.poid = res.sizeId[0]?.orderId ? res.sizeId[0]?.orderId : null
       this.FSizeFBC = res.sizeId[0]?.concatSize ? res.sizeId[0]?.concatSize : ''
-      this.FSizeFBCId = res.sizeId[0]?.sizeId ? res.sizeId[0]?.sizeId : ''
+      this.FSizeFBCId = res.sizeId[0]?.sizeId ? res.sizeId[0]?.sizeId : null
       this.fabricTypeFBC = res.sizeId[0]?.fabricType ? res.sizeId[0]?.fabricType : ''
-      this.fabricTypeFBCId = res.sizeId[0]?.fabricTypeId ? res.sizeId[0]?.fabricTypeId : ''
+      this.fabricTypeFBCId = res.sizeId[0]?.fabricTypeId ? res.sizeId[0]?.fabricTypeId : null
       this.fabricGSMFBC = res.sizeId[0]?.fabricGSM ? res.sizeId[0]?.fabricGSM : ''
-      this.fabricGSMFBCId = res.sizeId[0]?.fabricGSMId ? res.sizeId[0]?.fabricGSMId : ''
+      this.fabricGSMFBCId = res.sizeId[0]?.fabricGSMId ? res.sizeId[0]?.fabricGSMId : null
       this.yarnTypeFBC = res.sizeId[0]?.yarnType ? res.sizeId[0]?.yarnType : ''
-      this.yarnTypeFBCId = res.sizeId[0]?.yarnTypeId ? res.sizeId[0]?.yarnTypeId : ''
+      this.yarnTypeFBCId = res.sizeId[0]?.yarnTypeId ? res.sizeId[0]?.yarnTypeId : null
       this.finishDiaFBC = res.sizeId[0]?.finishDia ? res.sizeId[0]?.finishDia : ''
       // this.finishDiaFBCId = res.sizeId[0]?.finishDiaId ? res.sizeId[0]?.finishDiaId : ''
-      this.styleIdDta = res.sizeId[0]?.styleId ? res.sizeId[0]?.styleId : ''
+      this.styleIdDta = res.sizeId[0]?.styleId ? res.sizeId[0]?.styleId : null
       this.dyeTypeFBC = res.sizeId[0]?.dyeType ? res.sizeId[0]?.dyeType : ''
-      this.dyeTypeFBCId = res.sizeId[0]?.dyeTypeId ? res.sizeId[0]?.dyeTypeId : ''
+      this.dyeTypeFBCId = res.sizeId[0]?.dyeTypeId ? res.sizeId[0]?.dyeTypeId : null
 
       const formArray = this.buyerorderform.get('data') as FormArray;
       const row = formArray.at(index);

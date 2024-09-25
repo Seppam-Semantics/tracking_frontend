@@ -56,7 +56,7 @@ edit(id:any){
 }
 
 save(){
-  console.log(this.EventMasterNewFrom.value)
+  // console.log(this.EventMasterNewFrom.value)
   this.api.posteventmaster(this.EventMasterNewFrom.value).subscribe((res)=>{
     alert(res.message)
     this.EventMasterNewFrom.reset()
@@ -66,7 +66,7 @@ save(){
 }
 
 update(){
-  console.log(this.EventMasterEditFrom.value)
+  // console.log(this.EventMasterEditFrom.value)
   this.api.posteventmaster(this.EventMasterEditFrom.value).subscribe((res)=>{
     alert(res.message)
     this.eventsfilter();

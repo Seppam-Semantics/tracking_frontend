@@ -55,7 +55,7 @@ export class MainComponent implements OnInit {
     this.router.navigate(['/main/Yarn-Report'])
   }
   yarnReceipt(){
-      this.router.navigate(['/main/yarn-receipt']);
+      this.router.navigate(['/main/yarnReceiptReport']);
   }
   fabricEntry() {
     this.router.navigate(['/main/fabricroll1'])

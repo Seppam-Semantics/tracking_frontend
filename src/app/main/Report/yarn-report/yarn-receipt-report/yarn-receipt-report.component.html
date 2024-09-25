@@ -1,0 +1,167 @@
+<mat-toolbar style="display: flex; justify-content:space-between; height: 10vh;">
+
+      <div style="display: flex; gap: 10px; ">
+
+        <p-dropdown [options]="yarnfty" [(ngModel)]="factory" placeholder="Factory" optionLabel="spinner"
+        optionValue="spinner" (onChange)="getLcNo()" (onChange)="yarnReceiptFilter()" autoWidth="false"
+        [style]="{ minWidth: '22vh', minHeight:'2vh' }" [editable]="true" ></p-dropdown>
+  
+        <p-dropdown [options]="lcNolist" [(ngModel)]="lcNo" placeholder="LcNo" optionLabel="lcNo"
+        optionValue="lcNo" (onChange)="yarnReceiptFilter()" autoWidth="false"
+        [style]="{ minWidth: '22vh', minHeight:'2vh' }" [editable]="true" ></p-dropdown>
+
+      </div> 
+
+      <div style="display: flex;">
+        <h2> Yarn Receipt</h2>
+      </div>
+      <div style="display: flex;">
+        <button class="btn btn-primary" color='primary' (click)="newReceiptEntry()">New Entry</button>
+      </div>
+  
+  </mat-toolbar>
+  
+  <div class="table-wrapper">
+    <table id="table-data2" class="fl-table">
+      <thead class="thead-dark">
+        <tr>
+          <th>S.No</th>
+          <th>Yarn Factory</th>
+          <th>Lc No.</th>
+          <th>Spin Challan</th>
+          <th>Scandex Challan</th>
+          <th>knit Factory</th>
+          <th>Receipt Date</th>
+          <th>Receipt Kg</th>
+          <th>Edit</th>
+          <!-- <th>Delete</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let work of this.data; let i=index">
+  
+          <td>{{i+1}}</td>
+          <td>{{work.spinner}}</td>
+          <td>{{work.lcNo}}</td>
+          <td>{{work.spinningChallan}}</td>
+          <td>{{work.scandexChallan}}</td>
+          <td>{{work.knitFactory}}</td>
+          <td>{{work.receiptDt}}</td>
+          <td>{{work.receiptYarnKgs}}</td>
+    
+          <td><button class="btn btn-primary" (click)="edit(work.id)"><mat-icon>edit</mat-icon></button></td>
+
+          <!-- <td><button class="btn btn-danger" (click)="delete(work.id)"><mat-icon>delete</mat-icon></button></td> -->
+        </tr>
+  
+      <tbody>
+    </table>
+  </div>
+
+
+  <!-- ===================================================================================================================================================== -->
+
+  <p-dialog [resizable]="true" [modal]="true" [maximizable]="true" [(visible)]="visible" [style]="{width: '90vw'}"
+  [contentStyle]="{height: '90vh'}" [formGroup]="yarnreceiptupdateform" header="Yarn Receipt Update">
+  <fieldset>
+    <div style="margin-top: 5%;">
+        <div style="display: flex; justify-content: center; gap: 20px;">
+    
+            <mat-form-field appearance="outline">
+                <mat-label>Factory</mat-label>
+                <input matInput formControlName="factory" readonly>
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Lc No.</mat-label>
+                <input matInput formControlName="lcNo" readonly>
+              </mat-form-field>
+        </div>
+        <div style="display: flex; justify-content: center; gap: 20px;">
+    
+            <mat-form-field appearance="outline">
+                <mat-label>Spin Challan</mat-label>
+                <input matInput type="text" formControlName="spinningChallan">
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline">
+                <mat-label>SPDL Challan</mat-label>
+                <input matInput type="text" formControlName="scandexChallan" >
+            </mat-form-field>
+    
+                <input type="date" formControlName="receiptDt" class="form-control" style="width: 215px; height: 58px; border: 1px solid rgb(85, 83, 83);">
+        </div>
+
+        <div style="display: flex; justify-content: center; gap: 20px;">
+    
+            <mat-form-field appearance="outline">
+                <mat-label>Yarn Type</mat-label>
+                <input matInput type="text" formControlName="yarnType" readonly>
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline">
+                <mat-label>Buyer</mat-label>
+                <input matInput type="text" formControlName="buyer"  readonly>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Order No</mat-label>
+                <input matInput type="text" formControlName="orderNo" readonly>
+            </mat-form-field>
+
+        </div>
+
+        <div style="display: flex; justify-content: center; gap: 20px;">
+    
+            <mat-form-field appearance="outline">
+                <mat-label>Style</mat-label>
+                <input matInput type="text" formControlName="style" readonly>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Color</mat-label>
+                <input matInput type="text" formControlName="colour" readonly>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>allocatedKg</mat-label>
+                <input matInput type="text" formControlName="allocatedKg" readonly>
+            </mat-form-field>
+            
+        </div>
+
+        <div style="display: flex; justify-content: center; gap: 20px;">
+    
+            <mat-form-field appearance="outline">
+                <mat-label>Knit Factory</mat-label>
+                <input matInput type="text" formControlName="knitFactory">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Receipt Quantity</mat-label>
+                <input matInput type="text" formControlName="receiptYarnKgs" (input)="pending($event.target.value)">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>BagsCtn Nos</mat-label>
+                <input matInput type="text" formControlName="BagsCtnNos">
+            </mat-form-field>
+            
+        </div>
+
+        <div style="display: flex; justify-content: center; gap: 20px;">
+
+            <mat-form-field appearance="outline">
+                <mat-label>pending Receipt Kgs</mat-label>
+                <input matInput type="text" formControlName="pendingReceiptKgs" readonly>
+            </mat-form-field>
+
+        </div>
+    </div>
+  </fieldset>
+
+  <ng-template pTemplate="footer">
+    <div style="display: flex; width: 100%; justify-content: center;">
+      <button (click)="receiptupdate()" mat-button color="primary"><mat-icon>save</mat-icon>Update</button>
+    </div>
+  </ng-template>
+</p-dialog>

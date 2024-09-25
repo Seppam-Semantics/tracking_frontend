@@ -69,6 +69,7 @@ import { EventMasterRootComponent } from './Event/Master/event-master-root/event
 import { TnaEventUpdateComponent } from './Event/Update/tna-event-update/tna-event-update.component';
 import { TnaListsComponent } from './Event/Report/tna-lists/tna-lists.component';
 import { YarnReceiptComponent } from './Transaction/yarn-entry/yarn-receipt/yarn-receipt/yarn-receipt.component';
+import { YarnReceiptReportComponent } from './Report/yarn-report/yarn-receipt-report/yarn-receipt-report.component';
 
 const routes: Routes = [
   {path:'', component: AppComponent},
@@ -99,6 +100,7 @@ const routes: Routes = [
   {path:"yarn-header", component:YarnHeaderComponent},
   {path:"yarn-transcation", component:YarnTranscationComponent},
   {path : "yarn-receipt", component : YarnReceiptComponent},
+  {path : "yarnReceiptReport", component : YarnReceiptReportComponent},
   {path:"dye-delivery" , component:DyeDeliveryComponent},
   {path:"knit-delivery" , component:KnitDeliveryComponent},
   {path:"Dye-DelEntry" , component:DyeDelEntryComponent},

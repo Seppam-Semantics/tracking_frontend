@@ -50,6 +50,10 @@
 
             <th>GSize</th>
             <th>FabDia</th>
+            <th>OrderPcs</th>
+            <th>YarnKg</th>
+            <th>GreigeKg</th>
+            <th>FinishKg</th>
             <th>FabGsm</th>
 
             <th>Yarn Type</th>
@@ -60,14 +64,12 @@
             <th>KnitFty</th>
             <th>DyeinFty</th> -->
 
-            <th>OrderPcs</th>
-            <th>OrderFOBRate</th>
+
+            <!-- <th>OrderFOBRate</th> -->
             <!-- <th>KnitRate</th>
             <th>DyeRate</th> -->
 
-            <th>YarnKg</th>
-            <th>GreigeKg</th>
-            <th>FinishKg</th>
+            
 
             <th>Remove</th>
           </tr>
@@ -123,19 +125,17 @@
             </td>
 
 
-            <td><input style="width: 15vh;" formControlName="FabDia" list="FabDia" (input)="fabdiavalue($event)"
-                readonly class="form-control">
-              <datalist id="FabDia">
-                <option *ngFor="let data of this.fabdiaDta" value="{{data.FabDia}}">{{data.FabDia}}</option>
-              </datalist>
-            </td>
+            <td><input style="width: 15vh;" formControlName="FabDia" list="FabDia" (input)="fabdiavalue($event)" readonly class="form-control"></td>
 
-            <td><input style="width: 15vh;" formControlName="FabGsm" list="FabGsm" (input)="fabdiavalue($event)"
-                readonly class="form-control">
-              <datalist id="FabGsm">
-                <option *ngFor="let data of this.fabGsmDta" value="{{data.FabGsm}}">{{data.FabGsm}}</option>
-              </datalist>
-            </td>
+            <td><input style="width: 15vh;" formControlName="OrderPcs" class="form-control" (click)="calculateDiff(i)" (input)="calculateDiff(i)"></td>
+
+            <td><input style="width: 15vh;" formControlName="YarnKg" readonly class="form-control"></td>
+
+            <td><input style="width: 15vh;" formControlName="GreigeKg" readonly class="form-control"></td>
+
+            <td><input style="width: 15vh;" formControlName="FinishKg" readonly class="form-control"></td>
+            
+            <td><input style="width: 15vh;" formControlName="FabGsm" list="FabGsm" readonly class="form-control"></td>
 
             <td><input style="width: 15vh;" formControlName="YarnType" list="YarnType" readonly class="form-control">
               <datalist id="YarnType">
@@ -178,19 +178,13 @@
               </datalist>
             </td> -->
 
-            <td><input style="width: 15vh;" formControlName="OrderPcs" class="form-control" (click)="calculateDiff(i)" (input)="calculateDiff(i)"></td>
-
-            <td><input style="width: 15vh;" formControlName="OrderFOBRate" class="form-control"></td>
+            <!-- <td><input style="width: 15vh;" formControlName="OrderFOBRate" class="form-control"></td> -->
 
             <!-- <td><input style="width: 15vh;" formControlName="KnitRate" class="form-control"></td>
 
             <td><input style="width: 15vh;" formControlName="DyeRate" class="form-control"></td> -->
 
-            <td><input style="width: 15vh;" formControlName="YarnKg" readonly class="form-control"></td>
-
-            <td><input style="width: 15vh;" formControlName="GreigeKg" readonly class="form-control"></td>
-
-            <td><input style="width: 15vh;" formControlName="FinishKg" readonly class="form-control"></td>
+          
 
             <td><button (click)="Delete(i)" style="background-color: red; color: white;">x</button></td>
 

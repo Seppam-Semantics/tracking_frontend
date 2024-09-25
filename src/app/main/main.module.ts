@@ -143,6 +143,7 @@ import { TnaEventUpdateComponent } from './Event/Update/tna-event-update/tna-eve
 import { TnaListsComponent } from './Event/Report/tna-lists/tna-lists.component';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { YarnReceiptComponent } from './Transaction/yarn-entry/yarn-receipt/yarn-receipt/yarn-receipt.component';
+import { YarnReceiptReportComponent } from './Report/yarn-report/yarn-receipt-report/yarn-receipt-report.component';
 
 
 @NgModule({
@@ -239,7 +240,8 @@ import { YarnReceiptComponent } from './Transaction/yarn-entry/yarn-receipt/yarn
     StyleBudgetDaysComponent,
     TnaEventUpdateComponent,
     TnaListsComponent,
-    YarnReceiptComponent
+    YarnReceiptComponent,
+    YarnReceiptReportComponent
   ],
   imports: [
     CommonModule,

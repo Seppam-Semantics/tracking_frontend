@@ -70,7 +70,7 @@ export class KnitWorkOrderCreationComponent implements OnInit {
   factoryName() {
     this.api.KnitFty_master_Fillter_Data().subscribe((res)=>{
       this.ftyName = res.knitFty
-      console.log(res)
+      // console.log(res)
     })
     // this.api.knitfty_name().subscribe((res) => {
     //   this.ftyName = res.factorys

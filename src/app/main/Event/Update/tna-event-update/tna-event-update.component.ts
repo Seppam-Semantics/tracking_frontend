@@ -143,7 +143,7 @@ colorvalue() {
   this.color_Value = this.tnaEventNew.get('color')?.value;
 
   this.api1.getTNAEvent(this.style_Value).subscribe((res)=>{
-      console.log(res)
+      // console.log(res)
       this.eventlist = res.data
       this.tnaEventNew.patchValue({
         id : this.eventlist[0].headId ? this.eventlist[0]?.headId : 0,

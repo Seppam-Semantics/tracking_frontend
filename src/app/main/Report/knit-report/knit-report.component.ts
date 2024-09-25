@@ -61,6 +61,7 @@ export class KnitReportComponent implements OnInit {
   no: any
   fty_name: any;
   buyer: any;
+  buyerKnit : any;
   orderNo: any;
   style: any;
   color: any;
@@ -120,12 +121,14 @@ export class KnitReportComponent implements OnInit {
     this.factoryName();
     this.allknitDetails();
     this.knitDate()
-    this.OrderName()
     this.factory()
-    this.statusfun()
 
-    this.api.knit_color_list().subscribe((res)=>{
-      this.colorlist2 = res.color
+    this.api.knit_Total_filter().subscribe((res) => {
+      this.TotalValue = res.knitTotal[0].totalDayProductionKgs;
+    });
+
+    this.api.getknitwobuyers().subscribe((res) => {
+      this.buyer = res.buyers
     })
   }
 
@@ -141,11 +144,15 @@ export class KnitReportComponent implements OnInit {
     })
   }
   OrderName() {
-    this.api.knitfty_order().subscribe((res) => {
+    this.api.knitfty_order_filter(this.buyerKnit).subscribe((res) => {
       this.orderName = res.order
     })
   }
-
+  colorName() {
+    this.api.knit_color_list_filter(this.ordervalue).subscribe((res)=>{
+      this.colorlist2 = res.color
+    })
+  }
 
 
   allknitDetails() {
@@ -159,60 +166,19 @@ export class KnitReportComponent implements OnInit {
   }
 
   factory() {
-;
-
-    // if(this.factoryvalue != '' && this.knitdate == ''){
-    //   this.loadknitdetails(this.factoryvalue)
-    // }
-    // if(this.factoryvalue == '' && this.knitdate != ''){
-    //   this.loadknitdetails('',this.knitdate)
-    // }
-    // if(this.factoryvalue == '' && this.knitdate != '' && this.ordervalue != ''){
-    //   this.loadknitdetails('','',this.ordervalue)
-    // }
-    // if(this.factoryvalue && this.knitdate && this.ordervalue){
-    this.api.ftydetailsFilter(this.ordervalue,'').subscribe((res) => {
-      this.data = res.knit; 
-    });
-
-    this.api.knit_Total_filter(this.ordervalue,'').subscribe((res) => {
-      this.TotalValue = res.knitTotal[0].totalDayProductionKgs; 
-
-    });
-    // }
-  }
-
-  colorfilter(){
-    this.api.ftydetailsFilter('','',this.colorvalue).subscribe((res) => {
-      this.data = res.knit; 
-    });
-
-    this.api.knit_Total_filter('','',this.colorvalue).subscribe((res) => {
-      this.TotalValue = res.knitTotal[0].totalDayProductionKgs; 
-    
-    });
-  }
-
-  loadknitdetails(Order: string = '' , status: string = '') {
- 
-  }
-
-  statusfun(){
-    this.api.ftydetailsFilter('',this.statusvalue).subscribe((res) => {
-      this.data = res.knit; 
-    });
+    const { buyerKnit, ordervalue, colorvalue, statusvalue } = this;
   
-    this.api.knit_Total_filter('',this.statusvalue).subscribe((res) => {
-      this.TotalValue = res.knitTotal[0].totalDayProductionKgs; 
-    
-    });
+    if (buyerKnit) {
+      this.api.ftydetailsFilter(buyerKnit,ordervalue, colorvalue, statusvalue).subscribe((res) => {
+        this.data = res.knit;
+      });
   
+      this.api.knit_Total_filter(buyerKnit,ordervalue, colorvalue, statusvalue).subscribe((res) => {
+        this.TotalValue = res.knitTotal[0].totalDayProductionKgs;
+      });
+    }
   }
-  // factory_date() {
-  //   this.loadknitdetails(this.factoryvalue, this.knitdate)
-  // }
-
-
+  
   loadftydetails(buyer: any, orderNo: string = '', style: string = '', color: string = '', size: string = '') {
     this.api.knitDetailsFilter(buyer, orderNo, style, color, size).subscribe((res) => {
       this.knitdetails = res.knit;
@@ -247,7 +213,6 @@ export class KnitReportComponent implements OnInit {
     })
   }
   getBuyerValue(index: any) {
-    // this.buyerName = event.target.value;
     const formArray = this.load.get('data') as FormArray;
     const row = formArray.at(index);
     this.buyerName = row.get('buyer')?.value;
@@ -283,7 +248,6 @@ export class KnitReportComponent implements OnInit {
     this.orderNo = row.get('orderNo')?.value;
     this.style = row.get('style')?.value;
     this.getcolor()
-    // this.style = event.target.value
   }
 
   getcolor() {
@@ -300,8 +264,7 @@ export class KnitReportComponent implements OnInit {
     this.orderNo = row.get('orderNo')?.value;
     this.style = row.get('style')?.value;
     this.color = row.get('color')?.value;
-    
-    // this.color = event.target.value
+  
     this.getsize()
   }
 
@@ -419,7 +382,7 @@ export class KnitReportComponent implements OnInit {
     this.router.navigate(['/main/knit-factory-inventory'])
   }
   Dayknit() {
-    this.router.navigate(['/main/Day-Knit'])
+    this.router.navigate(['/main/Day-Knit']);
   }
 
   edit(id: any) {
@@ -549,15 +512,6 @@ export class KnitReportComponent implements OnInit {
 
     this.items.push(row);
   }
-
-  // save() {
-  //   this.api.updateKnitEntry(this.load.value).subscribe((res) => {
-  //     alert(res.message)
-  //     this.editpopup = false;
-  //   })
-  
-  // }
-
 
   save() {
 

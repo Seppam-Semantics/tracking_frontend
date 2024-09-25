@@ -95,10 +95,10 @@ table {
   :host ::ng-deep .modal-backdrop.show {
     display: contents;
   }
-  .fixTableHead{
+  /* .fixTableHead{
     overflow: scroll;
     height: 75%;
-  }
+  } */
 
 
 
@@ -189,7 +189,7 @@ thead{
 }
 .fixTableHead{
   overflow: scroll;
-  height: 69%;
+  height: 80%;
   scrollbar-width: none;
 }
 

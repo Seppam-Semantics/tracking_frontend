@@ -254,7 +254,7 @@ export class LineAllocationEntryComponent implements OnInit {
       const formArray = this.LineAllocationForm.get('data') as FormArray;
       const row = formArray.at(index);
       row.get('startdate')?.setValue(res.date[0].endDate)
-      console.log(res.date[0].endDate)
+      // console.log(res.date[0].endDate)
     })
   }
 

@@ -51,7 +51,7 @@ export class YarnHeaderComponent implements OnInit{
 
     this.api.spinFty_master_Fillter_Data().subscribe((res)=>{
       this.spinfty = res.spinFty
-      console.log(res)
+      // console.log(res)
     })
 
     // this.api.getallSpinfty().subscribe((res)=>{

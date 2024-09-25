@@ -1,8 +1,14 @@
-<div style="text-align: center;">
-    <h2>Yarn Receipt</h2>
+<div>
+    <div style="display: flex;">
+        <button (click)="back()" class="btn btn-danger">Back</button>
+    </div>
+    <div>
+        <h2 style="text-align: center;">Yarn Receipt Create</h2>
+    </div>
 </div>
 <div>
     <div style="display: flex; justify-content: center; gap: 20px;">
+
         <mat-form-field appearance="outline">
             <mat-label>Factory</mat-label>
             <mat-select [(ngModel)]="factory" (selectionChange)="getLcNo($event.value)">
@@ -15,59 +21,37 @@
                 <mat-option *ngFor="let number of this.lcNolist" [value]="number.lcNo">{{number.lcNo}}</mat-option>
             </mat-select>
           </mat-form-field>
-          <mat-form-field appearance="outline">
-            <mat-label>Yarn Type</mat-label>
-            <mat-select [(ngModel)]="this.yarnType" (selectionChange)="getyarnBuyers()">
-                <mat-option *ngFor="let type of this.yarntypelist" [value]="type.yarnType">{{type.yarnType}}</mat-option>
-            </mat-select>
-          </mat-form-field>
     </div>
     <div style="display: flex; justify-content: center; gap: 20px;">
-          <mat-form-field appearance="outline">
-            <mat-label>Buyer</mat-label>
-            <mat-select [(ngModel)]="this.buyer" (selectionChange)="getyarnorders()">
-                <mat-option *ngFor="let buyer of this.buyerslist" [value]="buyer.buyer">{{buyer.buyer}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field appearance="outline">
-            <mat-label>OrderNo</mat-label>
-            <mat-select [(ngModel)]="this.orderNo" (selectionChange)="getyarnstyles()">
-                <mat-option *ngFor="let order of this.orderslist" [value]="order.orderNo">{{order.orderNo}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field appearance="outline">
-            <mat-label>Style</mat-label>
-            <mat-select [(ngModel)]="this.style" (selectionChange)="getyarncolors()">
-                <mat-option *ngFor="let style of this.styleslist" [value]="style.style">{{style.style}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field appearance="outline">
-            <mat-label>Color</mat-label>
-            <mat-select [(ngModel)]="this.color" (selectionChange)="getyarnlotNos()">
-                <mat-option *ngFor="let color of this.colorslist" [value]="color.colour">{{color.colour}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field appearance="outline">
-            <mat-label>Lot No</mat-label>
-            <mat-select [(ngModel)]="this.lotNo" (selectionChange)="orderId()">
-                <mat-option *ngFor="let nos of this.lotNoslist" [value]="nos.lotNo">{{nos.lotNo}}</mat-option>
-            </mat-select>
-          </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Spin Challan</mat-label>
+            <input matInput type="text" [(ngModel)]="spinChallan">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>SPDL Challan</mat-label>
+            <input matInput type="text" [(ngModel)]="scandexChallan">
+        </mat-form-field>
+
+            <input type="date" class="form-control" [(ngModel)]="receiptDate" style="width: 215px; height: 58px; border: 1px solid rgb(85, 83, 83);">
     </div>
 
     <div [formGroup]="receiptForm" class="table1">
         <table class="table table-hover">
-            <thead class="thead-dark">
+            <thead class="thead-dark"> 
                 <tr>
                     <th><button class="btn btn-danger" (click)="ReceiptAddButton()">+</button></th>
-                    <th>Spin Challan</th>
-                    <th>SBDL Challan</th>
-                    <th>Receipt Dt</th>
-
+                    <th>Yarn Type</th>
+                    <th>Buyer</th>
+                    <th>Order No.</th>
+                    <th>Style</th>
+                    <th>Color</th>
+                    <th>Lot No.</th>
+                    <th>Allocated Kg</th>
                     <th>Knit Factory</th>
                     <th>Bags/Ctn - nos</th>
                     <th>Receipt Yarn Kgs</th>
-
                     <th>Pending Receipts - Kgs</th>
                     <th></th>
                 </tr>
@@ -75,31 +59,53 @@
             <tbody formArrayName="data">
                 <tr *ngFor="let process of items3.controls; let i=index" [formGroupName]="i"
                     style="overflow: scroll;">
-                    <th></th>
-                    <td>
-                        <input type="text" class="form-control" formControlName="spinningChallan">
+                    <td></td>
+                    <td> 
+                        <p-dropdown #yarn_type optionLabel="yarnType" [options]="yarntypelist" (onChange)="getyarnBuyers(i)" (click)="yarnlist(i)"
+                            optionValue="yarnType" [editable]="true" formControlName="yarnType">
+                        </p-dropdown>
                     </td>
                     <td>
-                        <input type="text" class="form-control" formControlName="scandexChallan">
+                        <p-dropdown #buyername [editable]="true" optionLabel="buyer" [options]="buyerslist" (click)="buyerlist(i)" (onChange)="getyarnorders(i)"
+                            optionValue="buyer" formControlName="buyer">
+                        </p-dropdown>
                     </td>
                     <td>
-                        <input type="date" class="form-control" formControlName="receiptDt">
+                        <p-dropdown #ordernumber [editable]="true" optionLabel="orderNo" [options]="orderslist" (click)="orderNoslist(i)" (onChange)="getyarnstyles(i)"
+                            optionValue="orderNo" formControlName="orderNo">
+                        </p-dropdown>
                     </td>
                     <td>
-                        <input type="text" class="form-control" formControlName="knitFactory" list="knit">
-                        <datalist id="knit">
-                            <option *ngFor="let knit of this.knitFty" value="{{knit.knitFty}}"></option>
-                        </datalist>
+                        <p-dropdown #styles [editable]="true" optionLabel="style" [options]="styleslist" (click)="stylelist(i)" (onChange)="getyarncolors(i)"
+                            optionValue="style" formControlName="style">
+                        </p-dropdown>
                     </td>
                     <td>
-                        <input type="number" class="form-control" formControlName="BagsCtnNos">
+                        <p-dropdown #colors [editable]="true" optionLabel="colour" [options]="colorslist" (click)="colorlist(i)" (onChange)="getyarnlotNos(i)"
+                            optionValue="colour" formControlName="color">
+                        </p-dropdown>
                     </td>
                     <td>
-                        <input type="number" class="form-control" formControlName="receiptYarnKgs"
-                            (input)="calculateDiff3()">
+                        <p-dropdown #lotNos [editable]="true" optionLabel="lotNo" [options]="lotNoslist" (click)="lotNolist(i)" (onChange)="orderId(i)"
+                        optionValue="lotNo" formControlName="lotNo">
+                        </p-dropdown>
                     </td>
                     <td>
-                        <input type="text" class="form-control" formControlName="pendingReceiptKgs">
+                        <input class="form-control" type="number" formControlName="allocatedKg">
+                    </td>
+                    <td>
+                        <p-dropdown #knitFact [editable]="true" optionLabel="knitFty" [options]="ftyName" (click)="knitFactorylist(i)"
+                        optionValue="knitFty" formControlName="knitFactory">
+                        </p-dropdown>
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" formControlName="BagsCtnNos">
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" formControlName="receiptYarnKgs" (input)="pendingKg(i)">
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" formControlName="pendingReceiptKgs">
                     </td>
                     <td>
                         <button class="btn btn-danger" (click)="ReceiptDelete(i)">x</button>

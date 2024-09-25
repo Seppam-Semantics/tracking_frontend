@@ -73,7 +73,7 @@ new(){
 edit(id:any){
   this.stylebudgetmasteredit = true;
   this.api1.singleStyleBudgetDays(id).subscribe((res)=>{
-    console.log(res)
+    // console.log(res)
     this.StyleBudgetEditForm.patchValue({
       id :  res.data[0].id,
       style :  res.data[0].style,
@@ -90,7 +90,7 @@ edit(id:any){
 }
 
 save(){
-  console.log(this.StyleBudgetNewForm.value)
+  // console.log(this.StyleBudgetNewForm.value)
   this.api1.postbudgetDays(this.StyleBudgetNewForm.value).subscribe((res)=>{
     alert(res.message);
     this.styleFilter()
@@ -99,7 +99,7 @@ save(){
   })
 }
 update(){
-  console.log(this.StyleBudgetEditForm.value)
+  // console.log(this.StyleBudgetEditForm.value)
   this.api1.postbudgetDays(this.StyleBudgetEditForm.value).subscribe((res)=>{
     alert(res.message);
     this.styleFilter()

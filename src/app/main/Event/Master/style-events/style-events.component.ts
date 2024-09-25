@@ -178,7 +178,7 @@ eventslist(i: number): void {
 
 
 save(){
-  console.log(this.StyleEventsNewForm.value)
+  // console.log(this.StyleEventsNewForm.value)
   this.api1.postStyleEventMaster(this.StyleEventsNewForm.value).subscribe((res)=>{
     alert(res.message);
     if(res.success == true){
@@ -189,7 +189,7 @@ save(){
   })
 }
 update(){
-  console.log(this.StyleEventsEditForm.value)
+  // console.log(this.StyleEventsEditForm.value)
   // this.api1.postStyleEventMaster(this.StyleEventsEditForm.value).subscribe((res)=>{
   //   alert(res.message);
   //   if(res.success == true){
