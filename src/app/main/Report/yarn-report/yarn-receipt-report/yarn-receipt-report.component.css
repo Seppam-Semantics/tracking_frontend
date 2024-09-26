@@ -92,4 +92,7 @@ thead {
     font-size: small;
   }
   
-  
+  .is-invalid {
+    border: 1px solid red;
+    box-shadow: 0 0 5px red;
+  }

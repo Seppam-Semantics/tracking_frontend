@@ -105,7 +105,7 @@
                         <input class="form-control" type="text" formControlName="receiptYarnKgs" (input)="pendingKg(i)">
                     </td>
                     <td>
-                        <input class="form-control" type="text" formControlName="pendingReceiptKgs">
+                        <input class="form-control" type="text" formControlName="pendingReceiptKgs" [ngClass]="{'is-invalid':this.toleranceValid[i]}">
                     </td>
                     <td>
                         <button class="btn btn-danger" (click)="ReceiptDelete(i)">x</button>
@@ -114,12 +114,10 @@
             </tbody>
         </table>
     </div>
-        <div style="display: flex; justify-content: center; background-color: darkgray;" *ngIf="!loading4">
-            <button class="btn btn-primary" (click)="receiptSave()">Update</button>
-        </div>
-        <div style="display: flex; justify-content: center;" *ngIf="loading4">
-            <button mat-raised-button color="primary" style="margin-top: 3%;">
-                <div class="loader"></div>
+        <div style="display: flex; justify-content: center;" >
+            <button *ngIf="!valueExceeded" class="btn btn-primary" (click)="receiptSave()">Update</button>
+            <button  *ngIf="valueExceeded" class="btn btn-primary">
+                <div class="loader">Loading</div>
             </button>
         </div>
     

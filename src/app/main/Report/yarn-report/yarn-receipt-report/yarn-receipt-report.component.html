@@ -33,6 +33,7 @@
           <th>knit Factory</th>
           <th>Receipt Date</th>
           <th>Receipt Kg</th>
+          <th>Pending Kg</th>
           <th>Edit</th>
           <!-- <th>Delete</th> -->
         </tr>
@@ -48,6 +49,7 @@
           <td>{{work.knitFactory}}</td>
           <td>{{work.receiptDt}}</td>
           <td>{{work.receiptYarnKgs}}</td>
+          <td>{{work.pendingReceiptKgs}}</td>
     
           <td><button class="btn btn-primary" (click)="edit(work.id)"><mat-icon>edit</mat-icon></button></td>
 
@@ -138,7 +140,7 @@
 
             <mat-form-field appearance="outline">
                 <mat-label>Receipt Quantity</mat-label>
-                <input matInput type="text" formControlName="receiptYarnKgs" (input)="pending($event.target.value)">
+                <input matInput type="text" formControlName="receiptYarnKgs" (input)="pending($event.target.value)" (click)="pending($event.target.value)">
             </mat-form-field>
 
             <mat-form-field appearance="outline">
@@ -152,7 +154,7 @@
 
             <mat-form-field appearance="outline">
                 <mat-label>pending Receipt Kgs</mat-label>
-                <input matInput type="text" formControlName="pendingReceiptKgs" readonly>
+                <input matInput type="text" formControlName="pendingReceiptKgs" readonly [ngClass]="{'is-invalid':this.toleranceValid}">
             </mat-form-field>
 
         </div>
@@ -161,7 +163,8 @@
 
   <ng-template pTemplate="footer">
     <div style="display: flex; width: 100%; justify-content: center;">
-      <button (click)="receiptupdate()" mat-button color="primary"><mat-icon>save</mat-icon>Update</button>
+      <button *ngIf="!valueExceeded" (click)="receiptupdate()" mat-button color="primary"><mat-icon>save</mat-icon>Update</button>
+      <button *ngIf="valueExceeded" mat-button color="primary"><mat-icon>save</mat-icon>Loading</button>
     </div>
   </ng-template>
 </p-dialog>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 
@@ -22,6 +22,8 @@ export class YarnReceiptReportComponent implements OnInit {
   receiptDate: any;
   singleReceiptDate: any;
   receiptId: any;
+  toleranceValid : Boolean = false
+  valueExceeded : boolean = false
 
 
   constructor(private router : Router, private api : ApiService, private fb : FormBuilder){
@@ -43,7 +45,7 @@ export class YarnReceiptReportComponent implements OnInit {
       knitFactory : new FormControl(''), 
       BagsCtnNos : new FormControl(''), 
       receiptYarnKgs : new FormControl(''), 
-      pendingReceiptKgs : new FormControl('')
+      pendingReceiptKgs : new FormControl('', Validators.required)
     })
   }
 
@@ -105,24 +107,48 @@ export class YarnReceiptReportComponent implements OnInit {
         knitFactory : res.receipt[0].knitFactory, 
         BagsCtnNos : res.receipt[0].BagsCtnNos, 
         receiptYarnKgs : res.receipt[0].receiptYarnKgs, 
-        pendingReceiptKgs : res.receipt[0].pendingReceiptKgs
+        pendingReceiptKgs : res.receipt[0]?.pendingReceiptKgs ?? 0
       })
+      if(res.receipt[0]?.pendingReceiptKgs == 0){
+        this.yarnreceiptupdateform.get('pendingReceiptKgs')?.setValue(0)
+      }
       }
     })
   }
 
   pending(receipt : any){
-    const allocated = this.yarnreceiptupdateform.get('allocatedKg')?.value
+    const allocated = this.yarnreceiptupdateform.get('allocatedKg')?.value ?? 0
     const pending = allocated - receipt
-    
-    this.yarnreceiptupdateform.get('pendingReceiptKgs')?.setValue(pending);
+
+    if(pending < 0){
+      this.toleranceValid = true
+    }
+    else{
+      this.yarnreceiptupdateform.get('pendingReceiptKgs')?.setValue(pending);
+      this.toleranceValid = false
+    }
+    this.validlity()
+  }
+
+  validlity(){
+    if(this.toleranceValid === true){
+      this.valueExceeded = true;
+    }
+    else{
+      this.valueExceeded = false;
+    }
   }
 
   receiptupdate(){
     // console.log(this.yarnreceiptupdateform.value)
-    this.api.updateYarnReceipt(this.receiptId, this.yarnreceiptupdateform.value).subscribe((res)=>{
-      alert(res.message)
-    })
+    if(this.yarnreceiptupdateform.valid){
+      this.api.updateYarnReceipt(this.receiptId, this.yarnreceiptupdateform.value).subscribe((res)=>{
+        alert(res.message)
+      })
+    }
+    else{
+      alert("Pending Value should not less than zero(0)")
+    }
   }
 
 }

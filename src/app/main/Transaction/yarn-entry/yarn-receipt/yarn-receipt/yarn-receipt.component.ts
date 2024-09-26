@@ -46,6 +46,8 @@ export class YarnReceiptComponent implements OnInit{
   spinChallan : any;
   scandexChallan : any;
   receiptDate : any;
+  toleranceValid : boolean[] = [];
+  valueExceeded : boolean = false;
 
 
   constructor(private api : ApiService, private fb : FormBuilder, private datePipe: DatePipe, private router : Router){}
@@ -201,10 +203,29 @@ export class YarnReceiptComponent implements OnInit{
     const yarnDataId = this.yarn[0].id;
 
     const difference = this.Receipttest - (currentRow.get('receiptYarnKgs')?.value)
-    currentRow.get('pendingReceiptKgs')?.setValue(difference)
+
+    if(difference < 0){
+      this.toleranceValid[index] = true
+      currentRow.get('pendingReceiptKgs')?.setValue(difference)
+    }
+    else{
+      currentRow.get('pendingReceiptKgs')?.setValue(difference)
+      this.toleranceValid[index] = false
+    }
+    this.validlity()
   })
   }
   
+  validlity(){
+    if(this.toleranceValid.includes(true)){
+      this.valueExceeded = true;
+    }
+    else{
+      this.valueExceeded = false;
+    }
+  }
+
+
 
   receiptForm = this.fb.group({
     yarnId: [],
